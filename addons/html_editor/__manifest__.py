@@ -20,8 +20,7 @@ This addon provides an extensible, maintainable editor.
     'auto_install': True,
     'assets': {
         'web._assets_primary_variables': [
-            # TODO DUAU: change when file is back in html_builder
-            ('after', 'web/static/src/scss/primary_variables.scss', 'html_editor/static/src/scss/builder.variables.scss'),
+            ('after', 'web/static/src/scss/primary_variables.scss', 'html_editor/static/src/scss/html_editor.variables.scss'),
         ],
         'web.assets_frontend': [
             ('include', 'html_editor.assets_media_dialog'),
@@ -109,6 +108,9 @@ This addon provides an extensible, maintainable editor.
         ],
         'web._assets_frontend_helpers': [
             ('prepend', 'html_editor/static/src/scss/bootstrap_overridden.scss'),
+        ],
+        'html_editor.assets_prism': [
+            'web/static/lib/prismjs/prism.js',
         ],
     },
     'license': 'LGPL-3'

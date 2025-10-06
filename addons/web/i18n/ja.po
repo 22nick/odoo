@@ -12,13 +12,14 @@
 # Ryoko Tsuda <ryoko@quartile.co>, 2023
 # Martin Trigaux, 2023
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Junko Augias (juau)" <juau@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-12 14:55+0000\n"
-"PO-Revision-Date: 2025-09-14 21:08+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2025-09-30 18:36+0000\n"
+"PO-Revision-Date: 2025-10-04 02:31+0000\n"
+"Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/web/ja/>"
 "\n"
 "Language: ja\n"
@@ -302,8 +303,9 @@ msgstr "3.30"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
+#, fuzzy
 msgid "31/01/%s"
-msgstr ""
+msgstr "31/01/%s"
 
 #. module: web
 #. odoo-javascript
@@ -452,7 +454,8 @@ msgstr ": not"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login_oauth
 msgid "<em class=\"d-block my-3 small text-center text-muted\">- or -</em>"
-msgstr "<em class=\"d-block my-3 small text-center text-muted\">- または -</em>"
+msgstr ""
+"<em class=\"d-block my-3 small text-center text-muted\">- または -</em>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.config_speedscope_index
@@ -484,6 +487,18 @@ msgid ""
 "Temporal mode will merge all samples.<br/>It can lead to partially invalid "
 "result in case of concurrent profiles.<br/>Use with caution </span>"
 msgstr ""
+"<select class=\"form-select\" name=\"profile_aggregation_mode\" "
+"id=\"profile_aggregation_mode\">\n"
+"                                        <option value=\"tabs\">分離 (タブごと"
+"に1つ)</option>\n"
+"                                        <option value=\"temporal\">時系列 (実"
+"験的)</option>\n"
+"                                    </select>\n"
+"                                    <span id=\"temporal_warning\" "
+"class=\"alert alert-warning\" style=\"display:none\"><b>警告:</b> 時系列モー"
+"ドでは、すべてのサンプルが統合されます。<br/>複数のプロファイルが同時に存在す"
+"る場合、結果が部分的に不正確になる可能性があります。<br/>使用には注意が必要で"
+"す</span>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -603,8 +618,8 @@ msgid ""
 "workstation</span>"
 msgstr ""
 "<span>[FURN_8220] 4人用デスク<br/>\n"
-"                                       "
-"4人用モダンオフィスワークステーション</span>"
+"                                       4人用モダンオフィスワークステーション"
+"</span>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -614,8 +629,8 @@ msgid ""
 "Steel Grey Colour</span>"
 msgstr ""
 "<span>[FURN_8999] 3人掛ソファ<br/>\n"
-"                                       "
-"3人掛けソファ、ラウンジャー付き、スチールグレーカラー</span>"
+"                                       3人掛けソファ、ラウンジャー付き、ス"
+"チールグレーカラー</span>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.report_invoice_wizard_preview
@@ -625,8 +640,8 @@ msgid ""
 "strong>"
 msgstr ""
 "<strong class=\"text-nowrap\">$ <span class=\"oe_currency_value\">\n"
-"                                                       "
-"22,137.50</span></strong>"
+"                                                       22,137.50</span></"
+"strong>"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
@@ -899,7 +914,7 @@ msgstr "写真を追加"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/properties_field.xml:0
 msgid "Add Property"
-msgstr ""
+msgstr "プロパティを追加する"
 
 #. module: web
 #. odoo-javascript
@@ -1081,7 +1096,8 @@ msgstr "アメリカ"
 msgid ""
 "Among the %(total)s selected records, %(valid_count)s are valid for this "
 "update."
-msgstr "選択された%(total)sレコードのうち、%(valid_count)s 件がこの更新に有効です。"
+msgstr ""
+"選択された%(total)sレコードのうち、%(valid_count)s 件がこの更新に有効です。"
 
 #. module: web
 #. odoo-javascript
@@ -1100,12 +1116,6 @@ msgstr "アップロード中にエラーが発生しました。"
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
 msgid "And more"
 msgstr "そしてさらに"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
-msgid "Angle"
-msgstr "角度"
 
 #. module: web
 #. odoo-javascript
@@ -1170,13 +1180,13 @@ msgstr "本当にこの埋め込みアクションを削除しますか？"
 #. odoo-javascript
 #: code:addons/web/static/src/views/view_components/multi_selection_buttons.js:0
 msgid "Are you sure you want to delete the %(nbSelected)s selected records?"
-msgstr ""
+msgstr "本当に選択した%(nbSelected)sレコードを削除しますか?"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/view_components/multi_selection_buttons.js:0
 msgid "Are you sure you want to delete the selected record?"
-msgstr ""
+msgstr "本当に選択したレコードを削除しますか?"
 
 #. module: web
 #. odoo-javascript
@@ -1194,7 +1204,7 @@ msgstr "本当にこのカラムを削除しますか？"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/properties_field.js:0
 msgid "Are you sure you want to delete this property field?"
-msgstr ""
+msgstr "このプロパティフィールドを削除してもよろしいですか?"
 
 #. module: web
 #. odoo-javascript
@@ -1444,7 +1454,8 @@ msgstr "ブーリアンアイコン"
 msgid ""
 "Boolean field from the model used in the relation, which indicates whether "
 "the state is folded or not."
-msgstr "リレーションで使用されるモデルのブーリアンフィールドで、ステータスが折りたた"
+msgstr ""
+"リレーションで使用されるモデルのブーリアンフィールドで、ステータスが折りたた"
 "まれているかどうかを示します。"
 
 #. module: web
@@ -1453,7 +1464,8 @@ msgstr "リレーションで使用されるモデルのブーリアンフィー
 msgid ""
 "Bootstrap classname to customize the style of the progress bar when the "
 "maximum value is exceeded"
-msgstr "最大値を超えたときの進行バーのスタイルをカスタマイズするためのBootstrapクラス"
+msgstr ""
+"最大値を超えたときの進行バーのスタイルをカスタマイズするためのBootstrapクラス"
 "名"
 
 #. module: web
@@ -1470,7 +1482,6 @@ msgstr "バグ修正保証"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/color_picker.xml:0
 #: code:addons/web/static/src/views/view_button/view_button.xml:0
 msgid "Button"
 msgstr "ボタン"
@@ -1648,8 +1659,9 @@ msgstr "ブラウザの権限を確認して下さい。"
 msgid ""
 "Check your network connection and come back here. Odoo will load as soon as "
 "you're back online."
-msgstr "ネットワーク接続を確認し、ここに戻ってきて下さい。オンラインに戻るとすぐにOdo"
-"oがロードされます。"
+msgstr ""
+"ネットワーク接続を確認し、ここに戻ってきて下さい。オンラインに戻るとすぐに"
+"Odooがロードされます。"
 
 #. module: web
 #. odoo-javascript
@@ -1688,7 +1700,8 @@ msgstr "ユーザを選択"
 msgid ""
 "Choose which maximal precision (days, months, ...) you want in the datetime "
 "picker."
-msgstr "日付時刻選択ツールで、どの最大精度(日、月、...)を使用するかを選択します。"
+msgstr ""
+"日付時刻選択ツールで、どの最大精度(日、月、...)を使用するかを選択します。"
 
 #. module: web
 #. odoo-javascript
@@ -1696,7 +1709,8 @@ msgstr "日付時刻選択ツールで、どの最大精度(日、月、...)を�
 msgid ""
 "Choose which minimal precision (days, months, ...) you want in the datetime "
 "picker."
-msgstr "日付時刻選択ツールで、どの最小精度(日、月、...)を使用するかを選択します。"
+msgstr ""
+"日付時刻選択ツールで、どの最小精度(日、月、...)を使用するかを選択します。"
 
 #. module: web
 #. odoo-javascript
@@ -1876,7 +1890,8 @@ msgstr "会社キャッチフレーズ"
 msgid ""
 "Company tagline, which is included in a printed document's header or footer "
 "(depending on the selected layout)."
-msgstr "会社のキャッチフレーズ。印刷文書のヘッダまたはフッタに含まれます。（選択した"
+msgstr ""
+"会社のキャッチフレーズ。印刷文書のヘッダまたはフッタに含まれます。（選択した"
 "レイアウトによって異なります）"
 
 #. module: web
@@ -1993,7 +2008,8 @@ msgstr "コントロールパネルボタン"
 msgid ""
 "Control the number of minutes in the time selection. E.g. set it to 15 to "
 "work in quarters."
-msgstr "時間選択で分数をコントロールします。例えば、4分の1単位で作業する場合は15に設"
+msgstr ""
+"時間選択で分数をコントロールします。例えば、4分の1単位で作業する場合は15に設"
 "定します。"
 
 #. module: web
@@ -2068,8 +2084,9 @@ msgstr "選択されたスプレッドシートを表示できませんでした
 msgid ""
 "Could not set the cover image: incorrect field (\"%s\") is provided in the "
 "view."
-msgstr "カバー画像は設定できません: 表示に提供されるフィールド (\"%s\""
-")は間違っています。"
+msgstr ""
+"カバー画像は設定できません: 表示に提供されるフィールド (\"%s\")は間違っていま"
+"す。"
 
 #. module: web
 #. odoo-javascript
@@ -2173,7 +2190,7 @@ msgstr "通貨"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/property_definition.xml:0
 msgid "Currency field"
-msgstr ""
+msgstr "通貨フィールド"
 
 #. module: web
 #. odoo-javascript
@@ -2183,7 +2200,7 @@ msgstr "現在の値フィールド"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/color_picker.xml:0
+#: code:addons/web/static/src/core/color_picker/tabs/color_picker_custom_tab.js:0
 msgid "Custom"
 msgstr "カスタム"
 
@@ -2228,7 +2245,7 @@ msgstr "カスタムグループ"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_components.js:0
 msgid "Custom range"
-msgstr ""
+msgstr "カスタム幅"
 
 #. module: web
 #. odoo-python
@@ -2294,7 +2311,7 @@ msgstr "日時"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Date Format"
-msgstr ""
+msgstr "日付書式"
 
 #. module: web
 #. odoo-javascript
@@ -2397,18 +2414,13 @@ msgstr "デフォルト値："
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/color_picker.xml:0
-msgid "Define a custom gradient"
-msgstr "カスタムグラデーションを定義"
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/views/fields/many2many_tags/many2many_tags_field.js:0
 #: code:addons/web/static/src/views/fields/many2one/many2one_field.js:0
 msgid ""
 "Defines the minimum number of characters to perform the search. If not set, "
 "the search is performed on focus."
-msgstr "検索を実行する最小文字数を定義します。設定しない場合、フォーカスが当たった時"
+msgstr ""
+"検索を実行する最小文字数を定義します。設定しない場合、フォーカスが当たった時"
 "点で検索が実行されます。"
 
 #. module: web
@@ -2540,7 +2552,7 @@ msgstr "破棄"
 #. odoo-javascript
 #: code:addons/web/static/src/views/form/form_status_indicator/form_status_indicator.xml:0
 msgid "Discard all changes"
-msgstr "全ての変更を破棄する"
+msgstr "すべての変更を破棄"
 
 #. module: web
 #. odoo-javascript
@@ -2549,8 +2561,6 @@ msgid "Discard changes"
 msgstr "変更を破棄"
 
 #. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/views/kanban/kanban_record_quick_create.js:0
 #: model:ir.model.fields,field_description:web.field_base_document_layout__display_name
 #: model:ir.model.fields,field_description:web.field_ir_http__display_name
 #: model:ir.model.fields,field_description:web.field_ir_model__display_name
@@ -2610,6 +2620,8 @@ msgid ""
 "Displays or hides the seconds in the datetime value. Affect only the "
 "readable datetime format."
 msgstr ""
+"日時値における秒の表示/非表示を切り替えます。これは、可読形式での日時表示にの"
+"み影響します。"
 
 #. module: web
 #. odoo-javascript
@@ -2621,7 +2633,7 @@ msgstr "datetime値の時刻を表示または非表示にします。"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Displays the date either in 31/01/%(year)s or in Jan 31, %(year)s"
-msgstr ""
+msgstr "日付を 31/01/%(year)s または%(year)s 年1月31日の形式で表示します。"
 
 #. module: web
 #. odoo-javascript
@@ -2629,7 +2641,8 @@ msgstr ""
 msgid ""
 "Displays the value of the selected field as a textual hint. If the selected "
 "field is empty, the static placeholder attribute is displayed instead."
-msgstr "選択されたフィールドの値をテキストのヒントとして表示します。選択されたフィー"
+msgstr ""
+"選択されたフィールドの値をテキストのヒントとして表示します。選択されたフィー"
 "ルドが空の場合、代わりに静的なプレースホルダ属性が表示されます。"
 
 #. module: web
@@ -2779,7 +2792,6 @@ msgstr "最短受取日"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/color_picker.xml:0
 #: code:addons/web/static/src/search/custom_favorite_item/custom_favorite_item.xml:0
 #: code:addons/web/static/src/views/calendar/calendar_common/calendar_common_popover.xml:0
 #: code:addons/web/static/src/views/calendar/quick_create/calendar_quick_create.xml:0
@@ -2845,7 +2857,7 @@ msgstr "メール"
 #. module: web
 #: model:ir.model.fields,field_description:web.field_res_users_settings__embedded_actions_config_ids
 msgid "Embedded Actions Config"
-msgstr ""
+msgstr "埋め込みアクション設定"
 
 #. module: web
 #. odoo-javascript
@@ -2910,12 +2922,6 @@ msgstr "企業版"
 #: code:addons/web/static/src/webclient/debug/profiling/profiling_item.xml:0
 msgid "Entry Count"
 msgstr "エントリ数"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/file_upload/file_upload_service.js:0
-msgid "Error"
-msgstr "エラー"
 
 #. module: web
 #. odoo-javascript
@@ -2984,30 +2990,6 @@ msgstr "グループ化されたデータのcsvへのエクスポートはサポ
 #: code:addons/web/static/src/core/expression_editor_dialog/expression_editor_dialog.js:0
 msgid "Expression is invalid. Please correct it"
 msgstr "式が無効です。修正して下さい。"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
-msgid "Extend to the closest corner"
-msgstr "最も近い隅に伸ばす"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
-msgid "Extend to the closest side"
-msgstr "最も近い側に伸ばす"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
-msgid "Extend to the farthest corner"
-msgstr "最も遠い隅に伸ばす"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
-msgid "Extend to the farthest side"
-msgstr "最も遠い側に伸ばす"
 
 #. module: web
 #. odoo-javascript
@@ -3120,7 +3102,8 @@ msgstr "フィールドプロパティがサポートされていません"
 msgid ""
 "Field that holds the maximum value of the progress bar. If set, will be "
 "displayed next to the progress bar (e.g. 10 / 200)."
-msgstr "進捗バーの最大値を保持するフィールド。設定されている場合、進捗バーの横に表示"
+msgstr ""
+"進捗バーの最大値を保持するフィールド。設定されている場合、進捗バーの横に表示"
 "されます(例：10 / 200)"
 
 #. module: web
@@ -3228,12 +3211,11 @@ msgid ""
 "\n"
 "Tip: try to flip axis, filter further or reduce the number of measures."
 msgstr ""
-"Excel との互換性について、カラム数が 16384 "
-"を超える場合はデータをエクスポートできません。\n"
+"Excel との互換性について、カラム数が 16384 を超える場合はデータをエクスポート"
+"できません。\n"
 "\n"
-"ヒント: "
-"軸を反転させる、さらにフィルタリングする、または集計項目数を減らしてみて下さ"
-"い。"
+"ヒント: 軸を反転させる、さらにフィルタリングする、または集計項目数を減らして"
+"みて下さい。"
 
 #. module: web
 #. odoo-javascript
@@ -3241,7 +3223,7 @@ msgstr ""
 msgid ""
 "For example, if the value is \"1\" and you enter \"+=2\", it will be updated "
 "to \"3\"."
-msgstr ""
+msgstr "たとえば、値が「1」のときに「+=2」と入力すると、「3」に更新されます。"
 
 #. module: web
 #. odoo-javascript
@@ -3256,7 +3238,8 @@ msgstr "フォーマット番号"
 msgid ""
 "Format the value according to your language setup - e.g. thousand "
 "separators, rounding, etc."
-msgstr "言語設定に従って値をフォーマットして下さい。例えば、千区切り、丸めなど。"
+msgstr ""
+"言語設定に従って値をフォーマットして下さい。例えば、千区切り、丸めなど。"
 
 #. module: web
 #. odoo-javascript
@@ -3357,12 +3340,6 @@ msgstr "Googleスライドビュワー"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/color_picker.xml:0
-msgid "Gradient"
-msgstr "グラデーション"
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/core/colorlist/colorlist.js:0
 msgid "Green"
 msgstr "緑"
@@ -3421,6 +3398,9 @@ msgid ""
 "click the %(upload_icon)s button now to ensure your work is saved before you "
 "exit this tab."
 msgstr ""
+"注意: 最近の変更内容が大きすぎるため、自動保存ができません。作業内容を失わな"
+"いよう、タブを閉じる前に %(upload_icon)s ボタンをクリックして保存してくださ"
+"い。"
 
 #. module: web
 #. odoo-javascript
@@ -3489,7 +3469,7 @@ msgstr "ホームメニュー"
 #. odoo-javascript
 #: code:addons/web/static/src/search/utils/dates.js:0
 msgid "Hour"
-msgstr ""
+msgstr "時間"
 
 #. module: web
 #. odoo-python
@@ -3498,7 +3478,8 @@ msgid ""
 "Houston, we have a database naming issue! Make sure you only use letters, "
 "numbers, underscores, hyphens, or dots in the database name, and you'll be "
 "golden."
-msgstr "データベースの名前に問題があります！データベース名にはアルファベット、数字、"
+msgstr ""
+"データベースの名前に問題があります！データベース名にはアルファベット、数字、"
 "アンダースコア、ハイフン、ドットのみを使用するようにして下さい。"
 
 #. module: web
@@ -3595,7 +3576,8 @@ msgstr ""
 #: code:addons/web/static/src/views/fields/state_selection/state_selection_field.js:0
 msgid ""
 "If checked, the record will be saved immediately when the field is modified."
-msgstr "チェックした場合、フィールドが変更されるとレコードは直ちに保存されます。"
+msgstr ""
+"チェックした場合、フィールドが変更されるとレコードは直ちに保存されます。"
 
 #. module: web
 #. odoo-javascript
@@ -3627,7 +3609,8 @@ msgstr ""
 msgid ""
 "If checked, users won't be able to create records through the autocomplete "
 "dropdown at all."
-msgstr "チェックした場合、ユーザは自動入力のドロップダウンからレコードを作成すること"
+msgstr ""
+"チェックした場合、ユーザは自動入力のドロップダウンからレコードを作成すること"
 "ができなくなります。"
 
 #. module: web
@@ -3711,7 +3694,8 @@ msgstr "アプリをインストール"
 msgid ""
 "Install the app on your device to access it easily. Here are the steps to "
 "follow:"
-msgstr "デバイスにアプリをインストールすると、簡単にアクセスできます。以下はその手順"
+msgstr ""
+"デバイスにアプリをインストールすると、簡単にアクセスできます。以下はその手順"
 "です:"
 
 #. module: web
@@ -3733,6 +3717,12 @@ msgstr "内部リンク"
 #: code:addons/web/static/src/webclient/debug/profiling/profiling_item.xml:0
 msgid "Interval"
 msgstr "間隔"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/views/kanban/kanban_record_quick_create.js:0
+msgid "Invalid Display Name"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -3788,13 +3778,6 @@ msgstr "無効な項目連携"
 #: code:addons/web/static/src/views/calendar/quick_create/calendar_quick_create.js:0
 msgid "Invalid fields"
 msgstr "無効なフィールド"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/model/relational_model/record.js:0
-#: code:addons/web/static/src/views/kanban/kanban_record_quick_create.js:0
-msgid "Invalid fields: "
-msgstr "項目が無効です: "
 
 #. module: web
 #. odoo-python
@@ -3878,8 +3861,8 @@ msgid ""
 "generated by the qweb."
 msgstr ""
 "t-call \"の時間がテンプレート全体の時間と一致しない可能性\n"
-"があります。（ドロップダウンにある）全体時間は、"
-"レンダリングに含まれない時間\n"
+"があります。（ドロップダウンにある）全体時間は、レンダリングに含まれない時"
+"間\n"
 "（テンプレートの検索、読込み、継承、コンパイル等）を考慮しない\n"
 "ためです。レンダリング中、全体時間はプロファイルを作成する時間の一部と\n"
 "　　　qwebによって生成された関数に記録されない部分も含みます。"
@@ -3899,18 +3882,20 @@ msgid ""
 "It will be removed for everyone using the \"%(parentName)s\" %"
 "(parentFieldLabel)s."
 msgstr ""
+"「%(parentName)s」%(parentFieldLabel)s を使用しているすべてのユーザに対して削"
+"除されます。"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/properties_field.js:0
 msgid "It will be removed for everyone!"
-msgstr ""
+msgstr "全員に対して削除されます!"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/datetime/datetime_field.js:0
 msgid "Jan 31, %s"
-msgstr ""
+msgstr "1月31日、%s"
 
 #. module: web
 #. odoo-javascript
@@ -4159,19 +4144,19 @@ msgstr "L"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_components.js:0
 msgid "Last 12 months"
-msgstr ""
+msgstr "直近12か月"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_components.js:0
 msgid "Last 30 days"
-msgstr ""
+msgstr "過去30日間"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_components.js:0
 msgid "Last 7 days"
-msgstr ""
+msgstr "過去7日間"
 
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__write_uid
@@ -4189,7 +4174,7 @@ msgstr "最終更新日"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_components.js:0
 msgid "Last month"
-msgstr ""
+msgstr "先月"
 
 #. module: web
 #. odoo-javascript
@@ -4263,12 +4248,6 @@ msgstr "折れ線グラフ"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
-msgid "Linear"
-msgstr "線形"
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/core/signature/name_and_signature.xml:0
 msgid "Load"
 msgstr "ロード"
@@ -4338,7 +4317,7 @@ msgstr "ログアウト"
 #. odoo-python
 #: code:addons/web/controllers/home.py:0
 msgid "Login"
-msgstr ""
+msgstr "ログイン"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.external_layout_bold
@@ -4362,7 +4341,7 @@ msgstr "ロゴのメインカラー"
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__logo_secondary_color
 msgid "Logo Secondary Color"
-msgstr "ロゴの2つめのカラー"
+msgstr "ロゴ サブカラー"
 
 #. module: web
 #. odoo-javascript
@@ -4494,12 +4473,12 @@ msgstr "ミーティング議題"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.config_speedscope_index
 msgid "Memory limit (in bytes)"
-msgstr ""
+msgstr "メモリ上限 (バイト単位)"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.config_speedscope_index
 msgid "Memory profile"
-msgstr ""
+msgstr "メモリプロファイル"
 
 #. module: web
 #. odoo-javascript
@@ -4568,6 +4547,12 @@ msgstr "ミッシングレコード"
 #: code:addons/web/controllers/json.py:0
 msgid "Missing record id"
 msgstr "レコードIDが不明です"
+
+#. module: web
+#. odoo-javascript
+#: code:addons/web/static/src/model/relational_model/record.js:0
+msgid "Missing required fields"
+msgstr ""
 
 #. module: web
 #. odoo-javascript
@@ -4654,7 +4639,7 @@ msgstr "月"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_components.js:0
 msgid "Month to date"
-msgstr ""
+msgstr "月初から本日まで"
 
 #. module: web
 #. odoo-javascript
@@ -4778,7 +4763,7 @@ msgstr "Odoo.comアカウント"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.js:0
 msgid "My Preferences"
-msgstr ""
+msgstr "個人設定"
 
 #. module: web
 #. odoo-javascript
@@ -5018,7 +5003,7 @@ msgstr "結果が見つかりません"
 #. odoo-javascript
 #: code:addons/web/static/src/core/select_menu/select_menu.xml:0
 msgid "No results"
-msgstr ""
+msgstr "結果なし"
 
 #. module: web
 #. odoo-javascript
@@ -5074,6 +5059,8 @@ msgid ""
 "Not possible to create monetary field because there is no currency on "
 "current model."
 msgstr ""
+"現在のモデルに通貨フィールドが存在しないため、金額フィールドを作成できませ"
+"ん。"
 
 #. module: web
 #. odoo-javascript
@@ -5179,7 +5166,8 @@ msgstr "Odooネットワークエラー"
 msgid ""
 "Odoo Push notifications have been blocked. Go to your browser settings to "
 "allow them."
-msgstr "Odooプッシュ通知はブロックされています。ブラウザの設定に移動して許可します。"
+msgstr ""
+"Odooプッシュ通知はブロックされています。ブラウザの設定に移動して許可します。"
 
 #. module: web
 #. odoo-javascript
@@ -5225,8 +5213,8 @@ msgid ""
 "Of the %(selectedRecord)s selected records, only the first %(firstRecords)s "
 "have been archived/unarchived."
 msgstr ""
-"選択された %(selectedRecord)sレコードのうち、 "
-"はじめの%(firstRecords)sだけがアーカイブ/アーカイブ解除されました。"
+"選択された %(selectedRecord)sレコードのうち、 はじめの%(firstRecords)sだけが"
+"アーカイブ/アーカイブ解除されました。"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
@@ -5254,7 +5242,8 @@ msgstr "OK"
 #: code:addons/web/controllers/home.py:0
 msgid ""
 "Only employees can access this database. Please contact the administrator."
-msgstr "従業員のみがこのデータベースにアクセスできます。管理者に連絡して下さい。"
+msgstr ""
+"従業員のみがこのデータベースにアクセスできます。管理者に連絡して下さい。"
 
 #. module: web
 #. odoo-javascript
@@ -5268,7 +5257,8 @@ msgstr "検索のみ可能"
 msgid ""
 "Only the first %(count)s records have been deleted (out of %(total)s "
 "selected)"
-msgstr "最初のレコード%(count)sだけが削除されました（選択された%(total)sのうち）"
+msgstr ""
+"最初のレコード%(count)sだけが削除されました（選択された%(total)sのうち）"
 
 #. module: web
 #. odoo-python
@@ -5276,7 +5266,8 @@ msgstr "最初のレコード%(count)sだけが削除されました（選択さ
 msgid ""
 "Only types %(supported_types)s are supported for category (found type %"
 "(field_type)s)"
-msgstr "カテゴリについては、タイプ%(supported_types)sのみがサポートされています。（発"
+msgstr ""
+"カテゴリについては、タイプ%(supported_types)sのみがサポートされています。（発"
 "見されたタイプ%(field_type)s）"
 
 #. module: web
@@ -5285,8 +5276,9 @@ msgstr "カテゴリについては、タイプ%(supported_types)sのみがサ�
 msgid ""
 "Only types %(supported_types)s are supported for filter (found type %"
 "(field_type)s)"
-msgstr "フィルタについてはタイプ%(supported_types)sのみがサポートされています。（"
-"発見されたタイプ %(field_type)s）"
+msgstr ""
+"フィルタについてはタイプ%(supported_types)sのみがサポートされています。（発見"
+"されたタイプ %(field_type)s）"
 
 #. module: web
 #. odoo-javascript
@@ -5304,20 +5296,23 @@ msgstr "おっと!"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/file_handler.js:0
 msgid "Oops! '%(fileName)s' didn’t upload since its format isn’t allowed."
-msgstr "'%(fileName)s' "
-"のフォーマットが許可されていないためアップロードできませんでした。"
+msgstr ""
+"'%(fileName)s' のフォーマットが許可されていないためアップロードできませんでし"
+"た。"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/properties_field.js:0
 msgid "Oops! A %(parentFieldLabel)s is needed to add property fields."
-msgstr "おっと!プロパティフィールドを追加するには %(parentFieldLabel)s が必要です。"
+msgstr ""
+"おっと!プロパティフィールドを追加するには %(parentFieldLabel)s が必要です。"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/properties_field.js:0
 msgid "Oops! You cannot edit the %(parentFieldLabel)s \"%(parentName)s\"."
-msgstr "おっと! %(parentFieldLabel)s \"%(parentName)s\" を編集することはできません。"
+msgstr ""
+"おっと! %(parentFieldLabel)s \"%(parentName)s\" を編集することはできません。"
 
 #. module: web
 #. odoo-javascript
@@ -5569,13 +5564,12 @@ msgid ""
 "in red."
 msgstr ""
 "ご注意ください:このビューには無効なロケーターが含まれています。<br/>\n"
-"                    "
-"これらのノードは親ビューにアンカー(接続)できず、効果がありません。<br/>\n"
-"                    "
-"この問題は、手動での変更やアップグレードプロセス中に発生した可能性があります"
-"。<br/>\n"
-"                    ご参考までに、無効な XPath "
-"ノードは赤色で強調表示されています。"
+"                    これらのノードは親ビューにアンカー(接続)できず、効果があ"
+"りません。<br/>\n"
+"                    この問題は、手動での変更やアップグレードプロセス中に発生"
+"した可能性があります。<br/>\n"
+"                    ご参考までに、無効な XPath ノードは赤色で強調表示されてい"
+"ます。"
 
 #. module: web
 #. odoo-javascript
@@ -5595,18 +5589,6 @@ msgstr "エクスポートリストに保存する項目を選んでください
 #: code:addons/web/static/src/views/fields/many2one/many2one.js:0
 msgid "Please, scan again!"
 msgstr "もう一度スキャンして下さい。"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
-msgid "Position X"
-msgstr "ポジションX"
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
-msgid "Position Y"
-msgstr "ポジションY"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.brand_promotion_message
@@ -5711,7 +5693,7 @@ msgstr "昨年"
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__primary_color
 msgid "Primary Color"
-msgstr "原色"
+msgstr "メインカラー"
 
 #. module: web
 #. odoo-javascript
@@ -5761,7 +5743,7 @@ msgstr "属性"
 #. module: web
 #: model:ir.model,name:web.model_properties_base_definition
 msgid "Properties Base Definition"
-msgstr ""
+msgstr "プロパティベース定義"
 
 #. module: web
 #. odoo-javascript
@@ -5839,12 +5821,6 @@ msgstr "Qwebフィールド画像"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
-msgid "Radial"
-msgstr "放射状"
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/views/fields/radio/radio_field.js:0
 msgid "Radio"
 msgstr "ラジオ"
@@ -5898,7 +5874,7 @@ msgstr "レコード規則"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/debug/profiling/profiling_item.xml:0
 msgid "Record memory"
-msgstr ""
+msgstr "レコードメモリ"
 
 #. module: web
 #. odoo-javascript
@@ -6352,7 +6328,7 @@ msgstr "検索ビュー"
 #. module: web
 #: model:ir.model.fields,field_description:web.field_base_document_layout__secondary_color
 msgid "Secondary Color"
-msgstr "二次色"
+msgstr "サブカラー"
 
 #. module: web
 #. odoo-javascript
@@ -6534,7 +6510,7 @@ msgstr "ユーザーにタイムゾーンを設定する"
 #: code:addons/web/static/src/views/fields/badge/badge_field.js:0
 #: code:addons/web/static/src/views/fields/badge_selection/list_badge_selection_field.js:0
 msgid "Set an integer field to use colors with the badge."
-msgstr ""
+msgstr "バッジに色を付けるための整数フィールドを設定してください。"
 
 #. module: web
 #. odoo-javascript
@@ -6636,7 +6612,6 @@ msgstr "週末を表示"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
 #: code:addons/web/static/src/views/fields/image/image_field.js:0
 #: code:addons/web/static/src/views/fields/image_url/image_url_field.js:0
 #: code:addons/web/static/src/views/fields/signature/signature_field.js:0
@@ -6659,7 +6634,7 @@ msgstr "スマイリー & 感情"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/color_picker.xml:0
+#: code:addons/web/static/src/core/color_picker/tabs/color_picker_solid_tab.js:0
 msgid "Solid"
 msgstr "ソリッド"
 
@@ -6681,8 +6656,9 @@ msgstr "恐ろしいことが起こった"
 msgid ""
 "Something went wrong... If you really are stuck, share the report with your "
 "friendly support service"
-msgstr "問題が発生しました... "
-"どうしても解決できない場合は、サポートサービスにレポートを共有して下さい"
+msgstr ""
+"問題が発生しました... どうしても解決できない場合は、サポートサービスにレポー"
+"トを共有して下さい"
 
 #. module: web
 #. odoo-javascript
@@ -6699,7 +6675,7 @@ msgstr "特別："
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.config_speedscope_index
 msgid "Speedscope"
-msgstr ""
+msgstr "Speedscope"
 
 #. module: web
 #. odoo-javascript
@@ -6804,7 +6780,7 @@ msgstr "スタイルエラー"
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/properties/property_definition.xml:0
 msgid "Suffix"
-msgstr ""
+msgstr "サフィックス"
 
 #. module: web
 #. odoo-javascript
@@ -6948,7 +6924,6 @@ msgstr "テンプレート："
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/color_picker.xml:0
 #: code:addons/web/static/src/views/fields/char/char_field.js:0
 #: code:addons/web/static/src/views/fields/properties/property_definition.js:0
 #: model_terms:ir.ui.view,arch_db:web.view_base_document_layout
@@ -6968,9 +6943,8 @@ msgid ""
 "country format. You can use '/' to indicate that the partner is not subject "
 "to tax."
 msgstr ""
-"登録番号(Tax Identification "
-"Number)。ここでの値は、国の形式に基づいて検証されます。取引先に税金がかからな"
-"いことを示すには、'/' を使用して下さい。"
+"登録番号(Tax Identification Number)。ここでの値は、国の形式に基づいて検証され"
+"ます。取引先に税金がかからないことを示すには、'/' を使用して下さい。"
 
 #. module: web
 #. odoo-python
@@ -7002,14 +6976,16 @@ msgstr "アプリはデバイスにインストールされているようです
 msgid ""
 "The content of this cell is too long for an XLSX file (more than %s "
 "characters). Please use the CSV format for this export."
-msgstr "このセルの内容はXLSXファイルには長すぎます。（%s文字以上）CSV形式でエクスポー"
+msgstr ""
+"このセルの内容はXLSXファイルには長すぎます。（%s文字以上）CSV形式でエクスポー"
 "トして下さい。"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/fields/domain/domain_field.js:0
 msgid "The domain involves non-literals. Their evaluation might fail."
-msgstr "このドメインには非リテラルが含まれています。それらの評価は失敗する可能性があ"
+msgstr ""
+"このドメインには非リテラルが含まれています。それらの評価は失敗する可能性があ"
 "ります。"
 
 #. module: web
@@ -7022,7 +6998,7 @@ msgstr "ドメインに非リテラルを含めてはいけません"
 #. odoo-python
 #: code:addons/web/models/res_users_settings_embedded_action.py:0
 msgid "The ids in %(field_name)s must not be duplicated: “%(action_ids)s”"
-msgstr ""
+msgstr "%(field_name)s 内の ID は重複してはいけません: “%(action_ids)s”"
 
 #. module: web
 #. odoo-python
@@ -7031,6 +7007,8 @@ msgid ""
 "The ids in %(field_name)s must only be integers or \"false\": “%"
 "(action_ids)s”"
 msgstr ""
+"%(field_name)s フィールドには、整数または \"false\" の値のみを含めることがで"
+"きます: “%(action_ids)s”"
 
 #. module: web
 #. odoo-javascript
@@ -7053,8 +7031,9 @@ msgstr "選択されたフィールドは署名を事前入力するのに使用
 msgid ""
 "The selected file (%(size)sB) is larger than the maximum allowed file size (%"
 "(maxSize)sB)."
-msgstr "選択されたファイル "
-"(%(size)sB)は許可されている最大ファイルサイズ(%(maxSize)sB)を超えています。"
+msgstr ""
+"選択されたファイル (%(size)sB)は許可されている最大ファイルサイズ(%"
+"(maxSize)sB)を超えています。"
 
 #. module: web
 #. odoo-javascript
@@ -7074,12 +7053,8 @@ msgid ""
 "The user should have one unique embedded action setting per user setting, "
 "action and record id."
 msgstr ""
-
-#. module: web
-#. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/color_picker.xml:0
-msgid "Theme"
-msgstr "テーマ"
+"ユーザごとの設定・アクション・レコード ID の組み合わせにつき、埋め込みアク"
+"ション設定は一意でなければなりません。"
 
 #. module: web
 #. odoo-javascript
@@ -7087,7 +7062,8 @@ msgstr "テーマ"
 msgid ""
 "There are too many data. The graph only shows a sample. Use the filters to "
 "refine the scope."
-msgstr "データが多すぎます。グラフはサンプルのみを表示しています。フィルタを使用して"
+msgstr ""
+"データが多すぎます。グラフはサンプルのみを表示しています。フィルタを使用して"
 "範囲を絞り込んで下さい。"
 
 #. module: web
@@ -7097,8 +7073,8 @@ msgid ""
 "There are too many rows (%(count)s rows, limit: %(limit)s) to export as "
 "Excel 2007-2013 (.xlsx) format. Consider splitting the export."
 msgstr ""
-"行数が多すぎる（%(count)s行、上限:%(limit)s）ため、Excel 2007-2013 (.xlsx) "
-"形式でエクスポートできません。エクスポートの分割を検討して下さい。"
+"行数が多すぎる（%(count)s行、上限:%(limit)s）ため、Excel 2007-2013 (.xlsx) 形"
+"式でエクスポートできません。エクスポートの分割を検討して下さい。"
 
 #. module: web
 #. odoo-javascript
@@ -7115,7 +7091,8 @@ msgstr "ファイルのアップロード中に問題が発生しました。"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.address_layout
 msgid "This block is not always present depending on the printed document."
-msgstr "このブロックは、印刷される文書によっては必ずしも存在しない場合があります。"
+msgstr ""
+"このブロックは、印刷される文書によっては必ずしも存在しない場合があります。"
 
 #. module: web
 #. odoo-javascript
@@ -7175,8 +7152,9 @@ msgstr "これは社内レポートのサンプルです。"
 msgid ""
 "This record belongs to a different parent so you can not change this "
 "property."
-msgstr "このレコードは違う親に属しているためこのプロパティを変更することはできません"
-"。"
+msgstr ""
+"このレコードは違う親に属しているためこのプロパティを変更することはできませ"
+"ん。"
 
 #. module: web
 #. odoo-javascript
@@ -7216,8 +7194,8 @@ msgid ""
 "Please, set the same timezone as your browser's to avoid time discrepancies "
 "in your system."
 msgstr ""
-"タイムゾーンの不一致: "
-"このタイムゾーンはお使いのブラウザのタイムゾーンと一致していません。\n"
+"タイムゾーンの不一致: このタイムゾーンはお使いのブラウザのタイムゾーンと一致"
+"していません。\n"
 "システム上での時間の不一致を回避するため、ブラウザに同じタイムゾーンを設定し"
 "てください。"
 
@@ -7235,7 +7213,6 @@ msgstr "妖精"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/color_picker.xml:0
 #: code:addons/web/static/src/views/fields/gauge/gauge_field.js:0
 #: code:addons/web/static/src/views/widgets/ribbon/ribbon.js:0
 msgid "Title"
@@ -7276,7 +7253,7 @@ msgstr "検索パネル切替"
 #. odoo-javascript
 #: code:addons/web/static/src/core/datetime/datetime_picker.xml:0
 msgid "Toggle date range mode"
-msgstr ""
+msgstr "日付範囲モードの切り替え"
 
 #. module: web
 #. odoo-javascript
@@ -7385,7 +7362,6 @@ msgstr "火曜日"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
 #: code:addons/web/static/src/views/fields/float/float_field.js:0
 #: code:addons/web/static/src/views/fields/float_time/float_time_field.js:0
 #: code:addons/web/static/src/views/fields/float_toggle/float_toggle_field.js:0
@@ -7477,7 +7453,8 @@ msgstr "カメラにアクセスできません"
 msgid ""
 "Unable to find Wkhtmltopdf on this system. The report will be shown in html.%"
 "(link)s"
-msgstr "システムにWkhtmltopdfが見つかりません。レポートはHTMLで表示されます。%(link)s"
+msgstr ""
+"システムにWkhtmltopdfが見つかりません。レポートはHTMLで表示されます。%(link)s"
 
 #. module: web
 #. odoo-javascript
@@ -7642,7 +7619,8 @@ msgstr "実行コンテキストを使用"
 #: code:addons/web/static/src/views/fields/integer/integer_field.js:0
 msgid ""
 "Use it with the 'User-friendly format' option to customize the formatting."
-msgstr "書式をカスタマイズするには、'ユーザフレンドリー書式'オプションを使用します。"
+msgstr ""
+"書式をカスタマイズするには、'ユーザフレンドリー書式'オプションを使用します。"
 
 #. module: web
 #. odoo-javascript
@@ -7651,6 +7629,8 @@ msgid ""
 "Use the operators \"+=\", \"-=\", \"*=\" and \"/=\" to update the current "
 "value."
 msgstr ""
+"現在の値を更新するには \"+=\", \"-=\", \"*=\", \"/=\" の演算子を使用してくだ"
+"さい。"
 
 #. module: web
 #. odoo-javascript
@@ -7664,9 +7644,9 @@ msgstr "このビューを開くと、デフォルトでこのフィルタが使
 msgid ""
 "Use to override the display value (e.g. if your progress bar is a computed "
 "percentage but you want to display the actual field value instead)."
-msgstr "表示値を上書きするために使用します（例: "
-"プログレスバーが計算されたパーセンテージであり、代わりに実際のフィールド値を"
-"表示したい場合）"
+msgstr ""
+"表示値を上書きするために使用します（例: プログレスバーが計算されたパーセン"
+"テージであり、代わりに実際のフィールド値を表示したい場合）"
 
 #. module: web
 #. odoo-javascript
@@ -7695,12 +7675,12 @@ msgstr "ユーザインタフェース"
 #. module: web
 #: model:ir.model,name:web.model_res_users_settings
 msgid "User Settings"
-msgstr ""
+msgstr "ユーザ管理設定"
 
 #. module: web
 #: model:ir.model,name:web.model_res_users_settings_embedded_action
 msgid "User Settings for Embedded Actions"
-msgstr ""
+msgstr "埋め込みアクションのユーザ管理設定"
 
 #. module: web
 #. odoo-javascript
@@ -7857,7 +7837,6 @@ msgstr "トイレ"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-#: code:addons/web/static/src/model/relational_model/dynamic_list.js:0
 #: code:addons/web/static/src/search/control_panel/control_panel.js:0
 #: code:addons/web/static/src/views/fields/domain/domain_field.xml:0
 msgid "Warning"
@@ -7939,7 +7918,8 @@ msgstr "フィールドが空の場合に記入すること"
 msgid ""
 "Whether or not this Property Field is displayed in the Calendar, Cards & "
 "Kanban views"
-msgstr "このプロパティフィールドをカレンダー、カード、かんばんビューに表示するかどう"
+msgstr ""
+"このプロパティフィールドをカレンダー、カード、かんばんビューに表示するかどう"
 "か"
 
 #. module: web
@@ -7994,7 +7974,7 @@ msgstr "年"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_components.js:0
 msgid "Year to date"
-msgstr ""
+msgstr "年初からの累計"
 
 #. module: web
 #. odoo-javascript
@@ -8043,7 +8023,7 @@ msgstr "ブラウザメニューからアプリをインストールできます
 #. odoo-python
 #: code:addons/web/models/properties_base_definition.py:0
 msgid "You can not read that field definition."
-msgstr ""
+msgstr "そのフィールド定義を読み取ることはできません。"
 
 #. module: web
 #. odoo-javascript
@@ -8074,7 +8054,8 @@ msgstr "/jsonルートを使用するには許可をエクスポートする必�
 #: code:addons/web/static/src/views/fields/dynamic_placeholder_hook.js:0
 msgid ""
 "You need to select a model before opening the dynamic placeholder selector."
-msgstr "ダイナミック・プレースホルダー・セレクタを開く前に、モデルを選択する必要があ"
+msgstr ""
+"ダイナミック・プレースホルダー・セレクタを開く前に、モデルを選択する必要があ"
 "ります。"
 
 #. module: web
@@ -8093,15 +8074,17 @@ msgid ""
 "You should upgrade your version of Wkhtmltopdf to at least 0.12.0 in order "
 "to get a correct display of headers and footers as well as support for table-"
 "breaking between pages.%(link)s"
-msgstr "ヘッダやフッタ、またテーブル分割が正しく表示されるように、"
-"Wkhtmltopdfのバージョンを 0.12.0以上にして下さい。%(link)s"
+msgstr ""
+"ヘッダやフッタ、またテーブル分割が正しく表示されるように、Wkhtmltopdfのバー"
+"ジョンを 0.12.0以上にして下さい。%(link)s"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
 msgid "Your Odoo session expired. The current page is about to be refreshed."
-msgstr "Odooセッションの有効期限が切れました。現在のページがリフレッシュされようとし"
+msgstr ""
+"Odooセッションの有効期限が切れました。現在のページがリフレッシュされようとし"
 "ています。"
 
 #. module: web
@@ -8110,7 +8093,8 @@ msgstr "Odooセッションの有効期限が切れました。現在のペー�
 msgid ""
 "Your installation of Wkhtmltopdf seems to be broken. The report will be "
 "shown in html.%(link)s"
-msgstr "Wkhtmltopdfのインストールに問題があるようです。レポートはHTMLで表示されます。"
+msgstr ""
+"Wkhtmltopdfのインストールに問題があるようです。レポートはHTMLで表示されます。"
 "%(link)s"
 
 #. module: web
@@ -8261,7 +8245,7 @@ msgstr "アスクレピオスの杖"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "after"
-msgstr ""
+msgstr "後"
 
 #. module: web
 #. odoo-javascript
@@ -9238,7 +9222,7 @@ msgstr "カブトムシ"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "before"
-msgstr ""
+msgstr "前"
 
 #. module: web
 #. odoo-javascript
@@ -12014,12 +11998,6 @@ msgstr "鹿"
 
 #. module: web
 #. odoo-javascript
-#: code:addons/web/static/src/core/color_picker/gradient_picker/gradient_picker.xml:0
-msgid "deg"
-msgstr "度"
-
-#. module: web
-#. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "dejected"
 msgstr "落胆した"
@@ -12867,7 +12845,7 @@ msgstr "エンパナーダ"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/actions/blank_component.xml:0
 msgid "empty"
-msgstr ""
+msgstr "空"
 
 #. module: web
 #. odoo-javascript
@@ -14277,7 +14255,7 @@ msgstr "富士山"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "full"
-msgstr "満"
+msgstr "完全"
 
 #. module: web
 #. odoo-javascript
@@ -14697,7 +14675,7 @@ msgstr "バッタ"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "greater or equal to"
-msgstr ""
+msgstr "次の数以上："
 
 #. module: web
 #. odoo-javascript
@@ -17163,13 +17141,13 @@ msgstr "低い"
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "lower or equal to"
-msgstr ""
+msgstr "次の数以下："
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/tree_editor/tree_editor_operator_editor.js:0
 msgid "lower than"
-msgstr ""
+msgstr "次の数より小さい："
 
 #. module: web
 #. odoo-javascript
@@ -27007,6 +26985,51 @@ msgstr "“空”"
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "ココ"
 msgstr "ココ"
+
+#~ msgid "Angle"
+#~ msgstr "角度"
+
+#~ msgid "Define a custom gradient"
+#~ msgstr "カスタムグラデーションを定義"
+
+#~ msgid "Error"
+#~ msgstr "エラー"
+
+#~ msgid "Extend to the closest corner"
+#~ msgstr "最も近い隅に伸ばす"
+
+#~ msgid "Extend to the closest side"
+#~ msgstr "最も近い側に伸ばす"
+
+#~ msgid "Extend to the farthest corner"
+#~ msgstr "最も遠い隅に伸ばす"
+
+#~ msgid "Extend to the farthest side"
+#~ msgstr "最も遠い側に伸ばす"
+
+#~ msgid "Gradient"
+#~ msgstr "グラデーション"
+
+#~ msgid "Invalid fields: "
+#~ msgstr "項目が無効です: "
+
+#~ msgid "Linear"
+#~ msgstr "線形"
+
+#~ msgid "Position X"
+#~ msgstr "ポジションX"
+
+#~ msgid "Position Y"
+#~ msgstr "ポジションY"
+
+#~ msgid "Radial"
+#~ msgstr "放射状"
+
+#~ msgid "Theme"
+#~ msgstr "テーマ"
+
+#~ msgid "deg"
+#~ msgstr "度"
 
 #~ msgid " records"
 #~ msgstr "レコード"

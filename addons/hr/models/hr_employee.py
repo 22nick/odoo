@@ -198,6 +198,7 @@ class HrEmployee(models.Model):
         'hr.employee.category', 'employee_category_rel',
         'employee_id', 'category_id', groups="hr.group_hr_user",
         string='Tags')
+    tz = fields.Selection(tracking=True)
     # misc
     color = fields.Integer('Color Index', default=0)
     barcode = fields.Char(string="Badge ID", help="ID used for employee identification.", groups="hr.group_hr_user", copy=False)
@@ -489,7 +490,9 @@ class HrEmployee(models.Model):
     @api.depends('current_version_id')
     @api.depends_context('version_id')
     def _compute_version_id(self):
-        context_version = self.env['hr.version'].browse(self.env.context.get('version_id', False))
+        context_version_id = self.env.context.get('version_id', False)
+        context_version = self.env['hr.version'].browse(context_version_id).exists() if context_version_id else self.env['hr.version']
+
         for employee in self:
             if context_version.employee_id == self:
                 version = context_version
@@ -683,9 +686,9 @@ class HrEmployee(models.Model):
         if self.ids:
             version_domain &= Domain('employee_id', 'in', self.ids)
         if date_start:
-            version_domain &= Domain('contract_date_end', '=', False) | Domain('contract_date_end', '>', date_start)
+            version_domain &= Domain('contract_date_end', '=', False) | Domain('contract_date_end', '>=', date_start)
         if date_end:
-            version_domain &= Domain('contract_date_start', '<', date_end)
+            version_domain &= Domain('contract_date_start', '<=', date_end)
         if domain:
             version_domain &= domain
         all_versions = self.env['hr.version']._read_group(
@@ -695,7 +698,7 @@ class HrEmployee(models.Model):
         )
         contract_versions_by_employee = defaultdict(lambda: defaultdict(lambda: self.env["hr.version"]))
         for employee, _date_version, version in all_versions:
-            contract_versions_by_employee[employee.id][version.contract_date_start] |= version
+            contract_versions_by_employee[employee.id][version[0].contract_date_start] |= version
         return contract_versions_by_employee
 
     def _get_all_contract_dates(self):
@@ -1509,7 +1512,7 @@ class HrEmployee(models.Model):
 
         date_from = fields.Date.to_date(date_from)
         for employee in self:
-            employee_versions_sudo = employee.version_ids.sudo().filtered(lambda v: v._is_in_contract(date_from))
+            employee_versions_sudo = employee.sudo().version_ids.filtered(lambda v: v._is_in_contract(date_from))
             if employee_versions_sudo:
                 res[employee.id] = employee_versions_sudo[0].resource_calendar_id.sudo(False)
         return res

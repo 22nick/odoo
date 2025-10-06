@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-11 13:59+0000\n"
+"POT-Creation-Date: 2025-09-30 18:35+0000\n"
 "PO-Revision-Date: 2025-09-16 02:36+0000\n"
 "Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/"
@@ -18,8 +18,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || ("
-"n%100>=11 && n%100<=14)? 2 : 3);\n"
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 "X-Generator: Weblate 5.12.2\n"
 
 #. module: point_of_sale
@@ -74,14 +74,15 @@ msgstr "%(name)s ВОЗВРАТ"
 msgid ""
 "%(old_pm)s changed to %(new_pm)s and from %(old_amount)s to %(new_amount)s"
 msgstr ""
-"Метод оплаты изменен с %(old_pm)s на %(new_pm)s и сумма с %(old_amount)s на "
-"%(new_amount)s"
+"Метод оплаты изменен с %(old_pm)s на %(new_pm)s и сумма с %(old_amount)s на %"
+"(new_amount)s"
 
 #. module: point_of_sale
 #. odoo-python
 #: code:addons/point_of_sale/models/pos_order.py:0
 msgid "%(old_pm)s changed to %(new_pm)s for %(old_amount)s"
-msgstr "Метод оплаты изменен с %(old_pm)s на %(new_pm)s на сумму %(old_amount)s"
+msgstr ""
+"Метод оплаты изменен с %(old_pm)s на %(new_pm)s на сумму %(old_amount)s"
 
 #. module: point_of_sale
 #. odoo-python
@@ -1553,6 +1554,12 @@ msgstr "Отменен"
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/screens/product_screen/order_summary/order_summary.js:0
+msgid "Cannot edit orderline"
+msgstr ""
+
+#. module: point_of_sale
+#. odoo-javascript
+#: code:addons/point_of_sale/static/src/app/screens/product_screen/order_summary/order_summary.js:0
 msgid "Cannot modify a tip"
 msgstr "Невозможно изменить наконечник"
 
@@ -1745,7 +1752,8 @@ msgstr "Обнаружено расхождение при подсчете на
 #. odoo-python
 #: code:addons/point_of_sale/models/pos_session.py:0
 msgid "Cash difference observed during the counting (Profit) - closing"
-msgstr "Обнаружено расхождение при подсчете наличности (прибыль) – при закрытии"
+msgstr ""
+"Обнаружено расхождение при подсчете наличности (прибыль) – при закрытии"
 
 #. module: point_of_sale
 #. odoo-python
@@ -2856,7 +2864,8 @@ msgstr "Определите товары и категории POS для ма�
 #. module: point_of_sale
 #: model_terms:ir.ui.view,arch_db:point_of_sale.res_config_settings_view_form
 msgid "Define the smallest coinage of the currency used to pay by cash"
-msgstr "Определите наименьший номинал валюты, используемой для оплаты наличными"
+msgstr ""
+"Определите наименьший номинал валюты, используемой для оплаты наличными"
 
 #. module: point_of_sale
 #: model:ir.model.fields,help:point_of_sale.field_pos_payment_method__name
@@ -4190,8 +4199,8 @@ msgstr ""
 msgid ""
 "Invoice payment for %(order)s (%(account_move)s) using %(payment_method)s"
 msgstr ""
-"Оплата счета-фактуры за %(order)s (%(account_move)s) с использованием "
-"%(payment_method)s"
+"Оплата счета-фактуры за %(order)s (%(account_move)s) с использованием %"
+"(payment_method)s"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_report_pos_order__invoiced
@@ -4622,7 +4631,9 @@ msgstr "Загрузка..."
 #: model:ir.model.fields,help:point_of_sale.field_pos_config__epson_printer_ip
 #: model:ir.model.fields,help:point_of_sale.field_pos_printer__epson_printer_ip
 #: model:ir.model.fields,help:point_of_sale.field_res_config_settings__pos_epson_printer_ip
-msgid "Local IP address of an Epson receipt printer."
+msgid ""
+"Local IP address of an Epson receipt printer, or its serial number if the "
+"'Automatic Certificate Update' option is enabled in the printer settings."
 msgstr ""
 
 #. module: point_of_sale
@@ -7471,8 +7482,8 @@ msgid ""
 "Reversal of POS closing entry %(entry)s for order %(order)s from session %"
 "(session)s"
 msgstr ""
-"Сторнирование записи закрытия POS %(entry)s для ордера %(order)s из сессии "
-"%(session)s"
+"Сторнирование записи закрытия POS %(entry)s для ордера %(order)s из сессии %"
+"(session)s"
 
 #. module: point_of_sale
 #. odoo-python
@@ -8134,6 +8145,12 @@ msgid "Some Serial/Lot Numbers are missing"
 msgstr "Некоторые серийные/лот-номера отсутствуют"
 
 #. module: point_of_sale
+#. odoo-python
+#: code:addons/point_of_sale/models/pos_order.py:0
+msgid "Some orders are already being invoiced. Please try again later."
+msgstr ""
+
+#. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/services/pos_store.js:0
 msgid ""
@@ -8557,8 +8574,8 @@ msgstr ""
 #. module: point_of_sale
 #. odoo-python
 #: code:addons/point_of_sale/controllers/main.py:0
-msgid "The Ticket Number should be at least 14 characters long."
-msgstr "Номер билета должен состоять не менее чем из 14 символов."
+msgid "The Ticket Number should be at least 12 characters long."
+msgstr ""
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -9257,6 +9274,13 @@ msgstr ""
 "синхронизирован, а затем повторите попытку."
 
 #. module: point_of_sale
+#. odoo-javascript
+#: code:addons/point_of_sale/static/src/app/screens/product_screen/order_summary/order_summary.js:0
+msgid ""
+"This orderline has already been sent to the kitchen and cannot be edited."
+msgstr ""
+
+#. module: point_of_sale
 #. odoo-python
 #: code:addons/point_of_sale/models/pos_payment_method.py:0
 msgid "This payment method is not configured to generate QR codes."
@@ -9377,8 +9401,8 @@ msgid ""
 msgstr ""
 "Чтобы удалить товар, убедитесь, что все сессии POS закрыты.\n"
 "\n"
-"Удаление товара из активной сессии – это как вырвать бургер у клиента из рук:"
-" повсюду полетят кетчуп и майонез!"
+"Удаление товара из активной сессии – это как вырвать бургер у клиента из "
+"рук: повсюду полетят кетчуп и майонез!"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -9881,9 +9905,7 @@ msgid "Warehouse (PoS)"
 msgstr "Склад (PoS)"
 
 #. module: point_of_sale
-#. odoo-javascript
 #. odoo-python
-#: code:addons/point_of_sale/static/src/app/screens/payment_screen/payment_screen.js:0
 #: code:addons/point_of_sale/wizard/pos_make_invoice.py:0
 #: model_terms:ir.ui.view,arch_db:point_of_sale.view_confirm_action_wizard
 msgid "Warning"
@@ -10151,13 +10173,6 @@ msgstr "Нельзя редактировать оплату в уже пров�
 
 #. module: point_of_sale
 #. odoo-python
-#: code:addons/point_of_sale/models/pos_order.py:0
-msgid "You cannot invoice orders belonging to different companies."
-msgstr ""
-"Вы не можете выставлять счета на заказы, принадлежащие разным компаниям."
-
-#. module: point_of_sale
-#. odoo-python
 #: code:addons/point_of_sale/models/pos_config.py:0
 msgid ""
 "You cannot share open orders with configuration that does not use the same "
@@ -10211,8 +10226,8 @@ msgid ""
 "You have enabled the \"Identify Customer\" option for %(payment_method)s "
 "payment method,but the order %(order)s does not contain a customer."
 msgstr ""
-"Вы включили опцию \"Определить клиента\" для метода оплаты %(payment_method)"
-"s, но заказ %(order)s не содержит клиента."
+"Вы включили опцию \"Определить клиента\" для метода оплаты %"
+"(payment_method)s, но заказ %(order)s не содержит клиента."
 
 #. module: point_of_sale
 #: model_terms:ir.actions.act_window,help:point_of_sale.product_product_action
@@ -10538,6 +10553,13 @@ msgstr "для активации кнопок."
 #: model_terms:ir.ui.view,arch_db:point_of_sale.report_invoice_document
 msgid "using"
 msgstr "используя"
+
+#~ msgid "The Ticket Number should be at least 14 characters long."
+#~ msgstr "Номер билета должен состоять не менее чем из 14 символов."
+
+#~ msgid "You cannot invoice orders belonging to different companies."
+#~ msgstr ""
+#~ "Вы не можете выставлять счета на заказы, принадлежащие разным компаниям."
 
 #~ msgid " - closing"
 #~ msgstr " - закрытие"

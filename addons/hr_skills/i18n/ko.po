@@ -3,13 +3,14 @@
 # * hr_skills
 #
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Kwanghee Park (kwpa)" <kwpa@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-03 12:09+0000\n"
-"PO-Revision-Date: 2025-09-16 04:46+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2025-09-30 18:35+0000\n"
+"PO-Revision-Date: 2025-10-04 02:31+0000\n"
+"Last-Translator: \"Kwanghee Park (kwpa)\" <kwpa@odoo.com>\n"
 "Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/hr_skills/"
 "ko/>\n"
 "Language: ko\n"
@@ -44,6 +45,13 @@ msgstr "2022"
 #: model_terms:ir.ui.view,arch_db:hr_skills.report_employee_cv_main_panel
 msgid "2023"
 msgstr "2023"
+
+#. module: hr_skills
+#: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
+msgid ""
+"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Arrow icon\" "
+"title=\"Arrow\"/>"
+msgstr ""
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_line_admin_7
@@ -83,7 +91,8 @@ msgstr "앨런 켈러"
 msgid ""
 "Allows to encrypt/decrypt plain text or files. Available as a web app or as "
 "an API."
-msgstr "일반 텍스트 또는 파일을 암호화/해독화할 수 있습니다. 웹 앱 또는 API로 사용할 "
+msgstr ""
+"일반 텍스트 또는 파일을 암호화/해독화할 수 있습니다. 웹 앱 또는 API로 사용할 "
 "수 있습니다."
 
 #. module: hr_skills
@@ -138,6 +147,11 @@ msgstr "아놀드 코헨"
 #: model:hr.resume.line,name:hr_skills.employee_resume_niv_arroyo_ltd
 msgid "Arroyo Ltd"
 msgstr "아로요 주식회사"
+
+#. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__avatar_128
+msgid "Avatar 128"
+msgstr ""
 
 #. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_chs_avoca_primary_school
@@ -216,22 +230,31 @@ msgstr "채용 정보 담당자"
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.employee_skill_view_form
+#: model_terms:ir.ui.view,arch_db:hr_skills.hr_job_skill_view_form
 msgid "Category"
 msgstr "카테고리"
+
+#. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__certificate_file
+msgid "Certificate"
+msgstr "자격증"
+
+#. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__certificate_filename
+msgid "Certificate Filename"
+msgstr ""
 
 #. module: hr_skills
 #: model:ir.actions.act_window,name:hr_skills.hr_employee_certification_report_action
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee__certification_ids
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_public__certification_ids
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill_type__is_certification
-#: model:ir.model.fields,field_description:hr_skills.field_res_users__certification_ids
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_certification_report_view_list
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_certification_report_view_search
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_public_view_form_inherit
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_view_list
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_view_search
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_view_form
-#: model_terms:ir.ui.view,arch_db:hr_skills.res_users_view_form
 msgid "Certification"
 msgstr "자격증"
 
@@ -251,9 +274,9 @@ msgstr "자격증 유형"
 #: model:ir.actions.act_window,name:hr_skills.action_hr_employee_skill_certification
 #: model:ir.ui.menu,name:hr_skills.hr_certification_menu
 #: model:ir.ui.menu,name:hr_skills.hr_employee_certification_report_menu
+#: model:mail.activity.type,name:hr_skills.mail_activity_data_upload_certification
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_public_view_form_inherit
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_view_form
-#: model_terms:ir.ui.view,arch_db:hr_skills.res_users_view_form
 msgid "Certifications"
 msgstr "자격증"
 
@@ -278,11 +301,6 @@ msgid "Claremont College"
 msgstr "클레어몬트 컬리지"
 
 #. module: hr_skills
-#: model:ir.model.fields.selection,name:hr_skills.selection__hr_resume_line__display_type__classic
-msgid "Classic"
-msgstr "기본"
-
-#. module: hr_skills
 #: model:hr.skill,name:hr_skills.hr_skill_cloud_computing
 msgid "Cloud computing"
 msgstr "클라우드 컴퓨팅"
@@ -297,6 +315,8 @@ msgstr "콜 주식회사"
 #: code:addons/hr_skills/static/src/fields/formatted_date/formatted_date.js:0
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__color
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__color
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__color
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__color
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill__color
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill_type__color
 msgid "Color"
@@ -316,6 +336,7 @@ msgstr "연락"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_certification_report__company_id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_report__company_id
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__company_id
 msgid "Company"
 msgstr "회사"
 
@@ -340,6 +361,27 @@ msgid "Copywriter, advertising"
 msgstr "광고 카피라이터"
 
 #. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__is_course
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__is_course
+msgid "Course"
+msgstr "강좌"
+
+#. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__course_type
+msgid "Course Type"
+msgstr ""
+
+#. module: hr_skills
+#: model_terms:ir.ui.view,arch_db:hr_skills.hr_resume_line_type_tree_view
+msgid "Course?"
+msgstr "강좌 정보"
+
+#. module: hr_skills
+#: model:ir.ui.menu,name:hr_skills.menu_learnings_training_attendances_courses
+msgid "Courses"
+msgstr "강좌"
+
+#. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_ngh_craigmore_south_junior_primary_school
 msgid "Craigmore South Junior Primary School"
 msgstr "크레이그모어 사우스 주니어 초등학교"
@@ -359,6 +401,7 @@ msgstr "기술 생성"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_cv_wizard__create_uid
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__create_uid
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__create_uid
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__create_uid
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__create_uid
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill__create_uid
@@ -370,6 +413,7 @@ msgstr "작성자"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_cv_wizard__create_date
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__create_date
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__create_date
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__create_date
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__create_date
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill__create_date
@@ -390,6 +434,7 @@ msgstr "비판적 사고력"
 
 #. module: hr_skills
 #. odoo-javascript
+#: code:addons/hr_skills/static/src/components/internal_resume_lines/internal_resume_one2many.xml:0
 #: code:addons/hr_skills/static/src/fields/resume_one2many/resume_one2many.xml:0
 msgid "Current"
 msgstr "현재"
@@ -397,9 +442,13 @@ msgstr "현재"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee__current_employee_skill_ids
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_public__current_employee_skill_ids
-#: model:ir.model.fields,field_description:hr_skills.field_res_users__current_employee_skill_ids
 msgid "Current Employee Skill"
 msgstr "현재 직원 직무 기술"
+
+#. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job__current_job_skill_ids
+msgid "Current Job Skill"
+msgstr ""
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_certification_report_view_list
@@ -442,6 +491,8 @@ msgstr "데이터베이스 관리"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_history_report__date
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_history_report_view_search
+#: model_terms:ir.ui.view,arch_db:hr_skills.hr_resume_line_list_view
+#: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
 msgid "Date"
 msgstr "날짜"
 
@@ -500,6 +551,7 @@ msgstr "데모 회사 명"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_certification_report__department_id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_report__department_id
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__department_id
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_certification_report_view_search
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_report_view_search
 msgid "Department"
@@ -540,25 +592,22 @@ msgstr "취소"
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_history_report__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_report__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__display_name
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job__display_name
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill_level__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill_type__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_report_hr_skills_report_employee_cv__display_name
-#: model:ir.model.fields,field_description:hr_skills.field_res_users__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_resource_resource__display_name
 msgid "Display Name"
 msgstr "표시명"
 
 #. module: hr_skills
-#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__display_type
-msgid "Display Type"
-msgstr "표시 유형"
-
-#. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__display_warning_message
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__display_warning_message
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__display_warning_message
 msgid "Display Warning Message"
 msgstr "경고 메시지 표시"
 
@@ -573,6 +622,7 @@ msgid "Douglas, Thompson and Conner"
 msgstr "더글라스, 톰슨, 코너"
 
 #. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__duration
 #: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
 msgid "Duration"
 msgstr "소요시간"
@@ -608,6 +658,7 @@ msgstr "이메일 마케팅"
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_certification_report_view_search
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_report_view_search
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_view_search
+#: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form_inherit
 msgid "Employee"
 msgstr "임직원"
 
@@ -670,7 +721,8 @@ msgid ""
 "Enter your finance data and the app tries to forecast what will be your "
 "future incomes/expenses. The application uses machine learning to train "
 "itself."
-msgstr "앱에 재무 관련 데이터를 입력하면 미래의 예상 수입/지출이 계산됩니다. 이 앱은 "
+msgstr ""
+"앱에 재무 관련 데이터를 입력하면 미래의 예상 수입/지출이 계산됩니다. 이 앱은 "
 "머신 러닝을 사용하여 스스로 학습이 가능합니다."
 
 #. module: hr_skills
@@ -679,15 +731,35 @@ msgid "Evans, Cooper and White"
 msgstr "에반스, 쿠퍼, 화이트"
 
 #. module: hr_skills
-#: model:hr.resume.line.type,name:hr_skills.resume_type_experience
+#: model_terms:ir.ui.view,arch_db:hr_skills.view_hr_job_form
+msgid "Expected Skills"
+msgstr ""
+
+#. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.report_employee_cv_main_panel
 msgid "Experience"
 msgstr "경력"
 
 #. module: hr_skills
+#. odoo-javascript
+#: code:addons/hr_skills/static/src/components/internal_resume_lines/internal_resume_one2many.xml:0
+msgid "Experience -"
+msgstr ""
+
+#. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_certification_report_view_search
 msgid "Expired Certification"
 msgstr "만료된 자격증"
+
+#. module: hr_skills
+#: model:ir.model.fields.selection,name:hr_skills.selection__hr_resume_line__course_type__external
+msgid "External"
+msgstr "외부"
+
+#. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__external_url
+msgid "External URL"
+msgstr ""
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_jep_cole_ltd
@@ -715,6 +787,11 @@ msgid "Fluent"
 msgstr "유창"
 
 #. module: hr_skills
+#: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
+msgid "Forever"
+msgstr "언제든"
+
+#. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_jgo_fox_and_sons
 msgid "Fox and Sons"
 msgstr "폭스와 아들들"
@@ -733,7 +810,6 @@ msgstr "불어"
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_public_view_form_inherit
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_view_list
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_view_form
-#: model_terms:ir.ui.view,arch_db:hr_skills.res_users_view_form
 msgid "From"
 msgstr "시작"
 
@@ -798,11 +874,6 @@ msgstr "그린 주식회사"
 #: model:hr.resume.line,name:hr_skills.employee_resume_admin_greeneorr
 msgid "Greene-Orr"
 msgstr "그린-오어"
-
-#. module: hr_skills
-#: model_terms:ir.ui.view,arch_db:hr_skills.hr_skill_view_search
-msgid "Group By..."
-msgstr "그룹별..."
 
 #. module: hr_skills
 #: model:hr.skill,name:hr_skills.hr_skill_html
@@ -879,13 +950,14 @@ msgstr "인사 담당자"
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_history_report__id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_report__id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__id
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job__id
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill__id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill_level__id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill_type__id
 #: model:ir.model.fields,field_description:hr_skills.field_report_hr_skills_report_employee_cv__id
-#: model:ir.model.fields,field_description:hr_skills.field_res_users__id
 #: model:ir.model.fields,field_description:hr_skills.field_resource_resource__id
 msgid "ID"
 msgstr "ID"
@@ -943,7 +1015,8 @@ msgstr "기술이 누락된 경우 인사 담당자가 생성할 수 있습니�
 msgid ""
 "If the active field is set to False, it will allow you to hide the resource "
 "record without removing it."
-msgstr "사용중인 필드를 아니오로 설정하면 제거하지 않고 자원 기록을 숨길 수 있습니다."
+msgstr ""
+"사용중인 필드를 아니오로 설정하면 제거하지 않고 자원 기록을 숨길 수 있습니다."
 
 #. module: hr_skills
 #. odoo-javascript
@@ -998,36 +1071,47 @@ msgstr "쥬얼리 디자이너"
 
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_report__job_id
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__job_id
 msgid "Job"
 msgstr "직무"
+
+#. module: hr_skills
+#: model:ir.model,name:hr_skills.model_hr_job
+msgid "Job Position"
+msgstr ""
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_line_admin_4
 msgid ""
 "Job position: Development team leader\n"
-"- Supported technical operations with investigating and correcting varied production support issues (Java, Perl, Shell scripts, SQL).\n"
-"- Led quality assurance planning for multiple concurrent projects relative to overall system architecture or trading system changes/new developments.\n"
-"- Configured and released business critical alpha and risk models using MATLAB and SQL with inputs from Portfolio Managers."
+"- Supported technical operations with investigating and correcting varied "
+"production support issues (Java, Perl, Shell scripts, SQL).\n"
+"- Led quality assurance planning for multiple concurrent projects relative "
+"to overall system architecture or trading system changes/new developments.\n"
+"- Configured and released business critical alpha and risk models using "
+"MATLAB and SQL with inputs from Portfolio Managers."
 msgstr ""
 "직책: 개발팀 팀장\n"
 "- 다양한 프로덕션 지원 관련 문제 (Java, Perl, Shell scripts, SQL)를 조사하고 "
 "수정하여 기술 운영을 지원.\n"
-"- 전체 시스템 구조 및 트레이딩 시스템 변경/신규 개발과 관련된 동시 "
-"프로젝트에 대한 품질 보증 계획을 주도.\n"
-"- 포트폴리오 매니저의 의견을 반영하여, MATLAB와 SQL을 활용한 비즈니스 "
-"크리티컬 알파 및 리스크 모델을 출시."
+"- 전체 시스템 구조 및 트레이딩 시스템 변경/신규 개발과 관련된 동시 프로젝트"
+"에 대한 품질 보증 계획을 주도.\n"
+"- 포트폴리오 매니저의 의견을 반영하여, MATLAB와 SQL을 활용한 비즈니스 크리티"
+"컬 알파 및 리스크 모델을 출시."
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_line_admin_3
 msgid ""
 "Job position: Product manager\n"
-"- Coordinated and managed software deployment across five system environments from development to production.\n"
+"- Coordinated and managed software deployment across five system "
+"environments from development to production.\n"
 "- Developed stored procedures to assist Java level programming efforts.\n"
-"- Developed multiple renewable energy plant architectures, both commercial installations and defense-related."
+"- Developed multiple renewable energy plant architectures, both commercial "
+"installations and defense-related."
 msgstr ""
 "직책: 제품 관리자\n"
-"- 개발부터 생산에 이르기까지 5가지 시스템 환경에 걸쳐 소프트웨어를 배포, "
-"조정 및 관리\n"
+"- 개발부터 생산에 이르기까지 5가지 시스템 환경에 걸쳐 소프트웨어를 배포, 조"
+"정 및 관리\n"
 "- Java 레벨의 프로그래밍 작업을 지원하기 위해 축적 절차 개발.\n"
 "- 상업용 설치 및 방위 관련 재생 에너지 플랜트 아키텍처 개발."
 
@@ -1080,6 +1164,7 @@ msgstr "언어"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_cv_wizard__write_uid
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__write_uid
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__write_uid
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__write_uid
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__write_uid
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill__write_uid
@@ -1091,6 +1176,7 @@ msgstr "최근 갱신한 사람"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_cv_wizard__write_date
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__write_date
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__write_date
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__write_date
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__write_date
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill__write_date
@@ -1140,6 +1226,7 @@ msgstr "등급"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__levels_count
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__levels_count
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__levels_count
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill_type__levels_count
 msgid "Levels Count"
 msgstr "수준 수"
@@ -1163,11 +1250,6 @@ msgstr "사전 편찬자"
 #: model:hr.resume.line,name:hr_skills.employee_resume_lur_lindenow_primary_school
 msgid "Lindenow Primary School"
 msgstr "린데노우 초등학교"
-
-#. module: hr_skills
-#: model:ir.ui.menu,name:hr_skills.hr_resume_line_type_menu
-msgid "Line Types"
-msgstr "내역 유형"
 
 #. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_vad_loganmartin
@@ -1233,7 +1315,8 @@ msgstr "마틴, 스탠리, 던컨"
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_line_admin_1
 msgid ""
 "Master in Electrical engineering\n"
-"            Master thesis: Better grid management and control through machine learning"
+"            Master thesis: Better grid management and control through "
+"machine learning"
 msgstr ""
 "전기 공학 석사\n"
 "            석사 논문: 머신러닝을 통한 그리드 관리 및 제어 개선"
@@ -1316,8 +1399,8 @@ msgstr "신규"
 #. module: hr_skills
 #. odoo-javascript
 #: code:addons/hr_skills/static/src/fields/resume_one2many/resume_one2many.js:0
-msgid "New Resume line"
-msgstr "새로운 이력서 항목"
+msgid "New Resume Line"
+msgstr ""
 
 #. module: hr_skills
 #: model:hr.skill,name:hr_skills.hr_skill_nosql
@@ -1335,8 +1418,14 @@ msgid "Norton-Silva"
 msgstr "노턴-실바"
 
 #. module: hr_skills
+#: model_terms:ir.ui.view,arch_db:hr_skills.hr_resume_line_list_view
+msgid "Number of Hours"
+msgstr ""
+
+#. module: hr_skills
 #: model:ir.model.fields,help:hr_skills.field_hr_employee_skill__levels_count
 #: model:ir.model.fields,help:hr_skills.field_hr_individual_skill_mixin__levels_count
+#: model:ir.model.fields,help:hr_skills.field_hr_job_skill__levels_count
 #: model:ir.model.fields,help:hr_skills.field_hr_skill_type__levels_count
 msgid "Number of levels linked to this skill type"
 msgstr "해당 직무 기술 유형에 연결된 수준 수"
@@ -1368,6 +1457,11 @@ msgstr "조직"
 #: code:addons/hr_skills/static/src/views/skills_list_renderer.js:0
 msgid "Other"
 msgstr "기타"
+
+#. module: hr_skills
+#: model:hr.resume.line.type,name:hr_skills.resume_type_experience
+msgid "Other Experience"
+msgstr ""
 
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_cv_wizard__show_others
@@ -1488,6 +1582,7 @@ msgstr "프로그래밍 언어"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__level_progress
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__level_progress
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__level_progress
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill_level__level_progress
 msgid "Progress"
 msgstr "진행"
@@ -1505,6 +1600,7 @@ msgstr "진행 표시줄"
 #. module: hr_skills
 #: model:ir.model.fields,help:hr_skills.field_hr_employee_skill__level_progress
 #: model:ir.model.fields,help:hr_skills.field_hr_individual_skill_mixin__level_progress
+#: model:ir.model.fields,help:hr_skills.field_hr_job_skill__level_progress
 #: model:ir.model.fields,help:hr_skills.field_hr_skill_level__level_progress
 msgid "Progress from zero knowledge (0%) to fully mastered (100%)."
 msgstr "관련 지식 없음(0%)에서 완전히 숙달된 상태(100%)까지의 진행 상황."
@@ -1518,6 +1614,11 @@ msgstr "진행률은 0에서 100 사이의 숫자여야 합니다."
 #: model:hr.skill,name:hr_skills.hr_skill_project_management
 msgid "Project Management"
 msgstr "프로젝트 관리"
+
+#. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__resume_line_properties
+msgid "Properties"
+msgstr "속성"
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_mit_robinson_crawford_and_norman
@@ -1581,7 +1682,6 @@ msgstr "자원"
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_public_view_search
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_view_form
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_view_search
-#: model_terms:ir.ui.view,arch_db:hr_skills.res_users_view_form
 #: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
 msgid "Resume"
 msgstr "경력 사항"
@@ -1593,9 +1693,19 @@ msgid "Resume %s"
 msgstr "%s 이력서"
 
 #. module: hr_skills
+#: model_terms:ir.ui.view,arch_db:hr_skills.view_resume_lines_filter
+msgid "Resume Lines"
+msgstr ""
+
+#. module: hr_skills
+#: model_terms:ir.ui.view,arch_db:hr_skills.hr_resume_line_list_view
+msgid "Resume Section"
+msgstr ""
+
+#. module: hr_skills
 #: model:ir.actions.act_window,name:hr_skills.hr_resume_type_action
-msgid "Resume Line Types"
-msgstr "경력 사항 명세 유형"
+msgid "Resume Sections"
+msgstr ""
 
 #. module: hr_skills
 #: model:ir.model,name:hr_skills.model_hr_resume_line
@@ -1605,7 +1715,6 @@ msgstr "직원의 경력 사항 명세"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee__resume_line_ids
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_public__resume_line_ids
-#: model:ir.model.fields,field_description:hr_skills.field_res_users__resume_line_ids
 msgid "Resume lines"
 msgstr "경력 사항 명세"
 
@@ -1701,6 +1810,16 @@ msgid "Secretary, company"
 msgstr "회사 비서"
 
 #. module: hr_skills
+#: model:ir.ui.menu,name:hr_skills.hr_resume_line_type_menu
+msgid "Sections"
+msgstr "섹션"
+
+#. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__resume_line_type_properties_definition
+msgid "Sections Properties"
+msgstr ""
+
+#. module: hr_skills
 #. odoo-javascript
 #: code:addons/hr_skills/static/src/fields/form_view_one2many/form_view_one2many.xml:0
 msgid "Select & Close"
@@ -1711,6 +1830,12 @@ msgstr "선택 및 닫기"
 #: code:addons/hr_skills/static/src/fields/form_view_one2many/form_view_one2many.xml:0
 msgid "Select & New"
 msgstr "선택 및 새로 만들기"
+
+#. module: hr_skills
+#. odoo-javascript
+#: code:addons/hr_skills/static/src/fields/one2many_tags_skills/one2many_tags_skills.js:0
+msgid "Select Skills"
+msgstr ""
 
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__sequence
@@ -1742,6 +1867,8 @@ msgstr "시몬스-윌콕스"
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_history_report__skill_id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_report__skill_id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__skill_id
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job__skill_ids
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__skill_id
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_history_report_view_search
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_report_view_search
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_skill_view_search
@@ -1760,6 +1887,7 @@ msgstr "기술 이력 보고서"
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__skill_level_id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_report__skill_level
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__skill_level_id
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__skill_level_id
 #: model_terms:ir.ui.view,arch_db:hr_skills.employee_skill_level_view_form
 msgid "Skill Level"
 msgstr "능력 수준"
@@ -1777,6 +1905,7 @@ msgstr "능력 수준"
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_history_report__skill_type_id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill_report__skill_type_id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__skill_type_id
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__skill_type_id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill__skill_type_id
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill_level__skill_type_id
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_history_report_view_search
@@ -1807,20 +1936,26 @@ msgstr "직원 직무 기술 수준"
 #. module: hr_skills
 #. odoo-javascript
 #: code:addons/hr_skills/static/src/components/avatar_card_resource/avatar_card_resource_popover.xml:0
-#: code:addons/hr_skills/static/src/fields/skills_one2many/skills_one2many.xml:0
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee__employee_skill_ids
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_cv_wizard__show_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_public__employee_skill_ids
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job__job_skill_ids
 #: model:ir.model.fields,field_description:hr_skills.field_hr_skill_type__skill_ids
-#: model:ir.model.fields,field_description:hr_skills.field_res_users__employee_skill_ids
 #: model:ir.model.fields,field_description:hr_skills.field_resource_resource__employee_skill_ids
 #: model:ir.ui.menu,name:hr_skills.hr_employee_skill_report_menu
 #: model_terms:ir.ui.view,arch_db:hr_skills.employee_skill_view_form
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_type_view_form
+#: model_terms:ir.ui.view,arch_db:hr_skills.hr_job_skill_view_form
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_skill_view_form
 #: model_terms:ir.ui.view,arch_db:hr_skills.report_employee_cv_main_panel
 msgid "Skills"
 msgstr "업무 능력"
+
+#. module: hr_skills
+#. odoo-javascript
+#: code:addons/hr_skills/static/src/fields/skills_one2many/skills_one2many.xml:0
+msgid "Skills & Certifications"
+msgstr ""
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_department_view_kanban
@@ -1840,9 +1975,15 @@ msgid "Skills Report"
 msgstr "기술 보고서"
 
 #. module: hr_skills
-#: model:hr.resume.line.type,name:hr_skills.resume_type_social_media
-msgid "Social Media"
-msgstr "소셜미디어"
+#: model:ir.model,name:hr_skills.model_hr_job_skill
+msgid "Skills for job positions"
+msgstr ""
+
+#. module: hr_skills
+#: model:ir.actions.server,name:hr_skills.hr_job_skills_cron_add_certification_activity_to_employees_ir_actions_server
+msgid ""
+"Skills: Add an activity to employees with missing or expiring certifications"
+msgstr ""
 
 #. module: hr_skills
 #: model:hr.skill.type,name:hr_skills.hr_skill_type_softskill
@@ -1954,11 +2095,12 @@ msgstr "종료일은 시작일 이후여야 합니다."
 #. odoo-python
 #: code:addons/hr_skills/models/hr_individual_skill_mixin.py:0
 msgid ""
-"The following skills can't be created as they overlap or exactly match existing skills:\n"
+"The following skills can't be created as they overlap or exactly match "
+"existing skills:\n"
 "%(collisions)s"
 msgstr ""
-"다음 기술을 생성할 수 없습니다. 중복되거나 완전히 동일한 기술이 이미 "
-"존재합니다:\n"
+"다음 기술을 생성할 수 없습니다. 중복되거나 완전히 동일한 기술이 이미 존재합니"
+"다:\n"
 "%(collisions)s"
 
 #. module: hr_skills
@@ -1967,16 +2109,18 @@ msgstr ""
 msgid ""
 "The following skills have their valid stop date prior to their valid start "
 "date:\n"
-msgstr "다음 직무 기술은 유효기간 종료일이 시작일보다 이전 날짜로 설정되어 있습니다:"
-"\n"
+msgstr ""
+"다음 직무 기술은 유효기간 종료일이 시작일보다 이전 날짜로 설정되어 있습니"
+"다:\n"
 
 #. module: hr_skills
 #. odoo-python
 #: code:addons/hr_skills/models/hr_skill_type.py:0
 msgid ""
 "The following skills type must contain at least one skill and one level: %s"
-msgstr "다음의 기술 유형에는 기술과 레벨이 최소한 하나 이상 반드시 포함되어야 합니다:"
-" %s"
+msgstr ""
+"다음의 기술 유형에는 기술과 레벨이 최소한 하나 이상 반드시 포함되어야 합니"
+"다: %s"
 
 #. module: hr_skills
 #. odoo-python
@@ -2002,7 +2146,7 @@ msgstr "언어 치료사"
 
 #. module: hr_skills
 #. odoo-javascript
-#: code:addons/hr_skills/static/src/fields/resume_one2many/resume_one2many.xml:0
+#: code:addons/hr_skills/static/src/components/internal_resume_lines/internal_resume_one2many.xml:0
 msgid "There are no resume lines on this employee."
 msgstr "이 직원에 대한 이력서 내역이 없습니다."
 
@@ -2018,8 +2162,8 @@ msgid ""
 "This report will give you an overview of the certification per Employee.\n"
 "                Create them in configuration and add them on the Employee."
 msgstr ""
-"이 보고서에서는 직원 개인별 자격증 및 인증 내용을 전반적으로 확인할 수 "
-"있습니다.\n"
+"이 보고서에서는 직원 개인별 자격증 및 인증 내용을 전반적으로 확인할 수 있습니"
+"다.\n"
 "                설정 메뉴에서 관련 항목을 생성하고 직원에게 추가하세요."
 
 #. module: hr_skills
@@ -2057,7 +2201,6 @@ msgstr "제목"
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_public_view_form_inherit
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_view_list
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_view_form
-#: model_terms:ir.ui.view,arch_db:hr_skills.res_users_view_form
 msgid "To"
 msgstr "종료"
 
@@ -2070,6 +2213,22 @@ msgstr "토트넘 센트럴 스쿨"
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_jod_wilson_ltd
 msgid "Trade union research officer"
 msgstr "노동 조합 연구 책임자"
+
+#. module: hr_skills
+#: model:hr.resume.line.type,name:hr_skills.resume_type_training
+msgid "Training"
+msgstr "트레이닝"
+
+#. module: hr_skills
+#: model:ir.actions.act_window,name:hr_skills.hr_resume_lines_training_action
+#: model:ir.ui.menu,name:hr_skills.menu_learnings_training_attendances
+msgid "Training Attendances"
+msgstr ""
+
+#. module: hr_skills
+#: model_terms:ir.ui.view,arch_db:hr_skills.hr_resume_line_list_view
+msgid "Training Title"
+msgstr ""
 
 #. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_jep_trinity_college
@@ -2089,6 +2248,7 @@ msgstr "틴데일 크리스천 스쿨"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__line_type_id
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_view_search
+#: model_terms:ir.ui.view,arch_db:hr_skills.hr_resume_line_list_view
 msgid "Type"
 msgstr "유형"
 
@@ -2119,14 +2279,14 @@ msgid "Update Skills"
 msgstr "직무 기술 업데이트"
 
 #. module: hr_skills
+#: model:mail.activity.type,summary:hr_skills.mail_activity_data_upload_certification
+msgid "Upload a certification"
+msgstr ""
+
+#. module: hr_skills
 #: model:hr.skill,name:hr_skills.hr_skill_urdu
 msgid "Urdu"
 msgstr "우르두어"
-
-#. module: hr_skills
-#: model:ir.model,name:hr_skills.model_res_users
-msgid "User"
-msgstr "사용자"
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_view_search
@@ -2141,12 +2301,14 @@ msgstr "유효 기간"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__valid_from
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__valid_from
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__valid_from
 msgid "Validity Start"
 msgstr "유효 기간 시작"
 
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_skill__valid_to
 #: model:ir.model.fields,field_description:hr_skills.field_hr_individual_skill_mixin__valid_to
+#: model:ir.model.fields,field_description:hr_skills.field_hr_job_skill__valid_to
 msgid "Validity Stop"
 msgstr "유효 기간 정지"
 
@@ -2228,6 +2390,12 @@ msgid "You can add skills from our library to the employee profile."
 msgstr "라이브러리의 기술을 직원 프로필에 추가할 수 있습니다."
 
 #. module: hr_skills
+#. odoo-python
+#: code:addons/hr_skills/models/hr_employee.py:0
+msgid "You cannot access the resume of this employee."
+msgstr ""
+
+#. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.report_employee_cv_sidepanel
 msgid "demo@email.com"
 msgstr "demo@email.com"
@@ -2243,8 +2411,25 @@ msgid "e.g. Odoo Inc."
 msgstr "예. Odoo Inc."
 
 #. module: hr_skills
+#: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
+msgid "e.g. https://duolingo.com/course/xyz"
+msgstr ""
+
+#. module: hr_skills
+#: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
+msgid "hours"
+msgstr "시간"
+
+#. module: hr_skills
+#. odoo-javascript
+#: code:addons/hr_skills/static/src/fields/resume_one2many/resume_one2many.xml:0
+msgid "hours)"
+msgstr "시간)"
+
+#. module: hr_skills
 #: model:ir.model.fields,help:hr_skills.field_hr_employee_skill__is_certification
 #: model:ir.model.fields,help:hr_skills.field_hr_individual_skill_mixin__is_certification
+#: model:ir.model.fields,help:hr_skills.field_hr_job_skill__is_certification
 #: model:ir.model.fields,help:hr_skills.field_hr_skill_type__is_certification
 msgid "if checked the skill type become a certification type"
 msgstr "여기에 표시하면 직무 기술 유형이 자격증 유형이 변경됩니다."
@@ -2264,3 +2449,27 @@ msgstr "www.demo.com"
 #: code:addons/hr_skills/models/hr_individual_skill_mixin.py:0
 msgid "• %(skill_name)s from %(valid_from)s to %(valid_to)s"
 msgstr "• %(skill_name)s %(valid_from)s부터 %(valid_to)s까지"
+
+#~ msgid "Classic"
+#~ msgstr "기본"
+
+#~ msgid "Display Type"
+#~ msgstr "표시 유형"
+
+#~ msgid "Group By..."
+#~ msgstr "그룹별..."
+
+#~ msgid "Line Types"
+#~ msgstr "내역 유형"
+
+#~ msgid "New Resume line"
+#~ msgstr "새로운 이력서 항목"
+
+#~ msgid "Resume Line Types"
+#~ msgstr "경력 사항 명세 유형"
+
+#~ msgid "Social Media"
+#~ msgstr "소셜미디어"
+
+#~ msgid "User"
+#~ msgstr "사용자"

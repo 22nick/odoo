@@ -392,7 +392,7 @@ class AccountPaymentRegister(models.TransientModel):
 
             wizard.batches = batch_vals
 
-    @api.depends('payment_method_line_id', 'line_ids', 'group_payment')
+    @api.depends('payment_method_line_id', 'line_ids', 'group_payment', 'partner_bank_id')
     def _compute_trust_values(self):
         for wizard in self:
             total_payment_count = 0
@@ -404,7 +404,8 @@ class AccountPaymentRegister(models.TransientModel):
             for batch in wizard.batches:
                 payment_count = 1 if wizard.group_payment else len(batch['lines'])
                 total_payment_count += payment_count
-                batch_account = wizard._get_batch_account(batch)
+                # Use the currently selected partner_bank_id if in edit mode, otherwise use batch account
+                batch_account = wizard.partner_bank_id or wizard._get_batch_account(batch)
                 if wizard.require_partner_bank_account:
                     if not batch_account:
                         missing_account_partners += batch['lines'].partner_id
@@ -761,16 +762,20 @@ class AccountPaymentRegister(models.TransientModel):
                 total_amount_values = wizard._get_total_amounts_to_pay(wizard.batches)
                 html_lines = []
                 if wizard.installments_mode == 'full':
-                    if (
+                    is_full_match = (
                         wizard.currency_id.is_zero(total_amount_values['full_amount'] - wizard.amount)
                         and wizard.currency_id.is_zero(total_amount_values['full_amount'] - total_amount_values['amount_by_default'])
-                    ):
-                        wizard.installments_switch_amount = 0.0
-                    else:
-                        wizard.installments_switch_amount = total_amount_values['amount_by_default']
+                    )
+                    wizard.installments_switch_amount = 0.0 if is_full_match else total_amount_values['amount_by_default']
+                    if not is_full_match and not wizard.currency_id.is_zero(wizard.amount):
+                        switch_message = (
+                            _("Consider paying the amount with %(btn_start)searly payment discount%(btn_end)s instead.")
+                            if total_amount_values['epd_applied']
+                            else _("Consider paying in %(btn_start)sinstallments%(btn_end)s instead.")
+                        )
                         html_lines += [
                             _("This is the full amount."),
-                            _("Consider paying in %(btn_start)sinstallments%(btn_end)s instead."),
+                            switch_message,
                         ]
                 elif wizard.installments_mode == 'overdue':
                     wizard.installments_switch_amount = total_amount_values['full_amount']

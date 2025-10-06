@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-11 14:02+0000\n"
-"PO-Revision-Date: 2025-09-23 15:04+0000\n"
+"PO-Revision-Date: 2025-10-03 02:31+0000\n"
 "Last-Translator: \"Maitê Dietze (madi)\" <madi@odoo.com>\n"
 "Language-Team: Portuguese (Brazil) <https://translate.odoo.com/projects/"
 "odoo-19/survey_crm/pt_BR/>\n"
@@ -28,7 +28,7 @@ msgstr "%(participant_name)s %(category_name)s resultados"
 #. module: survey_crm
 #: model:survey.question.answer,value:survey_crm.lead_qualification_question_8_question_answer_1
 msgid "1 - 9"
-msgstr ""
+msgstr "1 - 9"
 
 #. module: survey_crm
 #. odoo-python
@@ -39,11 +39,10 @@ msgstr "1-10 funcionários"
 #. module: survey_crm
 #: model:survey.question.answer,value:survey_crm.lead_qualification_question_8_question_answer_2
 msgid "10 - 99"
-msgstr ""
+msgstr "10 - 99"
 
 #. module: survey_crm
 #: model:survey.question.answer,value:survey_crm.lead_qualification_question_8_question_answer_3
-#, fuzzy
 msgid "100 - 499"
 msgstr "100 - 499"
 
@@ -57,16 +56,15 @@ msgstr "Mais de 100 funcionários"
 #. odoo-python
 #: code:addons/survey_crm/models/templates/survey_survey.py:0
 msgid "11-100 employees"
-msgstr ""
+msgstr "11-100 funcionários"
 
 #. module: survey_crm
 #: model:survey.question.answer,value:survey_crm.lead_qualification_question_8_question_answer_4
 msgid "500+"
-msgstr ""
+msgstr "500+"
 
 #. module: survey_crm
 #: model_terms:ir.ui.view,arch_db:survey_crm.survey_survey_view_kanban
-#, fuzzy
 msgid ""
 "<br/>\n"
 "                        <span class=\"text-muted\">Leads</span>"
@@ -76,7 +74,6 @@ msgstr ""
 
 #. module: survey_crm
 #: model_terms:ir.ui.view,arch_db:survey_crm.survey_user_input_view_form
-#, fuzzy
 msgid "<span class=\"o_stat_text\">Lead</span>"
 msgstr "<span class=\"o_stat_text\">Lead</span>"
 
@@ -99,17 +96,17 @@ msgstr "Sobre você"
 #. module: survey_crm
 #: model:survey.question,title:survey_crm.lead_qualification_question_5
 msgid "About your company"
-msgstr ""
+msgstr "Sobre sua empresa"
 
 #. module: survey_crm
 #: model:survey.question.answer,value:survey_crm.lead_qualification_question_7_question_answer_1
 msgid "Agriculture"
-msgstr ""
+msgstr "Agricultura"
 
 #. module: survey_crm
 #: model:survey.question.answer,value:survey_crm.lead_qualification_question_answer_row_2
 msgid "An IT-oriented company?"
-msgstr ""
+msgstr "Uma empresa voltada para TI?"
 
 #. module: survey_crm
 #. odoo-python
@@ -130,7 +127,7 @@ msgstr "Atribuir leads a"
 #. module: survey_crm
 #: model:ir.model.fields,help:survey_crm.field_survey_question__generate_lead
 msgid "At least one of the question answers can generate leads."
-msgstr ""
+msgstr "Pelo menos uma das respostas pode gerar leads."
 
 #. module: survey_crm
 #: model:survey.question,title:survey_crm.lead_qualification_question_1
@@ -157,12 +154,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/survey_crm/models/templates/survey_survey.py:0
 msgid "Create leads when key answers are chosen"
-msgstr ""
+msgstr "Criar leads quando respostas-chave forem selecionadas"
 
 #. module: survey_crm
 #: model:ir.model.fields,help:survey_crm.field_survey_question_answer__generate_lead
 msgid "Creates a lead when participants choose this answer"
-msgstr ""
+msgstr "Cria um lead quando os participantes escolhem esta resposta"
 
 #. module: survey_crm
 #: model:ir.model.fields,field_description:survey_crm.field_crm_lead__display_name
@@ -172,19 +169,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:survey_crm.field_survey_survey__display_name
 #: model:ir.model.fields,field_description:survey_crm.field_survey_user_input__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Exibir nome"
 
 #. module: survey_crm
 #. odoo-python
 #: code:addons/survey_crm/models/templates/survey_survey.py:0
 msgid "Expanding sales"
-msgstr ""
+msgstr "Expandindo as vendas"
 
 #. module: survey_crm
 #. odoo-python
 #: code:addons/survey_crm/models/templates/survey_survey.py:0
 msgid "Getting to know you"
-msgstr ""
+msgstr "Um pouco sobre você"
 
 #. module: survey_crm
 #: model:survey.question,title:survey_crm.lead_qualification_question_10

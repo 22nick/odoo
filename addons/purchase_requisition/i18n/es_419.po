@@ -4,12 +4,13 @@
 #
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
 # "Fernanda Alvarez (mfar)" <mfar@odoo.com>, 2025.
+# "Patricia Gutiérrez (pagc)" <pagc@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-26 08:56+0000\n"
-"PO-Revision-Date: 2025-09-23 02:31+0000\n"
+"PO-Revision-Date: 2025-09-29 22:33+0000\n"
 "Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
 "Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
 "odoo-19/purchase_requisition/es_419/>\n"
@@ -216,7 +217,7 @@ msgstr "Cancelado por el contrato asociado a esta cotización."
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition_line__product_uom_category_id
 msgid "Category"
-msgstr ""
+msgstr "Categoría"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.purchase_order_line_compare_tree
@@ -306,6 +307,9 @@ msgid ""
 "Conversion between Units of Measure can only occur if they belong to the "
 "same category. The conversion will be made based on the ratios."
 msgstr ""
+"La conversión entre unidades de medida solo puede ocurrir si pertenecen a la "
+"misma categoría. La conversión se realizará según las proporciones "
+"establecidas."
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition_create_alternative__copy_products
@@ -353,7 +357,7 @@ msgstr "Creado el"
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition_create_alternative__creation_blocked
 msgid "Creation Blocked"
-msgstr ""
+msgstr "Creación bloqueada"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__currency_id
@@ -714,7 +718,7 @@ msgstr "Producto"
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition_line__product_uom_id
 msgid "Product Unit of Measure"
-msgstr ""
+msgstr "Unidad de medida del producto"
 
 #. module: purchase_requisition
 #: model:ir.model,name:purchase_requisition.model_product_product
@@ -784,7 +788,7 @@ msgstr "Órdenes de compra"
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.purchase_order_search_inherit
 msgid "Purchase Orders with requisition"
-msgstr ""
+msgstr "Órdenes de compra con solicitud"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
@@ -862,7 +866,7 @@ msgstr "Solicitud de cotización"
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.purchase_order_search_inherit
 msgid "Requisition"
-msgstr ""
+msgstr "Solicitud"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
@@ -888,6 +892,8 @@ msgstr "Buscar contratos de compra"
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_filter
 msgid "Show all records which has next action date is before today"
 msgstr ""
+"Mostrar todos los registros cuya próxima fecha de acción es antes de la "
+"fecha de hoy."
 
 #. module: purchase_requisition
 #. odoo-python
@@ -990,7 +996,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/purchase_requisition/wizard/purchase_requisition_create_alternative.py:0
 msgid "This is a blocking warning!\n"
-msgstr ""
+msgstr "¡Esta es una advertencia de bloqueo!\n"
 
 #. module: purchase_requisition
 #. odoo-python
@@ -1035,7 +1041,7 @@ msgstr "Precio unitario"
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
 msgid "UoM"
-msgstr ""
+msgstr "UdM"
 
 #. module: purchase_requisition
 #: model:ir.model.fields,field_description:purchase_requisition.field_purchase_requisition__vendor_id

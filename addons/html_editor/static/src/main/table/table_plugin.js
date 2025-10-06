@@ -1070,12 +1070,13 @@ export class TablePlugin extends Plugin {
         const startTd = closestElement(selection.startContainer, isTableCell);
         const endTd = closestElement(selection.endContainer, isTableCell);
         if (startTd && startTd === endTd && !isProtected(startTd) && !isProtecting(startTd)) {
-            const targetedNodes = this.dependencies.selection.getTargetedNodes();
+            const selectedNodes = this.dependencies.selection
+                .getTargetedNodes()
+                .filter(this.dependencies.selection.areNodeContentsFullySelected);
             const cellContents = descendants(startTd);
-            /** @todo Test. Should probably use areNodeContentsFullySelected. */
             const areCellContentsFullySelected = cellContents
                 .filter((d) => !isBlock(d))
-                .every((child) => targetedNodes.includes(child));
+                .every((child) => selectedNodes.includes(child));
             if (areCellContentsFullySelected) {
                 const SENSITIVITY = 5;
                 if (!this._mouseMovePositionWhenAllContentsSelected) {
@@ -1217,10 +1218,10 @@ export class TablePlugin extends Plugin {
             (node) => node.isContentEditable
         );
         if (selectedTds.length && mode === "backgroundColor") {
-            if (previewMode) {
-                // Temporarily remove backgroundColor applied by "o_selected_td" class with !important.
-                selectedTds.forEach((td) => td.classList.remove("o_selected_td"));
-            }
+            // Disable the `box-shadow` while previewing the background color.
+            selectedTds.forEach((td) =>
+                td.classList.toggle("o_selected_td_bg_color_preview", previewMode)
+            );
             for (const td of selectedTds) {
                 this.dependencies.color.colorElement(td, color, mode);
                 if (color) {

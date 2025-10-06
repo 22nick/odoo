@@ -170,7 +170,7 @@ class ProductTemplate(models.Model):
         # If no company was set for the product, the product will be available for all companies and therefore should
         # have the default taxes of the other companies as well. sudo() is used since we're going to need to fetch all
         # the other companies default taxes which the user may not have access to.
-        other_companies = self.env['res.company'].sudo().search([('id', 'not in', self.env.companies.ids)])
+        other_companies = self.env['res.company'].sudo().search(['!', ('id', 'child_of', self.env.companies.ids)])
         if other_companies and products:
             products_without_company = products.filtered(lambda p: not p.company_id).sudo()
             products_without_company._force_default_tax(other_companies)
@@ -319,5 +319,8 @@ class ProductProduct(models.Model):
             sorted_domains.append((10, Domain('default_code', '=', default_code)))
         if name := vals.get('name'):
             name = name.split('\n', 1)[0]  # Cut sales description from the name
-            sorted_domains += [(15, Domain('name', '=', name)), (20, Domain('name', 'ilike', name))]
+            sorted_domains.append((15, Domain('name', '=', name)))
+            # avoid matching unrelated products whose names merely contain that short string
+            if len(name) > 4:
+                sorted_domains.append((20, Domain('name', 'ilike', name)))
         return sorted_domains

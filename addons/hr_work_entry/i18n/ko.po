@@ -3,13 +3,14 @@
 # * hr_work_entry
 #
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Kwanghee Park (kwpa)" <kwpa@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-03 12:09+0000\n"
-"PO-Revision-Date: 2025-09-16 04:46+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2025-09-30 18:35+0000\n"
+"PO-Revision-Date: 2025-10-04 02:31+0000\n"
+"Last-Translator: \"Kwanghee Park (kwpa)\" <kwpa@odoo.com>\n"
 "Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/"
 "hr_work_entry/ko/>\n"
 "Language: ko\n"
@@ -27,38 +28,29 @@ msgid ""
 "\n"
 "        Defines the source for work entries generation\n"
 "\n"
-"        Working Schedule: Work entries will be generated from the working hours below.\n"
-"        Attendances: Work entries will be generated from the employee's attendances. (requires Attendance app)\n"
-"        Planning: Work entries will be generated from the employee's planning. (requires Planning app)\n"
+"        Working Schedule: Work entries will be generated from the working "
+"hours below.\n"
+"        Attendances: Work entries will be generated from the employee's "
+"attendances. (requires Attendance app)\n"
+"        Planning: Work entries will be generated from the employee's "
+"planning. (requires Planning app)\n"
 "    "
 msgstr ""
 "\n"
 "        근무 항목 생성에 대한 기준 정의\n"
 "\n"
 "        근무 일정: 아래의 근무 시간에서 근무 항목을 생성합니다.\n"
-"        근태: 직원 근태 자료에서 근무 항목을 생성합니다. (근태 관리 앱 필요)"
-"\n"
-"        일정 수립: 직원의 일정에서 근무 항목을 생성합니다. (일정 수립 앱 "
-"필요)\n"
+"        근태: 직원 근태 자료에서 근무 항목을 생성합니다. (근태 관리 앱 필"
+"요)\n"
+"        일정 수립: 직원의 일정에서 근무 항목을 생성합니다. (일정 수립 앱 필"
+"요)\n"
 "    "
 
 #. module: hr_work_entry
 #. odoo-python
 #: code:addons/hr_work_entry/models/hr_work_entry.py:0
-msgid ""
-"%(employee)s does not have a contract from %(date_start)s to %(date_end)s."
-msgstr "%(employee)s의 %(date_start)s부터 %(date_end)s까지의 계약이 존재하지 "
-"않습니다."
-
-#. module: hr_work_entry
-#. odoo-python
-#: code:addons/hr_work_entry/models/hr_work_entry.py:0
-msgid ""
-"%(employee)s has multiple contracts from %(date_start)s to %(date_end)s. A "
-"work entry cannot overlap multiple contracts."
+msgid "%(employee)s does not have a contract on %(date)s."
 msgstr ""
-"%(employee)s에게  %(date_start)s부터 %(date_end)s까지 여러 건의 근로 "
-"계약서가 있습니다. 작업 항목은 여러 계약과 겹칠 수 없습니다."
 
 #. module: hr_work_entry
 #. odoo-python
@@ -69,11 +61,9 @@ msgstr "%s 근로 항목"
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_regeneration_wizard
 msgid ""
-"<i class=\"fa fa-exclamation-triangle me-1\" title=\"Warning\"/>You are not "
-"allowed to regenerate validated work entries"
+"<i class=\"fa fa-exclamation-triangle me-1\" title=\"Warning\"/>Employees in "
+"red will be skipped because they have at least one validated work entry."
 msgstr ""
-"<i class=\"fa fa-exclamation-triangle me-1\" title=\"Warning\"/>검증된 작업 "
-"입력 항목을 재생성할 권한이 없습니다."
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_regeneration_wizard
@@ -97,8 +87,8 @@ msgid ""
 "<span class=\"text-muted\">Warning: The work entry regeneration will delete "
 "all manual changes on the selected period.</span>"
 msgstr ""
-"<span class=\"text-muted\">경고: 근로 항목을 다시 생성하면 선택한 기간에 "
-"대한 모든 수동 변경 사항은 삭제됩니다.</span>"
+"<span class=\"text-muted\">경고: 근로 항목을 다시 생성하면 선택한 기간에 대"
+"한 모든 수동 변경 사항은 삭제됩니다.</span>"
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_form
@@ -111,6 +101,23 @@ msgstr "<span>시간</span>"
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__active
 msgid "Active"
 msgstr "활성화"
+
+#. module: hr_work_entry
+#. odoo-javascript
+#: code:addons/hr_work_entry/static/src/views/work_entry_calendar/work_entry_multi_selection_buttons.xml:0
+msgid "Add"
+msgstr "추가"
+
+#. module: hr_work_entry
+#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__is_extra_hours
+msgid "Added to Monthly Pay"
+msgstr ""
+
+#. module: hr_work_entry
+#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_calendar_multi_create_form
+#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_form
+msgid "Additional Description..."
+msgstr ""
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_additional_paid
@@ -140,11 +147,6 @@ msgid "Attendance"
 msgstr "출근"
 
 #. module: hr_work_entry
-#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_tree
-msgid "Beginning"
-msgstr "시작"
-
-#. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_id_work_entry_type_bereavement_leave
 msgid "Bereavement Leave"
 msgstr "상조 휴가"
@@ -158,6 +160,11 @@ msgstr "모유 수유 휴가"
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_small_unemployment_birth
 msgid "Brief Holiday (Birth)"
 msgstr "단기 휴가(출산)"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.work_entry_type_compensatory
+msgid "CTO"
+msgstr "CTO"
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_regeneration_wizard
@@ -175,13 +182,21 @@ msgstr "취소됨"
 msgid ""
 "Careful, the Code is used in many references, changing it could lead to "
 "unwanted changes."
-msgstr "이 코드는 다른 참조에도 사용되는 코드입니다. 변경 시 원치 않는 변경이 발생할 "
+msgstr ""
+"이 코드는 다른 참조에도 사용되는 코드입니다. 변경 시 원치 않는 변경이 발생할 "
 "수 있으니 주의하세요."
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_au_work_entry_type_cash_out
 msgid "Cash Out of Leave in Service"
 msgstr "근무 시 휴가 현금 보상"
+
+#. module: hr_work_entry
+#: model:ir.model.fields,help:hr_work_entry.field_hr_work_entry_type__is_extra_hours
+msgid ""
+"Check this setting if you want the hours to be considered as extra time and "
+"added as a bonus to the basic salary."
+msgstr ""
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__color
@@ -203,11 +218,6 @@ msgstr "특별 휴가"
 #: model:hr.work.entry.type,name:hr_work_entry.work_entry_type_compensatory
 msgid "Compensatory Time Off"
 msgstr "대체 휴가"
-
-#. module: hr_work_entry
-#: model:ir.model.fields.selection,name:hr_work_entry.selection__hr_work_entry__state__conflict
-msgid "Conflict"
-msgstr "충돌"
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_search
@@ -267,9 +277,16 @@ msgid "Current Month"
 msgstr "이번 달"
 
 #. module: hr_work_entry
+#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__date
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_search
 msgid "Date"
 msgstr "날짜"
+
+#. module: hr_work_entry
+#. odoo-javascript
+#: code:addons/hr_work_entry/static/src/views/work_entry_calendar/work_entry_multi_selection_buttons.xml:0
+msgid "Delete"
+msgstr "삭제"
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__department_id
@@ -278,6 +295,8 @@ msgid "Department"
 msgstr "부서"
 
 #. module: hr_work_entry
+#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_calendar
+#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_calendar_multi_create_form
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_form
 msgid "Description"
 msgstr "설명"
@@ -286,6 +305,12 @@ msgstr "설명"
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_mx_work_entry_type_disability_due_to_illness_imss
 msgid "Disability due to illness (IMSS)"
 msgstr "질병으로 인한 장애(IMSS)"
+
+#. module: hr_work_entry
+#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__display_code
+#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__display_code
+msgid "Display Code"
+msgstr ""
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_employee__display_name
@@ -306,7 +331,6 @@ msgid "Double Time Hours"
 msgstr "이중 휴가"
 
 #. module: hr_work_entry
-#: model:ir.model.fields.selection,name:hr_work_entry.selection__hr_work_entry__state__draft
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_search
 msgid "Draft"
 msgstr "미결"
@@ -337,6 +361,11 @@ msgid "Educational Time Off"
 msgstr "교육연수 휴가"
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_sa_work_entry_type_emergency
+msgid "Emergency Leave"
+msgstr ""
+
+#. module: hr_work_entry
 #: model:ir.model,name:hr_work_entry.model_hr_employee
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_user_work_entry_employee__employee_id
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__employee_id
@@ -350,14 +379,14 @@ msgid "Employee Contract"
 msgstr "근로 계약서"
 
 #. module: hr_work_entry
+#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__version_id
+msgid "Employee Record"
+msgstr ""
+
+#. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_regeneration_wizard__employee_ids
 msgid "Employees"
 msgstr "직원"
-
-#. module: hr_work_entry
-#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_tree
-msgid "End"
-msgstr "종료"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_european
@@ -391,10 +420,14 @@ msgid "Flemish Educational Time Off"
 msgstr "플랑드르 교육 휴가"
 
 #. module: hr_work_entry
-#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__date_start
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_regeneration_wizard__date_from
 msgid "From"
 msgstr "시작"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.work_entry_type_leave
+msgid "GTO"
+msgstr "GTO"
 
 #. module: hr_work_entry
 #: model:ir.actions.server,name:hr_work_entry.ir_cron_generate_missing_work_entries_ir_actions_server
@@ -427,6 +460,11 @@ msgstr "인사 근로 항목"
 #: model:ir.model,name:hr_work_entry.model_hr_work_entry_type
 msgid "HR Work Entry Type"
 msgstr "인사 근로 항목 유형"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.work_entry_type_home_working
+msgid "HW"
+msgstr "HW"
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_employee__has_work_entries
@@ -480,27 +518,39 @@ msgstr "ID"
 #: model:ir.model.fields,help:hr_work_entry.field_hr_work_entry_type__is_work
 msgid ""
 "If checked, the work entry is counted as work time in the working schedule"
-msgstr "여기에 체크 표시하면, 근무 항목을 근무 일정에 있는 근무 시간으로 계산합니다."
+msgstr ""
+"여기에 체크 표시하면, 근무 항목을 근무 일정에 있는 근무 시간으로 계산합니다."
 
 #. module: hr_work_entry
 #: model:ir.model.fields,help:hr_work_entry.field_hr_work_entry_type__active
 msgid ""
 "If the active field is set to false, it will allow you to hide the work "
 "entry type without removing it."
-msgstr "활성 필드가 false로 설정되면 작업 항목 유형을 제거하지 않고 숨길 수 있습니다."
+msgstr ""
+"활성 필드가 false로 설정되면 작업 항목 유형을 제거하지 않고 숨길 수 있습니다."
+
+#. module: hr_work_entry
+#: model:ir.model.fields,help:hr_work_entry.field_hr_work_entry_type__amount_rate
+msgid "If you want the hours should be paid double, the rate should be 200%."
+msgstr ""
+
+#. module: hr_work_entry
+#: model:ir.model.fields.selection,name:hr_work_entry.selection__hr_work_entry__state__conflict
+msgid "In Conflict"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:ir.model.fields.selection,name:hr_work_entry.selection__hr_work_entry__state__validated
+msgid "In Payslip"
+msgstr ""
 
 #. module: hr_work_entry
 #. odoo-python
 #: code:addons/hr_work_entry/wizard/hr_work_entry_regeneration_wizard.py:0
 msgid ""
-"In order to regenerate the work entries, you need to provide the wizard with"
-" an employee_id, a date_from and a date_to. In addition to that, the time "
-"interval defined by date_from and date_to must not contain any validated "
-"work entries."
+"In order to regenerate the work entries, you need to provide the wizard with "
+"an employee_id, a date_from and a date_to."
 msgstr ""
-"작업 항목을 재생성하려면, 마법사에 employee_id, date_from 및 date_to 항목 "
-"정보를 입력해야 합니다. 그 외에도 date_from 및 date_to로 정의된 시간 "
-"사이에는 검증된 작업 항목이 포함될 수 없습니다."
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_ch_swissdec_interruption_wt
@@ -513,8 +563,9 @@ msgstr "업무 중단"
 msgid ""
 "Invalid option: For fully flexible calendars, the work entry source cannot "
 "be 'Working Hours'."
-msgstr "잘못된 옵션: 완전히 유연한 캘린더의 경우 근무 입력 소스를 '근무 시간'으로 "
-"설정할 수 없습니다."
+msgstr ""
+"잘못된 옵션: 완전히 유연한 캘린더의 경우 근무 입력 소스를 '근무 시간'으로 설"
+"정할 수 없습니다."
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_user_work_entry_employee__is_checked
@@ -587,6 +638,7 @@ msgstr "출산 휴가 (IMSS)"
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_hk_work_entry_type_maternity_leave
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_id_work_entry_type_maternity_leave
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_sa_work_entry_type_maternity
 msgid "Maternity Leave"
 msgstr "출산 휴가"
 
@@ -616,6 +668,23 @@ msgid "Medical Assistance"
 msgstr "의료 지원"
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_mx_work_entry_type_care_children_with_cancer_imss
+msgid "Medical Leave for Care of Children Diagnosed with Cancer (IMSS)"
+msgstr ""
+
+#. module: hr_work_entry
+#. odoo-python
+#: code:addons/hr_work_entry/models/hr_version.py:0
+msgid "Missing date or duration on work entry"
+msgstr ""
+
+#. module: hr_work_entry
+#. odoo-python
+#: code:addons/hr_work_entry/models/hr_version.py:0
+msgid "Missing timezone for work entries generation."
+msgstr ""
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_ch_swissdec_monthly_wt
 msgid "Monthly Salary"
 msgstr "월 급여"
@@ -627,9 +696,21 @@ msgid "Name"
 msgstr "이름"
 
 #. module: hr_work_entry
+#: model:ir.model.fields.selection,name:hr_work_entry.selection__hr_work_entry__state__draft
+msgid "New"
+msgstr "신규"
+
+#. module: hr_work_entry
 #: model_terms:ir.actions.act_window,help:hr_work_entry.hr_work_entry_action
 msgid "No data to display"
 msgstr "표시할 데이터가 없습니다"
+
+#. module: hr_work_entry
+#. odoo-python
+#: code:addons/hr_work_entry/wizard/hr_work_entry_regeneration_wizard.py:0
+msgid ""
+"No work entry can be regenerated in this range of dates and these employees."
+msgstr ""
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_form
@@ -640,6 +721,16 @@ msgstr "참고: 이미 승인된 근로 항목은 수정할 수 없습니다."
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_notice
 msgid "Notice (Unprovided)"
 msgstr "통지 (미제공)"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.work_entry_type_overtime
+msgid "OT"
+msgstr "OT"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.hr_work_entry_type_out_of_contract
+msgid "OoC"
+msgstr "OoC"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_au_work_entry_type_other
@@ -665,6 +756,11 @@ msgstr "초과 근무 125%"
 #: model:hr.work.entry.type,name:hr_work_entry.work_entry_type_overtime
 msgid "Overtime Hours"
 msgstr "초과 근무"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_us_work_entry_type_overtime
+msgid "Overtime Hours (Paid at 150%)"
+msgstr ""
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_au_work_entry_type_overtime_pto
@@ -695,6 +791,11 @@ msgstr "초과 근무: 일요일"
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_au_work_entry_type_overtime_sunday_pto
 msgid "Overtime: Sunday & Public Time Off"
 msgstr "시간 외 근무: 일요일 및 공휴일"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.work_entry_type_legal_leave
+msgid "PTO"
+msgstr "PTO"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_au_work_entry_type_parental
@@ -730,6 +831,11 @@ msgid "Paternity Leave"
 msgstr "배우자 출산 휴가"
 
 #. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_hk_work_entry_type_paternity_leave_80
+msgid "Paternity Leave 80%"
+msgstr ""
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_paternity_legal
 msgid "Paternity Time Off (Legal)"
 msgstr "배우자 출산 휴가(법정)"
@@ -740,10 +846,20 @@ msgid "Paternity Time Off (Paid by Company)"
 msgstr "배우자 출산 휴가(회사 지급)"
 
 #. module: hr_work_entry
+#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__amount_rate
+msgid "Pay rate"
+msgstr ""
+
+#. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__code
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__code
 msgid "Payroll Code"
 msgstr "급여 코드"
+
+#. module: hr_work_entry
+#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_regeneration_wizard
+msgid "Period"
+msgstr "기간"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_au_work_entry_type_personal_leave
@@ -765,6 +881,11 @@ msgid "Public Holiday Compensation"
 msgstr "공휴일 보상"
 
 #. module: hr_work_entry
+#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_type__amount_rate
+msgid "Rate"
+msgstr "요금"
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_recovery_additional
 msgid "Recovery Additional Time"
 msgstr "추가 휴가 보전"
@@ -781,11 +902,27 @@ msgid "Regenerate Employee Work Entries"
 msgstr "직원 작업 항목 재생성"
 
 #. module: hr_work_entry
-#. odoo-javascript
-#: code:addons/hr_work_entry/static/src/views/work_entry_calendar/work_entry_calendar.xml:0
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_regeneration_wizard
 msgid "Regenerate Work Entries"
 msgstr "작업 항목 재생성"
+
+#. module: hr_work_entry
+#. odoo-javascript
+#: code:addons/hr_work_entry/static/src/views/work_entry_calendar/work_entry_multi_create_popover.xml:0
+msgid "Replace"
+msgstr "이미지 바꾸기"
+
+#. module: hr_work_entry
+#. odoo-javascript
+#: code:addons/hr_work_entry/static/src/views/work_entry_calendar/work_entry_calendar.xml:0
+msgid "Reset"
+msgstr "초기화"
+
+#. module: hr_work_entry
+#. odoo-javascript
+#: code:addons/hr_work_entry/static/src/views/work_entry_calendar/work_entry_multi_selection_buttons.xml:0
+msgid "Reset Selected Work Entries"
+msgstr ""
 
 #. module: hr_work_entry
 #: model:ir.model,name:hr_work_entry.model_resource_calendar_leaves
@@ -806,6 +943,11 @@ msgstr "초과 근무 시간 보전"
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_us_work_entry_type_retro_regular
 msgid "Retro Regular Pay Hours"
 msgstr "과거 정규 근무 시간"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.work_entry_type_sick_leave
+msgid "STO"
+msgstr "STO"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_ch_swissdec_accident_wt
@@ -848,6 +990,28 @@ msgid "Sequence"
 msgstr "순서"
 
 #. module: hr_work_entry
+#. odoo-javascript
+#: code:addons/hr_work_entry/static/src/views/work_entry_calendar/work_entry_multi_selection_buttons.xml:0
+msgid "Set"
+msgstr "설정"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_sa_work_entry_type_sick_leave_100
+msgid "Sick Leave (100% Paid)"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_sa_work_entry_type_sick_leave_75
+msgid "Sick Leave (75% Paid)"
+msgstr ""
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_jo_work_entry_type_sick_leave_unpaid
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_sa_work_entry_type_sick_leave_0
+msgid "Sick Leave (Unpaid)"
+msgstr ""
+
+#. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.uae_sick_leave_0_entry_type
 msgid "Sick Leave 0"
 msgstr "병가 0"
@@ -866,6 +1030,11 @@ msgstr "병가 80%"
 #: model:hr.work.entry.type,name:hr_work_entry.work_entry_type_sick_leave
 msgid "Sick Time Off"
 msgstr "병가"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,name:hr_work_entry.l10n_pl_work_entry_type_sick_leave
+msgid "Sick Time Off (Paid at 80%)"
+msgstr ""
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_part_sick
@@ -924,14 +1093,24 @@ msgid "Solve conflicts first"
 msgstr "먼저 갈등 해결"
 
 #. module: hr_work_entry
-#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_search
-msgid "Start Date"
-msgstr "시작일"
+#. odoo-javascript
+#: code:addons/hr_work_entry/static/src/views/work_entry_calendar/calendar_common/work_entry_calendar_common_popover.xml:0
+msgid "Split"
+msgstr "분할"
 
 #. module: hr_work_entry
-#: model:ir.model.constraint,message:hr_work_entry.constraint_hr_work_entry_work_entry_start_before_end
-msgid "Starting time should be before end time."
-msgstr "시작 시간은 종료 시간 이전이어야 합니다."
+#. odoo-javascript
+#: code:addons/hr_work_entry/static/src/views/work_entry_calendar/work_entry_calendar_controller.js:0
+msgid "Split Work Entry"
+msgstr ""
+
+#. module: hr_work_entry
+#. odoo-python
+#: code:addons/hr_work_entry/models/hr_work_entry.py:0
+msgid ""
+"Split work entry duration has to be less than the existing work entry "
+"duration."
+msgstr ""
 
 #. module: hr_work_entry
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__state
@@ -965,9 +1144,9 @@ msgid ""
 "be <= '%(latest_available_date)s', which correspond to the generated work "
 "entries time interval."
 msgstr ""
-"시작 날짜는 >= '%(earliest_available_date)s', 종료 날짜는 <= "
-"'%(latest_available_date)s'이여야 하며, 생성된 근로 항목 시간 간격에 "
-"해당됩니다."
+"시작 날짜는 >= '%(earliest_available_date)s', 종료 날짜는 <= '%"
+"(latest_available_date)s'이여야 하며, 생성된 근로 항목 시간 간격에 해당됩니"
+"다."
 
 #. module: hr_work_entry
 #. odoo-python
@@ -976,9 +1155,17 @@ msgid "The same code cannot be associated to multiple work entry types (%s)"
 msgstr "동일한 코드를 여러 작업 항목 유형에 연결할 수 없습니다 (%s)"
 
 #. module: hr_work_entry
+#: model:ir.model.fields,help:hr_work_entry.field_hr_work_entry__display_code
+#: model:ir.model.fields,help:hr_work_entry.field_hr_work_entry_type__display_code
+msgid ""
+"This code can be changed, it is only for a display purpose (3 letters max)"
+msgstr ""
+
+#. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_form
 msgid "This work entry cannot be validated. The work entry type is undefined."
-msgstr "이 근로 항목을 확인할 수 없습니다. 근로 입력 유형이 정의되지 않았습니다."
+msgstr ""
+"이 근로 항목을 확인할 수 없습니다. 근로 입력 유형이 정의되지 않았습니다."
 
 #. module: hr_work_entry
 #. odoo-python
@@ -997,7 +1184,6 @@ msgid "Time Off Options"
 msgstr "휴가 옵션"
 
 #. module: hr_work_entry
-#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__date_stop
 #: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_regeneration_wizard__date_to
 msgid "To"
 msgstr "종료 시간"
@@ -1012,13 +1198,19 @@ msgstr "훈련"
 msgid ""
 "Try to add some records, or make sure that there is no active filter in the "
 "search bar."
-msgstr "레코드를 일부 추가해 보거나, 검색창에서 활성화되어 있는 필터가 없는지 "
-"확인합니다."
+msgstr ""
+"레코드를 일부 추가해 보거나, 검색창에서 활성화되어 있는 필터가 없는지 확인합"
+"니다."
 
 #. module: hr_work_entry
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_search
 msgid "Type"
 msgstr "유형"
+
+#. module: hr_work_entry
+#: model:hr.work.entry.type,display_code:hr_work_entry.work_entry_type_unpaid_leave
+msgid "UN"
+msgstr "UN"
 
 #. module: hr_work_entry
 #. odoo-python
@@ -1069,20 +1261,9 @@ msgid "Valid"
 msgstr "유효"
 
 #. module: hr_work_entry
-#: model:ir.model.fields.selection,name:hr_work_entry.selection__hr_work_entry__state__validated
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_search
 msgid "Validated"
 msgstr "승인됨"
-
-#. module: hr_work_entry
-#: model:ir.model.constraint,message:hr_work_entry.constraint_hr_work_entry_work_entries_no_validated_conflict
-msgid "Validated work entries cannot overlap"
-msgstr "승인된 근로 항목은 중복될 수 없습니다"
-
-#. module: hr_work_entry
-#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry__version_id
-msgid "Version"
-msgstr "버전"
 
 #. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_hk_work_entry_type_weekend
@@ -1100,7 +1281,6 @@ msgid "Work Detail"
 msgstr "작업 세부사항"
 
 #. module: hr_work_entry
-#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_regeneration_wizard
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_pivot
 msgid "Work Entries"
 msgstr "근로 항목"
@@ -1111,22 +1291,12 @@ msgid "Work Entries Employees"
 msgstr "직원 작업 항목"
 
 #. module: hr_work_entry
-#: model:ir.model.fields,field_description:hr_work_entry.field_hr_work_entry_regeneration_wizard__validated_work_entry_ids
-msgid "Work Entries Within Interval"
-msgstr "시간 간격 내 근로 항목"
-
-#. module: hr_work_entry
 #: model:ir.actions.act_window,name:hr_work_entry.hr_work_entry_action
 #: model:ir.actions.act_window,name:hr_work_entry.hr_work_entry_action_conflict
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_calendar
 #: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_form
 msgid "Work Entry"
 msgstr "작업 항목"
-
-#. module: hr_work_entry
-#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_form
-msgid "Work Entry Name"
-msgstr "작업 항목명"
 
 #. module: hr_work_entry
 #: model:ir.actions.act_window,name:hr_work_entry.hr_work_entry_regeneration_wizard_action
@@ -1166,11 +1336,6 @@ msgid "Work Entry Types"
 msgstr "작업 항목 유형"
 
 #. module: hr_work_entry
-#: model:ir.model.constraint,message:hr_work_entry.constraint_hr_work_entry_work_entry_has_end
-msgid "Work entry must end. Please define an end date or a duration."
-msgstr "작업 항목은 반드시 끝나야 합니다. 종료 날짜 또는 기간을 정의하십시오."
-
-#. module: hr_work_entry
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_mx_work_entry_type_work_risk_imss
 msgid "Work risk (IMSS)"
 msgstr "업무 위험(IMSS)"
@@ -1196,7 +1361,8 @@ msgstr "근무 시간"
 msgid ""
 "You can't change the Country of this work entry type cause it's currently "
 "used by the system. You need to delete related working entries first."
-msgstr "이 작업 항목 유형의 국가는 현재 시스템에서 사용 중이므로 변경할 수 없습니다. "
+msgstr ""
+"이 작업 항목 유형의 국가는 현재 시스템에서 사용 중이므로 변경할 수 없습니다. "
 "먼저 관련된 업무 항목을 삭제해야 합니다."
 
 #. module: hr_work_entry
@@ -1204,6 +1370,18 @@ msgstr "이 작업 항목 유형의 국가는 현재 시스템에서 사용 중�
 #: code:addons/hr_work_entry/models/hr_work_entry_type.py:0
 msgid "You can't change the country of this specific work entry type."
 msgstr "이 특정 작업 항목 유형에 대한 국가 설정은 변경할 수 없습니다."
+
+#. module: hr_work_entry
+#. odoo-python
+#: code:addons/hr_work_entry/models/hr_work_entry.py:0
+msgid "You can't split a work entry with less than 1 hour."
+msgstr ""
+
+#. module: hr_work_entry
+#. odoo-javascript
+#: code:addons/hr_work_entry/static/src/views/work_entry_calendar/calendar_common/work_entry_calendar_common_popover.xml:0
+msgid "You cannot edit a validated work entry"
+msgstr ""
 
 #. module: hr_work_entry
 #: model:ir.model.constraint,message:hr_work_entry.constraint_hr_user_work_entry_employee_user_id_employee_id_unique
@@ -1214,3 +1392,69 @@ msgstr "같은 직원이 두 번씩 가질 수 없습니다."
 #: model:hr.work.entry.type,name:hr_work_entry.l10n_be_work_entry_type_youth_time_off
 msgid "Youth Time Off"
 msgstr "청소년 휴가"
+
+#. module: hr_work_entry
+#: model_terms:ir.ui.view,arch_db:hr_work_entry.hr_work_entry_view_calendar_multi_create_form
+msgid "hours"
+msgstr "시간"
+
+#~ msgid ""
+#~ "%(employee)s does not have a contract from %(date_start)s to %(date_end)s."
+#~ msgstr ""
+#~ "%(employee)s의 %(date_start)s부터 %(date_end)s까지의 계약이 존재하지 않습"
+#~ "니다."
+
+#~ msgid ""
+#~ "%(employee)s has multiple contracts from %(date_start)s to %(date_end)s. "
+#~ "A work entry cannot overlap multiple contracts."
+#~ msgstr ""
+#~ "%(employee)s에게  %(date_start)s부터 %(date_end)s까지 여러 건의 근로 계약"
+#~ "서가 있습니다. 작업 항목은 여러 계약과 겹칠 수 없습니다."
+
+#~ msgid ""
+#~ "<i class=\"fa fa-exclamation-triangle me-1\" title=\"Warning\"/>You are "
+#~ "not allowed to regenerate validated work entries"
+#~ msgstr ""
+#~ "<i class=\"fa fa-exclamation-triangle me-1\" title=\"Warning\"/>검증된 작"
+#~ "업 입력 항목을 재생성할 권한이 없습니다."
+
+#~ msgid "Beginning"
+#~ msgstr "시작"
+
+#~ msgid "Conflict"
+#~ msgstr "충돌"
+
+#~ msgid "End"
+#~ msgstr "종료"
+
+#~ msgid ""
+#~ "In order to regenerate the work entries, you need to provide the wizard "
+#~ "with an employee_id, a date_from and a date_to. In addition to that, the "
+#~ "time interval defined by date_from and date_to must not contain any "
+#~ "validated work entries."
+#~ msgstr ""
+#~ "작업 항목을 재생성하려면, 마법사에 employee_id, date_from 및 date_to 항목 "
+#~ "정보를 입력해야 합니다. 그 외에도 date_from 및 date_to로 정의된 시간 사이"
+#~ "에는 검증된 작업 항목이 포함될 수 없습니다."
+
+#~ msgid "Start Date"
+#~ msgstr "시작일"
+
+#~ msgid "Starting time should be before end time."
+#~ msgstr "시작 시간은 종료 시간 이전이어야 합니다."
+
+#~ msgid "Validated work entries cannot overlap"
+#~ msgstr "승인된 근로 항목은 중복될 수 없습니다"
+
+#~ msgid "Version"
+#~ msgstr "버전"
+
+#~ msgid "Work Entries Within Interval"
+#~ msgstr "시간 간격 내 근로 항목"
+
+#~ msgid "Work Entry Name"
+#~ msgstr "작업 항목명"
+
+#~ msgid "Work entry must end. Please define an end date or a duration."
+#~ msgstr ""
+#~ "작업 항목은 반드시 끝나야 합니다. 종료 날짜 또는 기간을 정의하십시오."

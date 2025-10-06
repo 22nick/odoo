@@ -395,14 +395,6 @@ export class Rtc extends Record {
             isFullscreen: false,
         });
         this.blurManager = undefined;
-        browser.navigator.permissions?.query({ name: "microphone" }).then((status) => {
-            this.microphonePermission = status.state;
-            status.onchange = () => (this.microphonePermission = status.state);
-        });
-        browser.navigator.permissions?.query({ name: "camera" }).then((status) => {
-            this.cameraPermission = status.state;
-            status.onchange = () => (this.cameraPermission = status.state);
-        });
     }
 
     start() {
@@ -582,6 +574,7 @@ export class Rtc extends Record {
 
     async openPip(options) {
         if (this.isHost) {
+            this.exitFullscreen();
             await this.pipService.openPip(options);
             return;
         }
@@ -1349,7 +1342,7 @@ export class Rtc extends Record {
                 const session = await this.store["discuss.channel.rtc.session"].getWhenReady(
                     Number(id)
                 );
-                if (!session || !this.channel) {
+                if (!session || session.eq(this.localSession) || !this.channel) {
                     return;
                 }
                 // `isRaisingHand` is turned into the Date `raisingHand`
@@ -2362,6 +2355,14 @@ export const rtcService = {
                     rtc.state.screenTrack.enabled = true;
                 }
             }
+        });
+        browser.navigator.permissions?.query({ name: "microphone" }).then((status) => {
+            rtc.microphonePermission = status.state;
+            status.onchange = () => (rtc.microphonePermission = status.state);
+        });
+        browser.navigator.permissions?.query({ name: "camera" }).then((status) => {
+            rtc.cameraPermission = status.state;
+            status.onchange = () => (rtc.cameraPermission = status.state);
         });
         rtc.p2pService = services["discuss.p2p"];
         rtc.p2pService.acceptOffer = async (id, sequence) => {

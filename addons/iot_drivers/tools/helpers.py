@@ -7,6 +7,7 @@ from importlib import util
 import inspect
 import io
 import logging
+import netifaces
 from pathlib import Path
 import re
 import requests
@@ -219,6 +220,15 @@ def get_identifier():
         update_conf({'generated_identifier': identifier})
 
     return identifier
+
+
+def get_mac_address():
+    interfaces = netifaces.interfaces()
+    for interface in interfaces:
+        if netifaces.ifaddresses(interface).get(netifaces.AF_INET):
+            addr = netifaces.ifaddresses(interface).get(netifaces.AF_LINK)[0]['addr']
+            if addr != '00:00:00:00:00:00':
+                return addr
 
 
 def get_path_nginx():
@@ -503,10 +513,12 @@ def save_browser_state(url=None, orientation=None):
     :param url: The URL the browser is on (if None, the URL is not saved)
     :param orientation: The orientation of the screen (if None, the orientation is not saved)
     """
-    update_conf({
-        'browser_url': url,
-        'screen_orientation': orientation.name.lower() if orientation else None,
-    })
+    to_update = {
+        "browser_url": url,
+        "screen_orientation": orientation.name.lower() if orientation else None,
+    }
+    # Only update the values that are not None
+    update_conf({k: v for k, v in to_update.items() if v is not None})
 
 
 def load_browser_state():
