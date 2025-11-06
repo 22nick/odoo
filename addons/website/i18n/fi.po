@@ -36,13 +36,14 @@
 # Martin Trigaux, 2023
 # Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2023
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# Saara Hakanen <sahak@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-03 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 15:34+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2025-10-08 18:37+0000\n"
+"PO-Revision-Date: 2025-11-04 07:59+0000\n"
+"Last-Translator: Saara Hakanen <sahak@odoo.com>\n"
 "Language-Team: Finnish <https://translate.odoo.com/projects/odoo-19/website/"
 "fi/>\n"
 "Language: fi\n"
@@ -704,7 +705,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website/static/src/client_actions/configurator/configurator.xml:0
 msgid "4 steps"
-msgstr "4 askelta"
+msgstr "neljällä askeleella"
 
 #. module: website
 #. odoo-javascript
@@ -13226,7 +13227,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_big_icons_subtitles
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_cards
 msgid "Points of sale"
-msgstr "Kassapääte"
+msgstr "Kassajärjestelmät"
 
 #. module: website
 #. odoo-javascript
@@ -16123,6 +16124,12 @@ msgid "The name of the page usable in a URL"
 msgstr ""
 
 #. module: website
+#. odoo-python
+#: code:addons/website/models/website.py:0
+msgid "The provided website domain is not a valid URL."
+msgstr ""
+
+#. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/font/add_font_dialog.js:0
 msgid "The quick brown fox jumps over the lazy dog."
@@ -17096,9 +17103,8 @@ msgstr "Alleviivaa kun hiirikursori viedään päälle"
 msgid ""
 "Understand how visitors engage with our website, via Google Analytics.\n"
 "                                                Learn more about <a "
-"class=\"o_translate_inline\" href=\"https://developers.google.com/analytics/"
-"resources/concepts/gaConceptsCookies?hl=en\">Analytics cookies and privacy "
-"information.</a>"
+"class=\"o_translate_inline\" href=\"https://support.google.com/analytics/"
+"answer/11397207?hl=en\">Analytics cookies and privacy information.</a>"
 msgstr ""
 
 #. module: website

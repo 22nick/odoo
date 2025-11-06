@@ -204,7 +204,6 @@ export class SelectionPlugin extends Plugin {
     resources = {
         user_commands: { id: "selectAll", run: this.selectAll.bind(this) },
         shortcuts: [{ hotkey: "control+a", commandId: "selectAll" }],
-        is_node_editable_predicates: (node) => node.parentElement?.isContentEditable,
     };
 
     setup() {
@@ -457,7 +456,12 @@ export class SelectionPlugin extends Plugin {
         const documentSelection =
             selection?.anchorNode && selection?.focusNode
                 ? Object.freeze({
-                      isCollapsed: selection.isCollapsed,
+                      get isCollapsed() {
+                          if (this.collapsed === undefined) {
+                              this.collapsed = selection.isCollapsed;
+                          }
+                          return this.collapsed;
+                      },
                       anchorNode: selection.anchorNode,
                       anchorOffset: selection.anchorOffset,
                       focusNode: selection.focusNode,
@@ -1024,25 +1028,33 @@ export class SelectionPlugin extends Plugin {
     }
 
     isNodeEditable(node) {
-        return this.getResource("is_node_editable_predicates").some((p) => p(node));
+        const results = this.getResource("is_node_editable_predicates")
+            .map((p) => p(node))
+            .filter((r) => r !== undefined);
+        if (!results.length) {
+            return node.parentElement?.isContentEditable;
+        }
+        return results.every((r) => r);
     }
 
     focusEditable() {
-        if (this.editable.contains(this.document.activeElement)) {
+        const { editableSelection, currentSelectionIsInEditable } = this.getSelectionData();
+        if (this.editable.contains(this.document.activeElement) && currentSelectionIsInEditable) {
             // Editor has focus — nothing to do.
             return;
         }
 
-        const { editableSelection, documentSelectionIsInEditable } = this.getSelectionData();
-
         const closestNonEditable = (node) => closestElement(node, (el) => !el.isContentEditable);
         // If selection includes a non-editable element, focusing editor will move cursor to different position.
-        if (!closestNonEditable(editableSelection.anchorNode) && !closestNonEditable(editableSelection.focusNode)) {
+        if (
+            !closestNonEditable(editableSelection.anchorNode) &&
+            !closestNonEditable(editableSelection.focusNode)
+        ) {
             // Manualy focusing the editable is necessary to avoid some non-deterministic error in the HOOT unit tests.
             this.editable.focus({ preventScroll: true });
         }
 
-        if (!documentSelectionIsInEditable) {
+        if (!currentSelectionIsInEditable) {
             // Selection is outside the editor — restore it.
             const { anchorNode, anchorOffset, focusNode, focusOffset } = editableSelection;
             const selection = this.document.getSelection();

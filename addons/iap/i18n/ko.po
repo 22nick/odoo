@@ -6,13 +6,14 @@
 # Martin Trigaux, 2022
 #
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Kwanghee Park (kwpa)" <kwpa@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~15.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-11 13:57+0000\n"
-"PO-Revision-Date: 2025-09-16 04:40+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2025-10-08 18:38+0000\n"
+"PO-Revision-Date: 2025-10-24 02:31+0000\n"
+"Last-Translator: \"Kwanghee Park (kwpa)\" <kwpa@odoo.com>\n"
 "Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/iap/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -52,8 +53,9 @@ msgstr "계정 토큰은 해당 서비스용 인증 키입니다. 공유하면 �
 msgid ""
 "An error occurred while reaching %s. Please contact Odoo support if this "
 "error persists."
-msgstr "%s에 연결하는 동안 오류가 발생했습니다. 문제가 지속되면 Odoo 지원팀에 "
-"문의하세요."
+msgstr ""
+"%s에 연결하는 동안 오류가 발생했습니다. 문제가 지속되면 Odoo 지원팀에 문의하"
+"세요."
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__balance
@@ -117,8 +119,8 @@ msgid ""
 "leads, generate leads based on a set of criteria and enrich the company data "
 "of your opportunities."
 msgstr ""
-"고품질 잠재 고객 및 기회 확보: 웹사이트 방문자를 리드로 전환하고, 특정 "
-"기준에 따라 리드를 생성하고, 기회에 대한 회사 데이터를 보강하세요."
+"고품질 잠재 고객 및 기회 확보: 웹사이트 방문자를 리드로 전환하고, 특정 기준"
+"에 따라 리드를 생성하고, 기회에 대한 회사 데이터를 보강하세요."
 
 #. module: iap
 #: model:ir.ui.menu,name:iap.iap_root_menu
@@ -201,8 +203,9 @@ msgstr "Odoo IAP"
 msgid ""
 "One of the email alert recipients doesn't have an email address set. Users: "
 "%s"
-msgstr "이메일 알림 수신자 중 한 명에게 이메일 주소가 설정되어 있지 않습니다. 사용자:"
-" %s"
+msgstr ""
+"이메일 알림 수신자 중 한 명에게 이메일 주소가 설정되어 있지 않습니다. 사용"
+"자: %s"
 
 #. module: iap
 #: model:ir.model.constraint,message:iap.constraint_iap_service_unique_technical_name
@@ -245,7 +248,7 @@ msgstr "기술 이름"
 #. odoo-python
 #: code:addons/iap/models/iap_account.py:0
 msgid "The IAP token provided is invalid or empty."
-msgstr ""
+msgstr "선택한 IAP 토큰이 유효하지 않거나 내용이 없습니다."
 
 #. module: iap
 #. odoo-python
@@ -253,7 +256,8 @@ msgstr ""
 msgid ""
 "The request to the service timed out. Please contact the author of the app. "
 "The URL it tried to contact was %s"
-msgstr "서비스 요청이 시간 초과되었습니다. 앱 개발자에게 문의하십시오. 연결을 시도한 "
+msgstr ""
+"서비스 요청이 시간 초과되었습니다. 앱 개발자에게 문의하십시오. 연결을 시도한 "
 "URL은 %s입니다."
 
 #. module: iap

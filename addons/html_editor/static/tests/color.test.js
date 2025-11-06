@@ -909,3 +909,60 @@ test("should be able to remove color of an icon", async () => {
         contentAfter: '<p>[<span class="fa fa-glass"></span>]</p>',
     });
 });
+
+test("doesn't change the color of the whole section when there's an icon next to the selection", async () => {
+    await testEditor({
+        contentBefore: `
+        <section style="color: rgb(255, 0, 0);">
+            <p>a[bc]d</p>
+            <span class="fa fa-glass" contenteditable="false">\u200b</span>
+        </section>`,
+        stepFunction: setColor("rgb(0, 0, 255)", "color"),
+        contentAfterEdit: `
+        <p data-selection-placeholder=""><br></p><section style="color: rgb(255, 0, 0);">
+            <p>a<font style="color: rgb(0, 0, 255);">[bc]</font>d</p>
+            <span class="fa fa-glass" contenteditable="false">\u200b</span>
+        </section><p data-selection-placeholder=""><br></p>`,
+        contentAfter: `
+        <section style="color: rgb(255, 0, 0);">
+            <p>a<font style="color: rgb(0, 0, 255);">[bc]</font>d</p>
+            <span class="fa fa-glass"></span>
+        </section>`,
+    });
+});
+
+test("should remove remove color from `td`", async () => {
+    await testEditor({
+        contentBefore: unformat(`
+                <table style="color: red;" class="o_selected_table"><tbody>
+                    <tr><td class="o_selected_td">[ab]</td></tr>
+                    <tr><td>ab</td></tr>
+                </tbody></table>
+            `),
+        stepFunction: setColor("", "color"),
+        contentAfter: unformat(`
+            <table>
+                <tbody>
+                    <tr><td>[ab]</td></tr>
+                    <tr><td style="color: red;">ab</td></tr>
+                </tbody>
+            </table>
+        `),
+    });
+});
+
+test("should be able to remove color applied by 'text-*' classes (1)", async () => {
+    await testEditor({
+        contentBefore: '<p><span class="text-muted">[a]</span></p>',
+        stepFunction: setColor("", "color"),
+        contentAfter: "<p>[a]</p>",
+    });
+});
+
+test("should be able to remove color applied by 'text-*' classes (2)", async () => {
+    await testEditor({
+        contentBefore: '<p><a href="#" class="text-muted">[a]</a></p>',
+        stepFunction: setColor("", "color"),
+        contentAfter: '<p><a href="#">[a]</a></p>',
+    });
+});

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 18:36+0000\n"
-"PO-Revision-Date: 2025-10-04 02:31+0000\n"
+"POT-Creation-Date: 2025-10-08 18:38+0000\n"
+"PO-Revision-Date: 2025-10-27 02:31+0000\n"
 "Last-Translator: \"Kwanghee Park (kwpa)\" <kwpa@odoo.com>\n"
 "Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/"
 "pos_self_order/ko/>\n"
@@ -89,6 +89,46 @@ msgid ""
 "                </div>\n"
 "            "
 msgstr ""
+"<div style=\"margin: 0; padding: 0; font-size: 14px;\">\n"
+"                    <t t-set=\"client\" t-value=\"object.partner_id\"/>\n"
+"                    <t t-set=\"client_name\" t-value=\"client.name\"/>\n"
+"                    <t t-set=\"street\" t-value=\"client.street or ''\"/>\n"
+"                    <t t-set=\"state\" t-value=\"client.state_id.name or ''\""
+"/>\n"
+"                    <t t-set=\"city\" t-value=\"client.city or ''\"/>\n"
+"                    <t t-set=\"country\" t-value="
+"\"client.country_id.name or ''\"/>\n"
+"                    <t t-set=\"store_name\" t-value=\"object.config_id.name\""
+"/>\n"
+"                    <t t-set=\"tz\" t-value=\"object.env.user.tz\"/>\n"
+"                    <t t-set=\"lg\" t-value="
+"\"object.partner_id.lang or user.lang\"/>\n"
+"                    <div>\n"
+"                        <t t-if=\"client_name\">안녕하세요 <t t-out="
+"\"client_name\">Client name</t>님,</t>\n"
+"                        <t t-else=\"\">안녕하세요,</t>\n"
+"                    </div>\n"
+"                    <br/>\n"
+"                    <div>다음의 주문서 <t t-out=\"object.tracking_number\""
+">...</t> amounting in <t t-out=\"object.amount_total\">$xx.xx</t> 가 "
+"확정되었습니다. <span t-if=\"object.preset_time or client.street\">해당 "
+"주문서에 대한 준비 관련 내용은 다음과 같습니다.</span> <span t-if="
+"\"object.preset_time\">완료 시간: <t t-out=\"format_time("
+"time=object.preset_time, tz=tz, time_format='short', lang_code=lg)"
+"\">12:00 pm</t></span> <span t-if=\"client.street\">장소: <t t-out=\"street\""
+">street</t>, <t t-out=\"state\">state</t>, <t t-out=\"client.zip or ''\""
+">zip</t>, <t t-out=\"city\">city</t>, <t t-out=\"country\""
+">country</t></span></div>\n"
+"                    <br/>\n"
+"                    <div>감사합니다.</div>\n"
+"                    <br/>\n"
+"                    <div t-if=\"object.state == 'paid'\">\n"
+"                        <div>영수증은 파일로 첨부되어 있습니다.</div>\n"
+"                        <br/>\n"
+"                    </div>\n"
+"                    <t t-out=\"store_name\">Store name</t>\n"
+"                </div>\n"
+"            "
 
 #. module: pos_self_order
 #: model:mail.template,body_html:pos_self_order.takeout_email_template
@@ -121,6 +161,33 @@ msgid ""
 "                </div>\n"
 "            "
 msgstr ""
+"<div style=\"margin: 0; padding: 0; font-size: 14px;\">\n"
+"                    <t t-set=\"store_name\" t-value=\"object.config_id.name\""
+"/>\n"
+"                    <t t-set=\"tz\" t-value=\"object.env.user.tz\"/>\n"
+"                    <t t-set=\"lg\" t-value="
+"\"object.partner_id.lang or user.lang\"/>\n"
+"                    <div>\n"
+"                        <t t-if=\"client_name\">안녕하세요 <t t-out="
+"\"client_name\">고객명</t>님,</t>\n"
+"                        <t t-else=\"\">안녕하세요,</t>\n"
+"                    </div>\n"
+"                    <br/>\n"
+"                    <div>주문 번호 <t t-out=\"object.tracking_number\">...</"
+"t> 주문 금액 <t t-out=\"object.amount_total\">$xx.xx</t> 에 대한 주문이 "
+"확정되었습니다. <span t-if=\"object.preset_time\">준비가 <t t-out="
+"\"format_time(time=object.preset_time, tz=tz, time_format='short', "
+"lang_code=lg)\">12:00 pm</t>에 완료될 예정입니다.</span></div>\n"
+"                    <br/>\n"
+"                    <div>감사합니다.</div>\n"
+"                    <br/>\n"
+"                    <div t-if=\"object.state == 'paid'\">\n"
+"                        <div>첨부된 영수증을 참조하시기 바랍니다.</div>\n"
+"                        <br/>\n"
+"                    </div>\n"
+"                    <t t-out=\"store_name\">상점명</t>\n"
+"                </div>\n"
+"            "
 
 #. module: pos_self_order
 #: model:ir.model.fields,help:pos_self_order.field_pos_config__self_ordering_default_user_id
@@ -301,7 +368,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "City"
-msgstr ""
+msgstr "도시"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -343,7 +410,7 @@ msgstr ""
 #. module: pos_self_order
 #: model:ir.model,name:pos_self_order.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "연락처"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -369,7 +436,7 @@ msgstr "테이블 번호를 확인해 주실 수 있을까요?"
 #. module: pos_self_order
 #: model:ir.model,name:pos_self_order.model_res_country
 msgid "Country"
-msgstr ""
+msgstr "국가"
 
 #. module: pos_self_order
 #: model:ir.model,website_form_label:pos_self_order.model_res_partner
@@ -531,7 +598,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Email"
-msgstr ""
+msgstr "이메일"
 
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_preset__mail_template_id
@@ -724,7 +791,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/overrides/screens/ticket_screen/ticket_screen.js:0
 msgid "Invoiced"
-msgstr ""
+msgstr "청구서 발행 완료"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -864,7 +931,7 @@ msgstr "노트"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Name"
-msgstr ""
+msgstr "이름"
 
 #. module: pos_self_order
 #: model:ir.model.fields,help:pos_self_order.field_pos_config__self_ordering_image_brand_name
@@ -910,7 +977,7 @@ msgstr "셀프로 이용 불가"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/unavailable_product_dialog/unavailable_product_dialog.xml:0
 msgid "OK"
-msgstr ""
+msgstr "예"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -922,13 +989,13 @@ msgstr "확인"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/overrides/screens/ticket_screen/ticket_screen.js:0
 msgid "Ongoing"
-msgstr ""
+msgstr "진행 중"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/network_connectionLost_popup/network_connectionLost_popup.xml:0
 msgid "Online"
-msgstr ""
+msgstr "온라인"
 
 #. module: pos_self_order
 #. odoo-python
@@ -940,7 +1007,7 @@ msgstr "키오스크 모드에서는 각각에 대한 결제만 가능합니다.
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/unavailable_product_dialog/unavailable_product_dialog.xml:0
 msgid "Oops..."
-msgstr ""
+msgstr "이런!"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.pos_self_order_menu_item
@@ -969,7 +1036,7 @@ msgstr "서버에서 주문을 찾을 수 없습니다"
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_order__source
 msgid "Origin"
-msgstr ""
+msgstr "출발지"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -982,7 +1049,7 @@ msgstr "품절"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/overrides/screens/ticket_screen/ticket_screen.js:0
 msgid "Paid"
-msgstr ""
+msgstr "결제 완료"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1021,7 +1088,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Phone"
-msgstr ""
+msgstr "전화번호"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1202,7 +1269,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/network_connectionLost_popup/network_connectionLost_popup.xml:0
 msgid "Retrying..."
-msgstr ""
+msgstr "다시 시도 중..."
 
 #. module: pos_self_order
 #: model:ir.model.fields.selection,name:pos_self_order.selection__pos_self_order_custom_link__style__secondary
@@ -1224,7 +1291,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Select"
-msgstr ""
+msgstr "선택"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1270,7 +1337,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/product_page/product_page.xml:0
 msgid "Selection"
-msgstr ""
+msgstr "선택"
 
 #. module: pos_self_order
 #. odoo-python
@@ -1498,7 +1565,7 @@ msgstr "이 조합은 존재하지 않습니다."
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/order_widget/order_widget.xml:0
 msgid "Total"
-msgstr ""
+msgstr "합계"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1660,13 +1727,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Zip"
-msgstr ""
+msgstr "우편번호"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/unavailable_product_dialog/unavailable_product_dialog.xml:0
 msgid "are"
-msgstr ""
+msgstr "은(는)"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1678,13 +1745,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "close"
-msgstr ""
+msgstr "닫기"
 
 #. module: pos_self_order
 #. odoo-python
 #: code:addons/pos_self_order/models/pos_config.py:0
 msgid "each"
-msgstr ""
+msgstr "각"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.custom_link_tree
@@ -1700,13 +1767,13 @@ msgstr "https://odoo.com"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/combo_page/combo_page.xml:0
 msgid "included"
-msgstr ""
+msgstr "포함 사항"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/unavailable_product_dialog/unavailable_product_dialog.xml:0
 msgid "is"
-msgstr ""
+msgstr "은(는)"
 
 #. module: pos_self_order
 #. odoo-javascript

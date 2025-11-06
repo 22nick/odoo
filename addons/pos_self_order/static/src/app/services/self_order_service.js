@@ -13,12 +13,13 @@ import { renderToElement } from "@web/core/utils/render";
 import { TimeoutPopup } from "@pos_self_order/app/components/timeout_popup/timeout_popup";
 import { NetworkConnectionLostPopup } from "@pos_self_order/app/components/network_connectionLost_popup/network_connectionLost_popup";
 import { UnavailableProductsDialog } from "@pos_self_order/app/components/unavailable_product_dialog/unavailable_product_dialog";
-import { constructFullProductName, deduceUrl, random5Chars } from "@point_of_sale/utils";
-import { getOrderLineValues } from "./card_utils";
 import {
-    getTaxesAfterFiscalPosition,
-    getTaxesValues,
-} from "@point_of_sale/app/models/utils/tax_utils";
+    constructFullProductName,
+    deduceUrl,
+    random5Chars,
+    orderUsageUTCtoLocalUtil,
+} from "@point_of_sale/utils";
+import { getOrderLineValues } from "./card_utils";
 import { EpsonPrinter } from "@point_of_sale/app/utils/printer/epson_printer";
 
 export class SelfOrder extends Reactive {
@@ -163,12 +164,9 @@ export class SelfOrder extends Reactive {
     getAvailableCategories() {
         let now = luxon.DateTime.now();
         now = now.hour + now.minute / 60;
-        const isKiosk = this.config.self_ordering_mode === "kiosk";
         const availableCategories = this.productCategories
             .filter(
-                (c) =>
-                    this.productByCategIds[c.id]?.length > 0 ||
-                    (isKiosk && c.child_ids.some((child) => child.id in this.productByCategIds))
+                (c) => this.productByCategIds[c.id]?.length > 0 || c.associatedProducts?.length > 0
             )
             .sort((a, b) => a.sequence - b.sequence);
         return availableCategories.filter((c) => {
@@ -205,8 +203,8 @@ export class SelfOrder extends Reactive {
                 access_token: this.access_token,
                 preset_id: this.currentOrder?.preset_id?.id,
             });
-
-            preset.computeAvailabilities(presetAvailabilities);
+            const localUsage = orderUsageUTCtoLocalUtil(presetAvailabilities.usage_utc);
+            preset.computeAvailabilities(localUsage);
         } catch {
             console.info("Offline mode, cannot update the slot avaibility");
         }
@@ -566,6 +564,15 @@ export class SelfOrder extends Reactive {
     }
 
     cancelOrder() {
+        if (
+            this.config.self_ordering_mode === "kiosk" &&
+            this.hasPaymentMethod() &&
+            typeof this.currentOrder.id === "number"
+        ) {
+            this.cancelBackendOrder();
+            return;
+        }
+
         const lineToDelete = [];
         for (const line of this.currentOrder.lines) {
             const changes = line.changes;
@@ -605,6 +612,20 @@ export class SelfOrder extends Reactive {
         }
     }
 
+    async cancelBackendOrder() {
+        try {
+            await rpc("/pos-self-order/remove-order", {
+                access_token: this.access_token,
+                order_id: this.currentOrder.id,
+                order_access_token: this.currentOrder.access_token,
+            });
+            this.currentOrder.state = "cancel";
+            this.router.navigate("default");
+        } catch (error) {
+            this.handleErrorNotification(error);
+        }
+    }
+
     async sendDraftOrderToServer() {
         if (
             Object.keys(this.currentOrder.changes).length === 0 ||
@@ -614,9 +635,9 @@ export class SelfOrder extends Reactive {
         }
 
         try {
+            this.currentOrder.setOrderPrices();
             const tableIdentifier = this.router.getTableIdentifier([]);
             let uuid = this.selectedOrderUuid;
-            this.currentOrder.recomputeOrderData();
             const data = await rpc(
                 `/pos-self-order/process-order/${this.config.self_ordering_mode}`,
                 {
@@ -678,7 +699,6 @@ export class SelfOrder extends Reactive {
                 order_access_tokens: accessTokens,
                 table_identifier: tableIdentifier,
             });
-            this.selectedOrderUuid = null;
             const result = this.models.connectNewData(data);
             const openOrder = result["pos.order"]?.find((o) => o.state === "draft");
             if (openOrder && this.router.activeSlot !== "confirmation") {
@@ -728,7 +748,6 @@ export class SelfOrder extends Reactive {
                 cleanOrders = true;
             } else if (error?.data?.name === "odoo.exceptions.UserError") {
                 message = error.data.message;
-                this.resetTableIdentifier();
             }
         } else if (error instanceof ConnectionLostError) {
             this.dialog.add(NetworkConnectionLostPopup, {
@@ -815,21 +834,18 @@ export class SelfOrder extends Reactive {
             ? this.currentOrder.preset_id?.pricelist_id
             : this.config.pricelist_id;
         const price = productTemplate.getPrice(pricelist, 1, 0, false, product);
-        let taxes = productTemplate.taxes_id;
 
         if (!product) {
             product = productTemplate;
         }
 
-        // Fiscal position.
-        const order = this.currentOrder;
-        if (order && order.fiscal_position_id) {
-            taxes = getTaxesAfterFiscalPosition(taxes, order.fiscal_position_id, this.models);
-        }
-
         // Taxes computation.
-        const taxesData = getTaxesValues(taxes, price, 1, product, {}, this.company, this.currency);
-
+        const order = this.currentOrder;
+        const taxesData = product.getTaxDetails({
+            price_unit: price,
+            quantity: 1,
+            fiscalPosition: order?.fiscal_position_id || false,
+        });
         return { pricelist_price: price, ...taxesData };
     }
     getProductDisplayPrice(productTemplate, product) {

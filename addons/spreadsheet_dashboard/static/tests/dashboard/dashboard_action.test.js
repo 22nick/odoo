@@ -138,15 +138,11 @@ test("display no dashboard message", async () => {
 
 test("display error message", async () => {
     expect.errors(1);
-    onRpc(
-        "/spreadsheet/dashboard/data/2",
-        () => {
-            const error = new RPCError();
-            error.data = {};
-            throw error;
-        },
-        { pure: true }
-    );
+    onRpc("/spreadsheet/dashboard/data/2", () => {
+        const error = new RPCError();
+        error.data = {};
+        throw error;
+    });
     await createSpreadsheetDashboard();
     expect(".o-spreadsheet").toHaveCount(1, { message: "It should display the spreadsheet" });
     await contains(".o_search_panel li:eq(1)").click();
@@ -253,9 +249,10 @@ test("share dashboard from dashboard view", async function () {
     expect(".spreadsheet_share_dropdown").toHaveCount(0);
     await contains("i.fa-share-alt").click();
     await animationFrame();
-    expect(".spreadsheet_share_dropdown").toHaveText("Generating sharing link");
+    expect(".spreadsheet_share_dropdown .o_loading_state").toHaveText("Generating sharing link");
     def.resolve();
     await animationFrame();
+    expect(".spreadsheet_share_dropdown .o_loading_state").toHaveCount(0);
     expect.verifySteps(["dashboard_shared", "share url copied"]);
     expect(".o_field_CopyClipboardChar").toHaveText("localhost:8069/share/url/132465");
     await contains(".fa-clipboard").click();

@@ -7,14 +7,29 @@ import { FOOTER_COPYRIGHT } from "./footer_option_plugin";
 import { HEADER_TEMPLATE } from "./header/header_option_plugin";
 import { TopMenuVisibilityOption } from "./website_page_config_option";
 import { BuilderAction } from "@html_builder/core/builder_action";
+import { BaseOptionComponent } from "@html_builder/core/utils";
 
 export const TOP_MENU_VISIBILITY = after(HEADER_TEMPLATE);
 export const HIDE_FOOTER = after(FOOTER_COPYRIGHT);
 
+export class HideFooterOption extends BaseOptionComponent {
+    static template = "website.HideFooterOption";
+    static selector =
+        "[data-main-object]:has(input.o_page_option_data[name='footer_visible']) #wrapwrap > footer";
+    static groups = ["website.group_website_designer"];
+    static editableOnly = false;
+}
+
 class WebsitePageConfigOptionPlugin extends Plugin {
     static id = "websitePageConfigOptionPlugin";
-    static dependencies = ["history", "visibility"];
-    static shared = ["setDirty", "setFooterVisible", "getVisibilityItem", "getFooterVisibility"];
+    static dependencies = ["history", "visibility", "builderActions"];
+    static shared = [
+        "setDirty",
+        "setFooterVisible",
+        "getVisibilityItem",
+        "getFooterVisibility",
+        "doesPageOptionExist",
+    ];
     resources = {
         builder_actions: {
             SetWebsiteHeaderVisibilityAction,
@@ -22,23 +37,8 @@ class WebsitePageConfigOptionPlugin extends Plugin {
             SetPageWebsiteDirtyAction,
         },
         builder_options: [
-            withSequence(TOP_MENU_VISIBILITY, {
-                OptionComponent: TopMenuVisibilityOption,
-                selector:
-                    "[data-main-object]:has(input.o_page_option_data[name='header_visible']) #wrapwrap > header",
-                editableOnly: false,
-                groups: ["website.group_website_designer"],
-                props: {
-                    doesPageOptionExist: this.doesPageOptionExist.bind(this),
-                },
-            }),
-            withSequence(HIDE_FOOTER, {
-                template: "website.HideFooterOption",
-                selector:
-                    "[data-main-object]:has(input.o_page_option_data[name='footer_visible']) #wrapwrap > footer",
-                editableOnly: false,
-                groups: ["website.group_website_designer"],
-            }),
+            withSequence(TOP_MENU_VISIBILITY, TopMenuVisibilityOption),
+            withSequence(HIDE_FOOTER, HideFooterOption),
         ],
         target_show: this.onTargetVisibilityToggle.bind(this, true),
         target_hide: this.onTargetVisibilityToggle.bind(this, false),
@@ -112,9 +112,17 @@ class WebsitePageConfigOptionPlugin extends Plugin {
     }
 
     onTargetVisibilityToggle(show, target) {
-        if (target.matches("#wrapwrap > header, #wrapwrap > footer")) {
-            this.dependencies.history.ignoreDOMMutations(() => {
-                target.classList.toggle("d-none", !show);
+        if (show && target.matches("#wrapwrap > header")) {
+            this.dependencies.builderActions.applyAction("setWebsiteHeaderVisibility", {
+                editingElement: target,
+                value: "regular",
+                isPreviewing: false,
+            });
+        }
+        if (show && target.matches("#wrapwrap > footer")) {
+            this.dependencies.builderActions.applyAction("setWebsiteFooterVisible", {
+                editingElement: target,
+                isPreviewing: false,
             });
         }
     }

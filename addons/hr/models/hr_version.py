@@ -133,7 +133,7 @@ class HrVersion(models.Model):
 
     departure_reason_id = fields.Many2one("hr.departure.reason", string="Departure Reason",
                                           groups="hr.group_hr_user", copy=False, ondelete='restrict', tracking=True)
-    departure_description = fields.Html(string="Additional Information", groups="hr.group_hr_user", copy=False, tracking=True)
+    departure_description = fields.Html(string="Additional Information", groups="hr.group_hr_user", copy=False)
     departure_date = fields.Date(string="Departure Date", groups="hr.group_hr_user", copy=False, tracking=True)
 
     resource_calendar_id = fields.Many2one('resource.calendar', inverse='_inverse_resource_calendar_id', check_company=True, string="Working Hours", tracking=True)
@@ -324,23 +324,29 @@ class HrVersion(models.Model):
         for employee, versions in multiple_versions.grouped('employee_id').items():
 
             dates_vals = {}
+            first_version = next(iter(versions), versions)
 
             if "contract_date_start" in vals:
                 dates_vals["contract_date_start"] = fields.Date.to_date(vals.get('contract_date_start'))
             else:
-                dates_vals["contract_date_start"] = versions[0].contract_date_start
+                dates_vals["contract_date_start"] = first_version.contract_date_start
             if "contract_date_end" in vals:
                 dates_vals["contract_date_end"] = fields.Date.to_date(vals.get('contract_date_end'))
             else:
-                dates_vals["contract_date_end"] = versions[0].contract_date_end
+                dates_vals["contract_date_end"] = first_version.contract_date_end
 
-            if versions[0].contract_date_start:
+            if first_version.contract_date_start:
                 versions_to_sync = employee._get_contract_versions(
-                    date_start=versions[0].contract_date_start,
-                    date_end=versions[0].contract_date_end,
+                    date_start=first_version.contract_date_start,
+                    date_end=first_version.contract_date_end,
                 )
+                all_versions_to_sync = self.env['hr.version']
                 for contract_versions in versions_to_sync.values():
-                    next(iter(contract_versions.values())).with_context(sync_contract_dates=True).write(dates_vals)
+                    all_versions_to_sync |= next(iter(contract_versions.values()))
+
+                if all_versions_to_sync:
+                    all_versions_to_sync.with_context(sync_contract_dates=True).write(dates_vals)
+
             else:
                 versions.with_context(sync_contract_dates=True).write(dates_vals)
 
@@ -383,7 +389,7 @@ class HrVersion(models.Model):
         :param date date_from: the start of the period
         :param date date_to: the stop of the period
         """
-        if not self.contract_date_start:
+        if not (self.contract_date_start and date_from and date_to):
             return False
         return self.date_start <= date_to and (not self.date_end or self.date_end >= date_from)
 
@@ -407,7 +413,8 @@ class HrVersion(models.Model):
     def get_values_from_contract_template(self, contract_template_id):
         if not contract_template_id:
             return {}
-        whitelist = self._get_whitelist_fields_from_template()
+        company = contract_template_id.company_id or self.env.company
+        whitelist = self.with_company(company)._get_whitelist_fields_from_template()
         contract_template_vals = contract_template_id.copy_data()[0]
         return {
             field: value

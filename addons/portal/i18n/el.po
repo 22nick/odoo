@@ -8,13 +8,14 @@
 # George Tarasidis <george_tarasidis@yahoo.com>, 2018
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# Panagiotis karampaglis <panosdotk@gmail.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-11 13:59+0000\n"
-"PO-Revision-Date: 2025-09-24 19:22+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2025-10-08 18:39+0000\n"
+"PO-Revision-Date: 2025-10-21 05:27+0000\n"
+"Last-Translator: Panagiotis karampaglis <panosdotk@gmail.com>\n"
 "Language-Team: Greek <https://translate.odoo.com/projects/odoo-19/portal/el/>"
 "\n"
 "Language: el\n"
@@ -663,7 +664,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/portal/controllers/portal.py:0
 msgid "Invalid Email! Please enter a valid email address."
-msgstr "Μη έγκυρο Email! Παρακαλώ εισάγετε μια έγκυρη διεύθυνση Email"
+msgstr "Μη έγκυρο Email! Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email."
 
 #. module: portal
 #. odoo-python
@@ -1129,7 +1130,7 @@ msgstr "Ο νέος κωδικός και η επιβεβαίωση του πρ�
 #: code:addons/portal/controllers/portal.py:0
 msgid ""
 "The old password you provided is incorrect, your password was not changed."
-msgstr "Ο παλιός κωδικός που δώσατε είναι λάθος, ο κωδικός σας δεν άλλαξε"
+msgstr "Ο παλιός κωδικός που δώσατε είναι λάθος, ο κωδικός σας δεν άλλαξε."
 
 #. module: portal
 #. odoo-python
@@ -1348,7 +1349,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/portal/controllers/portal.py:0
 msgid "You cannot leave any password empty."
-msgstr "Δεν μπορείτε να αφήσετε κανένα συνθηματικό κενό"
+msgstr "Δεν μπορείτε να αφήσετε κανένα συνθηματικό κενό."
 
 #. module: portal
 #. odoo-javascript

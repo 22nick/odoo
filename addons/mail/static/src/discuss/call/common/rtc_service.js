@@ -102,7 +102,7 @@ function hasTurn(iceServers) {
  * establish a connection with other call participants with the SFU when possible, and still handle
  * peer-to-peer for the participants who did not manage to establish a SFU connection.
  */
-class Network {
+export class Network {
     /** @type {import("@mail/discuss/call/common/peer_to_peer").PeerToPeer} */
     p2p;
     /** @type {import("@mail/../lib/odoo_sfu/odoo_sfu").SfuClient} */
@@ -1763,17 +1763,13 @@ export class Rtc extends Record {
      * Applies blur effect to a video stream using BlurManager.
      *
      * @param {MediaStream} videoStream - input video stream.
-     * @returns {Promise<{stream: MediaStream, close: Function}>} - Blurred video stream and a function to close the blur manager.
+     * @returns {Promise<BlurManager>} - BlurManager instance.
      */
     async applyBlurEffect(videoStream) {
-        const blurManager = new BlurManager(videoStream, {
+        return new BlurManager(videoStream, {
             backgroundBlur: this.store.settings.backgroundBlurAmount,
             edgeBlur: this.store.settings.edgeBlurAmount,
         });
-        return {
-            stream: await blurManager.stream,
-            close: () => blurManager.close(),
-        };
     }
 
     /**
@@ -1989,7 +1985,7 @@ export class Rtc extends Record {
             this.blurManager = undefined;
             try {
                 this.blurManager = await this.applyBlurEffect(sourceStream);
-                const blurredStream = this.blurManager.stream;
+                const blurredStream = await this.blurManager.stream;
                 outputTrack = blurredStream.getVideoTracks()[0];
             } catch (_e) {
                 this.notification.add(_e.message, { type: "warning" });

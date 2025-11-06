@@ -8,13 +8,14 @@
 # Niyas Raphy, 2022
 # Malaz Abuidris <msea@odoo.com>, 2023
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-03 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 13:44+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2025-10-08 18:37+0000\n"
+"PO-Revision-Date: 2025-10-13 12:16+0000\n"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: Arabic <https://translate.odoo.com/projects/odoo-19/"
 "website_sale/ar/>\n"
 "Language: ar\n"
@@ -63,12 +64,12 @@ msgstr "'. يتم عرض النتائج لـ '"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.tax_indication
 msgid "(Tax excluded)"
-msgstr ""
+msgstr "(غير شامل الضريبة)"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.tax_indication
 msgid "(Tax included)"
-msgstr ""
+msgstr "(شامل الضريبة)"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.empty_cart_svg
@@ -121,7 +122,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "1 Column"
-msgstr ""
+msgstr "عمود واحد"
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_image_width__100_pc
@@ -132,7 +133,7 @@ msgstr "100 %"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "2 Columns"
-msgstr ""
+msgstr "عمودان"
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_image_width__33_pc
@@ -157,6 +158,11 @@ msgid ""
 "class=\"btn btn-primary o_translate_inline\">Sign Up</a>\n"
 "                    <span class=\"align-middle\">to follow your order.</span>"
 msgstr ""
+"<a role=\"button\" t-att-href=\"order.partner_id.signup_prepare() and "
+"order.partner_id.with_context(relative_url=True)._get_signup_url()\" class=\""
+"btn btn-primary o_translate_inline\">قم بالتسجيل</a>\n"
+"                    <span class=\"align-middle\">حتى تتمكن من متابعة "
+"طلبك.</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.o_wsale_offcanvas
@@ -184,7 +190,7 @@ msgstr "<b>الفرز حسب</b>"
 #: model_terms:ir.ui.view,arch_db:website_sale.filter_products_tags
 #: model_terms:ir.ui.view,arch_db:website_sale.product_attribute_filters_form
 msgid "<b>Tags</b>"
-msgstr ""
+msgstr "<b>علامات التصنيف</b>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.suggested_products_list
@@ -200,6 +206,8 @@ msgid ""
 "<i class=\"fa fa-angle-left me-2 fw-light\"/>\n"
 "                    Continue shopping"
 msgstr ""
+"<i class=\"fa fa-angle-left me-2 fw-light\"/>\n"
+"                    الاستمرار في التسوق"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_buy_now
@@ -207,6 +215,8 @@ msgid ""
 "<i class=\"fa fa-bolt me-2\"/>\n"
 "                Buy now"
 msgstr ""
+"<i class=\"fa fa-bolt me-2\"/>\n"
+"                اشترِ الآن"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_add_to_cart
@@ -234,17 +244,17 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address_edit_button
 msgid "<i class=\"fa fa-pencil me-1\"/>Edit"
-msgstr ""
+msgstr "<i class=\"fa fa-pencil me-1\"/>تحرير"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address_edit_button
 msgid "<i class=\"fa fa-pencil me-1\"/>Want an invoice?"
-msgstr ""
+msgstr "<i class=\"fa fa-pencil me-1\"/>هل تريد فاتورة؟"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
 msgid "<i class=\"fa fa-print me-2\"/>Print"
-msgstr ""
+msgstr "<i class=\"fa fa-print me-2\"/>طباعة"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.quick_reorder_button
@@ -273,6 +283,8 @@ msgid ""
 "<i class=\"fa fa-shopping-cart me-2\"/>\n"
 "                    Add to cart"
 msgstr ""
+"<i class=\"fa fa-shopping-cart me-2\"/>\n"
+"                    إضافة إلى عربة التسوق"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.shop_product_carousel
@@ -280,6 +292,8 @@ msgid ""
 "<i class=\"oi oi-chevron-left oe_unmovable border bg-white text-900\" "
 "role=\"img\" aria-label=\"Previous\" title=\"Previous\"/>"
 msgstr ""
+"<i class=\"oi oi-chevron-left oe_unmovable border bg-white text-900\" role="
+"\"img\" aria-label=\"Previous\" title=\"السابق \"/>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.shop_product_carousel
@@ -287,6 +301,8 @@ msgid ""
 "<i class=\"oi oi-chevron-right oe_unmovable border bg-white text-900\" "
 "role=\"img\" aria-label=\"Next\" title=\"Next\"/>"
 msgstr ""
+"<i class=\"oi oi-chevron-right oe_unmovable border bg-white text-900\" role="
+"\"img\" aria-label=\"Next\" title=\"التالي \"/>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.billing_address_list
@@ -320,6 +336,9 @@ msgid ""
 "                                        <i class=\"oi oi-close\" "
 "role=\"presentation\"/>"
 msgstr ""
+"<small class=\"mx-auto\"><b>إزالة الفلاتر</b></small>\n"
+"                                        <i class=\"oi oi-close\" role="
+"\"presentation\"/>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_terms_and_conditions
@@ -331,11 +350,17 @@ msgid ""
 "            Shipping: 2-3 Business Days\n"
 "        </small>"
 msgstr ""
+"<small class=\"text-muted mb-0\">\n"
+"            <a href=\"/terms\" class=\"o_translate_inline text-muted\""
+"><u>الشروط والأحكلام</u></a><br/>\n"
+"            ضمان استرداد الأموال خلال 30 يوم <br/>\n"
+"            الشحن خلال 2-3 أيام عمل\n"
+"        </small>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "<span class=\"align-middle\">Already have an account?</span>"
-msgstr ""
+msgstr "<span class=\"align-middle\">لديك حساب بالفعل؟</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
@@ -346,6 +371,11 @@ msgid ""
 "class=\"oe_currency_value\">1,500.00</span>\n"
 "                                            </span>"
 msgstr ""
+"<span class=\"fw-bold\" name=\"product_price\" data-oe-type=\"monetary\" "
+"data-oe-expression=\"data['price']\">\n"
+"                                                <span class="
+"\"oe_currency_value\">1,500.00</span>\n"
+"                                            </span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
@@ -356,6 +386,11 @@ msgid ""
 "class=\"oe_currency_value\">140.00</span>\n"
 "                                            </span>"
 msgstr ""
+"<span class=\"fw-bold\" name=\"product_price\" data-oe-type=\"monetary\" "
+"data-oe-expression=\"data['price']\">\n"
+"                                                <span class="
+"\"oe_currency_value\">140.00</span>\n"
+"                                            </span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
@@ -366,6 +401,11 @@ msgid ""
 "class=\"oe_currency_value\">33.00</span>\n"
 "                                            </span>"
 msgstr ""
+"<span class=\"fw-bold\" name=\"product_price\" data-oe-type=\"monetary\" "
+"data-oe-expression=\"data['price']\">\n"
+"                                                <span class="
+"\"oe_currency_value\">33.00</span>\n"
+"                                            </span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
@@ -376,6 +416,11 @@ msgid ""
 "class=\"oe_currency_value\">750.00</span>\n"
 "                                            </span>"
 msgstr ""
+"<span class=\"fw-bold\" name=\"product_price\" data-oe-type=\"monetary\" "
+"data-oe-expression=\"data['price']\">\n"
+"                                                <span class="
+"\"oe_currency_value\">750.00</span>\n"
+"                                            </span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_method
@@ -390,7 +435,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.navigation_buttons
 msgid "<span class=\"px-3\">or</span>"
-msgstr ""
+msgstr "<span class=\"px-3\">أو</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.template_footer_website_sale
@@ -435,21 +480,23 @@ msgid ""
 "<span class=\"text-muted\" invisible=\"product_variant_count &lt;= 1\">Based "
 "on variants</span>"
 msgstr ""
+"<span class=\"text-muted\" invisible=\"product_variant_count &lt;= 1\">بناءً "
+"على المتغيرات</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "<span class=\"text-muted\">Search results for </span>'"
-msgstr ""
+msgstr "<span class=\"text-muted\">البحث عن نتائج لـ </span>'"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "<span class=\"text-muted\">Searching</span>"
-msgstr ""
+msgstr "<span class=\"text-muted\">جاري البحث</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "<span class=\"text-muted\">in</span>"
-msgstr ""
+msgstr "<span class=\"text-muted\">في</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.floating_bar
@@ -480,7 +527,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:web_tour.tour,rainbow_man_message:website_sale.test_01_admin_shop_tour
 msgid "<span><b>Good job!</b> You went through all steps of this tour.</span>"
-msgstr ""
+msgstr "<span><b>عمل رائع!</b> لقد تخطيت كافة مراحل هذه الجولة.</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
@@ -490,7 +537,7 @@ msgstr "<span>طلب</span>"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_document_kanban
 msgid "<span>Publish on website</span>"
-msgstr ""
+msgstr "<span>النشر على الموقع الإلكتروني</span>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment_confirmation_status
@@ -530,6 +577,12 @@ msgid ""
 "                            </strong> if you want to merge your previous "
 "cart into current cart."
 msgstr ""
+"<strong>\n"
+"                                <a class=\"o_translate_inline\" t-attf-href="
+"\"/shop/cart/?id={{id}}&amp;access_token={{access_token}}&amp;revive_method="
+"squash\">اضغط هنا</a>\n"
+"                            </strong> إذا أردت دمج عربة التسوق السابقة مع "
+"عربة التسوق الحالية."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart
@@ -541,6 +594,12 @@ msgid ""
 "                            </strong> if you want to restore your previous "
 "cart. Your current cart will be replaced with your previous cart."
 msgstr ""
+"<strong>\n"
+"                                <a class=\"o_translate_inline\" t-attf-href="
+"\"/shop/cart/?id={{id}}&amp;access_token={{access_token}}&amp;revive_method="
+"squash\">اضغط هنا</a>\n"
+"                            </strong> إذا أردت استعادة عربة التسوق السابقة. "
+"سيتم استبدال عربة التسوق الحالية بعربة التسوق السابقة الخاصة بك."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
@@ -550,12 +609,12 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_form
 msgid "<strong>No suitable delivery method could be found.</strong>"
-msgstr ""
+msgstr "<strong>لم نتمكن من العثور على طريقة توصيل مناسبة.</strong>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.total
 msgid "<strong>Total</strong>"
-msgstr ""
+msgstr "<strong>الإجمالي</strong>"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart_lines
@@ -632,6 +691,73 @@ msgid ""
 "</table>\n"
 "            "
 msgstr ""
+"<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"590\" style="
+"\"padding: 0px; background-color: white; color: #454748; border-"
+"collapse:separate;\">\n"
+"<tbody>\n"
+"    <!-- CONTENT -->\n"
+"    <tr>\n"
+"        <td align=\"center\" style=\"min-width: 590px;\">\n"
+"            <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width="
+"\"590\" style=\"min-width: 590px; background-color: white; padding: 0px 0px "
+"0px 0px; border-collapse:separate;\">\n"
+"                <tr><td valign=\"top\" style=\"font-size: 13px;\">\n"
+"                    <h1 style=\"color:#A9A9A9;\">توجد عناصر في عربة "
+"تسوقك.</h1>\n"
+"                    أترغب في إكمال عملية الشراء؟<br/><br/>\n"
+"                    <t t-if=\"object.order_line\">\n"
+"                        <t t-foreach=\"object.website_order_line\" t-as="
+"\"line\">\n"
+"                            <hr/>\n"
+"                            <table width=\"100%\">\n"
+"                                <tr>\n"
+"                                    <td style=\"padding: 10px; width:150px;\""
+">\n"
+"                                        <img t-attf-src="
+"\"/web/image/product.product/{{ line.product_id.id }}/image_128\" style="
+"\"width: 100px; height: 100px; object-fit: contain;\" alt=\"Product image\"/>"
+"\n"
+"                                    </td>\n"
+"                                    <td>\n"
+"                                        <strong t-out="
+"\"line.product_id.display_name or ''\">[FURN_7800]  مجموعة المكتب</strong><"
+"br/><t t-out=\"line.name or ''\">[FURN_7800] مجموعة المكتب مجموعة المكتب، "
+"أسود-بني: كرسي + مكتب + أدراج.</t>\n"
+"                                    </td>\n"
+"                                    <td width=\"100px\" align=\"right\">\n"
+"                                        <t t-out="
+"\"int(line.product_uom_qty) or ''\">10000</t> <t t-out="
+"\"line.product_uom_id.name or ''\">,وحدة</t>\n"
+"                                    </td>\n"
+"                                </tr>\n"
+"                            </table>\n"
+"                        </t>\n"
+"                        <hr/>\n"
+"                    </t>\n"
+"                    <div style=\"text-align: center; padding: 16px 0px 16px "
+"0px; font-size: 14px;\">\n"
+"                        <a t-attf-href=\"{{ object.get_base_url() }}/shop/"
+"cart?id={{ object.id }}&amp;access_token={{ object.access_token }}"
+"\" target=\"_blank\" t-attf-style=\"background-color: {{"
+"object.user_id.company_id.email_secondary_color or '#875A7B'}}; padding: 8px "
+"16px 8px 16px; text-decoration: none; color: {{"
+"object.user_id.company_id.email_primary_color or '#FFFFFF'}}; border-radius: "
+"5px; font-size:13px;\">\n"
+"                            الاستمرار بالطلب\n"
+"                        </a>\n"
+"                    </div>\n"
+"                    <t t-set=\"company\" t-value="
+"\"object.company_id or object.user_id.company_id or user.company_id\"/>\n"
+"                    <div style=\"text-align: center;"
+"\"><strong>شكراً لتسوقك مع <t t-out=\"company.name or ''\">My Company (San "
+"Francisco)</t>!</strong></div>\n"
+"                </td></tr>\n"
+"            </table>\n"
+"        </td>\n"
+"    </tr>\n"
+"</tbody>\n"
+"</table>\n"
+"            "
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_delivery_carrier__website_description
@@ -651,6 +777,8 @@ msgid ""
 "A detailed, formatted description to promote your product on this page. Use "
 "'/' to discover more features."
 msgstr ""
+"وصف تفصيلي منسق للترويج عن منتجك على هذه الصفحة. استخدم '/' لاستكشاف المزيد "
+"من الخصائص."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view
@@ -659,6 +787,8 @@ msgid ""
 "on                                      this page. Use '/' to discover more "
 "features."
 msgstr ""
+"وصف تفصيلي منسق للترويج عن منتجك على                                      "
+"هذه الصفحة. استخدم '/' لاستكشاف المزيد من الخصائص."
 
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.product_template_action_website
@@ -714,7 +844,7 @@ msgstr "عن البيع العابر للمنتجات"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/checkout_page_option.xml:0
 msgid "Accept Terms"
-msgstr ""
+msgstr "قبول الشروط"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_image_view_kanban
@@ -769,13 +899,13 @@ msgstr "إجراء مطلوب"
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 #: code:addons/website_sale/static/src/website_builder/products_design_panel.xml:0
 msgid "Actions"
-msgstr ""
+msgstr "الإجراءات"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_product_view_form_easy_inherit_website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view
 msgid "Add Media"
-msgstr ""
+msgstr "إضافة وسائل التواصل الاجتماعي"
 
 #. module: website_sale
 #. odoo-javascript
@@ -804,6 +934,8 @@ msgid ""
 "Add a strikethrough price to your /shop and product pages for comparison "
 "purposes.It will not be displayed if pricelists apply."
 msgstr ""
+"قم بإضافة سعر مشطوب إلى المتجر /shop وصفحات المنتجات لأغراض المقارنة. لن يتم "
+"عرضه إذا تم تطبيق قائمة الأسعار."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -877,7 +1009,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_sale.filter_select_attributes
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view
 msgid "All"
-msgstr ""
+msgstr "الكل"
 
 #. module: website_sale
 #. odoo-javascript
@@ -897,17 +1029,17 @@ msgstr "كافة المنتجات"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "All products"
-msgstr ""
+msgstr "كافة المنتجات"
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__ecommerce_access__everyone
 msgid "All users"
-msgstr ""
+msgstr "كافة المستخدمين"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_delivery_carrier_form_website_delivery
 msgid "All websites"
-msgstr ""
+msgstr "كافة المواقع الإلكترونية"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -915,6 +1047,8 @@ msgid ""
 "Allow customers to pick up their online purchases at your store and pay in "
 "person"
 msgstr ""
+"أتح للعملاء إمكانية استلام المشتريات التي قاموا بشرائها عبر الإنترنت من "
+"متجرك والدفع شخصياً"
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_pricelist__selectable
@@ -960,7 +1094,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_ribbon_options_plugin.js:0
 msgid "Are you sure you want to delete this ribbon?"
-msgstr ""
+msgstr "هل أنت متأكد من أنك ترغب في حذف هذه الشريطة؟"
 
 #. module: website_sale
 #. odoo-javascript
@@ -993,7 +1127,7 @@ msgstr "الخصائص"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_multimedia_augmented_reality
 msgid "Augmented Reality Tools"
-msgstr ""
+msgstr "أدوات الواقع المُعزز"
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_image_ratio__auto
@@ -1021,22 +1155,22 @@ msgstr "متوسط التقييم"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website_checkout_step__back_button_label
 msgid "Back Button Label"
-msgstr ""
+msgstr "عنوان زر الرجوع"
 
 #. module: website_sale
 #: model:website.checkout.step,back_button_label:website_sale.checkout_step_delivery
 msgid "Back to address"
-msgstr ""
+msgstr "الرجوع إلى العنوان"
 
 #. module: website_sale
 #: model:website.checkout.step,back_button_label:website_sale.checkout_step_cart
 msgid "Back to cart"
-msgstr ""
+msgstr "العودة إلى عربة التسوق"
 
 #. module: website_sale
 #: model:website.checkout.step,back_button_label:website_sale.checkout_step_extra
 msgid "Back to extra info"
-msgstr ""
+msgstr "العودة إلى المعلومات الإضافية"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1048,7 +1182,7 @@ msgstr "الخلفية"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_ribbon__bg_color
 msgid "Background Color"
-msgstr ""
+msgstr "لون الخلفية"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1088,7 +1222,7 @@ msgstr "الوحدات الأساسية"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets_bathroom
 msgid "Bathroom Cabinets"
-msgstr ""
+msgstr "خزائن الحمام"
 
 #. module: website_sale
 #: model:res.country.group,name:website_sale.benelux
@@ -1103,7 +1237,7 @@ msgstr ""
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures_beds
 msgid "Beds"
-msgstr ""
+msgstr "الأسرّة"
 
 #. module: website_sale
 #: model:product.pricelist,name:website_sale.list_benelux
@@ -1126,7 +1260,7 @@ msgstr "الفوترة"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.billing_address_list
 msgid "Billing address"
-msgstr ""
+msgstr "عنوان الفوترة"
 
 #. module: website_sale
 #. odoo-python
@@ -1172,7 +1306,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Bordered"
-msgstr ""
+msgstr "محاط بحدود"
 
 #. module: website_sale
 #. odoo-python
@@ -1184,7 +1318,7 @@ msgstr "صندوق"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Boxed"
-msgstr ""
+msgstr "في صندوق"
 
 #. module: website_sale
 #. odoo-python
@@ -1208,7 +1342,7 @@ msgstr "رابط URL للزر "
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__website_sale_contact_us_button_url
 msgid "Button Url"
-msgstr ""
+msgstr "رابط URL للزر"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1231,7 +1365,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
 msgid "Cabinet with Doors"
-msgstr ""
+msgstr "خزانة بأبواب"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets
@@ -1309,6 +1443,8 @@ msgid ""
 "Categories are used to browse your products through the\n"
 "                touchscreen interface."
 msgstr ""
+"تستخدم الفئات للتصفح عبر منتجاتك من خلال\n"
+"                واجهة شاشات اللمس."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_category_extra_link
@@ -1327,7 +1463,7 @@ msgstr "الفئة"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__website_footer
 msgid "Category Footer"
-msgstr ""
+msgstr "تذييل الفئات"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.dynamic_filter_template_product_public_category_default
@@ -1344,7 +1480,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.filmstrip_categories
 msgid "Category image"
-msgstr ""
+msgstr "صورة الفئة"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_category_extra_link
@@ -1354,7 +1490,7 @@ msgstr "الفئة:"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_lamps_ceiling
 msgid "Ceiling Lamps"
-msgstr ""
+msgstr "مصابيح السقف"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1383,17 +1519,17 @@ msgstr "الكراسي"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_lamps_chandelier
 msgid "Chandeliers"
-msgstr ""
+msgstr "الثريات"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_method
 msgid "Change location"
-msgstr ""
+msgstr "تغيير الموقع"
 
 #. module: website_sale
 #: model:website.checkout.step,main_button_label:website_sale.checkout_step_delivery
 msgid "Checkout"
-msgstr ""
+msgstr "الدفع والخروج"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1422,7 +1558,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
 msgid "Choose a pick-up point"
-msgstr ""
+msgstr "قم بتحديد نقطة استلام"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1435,14 +1571,14 @@ msgstr ""
 #: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
 #: code:addons/website_sale/static/src/js/location_selector/map_container/map_container.js:0
 msgid "Choose this location"
-msgstr ""
+msgstr "اختر هذا الموقع"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/client_actions/configurator/productPageSelectionScreen.xml:0
 #: code:addons/website_sale/static/src/js/client_actions/configurator/shopPageSelectionScreen.xml:0
 msgid "Choose your favorite"
-msgstr ""
+msgstr "اختر المفضل لديك"
 
 #. module: website_sale
 #: model:product.pricelist,name:website_sale.list_christmas
@@ -1453,13 +1589,13 @@ msgstr "عيد الميلاد المجيد"
 #. odoo-python
 #: code:addons/website_sale/const.py:0
 msgid "Classic"
-msgstr ""
+msgstr "كلاسيكي"
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/const.py:0
 msgid "Classic Grid"
-msgstr ""
+msgstr "الشبكة الكلاسيكية"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.o_wsale_offcanvas
@@ -1470,12 +1606,12 @@ msgstr "مسح عوامل التصفية"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "Clear search for this category"
-msgstr ""
+msgstr "مسح البحث لهذه الفئة"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__module_website_sale_collect
 msgid "Click & Collect"
-msgstr ""
+msgstr "انقر للتحصيل"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -1507,7 +1643,7 @@ msgstr "اضغط على هذا الزر حتى يتمكن عملاؤك من رؤ
 #: code:addons/website_sale/static/src/js/client_actions/configurator/productPageSelectionScreen.xml:0
 #: code:addons/website_sale/static/src/js/client_actions/configurator/shopPageSelectionScreen.xml:0
 msgid "Click to select"
-msgstr ""
+msgstr "انقر للاختيار"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1522,13 +1658,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_sale.o_wsale_offcanvas
 #: model_terms:ir.ui.view,arch_db:website_sale.quick_reorder_sidebar
 msgid "Close"
-msgstr ""
+msgstr "إغلاق"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/location_selector/location_schedule/location_schedule.js:0
 msgid "Closed"
-msgstr ""
+msgstr "مغلق"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1540,12 +1676,12 @@ msgstr "إخفاء الفئة المتكررة"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Collapse sidebar sections"
-msgstr ""
+msgstr "تصغير إجراءات الشريط الجانبي"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_collapsible
 msgid "Collapsible Boxes"
-msgstr ""
+msgstr "صناديق يمكن تصغيرها"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1575,7 +1711,7 @@ msgstr "الأعمدة"
 #. module: website_sale
 #: model:ir.ui.menu,name:website_sale.menu_product_combos
 msgid "Combo Choices"
-msgstr ""
+msgstr "خيارات التركيبات"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1629,7 +1765,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
 msgid "Conference Chair"
-msgstr ""
+msgstr "كرسي مؤتمرات"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_res_config_settings
@@ -1663,7 +1799,7 @@ msgstr ""
 #: model:website.checkout.step,main_button_label:website_sale.checkout_step_extra
 #: model:website.checkout.step,main_button_label:website_sale.checkout_step_payment
 msgid "Confirm"
-msgstr ""
+msgstr "تأكيد"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.navigation_buttons
@@ -1673,7 +1809,7 @@ msgstr "تأكيد الطلب"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment
 msgid "Confirm order"
-msgstr ""
+msgstr "تأكيد الطلب"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__confirmation_email_template_id
@@ -1720,7 +1856,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Content Width"
-msgstr ""
+msgstr "عرض المحتوى"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_feed_form
@@ -1758,7 +1894,7 @@ msgstr "إنشاء"
 #. module: website_sale
 #: model:ir.model,website_form_label:website_sale.model_res_partner
 msgid "Create a Customer"
-msgstr ""
+msgstr "Create a Customer"
 
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.product_template_action_website
@@ -1783,6 +1919,8 @@ msgid ""
 "Created in 2021, the company is young and dynamic. Discover the composition "
 "of the team and their skills."
 msgstr ""
+"أُنشئت الشركة في عام 2021، وهي شركة يافعة ومفعمة بالحيوية. تعرف على تشكيلة "
+"الفريق ومهارات كل فرد منهم."
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_feed__create_date
@@ -1851,7 +1989,7 @@ msgstr "العملاء"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
 msgid "Customizable Desk"
-msgstr ""
+msgstr "مكتب قابل للتخصيص"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -1867,7 +2005,7 @@ msgstr "تخصيص قوالب البريد الإلكتروني"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product
 msgid "DROP BUILDING BLOCKS HERE TO MAKE THEM AVAILABLE ACROSS ALL PRODUCTS"
-msgstr ""
+msgstr "قم بإفلات الكتل الإنشائية هنا لجعلها متاحة لكافة المنتجات"
 
 #. module: website_sale
 #. odoo-javascript
@@ -1924,7 +2062,7 @@ msgstr "تعريف فئة جديدة"
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.product_ribbon_action
 msgid "Define a new ribbon"
-msgstr ""
+msgstr "تحديد شريطة جديدة"
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_ribbon__assign
@@ -1948,7 +2086,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_ribbon_options.xml:0
 msgid "Delete Ribbon"
-msgstr ""
+msgstr "حذف الشريطة"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address_on_checkout
@@ -1960,12 +2098,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_sale.template_footer_website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.total
 msgid "Delivery"
-msgstr ""
+msgstr "التوصيل"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address_on_checkout
 msgid "Delivery &amp; Billing"
-msgstr ""
+msgstr "التوصيل والفوترة"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_sale_order__amount_delivery
@@ -1975,22 +2113,22 @@ msgstr "ميلغ التوصيل"
 #. module: website_sale
 #: model:ir.ui.menu,name:website_sale.menu_ecommerce_delivery
 msgid "Delivery Methods"
-msgstr ""
+msgstr "طرق التوصيل"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_address_list
 msgid "Delivery address"
-msgstr ""
+msgstr "عنوان التوصيل"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_services_delivery_and_installation
 msgid "Delivery and Installation"
-msgstr ""
+msgstr "التوصيل والتركيب"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_form
 msgid "Delivery method"
-msgstr ""
+msgstr "طريقة التوصيل"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2021,7 +2159,7 @@ msgstr "الوصف للموقع الإلكتروني"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_services_design_and_planning
 msgid "Design and Planning"
-msgstr ""
+msgstr "التصميم والتخطيط"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_category_template
@@ -2031,7 +2169,7 @@ msgstr ""
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_lamps_desk
 msgid "Desk Lamps"
-msgstr ""
+msgstr "المصابيح المكتبية"
 
 #. module: website_sale
 #. odoo-python
@@ -2056,7 +2194,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "Details"
-msgstr ""
+msgstr "التفاصيل"
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_product__website_sequence
@@ -2084,7 +2222,7 @@ msgstr "معطل (الشراء كضيف)"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.coupon_form
 msgid "Discount code..."
-msgstr ""
+msgstr "كود خصم..."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -2095,7 +2233,7 @@ msgstr "الخصومات، والولاء، وبطاقات الهدايا"
 #: model_terms:ir.ui.view,arch_db:website_sale.s_mega_menu_images_subtitles
 #: model_terms:ir.ui.view,arch_db:website_sale.s_mega_menu_little_icons
 msgid "Discover our team"
-msgstr ""
+msgstr "اعرف المزيد عن فريقنا"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2209,7 +2347,7 @@ msgstr "لا تملك صلاحيات الوصول. تخط هذه البيانا�
 #: code:addons/website_sale/models/product_document.py:0
 msgid ""
 "Documents shown on product page cannot be restricted to a specific variant"
-msgstr ""
+msgstr "المنتجات المعروضة على صفحة المنتجات لا يمكن تقييدها لمتغير محدد."
 
 #. module: website_sale
 #. odoo-javascript
@@ -2223,6 +2361,8 @@ msgid ""
 "Drag building blocks here to customize the footer for\n"
 "                                    \""
 msgstr ""
+"قم بسحب الكتل البرمجية الإنشائية إلى هنا لتخصيص تذييل\n"
+"                                    \""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -2230,6 +2370,8 @@ msgid ""
 "Drag building blocks here to customize the header for\n"
 "                                        \""
 msgstr ""
+"قم بسحب الكتل البرمجية الإنشائية إلى هنا لتخصيص ترويسة\n"
+"                                        \""
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -2268,7 +2410,7 @@ msgstr "المعلومات الإضافية للتجارة الإلكتروني�
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_document_form
 msgid "E-commerce"
-msgstr ""
+msgstr "المتجر الإلكتروني"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_pricelist__code
@@ -2283,23 +2425,23 @@ msgstr "يورو"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.website_sale_pricelist_form_view
 msgid "Ecommerce"
-msgstr ""
+msgstr "المتجر الإلكتروني"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__ecommerce_access
 #: model:ir.model.fields,field_description:website_sale.field_website__ecommerce_access
 msgid "Ecommerce Access"
-msgstr ""
+msgstr "الوصول إلى المتجر الإلكتروني"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view
 msgid "Ecommerce Description"
-msgstr ""
+msgstr "وصف المتجر الإلكتروني"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view
 msgid "Ecommerce Shop"
-msgstr ""
+msgstr "المتجر الإلكتروني"
 
 #. module: website_sale
 #: model:mail.template,name:website_sale.mail_template_sale_cart_recovery
@@ -2316,7 +2458,7 @@ msgstr "تحرير"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "Edit address"
-msgstr ""
+msgstr "تحرير العنوان"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2327,7 +2469,7 @@ msgstr "قم بتحرير سعر هذا المنتج من خلال النقر ع
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_multimedia_education
 msgid "Education Tools"
-msgstr ""
+msgstr "الأدوت التعليمية"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -2343,7 +2485,7 @@ msgstr "Embed Code"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/product_template_attribute_line/product_template_attribute_line.js:0
 msgid "Enter a customized value"
-msgstr ""
+msgstr "أضف قيمة مخصصة"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2377,7 +2519,7 @@ msgstr "معلومات إضافية"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Extra Media"
-msgstr ""
+msgstr "الوسائط الإضافية"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_product__product_template_image_ids
@@ -2389,7 +2531,7 @@ msgstr "وسائط منتج إضافية"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/checkout_page_option.xml:0
 msgid "Extra Step"
-msgstr ""
+msgstr "خطوة إضافية"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_product__product_variant_image_ids
@@ -2404,7 +2546,7 @@ msgstr "وسائط متغيرات إضافية"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.extra_info
 msgid "Extra info"
-msgstr ""
+msgstr "معلومات إضافية"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2443,7 +2585,7 @@ msgstr "اسم الحقل"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_drawers_file
 msgid "File Drawers"
-msgstr ""
+msgstr "أدراج الملفات"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2451,7 +2593,7 @@ msgstr ""
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "Filters"
-msgstr ""
+msgstr "عوامل التصفية"
 
 #. module: website_sale
 #. odoo-python
@@ -2459,6 +2601,7 @@ msgstr ""
 msgid ""
 "Final price may vary based on selection. Tax will be calculated at checkout."
 msgstr ""
+"قد يختلف السعر النهائي بناءً على اختيارك. سيتم احتساب الضريبة عند مرحلة الدفع."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -2504,24 +2647,24 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Floating"
-msgstr ""
+msgstr "عائمة"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Floating sticky Toolbar"
-msgstr ""
+msgstr "شريط الأدوات العائم"
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/const.py:0
 msgid "Focused"
-msgstr ""
+msgstr "تفصيلي"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_foldable
 msgid "Foldable Desks"
-msgstr ""
+msgstr "مكاتب قابلة للطي"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -2554,7 +2697,7 @@ msgstr ""
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_bins_storage
 msgid "Food Storage Bins"
-msgstr ""
+msgstr "حاويات حفظ الطعام"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_pricelist_item_form
@@ -2578,7 +2721,7 @@ msgstr "من الموقع الإلكتروني"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Full"
-msgstr ""
+msgstr "كامل"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2622,13 +2765,13 @@ msgstr ""
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_gaming
 msgid "Gaming Desks"
-msgstr ""
+msgstr "طاولات الألعاب"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_design_panel.xml:0
 msgid "Gap"
-msgstr ""
+msgstr "الفجوة"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2639,7 +2782,7 @@ msgstr ""
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_glass
 msgid "Glass Desks"
-msgstr ""
+msgstr "طاولات المكتب الزجاجية"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2686,7 +2829,7 @@ msgstr "الشبكة"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__shop_gap
 msgid "Grid-gap on the shop"
-msgstr ""
+msgstr "توجد ثغرة في الشبكة لدى المتجر"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_ir_http
@@ -2721,7 +2864,7 @@ msgstr "مخفي"
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Hide"
-msgstr ""
+msgstr "إخفاء"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__prevent_zero_price_sale
@@ -2738,7 +2881,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Hide all filters"
-msgstr ""
+msgstr "إخفاء كافة الفلاتر"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2751,7 +2894,7 @@ msgstr ""
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__product_attribute__preview_variants__hover
 msgid "Hover"
-msgstr ""
+msgstr "Hover"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2762,7 +2905,7 @@ msgstr ""
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website_checkout_step__step_href
 msgid "Href"
-msgstr ""
+msgstr "Href"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_image_view_kanban
@@ -2850,6 +2993,9 @@ msgid ""
 "field or make it selectable.Otherwise, the pricelist will not apply to any "
 "website."
 msgstr ""
+"إذا كنت ترغب في أن تكون قائمة الأسعار متاحة على الموقع الإلكتروني، عليك "
+"تعبئة هذا الحقل أو جعلها قابلة للتحديد. وإلا، فلن تنطبق قائمة الأسعار على أي "
+"موقع إلكتروني."
 
 #. module: website_sale
 #. odoo-javascript
@@ -2888,7 +3034,7 @@ msgstr "صورة 512"
 #. odoo-python
 #: code:addons/website_sale/const.py:0
 msgid "Image Grid"
-msgstr ""
+msgstr "شبكة ضبط الصورة"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_product_image_form
@@ -2913,7 +3059,7 @@ msgstr ""
 #: code:addons/website_sale/static/src/website_builder/products_design_panel.xml:0
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Images"
-msgstr ""
+msgstr "الصور"
 
 #. module: website_sale
 #. odoo-javascript
@@ -2943,6 +3089,7 @@ msgstr ""
 msgid ""
 "Instantly created variants are available for selection from your /shop page."
 msgstr ""
+"يمكنك الاختيار من بين المتغيرات التي تم إنشاؤها على الفور من صفحة /shop."
 
 #. module: website_sale
 #. odoo-python
@@ -2966,7 +3113,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_sale/controllers/main.py:0
 msgid "Invalid video URL provided."
-msgstr ""
+msgstr "رابط الفيديو المقدم غير صالح."
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_cols_order__inverse
@@ -3015,6 +3162,8 @@ msgid ""
 "It seems that there is already a transaction for your order; you can't "
 "change the delivery method anymore."
 msgstr ""
+"يبدو أنه توجد معاملة في طلبك بالفعل، ولذلك، لم يعد بإمكانك تغيير طريقة "
+"التوصيل بعد الآن"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_account_move
@@ -3024,12 +3173,12 @@ msgstr "قيد اليومية"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets_kitchen
 msgid "Kitchen Cabinets"
-msgstr ""
+msgstr "خزائن المطبخ"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_drawers_kitchen
 msgid "Kitchen Drawer Units"
-msgstr ""
+msgstr "وحدات خزائن المطبخ"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_digest_digest__kpi_website_sale_total_value
@@ -3072,7 +3221,7 @@ msgstr ""
 #: code:addons/website_sale/static/src/website_builder/dynamic_snippet_category_options.xml:0
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Large"
-msgstr ""
+msgstr "كبير"
 
 #. module: website_sale
 #. odoo-python
@@ -3084,13 +3233,13 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_sale/const.py:0
 msgid "Large Image"
-msgstr ""
+msgstr "صورة كبيرة"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Large Images"
-msgstr ""
+msgstr "صور كبيرة"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.sale_report_view_search_website
@@ -3143,7 +3292,7 @@ msgstr "العام الماضي"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_bins_laundry
 msgid "Laundry Bins"
-msgstr ""
+msgstr "سلال الغسيل"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3196,18 +3345,18 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
 msgid "List view"
-msgstr ""
+msgstr "عرض القائمة"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
 msgid "Loading..."
-msgstr ""
+msgstr "جار التحميل..."
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__ecommerce_access__logged_in
 msgid "Logged in users"
-msgstr ""
+msgstr "المستخدمون المسجلون"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.quick_reorder_button
@@ -3217,18 +3366,18 @@ msgstr ""
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_luxury
 msgid "Luxury Boxes"
-msgstr ""
+msgstr "صناديق بطابع فاخر"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website_checkout_step__main_button_label
 msgid "Main Button Label"
-msgstr ""
+msgstr "عنوان الزر الرئيسي"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Main Image"
-msgstr ""
+msgstr "الصورة الرئيسية"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -3254,19 +3403,19 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
 msgid "Map view"
-msgstr ""
+msgstr "عرض الخريطة"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/dynamic_snippet_category_options.xml:0
 #: code:addons/website_sale/static/src/website_builder/product_image_option.xml:0
 msgid "Media"
-msgstr ""
+msgstr "الإعلام"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets_medicine
 msgid "Medicine Cabinets"
-msgstr ""
+msgstr "خزائن الأدوية"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3280,7 +3429,7 @@ msgstr "متوسط"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_mega_menu_menu_image_menu
 msgid "Mega menu default image"
-msgstr ""
+msgstr "الصورة الافتراضية للقائمة الكبيرة"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_feed__message_has_error
@@ -3299,7 +3448,7 @@ msgstr "الرسائل"
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Mobile"
-msgstr ""
+msgstr "الهاتف المحمول"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3316,7 +3465,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.accordion_more_information
 msgid "More Information"
-msgstr ""
+msgstr "More Information"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3392,7 +3541,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_sale/models/product_public_category.py:0
 msgid "New"
-msgstr ""
+msgstr "جديد"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_ribbon_form_view
@@ -3412,7 +3561,7 @@ msgstr "منتج جديد"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
 msgid "New address"
-msgstr ""
+msgstr "عنوان جديد"
 
 #. module: website_sale
 #: model:product.ribbon,name:website_sale.new_ribbon
@@ -3437,7 +3586,7 @@ msgstr "أحدث المنتجات"
 #: code:addons/website_sale/static/src/xml/website_sale_image_viewer.xml:0
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
 msgid "Next"
-msgstr ""
+msgstr "التالي"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3448,7 +3597,7 @@ msgstr "التالي (السهم الأيسر)"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_drawers_nightstand
 msgid "Nightstand Drawers"
-msgstr ""
+msgstr "أدراج طاولة بجانب السرير"
 
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.action_view_abandoned_tree
@@ -3470,7 +3619,7 @@ msgstr "لم يتم تحديد منتج"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "No product defined in this category."
-msgstr ""
+msgstr "لا توجد منتجات محددة في هذه الفئة."
 
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.website_sale_visitor_product_action
@@ -3481,7 +3630,7 @@ msgstr "لم يقم هذا الزائر بعرض أي منتج بعد"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
 msgid "No result"
-msgstr ""
+msgstr "لا توجد نتائج"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -3512,7 +3661,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_sale/models/sale_order.py:0
 msgid "No shipping method is selected."
-msgstr ""
+msgstr "لم يتم تحديد طريقة شحن."
 
 #. module: website_sale
 #. odoo-javascript
@@ -3533,7 +3682,7 @@ msgstr "غير منشور"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/product/product.xml:0
 msgid "Not available for sale"
-msgstr ""
+msgstr "غير متوفر للبيع"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3573,7 +3722,7 @@ msgstr "عدد أعمدة الشبكة في المتجر"
 #: model:ir.model.fields,help:website_sale.field_product_feed__message_needaction_counter
 #: model:ir.model.fields,help:website_sale.field_product_template__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "عدد الرسائل التي تتطلب اتخاذ إجراء"
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_feed__message_has_error_counter
@@ -3590,12 +3739,12 @@ msgstr "عدد المنتجات في الشبكة على المتجر"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Off-screen Menu"
-msgstr ""
+msgstr "قائمة خارجية"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_office
 msgid "Office Desks"
-msgstr ""
+msgstr "الطاولات المكتبية"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3616,7 +3765,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_pricelist_item_form
 msgid "On the website original price is crossed out."
-msgstr ""
+msgstr "تم شطب السعر الأصلي على الموقع الإلكتروني."
 
 #. module: website_sale
 #. odoo-python
@@ -3649,7 +3798,7 @@ msgstr "تحليل المبيعات عبر الإنترنت"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/client_actions/configurator/shopPageSelectionScreen.xml:0
 msgid "Online catalog"
-msgstr ""
+msgstr "كتالوج أونلاين"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_sale_order__only_services
@@ -3694,7 +3843,7 @@ msgstr "التجارة الإلكترونية مفتوحة المصدر"
 #: code:addons/website_sale/static/src/js/location_selector/location/location.js:0
 #: code:addons/website_sale/static/src/js/location_selector/map_container/map_container.js:0
 msgid "Opening hours"
-msgstr ""
+msgstr "ساعات العمل"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_image_view_kanban
@@ -3724,7 +3873,7 @@ msgstr "أو قم بمسحي باستخدام تطبيقك البنكي."
 #: model:website.checkout.step,name:website_sale.checkout_step_cart
 #: model_terms:ir.ui.view,arch_db:website_sale.checkout_layout
 msgid "Order"
-msgstr ""
+msgstr "الطلب"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
@@ -3747,7 +3896,7 @@ msgstr "بنود الطلبات المعروضة على الموقع الإلك�
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart
 msgid "Order summary"
-msgstr ""
+msgstr "ملخص الطلب"
 
 #. module: website_sale
 #: model:ir.actions.act_window,name:website_sale.action_orders_ecommerce
@@ -3791,7 +3940,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.packaging_title
 msgid "Packaging"
-msgstr ""
+msgstr "التعبئة"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_website_page
@@ -3829,12 +3978,12 @@ msgstr "الأساسي والفرعي"
 #. odoo-python
 #: code:addons/website_sale/controllers/main.py:0
 msgid "Pay now"
-msgstr ""
+msgstr "ادفع الآن"
 
 #. module: website_sale
 #: model:website.checkout.step,name:website_sale.checkout_step_payment
 msgid "Payment"
-msgstr ""
+msgstr "الدفع"
 
 #. module: website_sale
 #: model:ir.ui.menu,name:website_sale.menu_ecommerce_payment_methods
@@ -3849,7 +3998,7 @@ msgstr "مزودي الدفع"
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_payment_token
 msgid "Payment Token"
-msgstr ""
+msgstr "رمز الدفع"
 
 #. module: website_sale
 #: model:ir.ui.menu,name:website_sale.menu_ecommerce_payment_tokens
@@ -3865,7 +4014,7 @@ msgstr "معاملات الدفع"
 #. odoo-python
 #: code:addons/website_sale/controllers/payment.py:0
 msgid "Payment is already being processed."
-msgstr ""
+msgstr "تتم معالجة المدفوعات بالفعل."
 
 #. module: website_sale
 #. odoo-python
@@ -3877,13 +4026,13 @@ msgstr "نظام يفتح عن طريق الدواسات"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/website_sale_form_editor.js:0
 msgid "Phone Number"
-msgstr ""
+msgstr "رقم الهاتف"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
 msgid "Pickup Location"
-msgstr ""
+msgstr "موقع الاستلام"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3945,7 +4094,7 @@ msgstr "منع بيع المنتجات التي سعرها صفر"
 #: code:addons/website_sale/static/src/xml/website_sale_image_viewer.xml:0
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
 msgid "Previous"
-msgstr ""
+msgstr "السابق"
 
 #. module: website_sale
 #. odoo-javascript
@@ -3996,7 +4145,7 @@ msgstr "قائمة الأسعار المتاحة لهذا المتجر الإل�
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.total
 msgid "Price will be updated after choosing a delivery method"
-msgstr ""
+msgstr "سيتم تحديث السعر بعد اختيار طريقة توصيل جديدة"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_pricelist
@@ -4009,7 +4158,7 @@ msgstr "قائمه الأسعار"
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_pricelist_item
 msgid "Pricelist Rule"
-msgstr ""
+msgstr "قاعدة قائمة الأسعار"
 
 #. module: website_sale
 #: model:ir.ui.menu,name:website_sale.menu_catalog_pricelists
@@ -4069,12 +4218,12 @@ msgstr "فئة المنتج"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Product Details"
-msgstr ""
+msgstr "تفاصيل المنتج"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_document
 msgid "Product Document"
-msgstr ""
+msgstr "مستند المنتج"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_feed
@@ -4112,7 +4261,7 @@ msgstr "اسم المنتج"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/dynamic_snippet_products_option.xml:0
 msgid "Product Names"
-msgstr ""
+msgstr "أسماء المنتجات"
 
 #. module: website_sale
 #. odoo-javascript
@@ -4189,13 +4338,13 @@ msgstr "السعر المرجعي للمنتج"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_ribbon_view_tree
 msgid "Product Ribbon"
-msgstr ""
+msgstr "شريطة المنتج"
 
 #. module: website_sale
 #: model:ir.actions.act_window,name:website_sale.product_ribbon_action
 #: model:ir.ui.menu,name:website_sale.product_catalog_product_ribbons
 msgid "Product Ribbons"
-msgstr ""
+msgstr "شرائط المنتجات"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_tag
@@ -4220,7 +4369,7 @@ msgstr "بند خاصية قالب المنتج"
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_template_attribute_value
 msgid "Product Template Attribute Value"
-msgstr ""
+msgstr "قيمة خاصية قالب المنتج"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__product_tmpl_ids
@@ -4334,12 +4483,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_sale.field_product_product__publish_date
 #: model:ir.model.fields,field_description:website_sale.field_product_template__publish_date
 msgid "Publish Date"
-msgstr ""
+msgstr "تاريخ النشر"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_document__shown_on_product_page
 msgid "Publish on website"
-msgstr ""
+msgstr "النشر على الموقع الإلكتروني"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_pages_kanban_view
@@ -4352,13 +4501,13 @@ msgstr "تم النشر"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Purchase Options"
-msgstr ""
+msgstr "خيارات الشراء"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Purchase Style"
-msgstr ""
+msgstr "أسلوب الشراء"
 
 #. module: website_sale
 #. odoo-javascript
@@ -4461,12 +4610,12 @@ msgstr "المنتجات المباعة حديثاً"
 #: model:ir.actions.server,name:website_sale.dynamic_snippet_latest_viewed_products_action
 #: model:website.snippet.filter,name:website_sale.dynamic_filter_latest_viewed_products
 msgid "Recently Viewed Products (per user)"
-msgstr ""
+msgstr "المنتجات المعروضة حديثاً (لكل مستخدم)"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures_recliners
 msgid "Recliners"
-msgstr ""
+msgstr "مقاعد الاسترخاء"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_sales_order_filter_ecommerce_abondand
@@ -4486,7 +4635,7 @@ msgstr "البريد الإلكتروني للاسترجاع بانتظار ال
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_container__regular
 #: model:ir.model.fields.selection,name:website_sale.selection__website__shop_page_container__regular
 msgid "Regular"
-msgstr ""
+msgstr "منتظم"
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_cols_order__regular
@@ -4502,7 +4651,7 @@ msgstr "مهيئة للدفعات الثقيلة"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_services_relocation_and_moving
 msgid "Relocation and Moving"
-msgstr ""
+msgstr "النقل والانتقال"
 
 #. module: website_sale
 #. odoo-javascript
@@ -4537,12 +4686,12 @@ msgstr "إزالة واحد"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Render a button to show the Off-screen Menu"
-msgstr ""
+msgstr "قم بتكوين زر لإظهار القائمة خارج الشاشة"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_services_repair_and_maintenance
 msgid "Repair and Maintenance"
-msgstr ""
+msgstr "التصليح والصيانة"
 
 #. module: website_sale
 #. odoo-javascript
@@ -4556,7 +4705,7 @@ msgstr "استبدال"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_image_option.xml:0
 msgid "Replace image"
-msgstr ""
+msgstr "استبدال الصورة"
 
 #. module: website_sale
 #: model:ir.actions.server,name:website_sale.action_invalidate_cache
@@ -4577,7 +4726,7 @@ msgstr ""
 #: model:ir.model.fields,help:website_sale.field_product_template__website_id
 #: model:ir.model.fields,help:website_sale.field_website_checkout_step__website_id
 msgid "Restrict to a specific website."
-msgstr ""
+msgstr "التقييد لموقع إلكتروني محدد"
 
 #. module: website_sale
 #. odoo-python
@@ -4602,7 +4751,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Reviews"
-msgstr ""
+msgstr "التقييمات"
 
 #. module: website_sale
 #. odoo-javascript
@@ -4616,7 +4765,7 @@ msgstr "شريط"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_ribbon__name
 msgid "Ribbon Name"
-msgstr ""
+msgstr "اسم الشريطة"
 
 #. module: website_sale
 #. odoo-javascript
@@ -4636,7 +4785,7 @@ msgstr ""
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_rustic
 msgid "Rustic Boxes"
-msgstr ""
+msgstr "صناديق بطابع ريفي"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__is_seo_optimized
@@ -4721,7 +4870,7 @@ msgstr "عينة"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Search"
-msgstr ""
+msgstr "بحث"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.view_sales_order_filter_ecommerce_abondand
@@ -4732,31 +4881,31 @@ msgstr "البحث في أوامر البيع المتروكة"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Search Bar"
-msgstr ""
+msgstr "شريط البحث"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.floating_bar
 #: model_terms:ir.ui.view,arch_db:website_sale.product
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "Search Products"
-msgstr ""
+msgstr "البحث في المنتجات"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "Search globally"
-msgstr ""
+msgstr "البحث في كل مكان"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.o_wsale_offcanvas
 #: model_terms:ir.ui.view,arch_db:website_sale.product
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "Search in"
-msgstr ""
+msgstr "البحث في"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "Search {{0}} globally"
-msgstr ""
+msgstr "البحث عن {{0}} في كل مكان"
 
 #. module: website_sale
 #. odoo-javascript
@@ -4787,12 +4936,12 @@ msgstr "تحديد الكمية"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.delivery_method
 msgid "Select a location"
-msgstr ""
+msgstr "اختر موقعاً"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.website_sale_pricelist_form_view
 msgid "Select a website"
-msgstr ""
+msgstr "قم بتحديد موقع إلكتروني"
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_feed__lang_id
@@ -4836,7 +4985,7 @@ msgstr "اسم محسنات محرك البحث"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Separators"
-msgstr ""
+msgstr "الفواصل"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_image__sequence
@@ -4896,7 +5045,7 @@ msgstr "المتجر - تم التأكيد"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment
 msgid "Shop - Select Payment Method"
-msgstr ""
+msgstr "المتجر - اختر طريقة الدفع"
 
 #. module: website_sale
 #. odoo-python
@@ -4946,7 +5095,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.res_config_settings_view_form
 msgid "Shop, products, cart and wishlist visibility"
-msgstr ""
+msgstr "ظهور المتجر والمنتجات وعربة التسوق وقائمة الأمنيات"
 
 #. module: website_sale
 #. odoo-javascript
@@ -4958,7 +5107,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/checkout_page_option.xml:0
 msgid "Show B2B Fields"
-msgstr ""
+msgstr "إظهار حقول B2B"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_public_category__show_category_description
@@ -4980,12 +5129,12 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/website_sale_show_empty_option.xml:0
 msgid "Show Empty"
-msgstr ""
+msgstr "إظهار الفارغ"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_attribute__is_thumbnail_visible
 msgid "Show Thumbnails"
-msgstr ""
+msgstr "إظهار الصور المصغرة"
 
 #. module: website_sale
 #. odoo-javascript
@@ -5004,18 +5153,18 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Show filters into Sidebar"
-msgstr ""
+msgstr "إظهار الفلاتر في الشريط الجانبي"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Show into Sidebar"
-msgstr ""
+msgstr "إظهار في الشريط الجانبي"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_document_search
 msgid "Show on Ecommerce"
-msgstr ""
+msgstr "إظهار في المتجر الإلكتروني"
 
 #. module: website_sale
 #. odoo-javascript
@@ -5027,7 +5176,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/dynamic_snippet_products_option.xml:0
 msgid "Show variants"
-msgstr ""
+msgstr "إظهار المتغيرات"
 
 #. module: website_sale
 #. odoo-javascript
@@ -5041,7 +5190,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Sidebar"
-msgstr ""
+msgstr "الشريط الجانبي"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.address
@@ -5091,7 +5240,7 @@ msgstr "صغير"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures_sofas
 msgid "Sofas"
-msgstr ""
+msgstr "الأرائك"
 
 #. module: website_sale
 #: model:product.ribbon,name:website_sale.sold_out_ribbon
@@ -5102,12 +5251,12 @@ msgstr "نفدت الكمية"
 #. odoo-python
 #: code:addons/website_sale/controllers/main.py:0
 msgid "Sorry, we are unable to ship your order."
-msgstr ""
+msgstr "عذراً، لم نتمكن من شحن طلبك."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.sort
 msgid "Sort By"
-msgstr ""
+msgstr "الفرز حسب"
 
 #. module: website_sale
 #. odoo-javascript
@@ -5140,17 +5289,17 @@ msgstr "حدد الوحدة"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_mega_menu_menus_logos
 msgid "Spring collection has arrived!"
-msgstr ""
+msgstr "لقد وصلت تشكيلة الربيع!"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_stackable
 msgid "Stackable Boxes"
-msgstr ""
+msgstr "صناديق قابلة للتكديس"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_standing
 msgid "Standing Desks"
-msgstr ""
+msgstr "مكاتب الوقوف"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.sale_report_view_search_website
@@ -5165,7 +5314,7 @@ msgstr "البقاء في صفحة المنتج"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_cabinets_storage
 msgid "Storage Cabinets"
-msgstr ""
+msgstr "خزائن التخزين"
 
 #. module: website_sale
 #. odoo-javascript
@@ -5185,7 +5334,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.total
 msgid "Subtotal"
-msgstr ""
+msgstr "الناتج الفرعي"
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_product__alternative_product_ids
@@ -5206,7 +5355,7 @@ msgstr "الملحقات المقترحة"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.suggested_products_list
 msgid "Suggested accessories"
-msgstr ""
+msgstr "الاكسسوارات المقترحة"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view
@@ -5217,7 +5366,7 @@ msgstr "الملحقات المقترحة في عربة التجارة الإل�
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Tabs"
-msgstr ""
+msgstr "علامات التبويب"
 
 #. module: website_sale
 #. odoo-javascript
@@ -5256,7 +5405,7 @@ msgstr "شامل أو غير شامل الضريبة، بناءً على تهي�
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.total
 msgid "Taxes"
-msgstr ""
+msgstr "الضرائب"
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_product__variants_default_code
@@ -5275,7 +5424,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 msgid "Terms and Conditions"
-msgstr ""
+msgstr "الشروط والأحكام"
 
 #. module: website_sale
 #. odoo-javascript
@@ -5292,7 +5441,7 @@ msgstr ""
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_ribbon__text_color
 msgid "Text Color"
-msgstr ""
+msgstr "لون النص"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.confirmation
@@ -5314,13 +5463,14 @@ msgstr "رمز الوصول غير صالح."
 #: model:website.snippet.filter,help:website_sale.dynamic_filter_latest_viewed_products
 msgid ""
 "The building block will remain empty until the user visits a product page."
-msgstr ""
+msgstr "ستظل الكتلة البرمجية الإنشائية فارغة حتى يزور المستخدم صفحة المنتج."
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/controllers/payment.py:0
 msgid "The cart has already been paid. Please refresh the page."
 msgstr ""
+"لقد تم دفع قيمة العناصر الموجودة في عربة التسوق. يرجى إعادة تحميل الصفحة."
 
 #. module: website_sale
 #. odoo-python
@@ -5335,6 +5485,8 @@ msgid ""
 "The company of the website you are trying to sell from (%(website_company)s) "
 "is different than the one you want to use (%(company)s)"
 msgstr ""
+"شركة الموقع الإلكتروني التي تحاول البيع منها (%(website_company)s) تختلف عن "
+"تلك التي ترغب باستخدامها (%(company)s)"
 
 #. module: website_sale
 #. odoo-python
@@ -5355,14 +5507,14 @@ msgstr "رابطURL الكامل للوصول إلى المستند من خلا�
 #: model:ir.model.fields,help:website_sale.field_product_template__website_absolute_url
 #: model:ir.model.fields,help:website_sale.field_website_checkout_step__website_absolute_url
 msgid "The full absolute URL to access the document through the website."
-msgstr ""
+msgstr "رابطURL الكامل المطلق للوصول إلى المستند من خلال الموقع الإلكتروني."
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_delivery_carrier__website_url
 #: model:ir.model.fields,help:website_sale.field_product_template__website_url
 #: model:ir.model.fields,help:website_sale.field_website_checkout_step__website_url
 msgid "The full relative URL to access the document through the website."
-msgstr ""
+msgstr "رابطURL الكامل ذو الصلة للوصول إلى المستند من خلال الموقع الإلكتروني."
 
 #. module: website_sale
 #. odoo-python
@@ -5396,7 +5548,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_sale/controllers/payment.py:0
 msgid "The order has been cancelled."
-msgstr ""
+msgstr "لقد تم إلغاء الطلب."
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_product__public_categ_ids
@@ -5415,7 +5567,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_sale.s_mega_menu_images_subtitles
 #: model_terms:ir.ui.view,arch_db:website_sale.s_mega_menu_little_icons
 msgid "The team"
-msgstr ""
+msgstr "الفريق"
 
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.action_view_abandoned_tree
@@ -5476,17 +5628,17 @@ msgstr "لا توجد طلبات غير مدفوعة من الموقع الإل�
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/location_selector/map_container/map_container.js:0
 msgid "There was an error loading the map"
-msgstr ""
+msgstr "حدث خطأ أثناء تحميل الخريطة"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.alternative_products
 msgid "These other products might interest you"
-msgstr ""
+msgstr "قد تكون مهتماً بهذه المنتجات الأخرى"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.accordion_more_information
 msgid "This content will be shared across all product pages."
-msgstr ""
+msgstr "سيتم مشاركة هذا المحتوى عبر كافة صفحات المنتجات."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart
@@ -5534,7 +5686,7 @@ msgstr "لم يعد هذا الكود الترويجي متوفراً."
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
 msgid "Three-Seat Sofa"
-msgstr ""
+msgstr "أريكة بثلاثة مقاعد"
 
 #. module: website_sale
 #. odoo-javascript
@@ -5552,6 +5704,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_sale.field_website__send_abandoned_cart_email_activation_time
 msgid "Time when the 'Send abandoned cart email' feature was activated."
 msgstr ""
+"الوقت الذي تم فيه تفعيل خاصية 'إرسال بريد إلكتروني بشأن عربة التسوق "
+"المتروكة'."
 
 #. module: website_sale
 #. odoo-javascript
@@ -5577,7 +5731,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "Toolbar"
-msgstr ""
+msgstr "شريط الأدوات"
 
 #. module: website_sale
 #. odoo-javascript
@@ -5600,17 +5754,17 @@ msgstr "إجمالي عدد مرات عرض المنتجات"
 #: code:addons/website_sale/static/src/js/combo_configurator_dialog/combo_configurator_dialog.js:0
 #: code:addons/website_sale/static/src/js/product_configurator_dialog/product_configurator_dialog.js:0
 msgid "Total: %s"
-msgstr ""
+msgstr "الإجمالي: %s"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_lamps_touch
 msgid "Touch Lamps"
-msgstr ""
+msgstr "مصابيح تعمل باللمس"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_bins_toy
 msgid "Toy Bins"
-msgstr ""
+msgstr "سلال تخزين الألعاب"
 
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_website_snippet_filter__product_cross_selling
@@ -5639,7 +5793,7 @@ msgstr "رابط URL لمقطع فيديو يعرض منتجك."
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_drawers_underbed
 msgid "Under-bed Drawers"
-msgstr ""
+msgstr "أدراج تخزين تحت السرير"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_website_base_unit
@@ -5695,7 +5849,7 @@ msgstr ""
 #. module: website_sale
 #: model:ir.model.fields,help:website_sale.field_product_attribute__is_thumbnail_visible
 msgid "Use product variant images instead of the attribute values displays."
-msgstr ""
+msgstr "استخدم صور متغيرات المنتج عوضاً عن عرض قيم السمات."
 
 #. module: website_sale
 #. odoo-javascript
@@ -5712,7 +5866,7 @@ msgstr "المتغير"
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_product__variant_ribbon_id
 msgid "Variant Ribbon"
-msgstr ""
+msgstr "شريط المتغيرات"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_product__variants_default_code
@@ -5737,13 +5891,13 @@ msgstr "رابط الفيديو"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.filter_radio_and_multi_attributes
 msgid "View More"
-msgstr ""
+msgstr "عرض المزيد"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/notification/add_to_cart_notification/add_to_cart_notification.xml:0
 msgid "View cart"
-msgstr ""
+msgstr "عرض عربة التسوق"
 
 #. module: website_sale
 #. odoo-javascript
@@ -5754,12 +5908,12 @@ msgstr "العارض"
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_vintage
 msgid "Vintage Boxes"
-msgstr ""
+msgstr "صناديق بطابع عتيق"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_multimedia_virtual_design
 msgid "Virtual Design Tools"
-msgstr ""
+msgstr "أدوات التصميم الافتراضية"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_attribute__visibility
@@ -5803,12 +5957,12 @@ msgstr "سجل عرض الزوار للمنتجات"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/add_to_cart_option.xml:0
 msgid "Visitor's Choice"
-msgstr ""
+msgstr "خيار الزوار"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures_wardrobes
 msgid "Wardrobes"
-msgstr ""
+msgstr "خزانات الملابس"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_sale_order__shop_warning
@@ -5826,7 +5980,7 @@ msgstr "الضمان"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.s_dynamic_snippet_products_preview_data
 msgid "Warranty (2 year)"
-msgstr ""
+msgstr "ضمان (سنتين)"
 
 #. module: website_sale
 #: model:product.template,description_sale:website_sale.product_product_1_product_template
@@ -5845,6 +5999,8 @@ msgid ""
 "We weren't able to update your cart. Please refresh your page before trying "
 "again."
 msgstr ""
+"لم نتمكن من تحديث عربة التسوق الخاصة بك. يرجى تحديث الصفحة قبل إعادة "
+"المحاولة."
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_website
@@ -5871,22 +6027,22 @@ msgstr "الموقع الإلكتروني"
 #: model:ir.model.fields,field_description:website_sale.field_product_template__website_absolute_url
 #: model:ir.model.fields,field_description:website_sale.field_website_checkout_step__website_absolute_url
 msgid "Website Absolute URL"
-msgstr ""
+msgstr "رابط URL المطلق للموقع الإلكتروني"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_product_view_form_normalized
 msgid "Website Category"
-msgstr ""
+msgstr "فئة الموقع الإلكتروني"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_website_checkout_step
 msgid "Website Checkout Step"
-msgstr ""
+msgstr "خطوة الدفع والخروج في الموقع الإلكتروني"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_website_menu
 msgid "Website Menu"
-msgstr ""
+msgstr "قائمة الموقع الإلكتروني"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_feed__website_message_ids
@@ -6007,7 +6163,7 @@ msgstr "سبورة"
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_image_ratio__16_9
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_image_ratio_mobile__16_9
 msgid "Wide (16/9)"
-msgstr ""
+msgstr "عريض (16/9)"
 
 #. module: website_sale
 #. odoo-javascript
@@ -6015,7 +6171,7 @@ msgstr ""
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_image_ratio__21_9
 #: model:ir.model.fields.selection,name:website_sale.selection__website__product_page_image_ratio_mobile__21_9
 msgid "Wider (21/9)"
-msgstr ""
+msgstr "أعرض (21/9)"
 
 #. module: website_sale
 #. odoo-python
@@ -6027,7 +6183,7 @@ msgstr "بثلاثة أقدام"
 #. odoo-python
 #: code:addons/website_sale/controllers/main.py:0
 msgid "Wrong format: got `pricelist=%s`, expected an integer"
-msgstr ""
+msgstr "Wrong format: got `pricelist=%s`, expected an integer"
 
 #. module: website_sale
 #. odoo-python
@@ -6045,12 +6201,17 @@ msgid ""
 "                            <a class=\"o_translate_inline\" href=\"/shop/"
 "address?address_type=billing\">new address</a>."
 msgstr ""
+"أنت تقوم بتحرير عنواني <b>التوصيل والفوترة</b>\n"
+"                            في نفس الوقت!<br/>\n"
+"                            إذا أردت تعديل عنوان الفوترة، قم بإنشاء\n"
+"                            <a class=\"o_translate_inline\" href="
+"\"/shop/address?address_type=billing\">عنوان جديد</a>."
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/controllers/main.py:0
 msgid "You can't use a video as the product's main image."
-msgstr ""
+msgstr "لا يمكنك استخدام مقطع فيديو كالصورة الرئيسية للمنتج."
 
 #. module: website_sale
 #: model_terms:ir.actions.act_window,help:website_sale.sale_report_action_carts
@@ -6088,13 +6249,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/website_sale_form_editor.js:0
 msgid "Your Email"
-msgstr ""
+msgstr "بريدك الإلكتروني"
 
 #. module: website_sale
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/website_sale_form_editor.js:0
 msgid "Your Name"
-msgstr ""
+msgstr "اسمك"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart_lines
@@ -6106,13 +6267,13 @@ msgstr "عربة التسوق الخاصة بك فارغة!"
 #. odoo-python
 #: code:addons/website_sale/controllers/delivery.py:0
 msgid "Your cart is empty."
-msgstr ""
+msgstr "عربة التسوق الخاصة بك فارغة."
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/models/sale_order.py:0
 msgid "Your cart is not ready to be paid, please verify previous steps."
-msgstr ""
+msgstr "عربة تسوقك ليست جاهزة للدفع. يرجى تأكيد الخطوات السابقة."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.payment_confirmation_status
@@ -6123,7 +6284,7 @@ msgstr "تم التصريح بالدفع."
 #. odoo-javascript
 #: code:addons/website_sale/static/src/js/location_selector/location_selector_dialog/location_selector_dialog.js:0
 msgid "Your postal code"
-msgstr ""
+msgstr "الرمز البريدي الخاص بك"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart
@@ -6169,7 +6330,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_list_page_option.xml:0
 msgid "by"
-msgstr ""
+msgstr "بواسطة"
 
 #. module: website_sale
 #. odoo-javascript
@@ -6202,18 +6363,18 @@ msgstr "فئات المتجر الإلكتروني"
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_search_view_website
 #: model_terms:ir.ui.view,arch_db:website_sale.sale_report_view_search_website
 msgid "eCommerce Category"
-msgstr ""
+msgstr "فئة المتجر الإلكتروني"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_product_product__description_ecommerce
 #: model:ir.model.fields,field_description:website_sale.field_product_template__description_ecommerce
 msgid "eCommerce Description"
-msgstr ""
+msgstr "وصف المتجر الإلكتروني"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_attribute_view_form
 msgid "eCommerce Filter"
-msgstr ""
+msgstr "فلتر المتجر الإلكتروني"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.attribute_tree_view
@@ -6223,7 +6384,7 @@ msgstr "إمكانية رؤية عامل تصفية المتجر الإلكتر�
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_template_form_view
 msgid "eCommerce Media"
-msgstr ""
+msgstr "وسائط المتجر الإلكتروني"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_digest_digest__kpi_website_sale_total
@@ -6233,7 +6394,7 @@ msgstr "مبيعات المتجر الإلكتروني"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.header_cart_link
 msgid "eCommerce cart"
-msgstr ""
+msgstr "عربة التسويق في المتجر الإلكتروني"
 
 #. module: website_sale
 #: model:ir.actions.server,name:website_sale.ir_cron_send_availability_email_ir_actions_server
@@ -6256,31 +6417,31 @@ msgstr "في الفئة \""
 #. odoo-python
 #: code:addons/website_sale/models/crm_team.py:0
 msgid "is_abandoned_cart"
-msgstr ""
+msgstr "is_abandoned_cart"
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "list_price asc"
-msgstr ""
+msgstr "list_price تصاعدياً"
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "list_price desc"
-msgstr ""
+msgstr "list_price تنازلياً"
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/models/res_config_settings.py:0
 msgid "model"
-msgstr ""
+msgstr "النموذج"
 
 #. module: website_sale
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "name asc"
-msgstr ""
+msgstr "فرز الأسماء تصاعدياً"
 
 #. module: website_sale
 #. odoo-javascript
@@ -6331,7 +6492,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_sale/models/website.py:0
 msgid "publish_date desc"
-msgstr ""
+msgstr "publish_date تنازلياً"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.accept_terms_and_conditions

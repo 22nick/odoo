@@ -28,6 +28,7 @@ export class CallPreview extends Component {
 
     setup() {
         this.dialog = useService("dialog");
+        this.notification = useService("notification");
         this.rtc = useService("discuss.rtc");
         this.store = useService("mail.store");
         this.state = useState({ audioStream: null, blurManager: null, videoStream: null });
@@ -81,6 +82,13 @@ export class CallPreview extends Component {
                     this.enableBlur();
                 } else {
                     this.disableBlur();
+                }
+            });
+            onChange(this.store.settings, ["edgeBlurAmount", "backgroundBlurAmount"], () => {
+                if (this.state.blurManager) {
+                    this.state.blurManager.edgeBlur = this.store.settings.edgeBlurAmount;
+                    this.state.blurManager.backgroundBlur =
+                        this.store.settings.backgroundBlurAmount;
                 }
             });
             onWillDestroy(() => {
@@ -269,7 +277,7 @@ export class CallPreview extends Component {
         }
         try {
             this.state.blurManager = await this.rtc.applyBlurEffect(this.state.videoStream);
-            this.videoRef.el.srcObject = this.state.blurManager.stream;
+            this.videoRef.el.srcObject = await this.state.blurManager.stream;
         } catch (_e) {
             this.notification.add(_e.message, { type: "warning" });
             this.disableBlur();

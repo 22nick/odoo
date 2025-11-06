@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 18:36+0000\n"
-"PO-Revision-Date: 2025-10-04 02:31+0000\n"
+"POT-Creation-Date: 2025-10-08 18:39+0000\n"
+"PO-Revision-Date: 2025-10-23 09:16+0000\n"
 "Last-Translator: \"Kwanghee Park (kwpa)\" <kwpa@odoo.com>\n"
 "Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/"
 "spreadsheet/ko/>\n"
@@ -344,7 +344,7 @@ msgstr "2 행"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "=PIVOT(${"
-msgstr ""
+msgstr "=PIVOT(${"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -642,19 +642,19 @@ msgstr "활성 필터"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Actual/360"
-msgstr ""
+msgstr "실제/360"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Actual/365"
-msgstr ""
+msgstr "실제/365"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Actual/Actual"
-msgstr ""
+msgstr "실제/실제"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -896,7 +896,7 @@ msgstr "추가 무게."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "Africa"
-msgstr ""
+msgstr "아프리카"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1132,7 +1132,7 @@ msgstr "X 축에서 점 (x, y)까지의 각도."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Annual"
-msgstr ""
+msgstr "연간"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1357,7 +1357,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "Asia"
-msgstr ""
+msgstr "아시아"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1523,7 +1523,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Billion"
-msgstr ""
+msgstr "10억"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1547,7 +1547,7 @@ msgstr "검정색"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Blues"
-msgstr ""
+msgstr "파란색"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1853,7 +1853,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Carousel"
-msgstr ""
+msgstr "슬라이드 형식"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1877,13 +1877,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Case-insensitive"
-msgstr ""
+msgstr "대소문자 구분 없음"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Case-sensitive"
-msgstr ""
+msgstr "대소문자 구분"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1901,7 +1901,7 @@ msgstr "카테고리 / 라벨"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Category"
-msgstr ""
+msgstr "카테고리"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2001,7 +2001,7 @@ msgstr "체크박스"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Chip"
-msgstr ""
+msgstr "칩"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2013,7 +2013,7 @@ msgstr "순환참조"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Cividis"
-msgstr ""
+msgstr "Cividis"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3007,7 +3007,7 @@ msgstr "입력한 날짜의 요일(숫자로 표시)."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Days"
-msgstr ""
+msgstr "일"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3256,7 +3256,7 @@ msgstr "크기가 피벗 정의와 일치하지 않습니다."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/filter_values_list/filter_values_list.xml:0
 msgid "Discard"
-msgstr ""
+msgstr "작성 취소"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3277,7 +3277,7 @@ msgstr "가격에 따른 유가증권 할인율."
 #: model:ir.model.fields,field_description:spreadsheet.field_res_lang__display_name
 #: model:ir.model.fields,field_description:spreadsheet.field_spreadsheet_mixin__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "표시명"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3629,7 +3629,7 @@ msgstr "오일러의 수 e(~2.718)를 거듭제곱한 값입니다."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "Europe"
-msgstr ""
+msgstr "유럽"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3813,7 +3813,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/chart/index.js:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Filled Radar"
-msgstr ""
+msgstr "채워진 방사형"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4180,7 +4180,7 @@ msgstr "함수 [[FUNCTION_NAME]] 의 매개변수 값 2가 범위를 벗어났�
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_funnel_chart.js:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Funnel"
-msgstr ""
+msgstr "깔때기형"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4234,7 +4234,7 @@ msgstr "공유 링크 생성"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_geo_chart.js:0
 msgid "Geo"
-msgstr ""
+msgstr "지리"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4385,13 +4385,13 @@ msgstr "같거나 큼"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Greens"
-msgstr ""
+msgstr "초록색"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Greys"
-msgstr ""
+msgstr "회색"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4445,7 +4445,7 @@ msgstr "행 %s - %s 그룹화"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Groups"
-msgstr ""
+msgstr "그룹"
 
 #. module: spreadsheet
 #: model:ir.model,name:spreadsheet.model_ir_http
@@ -4462,7 +4462,7 @@ msgstr "머리글 행"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Headers"
-msgstr ""
+msgstr "제목"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4528,13 +4528,13 @@ msgstr "시트 숨기기"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Hierarchical"
-msgstr ""
+msgstr "계층형"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Hierarchy"
-msgstr ""
+msgstr "계층"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4576,7 +4576,7 @@ msgstr "특정 시간의 시간 단위 구성 요소입니다."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Hours"
-msgstr ""
+msgstr "시간"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4958,7 +4958,7 @@ msgstr "표 삽입"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Integer"
-msgstr ""
+msgstr "정수"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5253,7 +5253,7 @@ msgstr "키 값"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Labels"
-msgstr ""
+msgstr "라벨"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5641,7 +5641,7 @@ msgstr "5월"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Measure"
-msgstr ""
+msgstr "측정"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5740,7 +5740,7 @@ msgstr "중간값은 최대값보다 작아야 합니다."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Million"
-msgstr ""
+msgstr "백만"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5904,7 +5904,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Months"
-msgstr ""
+msgstr "월"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6316,7 +6316,7 @@ msgstr "Odoo 원형 차트"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 msgid "Odoo Radar Chart"
-msgstr ""
+msgstr "Odoo 방사형 그래프"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6397,7 +6397,7 @@ msgstr "오렌지"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Oranges"
-msgstr ""
+msgstr "오렌지"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6409,7 +6409,7 @@ msgstr "주문자"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Others"
-msgstr ""
+msgstr "기타"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6719,13 +6719,13 @@ msgstr "보라색"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Purples"
-msgstr ""
+msgstr "보라색"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_pyramid_chart.js:0
 msgid "Pyramid"
-msgstr ""
+msgstr "피라미드"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6781,13 +6781,13 @@ msgstr "특정 날짜가 속한 연도의 분기"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Quarterly"
-msgstr ""
+msgstr "분기별"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Quarters"
-msgstr ""
+msgstr "분수"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6807,13 +6807,13 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_radar_chart.js:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Radar"
-msgstr ""
+msgstr "방사형"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Rainbow"
-msgstr ""
+msgstr "레인보우"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6879,7 +6879,7 @@ msgstr "되돌리기"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Reds"
-msgstr ""
+msgstr "빨간색"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6897,7 +6897,7 @@ msgstr "비어 있는지 검사할 셀에 대한 참조입니다."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Region"
-msgstr ""
+msgstr "지역"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7521,7 +7521,7 @@ msgstr "전체 선택"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Semi-annual"
-msgstr ""
+msgstr "반기별"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7802,7 +7802,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Sorting"
-msgstr ""
+msgstr "정렬"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8130,7 +8130,7 @@ msgstr "여러 기준에 따라 범위를 합산합니다."
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_sunburst_chart.js:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Sunburst"
-msgstr ""
+msgstr "선버스트"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8203,7 +8203,7 @@ msgstr "온도"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Territories"
-msgstr ""
+msgstr "지역"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12106,7 +12106,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Thousand"
-msgstr ""
+msgstr "천 단위"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12147,7 +12147,7 @@ msgstr "시간"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Today"
-msgstr ""
+msgstr "오늘"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12228,7 +12228,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/chart/index.js:0
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_treemap_chart.js:0
 msgid "Treemap"
-msgstr ""
+msgstr "트리맵"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12761,7 +12761,7 @@ msgstr "화면"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Viridis"
-msgstr ""
+msgstr "Viridis"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12853,7 +12853,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Weeks"
-msgstr ""
+msgstr "주"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13066,13 +13066,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Window"
-msgstr ""
+msgstr "윈도우"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "World"
-msgstr ""
+msgstr "세계"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13165,13 +13165,13 @@ msgstr "연초 대비 증감률"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Years"
-msgstr ""
+msgstr "년"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Yesterday"
-msgstr ""
+msgstr "어제"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13189,7 +13189,7 @@ msgstr "중복되는 테이블은 만들 수 없습니다."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Zoom"
-msgstr ""
+msgstr "확대/축소"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13257,7 +13257,7 @@ msgstr "[[FUNCTION_NAME]] 에 올바른 입력 데이터가 없습니다."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "ascending"
-msgstr ""
+msgstr "오름차순"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13305,7 +13305,7 @@ msgstr "기본 값:"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "descending"
-msgstr ""
+msgstr "내림차순"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13413,7 +13413,7 @@ msgstr "음수"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "not"
-msgstr ""
+msgstr "아님"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13449,7 +13449,7 @@ msgstr "일년 전"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "or"
-msgstr ""
+msgstr "또는"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13521,7 +13521,7 @@ msgstr "search_mode는 [-1, 1, -2, 2] 범위의 값이어야 합니다."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "sort_column${"
-msgstr ""
+msgstr "sort_column${"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13551,7 +13551,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/date_filter_dropdown/date_filter_dropdown.xml:0
 msgid "to"
-msgstr ""
+msgstr "다음까지"
 
 #. module: spreadsheet
 #. odoo-javascript

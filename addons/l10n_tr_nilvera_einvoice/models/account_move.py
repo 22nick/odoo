@@ -135,6 +135,7 @@ class AccountMove(models.Model):
                 # If the sequence/series is not found on Nilvera, add it then retry.
                 if 3009 in error_codes and post_series:
                     self._l10n_tr_nilvera_post_series(endpoint, client)
+                    xml_file.seek(0)    # reset stream before retry, as previous POST moved the buffer to the EOF
                     return self._l10n_tr_nilvera_submit_document(xml_file, endpoint, post_series=False)
                 raise UserError(error_message)
             elif response.status_code == 500:
@@ -346,6 +347,11 @@ class AccountMove(models.Model):
             and (line.quantity < 0 or line.price_unit < 0)
             for line in self.invoice_line_ids
         )
+
+    def _get_partner_l10n_tr_nilvera_customer_alias_name(self):
+        # Allows overriding the default customer alias with a custom one.
+        self.ensure_one()
+        return self.partner_id.l10n_tr_nilvera_customer_alias_id.name
 
     # -------------------------------------------------------------------------
     # CRONS

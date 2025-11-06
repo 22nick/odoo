@@ -122,12 +122,14 @@
 
     <!-- Complete page of the sale_order -->
     <template id="sale_order_portal_template" name="Sales Order" inherit_id="portal.portal_sidebar" primary="True">
-        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
+        <t t-call="portal.portal_layout" position="inside">
             <t t-set="o_portal_fullwidth_alert" groups="sales_team.group_sale_salesman">
                 <!-- Uses backend_url provided in rendering values -->
                 <t t-call="portal.portal_back_in_edit_mode"/>
             </t>
+        </t>
 
+        <xpath expr="//div[hasclass('o_portal_sidebar')]" position="inside">
             <div
                 class="row o_portal_sale_sidebar"
                 t-att-data-order-amount-total="sale_order.amount_total"
@@ -990,6 +992,11 @@
             <t t-call="#{sale_order._get_name_tax_totals_view()}">
                 <t t-set="tax_totals" t-value="sale_order.tax_totals"/>
                 <t t-set="currency" t-value="sale_order.currency_id"/>
+                <!--
+                NOTE: This variable should not be used in templates before version 19.1, as it might
+                not be available in earlier versions if customer does not upgrade the `sale` module.
+                -->
+                <t t-set="doc" t-value="sale_order"/>
             </t>
         </table>
     </template>

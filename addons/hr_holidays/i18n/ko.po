@@ -13,8 +13,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-11 13:56+0000\n"
-"PO-Revision-Date: 2025-09-24 19:22+0000\n"
+"POT-Creation-Date: 2025-10-08 18:37+0000\n"
+"PO-Revision-Date: 2025-10-22 02:31+0000\n"
 "Last-Translator: \"Kwanghee Park (kwpa)\" <kwpa@odoo.com>\n"
 "Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/"
 "hr_holidays/ko/>\n"
@@ -283,8 +283,9 @@ msgid ""
 "title=\"Arrow\" invisible=\"allocation_type == 'accrual' or state != "
 "'confirm'\"/>"
 msgstr ""
-"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"화살표 아이콘\" title="
-"\"화살표\" invisible=\"allocation_type == 'accrual' or state != 'confirm'\"/>"
+"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"화살표 아이콘\" "
+"title=\"화살표\" invisible=\"allocation_type == 'accrual' or state != "
+"'confirm'\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_generate_multi_wizard_view_form
@@ -293,8 +294,8 @@ msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Arrow icon\" "
 "title=\"Arrow\" invisible=\"allocation_type == 'accrual'\"/>"
 msgstr ""
-"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"화살표 아이콘\" title="
-"\"화살표\" invisible=\"allocation_type == 'accrual'\"/>"
+"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"화살표 아이콘\" "
+"title=\"화살표\" invisible=\"allocation_type == 'accrual'\"/>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_activity
@@ -309,8 +310,8 @@ msgid ""
 "'hour'\">Hours</span>"
 msgstr ""
 "<span class=\"ml8\" invisible=\"request_unit == 'hour'\">일</span>\n"
-"                            <span class=\"ml8\" invisible="
-"\"request_unit != 'hour'\">시간</span>"
+"                            <span class=\"ml8\" invisible=\"request_unit != "
+"'hour'\">시간</span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_view_form
@@ -320,8 +321,8 @@ msgid ""
 "invisible=\"type_request_unit != 'hour'\">Hours</span>"
 msgstr ""
 "<span class=\"ml8\" invisible=\"type_request_unit == 'hour'\">일</span>\n"
-"                                <span class=\"ml8\" invisible="
-"\"type_request_unit != 'hour'\">시간</span>"
+"                                <span class=\"ml8\" "
+"invisible=\"type_request_unit != 'hour'\">시간</span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban
@@ -331,7 +332,7 @@ msgstr "<span class=\"mx-1\">-</span>"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban
 msgid "<span class=\"mx-1\">–</span>"
-msgstr ""
+msgstr "<span class=\"mx-1\">–</span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.edit_holiday_status_form
@@ -417,8 +418,9 @@ msgstr ""
 msgid ""
 "<span>The allocated days cannot be used, because the allocation is set to "
 "finish in the past.</span>"
-msgstr "<span>할당된 날짜는 과거에 만료되도록 설정되어 있으므로 사용할 수 "
-"없습니다.</span>"
+msgstr ""
+"<span>할당된 날짜는 과거에 만료되도록 설정되어 있으므로 사용할 수 없습니다.</"
+"span>"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
@@ -543,9 +545,9 @@ msgid ""
 "this period, but %(nb_days)s days will be used because this leave %"
 "(leave_type_name)s can only be taken by days."
 msgstr ""
-"근무 일정을 기준으로 해당 기간 동안 근무일은 %(days)s일이나, 해당 "
-"%(leave_type_name)s 휴가는 일  단위로만 신청이 가능하므로 %(nb_days)s일을 "
-"사용할 수 있습니다."
+"근무 일정을 기준으로 해당 기간 동안 근무일은 %(days)s일이나, 해당 %"
+"(leave_type_name)s 휴가는 일  단위로만 신청이 가능하므로 %(nb_days)s일을 사용"
+"할 수 있습니다."
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -1322,9 +1324,9 @@ msgid ""
 "before changing the contract."
 msgstr ""
 "이 직원의 계약을 변경하면 이미 휴가를 사용한 기간의 근무 일정이 변경됩니다. "
-"이 근무 일정을 변경하면 해당 직원이 더 이상 필요한 휴가를 할당받지 못하는 "
-"방식으로 휴가 기간이 변경됩니다. 계약을 변경하기 전 이러한 휴가 및/또는 할당 "
-"내용을 검토하시기 바랍니다."
+"이 근무 일정을 변경하면 해당 직원이 더 이상 필요한 휴가를 할당받지 못하는 방"
+"식으로 휴가 기간이 변경됩니다. 계약을 변경하기 전 이러한 휴가 및/또는 할당 내"
+"용을 검토하시기 바랍니다."
 
 #. module: hr_holidays
 #. odoo-python
@@ -1335,9 +1337,9 @@ msgid ""
 "in the future. Please review this employee's leaves and adjust their "
 "allocation accordingly."
 msgstr ""
-"이 근무 일정을 변경하면 해당 직원은 이미 계획된 휴가를 사용할 수 있는 휴가 "
-"할당량이 부족해질 수 있습니다. 해당 직원의 휴가 기록을 검토하여 필요한 경우 "
-"휴가 배정을 조정해 주세요."
+"이 근무 일정을 변경하면 해당 직원은 이미 계획된 휴가를 사용할 수 있는 휴가 할"
+"당량이 부족해질 수 있습니다. 해당 직원의 휴가 기록을 검토하여 필요한 경우 휴"
+"가 배정을 조정해 주세요."
 
 #. module: hr_holidays
 #: model_terms:ir.actions.act_window,help:hr_holidays.action_hr_leave_report
@@ -1359,8 +1361,9 @@ msgstr "휴가 발생에 대한 상한을 선택합니다."
 msgid ""
 "Choose the Time Off Officers who will be notified to approve allocation or "
 "Time Off Request. If empty, nobody will be notified"
-msgstr "할당 또는 휴가 요청을 승인하도록 알림을 받을 담당자를 선택합니다. 비어있을 "
-"경우 아무도 알림을 받지 않습니다."
+msgstr ""
+"할당 또는 휴가 요청을 승인하도록 알림을 받을 담당자를 선택합니다. 비어있을 경"
+"우 아무도 알림을 받지 않습니다."
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -1451,15 +1454,16 @@ msgstr "연락처"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.edit_holiday_status_form
 msgid "Count as"
-msgstr ""
+msgstr "계산 기준"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.edit_holiday_status_form
 msgid ""
 "Count of allocations for this time off type (approved or waiting for "
 "approbation) with a validity period starting this year."
-msgstr "올해부터 유효 기간이 시작되는 해당 휴가 유형에 대한 할당 건수 (승인 또는 "
-"승인 대기 중) 입니다."
+msgstr ""
+"올해부터 유효 기간이 시작되는 해당 휴가 유형에 대한 할당 건수 (승인 또는 승"
+"인 대기 중) 입니다."
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.edit_holiday_status_form
@@ -1471,7 +1475,8 @@ msgstr "이 휴가 유형과 연결된 계획 수 입니다."
 msgid ""
 "Count of time off requests for this time off type (approved or waiting for "
 "approbation) with a start date in the current year."
-msgstr "올해에 시작 날짜가 있는 해당 휴가 유형에 대한 휴가 요청 건수 (승인 또는 승인 "
+msgstr ""
+"올해에 시작 날짜가 있는 해당 휴가 유형에 대한 휴가 요청 건수 (승인 또는 승인 "
 "대기 중) 입니다."
 
 #. module: hr_holidays
@@ -1625,7 +1630,7 @@ msgstr "일"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
 msgid "Day Period"
-msgstr ""
+msgstr "오전오후"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__added_value_type__day
@@ -1675,8 +1680,9 @@ msgstr "연간 상한을 지정할까요?"
 msgid ""
 "Define the maximum level of negative days this kind of time off can reach. "
 "Value must be at least 1."
-msgstr "해당 유형의 휴가로 사용할 수 있는 마이너스 일수의 최대 한도를 정의합니다. "
-"값은 1 이상으로 설정해야 합니다."
+msgstr ""
+"해당 유형의 휴가로 사용할 수 있는 마이너스 일수의 최대 한도를 정의합니다. 값"
+"은 1 이상으로 설정해야 합니다."
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
@@ -1801,7 +1807,8 @@ msgstr "누적된 날짜만큼 다음 연도로 이월할까요?"
 msgid ""
 "Do you want to save the changes made to the accrual plan before creating a "
 "new milestone?"
-msgstr "새로운 마일스톤을 생성하기 전에 적립 계획에 대한 변경 사항을 저장할까요?"
+msgstr ""
+"새로운 마일스톤을 생성하기 전에 적립 계획에 대한 변경 사항을 저장할까요?"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -1809,7 +1816,8 @@ msgstr "새로운 마일스톤을 생성하기 전에 적립 계획에 대한 �
 msgid ""
 "Do you want to save the changes made to the accrual plan before editing this "
 "milestone?"
-msgstr "새로운 마일스톤을 수정하기 전에 적립 계획에 대한 변경 사항을 저장할까요?"
+msgstr ""
+"새로운 마일스톤을 수정하기 전에 적립 계획에 대한 변경 사항을 저장할까요?"
 
 #. module: hr_holidays
 #. odoo-python
@@ -1817,8 +1825,9 @@ msgstr "새로운 마일스톤을 수정하기 전에 적립 계획에 대한 �
 msgid ""
 "Due to a change in global time offs, %s extra day(s) have been taken from "
 "your allocation. Please review this leave if you need it to be changed."
-msgstr "글로벌 휴가 변경 사항으로 인해, 귀하의 휴가 할당일이 %s일 추가되었습니다. "
-"휴가를 변경해야하는 경우 이 휴가를 검토하세요."
+msgstr ""
+"글로벌 휴가 변경 사항으로 인해, 귀하의 휴가 할당일이 %s일 추가되었습니다. 휴"
+"가를 변경해야하는 경우 이 휴가를 검토하세요."
 
 #. module: hr_holidays
 #. odoo-python
@@ -1827,8 +1836,9 @@ msgid ""
 "Due to a change in global time offs, this leave no longer has the required "
 "amount of available allocation and has been set to refused. Please review "
 "this leave."
-msgstr "글로벌 휴가 정책의 변경으로 인해 더 이상 사용 가능한 할당량이 없으며 "
-"거부하도록 설정되었습니다. 이 휴가를 검토해 주세요."
+msgstr ""
+"글로벌 휴가 정책의 변경으로 인해 더 이상 사용 가능한 할당량이 없으며 거부하도"
+"록 설정되었습니다. 이 휴가를 검토해 주세요."
 
 #. module: hr_holidays
 #. odoo-python
@@ -1870,7 +1880,7 @@ msgstr "기간 (시간)"
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation_generate_multi_wizard__request_unit
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__request_unit
 msgid "Duration Type"
-msgstr ""
+msgstr "소요 기간 유형"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_allocation__number_of_days
@@ -1886,7 +1896,7 @@ msgstr ""
 #. module: hr_holidays
 #: model:hr.leave.type,name:hr_holidays.l10n_sa_leave_type_emergency
 msgid "Emergency Leave"
-msgstr ""
+msgstr "일시 긴급 휴가"
 
 #. module: hr_holidays
 #: model:ir.model,name:hr_holidays.model_hr_employee
@@ -1963,8 +1973,9 @@ msgstr "종료일"
 msgid ""
 "End date has been updated because the employee will leave the company on %"
 "(departure_date)s."
-msgstr "직원이 %(departure_date)s에 퇴사할 예정이므로 기간 종료일이 "
-"업데이트되었습니다."
+msgstr ""
+"직원이 %(departure_date)s에 퇴사할 예정이므로 기간 종료일이 업데이트되었습니"
+"다."
 
 #. module: hr_holidays
 #: model:hr.leave.type,name:hr_holidays.l10n_be_leave_type_european
@@ -2051,9 +2062,9 @@ msgid ""
 "given to the employee, due to a previous start date, on the first run of the "
 "plan. This can be manually edited."
 msgstr ""
-"누적 할당의 경우 이 필드에는 계획의 첫 번째 실행 시 이전 시작 날짜에 따라 "
-"직원에게 주어진 이론적 시간이 포함됩니다. 이 필드는 수동으로 편집할 수 "
-"있습니다."
+"누적 할당의 경우 이 필드에는 계획의 첫 번째 실행 시 이전 시작 날짜에 따라 직"
+"원에게 주어진 이론적 시간이 포함됩니다. 이 필드는 수동으로 편집할 수 있습니"
+"다."
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
@@ -2376,7 +2387,7 @@ msgstr "예외 활동을 표시하기 위한 아이콘"
 #. module: hr_holidays
 #: model:hr.leave.type,name:hr_holidays.l10n_sa_leave_type_iddah
 msgid "Iddah Leave"
-msgstr ""
+msgstr "금혼 휴가"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -2417,7 +2428,8 @@ msgstr ""
 msgid ""
 "If checked, users request can exceed the allocated days and balance can go "
 "in negative."
-msgstr "이 옵션을 선택하면 사용자의 요청이 할당된 일수를 초과할 수 있으며 남은 휴가 "
+msgstr ""
+"이 옵션을 선택하면 사용자의 요청이 할당된 일수를 초과할 수 있으며 남은 휴가 "
 "일수는 마이너스가 될 수 있습니다."
 
 #. module: hr_holidays
@@ -3056,8 +3068,9 @@ msgstr "알림 대상이 없습니다"
 msgid ""
 "Non-visible allocations can still be selected when taking a leave, but will "
 "simply not be displayed on the leave dashboard."
-msgstr "휴가를 신청할 때 보이지 않는 할당은 여전히 선택할 수 있지만 휴가 "
-"대시보드에는 표시되지 않습니다."
+msgstr ""
+"휴가를 신청할 때 보이지 않는 할당은 여전히 선택할 수 있지만 휴가 대시보드에"
+"는 표시되지 않습니다."
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_type__allocation_validation_type__no_validation
@@ -3070,8 +3083,9 @@ msgstr "필요 없음"
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid ""
 "Not possible state. State Approve is only used for leave needed 2 approvals"
-msgstr "사용 불가 상태입니다. 상태에 대한 승인은 2회 승인을 해야 하는 휴가에만 "
-"적용됩니다."
+msgstr ""
+"사용 불가 상태입니다. 상태에 대한 승인은 2회 승인을 해야 하는 휴가에만 적용됩"
+"니다."
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_type__responsible_ids
@@ -3295,7 +3309,7 @@ msgstr "육아 휴직"
 #: model:hr.leave.type,name:hr_holidays.l10n_jo_leave_type_paternity
 #: model:hr.leave.type,name:hr_holidays.l10n_sa_leave_type_paternity
 msgid "Paternity Leave"
-msgstr ""
+msgstr "배우자 출산 휴가"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -3312,7 +3326,7 @@ msgstr "기간"
 #. module: hr_holidays
 #: model:hr.leave.type,name:hr_holidays.l10n_jo_leave_type_pilgrimage
 msgid "Pilgrimage Leave"
-msgstr ""
+msgstr "종교 휴가"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_employee_type_report__holiday_status__planned
@@ -3609,12 +3623,12 @@ msgid ""
 "            #       by the Time Off Officer, Employee's Approver or both."
 msgstr ""
 "직원의 요청이 있을 때 필요한 승인 단계를 선택합니다.\n"
-"            #     -  승인이 추가로 요구되지 않음: 직원의 요청이 자동으로 "
-"승인됩니다.\n"
-"            #     -  휴가 담당자가 승인: 직원의 요청을 휴가 담당자가 직접 "
-"승인합니다.\n"
-"            #       휴가 담당자, 직원 관리자 또는 두 사람 모두에 의해 "
-"승인됩니다."
+"            #     -  승인이 추가로 요구되지 않음: 직원의 요청이 자동으로 승인"
+"됩니다.\n"
+"            #     -  휴가 담당자가 승인: 직원의 요청을 휴가 담당자가 직접 승"
+"인합니다.\n"
+"            #       휴가 담당자, 직원 관리자 또는 두 사람 모두에 의해 승인됩"
+"니다."
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -3632,8 +3646,8 @@ msgid ""
 "in settings/users)."
 msgstr ""
 "해당 직원의 \"휴가\" 승인을 담당할 관리자를 선택하십시오.\n"
-"비어 있는 경우 일반 관리자 또는 결재권자 (설정/사용자에서 설정 가능)가 "
-"결재를 수행합니다."
+"비어 있는 경우 일반 관리자 또는 결재권자 (설정/사용자에서 설정 가능)가 결재"
+"를 수행합니다."
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__second_month__9
@@ -3729,7 +3743,8 @@ msgstr "일부 휴가는 할당에 연결할 수 없습니다. 해당 휴가를 
 msgid ""
 "Some of the accrual plans you're trying to delete are linked to an existing "
 "allocation. Delete or cancel them first."
-msgstr "삭제하려는 일부 발생 계획이 기존 할당과 연결되어 있습니다. 먼저 해당 할당을 "
+msgstr ""
+"삭제하려는 일부 발생 계획이 기존 할당과 연결되어 있습니다. 먼저 해당 할당을 "
 "삭제하거나 취소하세요."
 
 #. module: hr_holidays
@@ -3745,8 +3760,8 @@ msgid ""
 "Off Type."
 msgstr ""
 "이 휴가 유형에만 이 휴가 발생 계획을 사용할 수 있는지 설정합니다.\n"
-"                휴가 발생 계획을 모든 휴가 유형에 사용할 수 있는 경우 "
-"공란으로 비워 둡니다."
+"                휴가 발생 계획을 모든 휴가 유형에 사용할 수 있는 경우 공란으"
+"로 비워 둡니다."
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_holiday_list
@@ -3817,7 +3832,7 @@ msgstr "파업"
 #: model:hr.leave.type,name:hr_holidays.l10n_jo_leave_type_study
 #: model:hr.leave.type,name:hr_holidays.l10n_sa_leave_type_study
 msgid "Study Leave"
-msgstr ""
+msgstr "시험 준비 휴가"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -3899,8 +3914,9 @@ msgid ""
 "The accrual starts after a defined period from the allocation start date. "
 "This field defines the number of days, months or years after which accrual "
 "is used."
-msgstr "발생 휴가는 시작일로부터 일정 기간이 지난 후 시작됩니다. 이 필드에는 발생 "
-"휴가가 사용되는 일, 월 또는 연도를 정의합니다."
+msgstr ""
+"발생 휴가는 시작일로부터 일정 기간이 지난 후 시작됩니다. 이 필드에는 발생 휴"
+"가가 사용되는 일, 월 또는 연도를 정의합니다."
 
 #. module: hr_holidays
 #. odoo-python
@@ -3908,8 +3924,9 @@ msgstr "발생 휴가는 시작일로부터 일정 기간이 지난 후 시작�
 msgid ""
 "The allocation requirement of a time off type cannot be changed once leaves "
 "of that type have been taken. You should create a new time off type instead."
-msgstr "해당 유형의 휴가를 사용한 후에는 휴가 유형에 대한 할당 요건을 수정할 수 "
-"없습니다. 대신 새 휴가 유형을 생성해야 합니다."
+msgstr ""
+"해당 유형의 휴가를 사용한 후에는 휴가 유형에 대한 할당 요건을 수정할 수 없습"
+"니다. 대신 새 휴가 유형을 생성해야 합니다."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__color
@@ -3928,7 +3945,8 @@ msgstr "이월 휴가는 다음 기간동안 유효합니다:"
 msgid ""
 "The distinction between working time (ex. Attendance) and absence (ex. "
 "Training) will be used in the computation of Accrual's plan rate."
-msgstr "근무 시간(예. 출근)과 부재(예. 교육)의 구분은 발생 휴가 계획 요율을 계산하는 "
+msgstr ""
+"근무 시간(예. 출근)과 부재(예. 교육)의 구분은 발생 휴가 계획 요율을 계산하는 "
 "데 사용됩니다."
 
 #. module: hr_holidays
@@ -3974,8 +3992,9 @@ msgstr ""
 msgid ""
 "The maximum excess amount should be greater than 0. If you want to set 0, "
 "disable the negative cap instead."
-msgstr "최대 초과 금액은 0보다 커야 합니다. 0으로 설정하려면 대신 마이너스 한도를 "
-"비활성화하세요."
+msgstr ""
+"최대 초과 금액은 0보다 커야 합니다. 0으로 설정하려면 대신 마이너스 한도를 비"
+"활성화하세요."
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__expiring_carryover_days
@@ -4026,7 +4045,8 @@ msgstr "휴가가 자동으로 승인되었습니다"
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid ""
 "The time off request has been cancelled for the following reason:%(reason)s"
-msgstr "다음과 같은 사유로 인해 휴가 신청서가 취소되었습니다: %(error_message)s"
+msgstr ""
+"다음과 같은 사유로 인해 휴가 신청서가 취소되었습니다: %(error_message)s"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__sequence
@@ -4040,7 +4060,8 @@ msgstr "순서가 가장 작은 유형이 휴가 요청의 기본값입니다."
 msgid ""
 "There is no employee set on the time off. Please make sure you're logged in "
 "the correct company."
-msgstr "휴가를 설정한 직원이 없습니다. 근무 중인 회사에 올바르게 로그인했는지 확인해 "
+msgstr ""
+"휴가를 설정한 직원이 없습니다. 근무 중인 회사에 올바르게 로그인했는지 확인해 "
 "주세요."
 
 #. module: hr_holidays
@@ -4057,9 +4078,9 @@ msgid ""
 "to the days allocated to the employee. If you need to change the "
 "configuration of the allocation, delete and create a new one."
 msgstr ""
-"이 할당은 이미 실행되었으므로 변경 사항은 직원에게 할당된 일수에는 영향을 "
-"미치지 않습니다. 할당의 구성을 변경해야 하는 경우 해당 할당을 삭제하고 새 "
-"할당을 만들어 주세요."
+"이 할당은 이미 실행되었으므로 변경 사항은 직원에게 할당된 일수에는 영향을 미"
+"치지 않습니다. 할당의 구성을 변경해야 하는 경우 해당 할당을 삭제하고 새 할당"
+"을 만들어 주세요."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave__first_approver_id
@@ -4086,8 +4107,9 @@ msgstr "이 영역은 할당을 승인하는 사용자에 의해 자동으로 �
 msgid ""
 "This area is automatically filled by the user who validates the allocation "
 "with second level (If time off type need second validation)"
-msgstr "이 영역은 2단계 휴가 승인을 하는 사용자에 의해 자동적으로 채워집니다.(휴가 "
-"유형이 2단계 승인인 경우)"
+msgstr ""
+"이 영역은 2단계 휴가 승인을 하는 사용자에 의해 자동적으로 채워집니다.(휴가 유"
+"형이 2단계 승인인 경우)"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__accrual_validity_type
@@ -4453,8 +4475,9 @@ msgstr "교육 휴가"
 msgid ""
 "Try to add some records, or make sure that there is no active filter in the "
 "search bar."
-msgstr "레코드를 일부 추가해 보거나, 검색창에서 활성화되어 있는 필터가 없는지 "
-"확인합니다."
+msgstr ""
+"레코드를 일부 추가해 보거나, 검색창에서 활성화되어 있는 필터가 없는지 확인합"
+"니다."
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__week_day__1
@@ -4663,8 +4686,9 @@ msgstr "승인 유형"
 msgid ""
 "Validity End date has been updated because the employee will leave the "
 "company on %(departure_date)s."
-msgstr "직원이 %(departure_date)s에 퇴사할 예정이므로 기간 종료일이 "
-"업데이트되었습니다."
+msgstr ""
+"직원이 %(departure_date)s에 퇴사할 예정이므로 기간 종료일이 업데이트되었습니"
+"다."
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_allocation_generate_multi_wizard_view_form
@@ -4765,7 +4789,8 @@ msgstr ""
 msgid ""
 "When the field is checked the balance of an allocation using this accrual "
 "plan will never exceed the specified amount."
-msgstr "이 필드를 선택하면 이 적립 계획에 따른 휴가의 잔액이 지정된 금액을 초과하지 "
+msgstr ""
+"이 필드를 선택하면 이 적립 계획에 따른 휴가의 잔액이 지정된 금액을 초과하지 "
 "않습니다."
 
 #. module: hr_holidays
@@ -4820,7 +4845,8 @@ msgstr "년"
 msgid ""
 "Yes, consider the worked hours, excluding any time off taken during that "
 "period."
-msgstr "예, 근무 시간을 고려합니다. 해당 기간 동안 소진한 휴가 기간은 제외합니다."
+msgstr ""
+"예, 근무 시간을 고려합니다. 해당 기간 동안 소진한 휴가 기간은 제외합니다."
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -4853,7 +4879,8 @@ msgstr "휴무일에는 휴가를 요청할 수 없습니다."
 msgid ""
 "You can create a new allocation or follow the approval status of the current "
 "ones."
-msgstr "새로운 배정 작업을 생성하거나 현재 배정 건의 승인 상태를 확인할 수 있습니다."
+msgstr ""
+"새로운 배정 작업을 생성하거나 현재 배정 건의 승인 상태를 확인할 수 있습니다."
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_accrual_level__accrual_validity_count
@@ -4877,7 +4904,8 @@ msgstr "이미 지난 발생 휴가는 누적을 시작할 수 없습니다."
 msgid ""
 "You can only cancel your own leave. You can cancel a leave only if this "
 "leave is approved, validated or refused."
-msgstr "휴가 취소는 본인의 휴가만 취소할 수 있습니다. 휴가를 취소하려면 휴가에 대해 "
+msgstr ""
+"휴가 취소는 본인의 휴가만 취소할 수 있습니다. 휴가를 취소하려면 휴가에 대해 "
 "승인, 확인 또는 반려가 완료되어야 합니다."
 
 #. module: hr_holidays
@@ -4952,16 +4980,18 @@ msgstr "휴가 담당자의 확인이 완료된 휴가 배정은 반려할 수 �
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "You can't reset a leave. Cancel/delete this one and create an other"
-msgstr "휴가 배정을 초기화할 수 없습니다. 배정된 휴가를 취소/삭제 후 다른 휴가를 "
-"생성하세요"
+msgstr ""
+"휴가 배정을 초기화할 수 없습니다. 배정된 휴가를 취소/삭제 후 다른 휴가를 생성"
+"하세요"
 
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
 msgid ""
 "You can't reset an allocation. Cancel/delete this one and create an other"
-msgstr "휴가 배정을 초기화할 수 없습니다. 배정된 휴가를 취소/삭제 후 다른 휴가를 "
-"생성하세요"
+msgstr ""
+"휴가 배정을 초기화할 수 없습니다. 배정된 휴가를 취소/삭제 후 다른 휴가를 생성"
+"하세요"
 
 #. module: hr_holidays
 #. odoo-python
@@ -5034,9 +5064,9 @@ msgid ""
 "public holidays, meaning that the balance of those employees would be "
 "affected by this change."
 msgstr ""
-"휴가 유형에 대한 하나 이상의 휴가가 공휴일과 겹쳐                         "
-"해당 직원의 잔여 휴가 일수에 영향을 미치므로 '공휴일 포함' 설정을 수정할 수 "
-"없습니다."
+"휴가 유형에 대한 하나 이상의 휴가가 공휴일과 겹쳐                         해"
+"당 직원의 잔여 휴가 일수에 영향을 미치므로 '공휴일 포함' 설정을 수정할 수 없"
+"습니다."
 
 #. module: hr_holidays
 #. odoo-python
@@ -5052,7 +5082,8 @@ msgstr "직원이 이미 사용한 휴가 기간 이하로 기간을 줄일 수 
 msgid ""
 "You cannot refuse this allocation request since the employee has already "
 "taken leaves for it. Please refuse or delete those leaves first."
-msgstr "직원이 이미 휴가를 사용했으므로 이 할당 요청을 거부할 수 없습니다. 먼저 해당 "
+msgstr ""
+"직원이 이미 휴가를 사용했으므로 이 할당 요청을 거부할 수 없습니다. 먼저 해당 "
 "휴가를 거부하거나 삭제하시기 바랍니다."
 
 #. module: hr_holidays
@@ -5114,7 +5145,7 @@ msgstr "내 휴가"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_form
 msgid "Your Timezone"
-msgstr ""
+msgstr "내 시간대"
 
 #. module: hr_holidays
 #. odoo-python
@@ -5123,8 +5154,9 @@ msgid ""
 "Your frequency selection is not correct: please choose a frequency between "
 "theses options:Hourly, Daily, Weekly, Twice a month, Monthly, Twice a year "
 "and Yearly."
-msgstr "빈도가 잘못 선택되었습니다. 다음 중에서 빈도를 선택하세요: 매시간, 매일, "
-"매주, 격주, 매월, 매년"
+msgstr ""
+"빈도가 잘못 선택되었습니다. 다음 중에서 빈도를 선택하세요: 매시간, 매일, 매"
+"주, 격주, 매월, 매년"
 
 #. module: hr_holidays
 #. odoo-python

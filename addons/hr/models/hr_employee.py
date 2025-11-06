@@ -685,6 +685,8 @@ class HrEmployee(models.Model):
         version_domain = Domain('contract_date_start', '!=', False)
         if self.ids:
             version_domain &= Domain('employee_id', 'in', self.ids)
+        elif not any(self._ids):  # onchange
+            version_domain &= Domain('employee_id', 'in', self._origin.ids)
         if date_start:
             version_domain &= Domain('contract_date_end', '=', False) | Domain('contract_date_end', '>=', date_start)
         if date_end:
@@ -698,7 +700,8 @@ class HrEmployee(models.Model):
         )
         contract_versions_by_employee = defaultdict(lambda: defaultdict(lambda: self.env["hr.version"]))
         for employee, _date_version, version in all_versions:
-            contract_versions_by_employee[employee.id][version[0].contract_date_start] |= version
+            first_version = next(iter(version), version)
+            contract_versions_by_employee[employee.id][first_version.contract_date_start] |= version
         return contract_versions_by_employee
 
     def _get_all_contract_dates(self):
@@ -1156,9 +1159,16 @@ class HrEmployee(models.Model):
     def get_views(self, views, options=None):
         if self.browse().has_access('read'):
             return super().get_views(views, options)
-        res = self.env['hr.employee.public'].get_views(views, options)
-        res['models'].update({'hr.employee': res['models']['hr.employee.public']})
-        return res
+        # returning public employee data would cause a traceback when building
+        # the private employee xml view
+        raise RedirectWarning(
+            message=_(
+            """You are not allowed to access "Employee" (hr.employee) records.
+We can redirect you to the public employee list."""
+            ),
+            action=self.env.ref('hr.hr_employee_public_action').id,
+            button_text=_("Employees profile"),
+        )
 
     @api.model
     def _search(self, domain, offset=0, limit=None, order=None, *, bypass_access=False, **kwargs):
@@ -1528,7 +1538,7 @@ class HrEmployee(models.Model):
                 # if employee is under fully flexible contract, use timezone of the employee
                 calendar_tz = timezone(version.resource_calendar_id.tz) if version.resource_calendar_id else timezone(employee.resource_id.tz)
                 date_start = datetime.combine(
-                    version.date_start,
+                    version.contract_date_start,
                     time(0, 0, 0)
                 ).replace(tzinfo=calendar_tz).astimezone(utc)
                 if version.date_end:
@@ -1613,12 +1623,15 @@ class HrEmployee(models.Model):
                 domain=[('company_id', 'in', [False, self.company_id.id])])[self.resource_id.id]
             return calendar_intervals
         duration_data = Intervals()
+        version_prev = datetime.combine(valid_versions[0].date_start, time.min, employee_tz)
         for version in valid_versions:
             version_start = datetime.combine(version.date_start, time.min, employee_tz)
+            contract_start = datetime.combine(version.contract_date_start, time.min, employee_tz)
             version_end = datetime.combine(version.date_end or date.max, time.max, employee_tz)
             calendar = version.resource_calendar_id or version.company_id.resource_calendar_id
+            start_date = version_start if version_prev < version_start else contract_start
             version_intervals = calendar._work_intervals_batch(
-                                    max(date_from, version_start),
+                                    max(date_from, start_date),
                                     min(date_to, version_end),
                                     tz=employee_tz,
                                     resources=self.resource_id,

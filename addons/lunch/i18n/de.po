@@ -8,13 +8,14 @@
 # Larissa Manderfeld, 2023
 #
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-11 13:57+0000\n"
-"PO-Revision-Date: 2025-09-16 02:36+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2025-10-08 18:37+0000\n"
+"PO-Revision-Date: 2025-10-31 12:48+0000\n"
+"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
 "Language-Team: German <https://translate.odoo.com/projects/odoo-19/lunch/de/>"
 "\n"
 "Language: de\n"
@@ -55,8 +56,8 @@ msgid ""
 "<i class=\"fa fa-check\" role=\"img\" aria-label=\"Receive button\" "
 "title=\"Receive button\"/>"
 msgstr ""
-"<i class=\"fa fa-check\" role=\"img\" aria-label=\"Receive button\" title="
-"\"Receive button\"/>"
+"<i class=\"fa fa-check\" role=\"img\" aria-label=\"Receive button\" "
+"title=\"Receive button\"/>"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_order_view_kanban
@@ -108,8 +109,8 @@ msgid ""
 "<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Order button\" "
 "title=\"Order button\"/>"
 msgstr ""
-"<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Order button\" title="
-"\"Order button\"/>"
+"<i class=\"fa fa-phone\" role=\"img\" aria-label=\"Order button\" "
+"title=\"Order button\"/>"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_order_view_kanban
@@ -117,8 +118,8 @@ msgid ""
 "<i class=\"fa fa-times\" role=\"img\" aria-label=\"Cancel button\" "
 "title=\"Cancel button\"/>"
 msgstr ""
-"<i class=\"fa fa-times\" role=\"img\" aria-label=\"Cancel button\" title="
-"\"Cancel button\"/>"
+"<i class=\"fa fa-times\" role=\"img\" aria-label=\"Cancel button\" "
+"title=\"Cancel button\"/>"
 
 #. module: lunch
 #: model:mail.template,body_html:lunch.lunch_order_mail_supplier
@@ -486,9 +487,9 @@ msgstr ""
 "style=\"min-width: 590px; background-color: #F1F1F1; color: #454748; padding:"
 " 8px; border-collapse:separate;\">\n"
 "      <tr><td style=\"text-align: center; font-size: 13px;\">\n"
-"        Powered by <a target=\"_blank\" href=\"https://www.odoo.com\" t-attf-"
-"style=\"color: {{user.company_id.email_secondary_color or '#875A7B'}};\""
-">Odoo</a>\n"
+"        Unterstützt durch <a target=\"_blank\" href=\"https://www.odoo.com\" "
+"t-attf-style="
+"\"color: {{user.company_id.email_secondary_color or '#875A7B'}};\">Odoo</a>\n"
 "      </td></tr>\n"
 "    </table>\n"
 "</td></tr>\n"
@@ -502,8 +503,8 @@ msgid ""
 "            An expense is automatically created at the order receipt.<br>\n"
 "            A payment represents the employee reimbursement to the company."
 msgstr ""
-"Eine Zahlungsbewegung kann entweder eine Ausgabe oder eine Zahlung sein.<br>"
-"\n"
+"Eine Zahlungsbewegung kann entweder eine Ausgabe oder eine Zahlung sein."
+"<br>\n"
 "            Bei Auftragseingang wird automatisch ein Ausgabe erstellt<br>\n"
 "            Eine Zahlung stellt die Erstattung des Mitarbeiters an das "
 "Unternehmen dar."
@@ -640,7 +641,7 @@ msgstr "Verfügbarkeit"
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Available Balance"
-msgstr ""
+msgstr "Verfügbarer Saldo"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_order__available_on_date
@@ -799,7 +800,7 @@ msgstr "Stadt"
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Clear Order"
-msgstr ""
+msgstr "Bestellung leeren"
 
 #. module: lunch
 #: model_terms:ir.actions.act_window,help:lunch.lunch_order_action_control_suppliers
@@ -813,21 +814,20 @@ msgid ""
 "title=\"Cancel button\"></span> red X to announce that the order isn't "
 "available."
 msgstr ""
-"Klicken Sie auf <span class=\"fa fa-phone text-success\" title="
-"\"Order button\"></span>,um anzukündigen, dass der Auftrag bestellt ist.<br>"
-"\n"
-"            Klicken Sie auf <span class=\"fa fa-check text-success\" title="
-"\"Receive button\"></span>, um anzukündigen, dass Ihre Bestellung erhalten "
-"haben.<br>\n"
-"            Klicken Sie auf das rote X in <span class="
-"\"fa fa-times-circle text-danger\" title=\"Cancel button\"></span>, um "
-"anzukündigen, dass der Auftrag nicht verfügbar ist."
+"Klicken Sie auf <span class=\"fa fa-phone text-success\" title=\"Order "
+"button\"></span>,um anzukündigen, dass der Auftrag bestellt ist.<br>\n"
+"            Klicken Sie auf <span class=\"fa fa-check text-success\" "
+"title=\"Receive button\"></span>, um anzukündigen, dass Ihre Bestellung "
+"erhalten haben.<br>\n"
+"            Klicken Sie auf das rote X in <span class=\"fa fa-times-circle "
+"text-danger\" title=\"Cancel button\"></span>, um anzukündigen, dass der "
+"Auftrag nicht verfügbar ist."
 
 #. module: lunch
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 #. module: lunch
 #: model:lunch.product,name:lunch.product_club
@@ -976,7 +976,7 @@ msgstr "Datum"
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Decrease quantity"
-msgstr ""
+msgstr "Menge verringern"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_supplier__delivery
@@ -1282,7 +1282,7 @@ msgstr "Bild 512"
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Increase quantity"
-msgstr ""
+msgstr "Menge erhöhen"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_order_view_form
@@ -1713,7 +1713,7 @@ msgstr "Heute gibt es leider nichts zu bestellen."
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Nothing to order, add some meals to begin."
-msgstr ""
+msgstr "Nichts zu bestellen. Fügen Sie einige Gerichte hinzu."
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_alert__notification_moment
@@ -1848,7 +1848,7 @@ msgstr "nachmittags"
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Passed orders"
-msgstr ""
+msgstr "Aufgegebene Bestellungen"
 
 #. module: lunch
 #: model:lunch.product.category,name:lunch.categ_pasta

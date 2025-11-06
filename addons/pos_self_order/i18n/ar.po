@@ -3,13 +3,14 @@
 # * pos_self_order
 #
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 18:36+0000\n"
-"PO-Revision-Date: 2025-09-16 13:44+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2025-10-08 18:38+0000\n"
+"PO-Revision-Date: 2025-10-13 12:16+0000\n"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: Arabic <https://translate.odoo.com/projects/odoo-19/"
 "pos_self_order/ar/>\n"
 "Language: ar\n"
@@ -29,7 +30,7 @@ msgstr "\"رموز QR\""
 #. odoo-python
 #: code:addons/pos_self_order/models/pos_config.py:0
 msgid "(require Odoo Enterprise)"
-msgstr ""
+msgstr "(يتطلب إصدار أودو للمؤسسات)"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -89,6 +90,46 @@ msgid ""
 "                </div>\n"
 "            "
 msgstr ""
+"<div style=\"margin: 0; padding: 0; font-size: 14px;\">\n"
+"                    <t t-set=\"client\" t-value=\"object.partner_id\"/>\n"
+"                    <t t-set=\"client_name\" t-value=\"client.name\"/>\n"
+"                    <t t-set=\"street\" t-value=\"client.street or ''\"/>\n"
+"                    <t t-set=\"state\" t-value=\"client.state_id.name or ''\""
+"/>\n"
+"                    <t t-set=\"city\" t-value=\"client.city or ''\"/>\n"
+"                    <t t-set=\"country\" t-value="
+"\"client.country_id.name or ''\"/>\n"
+"                    <t t-set=\"store_name\" t-value=\"object.config_id.name\""
+"/>\n"
+"                    <t t-set=\"tz\" t-value=\"object.env.user.tz\"/>\n"
+"                    <t t-set=\"lg\" t-value="
+"\"object.partner_id.lang or user.lang\"/>\n"
+"                    <div>\n"
+"                        <t t-if=\"client_name\">مرحباً <t t-out="
+"\"client_name\">اسم العميل</t>،</t>\n"
+"                        <t t-else=\"\">مرحباً،</t>\n"
+"                    </div>\n"
+"                    <br/>\n"
+"                    <div>لقد تم تأكيد طلبك <t t-out="
+"\"object.tracking_number\">...</t> والذي تبلغ قيمته <t t-out="
+"\"object.amount_total\">$xx.xx</t> بنجاح. <span t-if="
+"\"object.preset_time or client.street\">سيكون جاهزاً</span> <span t-if="
+"\"object.preset_time\">الساعة <t t-out=\"format_time("
+"time=object.preset_time, tz=tz, time_format='short', lang_code=lg)"
+"\">12:00 مساءً</t></span> <span t-if=\"client.street\">في <t t-out=\"street\""
+">الشارع</t>، <t t-out=\"state\">الولاية</t>، <t t-out=\"client.zip or ''\""
+">الرمز البريدي</t>، <t t-out=\"city\">المدينة</t>، <t t-out=\"country\""
+">الدولة</t></span></div>\n"
+"                    <br/>\n"
+"                    <div>شكراً لك،</div>\n"
+"                    <br/>\n"
+"                    <div t-if=\"object.state == 'paid'\">\n"
+"                        <div>ستجد إيصالك في المرفقات</div>\n"
+"                        <br/>\n"
+"                    </div>\n"
+"                    <t t-out=\"store_name\">اسم المتجر</t>\n"
+"                </div>\n"
+"            "
 
 #. module: pos_self_order
 #: model:mail.template,body_html:pos_self_order.takeout_email_template
@@ -121,6 +162,33 @@ msgid ""
 "                </div>\n"
 "            "
 msgstr ""
+"<div style=\"margin: 0; padding: 0; font-size: 14px;\">\n"
+"                    <t t-set=\"store_name\" t-value=\"object.config_id.name\""
+"/>\n"
+"                    <t t-set=\"tz\" t-value=\"object.env.user.tz\"/>\n"
+"                    <t t-set=\"lg\" t-value="
+"\"object.partner_id.lang or user.lang\"/>\n"
+"                    <div>\n"
+"                        <t t-if=\"client_name\">مرحباً <t t-out="
+"\"client_name\">اسم العميل</t>،</t>\n"
+"                        <t t-else=\"\">مرحباً،</t>\n"
+"                    </div>\n"
+"                    <br/>\n"
+"                    <div>لقد تم تأكيد طلبك <t t-out="
+"\"object.tracking_number\">...</t> والذي تبلغ قيمته <t t-out="
+"\"object.amount_total\">$xx.xx</t> بنجاح. <span t-if=\"object.preset_time\""
+">سيكون جاهزة بحلول الساعة <t t-out=\"format_time(time=object.preset_time, "
+"tz=tz, time_format='short', lang_code=lg)\">12:00 مساءً</t></span></div>\n"
+"                    <br/>\n"
+"                    <div>شكراً لك،</div>\n"
+"                    <br/>\n"
+"                    <div t-if=\"object.state == 'paid'\">\n"
+"                        <div>ستجد إيصال الشراء الخاص بك في المشتريات</div>\n"
+"                        <br/>\n"
+"                    </div>\n"
+"                    <t t-out=\"store_name\">اسم المتجر</t>\n"
+"                </div>\n"
+"            "
 
 #. module: pos_self_order
 #: model:ir.model.fields,help:pos_self_order.field_pos_config__self_ordering_default_user_id
@@ -141,7 +209,7 @@ msgstr "نشط"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/combo_page/combo_page.xml:0
 msgid "Add"
-msgstr ""
+msgstr "إضافة"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.res_config_settings_view_form_menu
@@ -165,7 +233,7 @@ msgstr "إضافة إلى عربة التسوق"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/product_list_page/product_list_page.xml:0
 msgid "All"
-msgstr ""
+msgstr "الكل"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -206,7 +274,7 @@ msgstr "متاح في الخدمة الذاتية"
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_preset__available_in_self
 msgid "Available in self"
-msgstr ""
+msgstr "متاح في الخدمة الذاتية"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.res_config_settings_view_form_menu
@@ -227,7 +295,7 @@ msgstr "العودة"
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.res_config_settings_view_form_menu
 msgid "Background"
-msgstr ""
+msgstr "الخلفية"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -253,19 +321,19 @@ msgstr "إلغاء الطلب"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/overrides/screens/ticket_screen/ticket_screen.js:0
 msgid "Cancelled"
-msgstr ""
+msgstr "ملغي"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/category_list_popup/category_list_popup.xml:0
 msgid "Categories"
-msgstr ""
+msgstr "الفئات"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/order_widget/order_widget.js:0
 msgid "Checkout"
-msgstr ""
+msgstr "الدفع والخروج"
 
 #. module: pos_self_order
 #: model:ir.model.fields,help:pos_self_order.field_pos_config__self_ordering_service_mode
@@ -295,13 +363,13 @@ msgstr "اختر"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Choose your time"
-msgstr ""
+msgstr "اختر الوقت الذي تريده"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "City"
-msgstr ""
+msgstr "المدينة"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -343,7 +411,7 @@ msgstr ""
 #. module: pos_self_order
 #: model:ir.model,name:pos_self_order.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "جهة الاتصال"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -369,12 +437,12 @@ msgstr "هلّا أكدت رقم طاولتك؟"
 #. module: pos_self_order
 #: model:ir.model,name:pos_self_order.model_res_country
 msgid "Country"
-msgstr ""
+msgstr "الدولة"
 
 #. module: pos_self_order
 #: model:ir.model,website_form_label:pos_self_order.model_res_partner
 msgid "Create a Customer"
-msgstr ""
+msgstr "Create a Customer"
 
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_self_order_custom_link__create_uid
@@ -449,7 +517,7 @@ msgstr "التوصيل"
 #. module: pos_self_order
 #: model:mail.template,name:pos_self_order.delivery_email_template
 msgid "Delivery: Confirmation order for self"
-msgstr ""
+msgstr "التوصيل: تأكيد الطلب الذاتي"
 
 #. module: pos_self_order
 #: model:ir.model.fields.selection,name:pos_self_order.selection__pos_config__self_ordering_mode__nothing
@@ -526,23 +594,23 @@ msgstr ""
 #. module: pos_self_order
 #: model:ir.model,name:pos_self_order.model_pos_preset
 msgid "Easily load a set of configuration options"
-msgstr ""
+msgstr "تمكن من تحميل مجموعة من خيارات التهيئة بسهولة"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Email"
-msgstr ""
+msgstr "البريد الإلكتروني"
 
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_preset__mail_template_id
 msgid "Email Confirmation"
-msgstr ""
+msgstr "تأكيد البريد الإلكتروني"
 
 #. module: pos_self_order
 #: model:ir.model,name:pos_self_order.model_mail_template
 msgid "Email Templates"
-msgstr ""
+msgstr "قوالب البريد الإلكتروني"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -550,6 +618,8 @@ msgstr ""
 msgid ""
 "Enable QR menu in the Restaurant settings to get QR codes for free on tables."
 msgstr ""
+"قم بتمكين خاصية ”قائمة الاستجابة السريعة (QR)“ في إعدادات المطعم للحصول على "
+"رموز QR على الطاولات مجانًا."
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -688,7 +758,7 @@ msgstr ""
 #: model:ir.model.fields,help:pos_self_order.field_pos_config__self_ordering_image_background_ids
 #: model:ir.model.fields,help:pos_self_order.field_res_config_settings__pos_self_ordering_image_background_ids
 msgid "Image to be displayed in the background"
-msgstr ""
+msgstr "الصورة التي سيتم عرضها في الخلفية"
 
 #. module: pos_self_order
 #: model:ir.model.fields,help:pos_self_order.field_pos_config__self_ordering_image_brand
@@ -726,7 +796,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/overrides/screens/ticket_screen/ticket_screen.js:0
 msgid "Invoiced"
-msgstr ""
+msgstr "تمت الفوترة"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -788,7 +858,7 @@ msgstr "فاتح"
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_category__pos_config_ids
 msgid "Linked PoS Configurations"
-msgstr ""
+msgstr "تهبئة نقطة البيع المرتبطة"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -866,7 +936,7 @@ msgstr "ملاحظة"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: pos_self_order
 #: model:ir.model.fields,help:pos_self_order.field_pos_config__self_ordering_image_brand_name
@@ -895,7 +965,7 @@ msgstr "لم يتم العثور على طلب"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/combo_page/combo_page.xml:0
 msgid "No, thanks"
-msgstr ""
+msgstr "لا، شكراً"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -912,7 +982,7 @@ msgstr "غير متاح في الخدمة الذاتية"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/unavailable_product_dialog/unavailable_product_dialog.xml:0
 msgid "OK"
-msgstr ""
+msgstr "حسناً"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -924,7 +994,7 @@ msgstr "موافق"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/overrides/screens/ticket_screen/ticket_screen.js:0
 msgid "Ongoing"
-msgstr ""
+msgstr "جاري"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -942,7 +1012,7 @@ msgstr "الدفع بعد أن يكون كل شيء متاحاً في وضع ا�
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/unavailable_product_dialog/unavailable_product_dialog.xml:0
 msgid "Oops..."
-msgstr ""
+msgstr "عذراً..."
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.pos_self_order_menu_item
@@ -984,7 +1054,7 @@ msgstr "نفدت الكمية"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/overrides/screens/ticket_screen/ticket_screen.js:0
 msgid "Paid"
-msgstr ""
+msgstr "مدفوع"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1008,7 +1078,7 @@ msgstr "الدفع بعد"
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.res_config_settings_view_form_menu
 msgid "Personalize the Kiosk background"
-msgstr ""
+msgstr "قم بتخصيص خلفية الكشك"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.res_config_settings_view_form_menu
@@ -1023,7 +1093,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Phone"
-msgstr ""
+msgstr "رقم الهاتف"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1116,7 +1186,7 @@ msgstr "المنتج"
 #. module: pos_self_order
 #: model:ir.model,name:pos_self_order.model_product_tag
 msgid "Product Tag"
-msgstr ""
+msgstr "علامة تصنيف المنتج"
 
 #. module: pos_self_order
 #: model:ir.model,name:pos_self_order.model_product_product
@@ -1226,25 +1296,25 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Select"
-msgstr ""
+msgstr "تحديد"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Select a country"
-msgstr ""
+msgstr "قم بتحديد دولة"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/slots_popup/slots_popup.xml:0
 msgid "Select a hour"
-msgstr ""
+msgstr "قم بتحديد ساعة"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Select a state"
-msgstr ""
+msgstr "حدد الولاية"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1267,19 +1337,19 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Select your address"
-msgstr ""
+msgstr "حدد عنوانك الخاص"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/product_page/product_page.xml:0
 msgid "Selection"
-msgstr ""
+msgstr "قائمة خيارات"
 
 #. module: pos_self_order
 #. odoo-python
 #: code:addons/pos_self_order/models/pos_config.py:0
 msgid "Self Order"
-msgstr ""
+msgstr "الطلب الذاتي"
 
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_config__self_ordering_image_brand
@@ -1297,7 +1367,7 @@ msgstr "اسم العلامة التجارية لصورة كشك الطلب ال
 #: model:ir.model.fields,field_description:pos_self_order.field_product_product__self_order_visible
 #: model:ir.model.fields,field_description:pos_self_order.field_product_template__self_order_visible
 msgid "Self Order Visible"
-msgstr ""
+msgstr "الطلبات الذاتية مرئية"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.qr_codes_page
@@ -1353,7 +1423,7 @@ msgstr "الطلب الذاتي:"
 #: model:mail.template,description:pos_self_order.delivery_email_template
 #: model:mail.template,description:pos_self_order.takeout_email_template
 msgid "Sent to customers with the receipt in attachment"
-msgstr ""
+msgstr "يتم إرساله إلى العملاء مع الإيصال في المرفق"
 
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_self_order_custom_link__sequence
@@ -1376,13 +1446,13 @@ msgstr "الخدمة عند الطاولة"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/timeout_popup/timeout_popup.xml:0
 msgid "Session Inactive"
-msgstr ""
+msgstr "الجلسة غير نشطة"
 
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_config__self_ordering_image_background_ids
 #: model:ir.model.fields,field_description:pos_self_order.field_res_config_settings__pos_self_ordering_image_background_ids
 msgid "Set background image"
-msgstr ""
+msgstr "تعيين صورة الخلفية"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.res_config_settings_view_form_menu
@@ -1403,7 +1473,7 @@ msgstr "الحالة"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Street and Number"
-msgstr ""
+msgstr "الشارع والرقم"
 
 #. module: pos_self_order
 #: model:ir.model.fields,field_description:pos_self_order.field_pos_self_order_custom_link__style
@@ -1441,7 +1511,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/popup_table/popup_table.xml:0
 msgid "Table selection"
-msgstr ""
+msgstr "اختيار الطاولة"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.qr_codes_page
@@ -1451,7 +1521,7 @@ msgstr "الطاولة:"
 #. module: pos_self_order
 #: model:mail.template,name:pos_self_order.takeout_email_template
 msgid "Takeout: Confirmation order for self"
-msgstr ""
+msgstr "طلب الطعام إلى الخارج: تأكيد الطلب الذاتي"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1482,7 +1552,7 @@ msgstr "يجب أن يكون المستخدم الافتراضي للطلب ال
 #. odoo-python
 #: code:addons/pos_self_order/models/pos_order.py:0
 msgid "The mail template with xmlid %s has been deleted."
-msgstr ""
+msgstr "لقد تم حذف قالب البريد الإلكتروني مع xmlid%s."
 
 #. module: pos_self_order
 #. odoo-python
@@ -1501,7 +1571,7 @@ msgstr "هذه التركيبة غير موجودة."
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/order_widget/order_widget.xml:0
 msgid "Total"
-msgstr ""
+msgstr "الإجمالي"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1536,7 +1606,7 @@ msgstr "غير مصنف"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/combo_page/combo_page.xml:0
 msgid "Validate your selection"
-msgstr ""
+msgstr "قك بتأكيد خيارك"
 
 #. module: pos_self_order
 #: model:ir.model.fields.selection,name:pos_self_order.selection__pos_self_order_custom_link__style__warning
@@ -1555,13 +1625,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "We need more info"
-msgstr ""
+msgstr "نحتاج إلى المزيد من المعلومات"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/slots_popup/slots_popup.xml:0
 msgid "We'll do everything to be on time!"
-msgstr ""
+msgstr "سنبذل قصارى جهدنا لنصل في الموعد المحدد!"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1585,13 +1655,13 @@ msgstr "نجهز طلبك الآن!"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/slots_popup/slots_popup.xml:0
 msgid "When would you like to receive your orders ?"
-msgstr ""
+msgstr "متى ترغب في استلام طلبك؟"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/eating_location_page/eating_location_page.xml:0
 msgid "Where do you want to eat?"
-msgstr ""
+msgstr "أين ترغب في تناول طعامك؟"
 
 #. module: pos_self_order
 #. odoo-javascript
@@ -1657,37 +1727,37 @@ msgstr "رقم طلبك"
 #: model:mail.template,subject:pos_self_order.delivery_email_template
 #: model:mail.template,subject:pos_self_order.takeout_email_template
 msgid "Your {{ object.config_id.name }} receipt"
-msgstr ""
+msgstr "إيصال {{ object.config_id.name }} الخاص بك"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "Zip"
-msgstr ""
+msgstr "الرمز البريدي"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/unavailable_product_dialog/unavailable_product_dialog.xml:0
 msgid "are"
-msgstr ""
+msgstr " "
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/confirmation_page/confirmation_page.xml:0
 msgid "at the counter"
-msgstr ""
+msgstr "عند الكاشير"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/preset_info_popup/preset_info_popup.xml:0
 msgid "close"
-msgstr ""
+msgstr "إغلاق"
 
 #. module: pos_self_order
 #. odoo-python
 #: code:addons/pos_self_order/models/pos_config.py:0
 msgid "each"
-msgstr ""
+msgstr "كل"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.custom_link_tree
@@ -1703,13 +1773,13 @@ msgstr "https://odoo.com"
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/pages/combo_page/combo_page.xml:0
 msgid "included"
-msgstr ""
+msgstr "شاملة"
 
 #. module: pos_self_order
 #. odoo-javascript
 #: code:addons/pos_self_order/static/src/app/components/unavailable_product_dialog/unavailable_product_dialog.xml:0
 msgid "is"
-msgstr ""
+msgstr " "
 
 #. module: pos_self_order
 #. odoo-javascript

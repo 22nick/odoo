@@ -177,6 +177,12 @@ class ProductProduct(models.Model):
             domain_quant += [('owner_id', '=', owner_id)]
             domain_move_in += [('restrict_partner_id', '=', owner_id)]
             domain_move_out += [('restrict_partner_id', '=', owner_id)]
+        if 'owners' in self.env.context:
+            owners = self.env.context['owners']
+            if owners:
+                domain_quant += [('owner_id', 'in', self.env.context['owners'])]
+            else:
+                domain_quant += [('owner_id', '=', False)]
         if package_id is not None:
             domain_quant += [('package_id', '=', package_id)]
         if dates_in_the_past:
@@ -373,7 +379,7 @@ class ProductProduct(models.Model):
         if self.env.context.get('strict'):
             loc_domain = Domain('location_id', 'in', locations.ids)
             dest_loc_domain = Domain('location_dest_id', 'in', locations.ids)
-            dest_loc_domain_out = Domain('location_dest_id', 'in', locations.ids)
+            dest_loc_domain_out = Domain('location_dest_id', 'not in', locations.ids)
         elif locations:
             paths_domain = Domain.OR(Domain('parent_path', '=like', loc.parent_path + '%') for loc in locations)
             loc_domain = Domain('location_id', 'any', paths_domain)
@@ -1176,6 +1182,8 @@ class ProductTemplate(models.Model):
 
     def action_product_tmpl_forecast_report(self):
         self.ensure_one()
+        if not self.env.user._get_default_warehouse_id():
+            self.env['stock.warehouse']._warehouse_redirect_warning()
         action = self.env["ir.actions.actions"]._for_xml_id('stock.stock_forecasted_product_template_action')
         return action
 

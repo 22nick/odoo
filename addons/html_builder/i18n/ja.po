@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 18:36+0000\n"
-"PO-Revision-Date: 2025-09-29 19:46+0000\n"
+"POT-Creation-Date: 2025-10-08 18:38+0000\n"
+"PO-Revision-Date: 2025-11-04 05:20+0000\n"
 "Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/"
 "html_builder/ja/>\n"
@@ -66,7 +66,7 @@ msgstr "追加"
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/add_product_option.xml:0
 msgid "Add Product"
-msgstr ""
+msgstr "プロダクト追加"
 
 #. module: html_builder
 #. odoo-javascript
@@ -84,31 +84,31 @@ msgstr "Aden"
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/background_option/background_shapes_definition.js:0
 msgid "Airy"
-msgstr ""
+msgstr "軽やか"
 
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/background_option/background_shapes_definition.js:0
 msgid "Airy 01"
-msgstr ""
+msgstr "エアリー 01"
 
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/background_option/background_shapes_definition.js:0
 msgid "Airy 02"
-msgstr ""
+msgstr "エアリー 02"
 
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/background_option/background_shapes_definition.js:0
 msgid "Airy 03"
-msgstr ""
+msgstr "エアリー 03"
 
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/background_option/background_shapes_definition.js:0
 msgid "Airy 04"
-msgstr ""
+msgstr "エアリー 04"
 
 #. module: html_builder
 #. odoo-javascript
@@ -3049,6 +3049,12 @@ msgstr ""
 
 #. module: html_builder
 #. odoo-javascript
+#: code:addons/html_builder/static/src/plugins/image/image_format_option.xml:0
+msgid "WebP compression not supported on this browser"
+msgstr ""
+
+#. module: html_builder
+#. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/background_option/background_position_option.xml:0
 #: code:addons/html_builder/static/src/plugins/separator_option.xml:0
 #: code:addons/html_builder/static/src/plugins/width_option.xml:0
@@ -3083,7 +3089,7 @@ msgstr "追加する記録はありません"
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/image/replace_media_option.xml:0
 msgid "Your URL"
-msgstr "あなたのURL"
+msgstr "URL"
 
 #. module: html_builder
 #. odoo-javascript
@@ -3091,13 +3097,14 @@ msgstr "あなたのURL"
 msgid ""
 "Your custom snippet was successfully saved as %s. Find it in your snippets "
 "collection."
-msgstr ""
+msgstr "カスタムスニペットは「%s」として正常に保存されました。スニペットコレクション"
+"からご確認ください。"
 
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/background_option/background_position_option.xml:0
 msgid "auto"
-msgstr ""
+msgstr "自動"
 
 #. module: html_builder
 #. odoo-javascript

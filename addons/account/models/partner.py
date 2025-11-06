@@ -45,7 +45,6 @@ class AccountFiscalPosition(models.Model):
         column1='account_fiscal_position_id',
         column2='account_tax_id',
         string='Taxes',
-        context={'active_test': False},
     )
     tax_map = fields.Binary(compute='_compute_tax_map')
     note = fields.Html('Notes', translate=True, help="Legal mentions that have to be printed on the invoices.")
@@ -329,7 +328,10 @@ class ResPartner(models.Model):
     def _compute_fiscal_country_codes(self):
         for record in self:
             allowed_companies = record.company_id or self.env.companies
-            record.fiscal_country_codes = ",".join(allowed_companies.mapped('account_fiscal_country_id.code'))
+            country_codes = allowed_companies.mapped('account_fiscal_country_id.code')
+            if record.country_code:
+                country_codes.append(record.country_code)
+            record.fiscal_country_codes = ",".join(country_codes)
 
     @api.depends('company_id')
     @api.depends_context('allowed_company_ids')

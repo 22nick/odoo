@@ -18,7 +18,7 @@ from odoo.tools.date_utils import float_to_time
 from odoo.fields import Command, Date, Domain
 from odoo.tools.float_utils import float_round, float_compare
 from odoo.tools.intervals import Intervals
-from odoo.tools.misc import format_date
+from odoo.tools.misc import clean_context, format_date
 from odoo.tools.translate import _
 
 _logger = logging.getLogger(__name__)
@@ -257,16 +257,14 @@ class HrLeave(models.Model):
         env_company_calendar = self.env.company.resource_calendar_id
         for leave in self:
             calendar = leave.resource_calendar_id or env_company_calendar
-            if not (leave.request_unit_hours
-                and leave.employee_id
-                and leave.request_date_from
-                and leave.request_date_to
-                and calendar):
-                continue
-
-            hour_from, hour_to = leave._get_hour_from_to(leave.request_date_from, leave.request_date_to)
-            leave.request_hour_from = hour_from
-            leave.request_hour_to = hour_to
+            if (not leave.request_unit_hours
+                    and leave.employee_id
+                    and leave.request_date_from
+                    and leave.request_date_to
+                    and calendar):
+                hour_from, hour_to = leave._get_hour_from_to(leave.request_date_from, leave.request_date_to)
+                leave.request_hour_from = hour_from
+                leave.request_hour_to = hour_to
 
     @api.depends('employee_id', 'leave_type_request_unit', 'request_date_from', 'request_date_to',
             'request_hour_from', 'request_hour_to', 'request_date_from_period', 'request_date_to_period')
@@ -1009,15 +1007,17 @@ Versions:
         meeting_holidays = holidays.filtered(lambda l: l.holiday_status_id.create_calendar_meeting)
         meetings = self.env['calendar.event']
         if meeting_holidays:
+            Meeting = self.env['calendar.event']
+            Meeting.check_access('create')
             meeting_values_for_user_id = meeting_holidays._prepare_holidays_meeting_values()
             Meeting = self.env['calendar.event']
             for user_id, meeting_values in meeting_values_for_user_id.items():
-                meetings += Meeting.with_user(user_id or self.env.uid).with_context(
+                meetings += Meeting.with_user(user_id or self.env.uid).sudo().with_context(clean_context({**self.env.context, **dict(
                                 allowed_company_ids=[],
                                 no_mail_to_attendees=True,
                                 calendar_no_videocall=True,
                                 active_model=self._name
-                            ).create(meeting_values)
+                            )})).create(meeting_values)
         Holiday = self.env['hr.leave']
         for meeting in meetings:
             Holiday.browse(meeting.res_id).meeting_id = meeting

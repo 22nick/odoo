@@ -8,13 +8,14 @@
 # Martin Trigaux, 2022
 # Malaz Abuidris <msea@odoo.com>, 2023
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-30 18:35+0000\n"
-"PO-Revision-Date: 2025-09-16 13:43+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2025-10-08 18:37+0000\n"
+"PO-Revision-Date: 2025-10-13 12:16+0000\n"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: Arabic <https://translate.odoo.com/projects/odoo-19/"
 "website_event/ar/>\n"
 "Language: ar\n"
@@ -48,7 +49,7 @@ msgstr "(فقط"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid ", at"
-msgstr ""
+msgstr "، في"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
@@ -63,7 +64,7 @@ msgstr "<b>النهاية</b>"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "<b>Sold Out</b>"
-msgstr ""
+msgstr "<b>نفدت الكمية</b>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_complete
@@ -73,12 +74,12 @@ msgstr "<b>البداية</b>"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "<em>Hidden for visitors</em>"
-msgstr ""
+msgstr "<em>مخفي للزائرين</em>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "<em>Registrations <b>Closed</b></em>"
-msgstr ""
+msgstr "<em>تم إغلاق <b>التسجيلات</b></em>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_quotes
@@ -105,12 +106,12 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_slot_registration
 msgid "<i class=\"fa fa-caret-left me-2\"/><small>Previous</small>"
-msgstr ""
+msgstr "<i class=\"fa fa-caret-left me-2\"/><small>السابق</small>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "<i class=\"fa fa-check me-2\" role=\"img\"/>Registered"
-msgstr ""
+msgstr "<i class=\"fa fa-check me-2\" role=\"img\"/>التسجيلات"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
@@ -128,6 +129,8 @@ msgid ""
 "<i class=\"fa fa-discord text-discord\" aria-label=\"Discord\" "
 "title=\"Discord\"/>"
 msgstr ""
+"<i class=\"fa fa-discord text-discord\" aria-label=\"Discord\" title="
+"\"Discord \"/>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
@@ -194,7 +197,7 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "<i class=\"fa fa-map-marker\" title=\"Location\"/> Online event"
-msgstr ""
+msgstr "<i class=\"fa fa-map-marker\" title=\"Location\"/> فعالية عبر الإنترنت"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
@@ -208,7 +211,7 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
 msgid "<i class=\"fa fa-twitter text-twitter\" aria-label=\"X\" title=\"X\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-twitter text-twitter\" aria-label=\"X\" title=\"X\"/>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
@@ -225,26 +228,28 @@ msgid ""
 "<i class=\"oi oi-chevron-left\"/>\n"
 "                <span>All Events</span>"
 msgstr ""
+"<i class=\"oi oi-chevron-left\"/>\n"
+"                <span>كافة الفعاليات</span>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "<small class=\"fw-bold\">Ends</small>"
-msgstr ""
+msgstr "<small class=\"fw-bold\">ينتهي في</small>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "<small class=\"fw-bold\">Starts</small>"
-msgstr ""
+msgstr "<small class=\"fw-bold\">يبدأ في</small>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "<small class=\"text-muted\">Add to calendar:</small>"
-msgstr ""
+msgstr "<small class=\"text-muted\">إضافة إلى التقويم:</small>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_slot_registration
 msgid "<small>Next</small><i class=\"fa fa-caret-right ms-2\"/>"
-msgstr ""
+msgstr "<small>التالي</small><i class=\"fa fa-caret-right ms-2\"/>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_speaker_bio
@@ -258,7 +263,7 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "<span class=\"fa fa-plus me-1\"/> Create an Event"
-msgstr ""
+msgstr "<span class=\"fa fa-plus me-1\"/> أنشئ فعالية"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_dynamic_snippet_events_single_entry_preview_data
@@ -340,6 +345,11 @@ msgid ""
 "Out\n"
 "                                    </span>"
 msgstr ""
+"<span itemprop=\"availability\" content=\"http://schema.org/SoldOut\" class"
+"=\"text-danger\">\n"
+"                                        <i class=\"fa fa-ban me-2\"/>نفدت "
+"الكمية\n"
+"                                    </span>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_dynamic_snippet_events_single_aside_preview_data
@@ -416,6 +426,13 @@ msgid ""
 "                                </span>\n"
 "                            </time>"
 msgstr ""
+"<time class=\"text-white\" datetime=\"2024-08-05 07:00:00\">\n"
+"                                <span>July 26, 2024</span>\n"
+"                                <span class=\"s_events_event_time\">\n"
+"                                    - <span>9:00 AM</span>\n"
+"                                    (Europe/Brussels)\n"
+"                                </span>\n"
+"                            </time>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_preview_data
@@ -428,6 +445,13 @@ msgid ""
 "                                </span>\n"
 "                            </time>"
 msgstr ""
+"<time class=\"text-white\" datetime=\"2024-08-10 08:00:00\">\n"
+"                                <span>October 24, 2024</span>\n"
+"                                <span class=\"s_events_event_time\">\n"
+"                                    - <span>1:15 AM</span>\n"
+"                                    (Europe/Brussels)\n"
+"                                </span>\n"
+"                            </time>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_preview_data
@@ -440,6 +464,13 @@ msgid ""
 "                                </span>\n"
 "                            </time>"
 msgstr ""
+"<time class=\"text-white\" datetime=\"2024-11-08 20:15:00\">\n"
+"                                <span>November 23, 2024</span>\n"
+"                                <span class=\"s_events_event_time\">\n"
+"                                    - <span>8:15 PM</span>\n"
+"                                    (Europe/Brussels)\n"
+"                                </span>\n"
+"                            </time>"
 
 #. module: website_event
 #: model:event.question.answer,name:website_event.event_question_about_1_answer_2
@@ -465,37 +496,37 @@ msgstr "من نحن"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "Add to Google"
-msgstr ""
+msgstr "إضافة إلى Google"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_calendar_links
 msgid "Add to Google Agenda"
-msgstr ""
+msgstr "إضافة إلى جدول أعمال Google"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "Add to Outlook"
-msgstr ""
+msgstr "إضافة إلى Outlook"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "Add to iCal"
-msgstr ""
+msgstr "إضافة إلى iCal"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_calendar_links
 msgid "Add to iCal/Outlook"
-msgstr ""
+msgstr "إضافة إلى iCal/Outlook"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_calendar_links
 msgid "Add to your calendar"
-msgstr ""
+msgstr "إضافة إلى التقويم الخاص بك"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_topbar
 msgid "All"
-msgstr ""
+msgstr "الكل"
 
 #. module: website_event
 #. odoo-python
@@ -562,12 +593,12 @@ msgstr "الكاتب"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.navbar
 msgid "Back to All Events"
-msgstr ""
+msgstr "العودة إلى كافة الفعاليات"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.navbar
 msgid "Back to {{0}}"
-msgstr ""
+msgstr "العودة إلى {{0}}"
 
 #. module: website_event
 #: model:event.question.answer,name:website_event.event_question_about_0_answer_1
@@ -585,7 +616,7 @@ msgstr "ورشة عمل للأعمال"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Calendar links"
-msgstr ""
+msgstr "روابط التقويم"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__can_publish
@@ -609,7 +640,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/events_list_page_option.xml:0
 msgid "Card design"
-msgstr ""
+msgstr "تصميم البطاقة"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.display_timer_alert_widget
@@ -657,7 +688,7 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_configure_tickets_button
 msgid "Configure event tickets"
-msgstr ""
+msgstr "قم بتهئية تذاكر الفعالية"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
@@ -680,7 +711,7 @@ msgstr "الدول"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Cover Position"
-msgstr ""
+msgstr "موقع الغلاف"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__cover_properties
@@ -722,7 +753,7 @@ msgstr "التاريخ (من الأقدم إلى الأحدث)"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Dates"
-msgstr ""
+msgstr "التواريخ"
 
 #. module: website_event
 #: model:ir.model.fields,help:website_event.field_event_event__website_visibility
@@ -732,6 +763,10 @@ msgid ""
 "            Note that the EventEvent is however always available via its "
 "link."
 msgstr ""
+"يحدد ظهور الفعالية في الموقع الإلكتروني وفي عمليات البحث.\n"
+"\n"
+"            ولكن، يُرجى العلم أن الفعالية تكون متاحة دائماً عن طريق رابط "
+"الفعالية."
 
 #. module: website_event
 #. odoo-javascript
@@ -773,12 +808,12 @@ msgstr "لا تنسَ الضغط على <b>حفظ</b> عند انتهائك."
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_ticket_access
 msgid "Download All Tickets"
-msgstr ""
+msgstr "تنزيل كافة التذاكر"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_ticket_access
 msgid "Download Tickets"
-msgstr ""
+msgstr "تنزيل التذاكر"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_card_preview_data
@@ -806,12 +841,12 @@ msgstr "تاريخ الفعالية"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_complete
 msgid "Event Details"
-msgstr ""
+msgstr "تفاصيل الفعالية"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "Event Info"
-msgstr ""
+msgstr "معلومات الفعالية"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
@@ -842,7 +877,7 @@ msgstr "التسجيل للفعالية"
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__event_register_url
 msgid "Event Registration Link"
-msgstr ""
+msgstr "رابط التسجيل للفعالية"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_website_visitor__event_registration_ids
@@ -858,7 +893,7 @@ msgstr "العنوان الفرعي للفعالية"
 #. module: website_event
 #: model:ir.model,name:website_event.model_event_tag
 msgid "Event Tag"
-msgstr ""
+msgstr "علامة تصنيف الفعالية"
 
 #. module: website_event
 #: model:ir.model,name:website_event.model_event_tag_category
@@ -912,7 +947,7 @@ msgstr "الفعاليات"
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_card_preview_data
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_preview_data
 msgid "Excellence in Achievement Awards"
-msgstr ""
+msgstr "التميز في صنع جوائز الإنجازات"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_ticket_registration
@@ -922,32 +957,32 @@ msgstr "منتهي الصلاحية"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_location
 msgid "Filter by Country"
-msgstr ""
+msgstr "الفلترة حسب الدولة"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_time
 msgid "Filter by Date"
-msgstr ""
+msgstr "الفلترة حسب التاريخ"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_topbar
 msgid "Filter by category"
-msgstr ""
+msgstr "التصفية حسب الفئة"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_location
 msgid "Filter by country"
-msgstr ""
+msgstr "الفلترة حسب الدولة"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_time
 msgid "Filter by date"
-msgstr ""
+msgstr "التصفية حسب التاريخ"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_topbar
 msgid "Filters"
-msgstr ""
+msgstr "عوامل التصفية"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
@@ -959,7 +994,7 @@ msgstr "تعرف على آراء الجمهور عن هذه الفعالية، �
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Fixed Sidebar"
-msgstr ""
+msgstr "شريط جانبي ثابت"
 
 #. module: website_event
 #. odoo-javascript
@@ -976,7 +1011,7 @@ msgstr "سيظهر المحتوى التالي في كافة الفعاليات.
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__footer_visible
 msgid "Footer Visible"
-msgstr ""
+msgstr "التذييل مرئي"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
@@ -986,13 +1021,13 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "Get directions"
-msgstr ""
+msgstr "احصل على الاتجاهات"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_calendar_links
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "Google Agenda"
-msgstr ""
+msgstr "جدول أعمال Google"
 
 #. module: website_event
 #. odoo-python
@@ -1011,18 +1046,18 @@ msgstr "الشبكة"
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_card_preview_data
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_preview_data
 msgid "Harmony Under the Stars"
-msgstr ""
+msgstr "النغم تحت النجوم"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__header_visible
 msgid "Header Visible"
-msgstr ""
+msgstr "الترويسة مرئية"
 
 #. module: website_event
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Hidden (visitor only)"
-msgstr ""
+msgstr "مخفي (الزوار فقط)"
 
 #. module: website_event
 #. odoo-python
@@ -1035,7 +1070,7 @@ msgstr "بطولة الهوكي"
 #: code:addons/website_event/models/event_event.py:0
 #: model:ir.model.fields.selection,name:website_event.selection__website_event_menu__menu_type__introduction
 msgid "Home"
-msgstr ""
+msgstr "الرئيسية"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_dynamic_snippet_events_single_card_preview_data
@@ -1077,13 +1112,13 @@ msgstr "المُعرف"
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_card_preview_data
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_preview_data
 msgid "Innovations in Technology and Society"
-msgstr ""
+msgstr "الابتكارات التكنولوجية والمجتمعية"
 
 #. module: website_event
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Inside content"
-msgstr ""
+msgstr "المحتوى الداخلي"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.template_intro
@@ -1135,12 +1170,12 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_ticket_access
 msgid "Join online"
-msgstr ""
+msgstr "الانضمام عبر الإنترنت"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_ticket_access
 msgid "Join online <i class=\"ms-1 fa fa-globe\"/>"
-msgstr ""
+msgstr "الانضمام عبر الإنترنت <i class=\"ms-1 fa fa-globe\"/>"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_website_event_menu__write_uid
@@ -1184,7 +1219,7 @@ msgstr "الموقع"
 #. module: website_event
 #: model:ir.model.fields.selection,name:website_event.selection__event_event__website_visibility__logged_users
 msgid "Logged Users"
-msgstr ""
+msgstr "المستخدمون المسجلون"
 
 #. module: website_event
 #. odoo-javascript
@@ -1242,7 +1277,7 @@ msgstr "فعالية جديدة"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_slot_registration
 msgid "Next"
-msgstr ""
+msgstr "التالي"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
@@ -1258,7 +1293,7 @@ msgstr "الفعاليات التالية"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "No Future Dates Available"
-msgstr ""
+msgstr "لا توجد مواعيد متوفرة في المستقبل"
 
 #. module: website_event
 #: model_terms:ir.actions.act_window,help:website_event.website_event_menu_action
@@ -1268,12 +1303,12 @@ msgstr "لا توجد عناصر قائمة للموقع الإلكتروني ب
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "No event matching your search criteria could be found."
-msgstr ""
+msgstr "لم يتم العثور على أي فعالية تطابق معايير بحثك."
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "No events scheduled yet"
-msgstr ""
+msgstr "لا توجد فعاليات مجدولة بعد"
 
 #. module: website_event
 #: model_terms:ir.actions.act_window,help:website_event.event_registration_action_from_visitor
@@ -1293,7 +1328,7 @@ msgstr "غير منشور"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_location
 msgid "Online Events"
-msgstr ""
+msgstr "الفعاليات عبر الإنترنت"
 
 #. module: website_event
 #. odoo-python
@@ -1311,12 +1346,12 @@ msgstr "منظِّم"
 #. module: website_event
 #: model:ir.model.fields.selection,name:website_event.selection__website_event_menu__menu_type__other
 msgid "Other"
-msgstr ""
+msgstr "غير ذلك"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__other_menu_ids
 msgid "Other Menus"
-msgstr ""
+msgstr "القوائم الأخرى"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_photos
@@ -1332,7 +1367,7 @@ msgstr "موقعنا الإلكتروني"
 #: model_terms:ir.ui.view,arch_db:website_event.event_calendar_links
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "Outlook"
-msgstr ""
+msgstr "Outlook"
 
 #. module: website_event
 #. odoo-python
@@ -1357,17 +1392,17 @@ msgstr "الصور"
 #: code:addons/website_event/models/event_event.py:0
 #: model:ir.model.fields.selection,name:website_event.selection__website_event_menu__menu_type__register
 msgid "Practical"
-msgstr ""
+msgstr "عملي"
 
 #. module: website_event
 #: model:ir.model.fields.selection,name:website_event.selection__event_event__website_visibility__public
 msgid "Public"
-msgstr ""
+msgstr "عام"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_event_view_form
 msgid "Publish"
-msgstr ""
+msgstr "نشر"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_event_view_search
@@ -1459,13 +1494,13 @@ msgstr "تم تأكيد التسجيل!"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "Registration failed! Suspicious activity detected by Google reCaptcha."
-msgstr ""
+msgstr "فشلت عملية التسجيل! تم استشعار نشاط مريب عن طريق Google reCaptcha."
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_ticket_registration
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "Registration failed! These tickets are not available anymore."
-msgstr ""
+msgstr "فشلت عملية التسجيل! لم تعد تلك التذاكر متاحة بعد الآن."
 
 #. module: website_event
 #: model:ir.actions.act_window,name:website_event.event_registration_action_from_visitor
@@ -1491,7 +1526,7 @@ msgstr "لم تُفتح التسجيلات بعد"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "Registrations will open on"
-msgstr ""
+msgstr "سيفتح التسجيل في"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__start_remaining
@@ -1513,13 +1548,13 @@ msgstr "البحث"
 #: model:ir.model.fields,help:website_event.field_event_tag__website_id
 #: model:ir.model.fields,help:website_event.field_event_tag_category__website_id
 msgid "Restrict to a specific website."
-msgstr ""
+msgstr "التقييد لموقع إلكتروني محدد"
 
 #. module: website_event
 #. odoo-python
 #: code:addons/website_event/models/event_event.py:0
 msgid "Rooms"
-msgstr ""
+msgstr "الغرف"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__is_seo_optimized
@@ -1563,12 +1598,12 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_topbar
 msgid "Search an event.."
-msgstr ""
+msgstr "البحث عن فعالية.."
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_slot_registration
 msgid "Select a Date:"
-msgstr ""
+msgstr "قم بتحديد التاريخ:"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_registration_view_search
@@ -1594,7 +1629,7 @@ msgstr ""
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "Share"
-msgstr ""
+msgstr "مشاركة"
 
 #. module: website_event
 #. odoo-javascript
@@ -1612,7 +1647,7 @@ msgstr "إظهار في الموقع الإلكتروني"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/dynamic_snippet_events_option.xml:0
 msgid "Show time"
-msgstr ""
+msgstr "إظهار الوقت"
 
 #. module: website_event
 #. odoo-javascript
@@ -1624,12 +1659,12 @@ msgstr "الشريط الجانبي"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Sidebar Blocks"
-msgstr ""
+msgstr "الكتل البرمجة الإنشائية للشريط الجانبي"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_slot_registration
 msgid "Slots"
-msgstr ""
+msgstr "الفترات الزمنية"
 
 #. module: website_event
 #: model:event.question.answer,name:website_event.event_question_about_0_answer_0
@@ -1664,27 +1699,27 @@ msgstr "القائمة الفرعية (محدد)"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/events_list_page_option.xml:0
 msgid "Template badge"
-msgstr ""
+msgstr "شارة القالب"
 
 #. module: website_event
 #: model:ir.model.fields,help:website_event.field_event_event__website_absolute_url
 #: model:ir.model.fields,help:website_event.field_event_tag__website_absolute_url
 #: model:ir.model.fields,help:website_event.field_event_tag_category__website_absolute_url
 msgid "The full absolute URL to access the document through the website."
-msgstr ""
+msgstr "رابطURL الكامل المطلق للوصول إلى المستند من خلال الموقع الإلكتروني."
 
 #. module: website_event
 #: model:ir.model.fields,help:website_event.field_event_event__website_url
 #: model:ir.model.fields,help:website_event.field_event_tag__website_url
 #: model:ir.model.fields,help:website_event.field_event_tag_category__website_url
 msgid "The full relative URL to access the document through the website."
-msgstr ""
+msgstr "رابطURL الكامل ذو الصلة للوصول إلى المستند من خلال الموقع الإلكتروني."
 
 #. module: website_event
 #. odoo-python
 #: code:addons/website_event/models/event_event.py:0
 msgid "The website must be from the same company as the event."
-msgstr ""
+msgstr "يجب أن يكون الموقع الإلكتروني من نفس شركة الفعالية."
 
 #. module: website_event
 #. odoo-python
@@ -1717,7 +1752,7 @@ msgstr "رقم التذكرة"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_ticket_registration
 msgid "Tickets"
-msgstr ""
+msgstr "التذاكر"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.dynamic_filter_template_event_event_single_offset
@@ -1735,7 +1770,7 @@ msgstr "اليوم"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Top"
-msgstr ""
+msgstr "الأعلى"
 
 #. module: website_event
 #. odoo-javascript
@@ -1757,7 +1792,7 @@ msgstr "الفعاليات القادمة"
 #. module: website_event
 #: model:website.snippet.filter,name:website_event.website_snippet_filter_event_list_unfinished
 msgid "Upcoming and Ongoing Events"
-msgstr ""
+msgstr "الفعاليات القادمة والجارية"
 
 #. module: website_event
 #. odoo-javascript
@@ -1783,7 +1818,7 @@ msgstr "نباتي"
 #. module: website_event
 #: model:ir.model.fields.selection,name:website_event.selection__event_event__website_visibility__link
 msgid "Via a Link"
-msgstr ""
+msgstr "عن طريق الرابط"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_website_event_menu__view_id
@@ -1793,17 +1828,17 @@ msgstr "أداة العرض"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "View More"
-msgstr ""
+msgstr "عرض المزيد"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_event_view_form
 msgid "Visibility"
-msgstr ""
+msgstr "الظهور"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__is_visible_on_website
 msgid "Visible On Website"
-msgstr ""
+msgstr "مرئي على الموقع الإلكتروني"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__website_published
@@ -1820,12 +1855,12 @@ msgstr "زائر"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "We couldn't find any event matching your search for:"
-msgstr ""
+msgstr "لم نتمكن من العثور على أي فعالية تطابق بحثك لـ:"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "We couldn't find any event scheduled at this moment."
-msgstr ""
+msgstr "لم نتمكن من العثور على أي فعالية مجدولة في الوقت الحالي."
 
 #. module: website_event
 #: model:ir.model,name:website_event.model_website
@@ -1841,7 +1876,7 @@ msgstr "الموقع الإلكتروني"
 #: model:ir.model.fields,field_description:website_event.field_event_tag__website_absolute_url
 #: model:ir.model.fields,field_description:website_event.field_event_tag_category__website_absolute_url
 msgid "Website Absolute URL"
-msgstr ""
+msgstr "رابط URL المطلق للموقع الإلكتروني"
 
 #. module: website_event
 #: model:ir.model,name:website_event.model_website_event_menu
@@ -1892,7 +1927,7 @@ msgstr "رابط URL للموقع الإلكتروني"
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__website_visibility
 msgid "Website Visibility"
-msgstr ""
+msgstr "الظهور على الموقع الإلكتروني"
 
 #. module: website_event
 #: model:ir.model,name:website_event.model_website_visitor
@@ -1968,27 +2003,27 @@ msgstr "متاح)"
 #. odoo-python
 #: code:addons/website_event/models/event_event.py:0
 msgid "date_end"
-msgstr ""
+msgstr "date_end"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "iCal"
-msgstr ""
+msgstr "iCal"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "time)"
-msgstr ""
+msgstr ")"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "w-100"
-msgstr ""
+msgstr "w-100"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "w-100 py-sm-3 mt-sm-2"
-msgstr ""
+msgstr "w-100 py-sm-3 mt-sm-2"
 
 #~ msgid "(Ref:"
 #~ msgstr "(المرجع: "

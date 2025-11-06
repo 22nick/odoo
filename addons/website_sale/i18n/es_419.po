@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-03 18:37+0000\n"
-"PO-Revision-Date: 2025-10-03 02:31+0000\n"
+"POT-Creation-Date: 2025-10-08 18:37+0000\n"
+"PO-Revision-Date: 2025-10-30 17:22+0000\n"
 "Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
 "Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
 "odoo-19/website_sale/es_419/>\n"
@@ -307,7 +307,7 @@ msgstr "<i class=\"fa fa-print me-2\"/>Imprimir"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.quick_reorder_button
 msgid "<i class=\"fa fa-rotate-left me-2\"/>Quick reorder"
-msgstr "<i class=\"fa fa-rotate-left me-2\"/>Reordendo rápido"
+msgstr "<i class=\"fa fa-rotate-left me-2\"/>Reordenado rápido"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.sale_order_re_order_btn
@@ -1837,7 +1837,7 @@ msgstr "Comparar al precio"
 #: model:ir.model.fields,field_description:website_sale.field_res_config_settings__group_product_price_comparison
 #: model:res.groups,name:website_sale.group_product_price_comparison
 msgid "Comparison Price"
-msgstr "Precio de comparación"
+msgstr "Precio comparativo"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_desks_components
@@ -2322,12 +2322,12 @@ msgstr "Resumen"
 #: code:addons/website_sale/static/src/website_builder/product_page_option.xml:0
 #: model:ir.model.fields.selection,name:website_sale.selection__res_config_settings__account_on_checkout__disabled
 msgid "Disabled"
-msgstr "Deshabilitada"
+msgstr "Deshabilitado"
 
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__website__account_on_checkout__disabled
 msgid "Disabled (buy as guest)"
-msgstr "Deshabilitar (comprar como invitado)"
+msgstr "Deshabilitado (comprar como invitado)"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.coupon_form
@@ -2515,7 +2515,7 @@ msgstr "Cajones"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.snippets
 msgid "Dynamic Content"
-msgstr ""
+msgstr "Contenido dinámico"
 
 #. module: website_sale
 #: model:ir.model.fields,field_description:website_sale.field_website__shop_extra_field_ids
@@ -3221,7 +3221,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_sale/controllers/main.py:0
 msgid "Invalid category."
-msgstr ""
+msgstr "Categoría inválida."
 
 #. module: website_sale
 #. odoo-python
@@ -3487,7 +3487,7 @@ msgstr "Usuarios que iniciaron sesión"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.quick_reorder_button
 msgid "Login to reorder"
-msgstr ""
+msgstr "Inicia sesión para volver a ordenar"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_boxes_luxury
@@ -3735,7 +3735,7 @@ msgstr "No se encontró ningún carrito abandonado"
 #: code:addons/website_sale/static/src/js/website_sale_utils.js:0
 #: model_terms:ir.ui.view,arch_db:website_sale.quick_reorder_button
 msgid "No previous products available for reorder."
-msgstr ""
+msgstr "No hay productos previos disponibles para volver a ordenar."
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
@@ -3886,7 +3886,7 @@ msgstr "Tarjetas de producto"
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__product_ribbon__assign__sale
 msgid "On Sale"
-msgstr ""
+msgstr "Con descuento"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.product_pricelist_item_form
@@ -3951,7 +3951,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_design_panel.xml:0
 msgid "Opacity of the overlay"
-msgstr ""
+msgstr "Opacidad de la superposición"
 
 #. module: website_sale
 #. odoo-python
@@ -4063,7 +4063,7 @@ msgstr "Agotado"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/products_design_panel.xml:0
 msgid "Overlay"
-msgstr ""
+msgstr "Superposición"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.packaging_title
@@ -4073,7 +4073,7 @@ msgstr "Embalaje"
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_website_page
 msgid "Page"
-msgstr ""
+msgstr "Página"
 
 #. module: website_sale
 #. odoo-javascript
@@ -4493,7 +4493,7 @@ msgstr "Plantilla del producto"
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_template_attribute_line
 msgid "Product Template Attribute Line"
-msgstr "Linea de atributo de la plantilla de producto"
+msgstr "Línea del atributo de la plantilla del producto"
 
 #. module: website_sale
 #: model:ir.model,name:website_sale.model_product_template_attribute_value
@@ -4804,7 +4804,7 @@ msgstr "Quitar del carrito"
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.dynamic_filter_template_product_product_products_item
 msgid "Remove from recently viewed"
-msgstr ""
+msgstr "Eliminar de los elementos recientemente vistos"
 
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.cart_lines_quantity
@@ -6126,7 +6126,7 @@ msgstr "Historial de vistas del producto"
 #. odoo-javascript
 #: code:addons/website_sale/static/src/website_builder/add_to_cart_option.xml:0
 msgid "Visitor's Choice"
-msgstr "Selección del visitante"
+msgstr "Elección del visitante"
 
 #. module: website_sale
 #: model:product.public.category,name:website_sale.public_category_furnitures_wardrobes
@@ -6319,7 +6319,7 @@ msgstr "¿Qué debe ocurrir después de hacer clic en \"Agregar al carrito\"?"
 #. module: website_sale
 #: model:ir.model.fields.selection,name:website_sale.selection__product_ribbon__assign__new
 msgid "When New"
-msgstr ""
+msgstr "Cuando sea Nuevo"
 
 #. module: website_sale
 #. odoo-python
@@ -6673,7 +6673,7 @@ msgstr ""
 #. module: website_sale
 #: model_terms:ir.ui.view,arch_db:website_sale.products
 msgid "placeholder"
-msgstr "marcador de posición"
+msgstr "placeholder"
 
 #. module: website_sale
 #. odoo-python

@@ -3,13 +3,14 @@
 # * cloud_storage_azure
 #
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-26 08:55+0000\n"
-"PO-Revision-Date: 2025-09-17 17:31+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2025-10-08 18:37+0000\n"
+"PO-Revision-Date: 2025-10-22 11:17+0000\n"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/"
 "cloud_storage_azure/ru/>\n"
 "Language: ru\n"
@@ -21,6 +22,12 @@ msgstr ""
 "X-Generator: Weblate 5.12.2\n"
 
 #. module: cloud_storage_azure
+#. odoo-python
+#: code:addons/cloud_storage_azure/models/ir_attachment.py:0
+msgid "%s is not a valid Azure Blob Storage URL."
+msgstr ""
+
+#. module: cloud_storage_azure
 #: model:ir.model,name:cloud_storage_azure.model_ir_attachment
 msgid "Attachment"
 msgstr "Вложение"
@@ -28,37 +35,37 @@ msgstr "Вложение"
 #. module: cloud_storage_azure
 #: model:ir.model.fields,field_description:cloud_storage_azure.field_res_config_settings__cloud_storage_azure_account_name
 msgid "Azure Account Name"
-msgstr ""
+msgstr "Имя аккаунта Azure"
 
 #. module: cloud_storage_azure
 #: model:ir.model.fields,field_description:cloud_storage_azure.field_res_config_settings__cloud_storage_azure_client_id
 msgid "Azure Client ID"
-msgstr ""
+msgstr "ID клиента Azure"
 
 #. module: cloud_storage_azure
 #: model:ir.model.fields,field_description:cloud_storage_azure.field_res_config_settings__cloud_storage_azure_client_secret
 msgid "Azure Client Secret"
-msgstr ""
+msgstr "Секрет клиента Azure"
 
 #. module: cloud_storage_azure
 #: model:ir.model.fields.selection,name:cloud_storage_azure.selection__res_config_settings__cloud_storage_provider__azure
 msgid "Azure Cloud Storage"
-msgstr ""
+msgstr "Облачное хранилище Azure"
 
 #. module: cloud_storage_azure
 #: model:ir.model.fields,field_description:cloud_storage_azure.field_res_config_settings__cloud_storage_azure_container_name
 msgid "Azure Container Name"
-msgstr ""
+msgstr "Имя контейнера Azure"
 
 #. module: cloud_storage_azure
 #: model:ir.model.fields,field_description:cloud_storage_azure.field_res_config_settings__cloud_storage_azure_tenant_id
 msgid "Azure Tenant ID"
-msgstr ""
+msgstr "ID клиента Azure"
 
 #. module: cloud_storage_azure
 #: model:ir.model.fields,field_description:cloud_storage_azure.field_res_config_settings__cloud_storage_provider
 msgid "Cloud Storage Provider for new attachments"
-msgstr ""
+msgstr "Провайдер облачного хранилища для новых вложений"
 
 #. module: cloud_storage_azure
 #: model:ir.model,name:cloud_storage_azure.model_res_config_settings
@@ -66,9 +73,21 @@ msgid "Config Settings"
 msgstr "Параметры конфигурации"
 
 #. module: cloud_storage_azure
+#: model:ir.model.fields,field_description:cloud_storage_azure.field_ir_attachment__display_name
+#: model:ir.model.fields,field_description:cloud_storage_azure.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: cloud_storage_azure
+#: model:ir.model.fields,field_description:cloud_storage_azure.field_ir_attachment__id
+#: model:ir.model.fields,field_description:cloud_storage_azure.field_res_config_settings__id
+msgid "ID"
+msgstr ""
+
+#. module: cloud_storage_azure
 #: model:ir.model.fields,field_description:cloud_storage_azure.field_res_config_settings__cloud_storage_azure_invalidate_user_delegation_key
 msgid "Invalidate Cached Azure User Delegation Key"
-msgstr ""
+msgstr "Сбросить кэшированный ключ делегирования пользователя Azure"
 
 #. module: cloud_storage_azure
 #. odoo-python
@@ -77,6 +96,8 @@ msgid ""
 "Some Azure attachments are in use, please migrate their cloud storages "
 "before disable this module"
 msgstr ""
+"Некоторые вложения Azure используются – перенесите их хранилища перед "
+"отключением модуля"
 
 #. module: cloud_storage_azure
 #. odoo-python
@@ -85,6 +106,8 @@ msgid ""
 "The connection string is not allowed to download blobs from the container.\n"
 "%s"
 msgstr ""
+"Строка подключения не разрешает скачивать BLOB-объекты из контейнера.\n"
+"%s"
 
 #. module: cloud_storage_azure
 #. odoo-python
@@ -93,3 +116,5 @@ msgid ""
 "The connection string is not allowed to upload blobs to the container.\n"
 "%s"
 msgstr ""
+"Строка подключения не разрешает загружать BLOB-объекты в контейнер.\n"
+"%s"
