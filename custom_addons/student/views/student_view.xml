@@ -1,0 +1,101 @@
+<odoo>
+  <data>
+  <record id="wb_student_list_view" model="ir.ui.view">
+    <field name="name">wb.student.list.view</field>
+    <field name="model">wb.student</field>
+    <field name="arch" type="xml">
+      <list string="Student">
+        <field name="id"/>
+        <field name="name"/>
+        <field name="school_id"/>
+        <groupby name="school_id"> 
+           <button type="edit" name="edit" icon="fa-edit" title="Edit"/>
+           <button type="object" name="abs_test" string="Click Here!" class="oe_highlight"/>
+        </groupby>
+        <field name="roll_number" />
+        <field name="name1"/>
+        <field name="is_paid"/>
+        <field name="student_fees" sum="Total Fees"/>
+        <field name="discount_fees" sum="Total discount"/>
+        <field name="final_fees" avg="Average of final fees"/>
+
+      </list>
+     
+    </field>
+
+  </record>
+
+  <record id="wb_student_form_view" model="ir.ui.view">
+    <field name="name">wb.student.form.view</field>
+    <field name="model">wb.student</field>
+    <field name="arch" type="xml">
+      <form string="Student Form">
+        <sheet>
+          <header>
+            <button name="custom_method" string="Custom Method" type="object" class="oe_highlight"/>
+          </header>
+          <group>
+            <field name="school_id"/>
+           
+            <field name="school_data"/>
+            <field name="is_paid"/>
+            <field name="student_fees"/>
+            <field name="discount_fees"/>
+            <field name="final_fees" readonly="1"/>
+            <field name="name"/>
+            <field name="roll_number" string="Unique Number" help="Please use here unique enrollment number." placeholder="Enter here Enrollment Number"/>
+            <field name="gender"/>
+            <field name="vip_gender"/>
+            <field name="advance_gender"/>
+            <field name="name1"/>
+            <field name="name2"/>
+            <field name="name3"/>
+            <field name="name4"/>
+            <field name="student_name"/>
+            <field name="student_img" widget="image" class="oe_avatar" nolabel="1"/>
+
+            <button name="json_data_store" string="JSON FEED" type="object"/>
+          </group>
+          <group>
+            <field name="address_html" 
+                    string="Override HTML Label"
+                    options="{'sandboxedPreview':false}"
+                    placeholder="Hello enter ypur HTML here"/>
+
+            <field name="compute_address_html" options="{'sandboxedPreview':true}"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+
+  </record>
+
+  <record id="wb_student_action" model="ir.actions.act_window">
+    <field name="name">Student</field>
+    <field name="res_model">wb.student</field>
+    <field name="view_mode">list,form</field>
+    <!-- <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Create the first student
+      </p>
+    </field> -->
+  </record>
+
+  <menuitem id="wb_student_root_menu"
+            name="Student"
+  />
+  
+  <menuitem id="wb_student_sub_root_menu"
+            name="Weblearns"
+            parent="wb_student_root_menu"
+  />
+  
+  <menuitem id="wb_student_menu"
+            name="Student List"
+            action="wb_student_action"
+            parent="wb_student_sub_root_menu"
+
+  />
+
+  </data>
+</odoo>

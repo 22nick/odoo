@@ -1,0 +1,69 @@
+<odoo>
+  <data>
+
+  <record id="wb_school_list_view" model="ir.ui.view">
+    <field name="name">wb.school.list.view</field>
+    <field name="model">wb.school</field>
+    <field name="arch" type="xml">
+      <list string="School">
+        <header>
+            <button name="abs_test" string="Click Me!" type="object" display="always"/>
+            <button name="abs_test" string="Click Me! - selected" type="object"/>
+        </header>
+
+        <field name="id"/>
+        <field name="name"/>
+    
+      </list>
+     
+    </field>
+
+  </record>
+
+    <record id="wb_school_form_view" model="ir.ui.view">
+        <field name="name">wb.school.form.view</field>
+        <field name="model">wb.school</field>
+        <field name="arch" type="xml">
+        <form string="School Form">
+            <sheet>
+            <header>
+                <button name="custom_method" string="Custom Method" type="object" class="oe_highlight"/>
+            </header>
+            <group>
+                <field name="name"/>
+                <field name="student_list"/>
+                <field name="binary_fields" widget="many2many_binary"/>
+                <field name="binary_field" string="Upload File" filename = "binary_file_fname"/>
+                <field name="binary_file_fname" invisible="1"/>
+                
+    
+            </group>
+
+            <group>
+                <field name="school_image" widget="image" class="oe_avatar" nolabel="1"/>
+            </group>
+
+            </sheet>
+        </form>
+        </field>
+    </record>
+
+    <record id="wb_school_action" model="ir.actions.act_window">
+        <field name="name">School</field>
+        <field name="res_model">wb.school</field>
+        <field name="view_mode">list,form</field>
+        <!-- <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Create the first student
+            </p>
+        </field> -->
+    </record>
+
+    <menuitem id="wb_school_menu"
+            name="School List"
+            action="wb_school_action"
+            parent="wb_student_sub_root_menu"
+    />
+
+  </data>
+</odoo>

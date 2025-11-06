@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="school_student_profile_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2>Student Report</h2>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>School</th>
+                                    <th>Roll Number</th>
+                                    <th>Fees</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><t t-esc="doc.id"/></td>
+                                    <td><t t-esc="doc.name"/></td>
+                                    <td><t t-esc="doc.school_id.name"/></td>
+                                    <td><t t-esc="doc.roll_number"/></td>
+                                    <td><t t-esc="doc.final_fees"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <t t-foreach="doc.school_id.student_list" t-as="student">
+                            <div>
+                                <t t-set="student_list_index" t-value="student_index + 1"/>
+                                <strong><span t-esc="student_list_index"/>. </strong> <t t-esc="student.name"/>
+                                <img t-att-src="'/report/barcode/QR/%s' % student.name" alt="QR Code"/>
+                            </div>
+                        </t>
+                        
+                        
+                       
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    
+
+    <record id="school_student_profile_report_temp" model="ir.actions.report">
+        <field name="name">Student Profile</field>
+        <field name="model">wb.student</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">student.school_student_profile_report_template</field>
+        <field name="report_file">student.school_student_profile_report_template</field>
+        <field name="print_report_name">'Student-Profile'</field>
+        <field name="binding_model_id" ref="model_wb_student"/>
+        <field name="binding_type">report</field>
+    </record>
+</odoo>

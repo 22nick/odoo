@@ -1,0 +1,56 @@
+<odoo>
+
+    <record id="student_list_view_extend" model="ir.ui.view">
+        <field name="name">student.list.view.extend</field>
+        <field name="model">wb.student</field>
+        <field name="inherit_id" ref="student.wb_student_list_view"/>
+        <field name="arch" type="xml">
+            <field name="is_paid" position="after">
+                <!-- <p>Inherited field in list view</p> -->
+                <field name="write_date"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="student_form_view_extend" model="ir.ui.view">
+        <field name="name">student.form.view.extend</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook//page[1]" position="before">
+
+                <page string="Forging parameters" name="forging_parameters" invisible="0">
+                    <group name="shape" string="Shape">
+                            <field name="forging_type" />
+                    </group>
+
+                    <group name="size" string="Size (in mm)">
+                        <field name="forging_min_length" invisible="forging_type in ['disk', 'disk_hollow']"/>
+                        <field name="forging_max_length" invisible="forging_type in ['disk', 'disk_hollow']"/>
+                        <field name="forging_width" invisible="forging_type in ['disk', 'round', 'disk_hollow']"/>
+                        <field name="forging_height"  invisible="forging_type in ['round', 'square']"/>
+                        <field name="forging_diameter"  invisible="forging_type in ['square', 'rectangle']"/>
+                        <field name="forging_diameter_inner" invisible="forging_type!='disk_hollow'"/>
+
+                    </group>
+                    
+                    <group>
+                        <group string="Material" name="material">
+                            <field name="forging_material"/>
+                        </group>
+                    </group>
+                </page>
+
+                <!-- <t><script>console.log("Custom JavaScript In Student Inherit Views")</script></t> -->
+                <!-- <script t-attf-src ="student_inherit_views/static/src/js/product_fiels_validate.js" type ="text/javascript" /> -->
+
+
+            <!-- <field name="volume" position="replace"> -->
+                <!-- <p>Inherited field in form view</p> -->
+                <!-- <field name="volume" string="Volume;)" class="oe_inline" style="max-width: 7rem;"/> -->
+
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
