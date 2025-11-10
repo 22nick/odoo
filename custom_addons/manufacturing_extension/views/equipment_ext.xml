@@ -1,0 +1,33 @@
+<odoo>
+
+    <record id="hr_equipment_view_form_ext" model="ir.ui.view">
+        <field name="name">hr.equipment.view.form.ext</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_form"/>
+        <field name="arch" type="xml">
+            <field name="scrap_date" position="after">
+                <field name="workcenter_id"/>
+            </field>
+
+            <!-- <xpath expr="//notebook//page[1]" position="before">
+
+            </xpath> -->
+        </field>
+    </record>
+
+    <record id="hr_equipment_view_tree_ext" model="ir.ui.view">
+        <field name="name">hr.equipment.view.tree.ext</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_tree"/>
+        <field name="arch" type="xml">
+            <field name="technician_user_id" position="after">
+                <field name="workcenter_id"/>
+            </field>
+
+            <!-- <xpath expr="//notebook//page[1]" position="before">
+
+            </xpath> -->
+        </field>
+    </record>
+
+</odoo>

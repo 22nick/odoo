@@ -25,14 +25,17 @@ Long description of module's purpose
         'views/student_view.xml',
         'views/school_view.xml',
         'report/student_report_template.xml',
-        'report/student_card_template.xml'
+        'report/student_card_template.xml',
+        'views/actions.xml',
+        # 'views/menu.xml'
     ],
 
-    # "assets":{
-    #     "web.assets_backend": [
-    #         "student/static/src/xml/list_controler.xml"
-    #     ]
-    # }
+    "assets":{
+        "web.assets_backend": [
+            "student/static/src/xml/list_controller.xml",
+            "student/static/src/js/script.js"
+        ]
+    }
 
 
     

@@ -1,8 +1,14 @@
-from odoo import models, fields
+from odoo import api, models, fields
 
 
 class ProductTemlpate(models.Model):
     _inherit = 'product.template'
+
+    product_type = fields.Selection([
+        ('forging', 'Forging'),
+        ('ingot', 'Ingot'),
+        ('part', 'Part'),
+    ], string='Product Type', default='forging')
 
     forging_type = fields.Selection([
         ('round', 'Round Bar'),
@@ -11,7 +17,7 @@ class ProductTemlpate(models.Model):
         ('disk', 'Disk'),
         ('disk_hollow', 'Hollow Disk')
         
-    ], string='Product Type', default='round')
+    ], string='Product Shape', default='round')
 
     forging_min_length = fields.Integer(string='Length (min)')
     forging_max_length = fields.Integer(string='Length (max)')
@@ -24,6 +30,10 @@ class ProductTemlpate(models.Model):
 
     # reference_note = fields.Char(string="Reference Note")
     # print("Product Template Inherited Successfully")   
+
+    @api.onchange('forging_type')
+    def _change_forging_type(self):
+        print("Forging Type Changed", self)
 
 # class SaleOrder(models.Model):
 #    _inherit = 'sale.order'

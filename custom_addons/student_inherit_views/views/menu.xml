@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<menuitem id="menu_load_js" action="load_js_code" name="Load JS"/>
+</odoo>

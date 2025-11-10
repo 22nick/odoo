@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-    <!-- <t t-inherit="web.ListView.Buttons" t-inherit-mode="extension" >
-        <xpath expr="//t[@t-name='web.ListView.Buttons']" position="inside">
+    <!-- <t t-name="student.ListView.Buttons" t-inherit="web.ListView.Buttons" t-inherit-mode="extension" >
+        <xpath expr="expr='//web.ListView.Buttons'" position="after">
             <button type="button" class="btn btn-primary" id="school_edit">
                 <span>Edit school</span>
             </button>

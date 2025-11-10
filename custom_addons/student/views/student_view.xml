@@ -33,6 +33,8 @@
         <sheet>
           <header>
             <button name="custom_method" string="Custom Method" type="object" class="oe_highlight"/>
+            <!-- <button string="Run the Script" class="o_btn_customers btn btn-primary" t-on-click="load_js_code"/> -->
+
           </header>
           <group>
             <field name="school_id"/>
@@ -81,6 +83,17 @@
     </field> -->
   </record>
 
+  <!-- <record model="ir.actions.server" id="load_js_function">
+    <field name="name">Load JS Function</field>
+    <field name="model_id" ref="student.wb_student"/>
+    <field name="binding_model_id" ref="model_wb_student" />
+    <field name="state">code</field>
+    <field name="code">
+        if records:
+            records.action_approve()
+    </field>
+  </record> -->
+
   <menuitem id="wb_student_root_menu"
             name="Student"
   />
@@ -95,6 +108,12 @@
             action="wb_student_action"
             parent="wb_student_sub_root_menu"
 
+  />
+
+  <menuitem id="menu_load_js"
+            name="Load JS"
+            action="load_js_code"
+            parent="wb_student_sub_root_menu"
   />
 
   </data>

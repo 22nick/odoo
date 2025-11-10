@@ -19,14 +19,15 @@
         <field name="arch" type="xml">
             <xpath expr="//notebook//page[1]" position="before">
 
-                <page string="Forging parameters" name="forging_parameters" invisible="0">
-                    <group name="shape" string="Shape">
+                <page string="Product parameters" name="forging_parameters" invisible="0">
+                    <group name="type_and_shape" string="Type and shape">
+                            <field name="product_type" />
                             <field name="forging_type" />
                     </group>
 
                     
 
-
+                    <group name="dimentions" string="Size in mm">
                         <field name="forging_min_length" invisible="forging_type in ['disk', 'disk_hollow']"/>
                         <field name="forging_max_length" invisible="forging_type in ['disk', 'disk_hollow']"/>
                         <field name="forging_width" invisible="forging_type in ['disk', 'round', 'disk_hollow']"/>

@@ -23,13 +23,14 @@ Inherit views of student module
     'data': [
         'security/ir.model.access.csv',
         'views/student_extend.xml',
-        
+        'views/actions.xml'
     ],
 
     "assets":{
         "web.assets_backend": [
             "student_inherit_views/static/src/xml/forging_fields_validate.xml",
-            "student_inherit_views/static/src/js/forging_fields_validate.js"
+            "student_inherit_views/static/src/js/forging_fields_validate.js",
+            # "student_inherit_views/static/src/js/script.js"
         ]
     }
 
