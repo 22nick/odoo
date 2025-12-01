@@ -41,6 +41,9 @@
                         <group string="Material" name="material">
                             <field name="forging_material"/>
                         </group>
+                        <group string="Reference No." name="reference_no">
+                            <field name="product_reference_no"/>
+                        </group>
                     </group>
                 </page>
 
@@ -55,5 +58,22 @@
             </xpath>
         </field>
     </record>
+
+
+    <record id="product_tree_view_extend" model="ir.ui.view">
+        <field name="name">product.tree.view.extend</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="is_favorite" position="after">
+                <field name="product_reference_no" decoration-bf="1"/>
+            </field>
+
+            <!-- <xpath expr="//notebook//page[1]" position="before">
+
+            </xpath> -->
+
+        </field>
+    </record>   
 
 </odoo>

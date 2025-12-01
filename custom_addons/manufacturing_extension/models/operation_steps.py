@@ -30,7 +30,7 @@ class OperationSteps_Heating(models.Model):
     charge_id = fields.Many2one('operation.charge', string="Charge ID")
     heating_date = fields.Date(string="Heating Date")
     
-    
+
    
     
 
