@@ -22,7 +22,7 @@ Inherit views of student module
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/student_extend.xml',
+        # 'views/student_extend.xml',
         'views/actions.xml'
     ],
 

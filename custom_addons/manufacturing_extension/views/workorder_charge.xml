@@ -1,0 +1,118 @@
+<odoo>
+
+    <record id="mrp_production_workorder_form_view_inherit_ext" model="ir.ui.view">
+        <field name="name">mrp.production.workorder.form.view.inherit.ext</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group[1]/group[1]" position="inside">
+                <field name="charge_id"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    
+    <!-- <record id="mrp_production_workorder_tree_editable_view_inherit_remove"
+            model="ir.ui.view">
+        <field name="name">mrp.production.work.order.list.editable.remove.button</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
+        <field name="arch" type="xml">
+
+            
+            <xpath expr="//list" position="inside">
+                
+                    <button name="action_remove_from_charge"
+                            type="object"
+                            icon="fa-trash"
+                            class="btn-link text-danger"
+                            title="Delete from Charge"
+                            invisible="charge_id == False"
+                            string=""/>
+                
+            </xpath>
+
+            <xpath expr="//list" position="attributes">
+                <attribute name="create">0</attribute>
+                <attribute name="sample">1</attribute>
+                <attribute name="editable"/>
+            </xpath>
+
+        </field>
+    </record> -->
+
+
+
+    <!-- #Name Inheritance to add Many2one field to mrp.workorder -->
+    <!-- Gemini # Pro -->
+
+    <record id="mrp_production_workorder_tree_editable_view_custom_types" model="ir.ui.view">
+        <field name="name">mrp.production.work.order.list.editable.custom.types</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_tree_editable_view"/>
+        <field name="arch" type="xml">
+            
+            <!-- Ищем оригинальное поле name -->
+            <xpath expr="//field[@name='name']" position="replace">
+                
+                <!-- 
+                    1. Вставляем наше поле-ссылку.
+                    По умолчанию Many2one позволяет "Создать и редактировать".
+                    Если хотите запретить создание на лету, добавьте options="{'no_create': True}"
+                -->
+                <field name="operation_type_id" 
+                       string="Operation" 
+                       readonly="state in ['cancel', 'done']"
+                       widget="many2one"/>
+
+                <!-- 
+                    2. Оригинальное поле name оставляем, но делаем невидимым (column_invisible).
+                    Оно заполнится автоматически благодаря методу _onchange в Python.
+                    force_save="1" гарантирует, что значение запишется в базу, даже если поле невидимо.
+                -->
+                <field name="name" column_invisible="True" force_save="1"/>
+                
+            </xpath>
+
+            <!-- <xpath expr="//list" position="inside">
+                
+                    <button name="action_remove_from_charge"
+                            type="object"
+                            icon="fa-trash"
+                            class="btn-link text-danger"
+                            title="Delete from Charge"
+                            invisible="charge_id == False"
+                            string=""/>
+                
+            </xpath> -->
+
+
+        </field>
+    </record>
+
+
+    <record id="mrp_production_workorder_form_view_inherit_custom_types" model="ir.ui.view">
+        <field name="name">mrp.production.work.order.form.view.inherit.custom.types</field>
+        <field name="model">mrp.workorder</field>
+        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
+        <field name="arch" type="xml">
+            
+            <!-- Находим поле name внутри первой группы и заменяем его -->
+            <xpath expr="//sheet/group/group/field[@name='name']" position="replace">
+                
+                <!-- 1. Ваше поле для выбора типа операции -->
+                <field name="operation_type_id" 
+                    string="Operation" 
+                    readonly="state in ['cancel', 'done']"
+                    options="{'no_create': False, 'no_edit': False}"/>
+                
+                <!-- 2. Скрытое системное поле name (обязательно должно быть во view) -->
+                <field name="name" invisible="1" force_save="1"/>
+                
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

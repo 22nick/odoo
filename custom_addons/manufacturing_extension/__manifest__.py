@@ -19,11 +19,15 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'maintenance', 'mrp'],
+    'depends': ['base', 'maintenance', 'mrp', 'product'],
 
     # always loaded
     'data': [
-        'views/equipment_ext.xml'
+        'security/ir.model.access.csv',
+        'views/equipment_ext.xml',
+        'views/product_extend.xml',
+        'views/workorder_charge.xml',
+        'views/operations_steps.xml',
     ],
 
     "assets":{

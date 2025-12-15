@@ -44,6 +44,8 @@ class ProductTemlpate(models.Model):
     @api.onchange('forging_type')
     def _change_forging_type(self):
         print("Forging Type Changed", self)
+        
+    
 
     # @api.depends('name', 'product_reference_no')
     # @api.model

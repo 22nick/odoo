@@ -1,0 +1,121 @@
+<odoo>
+  <data>
+    <record id="operation_charge_list_view" model="ir.ui.view">
+        <field name="name">operation.charge.list.view</field>
+        <field name="model">operation.charge</field>
+        <field name="arch" type="xml">
+        <list string="Operation Charges">
+            <field name="id"/>
+            <field name="name"/>
+            <field name="workorder_list" widget="many2many_tags"/>
+            <field name="mo_ids" widget="many2many_tags"/>
+            <field name="mo_component_ids" widget="many2many_tags"/>
+            <field name="mo_product_ids" widget="many2many_tags"/>
+
+        </list>
+        </field>
+    </record>
+
+    
+
+    <record id="operation_charge_form_view" model="ir.ui.view">
+        <field name="name">operation.charge.form.view</field>
+        <field name="model">operation.charge</field>
+        <field name="arch" type="xml">
+        <form string="Operation Charge Form">
+            <sheet>
+            <group>
+                <field name="name"/>
+
+                <separator string="Workorder List" colspan="2"/>
+                <field name="workorder_list" create="true"/>
+                
+                <separator string="Filters" colspan="2"/>
+
+                <field name="selected_mo_ids" widget="many2many_tags"/>
+                <field name="selected_product_ids" widget="many2many_tags"/>
+                <field name="selected_component_ids" widget="many2many_tags"/>
+
+                <separator string="Select Workorder" colspan="2"/>
+
+                <field name="workorder_id" 
+                    string="Add Workorder" 
+                    domain="computed_wo_domain"/>
+                
+            </group>
+            </sheet>
+
+        </form>
+        </field>
+    </record>
+
+    
+
+    <record id="operation_types_list_view" model="ir.ui.view">
+        <field name="name">operation.types.list.view</field>
+        <field name="model">operation.types</field>
+        <field name="arch" type="xml">
+        <list string="Operation Types">
+            <field name="id"/>
+            <field name="name"/>
+            <field name="workcenter_id"/>
+            <field name="equipment_id"/>
+            <field name="description"/>
+        </list>
+        </field>
+    </record>
+
+    <record id="operation_types_form_view" model="ir.ui.view">
+        <field name="name">operation.types.form.view</field>
+        <field name="model">operation.types</field>
+        <field name="arch" type="xml">
+        <form string="Operation Types Form">
+            <sheet>
+            <group>
+                <field name="name"/>
+                <field name="workcenter_id"/>
+                <field name="equipment_id"/>
+                <field name="description"/>
+            </group>
+            </sheet>
+
+        </form>
+        </field>
+    </record>   
+
+
+    
+    <record id="operation_charge_action" model="ir.actions.act_window">
+        <field name="name">Operation Charges</field>
+        <field name="res_model">operation.charge</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+    <record id="operation_types_action" model="ir.actions.act_window">
+        <field name="name">Operation Types</field>
+        <field name="res_model">operation.types</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+    <menuitem id="manufacturing_extension_root_menu"
+        name="Operations"
+        parent="mrp.menu_mrp_manufacturing"
+    />
+    
+    <menuitem id="manufacturing_extension_operation_charge_menu"
+        action="operation_charge_action"
+        name="Operation Charges"
+        parent="manufacturing_extension_root_menu"
+    />
+
+    <menuitem id="manufacturing_extension_operation_types_menu"
+        action="operation_types_action"
+        name="Operation Types"
+        parent="manufacturing_extension_root_menu"
+    />
+
+  </data>
+
+</odoo>
