@@ -21,6 +21,12 @@ class OperaionCharge(models.Model):
     workorder_id = fields.Many2one('mrp.workorder', string="Order")
     # workorder_id = fields.Integer(string="Order")
     
+    operation_type_id = fields.Many2one(
+        'operation.types', 
+        string="Operation type",
+        required=False 
+    )
+    
     workorder_list = fields.One2many('mrp.workorder', 'charge_id', string="Workorder List", context={'no_delete': True})
         
     
@@ -164,7 +170,10 @@ class OperaionCharge(models.Model):
             if self.selected_component_ids:
                 domain.append(('production_id.move_raw_ids.product_id', 'in', self.selected_component_ids.ids))
             
-            # print("Computed domain:", domain)
+            if self.operation_type_id:
+                domain.append(('operation_type_id', 'in', self.operation_type_id.id))
+                
+                # print("Opernation type:", self.operation_type_id.id)
             
             rec.computed_wo_domain=str(domain)    
                 
@@ -199,6 +208,8 @@ class OperationSteps_Heating(models.Model):
     recipe_name = fields.Char(string="Recipe Name")
     charge_id = fields.Many2one('operation.charge', string="Charge ID")
     heating_date = fields.Date(string="Heating Date")
+    
+    
     
 
    

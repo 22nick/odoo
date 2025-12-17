@@ -126,4 +126,5 @@ class product_product(models.Model):
             ]
             domains.append([('product_tmpl_id.seller_ids', 'any', supplier_domain)])
         return combine(domains)
-
+   
+    # product_reference_no = fields.Char(string='Material reference No.', default='[New]', readonly=True, copy=False, index=True, required=True, help="Reference Number of the material")

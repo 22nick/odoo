@@ -10,7 +10,10 @@ class MrpWorkorder(models.Model):
         
         )
     
-
+    user_id = fields.Many2one(
+        'res.users', 'Responsible', default=lambda self: self.env.user,
+        domain=lambda self: [('all_group_ids', 'in', self.env.ref('mrp.group_mrp_user').id)])
+    
     def unlink(self):
         # если удаление вызвано из формы Charge
         ctx = self.env.context
@@ -27,7 +30,7 @@ class MrpWorkorder(models.Model):
     # Operation Type field linked to operation.types
     operation_type_id = fields.Many2one(
         'operation.types', 
-        string="Operation",
+        string="Operation Type",
         required=False 
     )
     
@@ -58,6 +61,11 @@ class MrpWorkorder(models.Model):
         
     #     return result
                 
+    product_reference_no = fields.Char(related='production_id.product_id.product_reference_no', string="Product Ref.No.")
+    
+    component_id = fields.Many2one(related='production_id.move_raw_ids.product_id', string="Component")
+    
+    component_reference_no = fields.Char(related='production_id.move_raw_ids.product_id.product_reference_no', string="Component Ref.No.")
     
 
     

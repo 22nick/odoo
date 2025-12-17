@@ -1,0 +1,60 @@
+<odoo>
+
+    <record id="mrp_production_form_view_ext" model="ir.ui.view">
+        <field name="name">mrp.production.form.view.ext</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+            <!-- Copmany_id = manufacturer -->
+            <xpath expr="//field[@name='user_id']" position="after">
+                
+                <field name="partner_id" placeholder="Customer" widget="res_partner_many2one"/>
+            </xpath>
+
+            <xpath expr="//sheet/group[1]/group[2]" position="after">
+                
+                        
+                <group string="References" class="col-md-6">    
+                    <field name="sales_order_reference"/>
+                    <field name="customer_order_reference"/>
+                    <field name="technical_feasibility" widget="boolean_toggle"/>
+                    <field name="technical_feasibility_form_no"/>
+                    
+                    <field name="manufactoring_features" placeholder="Featured"/>
+                </group>
+
+                <group string="Revisions" class="col-md-6">
+
+                    <field name="manufactoring_part_no" placeholder="Part No."/>
+                    <field name="manufactoring_explanation_note" nolabel="1" placeholder="Explanations..."  colspan="2"/>
+
+                    <field name="manufacturing_order_revision_number" placeholder="Rev.No."/>
+                    <field name="manufacturing_order_revision_note" nolabel="1" placeholder="Revision notes..."  colspan="2"/>
+                    
+                    <field name="technical_drawing_revision_number" placeholder="Rev.No."/>
+                    <field name="technical_drawing_revision_note" nolabel="1" placeholder="Revision notes..." colspan="2"/>
+                </group>
+
+                <group string="Information" class="col-md-2">
+                    <field name="product_dimensions"/>
+                    <field name="product_material_standart"/>
+                    <field name="customer_requirements"/>
+                    <field name="customer_requirements_notes"/>
+                    <field name="binary_field" widget="many2many_binary" nolabel="1"/>
+                    
+                    <!-- <button name="action_print_report" 
+                        string="Print Report" 
+                        type="action" 
+                        class="btn-primary"/> -->
+                    
+                </group>
+                
+                
+                
+                    
+            </xpath>
+
+
+        </field>
+    </record>
+</odoo>

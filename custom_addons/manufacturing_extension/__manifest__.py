@@ -28,6 +28,8 @@
         'views/product_extend.xml',
         'views/workorder_charge.xml',
         'views/operations_steps.xml',
+        'views/manufacturing_ext.xml',
+        'reports/manufacturing_order_report.xml',
     ],
 
     "assets":{

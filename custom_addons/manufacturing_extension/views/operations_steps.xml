@@ -7,6 +7,7 @@
         <list string="Operation Charges">
             <field name="id"/>
             <field name="name"/>
+            <field name="operation_type_id"/>
             <field name="workorder_list" widget="many2many_tags"/>
             <field name="mo_ids" widget="many2many_tags"/>
             <field name="mo_component_ids" widget="many2many_tags"/>
@@ -26,6 +27,7 @@
             <sheet>
             <group>
                 <field name="name"/>
+                <field name="operation_type_id"/>
 
                 <separator string="Workorder List" colspan="2"/>
                 <field name="workorder_list" create="true"/>

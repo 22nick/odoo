@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Определение отчета -->
+    <record id="action_report_manufacturing_order" model="ir.actions.report">
+        <field name="name">Order Technical Operation Form</field>
+        <field name="model">mrp.production</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">manufacturing_extension.report_manufacturing_order_document</field>
+        <field name="report_file">manufacturing_extension.report_manufacturing_order_document</field>
+        <field name="binding_model_id" ref="model_mrp_production"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Order technical operation form - %s' % (object.sales_order_reference or 'N/A')</field>
+    </record>
+
+    <!-- QWeb шаблон отчета -->
+        <template id="report_manufacturing_order_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style>
+                            .page {
+                                font-size: 9pt;
+                                line-height: 1.2;
+                            }
+                            .compact-section {
+                                border: 1px solid #333;
+                                padding: 6px;
+                                margin-bottom: 8px;
+                            }
+                            .section-header {
+                                background-color: #e9ecef;
+                                padding: 4px 8px;
+                                margin: -6px -6px 6px -6px;
+                                font-weight: bold;
+                                font-size: 10pt;
+                                border-bottom: 1px solid #333;
+                            }
+                            .compact-table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                font-size: 8.5pt;
+                            }
+                            .compact-table td {
+                                padding: 3px 5px;
+                                border: 1px solid #dee2e6;
+                                vertical-align: top;
+                            }
+                            .compact-table td.label-col {
+                                width: 28%;
+                                background-color: #f8f9fa;
+                                font-weight: bold;
+                                font-size: 8pt;
+                            }
+                            .checkbox-inline {
+                                display: inline-block;
+                                width: 12px;
+                                height: 12px;
+                                border: 1px solid #333;
+                                margin-right: 5px;
+                                vertical-align: middle;
+                            }
+                            .checkbox-inline.checked::after {
+                                content: '✓';
+                                font-size: 10px;
+                                font-weight: bold;
+                                position: relative;
+                                left: 1px;
+                                top: -2px;
+                            }
+                            .badge-sm {
+                                display: inline-block;
+                                padding: 2px 6px;
+                                border-radius: 2px;
+                                background-color: #007bff;
+                                color: white;
+                                font-size: 8pt;
+                            }
+                            .text-compact {
+                                font-size: 8pt;
+                                padding: 4px;
+                                background-color: #f8f9fa;
+                                border: 1px solid #dee2e6;
+                                max-height: 45px;
+                                overflow: hidden;
+                            }
+                            h1.title {
+                                font-size: 18pt;
+                                margin: 0 0 3px 0;
+                            }
+                            h3.subtitle {
+                                font-size: 11pt;
+                                margin: 0 0 8px 0;
+                                color: #6c757d;
+                            }
+                        </style>
+
+                        <!-- Компактный заголовок -->
+                        <div class="text-center">
+                            <h1 class="title">ORDER TECHNICAL OPERATION FORM</h1>
+                            <h3 class="subtitle"><span t-field="o.name"/></h3>
+                        </div>
+
+                        <!-- Две колонки для основной информации -->
+                        <div class="row">
+                            <!-- Левая колонка -->
+                            <div class="col-6">
+                                <!-- Секция 1: Информация о заказе -->
+                                <div class="compact-section">
+                                    <div class="section-header">ORDER INFO</div>
+                                    <table class="compact-table">
+                                        <tr>
+                                            <td class="label-col">Customer</td>
+                                            <td><span t-field="o.partner_id"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Date</td>
+                                            <td><span t-field="o.create_date"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Created by:</td>
+                                            <td><span t-field="o.user_id"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Sales Order</td>
+                                            <td><span t-field="o.sales_order_reference"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Customer Order</td>
+                                            <td><span t-field="o.customer_order_reference"/></td>
+                                        </tr>
+                                        
+                                    </table>
+                                </div>
+
+                                <!-- Секция 2: Характеристики -->
+                                <div class="compact-section">
+                                    <div class="section-header">MANUFACTURING</div>
+                                    <table class="compact-table">
+                                        <tr>
+                                            <td class="label-col">Features</td>
+                                            <td>
+                                                <t t-if="o.manufactoring_features == 'prototype'">
+                                                    <span class="badge-sm">Prototype</span>
+                                                </t>
+                                                <t t-elif="o.manufactoring_features == 'trial'">
+                                                    <span class="badge-sm" style="background-color: #ffc107; color: #000;">Trial</span>
+                                                </t>
+                                                <t t-elif="o.manufactoring_features == 'fac'">
+                                                    <span class="badge-sm" style="background-color: #28a745;">FAC</span>
+                                                </t>
+                                                <t t-elif="o.manufactoring_features == 'serial'">
+                                                    <span class="badge-sm">Serial</span>
+                                                </t>
+                                                <t t-elif="o.manufactoring_features == 'special'">
+                                                    <span class="badge-sm" style="background-color: #6c757d;">Special</span>
+                                                </t>
+                                                <t t-elif="o.manufactoring_features == 'other'">
+                                                    <span class="badge-sm" style="background-color: #343a40;">Other</span>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Tech. Feasibility</td>
+                                            <td>
+                                                <span t-attf-class="checkbox-inline #{o.technical_feasibility and 'checked' or ''}"/>
+                                                <span t-if="o.technical_feasibility">YES</span>
+                                                <span t-else="">NO</span>
+                                            </td>
+                                        </tr>
+                                        <tr t-if="o.technical_feasibility">
+                                            <td class="label-col">Form No.</td>
+                                            <td><span t-field="o.technical_feasibility_form_no"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <!-- Секция 3: Спецификации продукта -->
+                                <div class="compact-section">
+                                    <div class="section-header">PRODUCT SPECS</div>
+                                    <table class="compact-table">
+                                        <tr>
+                                            <td class="label-col">Dimensions</td>
+                                            <td><span t-field="o.product_dimensions"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Material</td>
+                                            <td><span t-field="o.product_material_standart"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Part No.</td>
+                                            <td><span t-field="o.manufactoring_part_no"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Material Ref.No.</td>
+                                            <td><span t-field="o.component_reference_no"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Explanations</td>
+                                            <td>
+                                                <div class="text-compact">
+                                                    <span t-field="o.manufactoring_explanation_note"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                
+                            </div>
+
+                            <!-- Правая колонка -->
+                            <div class="col-6">
+                                <!-- Секция 4: Требования заказчика -->
+                                <div class="compact-section">
+                                    <div class="section-header">CUSTOMER REQUIREMENTS</div>
+                                    <table class="compact-table">
+                                        <tr>
+                                            <td class="label-col">Type</td>
+                                            <td>
+                                                <t t-if="o.customer_requirements == 'item'">
+                                                    <span class="badge-sm">Item</span>
+                                                </t>
+                                                <t t-elif="o.customer_requirements == 'tolerance'">
+                                                    <span class="badge-sm">Tolerance</span>
+                                                </t>
+                                                <t t-elif="o.customer_requirements == 'heattrearment'">
+                                                    <span class="badge-sm">Heat Treatment</span>
+                                                </t>
+                                                <t t-elif="o.customer_requirements == 'documents'">
+                                                    <span class="badge-sm">Documentation</span>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Notes</td>
+                                            <td>
+                                                <div class="text-compact">
+                                                    <span t-field="o.customer_requirements_notes"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!-- Секция 5: Ревизия производственного заказа -->
+                                <div class="compact-section">
+                                    <div class="section-header">MFG ORDER REVISION</div>
+                                    <table class="compact-table">
+                                        <tr>
+                                            <td class="label-col">Rev. No.</td>
+                                            <td><strong><span t-field="o.manufacturing_order_revision_number"/></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Notes</td>
+                                            <td>
+                                                <div class="text-compact">
+                                                    <span t-field="o.manufacturing_order_revision_note"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <!-- Секция 6: Ревизия технического чертежа -->
+                                <div class="compact-section">
+                                    <div class="section-header">DRAWING REVISION</div>
+                                    <table class="compact-table">
+                                        <tr>
+                                            <td class="label-col">Rev. No.</td>
+                                            <td><strong><span t-field="o.technical_drawing_revision_number"/></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Notes</td>
+                                            <td>
+                                                <div class="text-compact">
+                                                    <span t-field="o.technical_drawing_revision_note"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                                <!-- Секция 7: Прикрепленные файлы -->
+                                <div class="compact-section" t-if="o.binary_field">
+                                    <div class="section-header">ATTACHMENTS</div>
+                                    <div style="font-size: 8pt; padding: 2px;">
+                                        <t t-foreach="o.binary_field[:5]" t-as="attachment">
+                                            <div style="padding: 2px 0; border-bottom: 1px dotted #dee2e6;">
+                                                <i class="fa fa-file-o" style="margin-right: 5px; font-size: 8pt;"/>
+                                                <span t-field="attachment.name"/>
+                                            </div>
+                                        </t>
+                                        <t t-if="len(o.binary_field) > 5">
+                                            <div style="padding: 2px 0; color: #6c757d;">
+                                                ... and <t t-esc="len(o.binary_field) - 5"/> more file(s)
+                                            </div>
+                                        </t>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <!-- Компактный футер -->
+                        <div style="margin-top: 6px; padding-top: 4px; border-top: 1px solid #dee2e6; font-size: 7pt; color: #6c757d;">
+                            <span>Generated: <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></span>
+                            <span style="float: right;">Manufacturing Order Report</span>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
