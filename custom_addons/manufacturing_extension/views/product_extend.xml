@@ -42,6 +42,7 @@
                         </group>
                         <group string="Reference No." name="reference_no">
                             <field name="product_reference_no"/>
+                            <field name="heat_no"/>
                         </group>
                     </group>
                 </page>

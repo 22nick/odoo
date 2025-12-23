@@ -30,6 +30,8 @@ class ProductTemlpate(models.Model):
 
     product_reference_no = fields.Char(string='Material reference No.', default='[New]', readonly=True, copy=False, index=True, required=True, help="Reference Number of the material")
 
+    heat_no = fields.Char(string='Heat No.', required=True, help="Heat Number of the material", default="N/A")
+    
     # reference_note = fields.Char(string="Reference Note")
     # print("Product Template Inherited Successfully")   
 

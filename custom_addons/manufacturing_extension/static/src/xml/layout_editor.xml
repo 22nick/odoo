@@ -1,0 +1,14 @@
+<templates>
+    <t t-name="manufacturing_extension.LayoutEditor">
+        <div class="o_layout_editor">
+            <div class="mb-2">
+                <button type="button" t-on-click="addBox">➕ Add</button>
+                <button type="button" t-on-click="removeSelected">🗑 Remove</button>
+                <button type="button" class="btn btn-primary" t-on-click="saveManual">💾 Сохранить</button>
+            </div>
+
+            <canvas t-ref="canvas" width="1000" height="600"/>
+        </div>
+    </t>
+
+</templates>

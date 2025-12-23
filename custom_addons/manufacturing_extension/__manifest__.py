@@ -29,13 +29,18 @@
         'views/workorder_charge.xml',
         'views/operations_steps.xml',
         'views/manufacturing_ext.xml',
+        # 'data/operation_types_data.xml', # initional data for operation types (examle)
         'reports/manufacturing_order_report.xml',
+        'reports/cutting_operation_report.xml',
+        'reports/workorder_operation_report.xml',
+        'reports/mrp_production_report_ext.xml',
     ],
 
     "assets":{
         "web.assets_backend": [
-            # "student/static/src/xml/list_controller.xml",
-            # "student/static/src/js/script.js"
+            'manufacturing_extension/static/lib/fabric.min.js',
+            'manufacturing_extension/static/src/js/layout_editor.js',
+            'manufacturing_extension/static/src/xml/layout_editor.xml',
         ]
     }
 

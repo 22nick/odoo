@@ -9,9 +9,6 @@
                 <field name="charge_id"/>
                 <field name="user_id"/>
 
-
-                <!-- <field name="sequence" /> -->
-
             </xpath>
 
             <!-- Находим поле name внутри первой группы и заменяем его -->
@@ -25,7 +22,131 @@
                 
                 <!-- 2. Скрытое системное поле name (обязательно должно быть во view) -->
                 <field name="name" invisible="1" force_save="1"/>
+                <field name="operation_type_code" invisible="1"/>
+
+            </xpath>
+
+            <!-- Add operation-specific pages in notebook -->
+            <xpath expr="//notebook" position="inside">
                 
+                <!-- Cutting Operations Page -->
+                <page string="Cutting Operations" 
+                      invisible="operation_type_code != 'cutting'"
+                      id="page_cutting_operations">
+                    <field name="cutting_operation_ids" nolabel="1">
+                        <list>
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="equipment_id"/>
+                            <field name="performer_id"/>
+                            <field name="responsible_id"/>
+                            <field name="ksb_form_no"/>
+                            <field name="income_material_weight"/>
+                            <field name="outcome_material_weight"/>
+                            <field name="income_material_crosssection"/>
+                            <field name="outcome_material_crosssection"/>
+                            <field name="income_material_length"/>
+                            <field name="outcome_material_length"/>
+
+                        </list>
+
+                        <form string="Cutting Operation">
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="sequence"/>
+                                        <field name="name"/>
+                                        <field name="equipment_id"/>
+                                        <field name="performer_id"/>
+                                        <field name="responsible_id"/>
+                                        <field name="ksb_form_no"/>
+                                        <field name="workorder_id"/>
+                                        <!-- <field name="layout_json" widget="layout_editor"/> -->
+                                        
+                                    </group>
+                                    <group>
+                                        <field name="income_material_weight"/>
+                                        <field name="outcome_material_weight"/>
+                                        <field name="income_material_crosssection"/>
+                                        <field name="outcome_material_crosssection"/>
+                                        <field name="income_material_length"/>
+                                        <field name="outcome_material_length"/>
+                                        
+                                    </group>
+                                </group>
+                         
+                                <group string="Notes" colspan="2">
+                                    <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
+                                </group>
+
+                                <group string="Layout" colspan="2">
+                                    <button name="action_open_svg"
+                                        type="object"
+                                        string="Edit SVG"
+                                        class="oe_highlight"/>
+
+                                    <field name="svg_builder_id" widget="svg_builder"/>
+
+                                    <field name="svg_preview" widget="html" readonly="1" nolabel="1"/>
+
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+                
+                <!-- Heating Operations Page -->
+                <page string="Heating Operations" 
+                      invisible="operation_type_code != 'heating'"
+                      id="page_heating_operations">
+                    <field name="heating_operation_ids" nolabel="1">
+                        <list>
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="equipment_id"/>
+                            <field name="recipe_name"/>
+                            <field name="charge_id"/>
+                            <field name="heating_date"/>
+                            <field name="performer_id"/>
+                            <field name="responsible_id"/>
+                        </list>
+                        <form string="Heating Operation">
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="sequence"/>
+                                        <field name="name"/>
+                                        <field name="equipment_id"/>
+                                        <field name="recipe_name"/>
+                                        <field name="workorder_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="charge_id"/>
+                                        <field name="heating_date"/>
+                                        <field name="performer_id"/>
+                                        <field name="responsible_id"/>
+                                    </group>
+                                </group>
+                                <group string="Notes" colspan="2">
+                                    <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
+                                </group>
+
+                                <group string="Layout" colspan="2">
+                                    <button name="action_open_svg"
+                                        type="object"
+                                        string="Edit SVG"
+                                        class="oe_highlight"/>
+
+                                    <field name="svg_builder_id" widget="svg_builder"/>
+
+                                    <field name="svg_preview" widget="html" readonly="1" nolabel="1"/>
+
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+            
             </xpath>
 
         </field>
@@ -61,8 +182,6 @@
                 -->
                 <field name="name" column_invisible="True" force_save="1"/>
                 <field name="user_id" optional="show"/>
-
-
                 
             </xpath>
 
@@ -73,51 +192,10 @@
                 <field name="component_id" optional="show"/>
                 <field name="component_reference_no" optional="hide"/>
 
-            
-
             </xpath>
 
-            <!-- <xpath expr="//list" position="inside">
-                
-                    <button name="action_remove_from_charge"
-                            type="object"
-                            icon="fa-trash"
-                            class="btn-link text-danger"
-                            title="Delete from Charge"
-                            invisible="charge_id == False"
-                            string=""/>
-                
-            </xpath> -->
-
-            <!-- <xpath expr="//field[@name='name']" position='before'>
-                <field name="sequence" widget="handle" column_invisible="0"/>
-            </xpath> -->
-
+            
 
         </field>
     </record>
-
-
-    <!-- <record id="mrp_production_workorder_form_view_inherit_custom_types" model="ir.ui.view">
-        <field name="name">mrp.production.work.order.form.view.inherit.custom.types</field>
-        <field name="model">mrp.workorder</field>
-        <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
-        <field name="arch" type="xml">
-            
-            <xpath expr="//sheet/group/group/field[@name='name']" position="replace">
-                
-                <field name="operation_type_id" 
-                    string="Operation" 
-                    readonly="state in ['cancel', 'done']"
-                    options="{'no_create': False, 'no_edit': False}"/>
-                
-                
-                <field name="name" invisible="1" force_save="1"/>
-                
-            </xpath>
-
-        </field>
-    </record> -->
-
-
 </odoo>

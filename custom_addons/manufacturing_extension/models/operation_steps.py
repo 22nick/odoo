@@ -1,15 +1,27 @@
 from odoo import api, models, fields
+import re
+from markupsafe import Markup
 
 
 class OperationTypes(models.Model):
     _name = 'operation.types'
     _description = 'Operation Types for Manufacturing'
     _rec_name = 'name' # Важно: указывает, какое поле искать при вводе текста
+    _order = 'sequence, name'
 
-    name = fields.Char(string="Operation Type Name", required=True)
+    name = fields.Char(string="Operation Type Name", required=True, translate=True)
     workcenter_id = fields.Many2one('mrp.workcenter', string="Workcenter")
     equipment_id = fields.Many2one('maintenance.equipment', string="Default Equipment")
-    description = fields.Text(string="Description")
+    code = fields.Char(string='Code', required=True)
+    model_name = fields.Char(string='Model Name', help='Technical name of the related model')
+    sequence = fields.Integer(string='Sequence', default=10)
+    active = fields.Boolean(string='Active', default=True)
+    description = fields.Text(string='Description')
+    color = fields.Integer(string='Color Index')
+    
+    _sql_constraints = [
+        ('code_unique', 'unique(code)', 'The code must be unique!'),
+    ]
     
 
 class OperaionCharge(models.Model):
@@ -196,20 +208,108 @@ class OperaionCharge(models.Model):
            
 
 
-class OperationSteps_Heating(models.Model):
-    _name = 'operation.steps_heating'
+class OperationStepsCutting(models.Model):
+    _name = 'operation.steps.cutting'
+    _description = 'Cutting Operation Steps'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
+    
+    sequence = fields.Integer(string='Sequence', default=10)
+    name = fields.Char(string='Step Name', required=True)
+    equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
+    equipment_reference_id = fields.Char(related='equipment_id.reference_id', string="Equipment Ref.Id")
+    
+    performer_id = fields.Many2one('res.users', string="Performer")
+    responsible_id = fields.Many2one('res.users', string="Responsible")
+    resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+    income_material_weight = fields.Float(string="Incoming Material Weight (kg)")
+    outcome_material_weight = fields.Float(string="Outgoing Material Weight (kg)")
+    income_material_crosssection = fields.Char(string="Incoming Material Cross-Section (mmxmm)")   
+    outcome_material_crosssection = fields.Char(string="Outgoing Material Cross-Section (mmxmm)")
+    income_material_length = fields.Float(string="Incoming Material Length (mm)")
+    outcome_material_length = fields.Float(string="Outgoing Material Length (mm)")
+    notes = fields.Text(string="Additional Notes")
+    
+    
+    
+class OperationStepsHeating(models.Model):
+    _name = 'operation.steps.heating'
     _description = 'Operation Steps for Manufacturing'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
 
 
     name = fields.Char(string="Operation Step Name", required=True)
-    operation_type_id = fields.Many2one('operation.types', string="Operation Type", required=True)
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    # operation_type_id = fields.Many2one('operation.types', string="Operation Type", required=True)
 
     equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
     recipe_name = fields.Char(string="Recipe Name")
     charge_id = fields.Many2one('operation.charge', string="Charge ID")
     heating_date = fields.Date(string="Heating Date")
     
+    performer_id = fields.Many2one('res.users', string="Performer")
+    responsible_id = fields.Many2one('res.users', string="Responsible")
+    resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+
+    notes = fields.Text(string="Additional Notes")
+
+    # SVG fields
+    svg_builder_id = fields.Many2one('svg.builder', string="SVG")
     
+    svg_preview = fields.Html(
+        string="Preview",
+        sanitize=False,           # Отключает базовую очистку
+        sanitize_tags=False,      # Разрешает любые теги (rect, path и т.д.)
+        sanitize_attributes=False,# Разрешает любые атрибуты (stroke-width и т.d.)
+        sanitize_style=False,     # Разрешает инлайн стили
+        strip_style=False,        # Не удалять теги <style>
+        strip_classes=False,    # Не удалять классы CSS
+        compute="_compute_svg_preview"
+    )
+    
+    @api.depends('svg_builder_id', 'svg_builder_id.svg_content')
+    def _compute_svg_preview(self):
+
+                
+        for rec in self:
+            if rec.svg_builder_id and rec.svg_builder_id.svg_content:
+                # svg_content = re.sub(r"<\?xml.*?\?>", "", rec.svg_builder_id.svg_content, flags=re.IGNORECASE | re.DOTALL).strip()
+                svg_content = rec.svg_builder_id.svg_content
+                rec.svg_preview = Markup(svg_content)
+            else:
+                rec.svg_preview = Markup('<p>No Graphic Available</p>')
+    
+
+    def action_open_svg(self):
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "svg.builder",
+            "res_id": self.svg_builder_id.id,
+            "view_mode": "form",
+            "target": "new",
+        }
+    
+
     
 
    

@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Report Definition -->
+    <record id="action_report_workorder_operations" model="ir.actions.report">
+        <field name="name">Workorder Operations Report</field>
+        <field name="model">mrp.workorder</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">manufacturing_extension.report_workorder_operations_document</field>
+        <field name="report_file">manufacturing_extension.report_workorder_operations_document</field>
+        <field name="binding_model_id" ref="model_mrp_workorder"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Workorder Operations - %s' % (object.name or 'N/A')</field>
+    </record>
+
+    <!-- QWeb Template -->
+    <template id="report_workorder_operations_document">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <style>
+                            .page {
+                                font-size: 9pt;
+                                line-height: 1.2;
+                            }
+                            .compact-section {
+                                border: 1px solid #333;
+                                padding: 6px;
+                                margin-bottom: 8px;
+                            }
+                            .section-header {
+                                background-color: #e9ecef;
+                                padding: 4px 8px;
+                                margin: -6px -6px 6px -6px;
+                                font-weight: bold;
+                                font-size: 10pt;
+                                border-bottom: 1px solid #333;
+                            }
+                            .info-table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin-bottom: 8px;
+                                font-size: 8.5pt;
+                            }
+                            .info-table td {
+                                padding: 3px 5px;
+                                border: 1px solid #dee2e6;
+                                vertical-align: top;
+                            }
+                            .info-table td.label-col {
+                                width: 28%;
+                                background-color: #f8f9fa;
+                                font-weight: bold;
+                                color: #495057;
+                                font-size: 8pt;
+                            }
+                            .steps-table {
+                                width: 100%;
+                                border-collapse: collapse;
+                                margin-top: 8px;
+                            }
+                            .steps-table thead th {
+                                background-color: #333;
+                                color: white;
+                                padding: 5px 3px;
+                                text-align: left;
+                                font-size: 7.5pt;
+                                border: 1px solid #222;
+                                line-height: 1.1;
+                            }
+                            .steps-table tbody td {
+                                padding: 4px 3px;
+                                border: 1px solid #dee2e6;
+                                font-size: 7.5pt;
+                                vertical-align: top;
+                            }
+                            .steps-table tbody tr:nth-child(even) {
+                                background-color: #f8f9fa;
+                            }
+                            .steps-table tfoot td {
+                                padding: 5px 8px;
+                                border: 2px solid #333;
+                                font-size: 8pt;
+                                background-color: #e9ecef;
+                            }
+                            .badge-sm {
+                                display: inline-block;
+                                padding: 2px 6px;
+                                border-radius: 2px;
+                                font-size: 7.5pt;
+                                font-weight: bold;
+                                color: white;
+                            }
+                            .text-right {
+                                text-align: right;
+                            }
+                            .text-center {
+                                text-align: center;
+                            }
+                            .notes-section {
+                                background-color: #f8f9fa;
+                                border: 1px solid #dee2e6;
+                                padding: 5px;
+                                margin-top: 3px;
+                                font-size: 7pt;
+                                border-radius: 2px;
+                            }
+                            .footer-info {
+                                margin-top: 12px;
+                                padding-top: 6px;
+                                border-top: 1px solid #dee2e6;
+                                font-size: 7pt;
+                                color: #6c757d;
+                            }
+                            .signature-box {
+                                border: 1px solid #dee2e6;
+                                padding: 10px;
+                                border-radius: 3px;
+                            }
+                            .signature-line {
+                                margin-top: 20px;
+                                border-bottom: 1px solid #333;
+                                width: 80%;
+                            }
+                            h1.title {
+                                margin: 0;
+                                font-size: 18pt;
+                            }
+                            h3.subtitle {
+                                margin: 3px 0 0 0;
+                                font-weight: normal;
+                                font-size: 12pt;
+                                color: #6c757d;
+                            }
+                        </style>
+
+                        <!-- Header Section -->
+                        <div class="text-center">
+                            <h1 class="title">WORKORDER REPORT</h1>
+                            <h3 class="subtitle">
+                                <span t-field="o.name"/>
+                            </h3>
+                        </div>
+
+                        <!-- Work Order Information -->
+                        <div class="compact-section">
+                            <div class="section-header">WORK ORDER INFORMATION</div>
+                            <table class="info-table">
+                                <tr>
+                                    <td class="label-col">Work Order:</td>
+                                    <td><strong><span t-field="o.barcode"/></strong></td>
+                                    <td class="label-col">Production Order:</td>
+                                    <td><span t-field="o.production_id"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="label-col">Product:</td>
+                                    <td><span t-field="o.product_id"/></td>
+                                    <td class="label-col">Quantity:</td>
+                                    <td>
+                                        <span t-field="o.qty_production"/>
+                                        <span t-field="o.product_uom_id"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="label-col">Work Center:</td>
+                                    <td><span t-field="o.workcenter_id"/></td>
+                                    <td class="label-col">Operation:</td>
+                                    <td><span t-field="o.operation_id"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="label-col">Operation Type:</td>
+                                    <td>
+                                        <span class="badge-sm" style="background-color: #007bff;">
+                                            <span t-field="o.operation_type_id"/>
+                                        </span>
+                                    </td>
+                                    <td class="label-col">State:</td>
+                                    <td>
+                                        <t t-if="o.state == 'pending'">
+                                            <span class="badge-sm" style="background-color: #ffc107; color: #000;">Pending</span>
+                                        </t>
+                                        <t t-elif="o.state == 'ready'">
+                                            <span class="badge-sm" style="background-color: #007bff;">Ready</span>
+                                        </t>
+                                        <t t-elif="o.state == 'progress'">
+                                            <span class="badge-sm" style="background-color: #17a2b8;">In Progress</span>
+                                        </t>
+                                        <t t-elif="o.state == 'done'">
+                                            <span class="badge-sm" style="background-color: #28a745;">Done</span>
+                                        </t>
+                                        <t t-else="">
+                                            <span class="badge-sm" style="background-color: #6c757d;">
+                                                <span t-field="o.state"/>
+                                            </span>
+                                        </t>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <!-- Cutting Operations Steps -->
+                        <div class="compact-section">
+                            <div class="section-header">CUTTING OPERATIONS</div>
+
+                            <t t-if="not o.cutting_operation_ids">
+                                <div style="text-align: center; padding: 20px; color: #6c757d; background-color: #f8f9fa; border: 1px dashed #dee2e6; border-radius: 3px; font-size: 9pt;">
+                                    <p style="margin: 0;">No cutting operations defined for this work order.</p>
+                                </div>
+                            </t>
+
+                            <t t-if="o.cutting_operation_ids">
+                                <table class="steps-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 3%;">#</th>
+                                            <th style="width: 9%;">Step Name</th>
+                                            <th style="width: 8%;">Equipment</th>
+                                            <th style="width: 8%;">Equip. Ref.</th>       
+                                            <th style="width: 7%;">Performer</th>
+                                            <th style="width: 8%;">Responsible</th>
+                                            <th style="width: 6%;">Income<br/>kg</th>
+                                            <th style="width: 6%;">Outcome<br/>kg</th>
+                                            <th style="width: 9%;">Income<br/>section, mm</th>
+                                            <th style="width: 9%;">Outcome<br/>section, mm</th>
+                                            <th style="width: 9%;">Income<br/>length, mm</th>
+                                            <th style="width: 9%;">Outcome<br/>length, mm</th>
+                                            <th style="width: 9%;">Notes</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="o.cutting_operation_ids" t-as="step">
+                                            <tr>
+                                                <td class="text-center">
+                                                    <strong><span t-esc="step_index + 1"/></strong>
+                                                </td>
+                                                <td>
+                                                    <strong><span t-field="step.name"/></strong>
+                                                </td>
+                                                <td>
+                                                    <span t-field="step.equipment_id"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="step.equipment_reference_id"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="step.performer_id"/>
+                                                </td>
+                                                <td>
+                                                    <span t-field="step.responsible_id"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="step.income_material_weight"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="step.outcome_material_weight"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="step.income_material_crosssection"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="step.outcome_material_crosssection"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="step.income_material_length"/>
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-field="step.outcome_material_length"/>
+                                                </td>
+                                                <td>
+                                                    <t t-if="step.notes">
+                                                        <div style="max-height: 30px; overflow: hidden; font-size: 7pt;">
+                                                            <span t-field="step.notes"/>
+                                                        </div>
+                                                    </t>
+                                                    <t t-else="">-</t>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="13" style="font-weight: bold;">
+                                                <span style="float: left;">
+                                                    Total Operations: <span t-esc="len(o.cutting_operation_ids)"/>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </t>
+                        </div>
+
+                        <!-- Signature Section -->
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-6">
+                                <div class="compact-section">
+                                    <div class="section-header">OPERATOR</div>
+                                    <div style="padding: 15px 5px 5px 5px;">
+                                        <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                                        <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="compact-section">
+                                    <div class="section-header">SUPERVISOR</div>
+                                    <div style="padding: 15px 5px 5px 5px;">
+                                        <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                                        <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="footer-info">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 50%;">
+                                        <strong>Company:</strong> <span t-field="o.company_id"/>
+                                    </td>
+                                    <td style="width: 50%; text-align: right;">
+                                        <strong>Generated:</strong> 
+                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="padding-top: 3px; text-align: center;">
+                                        <em>This document is for manufacturing purposes only</em>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <t t-name="svg_builder.SvgBuilderTemplate">
+        <div class="o_svg_builder d-flex flex-column h-100 p-2">
+            <div class="o_svg_builder_toolbar d-flex flex-wrap gap-2 p-2 bg-light border rounded mb-2" t-ref="toolbar">
+                <button t-foreach="tools" t-as="tool" t-key="tool"
+                        t-attf-class="btn btn-sm #{this.state.currentTool === tool ? 'btn-primary' : 'btn-secondary'}"
+                        t-on-click="() => this.setTool(tool)">
+                    <i t-attf-class="#{getToolIcon(tool)}"/>
+                    <t t-esc="tool"/>
+                </button>
+                <div class="vr mx-2"></div>
+                <div class="btn-group" role="group" aria-label="Zoom Controls">
+                    <button class="btn btn-sm btn-secondary" title="Zoom In" t-on-click="this.zoomIn">
+                        <i class="fa fa-plus"/>
+                    </button>
+                    <button class="btn btn-sm btn-secondary" title="Zoom Out" t-on-click="this.zoomOut">
+                        <i class="fa fa-minus"/>
+                    </button>
+                    <button class="btn btn-sm btn-secondary" title="Zoom to Fit" t-on-click="this.zoomToFit">
+                        <i class="fa fa-expand"/>
+                    </button>
+                </div>
+                <div class="vr mx-2"></div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <label for="canvasWidth" class="col-form-label-sm">Width:</label>
+                    <input type="number" id="canvasWidth" class="form-control form-control-sm w-auto"
+                           t-model.number="this.state.canvasWidth" t-on-change="this.saveSvgData"/>
+                    <label for="canvasHeight" class="col-form-label-sm">Height:</label>
+                    <input type="number" id="canvasHeight" class="form-control form-control-sm w-auto"
+                           t-model.number="this.state.canvasHeight" t-on-change="this.saveSvgData"/>
+                    <label for="backgroundColor" class="col-form-label-sm">BG Color:</label>
+                    <input type="color" id="backgroundColor" class="form-control form-control-sm form-control-color"
+                           t-model="this.state.backgroundColor" t-on-change="this.saveSvgData"/>
+                </div>
+
+                <div class="vr mx-2"></div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="showGrid" t-model="this.state.showGrid"/>
+                        <label class="form-check-label" for="showGrid">Show Grid</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="snapToGrid"
+                               t-model="this.state.snapToGrid"/>
+                        <label class="form-check-label" for="snapToGrid">Snap to Grid</label>
+                    </div>
+                    <label for="gridSize" class="col-form-label-sm">Grid Size:</label>
+                    <input type="number" id="gridSize" class="form-control form-control-sm w-auto"
+                           t-model.number="this.state.gridSize" min="5" max="100"/>
+                </div>
+
+                <div class="vr mx-2"></div>
+
+                <button class="btn btn-sm btn-info" t-on-click="this.undo" t-att-disabled="!historyManager.canUndo()">
+                    <i class="fa fa-undo"/>
+                    Undo
+                </button>
+                <button class="btn btn-sm btn-info" t-on-click="this.redo" t-att-disabled="!historyManager.canRedo()">
+                    <i class="fa fa-redo"/>
+                    Redo
+                </button>
+                <button class="btn btn-sm btn-warning" t-on-click="this.clearCanvas">
+                    <i class="fa fa-trash"/>
+                    Clear
+                </button>
+                <button class="btn btn-sm btn-success" t-on-click="() => this.exportSvg('svg')">
+                    <i class="fa fa-download"/>
+                    Export SVG
+                </button>
+                <button class="btn btn-sm btn-success" t-on-click="() => this.exportSvg('png')">
+                    <i class="fa fa-file-image"/>
+                    Export PNG
+                </button>
+                <button class="btn btn-sm btn-secondary" t-on-click="() => this.fileInputRef.el.click()">
+                    <i class="fa fa-upload"/>
+                    Import SVG
+                </button>
+                <input type="file" t-ref="fileInput" class="d-none" accept=".svg" t-on-change="this.importSvg"/>
+            </div>
+
+            <div class="d-flex flex-grow-1 overflow-hidden">
+                <div class="o_svg_builder_canvas_wrapper flex-grow-1 position-relative border rounded overflow-auto bg-light"
+                     t-on-wheel.prevent="this.onWheel"
+                     t-on-mousedown.self="startPan">
+                    <svg t-ref="svg"
+                         t-att-width="this.state.canvasWidth"
+                         t-att-height="this.state.canvasHeight"
+                         t-attf-style="background-color: #{this.state.backgroundColor}; transform: scale(#{this.state.zoom}) translate(#{this.state.panX}px, #{this.state.panY}px); transform-origin: 0 0;"
+                         class="o_svg_canvas"
+                         t-on-mousedown.prevent.stop="onSvgMouseDown"
+                         t-on-mousemove.prevent.stop="onSvgMouseMove"
+                         t-on-mouseup.prevent.stop="onSvgMouseUp"
+                         t-on-mouseleave.prevent.stop="onSvgMouseUp"
+                         t-on-dblclick.prevent.stop="onSvgDoubleClick">
+                        <g t-if="this.state.showGrid" class="grid-lines">
+                            <t t-foreach="getGridLines()" t-as="line" t-key="line_index">
+                                <line t-att-x1="line.x1" t-att-y1="line.y1" t-att-x2="line.x2" t-att-y2="line.y2"
+                                      stroke="#e0e0e0" stroke-width="0.5"/>
+                            </t>
+                        </g>
+
+
+                        <g t-foreach="this.state.svgElements" t-as="el" t-key="el.id"
+                           t-att-data-element-id="el.id"
+                           t-att-transform="el.attributes.transform">
+                            <t t-if="el.type === 'rect'">
+                                <rect
+                                        t-att-x="el.attributes.x" t-att-y="el.attributes.y"
+                                        t-att-width="el.attributes.width" t-att-height="el.attributes.height"
+                                        t-att-fill="el.attributes.fill" t-att-stroke="el.attributes.stroke"
+                                        t-att-stroke-width="el.attributes['stroke-width']"
+                                        t-att-rx="el.attributes.rx || 0" t-att-ry="el.attributes.ry || 0"/>
+                            </t>
+                            <t t-if="el.type === 'circle'">
+                                <circle
+                                        t-att-cx="el.attributes.cx" t-att-cy="el.attributes.cy"
+                                        t-att-r="el.attributes.r"
+                                        t-att-fill="el.attributes.fill" t-att-stroke="el.attributes.stroke"
+                                        t-att-stroke-width="el.attributes['stroke-width']"/>
+                            </t>
+                            <t t-if="el.type === 'ellipse'">
+                                <ellipse
+                                        t-att-cx="el.attributes.cx" t-att-cy="el.attributes.cy"
+                                        t-att-rx="el.attributes.rx" t-att-ry="el.attributes.ry"
+                                        t-att-fill="el.attributes.fill" t-att-stroke="el.attributes.stroke"
+                                        t-att-stroke-width="el.attributes['stroke-width']"/>
+                            </t>
+                            <t t-if="el.type === 'line'">
+                                <line
+                                        t-att-x1="el.attributes.x1" t-att-y1="el.attributes.y1"
+                                        t-att-x2="el.attributes.x2" t-att-y2="el.attributes.y2"
+                                        t-att-stroke="el.attributes.stroke"
+                                        t-att-stroke-width="el.attributes['stroke-width']"/>
+                            </t>
+                            <t t-if="el.type === 'text'">
+                                <text
+                                        t-att-x="el.attributes.x" t-att-y="el.attributes.y"
+                                        t-att-fill="el.attributes.fill"
+                                        t-att-font-size="el.attributes['font-size']"
+                                        t-att-font-family="el.attributes['font-family']"
+                                        t-on-dblclick="() => this.startTextEdit(el.id)"
+                                        t-attf-class="#{this.state.editingTextElementId === el.id ? 'editing-text' : ''}">
+                                    <t t-esc="el.textContent"/>
+                                </text>
+                            </t>
+                            <t t-if="el.type === 'path'">
+                                <path
+                                        t-att-d="el.attributes.d"
+                                        t-att-fill="el.attributes.fill" t-att-stroke="el.attributes.stroke"
+                                        t-att-stroke-width="el.attributes['stroke-width']"/>
+                            </t>
+                        </g>
+
+                        <g t-if="this.state.selectedElement and this.state.selectedElementBounds" class="selection-box">
+                            <rect t-att-x="this.state.selectedElementBounds.x"
+                                  t-att-y="this.state.selectedElementBounds.y"
+                                  t-att-width="this.state.selectedElementBounds.width"
+                                  t-att-height="this.state.selectedElementBounds.height"
+                                  fill="none" stroke="#007bff" stroke-width="1" stroke-dasharray="3 3"/>
+                            <t t-foreach="this.state.selectedElementBounds.handles" t-as="handle" t-key="handle.name">
+                                <t t-if="handle.name === 'rotate'">
+                                    <g t-attf-transform="translate(#{handle.x - 7.5}, #{handle.y - 7.5})"
+                                       t-att-data-handle="handle.name"
+                                       t-att-data-element-id="this.state.selectedElementId"
+                                       t-on-mousedown.stop="this.onHandleMouseDown"
+                                       class="rotate-handle"
+                                       style="cursor: pointer;">
+                                        <path d="M 12.6,3.6 C 11.2,2.3 9.4,1.5 7.5,1.5 C 3.4,1.5 0,4.8 0,9 H 1.5 C 1.5,5.7 4.2,3 7.5,3 C 9,3 10.3,3.6 11.4,4.6 L 9,7.5 H 15 V 1.5 L 12.6,3.6 Z"
+                                              fill="red" stroke="#fff" stroke-width="0.5"/>
+                                    </g>
+                                </t>
+                                <t t-else="">
+                                    <circle t-att-cx="handle.x"
+                                            t-att-cy="handle.y"
+                                            r="5"
+                                            fill="#007bff"
+                                            stroke="#fff"
+                                            stroke-width="1"
+                                            t-att-data-handle="handle.name"
+                                            t-on-mousedown.stop="this.onHandleMouseDown"
+                                            class="resize-handle"
+                                            t-att-data-element-id="this.state.selectedElementId"/>
+                                </t>
+                            </t>
+                        </g>
+
+                        <foreignObject t-if="this.state.editingTextElementId"
+                                       t-att-x="this.state.editingTextPosition.x"
+                                       t-att-y="this.state.editingTextPosition.y"
+                                       width="200" height="50">
+                            <textarea
+                                    t-ref="textInput"
+                                    t-on-blur="this.finishTextEdit"
+                                    t-on-keydown.stop="this.onTextInputKeyDown"
+                                    class="o_svg_text_editor"
+                                    t-esc="this.state.editingTextContent"/>
+                        </foreignObject>
+                    </svg>
+                </div>
+
+                <div class="o_svg_builder_properties_panel p-2 ms-2 bg-light border rounded" t-ref="propertiesPanel"
+                     t-attf-class="#{this.state.selectedElement ? 'd-block' : 'd-none'}">
+                    <h5>Properties</h5>
+                    <t t-if="this.state.selectedElement">
+                        <div class="mb-2">
+                            <label class="form-label">Fill Color</label>
+                            <input type="color" class="form-control form-control-sm form-control-color"
+                                   t-model="this.state.selectedElementAttributes.fill"
+                                   t-on-change="(ev) => this.updateElementProperty('fill', ev.target.value)"/>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Stroke Color</label>
+                            <input type="color" class="form-control form-control-sm form-control-color"
+                                   t-model="this.state.selectedElementAttributes.stroke"
+                                   t-on-change="(ev) => this.updateElementProperty('stroke', ev.target.value)"/>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Stroke Width</label>
+                            <input type="number" class="form-control form-control-sm"
+                                   t-model.number="this.state.selectedElementAttributes.stroke_width"
+                                   t-on-change="(ev) => this.updateElementProperty('stroke-width', ev.target.value)"/>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label">Rotation</label>
+                            <input type="number" class="form-control form-control-sm"
+                                   t-model.number="this.state.selectedElementAttributes.rotation"
+                                   t-on-change="(ev) => this.updateElementProperty('rotation', ev.target.value)"/>
+                        </div>
+
+                        <t t-if="this.state.selectedElementAttributes.type === 'text'">
+                            <div class="mb-2">
+                                <label class="form-label">Font Size</label>
+                                <input type="number" class="form-control form-control-sm"
+                                       t-model.number="this.state.selectedElementAttributes.font_size"
+                                       t-on-change="(ev) => this.updateElementProperty('font-size', ev.target.value)"/>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Font Family</label>
+                                <input type="text" class="form-control form-control-sm"
+                                       t-model="this.state.selectedElementAttributes.font_family"
+                                       t-on-change="(ev) => this.updateElementProperty('font-family', ev.target.value)"/>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Text Content</label>
+                                <textarea class="form-control form-control-sm"
+                                          t-model="this.state.selectedElementAttributes.textContent"
+                                          t-on-change="(ev) => this.updateElementProperty('textContent', ev.target.value)"/>
+                            </div>
+                        </t>
+
+                        <t t-if="this.state.selectedElementAttributes.type === 'rect'">
+                            <div class="mb-2">
+                                <label class="form-label">Corner Radius (rx)</label>
+                                <input type="number" class="form-control form-control-sm"
+                                       t-model.number="this.state.selectedElementAttributes.rx"
+                                       t-on-change="(ev) => this.updateElementProperty('rx', ev.target.value)"/>
+                            </div>
+                            <div class="mb-2">
+                                <label class="form-label">Corner Radius (ry)</label>
+                                <input type="number" class="form-control form-control-sm"
+                                       t-model.number="this.state.selectedElementAttributes.ry"
+                                       t-on-change="(ev) => this.updateElementProperty('ry', ev.target.value)"/>
+                            </div>
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <p class="text-muted">Select an element to view its properties.</p>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- <t t-name="svg_builder.SvgPreviewField">
+        <div class="o_svg_preview"
+            style="border:1px solid #ddd; min-height:200px"/>
+    </t> -->
+
+
+</odoo>

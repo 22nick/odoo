@@ -31,8 +31,11 @@ class MrpWorkorder(models.Model):
     operation_type_id = fields.Many2one(
         'operation.types', 
         string="Operation Type",
-        required=False 
+        required=False,
+        tracking=True 
     )
+    
+    
     
     # Магия синхронизации:
     # Когда пользователь выбирает или создает запись в выпадающем списке,
@@ -67,5 +70,54 @@ class MrpWorkorder(models.Model):
     
     component_reference_no = fields.Char(related='production_id.move_raw_ids.product_id.product_reference_no', string="Component Ref.No.")
     
-
+    operation_type_code = fields.Char(
+        related='operation_type_id.code',
+        string='Operation Type Code',
+        store=True,
+        readonly=True
+    )
+    
+    # One2many relations to different operation models
+    cutting_operation_ids = fields.One2many(
+        'operation.steps.cutting',
+        'workorder_id',
+        string="Cutting Operations"
+    )
+    
+    heating_operation_ids = fields.One2many(
+        'operation.steps.heating',
+        'workorder_id',
+        string="Heating Operations"
+    )
+    
+    # welding_operation_ids = fields.One2many(
+    #     'operation.steps.welding',
+    #     'workorder_id',
+    #     string="Welding Operations"
+    # )
+    
+    # grinding_operation_ids = fields.One2many(
+    #     'operation.steps.grinding',
+    #     'workorder_id',
+    #     string="Grinding Operations"
+    # )
+    
+    @api.onchange('operation_type_id')
+    def _onchange_operation_type_id(self):
+        """Clear operation lines when operation type changes"""
+        if self.operation_type_id:
+            # Clear all operation lines
+            self.cutting_operation_ids = [(5, 0, 0)]
+            self.heating_operation_ids = [(5, 0, 0)]
+            # self.welding_operation_ids = [(5, 0, 0)]
+            # self.grinding_operation_ids = [(5, 0, 0)]
+    
+    def action_print_cutting_report(self):
+        """Print Cutting Operations Report"""
+        return self.env.ref('mrp_operation_extension.action_report_cutting_operations').report_action(self)
+    
+    def action_print_workorder_report(self):
+        """Print Cutting Operations Report"""
+        return self.env.ref('mrp_operation_extension.action_report_workorder_operations').report_action(self)
+    
     

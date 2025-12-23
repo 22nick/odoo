@@ -1,0 +1,81 @@
+<odoo>
+    <template id="mrp_report_mrporder_ext"
+        inherit_id="mrp.report_mrporder"
+    >
+        
+        <!-- Product data modification: -->
+        <xpath expr="//div[@class='row mt32 mb32'][2]/div[@class='col-3'][1]" position="before">
+            <div class="col-3">
+                <strong>Product Ref. No.:</strong><br/>
+                <span t-field="o.product_id.product_reference_no"/>
+            </div>
+            
+        </xpath>
+
+
+        <!-- Workorder list modification: -->
+
+        <!-- workorder reference id (header)-->
+        <xpath expr="//table[@class='table table-sm']/tr[1]/th[1]" position="after">
+            <th><strong>Referemce ID</strong></th>
+        </xpath>
+
+        <!-- Counter (header) -->
+        <xpath expr="//table[@class='table table-sm']/tr[1]/th[1]" position="before">
+            <th><strong>No.</strong></th>
+        </xpath>
+
+        <!-- Responsible (header) -->
+        <xpath expr="//table[@class='table table-sm']/tr[1]" position="inside">
+            <th><strong>Responsible/ Singniture</strong></th>
+        </xpath>
+
+        <!-- Table -->
+        <!-- ##### -->
+        <xpath expr="//table[@class='table table-sm']/tr[2]" position="before">
+            <t t-set="counter" t-value="1"/>
+        </xpath>
+
+        <!-- workorder reference id (date)-->
+        <xpath expr="//table[@class='table table-sm']/tr[2]/td[1]" position="after">
+            <td><span t-field="line2.barcode">Referemce Id</span></td>
+        </xpath>
+
+        <!-- Counter (data) -->
+        <xpath expr="//table[@class='table table-sm']/tr[2]/td[1]" position="before">
+            <td><span t-esc="counter"/></td>
+        </xpath>
+
+        <!-- Responsible (data) -->
+        <xpath expr="//table[@class='table table-sm']/tr[2]" position="inside">
+            <td>
+                <span t-field="line2.user_id" style="text-decoration:underline">Responsible</span><br/>
+                <br/>
+            </td>
+        </xpath>
+
+        <xpath expr="//table[@class='table table-sm']/tr[2]" position="inside">
+            <t t-set="counter" t-value="counter + 1"/>
+        </xpath>
+        
+        <!-- ##### -->
+
+    </template>
+
+
+
+    <template id="mrp_report_mrp_production_components_ext"
+        inherit_id="mrp.report_mrp_production_components">
+
+        <!-- Component data modification: -->
+        <xpath expr="//table[@class='table table-sm']/thead/tr/th[1]" position="before">
+            <th><strong>Component Ref. No.</strong></th>
+        </xpath>
+
+        <xpath expr="//table[@class='table table-sm']/tbody/tr/td[1]" position="before">
+            <td><span t-field="raw_line.product_id.product_reference_no"/></td>
+        </xpath>
+
+
+    </template>
+</odoo>

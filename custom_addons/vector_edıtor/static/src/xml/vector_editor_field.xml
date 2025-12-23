@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="vector_editor.VectorEditorField">
+        <div class="o_vector_editor">
+            <div class="o_vector_toolbar" style="margin-bottom: 10px; padding: 10px; background: #f8f9fa; border-radius: 4px;">
+                <button class="btn btn-sm btn-primary" 
+                        t-on-click="() => this.selectTool()"
+                        style="margin-right: 5px;">
+                    <i class="fa fa-mouse-pointer"/> Выбор
+                </button>
+                <button class="btn btn-sm btn-success" 
+                        t-on-click="() => this.addRectangle()"
+                        style="margin-right: 5px;">
+                    <i class="fa fa-square-o"/> Прямоугольник
+                </button>
+                <button class="btn btn-sm btn-danger" 
+                        t-on-click="() => this.deleteSelected()"
+                        t-att-disabled="!state.selectedShape"
+                        style="margin-right: 15px;">
+                    <i class="fa fa-trash"/> Удалить
+                </button>
+                
+                <span style="margin-right: 5px;">Цвет:</span>
+                <button class="btn btn-sm" 
+                        t-on-click="() => this.changeColor('#3498db')"
+                        style="background: #3498db; width: 30px; margin-right: 3px;"
+                        t-att-disabled="!state.selectedShape"/>
+                <button class="btn btn-sm" 
+                        t-on-click="() => this.changeColor('#e74c3c')"
+                        style="background: #e74c3c; width: 30px; margin-right: 3px;"
+                        t-att-disabled="!state.selectedShape"/>
+                <button class="btn btn-sm" 
+                        t-on-click="() => this.changeColor('#2ecc71')"
+                        style="background: #2ecc71; width: 30px; margin-right: 3px;"
+                        t-att-disabled="!state.selectedShape"/>
+                <button class="btn btn-sm" 
+                        t-on-click="() => this.changeColor('#f39c12')"
+                        style="background: #f39c12; width: 30px; margin-right: 3px;"
+                        t-att-disabled="!state.selectedShape"/>
+                <button class="btn btn-sm" 
+                        t-on-click="() => this.changeColor('#9b59b6')"
+                        style="background: #9b59b6; width: 30px; margin-right: 3px;"
+                        t-att-disabled="!state.selectedShape"/>
+            </div>
+            <div class="o_vector_canvas_container" 
+                 style="border: 2px solid #ddd; display: inline-block; background: white;">
+                <canvas t-ref="canvas" 
+                        width="800" 
+                        height="600"
+                        style="display: block; cursor: crosshair;"/>
+            </div>
+            <div class="o_vector_help" style="margin-top: 10px; color: #666; font-size: 12px;">
+                <strong>Инструкция:</strong> 
+                • Клик по прямоугольнику для выбора • 
+                Drag для перемещения • 
+                Потяните за углы для изменения размера • 
+                Потяните за зелёный кружок для поворота • 
+                Двойной клик для редактирования текста
+            </div>
+        </div>
+    </t>
+</templates>

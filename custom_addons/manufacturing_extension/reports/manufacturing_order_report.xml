@@ -103,6 +103,7 @@
 
                         <!-- Две колонки для основной информации -->
                         <div class="row">
+                            <!-- <t t-set="counter" t-value="1"/> -->
                             <!-- Левая колонка -->
                             <div class="col-6">
                                 <!-- Секция 1: Информация о заказе -->
@@ -284,11 +285,14 @@
                                 <div class="compact-section" t-if="o.binary_field">
                                     <div class="section-header">ATTACHMENTS</div>
                                     <div style="font-size: 8pt; padding: 2px;">
+                                        <t t-set="counter" t-value="1"/>
                                         <t t-foreach="o.binary_field[:5]" t-as="attachment">
+                                            <t t-esc="counter"/>
                                             <div style="padding: 2px 0; border-bottom: 1px dotted #dee2e6;">
                                                 <i class="fa fa-file-o" style="margin-right: 5px; font-size: 8pt;"/>
                                                 <span t-field="attachment.name"/>
                                             </div>
+                                            <t t-set="counter" t-value="counter + 1"/>
                                         </t>
                                         <t t-if="len(o.binary_field) > 5">
                                             <div style="padding: 2px 0; color: #6c757d;">

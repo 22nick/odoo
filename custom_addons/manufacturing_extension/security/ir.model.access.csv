@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_operation_types,operation.types,model_operation_types,base.group_user,1,1,1,1
 access_operation_charge,operation.charge,model_operation_charge,base.group_user,1,1,1,1
-access_operation_steps_heating,operation.steps_heating,model_operation_steps_heating,base.group_user,1,1,1,1
+access_operation_steps_cutting,operation.steps.cutting,model_operation_steps_cutting,base.group_user,1,1,1,1
+access_operation_steps_heating,operation.steps.heating,model_operation_steps_heating,base.group_user,1,1,1,1

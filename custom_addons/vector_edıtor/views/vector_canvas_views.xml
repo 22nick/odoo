@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_vector_canvas_form" model="ir.ui.view">
+        <field name="name">vector.canvas.form</field>
+        <field name="model">vector.canvas</field>
+        <field name="arch" type="xml">
+            <form string="Vector Canvas">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="canvas_width"/>
+                        <field name="canvas_height"/>
+                    </group>
+                    <group>
+                        <field name="canvas_data" widget="vector_editor"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_vector_canvas_tree" model="ir.ui.view">
+        <field name="name">vector.canvas.tree</field>
+        <field name="model">vector.canvas</field>
+        <field name="arch" type="xml">
+            <tree string="Vector Canvases">
+                <field name="name"/>
+                <field name="canvas_width"/>
+                <field name="canvas_height"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_vector_canvas" model="ir.actions.act_window">
+        <field name="name">Vector Canvases</field>
+        <field name="res_model">vector.canvas</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_vector_editor_root" name="Vector Editor"/>
+    <menuitem id="menu_vector_canvas" 
+              name="Canvases" 
+              parent="menu_vector_editor_root" 
+              action="action_vector_canvas"/>
+</odoo>
