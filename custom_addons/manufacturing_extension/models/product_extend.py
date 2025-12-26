@@ -1,7 +1,48 @@
 from odoo import api, models, fields
 from odoo.fields import Domain
 
-class ProductTemlpate(models.Model):
+class ProductProduct(models.Model):
+    _inherit = 'product.product'
+
+    # product_reference_no = fields.Char(string='Material reference No.', default='[New]', readonly=True, copy=False, index=True, required=True, help="Reference Number of the material")
+    product_reference_no = fields.Char(
+        string='Material reference No.',
+        related='product_tmpl_id.product_reference_no',
+        store=True,  # ВАЖНО: store=True для индексации и поиска
+        readonly=False,
+        copy=False,
+        index=True,
+        help="Reference Number of the material"
+    )
+    
+    heat_no = fields.Char(string='Heat No.', 
+        related='product_tmpl_id.heat_no', 
+        required=True, 
+        store=True,  # ВАЖНО: store=True для индексации и поиска
+        readonly=False,
+        copy=False,
+        index=True, help="Heat Number of the material", 
+        default="N/A")
+    
+    # product_reference_no = fields.Char(
+    #     string='Material reference No.',
+    #     compute='_compute_product_reference_no',
+    #     store=True,
+    #     readonly=False,
+    #     copy=False,
+    #     index=True
+    # )
+    
+    # @api.depends('product_tmpl_id.product_reference_no')
+    # def _compute_product_reference_no(self):
+    #     for product in self:
+    #         if product.product_tmpl_id.product_reference_no:
+    #             product.product_reference_no = product.product_tmpl_id.product_reference_no
+    #         elif not product.product_reference_no:
+    #             product.product_reference_no = '[New]'
+                
+
+class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     product_type = fields.Selection([
@@ -28,49 +69,50 @@ class ProductTemlpate(models.Model):
     
     forging_material = fields.Char(string='Material')
 
-    product_reference_no = fields.Char(string='Material reference No.', default='[New]', readonly=True, copy=False, index=True, required=True, help="Reference Number of the material")
+    product_reference_no = fields.Char(string='Material reference No.', default='[New]', readonly=False, copy=False, index=True, required=True, help="Reference Number of the material")
 
     heat_no = fields.Char(string='Heat No.', required=True, help="Heat Number of the material", default="N/A")
     
-    # reference_note = fields.Char(string="Reference Note")
-    # print("Product Template Inherited Successfully")   
+    # Previous create method
+    # @api.model_create_multi
+    # def create(self, vals):
+    #     for val in vals:
+    #         if val.get('product_reference_no', '[New]') == '[New]':
+    #             val['product_reference_no'] = (self.env['ir.sequence'].
+    #             next_by_code('product_sequense'))
+    #     return super().create(vals)
 
     @api.model_create_multi
-    def create(self, vals):
-        for val in vals:
+    def create(self, vals_list):
+        
+        for val in vals_list:
             if val.get('product_reference_no', '[New]') == '[New]':
                 val['product_reference_no'] = (self.env['ir.sequence'].
                 next_by_code('product_sequense'))
-        return super().create(vals)
-
+        records = super(ProductTemplate, self).create(vals_list)
+         
+        for rec in records:
+            if rec.product_variant_ids:
+                # Мы пишем в поле шаблона, а Odoo сама должна обновить related.
+                # Но если store=True глючит, можно обновить варианты напрямую:
+                rec.product_variant_ids.write({'product_reference_no': rec.product_reference_no})
+                
+                        
+        return records
+    
+    # #Для перезаписи поля при изменении    
+    # def write(self, vals):
+    #     # Важно также обработать изменение поля в будущем
+    #     res = super(ProductTemplate, self).write(vals)
+    #     if 'product_reference_no' in vals:
+    #         for rec in self:
+    #             rec.product_variant_ids.write({'product_reference_no': rec.product_reference_no})
+    #     return res
+    
     @api.onchange('forging_type')
     def _change_forging_type(self):
         print("Forging Type Changed", self)
         
-    
-
-    # @api.depends('name', 'product_reference_no')
-    # @api.model
-    # def name_get(self):
-    #     result = []
-    #     print("Name Get Called")
-    #     for record in self:
-    #         name = record.name
-    #         # if record.product_reference_no:
-    #         #     name = f"[{record.product_reference_no}] {name}"
-    #         reference_no = record.product_reference_no
-    #         result.append((reference_no, name))
-    #     return result
-    
-# class SaleOrder(models.Model):
-#    _inherit = 'sale.order'
-
-
-
-# class student_extend(models.Model):
-#     _inherit = 'wb.student'
-
-#     reference_note = fields.Char(string="Reference Note")   
 
 class product_product(models.Model):
     _inherit = "product.product"
@@ -78,16 +120,7 @@ class product_product(models.Model):
 
     @api.model
     def web_name_search(self, name, specification, domain=None, operator='ilike', limit=100):
-        
-        # print("Web Name Search Called :self: ", self)
-        # print("Web Name Search Called :name: ", name)
-        # print("Web Name Search Called :specification: ", specification)
-        # print("Web Name Search Called :domain: ", domain)
-        # print("Web Name Search Called :operator: ", operator)
 
-        # specification.update({'product_reference_no': {}})
-
-        # print("Web Name Search Modified :specification: ", specification)
 
         rec = super(product_product, self).web_name_search(name, specification, domain, operator, limit)
         res = []
@@ -97,9 +130,6 @@ class product_product(models.Model):
             r['__formatted_display_name'] = f"--{product.product_reference_no}--\t {r['__formatted_display_name']}"
             # print("Modified Record :: ", r)
             res.append(r)
-
-        # print("Web Name Search Called Original:: ", rec)
-        # print("Web Name Search Called Modified:: ", res)
 
         return res
     

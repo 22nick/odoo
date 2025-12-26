@@ -21,7 +21,7 @@
                     options="{'no_create': False, 'no_edit': False}"/>
                 
                 <!-- 2. Скрытое системное поле name (обязательно должно быть во view) -->
-                <field name="name" invisible="1" force_save="1"/>
+                <field name="name" invisible="1" force_save='1'/>
                 <field name="operation_type_code" invisible="1"/>
 
             </xpath>
@@ -79,17 +79,7 @@
                                     <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
                                 </group>
 
-                                <group string="Layout" colspan="2">
-                                    <button name="action_open_svg"
-                                        type="object"
-                                        string="Edit SVG"
-                                        class="oe_highlight"/>
-
-                                    <field name="svg_builder_id" widget="svg_builder"/>
-
-                                    <field name="svg_preview" widget="html" readonly="1" nolabel="1"/>
-
-                                </group>
+                                
                             </sheet>
                         </form>
                     </field>
@@ -119,25 +109,30 @@
                                         <field name="equipment_id"/>
                                         <field name="recipe_name"/>
                                         <field name="workorder_id"/>
-                                    </group>
-                                    <group>
                                         <field name="charge_id"/>
                                         <field name="heating_date"/>
+                                    </group>
+                                    <group>
                                         <field name="performer_id"/>
                                         <field name="responsible_id"/>
+                                        <field name="resposible_quality_id"/>
+                                        <field name="measurement_device_id"/>
+                                        <field name="ksb_form_no"/>
                                     </group>
                                 </group>
                                 <group string="Notes" colspan="2">
                                     <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
                                 </group>
 
-                                <group string="Layout" colspan="2">
-                                    <button name="action_open_svg"
-                                        type="object"
-                                        string="Edit SVG"
-                                        class="oe_highlight"/>
+                                <!-- <group string="Components" colspan="2">
+                                    <field name="charge_component_ids" widget="many2many" readonly="1" nolabel="1"/>
 
-                                    <field name="svg_builder_id" widget="svg_builder"/>
+                                </group> -->
+
+                                <group string="Layout" colspan="2">
+
+
+                                    <field name="svg_builder_id" nolabel="1" readonly="1" invisible="1"/>
 
                                     <field name="svg_preview" widget="html" readonly="1" nolabel="1"/>
 

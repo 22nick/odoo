@@ -45,6 +45,7 @@
         <field name="model">svg.builder</field>
         <field name="arch" type="xml">
             <list string="SVG Builder">
+                <field name="id"/>
                 <field name="name"/>
                 <field name="width"/>
                 <field name="height"/>

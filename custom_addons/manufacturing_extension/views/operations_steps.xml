@@ -23,31 +23,75 @@
         <field name="name">operation.charge.form.view</field>
         <field name="model">operation.charge</field>
         <field name="arch" type="xml">
-        <form string="Operation Charge Form">
-            <sheet>
-            <group>
-                <field name="name"/>
-                <field name="operation_type_id"/>
+            <form string="Operation Charge Form">
+                <sheet>
+                    <group>
+                        <group string="Charge Info">
+                            <field name="name"/>
+                            <field name="operation_type_id"/>
+                        </group>
 
-                <separator string="Workorder List" colspan="2"/>
-                <field name="workorder_list" create="true"/>
-                
-                <separator string="Filters" colspan="2"/>
+                        <group string="Filters">
+                            <field name="selected_mo_ids" widget="many2many_tags"/>
+                            <field name="selected_product_ids" widget="many2many_tags"/>
+                            <field name="selected_component_ids" widget="many2many_tags"/>
 
-                <field name="selected_mo_ids" widget="many2many_tags"/>
-                <field name="selected_product_ids" widget="many2many_tags"/>
-                <field name="selected_component_ids" widget="many2many_tags"/>
+                            <separator string="Add Workorder" colspan="2"/>
+                            
+                            <field name="workorder_id" string="Add Workorder" domain="computed_wo_domain" nolabel='1'/>
+                        </group>
+                    </group>
 
-                <separator string="Select Workorder" colspan="2"/>
+                    <group string="Workorder List" colspan="2">    
+                        <field name="workorder_list" create="true" nolabel='1'/>
 
-                <field name="workorder_id" 
-                    string="Add Workorder" 
-                    domain="computed_wo_domain"/>
-                
-            </group>
-            </sheet>
+                    </group>
 
-        </form>
+                    <group string="Components">
+                        <field name="mo_component_ids" widget="many2many" readonly="1" nolabel="1"/>
+
+                    </group>
+                        
+                    <group string="Layout" colspan="2">
+                        <!-- Строка управления созданием SVG-->
+                        <div class="d-flex align-items-center mb-3" invisible="svg_builder_id != False">
+                            <label for="template_svg_id" string="Template:" class="me-2"/>
+                            <div style="min-width: 200px;" class="me-2">
+                                <field name="template_svg_id" nolabel="1" options="{'no_create': True}"/>
+                            </div>
+                            <button name="action_create_svg" type="object" string="New" class="btn-primary" invisible="name == False"/>
+                        </div>
+
+                        <!-- Строка управления существующим SVG -->
+                        <div class="o_row mb-3" invisible="svg_builder_id == False">
+                            <button name="action_open_svg"
+                                    type="object"
+                                    string="Edit"
+                                    class="btn-primary"
+                                    icon="fa-pencil"/>
+                            
+                            <button name="action_delete_svg"
+                                    type="object"
+                                    string="Remove"
+                                    class="btn-primary"
+                                    confirm="This will permanently delete the SVG. Continue?"
+                                    icon="fa-trash"/>
+                        </div>
+
+                        <!-- Скрытые технические поля SVG-->
+                        <field name="svg_builder_id" invisible="1"/>
+
+                        <!-- Превью SVG-->
+                        <field name="svg_preview" 
+                            widget="html" 
+                            readonly="1" 
+                            nolabel="1" 
+                            invisible="svg_builder_id == False"
+                            class="border rounded bg-light p-2"/>
+                    </group>
+                    
+                </sheet>
+            </form>
         </field>
     </record>
 

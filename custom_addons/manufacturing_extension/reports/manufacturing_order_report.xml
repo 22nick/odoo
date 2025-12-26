@@ -15,7 +15,7 @@
     <!-- QWeb шаблон отчета -->
         <template id="report_manufacturing_order_document">
         <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="o">
+            <t t-foreach="docs" t-as="mo">
                 <t t-call="web.external_layout">
                     <div class="page">
                         <style>
@@ -98,7 +98,7 @@
                         <!-- Компактный заголовок -->
                         <div class="text-center">
                             <h1 class="title">ORDER TECHNICAL OPERATION FORM</h1>
-                            <h3 class="subtitle"><span t-field="o.name"/></h3>
+                            <h3 class="subtitle"><span t-field="mo.name"/></h3>
                         </div>
 
                         <!-- Две колонки для основной информации -->
@@ -112,23 +112,23 @@
                                     <table class="compact-table">
                                         <tr>
                                             <td class="label-col">Customer</td>
-                                            <td><span t-field="o.partner_id"/></td>
+                                            <td><span t-field="mo.partner_id"/></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Date</td>
-                                            <td><span t-field="o.create_date"/></td>
+                                            <td><span t-field="mo.create_date"/></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Created by:</td>
-                                            <td><span t-field="o.user_id"/></td>
+                                            <td><span t-field="mo.user_id"/></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Sales Order</td>
-                                            <td><span t-field="o.sales_order_reference"/></td>
+                                            <td><span t-field="mo.sales_order_reference"/></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Customer Order</td>
-                                            <td><span t-field="o.customer_order_reference"/></td>
+                                            <td><span t-field="mo.customer_order_reference"/></td>
                                         </tr>
                                         
                                     </table>
@@ -141,22 +141,22 @@
                                         <tr>
                                             <td class="label-col">Features</td>
                                             <td>
-                                                <t t-if="o.manufactoring_features == 'prototype'">
+                                                <t t-if="mo.manufactoring_features == 'prototype'">
                                                     <span class="badge-sm">Prototype</span>
                                                 </t>
-                                                <t t-elif="o.manufactoring_features == 'trial'">
+                                                <t t-elif="mo.manufactoring_features == 'trial'">
                                                     <span class="badge-sm" style="background-color: #ffc107; color: #000;">Trial</span>
                                                 </t>
-                                                <t t-elif="o.manufactoring_features == 'fac'">
+                                                <t t-elif="mo.manufactoring_features == 'fac'">
                                                     <span class="badge-sm" style="background-color: #28a745;">FAC</span>
                                                 </t>
-                                                <t t-elif="o.manufactoring_features == 'serial'">
+                                                <t t-elif="mo.manufactoring_features == 'serial'">
                                                     <span class="badge-sm">Serial</span>
                                                 </t>
-                                                <t t-elif="o.manufactoring_features == 'special'">
+                                                <t t-elif="mo.manufactoring_features == 'special'">
                                                     <span class="badge-sm" style="background-color: #6c757d;">Special</span>
                                                 </t>
-                                                <t t-elif="o.manufactoring_features == 'other'">
+                                                <t t-elif="mo.manufactoring_features == 'other'">
                                                     <span class="badge-sm" style="background-color: #343a40;">Other</span>
                                                 </t>
                                             </td>
@@ -164,14 +164,14 @@
                                         <tr>
                                             <td class="label-col">Tech. Feasibility</td>
                                             <td>
-                                                <span t-attf-class="checkbox-inline #{o.technical_feasibility and 'checked' or ''}"/>
-                                                <span t-if="o.technical_feasibility">YES</span>
+                                                <span t-attf-class="checkbox-inline #{mo.technical_feasibility and 'checked' or ''}"/>
+                                                <span t-if="mo.technical_feasibility">YES</span>
                                                 <span t-else="">NO</span>
                                             </td>
                                         </tr>
-                                        <tr t-if="o.technical_feasibility">
+                                        <tr t-if="mo.technical_feasibility">
                                             <td class="label-col">Form No.</td>
-                                            <td><span t-field="o.technical_feasibility_form_no"/></td>
+                                            <td><span t-field="mo.technical_feasibility_form_no"/></td>
                                         </tr>
                                     </table>
                                 </div>
@@ -182,25 +182,25 @@
                                     <table class="compact-table">
                                         <tr>
                                             <td class="label-col">Dimensions</td>
-                                            <td><span t-field="o.product_dimensions"/></td>
+                                            <td><span t-field="mo.product_dimensions"/></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Material</td>
-                                            <td><span t-field="o.product_material_standart"/></td>
+                                            <td><span t-field="mo.product_material_standart"/></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Part No.</td>
-                                            <td><span t-field="o.manufactoring_part_no"/></td>
+                                            <td><span t-field="mo.manufactoring_part_no"/></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Material Ref.No.</td>
-                                            <td><span t-field="o.component_reference_no"/></td>
+                                            <td><span t-field="mo.component_reference_no"/></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Explanations</td>
                                             <td>
                                                 <div class="text-compact">
-                                                    <span t-field="o.manufactoring_explanation_note"/>
+                                                    <span t-field="mo.manufactoring_explanation_note"/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -219,16 +219,16 @@
                                         <tr>
                                             <td class="label-col">Type</td>
                                             <td>
-                                                <t t-if="o.customer_requirements == 'item'">
+                                                <t t-if="mo.customer_requirements == 'item'">
                                                     <span class="badge-sm">Item</span>
                                                 </t>
-                                                <t t-elif="o.customer_requirements == 'tolerance'">
+                                                <t t-elif="mo.customer_requirements == 'tolerance'">
                                                     <span class="badge-sm">Tolerance</span>
                                                 </t>
-                                                <t t-elif="o.customer_requirements == 'heattrearment'">
+                                                <t t-elif="mo.customer_requirements == 'heattrearment'">
                                                     <span class="badge-sm">Heat Treatment</span>
                                                 </t>
-                                                <t t-elif="o.customer_requirements == 'documents'">
+                                                <t t-elif="mo.customer_requirements == 'documents'">
                                                     <span class="badge-sm">Documentation</span>
                                                 </t>
                                             </td>
@@ -237,7 +237,7 @@
                                             <td class="label-col">Notes</td>
                                             <td>
                                                 <div class="text-compact">
-                                                    <span t-field="o.customer_requirements_notes"/>
+                                                    <span t-field="mo.customer_requirements_notes"/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -249,13 +249,13 @@
                                     <table class="compact-table">
                                         <tr>
                                             <td class="label-col">Rev. No.</td>
-                                            <td><strong><span t-field="o.manufacturing_order_revision_number"/></strong></td>
+                                            <td><strong><span t-field="mo.manufacturing_order_revision_number"/></strong></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Notes</td>
                                             <td>
                                                 <div class="text-compact">
-                                                    <span t-field="o.manufacturing_order_revision_note"/>
+                                                    <span t-field="mo.manufacturing_order_revision_note"/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -268,13 +268,13 @@
                                     <table class="compact-table">
                                         <tr>
                                             <td class="label-col">Rev. No.</td>
-                                            <td><strong><span t-field="o.technical_drawing_revision_number"/></strong></td>
+                                            <td><strong><span t-field="mo.technical_drawing_revision_number"/></strong></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Notes</td>
                                             <td>
                                                 <div class="text-compact">
-                                                    <span t-field="o.technical_drawing_revision_note"/>
+                                                    <span t-field="mo.technical_drawing_revision_note"/>
                                                 </div>
                                             </td>
                                         </tr>
@@ -282,11 +282,11 @@
                                 </div>
 
                                 <!-- Секция 7: Прикрепленные файлы -->
-                                <div class="compact-section" t-if="o.binary_field">
+                                <div class="compact-section" t-if="mo.binary_field">
                                     <div class="section-header">ATTACHMENTS</div>
                                     <div style="font-size: 8pt; padding: 2px;">
                                         <t t-set="counter" t-value="1"/>
-                                        <t t-foreach="o.binary_field[:5]" t-as="attachment">
+                                        <t t-foreach="mo.binary_field[:5]" t-as="attachment">
                                             <t t-esc="counter"/>
                                             <div style="padding: 2px 0; border-bottom: 1px dotted #dee2e6;">
                                                 <i class="fa fa-file-o" style="margin-right: 5px; font-size: 8pt;"/>
@@ -294,9 +294,9 @@
                                             </div>
                                             <t t-set="counter" t-value="counter + 1"/>
                                         </t>
-                                        <t t-if="len(o.binary_field) > 5">
+                                        <t t-if="len(mo.binary_field) > 5">
                                             <div style="padding: 2px 0; color: #6c757d;">
-                                                ... and <t t-esc="len(o.binary_field) - 5"/> more file(s)
+                                                ... and <t t-esc="len(mo.binary_field) - 5"/> more file(s)
                                             </div>
                                         </t>
                                     </div>
@@ -311,6 +311,18 @@
                             <span style="float: right;">Manufacturing Order Report</span>
                         </div>
                     </div>
+
+                    <!-- <t t-foreach="mo.workorder_ids" t-as="wo"> -->
+                        <div class="page">
+                            <!-- <h2>Work Order</h2>
+                            <p><strong>WO:</strong> <span t-esc="wo.operation_type_id"/></p> -->
+
+                            <!-- можно подключить отдельный шаблон -->
+                            <t t-call="manufacturing_extension.report_workorder_operations_document">
+                                <t t-set="docs" t-value="mo.workorder_ids"/>
+                            </t>
+                        </div>
+                    <!-- </t> -->
                 </t>
             </t>
         </t>

@@ -34,6 +34,7 @@
         'reports/cutting_operation_report.xml',
         'reports/workorder_operation_report.xml',
         'reports/mrp_production_report_ext.xml',
+        'reports/heating_operation_report.xml', 
     ],
 
     "assets":{

@@ -1,6 +1,10 @@
-from odoo import api, models, fields
+from odoo import api, models, fields, _
 import re
 from markupsafe import Markup
+from odoo.exceptions import UserError
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
+import base64
 
 
 class OperationTypes(models.Model):
@@ -40,7 +44,6 @@ class OperaionCharge(models.Model):
     )
     
     workorder_list = fields.One2many('mrp.workorder', 'charge_id', string="Workorder List", context={'no_delete': True})
-        
     
     #Calculate all workorders in the system
     wo_product_ids = fields.Many2many(
@@ -205,8 +208,220 @@ class OperaionCharge(models.Model):
             # очистить поле выбора
             self.workorder_id = False
             # return
-           
+            
+            
+    
+    # SVG fields
+    svg_builder_id = fields.Many2one('svg.builder', string="SVG")
+    
+    svg_preview = fields.Html(
+        string="Preview",
+        sanitize=False,           # Отключает базовую очистку
+        sanitize_tags=False,      # Разрешает любые теги (rect, path и т.д.)
+        sanitize_attributes=False,# Разрешает любые атрибуты (stroke-width и т.d.)
+        sanitize_style=False,     # Разрешает инлайн стили
+        strip_style=False,        # Не удалять теги <style>
+        strip_classes=False,    # Не удалять классы CSS
+        compute="_compute_svg_preview"
+    )
+    
+    @api.depends('svg_builder_id', 'svg_builder_id.svg_content')
+    def _compute_svg_preview(self):
 
+                
+        for rec in self:
+            if rec.svg_builder_id and rec.svg_builder_id.svg_content:
+                # svg_content = re.sub(r"<\?xml.*?\?>", "", rec.svg_builder_id.svg_content, flags=re.IGNORECASE | re.DOTALL).strip()
+                svg_content = rec.svg_builder_id.svg_content
+                rec.svg_preview = Markup(svg_content)
+                
+                
+                # Parsing SVG content
+                # 1. Убираем XML-заголовок (на всякий случай)
+                # svg_content = re.sub(r"<\?xml.*?\?>", "", svg_content).strip()
+
+                # 2. Парсим XML
+                root = ET.fromstring(svg_content)
+
+                texts = []
+
+                # 3. SVG namespace
+                ns = {"svg": "http://www.w3.org/2000/svg"}
+
+                # 4. Ищем все <text>
+                for text_el in root.findall(".//svg:text", ns):
+                    if text_el.text:
+                        texts.append(text_el.text.strip())
+
+                print("Extracted texts from SVG:", texts)
+                
+                
+                
+            else:
+                rec.svg_preview = Markup('<p>No Graphic Available</p>')
+    
+
+    def action_open_svg(self):
+        return {
+            "type": "ir.actions.act_window",
+            "res_model": "svg.builder",
+            "res_id": self.svg_builder_id.id,
+            "view_mode": "form",
+            "target": "new",
+        }
+
+    template_svg_id = fields.Many2one(
+        'svg.builder', 
+        string="Use Template", 
+        help="Select a template to copy from"
+    )
+
+    def action_create_svg(self):
+        self.ensure_one()
+        if not self.name:
+            raise UserError(_("Please enter a Charge Name before creating an SVG."))
+
+        # # Инициализируем переменные для нового SVG
+        # svg_content = ""
+        # width = 800
+        # height = 600
+        # bg_color = "#ffffff"
+
+        # --- ЛОГИКА ВЫБОРА ШАБЛОНА ---
+
+        # Вариант 2: Если выбран шаблон в форме
+        source = self.template_svg_id
+        
+        if source:
+            svg_content = source.svg_content
+            canvas_w = source.width or 800
+            canvas_h = source.height or 600
+            bg_color = source.background_color or "#ffffff"
+
+        # Вариант 1 (Настройки): Если в форме пусто, ищем "Глобальный шаблон" в настройках
+        else:
+            # Ищем ID шаблона по умолчанию в системных параметрах
+            default_template_id = self.env['ir.config_parameter'].sudo().get_param('operation_charge.default_svg_template_id')
+            template = self.env['svg.builder'].browse(int(default_template_id)) if default_template_id else False
+            
+            if template:
+                svg_content = template.svg_content
+                canvas_w = template.width
+                canvas_h = template.height
+                bg_color = template.background_color
+            else:
+                # Вариант 1 (Код): Хардкодный фоллбек, если ничего не найдено
+                canvas_w, canvas_h, bg_color = 800, 600, "#ffffff"
+                svg_content = f'<svg width="{canvas_w}" height="{canvas_h}" xmlns="http://www.w3.org/2000/svg" style="background-color: {bg_color}"></svg>'
+                
+        # 2. Подготовка к генерации фигур
+        rect_w, rect_h = 200, 100
+        padding = 20
+        # Рассчитываем количество колонок исходя из ширины полотна
+        cols = max(1, canvas_w // (rect_w + padding))
+        
+        components = self.mo_component_ids
+        generated_elements = []
+
+        for i, product in enumerate(components):
+            # Рассчитываем координаты X и Y
+            row = i // cols
+            col = i % cols
+            x = 50 + padding + col * (rect_w + padding)
+            y = padding + row * (rect_h + padding)
+
+            # Получаем текст (по вашей логике связей)
+            # ВНИМАНИЕ: так как product - это product.product, нам нужно найти 
+            # соответствующий move из связанных записей текущей формы.
+            # Здесь пример получения данных:
+            ref = getattr(product, 'product_reference_no', '') or ''
+            # ref = product.product_reference_no
+            
+            # Поиск heat_no: так как в M2M только продукты, 
+            # ищем heat_no в move_raw_ids связанных производств
+            # (Логика может меняться в зависимости от того, как связаны данные в вашей системе)
+            heat_no = product.heat_no
+            
+            # heat_no = ""
+            # related_move = self.workorder_id.production_id.move_raw_ids.filtered(lambda m: m.product_id == product)[:1]
+            # if related_move:
+            #     heat_no = related_move.product_id.heat_no or ""
+
+            display_text = f"{ref}".strip() or "N/A"
+            display_text2 = f"{heat_no}".strip() or "N/A"
+
+            # Генерируем SVG-код для прямоугольника и текста в центре
+            rect_tag = f'<rect x="{x}" y="{y}" width="{rect_w}" height="{rect_h}" fill="#FFFFFF" stroke="#000000" stroke-width="2" />'
+            
+            # Текст: x + 50 (половина ширины), y + 25 (половина высоты)
+            text_tag = (
+                f'<text x="{x + 2}" y="{y + rect_h/2 - 14}" '
+                f'font-size="14" font-family="Arial" '
+                f'text-anchor="left" dominant-baseline="central" fill="#000000">'
+                f'{display_text}</text>'
+            )
+            
+            text2_tag = (
+                f'<text x="{x + 2}" y="{y + rect_h/2 + 14}" '
+                f'font-size="14" font-family="Arial" '
+                f'text-anchor="left" dominant-baseline="central" fill="#000000">'
+                f'{display_text2}</text>'
+            )
+            
+            
+            
+            # group_tag = f'<g>\\n {rect_tag}\\n  {text_tag}\\n    </g>
+            # generated_elements.append(group_tag)
+            
+            # generated_elements.append('<g>')
+            generated_elements.append(rect_tag)
+            generated_elements.append(text_tag)
+            generated_elements.append(text2_tag)
+            
+            # generated_elements.append('</g>')
+
+
+        # 3. Внедряем элементы в SVG
+        # Находим закрывающий тег </svg> и вставляем перед ним
+        # print("Generated SVG Elements:", generated_elements)
+        
+        new_elements_str = "\n    ".join(generated_elements)
+        # print("New Elements String:", new_elements_str)
+        
+        if "</svg>" in svg_content:
+            svg_content = svg_content.replace("</svg>", f"    {new_elements_str}\n</svg>")
+        else:
+            # Если тега нет (битый XML), просто собираем заново
+            svg_content = f'<svg width="{canvas_w}" height="{canvas_h}" xmlns="http://www.w3.org/2000/svg" style="background-color: {bg_color}">{new_elements_str}</svg>'
+            
+
+        # Создаем новую запись
+        new_svg = self.env['svg.builder'].create({
+            'name': self.name,
+            'svg_content': svg_content,
+            'width': canvas_w,
+            'height': canvas_h,
+            'background_color': bg_color,
+        })
+
+        self.svg_builder_id = new_svg.id
+        return self.action_open_svg()
+    
+    
+    def action_delete_svg(self):
+        """Удаляет связь с SVG и саму запись SVG"""
+        self.ensure_one()
+        if self.svg_builder_id:
+            # Сначала сохраняем ID, чтобы удалить запись из БД совсем, 
+            # если она больше нигде не используется
+            svg_to_delete = self.svg_builder_id
+            self.svg_builder_id = False
+            # Если нужно удалить запись из БД физически:
+            svg_to_delete.unlink()
+        return True
+    
+    
+    
 
 class OperationStepsCutting(models.Model):
     _name = 'operation.steps.cutting'
@@ -262,7 +477,10 @@ class OperationStepsHeating(models.Model):
 
     equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
     recipe_name = fields.Char(string="Recipe Name")
-    charge_id = fields.Many2one('operation.charge', string="Charge ID")
+    
+    charge_id = fields.Many2one(related="workorder_id.charge_id", string="Charge ID", readonly=True)
+    charge_component_ids = fields.Many2many(related="charge_id.mo_component_ids", string="Charge Component IDs", readonly=True)
+    
     heating_date = fields.Date(string="Heating Date")
     
     performer_id = fields.Many2one('res.users', string="Performer")
@@ -274,7 +492,18 @@ class OperationStepsHeating(models.Model):
     notes = fields.Text(string="Additional Notes")
 
     # SVG fields
-    svg_builder_id = fields.Many2one('svg.builder', string="SVG")
+    svg_builder_id = fields.Many2one('svg.builder', string="SVG", compute='_compute_svg_builder_id', store=True)
+    
+    @api.model
+    @api.depends('charge_id', 'charge_id.svg_builder_id')
+    def _compute_svg_builder_id(self):
+        for rec in self:
+            # Попытка найти связанный charge_id и его SVG
+            if rec.charge_id and rec.charge_id.svg_builder_id:
+                rec.svg_builder_id = rec.charge_id.svg_builder_id
+            else:
+                rec.svg_builder_id = False
+                
     
     svg_preview = fields.Html(
         string="Preview",
@@ -284,7 +513,8 @@ class OperationStepsHeating(models.Model):
         sanitize_style=False,     # Разрешает инлайн стили
         strip_style=False,        # Не удалять теги <style>
         strip_classes=False,    # Не удалять классы CSS
-        compute="_compute_svg_preview"
+        compute="_compute_svg_preview",
+        store=False
     )
     
     @api.depends('svg_builder_id', 'svg_builder_id.svg_content')
@@ -296,21 +526,26 @@ class OperationStepsHeating(models.Model):
                 # svg_content = re.sub(r"<\?xml.*?\?>", "", rec.svg_builder_id.svg_content, flags=re.IGNORECASE | re.DOTALL).strip()
                 svg_content = rec.svg_builder_id.svg_content
                 rec.svg_preview = Markup(svg_content)
+                
             else:
                 rec.svg_preview = Markup('<p>No Graphic Available</p>')
-    
+                
+    svg_image = fields.Text(
+        string="SVG Image",
+        compute="_compute_svg_image",
+        store=True
+    )
 
-    def action_open_svg(self):
-        return {
-            "type": "ir.actions.act_window",
-            "res_model": "svg.builder",
-            "res_id": self.svg_builder_id.id,
-            "view_mode": "form",
-            "target": "new",
-        }
-    
-
-    
+    @api.depends('svg_preview')
+    def _compute_svg_image(self):
+        for rec in self:
+            if rec.svg_preview:
+                svg_bytes = rec.svg_preview.encode('utf-8')
+                b64 = base64.b64encode(svg_bytes).decode('utf-8')
+                rec.svg_image = f"data:image/svg+xml;base64,{b64}"
+            else:
+                rec.svg_image = False
+      
 
    
     

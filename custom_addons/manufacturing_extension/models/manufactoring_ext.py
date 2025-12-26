@@ -34,9 +34,16 @@ class MrpProduction(models.Model):
     
     binary_field = fields.Many2many("ir.attachment", string="Upload Files",)
     
-    def action_print_report(self):
-        """Метод для печати отчета"""
-        return self.env.ref('manufacturing_extension.action_report_manufacturing_order').report_action(self)
     
     component_reference_no = fields.Char(related='move_raw_ids.product_id.product_reference_no', string="Component Ref.No.")
     manufactoring_explanation_note = fields.Text(string='Explanations')
+    
+    
+    def action_print_report(self):
+        """Метод для печати отчета"""
+        
+        # for workorder in self.workorder_ids():
+        #     workorder.action_print_workorder_report(workorder)
+        
+        return self.env.ref('manufacturing_extension.action_report_manufacturing_order').report_action(self)
+    

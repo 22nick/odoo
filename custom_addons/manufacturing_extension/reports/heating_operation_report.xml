@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Report Definition -->
-    <record id="action_report_workorder_operations" model="ir.actions.report">
-        <field name="name">Workorder Operations Report</field>
+    <record id="action_report_heating_operations" model="ir.actions.report">
+        <field name="name">Heating Operations Report</field>
         <field name="model">mrp.workorder</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">manufacturing_extension.report_workorder_operations_document</field>
-        <field name="report_file">manufacturing_extension.report_workorder_operations_document</field>
+        <field name="report_name">manufacturing_extension.report_heating_operations_document</field>
+        <field name="report_file">manufacturing_extension.report_heating_operations_document</field>
         <field name="binding_model_id" ref="model_mrp_workorder"/>
         <field name="binding_type">report</field>
-        <field name="print_report_name">'Workorder Operations - %s' % (object.name or 'N/A')</field>
+        <field name="print_report_name">'Heating Operations - %s' % (object.name or 'N/A')</field>
     </record>
 
     <!-- QWeb Template -->
-    <template id="report_workorder_operations_document">
+    <template id="report_heating_operations_document">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
@@ -112,16 +112,6 @@
                                 font-size: 7pt;
                                 color: #6c757d;
                             }
-                            .signature-box {
-                                border: 1px solid #dee2e6;
-                                padding: 10px;
-                                border-radius: 3px;
-                            }
-                            .signature-line {
-                                margin-top: 20px;
-                                border-bottom: 1px solid #333;
-                                width: 80%;
-                            }
                             h1.title {
                                 margin: 0;
                                 font-size: 18pt;
@@ -136,7 +126,7 @@
 
                         <!-- Header Section -->
                         <div class="text-center">
-                            <h1 class="title">WORKORDER REPORT</h1>
+                            <h1 class="title">WORKORDER REPORT - HEATING OPERATIONS</h1>
                             <h3 class="subtitle">
                                 <span t-field="o.name"/>
                             </h3>
@@ -170,7 +160,7 @@
                                 <tr>
                                     <td class="label-col">Operation Type:</td>
                                     <td>
-                                        <span class="badge-sm" style="background-color: #007bff;">
+                                        <span class="badge-sm" style="background-color: #dc3545;">
                                             <span t-field="o.operation_type_id"/>
                                         </span>
                                     </td>
@@ -198,93 +188,16 @@
                             </table>
                         </div>
 
-                        <!-- Operations Steps -->
+                        <!-- Heating Operations Steps -->
                         <div class="compact-section">
-                            <div class="section-header">OPERATIONS</div>
+                            <div class="section-header">HEATING OPERATIONS</div>
 
-                            <!-- Cutting Operations Steps -->
-                            <t t-if="o.cutting_operation_ids">
-                                <table class="steps-table">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 3%;">#</th>
-                                            <th style="width: 9%;">Step Name</th>
-                                            <th style="width: 8%;">Equipment</th>
-                                            <th style="width: 8%;">Equip. Ref.</th>       
-                                            <th style="width: 7%;">Performer</th>
-                                            <th style="width: 8%;">Responsible</th>
-                                            <th style="width: 6%;">Income<br/>kg</th>
-                                            <th style="width: 6%;">Outcome<br/>kg</th>
-                                            <th style="width: 9%;">Income<br/>section, mm</th>
-                                            <th style="width: 9%;">Outcome<br/>section, mm</th>
-                                            <th style="width: 9%;">Income<br/>length, mm</th>
-                                            <th style="width: 9%;">Outcome<br/>length, mm</th>
-                                            <th style="width: 9%;">Notes</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <t t-foreach="o.cutting_operation_ids" t-as="step">
-                                            <tr>
-                                                <td class="text-center">
-                                                    <strong><span t-esc="step_index + 1"/></strong>
-                                                </td>
-                                                <td>
-                                                    <strong><span t-field="step.name"/></strong>
-                                                </td>
-                                                <td>
-                                                    <span t-field="step.equipment_id"/>
-                                                </td>
-                                                <td>
-                                                    <span t-field="step.equipment_reference_id"/>
-                                                </td>
-                                                <td>
-                                                    <span t-field="step.performer_id"/>
-                                                </td>
-                                                <td>
-                                                    <span t-field="step.responsible_id"/>
-                                                </td>
-                                                <td class="text-right">
-                                                    <span t-field="step.income_material_weight"/>
-                                                </td>
-                                                <td class="text-right">
-                                                    <span t-field="step.outcome_material_weight"/>
-                                                </td>
-                                                <td class="text-right">
-                                                    <span t-field="step.income_material_crosssection"/>
-                                                </td>
-                                                <td class="text-right">
-                                                    <span t-field="step.outcome_material_crosssection"/>
-                                                </td>
-                                                <td class="text-right">
-                                                    <span t-field="step.income_material_length"/>
-                                                </td>
-                                                <td class="text-right">
-                                                    <span t-field="step.outcome_material_length"/>
-                                                </td>
-                                                <td>
-                                                    <t t-if="step.notes">
-                                                        <div style="max-height: 30px; overflow: hidden; font-size: 7pt;">
-                                                            <span t-field="step.notes"/>
-                                                        </div>
-                                                    </t>
-                                                    <t t-else="">-</t>
-                                                </td>
-                                            </tr>
-                                        </t>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="13" style="font-weight: bold;">
-                                                <span style="float: left;">
-                                                    Total Operations: <span t-esc="len(o.cutting_operation_ids)"/>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
+                            <t t-if="not o.heating_operation_ids">
+                                <div style="text-align: center; padding: 20px; color: #6c757d; background-color: #f8f9fa; border: 1px dashed #dee2e6; border-radius: 3px; font-size: 9pt;">
+                                    <p style="margin: 0;">No heating operations defined for this work order.</p>
+                                </div>
                             </t>
 
-                            <!-- Heating Operations Steps -->
                             <t t-if="o.heating_operation_ids">
                                 <table class="steps-table">
                                     <thead>
@@ -414,6 +327,17 @@
                                     
                                 </table>
 
+                                <!-- SVG Layout if exists -->
+                                <!-- <div style="width: 100%; margin-left: auto; margin-right: auto; background-color: #f8f9fa; border: 1px solid #dee2e6; padding: 8px; margin-top: 3px; border-radius: 2px;"> -->
+                                    
+                                    <!-- <t t-if="step.svg_image">
+                                        <div style="text-align: center;">
+                                            <img t-att-src="step.svg_image"
+                                                style="width: 50%;"/>
+                                        </div>
+                                    </t> -->
+                                    
+                                <!-- </div> -->
                             </t>
                         </div>
 

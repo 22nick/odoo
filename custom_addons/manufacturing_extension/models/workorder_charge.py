@@ -42,27 +42,20 @@ class MrpWorkorder(models.Model):
     # мы копируем её название в стандартное поле 'name', которое требует Odoo.
     @api.onchange('operation_type_id')
     def _onchange_operation_type_id(self):
+
         if self.operation_type_id:
             self.name = self.operation_type_id.name
             
             # (Опционально) Сразу подтягиваем рабочий центр, если он задан в типе
             if self.operation_type_id.workcenter_id:
                 self.workcenter_id = self.operation_type_id.workcenter_id
-    
-    # Test 13.41
-    # Override write method to log charge_id changes            
-    # def write(self, vals):
-    #     import logging
-    #     _logger = logging.getLogger(__name__)
-    #     _logger.info(f"WO write called with vals: {vals}")
-    #     _logger.info(f"Current charge_id: {self.charge_id.id if self.charge_id else None}")
         
-    #     result = super(MrpWorkorder, self).write(vals)
-        
-    #     if 'charge_id' in vals:
-    #         _logger.info(f"After write, charge_id: {self.charge_id.id if self.charge_id else None}")
-        
-    #     return result
+            """Clear operation lines when operation type changes"""
+            self.cutting_operation_ids = [(5, 0, 0)]
+            self.heating_operation_ids = [(5, 0, 0)]
+            # self.welding_operation_ids = [(5, 0, 0)]
+            # self.grinding_operation_ids = [(5, 0, 0)]
+
                 
     product_reference_no = fields.Char(related='production_id.product_id.product_reference_no', string="Product Ref.No.")
     
@@ -102,15 +95,7 @@ class MrpWorkorder(models.Model):
     #     string="Grinding Operations"
     # )
     
-    @api.onchange('operation_type_id')
-    def _onchange_operation_type_id(self):
-        """Clear operation lines when operation type changes"""
-        if self.operation_type_id:
-            # Clear all operation lines
-            self.cutting_operation_ids = [(5, 0, 0)]
-            self.heating_operation_ids = [(5, 0, 0)]
-            # self.welding_operation_ids = [(5, 0, 0)]
-            # self.grinding_operation_ids = [(5, 0, 0)]
+
     
     def action_print_cutting_report(self):
         """Print Cutting Operations Report"""
@@ -120,4 +105,6 @@ class MrpWorkorder(models.Model):
         """Print Cutting Operations Report"""
         return self.env.ref('mrp_operation_extension.action_report_workorder_operations').report_action(self)
     
-    
+    def action_print_heating_report(self):
+        """Print Heating Operations Report"""
+        return self.env.ref('mrp_operation_extension.action_report_heating_operations').report_action(self)
