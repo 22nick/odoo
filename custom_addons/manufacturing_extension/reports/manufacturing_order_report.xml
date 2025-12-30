@@ -310,21 +310,29 @@
                             <span>Generated: <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/></span>
                             <span style="float: right;">Manufacturing Order Report</span>
                         </div>
-                    </div>
-
-                    <!-- <t t-foreach="mo.workorder_ids" t-as="wo"> -->
-                        <div class="page">
-                            <!-- <h2>Work Order</h2>
-                            <p><strong>WO:</strong> <span t-esc="wo.operation_type_id"/></p> -->
-
-                            <!-- можно подключить отдельный шаблон -->
-                            <t t-call="manufacturing_extension.report_workorder_operations_document">
-                                <t t-set="docs" t-value="mo.workorder_ids"/>
-                            </t>
+                        <div style="margin-top: 6px; padding-top: 4px; font-size: 7pt; color: #000000; float: right;">
+                            <div>FR.87</div>
+                            <div>Y. T: 21.09.2023</div>
+                            <div>Rev. No: 04</div>
+                            <div>Rev. T.: 27.10.2025</div>
+                            
                         </div>
-                    <!-- </t> -->
+                    </div>
                 </t>
             </t>
+
+            <!-- Отчет содержимого МО -->
+            <t t-call="mrp.report_mrporder"/>
+
+            <!-- Отчеты содержимого WO -->
+            <t t-foreach="docs" t-as="mo">
+                <div class="page">
+                    <t t-call="manufacturing_extension.report_workorder_operations_document">
+                        <t t-set="docs" t-value="mo.workorder_ids"/>
+                    </t>
+                </div>
+            </t>
+
         </t>
     </template>
 </odoo>

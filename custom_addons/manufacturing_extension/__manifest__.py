@@ -31,10 +31,13 @@
         'views/manufacturing_ext.xml',
         # 'data/operation_types_data.xml', # initional data for operation types (examle)
         'reports/manufacturing_order_report.xml',
-        'reports/cutting_operation_report.xml',
+        # 'reports/cutting_operation_report.xml',
         'reports/workorder_operation_report.xml',
         'reports/mrp_production_report_ext.xml',
-        'reports/heating_operation_report.xml', 
+        # 'reports/heating_operation_report.xml', 
+        'reports/report_cutting_opertions_steps.xml',
+        'reports/report_heating_opertions_steps.xml',
+        'reports/report_grinding_opertions_steps.xml',
     ],
 
     "assets":{

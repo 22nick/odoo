@@ -41,9 +41,5 @@ class MrpProduction(models.Model):
     
     def action_print_report(self):
         """Метод для печати отчета"""
-        
-        # for workorder in self.workorder_ids():
-        #     workorder.action_print_workorder_report(workorder)
-        
         return self.env.ref('manufacturing_extension.action_report_manufacturing_order').report_action(self)
     

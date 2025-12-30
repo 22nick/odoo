@@ -446,6 +446,7 @@ class OperationStepsCutting(models.Model):
     resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+    quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
     income_material_weight = fields.Float(string="Incoming Material Weight (kg)")
     outcome_material_weight = fields.Float(string="Outgoing Material Weight (kg)")
     income_material_crosssection = fields.Char(string="Incoming Material Cross-Section (mmxmm)")   
@@ -458,7 +459,7 @@ class OperationStepsCutting(models.Model):
     
 class OperationStepsHeating(models.Model):
     _name = 'operation.steps.heating'
-    _description = 'Operation Steps for Manufacturing'
+    _description = 'Heating Operation Steps'
     _order = 'sequence, id'
     
     workorder_id = fields.Many2one(
@@ -545,8 +546,48 @@ class OperationStepsHeating(models.Model):
                 rec.svg_image = f"data:image/svg+xml;base64,{b64}"
             else:
                 rec.svg_image = False
+                
+    hardness_target_low = fields.Float(string="Hardness (low)")
+    hardness_target_high = fields.Float(string="Hardness (high)")
+    hardness_UOM =fields.Selection([('hrc','HRC'), ('hb', 'HB')], string="Unit", default='hrc')
+    hardness_measured = fields.Float(string="Measured hardness")
+    quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
       
 
    
-    
+    class OperationStepsGringing(models.Model):
+        _name = 'operation.steps.grinding'
+        _description = 'Grinding Operation Steps'
+        _order = 'sequence, id'
+        
+        workorder_id = fields.Many2one(
+            'mrp.workorder', 
+            string='Work Order', 
+            required=True,
+            ondelete='cascade',
+            index=True
+        )
+
+
+        name = fields.Char(string="Operation Step Name", required=True)
+        sequence = fields.Integer(string='Sequence', default=10)
+        
+        equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
+        tools_ids = fields.Many2many('maintenance.equipment', string= "Used tools")
+        
+        # recipe_name = fields.Char(string="Recipe Name")
+        
+        # charge_id = fields.Many2one(related="workorder_id.charge_id", string="Charge ID", readonly=True)
+        # charge_component_ids = fields.Many2many(related="charge_id.mo_component_ids", string="Charge Component IDs", readonly=True)
+        
+        operation_date = fields.Date(string="Operation Date")
+        
+        performer_id = fields.Many2one('res.users', string="Performer")
+        responsible_id = fields.Many2one('res.users', string="Responsible")
+        resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+        # measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
+        quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
+        ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+
+        notes = fields.Text(string="Additional Notes")
 

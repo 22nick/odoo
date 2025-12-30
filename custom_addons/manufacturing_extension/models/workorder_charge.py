@@ -61,6 +61,8 @@ class MrpWorkorder(models.Model):
     
     component_id = fields.Many2one(related='production_id.move_raw_ids.product_id', string="Component")
     
+    component_qty = fields.Float(related='production_id.move_raw_ids.product_uom_qty', string="Component Qty.")
+    
     component_reference_no = fields.Char(related='production_id.move_raw_ids.product_id.product_reference_no', string="Component Ref.No.")
     
     operation_type_code = fields.Char(
@@ -89,22 +91,22 @@ class MrpWorkorder(models.Model):
     #     string="Welding Operations"
     # )
     
-    # grinding_operation_ids = fields.One2many(
-    #     'operation.steps.grinding',
-    #     'workorder_id',
-    #     string="Grinding Operations"
-    # )
+    grinding_operation_ids = fields.One2many(
+        'operation.steps.grinding',
+        'workorder_id',
+        string="Grinding Operations"
+    )
     
 
     
-    def action_print_cutting_report(self):
-        """Print Cutting Operations Report"""
-        return self.env.ref('mrp_operation_extension.action_report_cutting_operations').report_action(self)
+    # def action_print_cutting_report(self):
+    #     """Print Cutting Operations Report"""
+    #     return self.env.ref('mrp_operation_extension.action_report_cutting_operations').report_action(self)
     
     def action_print_workorder_report(self):
-        """Print Cutting Operations Report"""
+        """Print Workorder Operations Report"""
         return self.env.ref('mrp_operation_extension.action_report_workorder_operations').report_action(self)
     
-    def action_print_heating_report(self):
-        """Print Heating Operations Report"""
-        return self.env.ref('mrp_operation_extension.action_report_heating_operations').report_action(self)
+    # def action_print_heating_report(self):
+    #     """Print Heating Operations Report"""
+    #     return self.env.ref('mrp_operation_extension.action_report_heating_operations').report_action(self)

@@ -8,11 +8,11 @@
             <field name="scrap_date" position="after">
                 <field name="workcenter_id"/>
                 <field name="reference_id"/>
+                <field name="state"/>
+                <field name="used_on_eqiopment"/>
+                
             </field>
 
-            <!-- <xpath expr="//notebook//page[1]" position="before">
-
-            </xpath> -->
         </field>
     </record>
 
@@ -21,17 +21,19 @@
         <field name="model">maintenance.equipment</field>
         <field name="inherit_id" ref="maintenance.hr_equipment_view_tree"/>
         <field name="arch" type="xml">
+            <!-- <xpath expr="//list" position="attributes">
+                <attribute name="decoration-warning">state == 'alarm'</attribute>
+                <attribute name="decoration-success">state == 'working'</attribute>
+                <attribute name="decoration-danger">state == 'out'</attribute>
+                <attribute name="decoration-info">state == 'comissioning'</attribute>
+            </xpath> -->
             <field name="technician_user_id" position="after">
                 <field name="workcenter_id"/>
-            </field>
-
-            <field name="name" position="after">
                 <field name="reference_id"/>
+                <field name="state" widget="badge"/>
             </field>
 
-            <!-- <xpath expr="//notebook//page[1]" position="before">
 
-            </xpath> -->
         </field>
     </record>
 
