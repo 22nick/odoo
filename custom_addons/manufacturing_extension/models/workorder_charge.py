@@ -4,16 +4,75 @@ from odoo import api, models, fields
 class MrpWorkorder(models.Model):
     _inherit = "mrp.workorder"
 
-    charge_id =  fields.Many2one(
-        "operation.charge", 
-        string="Charge ID"
-        
-        )
+    charge_id =  fields.Many2one("operation.charge", string="Charge ID")
     
     user_id = fields.Many2one(
         'res.users', 'Responsible', default=lambda self: self.env.user,
         domain=lambda self: [('all_group_ids', 'in', self.env.ref('mrp.group_mrp_user').id)])
     
+    
+    
+
+    # Operation Type field linked to operation.types
+    operation_type_id = fields.Many2one(
+        'operation.types', 
+        string="Operation Type",
+        required=False,
+        tracking=True 
+    )
+                
+
+    product_reference_no = fields.Char(related='production_id.product_id.product_reference_no', string="Product Ref.No.")
+    
+    component_id = fields.Many2one(related='production_id.move_raw_ids.product_id', string="Component")
+    
+    component_qty = fields.Float(related='production_id.move_raw_ids.product_uom_qty', string="Component Qty.")
+    
+    component_reference_no = fields.Char(related='production_id.move_raw_ids.product_id.product_reference_no', string="Component Ref.No.")
+    
+    operation_type_code = fields.Char(
+        related='operation_type_id.code',
+        string='Operation Type Code',
+        store=True,
+        readonly=True
+    )
+    
+    operation_notes = fields.Text(string="Operation Notes")
+    
+    operation_files = fields.Many2many("ir.attachment", string="Upload Files")
+    
+    
+    # One2many relations to different operation models
+    cutting_operation_ids = fields.One2many(
+        'operation.steps.cutting',
+        'workorder_id',
+        string="Cutting Operations"
+    )
+    
+    heating_operation_ids = fields.One2many(
+        'operation.steps.heating',
+        'workorder_id',
+        string="Heating Operations"
+    )
+    
+    forging_operation_ids = fields.One2many(
+        'operation.steps.forging',
+        'workorder_id',
+        string="Forging Operations"
+    )
+    
+    grinding_operation_ids = fields.One2many(
+        'operation.steps.grinding',
+        'workorder_id',
+        string="Grinding Operations"
+    )
+    
+    forging_operation_params_id = fields.Many2one(
+        'operation.params.forging',
+        string="Operation Parameters"
+    )
+    
+
     def unlink(self):
         # если удаление вызвано из формы Charge
         ctx = self.env.context
@@ -26,17 +85,12 @@ class MrpWorkorder(models.Model):
         else:
             return super().unlink()
 
+    
+    def action_print_workorder_report(self):
+        """Print Workorder Operations Report"""
+        return self.env.ref('manufacturing_extension.action_report_workorder_operations').report_action(self)
+    
 
-    # Operation Type field linked to operation.types
-    operation_type_id = fields.Many2one(
-        'operation.types', 
-        string="Operation Type",
-        required=False,
-        tracking=True 
-    )
-    
-    
-    
     # Магия синхронизации:
     # Когда пользователь выбирает или создает запись в выпадающем списке,
     # мы копируем её название в стандартное поле 'name', которое требует Odoo.
@@ -55,58 +109,18 @@ class MrpWorkorder(models.Model):
             self.heating_operation_ids = [(5, 0, 0)]
             # self.welding_operation_ids = [(5, 0, 0)]
             # self.grinding_operation_ids = [(5, 0, 0)]
+    
+    
+    
+    @api.onchange('operation_type_id')
+    def _onchange_operation_type_id_notes(self):
+        if not self.operation_type_id:
+            return
 
-                
-    product_reference_no = fields.Char(related='production_id.product_id.product_reference_no', string="Product Ref.No.")
+        self.operation_notes = self._get_operation_notes_template(
+            self.operation_type_id
+        )
     
-    component_id = fields.Many2one(related='production_id.move_raw_ids.product_id', string="Component")
+    def _get_operation_notes_template(self, operation_type):
+        return operation_type.operation_notes_template or ""
     
-    component_qty = fields.Float(related='production_id.move_raw_ids.product_uom_qty', string="Component Qty.")
-    
-    component_reference_no = fields.Char(related='production_id.move_raw_ids.product_id.product_reference_no', string="Component Ref.No.")
-    
-    operation_type_code = fields.Char(
-        related='operation_type_id.code',
-        string='Operation Type Code',
-        store=True,
-        readonly=True
-    )
-    
-    # One2many relations to different operation models
-    cutting_operation_ids = fields.One2many(
-        'operation.steps.cutting',
-        'workorder_id',
-        string="Cutting Operations"
-    )
-    
-    heating_operation_ids = fields.One2many(
-        'operation.steps.heating',
-        'workorder_id',
-        string="Heating Operations"
-    )
-    
-    # welding_operation_ids = fields.One2many(
-    #     'operation.steps.welding',
-    #     'workorder_id',
-    #     string="Welding Operations"
-    # )
-    
-    grinding_operation_ids = fields.One2many(
-        'operation.steps.grinding',
-        'workorder_id',
-        string="Grinding Operations"
-    )
-    
-
-    
-    # def action_print_cutting_report(self):
-    #     """Print Cutting Operations Report"""
-    #     return self.env.ref('mrp_operation_extension.action_report_cutting_operations').report_action(self)
-    
-    def action_print_workorder_report(self):
-        """Print Workorder Operations Report"""
-        return self.env.ref('mrp_operation_extension.action_report_workorder_operations').report_action(self)
-    
-    # def action_print_heating_report(self):
-    #     """Print Heating Operations Report"""
-    #     return self.env.ref('mrp_operation_extension.action_report_heating_operations').report_action(self)

@@ -16,18 +16,8 @@ class MaintenanceEquipmentWorkcenter(models.Model):
         store=True,
         default='idle', copy=False, index=True)
 
-    # def _get_state_color(self):
-    #     """Возвращает цвет для badge виджета"""
-    #     colors = {
-    #         'working': 'success',      
-    #         'alarm': 'warning',        
-    #         'out': 'danger',           
-    #         'comissioning': 'info',     
-    #         'idle': 'secondary',       
-    #     }
-    #     return colors.get(self.state, 'secondary')
-    
-    used_on_eqiopment = fields.Many2one('maintenance.equipment', string= "Used on Equipment")
+   
+    used_on_eqiupment = fields.Many2one('maintenance.equipment', string= "Used on Equipment")
     
 
 

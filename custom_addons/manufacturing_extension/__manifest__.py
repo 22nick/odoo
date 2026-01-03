@@ -38,6 +38,7 @@
         'reports/report_cutting_opertions_steps.xml',
         'reports/report_heating_opertions_steps.xml',
         'reports/report_grinding_opertions_steps.xml',
+        'reports/report_forging_opertions_steps.xml',
     ],
 
     "assets":{

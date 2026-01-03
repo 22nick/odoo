@@ -8,8 +8,15 @@
             <xpath expr="//sheet/group[1]/group[1]" position="inside">
                 <field name="charge_id"/>
                 <field name="user_id"/>
+                <field name="operation_notes"/>
 
             </xpath>
+
+            <xpath expr="//sheet/group[1]/group[2]" position="inside">
+                <field name="operation_files" widget="many2many_binary" nolabel="1"/>
+
+            </xpath>
+
 
             <!-- Находим поле name внутри первой группы и заменяем его -->
             <xpath expr="//sheet/group/group/field[@name='name']" position="replace">
@@ -23,8 +30,15 @@
                 <!-- 2. Скрытое системное поле name (обязательно должно быть во view) -->
                 <field name="name" invisible="1" force_save='1'/>
                 <field name="operation_type_code" invisible="1"/>
+                
 
             </xpath>
+
+            <!-- Add "Print Report" button -->
+            <xpath expr="//header" position="inside">
+                <button name="action_print_workorder_report" string="Print Report" type="object"/>
+            </xpath>
+
 
             <!-- Add operation-specific pages in notebook -->
             <xpath expr="//notebook" position="inside">
@@ -123,6 +137,7 @@
                                         <field name="performer_id"/>
                                         <field name="responsible_id"/>
                                         <field name="resposible_quality_id"/>
+                                        <field name="approver_quality_id"/>
                                         <field name="measurement_device_id"/>
                                         <field name="ksb_form_no"/>
                                         <field name="hardness_target_low"/>
@@ -189,6 +204,62 @@
                                         <field name="performer_id"/>
                                         <field name="responsible_id"/>
                                         <field name="resposible_quality_id"/>
+                                        <field name="ksb_form_no"/>
+                                        <field name="quality_approval"/>
+                                        
+
+                                    </group>
+                                </group>
+                                <group string="Tools" colspan="2">
+                                    <field name="tools_ids" nolabel="1" placeholder="Used tools..." colspan="2"/>
+                                </group>
+                                <group string="Notes" colspan="2">
+                                    <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
+                                </group>
+
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+
+                <!-- Forging Operations Page -->
+                <page string="Forging Operations" 
+                      invisible="operation_type_code != 'forging'"
+                      id="page_forging_operations">
+                    <field name="forging_operation_ids" nolabel="1">
+                        <list>
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="equipment_id"/>
+                            <!-- <field name="recipe_name"/> -->
+                            <!-- <field name="charge_id"/> -->
+                            <field name="operation_date"/>
+                            <field name="performer_id"/>
+                            <field name="responsible_id"/>
+                            <field name="resposible_quality_id"/>
+                            <field name="quality_approval"/>
+
+                        </list>
+                        <form string="Forging Operation">
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="sequence"/>
+                                        <field name="name"/>
+                                        <field name="equipment_id"/>
+                                        <!-- <field name="recipe_name"/> -->
+                                        <field name="workorder_id"/>
+                                        <!-- <field name="charge_id"/> -->
+                                        <field name="performer_id"/>
+                                        <field name="responsible_id"/>
+                                        <field name="resposible_quality_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="operation_date"/>
+                                        <field name="step_dimensions"/>
+                                        <field name="start_temperature"/>
+                                        <field name="end_temperature"/>
+
                                         <field name="ksb_form_no"/>
                                         <field name="quality_approval"/>
 

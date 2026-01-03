@@ -13,6 +13,7 @@
             <field name="mo_component_ids" widget="many2many_tags"/>
             <field name="mo_product_ids" widget="many2many_tags"/>
 
+
         </list>
         </field>
     </record>
@@ -110,6 +111,7 @@
             <field name="equipment_id"/>
             <field name="model_name"/>
             <field name="active"/>
+
         </list>
         </field>
     </record>
@@ -140,8 +142,15 @@
                     </group>
                 </group>
                 <group>
-                    <group>
-                        <field name="description" placeholder="Describe this operation type..." colspan="2"/>
+                    <group string="Operation Notes Template" colspan="2">
+                        <field name="operation_notes_template" placeholder="Enter operation notes template..." colspan="2" nolabel="1"/>
+                        
+                    </group>
+                </group>
+                <group>
+                    <group string="Description" colspan="2">
+                        <field name="description" placeholder="Describe this operation type..." colspan="2" nolabel="1" />
+                        
                     </group>
                 </group>
 

@@ -27,6 +27,12 @@ class OperationTypes(models.Model):
         ('code_unique', 'unique(code)', 'The code must be unique!'),
     ]
     
+    # model operation.types
+    operation_notes_template = fields.Text(
+        string="Operation Notes Template"
+    )
+
+    
 
 class OperaionCharge(models.Model):
     _name = 'operation.charge'
@@ -487,6 +493,7 @@ class OperationStepsHeating(models.Model):
     performer_id = fields.Many2one('res.users', string="Performer")
     responsible_id = fields.Many2one('res.users', string="Responsible")
     resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
 
@@ -555,39 +562,84 @@ class OperationStepsHeating(models.Model):
       
 
    
-    class OperationStepsGringing(models.Model):
-        _name = 'operation.steps.grinding'
-        _description = 'Grinding Operation Steps'
-        _order = 'sequence, id'
-        
-        workorder_id = fields.Many2one(
-            'mrp.workorder', 
-            string='Work Order', 
-            required=True,
-            ondelete='cascade',
-            index=True
-        )
+class OperationStepsGringing(models.Model):
+    _name = 'operation.steps.grinding'
+    _description = 'Grinding Operation Steps'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
 
 
-        name = fields.Char(string="Operation Step Name", required=True)
-        sequence = fields.Integer(string='Sequence', default=10)
-        
-        equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
-        tools_ids = fields.Many2many('maintenance.equipment', string= "Used tools")
-        
-        # recipe_name = fields.Char(string="Recipe Name")
-        
-        # charge_id = fields.Many2one(related="workorder_id.charge_id", string="Charge ID", readonly=True)
-        # charge_component_ids = fields.Many2many(related="charge_id.mo_component_ids", string="Charge Component IDs", readonly=True)
-        
-        operation_date = fields.Date(string="Operation Date")
-        
-        performer_id = fields.Many2one('res.users', string="Performer")
-        responsible_id = fields.Many2one('res.users', string="Responsible")
-        resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
-        # measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
-        quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
-        ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+    name = fields.Char(string="Operation Step Name", required=True)
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
+    tools_ids = fields.Many2many('maintenance.equipment', string= "Used tools")
+    
+    # recipe_name = fields.Char(string="Recipe Name")
+    
+    # charge_id = fields.Many2one(related="workorder_id.charge_id", string="Charge ID", readonly=True)
+    # charge_component_ids = fields.Many2many(related="charge_id.mo_component_ids", string="Charge Component IDs", readonly=True)
+    
+    operation_date = fields.Date(string="Operation Date")
+    
+    performer_id = fields.Many2one('res.users', string="Performer")
+    responsible_id = fields.Many2one('res.users', string="Responsible")
+    resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    # measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
+    quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
 
-        notes = fields.Text(string="Additional Notes")
+    notes = fields.Text(string="Additional Notes")
+    
+    
+# Operations steps for forging and rolling
+class OperationStepsForging(models.Model): 
+    _name = 'operation.steps.forging'
+    _description = 'Forging Operation Steps'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
+
+    name = fields.Char(string="Operation Step Name", required=True)
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
+    tools_ids = fields.Many2many('maintenance.equipment', string= "Used tools")
+    
+    # recipe_name = fields.Char(string="Recipe Name")
+    
+    # charge_id = fields.Many2one(related="workorder_id.charge_id", string="Charge ID", readonly=True)
+    # charge_component_ids = fields.Many2many(related="charge_id.mo_component_ids", string="Charge Component IDs", readonly=True)
+    
+    operation_date = fields.Date(string="Operation Date")
+    
+    performer_id = fields.Many2one('res.users', string="Performer")
+    responsible_id = fields.Many2one('res.users', string="Responsible")
+    resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
+    measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
+    quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+
+    notes = fields.Text(string="Additional Notes")
+    
+    step_dimensions = fields.Text(string="Step Dimensions")
+    start_temperature = fields.Integer(string="Start Temperature")
+    end_temperature = fields.Integer(string="End Temperature")
+        
+        
+        
 

@@ -9,7 +9,7 @@
                 <field name="workcenter_id"/>
                 <field name="reference_id"/>
                 <field name="state"/>
-                <field name="used_on_eqiopment"/>
+                <field name="used_on_eqiupment"/>
                 
             </field>
 

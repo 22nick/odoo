@@ -4,3 +4,5 @@ access_operation_charge,operation.charge,model_operation_charge,base.group_user,
 access_operation_steps_cutting,operation.steps.cutting,model_operation_steps_cutting,base.group_user,1,1,1,1
 access_operation_steps_heating,operation.steps.heating,model_operation_steps_heating,base.group_user,1,1,1,1
 access_operation_steps_grinding,operation.steps.grinding,model_operation_steps_grinding,base.group_user,1,1,1,1
+access_operation_steps_forging,operation.steps.forging,model_operation_steps_forging,base.group_user,1,1,1,1
+access_operation_params_forging,operation.params.forging,model_operation_params_forging,base.group_user,1,1,1,1

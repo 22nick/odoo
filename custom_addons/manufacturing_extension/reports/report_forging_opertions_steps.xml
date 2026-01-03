@@ -1,5 +1,5 @@
 <odoo>
-<template id="report_grinding_opertions_steps_template">
+<template id="report_forging_opertions_steps_template">
     <table class="steps-table">
         <thead>
             <tr>
@@ -12,13 +12,16 @@
                 <th style="width: 9%;">Performer</th>
                 <th style="width: 9%;">Responsible</th>
                 <th style="width: 9%;">Quality Resp.</th>
+                <th style="width: 9%;">Dimensions, mm</th>
+                <th style="width: 9%;">Start Temp., oC</th>
+                <th style="width: 9%;">End Temp., oC</th>
                 <th style="width: 10%;">KSB Form No.</th>
                 <th style="width: 10%;">Approval</th>
 
             </tr>
         </thead>
         <tbody>
-            <t t-foreach="o.grinding_operation_ids" t-as="step">
+            <t t-foreach="o.forging_operation_ids" t-as="step">
                 <tr>
                     <td class="text-center">
                         <strong><span t-esc="step_index + 1"/></strong>
@@ -47,6 +50,15 @@
                     <td>
                         <span t-field="step.resposible_quality_id"/>
                     </td>
+                    <td>
+                        <span t-field="step.step_dimensions"/>
+                    </td>
+                    <td>
+                        <span t-field="step.start_temperature"/>
+                    </td>
+                    <td>
+                        <span t-field="step.end_temperature"/>
+                    </td>
                     <td class="text-center">
                         <span t-field="step.ksb_form_no"/>
                     </td>
@@ -57,7 +69,7 @@
 
                 <!-- Notes and Tools combined row -->
                 <tr t-if="step.notes or step.tools_ids">
-                    <td colspan="11" style="padding: 5px;">
+                    <td colspan="12" style="padding: 5px;">
                         <div style="display: table; width: 100%; border: 1px solid #dee2e6; background-color: #f8f9fa;">
                             
                             <!-- Tools cell (40%) -->
