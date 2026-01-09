@@ -42,19 +42,18 @@
                     <field name="customer_requirements_notes"/>
                     <field name="binary_field" widget="many2many_binary" nolabel="1"/>
                     
-                    <!-- <button name="action_print_report" 
-                        string="Print Report" 
-                        type="action" 
-                        class="btn-primary"/> -->
-                    
                 </group>
-                
-                
-                
-                    
             </xpath>
-
+            
+            <xpath expr="//notebook/page/field/list" position="inside">
+                <field name="min_consume_qty"/>
+                <field name="max_consume_qty"/>
+                <field name="measurement_tool_id"/>
+            </xpath>
 
         </field>
     </record>
+
+    
+
 </odoo>

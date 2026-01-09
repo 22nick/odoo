@@ -1,0 +1,17 @@
+<!-- data/product_defaults.xml -->
+<odoo>
+    <data>
+        <!-- Установить kg как значение по умолчанию для product.template -->
+        <function model="ir.default" name="set">
+            <value>product.template</value>
+            <value>uom_id</value>
+            <value eval="ref('uom.product_uom_kgm')"/>
+        </function>
+        
+        <!-- <function model="ir.default" name="set">
+            <value>product.template</value>
+            <value>uom_po_id</value>
+            <value eval="ref('uom.product_uom_kgm')"/>
+        </function> -->
+    </data>
+</odoo>

@@ -43,3 +43,9 @@ class MrpProduction(models.Model):
         """Метод для печати отчета"""
         return self.env.ref('manufacturing_extension.action_report_manufacturing_order').report_action(self)
     
+class StockMove(models.Model):
+    _inherit = "stock.move"
+
+    min_consume_qty = fields.Float(string='Min Consume Qty')
+    max_consume_qty = fields.Float(string='Max Consume Qty')
+    measurement_tool_id = fields.Many2one('maintenance.equipment', string='Measurement Tool')

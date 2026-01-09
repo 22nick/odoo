@@ -1,0 +1,252 @@
+<odoo>
+  <data>
+    <record id="material_grade_list_view" model="ir.ui.view">
+        <field name="name">material.grade.list.view</field>
+        <field name="model">material.grade</field>
+        <field name="arch" type="xml">
+            <list string="Material Grades">
+                <field name="id" invisible="1"/>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="material_type_id"/>
+                <field name="material_group_id"/>
+                <field name="density"/>
+                <field name="description"/>
+
+            </list>
+        </field>
+    </record>
+
+    <record id="material_grade_form_view" model="ir.ui.view">
+        <field name="name">material.grade.form.view</field>
+        <field name="model">material.grade</field>
+        <field name="arch" type="xml">
+        <form string="Material Grade">
+            <sheet>
+                <group>
+                    <group>
+                        <!-- <div class="oe_button_box" name="button_box" colspan="2">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                            </button>
+                        </div> -->
+                        <field name="name"/>
+                        <field name="material_type_id"/>
+                        <!-- <field name="material_group_id" options="{'no_create': True, 'no_open': True}"/> -->
+                        <field name="material_group_id"/>
+                        <field name="density"/>
+                    </group>
+                    <group>
+                        
+                    </group>
+                </group>
+     
+                <group>
+                    <group string="Description" colspan="2">
+                        <field name="description" placeholder="Describe this material grade..." colspan="2" nolabel="1" />
+                        
+                    </group>
+                </group>
+                
+            </sheet>
+
+        </form>
+        </field>
+    </record>   
+
+
+    <!-- Search view для Material Grade -->
+    <record id="view_material_grade_search" model="ir.ui.view">
+        <field name="name">material.grade.search</field>
+        <field name="model">material.grade</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="material_type_id"/>
+                <field name="material_group_id"/>
+                <filter string="Material Type" name="group_by_type" 
+                        context="{'group_by': 'material_type_id'}"/>
+                <filter string="Material Group" name="group_by_group" 
+                        context="{'group_by': 'material_group_id'}"/>
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="material_type_list_view" model="ir.ui.view">
+        <field name="name">material.type.list.view</field>
+        <field name="model">material.type</field>
+        <field name="arch" type="xml">
+            <list string="Material Types">
+                <field name="id" invisible="1"/>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <!-- <field name="material_group_ids" invisible="1"/> -->
+
+                <field name="description"/>
+
+            </list>
+        </field>
+    </record>
+
+    <record id="material_type_form_view" model="ir.ui.view">
+        <field name="name">material.type.form.view</field>
+        <field name="model">material.type</field>
+        <field name="arch" type="xml">
+        <form string="Material Type">
+            <sheet>
+                <group>
+                    <group>
+                        <!-- <div class="oe_button_box" name="button_box" colspan="2">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                            </button>
+                        </div> -->
+                        <field name="name"/>
+                        <!-- <field name="material_group_ids"/> -->
+                    </group>
+                    <group>
+                        
+                    </group>
+                </group>
+     
+                <group>
+                    <group string="Description" colspan="2">
+                        <field name="description" placeholder="Describe this material group..." colspan="2" nolabel="1" />
+                        
+                    </group>
+                </group>
+                
+            </sheet>
+
+        </form>
+        </field>
+    </record>   
+
+    <!-- Search view для Material Type -->
+    <record id="view_material_type_search" model="ir.ui.view">
+        <field name="name">material.type.search</field>
+        <field name="model">material.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+
+    <record id="material_group_list_view" model="ir.ui.view">
+        <field name="name">material.group.list.view</field>
+        <field name="model">material.group</field>
+        <field name="arch" type="xml">
+            <list string="Material Groups">
+                <field name="id" invisible="1"/>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="material_type_id" invisible="1"/>
+
+                <field name="description"/>
+
+            </list>
+        </field>
+    </record>
+
+    <record id="material_group_form_view" model="ir.ui.view">
+        <field name="name">material.group.form.view</field>
+        <field name="model">material.group</field>
+        <field name="arch" type="xml">
+        <form string="Material Group">
+            <sheet>
+                <group>
+                    <group>
+                        <!-- <div class="oe_button_box" name="button_box" colspan="2">
+                            <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                                <field name="active" widget="boolean_button" options="{'terminology': 'archive'}"/>
+                            </button>
+                        </div> -->
+                        <field name="name"/>
+                        <field name="material_type_id"/>
+                    </group>
+                    <group>
+                        
+                    </group>
+                </group>
+     
+                <group>
+                    <group string="Description" colspan="2">
+                        <field name="description" placeholder="Describe this material group..." colspan="2" nolabel="1" />
+                        
+                    </group>
+                </group>
+                
+            </sheet>
+
+        </form>
+        </field>
+    </record>   
+
+
+    <!-- Search view для Material Group -->
+    <record id="view_material_group_search" model="ir.ui.view">
+        <field name="name">material.group.search</field>
+        <field name="model">material.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="material_type_id"/>
+                <filter string="Material Type" name="group_by_type" 
+                        context="{'group_by': 'material_type_id'}"/>
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+
+
+    <record id="material_grade_action" model="ir.actions.act_window">
+        <field name="name">Material Grades</field>
+        <field name="res_model">material.grade</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="material_type_action" model="ir.actions.act_window">
+        <field name="name">Material Types</field>
+        <field name="res_model">material.type</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    
+    <record id="material_group_action" model="ir.actions.act_window">
+        <field name="name">Material Groups</field>
+        <field name="res_model">material.group</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="material_grade_root_menu"
+        name="Material Data"
+        
+        parent="mrp.menu_mrp_bom"
+    />
+        <!-- parent="stock.menu_stock_inventory_control" -->
+
+    <menuitem id="material_grade_menu"
+        action="material_grade_action"
+        name="Material Grades"
+        parent="material_grade_root_menu"
+    />
+
+    <menuitem id="material_type_menu"
+        action="material_type_action"
+        name="Material Types"
+        parent="material_grade_root_menu"
+    />
+
+    <menuitem id="material_group_menu"
+        action="material_group_action"
+        name="Material Groups"
+        parent="material_grade_root_menu"
+    />
+
+  </data>
+</odoo>

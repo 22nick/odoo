@@ -5,6 +5,7 @@
         <field name="model">mrp.workorder</field>
         <field name="inherit_id" ref="mrp.mrp_production_workorder_form_view_inherit"/>
         <field name="arch" type="xml">
+            <!-- Group [1] Add-ons -->
             <xpath expr="//sheet/group[1]/group[1]" position="inside">
                 <field name="charge_id"/>
                 <field name="user_id"/>
@@ -12,13 +13,14 @@
 
             </xpath>
 
+            <!-- Group [2] Add-ons -->
             <xpath expr="//sheet/group[1]/group[2]" position="inside">
                 <field name="operation_files" widget="many2many_binary" nolabel="1"/>
 
             </xpath>
 
 
-            <!-- Находим поле name внутри первой группы и заменяем его -->
+            <!-- Operation type field-->
             <xpath expr="//sheet/group/group/field[@name='name']" position="replace">
                 
                 <!-- 1. Ваше поле для выбора типа операции -->
@@ -39,14 +41,52 @@
                 <button name="action_print_workorder_report" string="Print Report" type="object"/>
             </xpath>
 
+            <!-- Add operation-specific parameters fields -->
+            <xpath expr="//notebook/page[1]" position="before">
+                <!-- Forging Operation Parameters -->
+                <page string="Operation Parameters" 
+                    invisible="operation_type_code != 'forging'"
+                    id="group_forging_operation_parameters">
+                    
+                    <field name="forging_operation_params_id" nolabel="1">
+                        <list>
+                            <field name="order_dimensions"/>
+                            <field name="start_temperature"/>
+                            <field name="end_temperature"/>
+
+                        </list>
+
+                        <form string="Forging Parameters">
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <!-- <field name="sequence" invisible="1"/> -->
+                                        <field name="order_dimensions"/>
+                                        <field name="lubtication"/>
+
+                                    </group>
+                                    <group>
+                                        <field name="start_temperature"/>
+                                        <field name="end_temperature"/>
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+
+
+            </xpath>
+
+
 
             <!-- Add operation-specific pages in notebook -->
             <xpath expr="//notebook" position="inside">
                 
                 <!-- Cutting Operations Page -->
-                <page string="Cutting Operations" 
-                      invisible="operation_type_code != 'cutting'"
-                      id="page_cutting_operations">
+                <page string="Operation Report" 
+                    invisible="operation_type_code != 'cutting'"
+                    id="page_cutting_operations">
                     <field name="cutting_operation_ids" nolabel="1">
                         <list>
                             <field name="sequence" widget="handle"/>
@@ -69,7 +109,7 @@
                             <sheet>
                                 <group>
                                     <group>
-                                        <field name="sequence"/>
+                                        <!-- <field name="sequence"/> -->
                                         <field name="name"/>
                                         <field name="equipment_id"/>
                                         <field name="performer_id"/>
@@ -90,7 +130,7 @@
                                         
                                     </group>
                                 </group>
-                         
+                        
                                 <group string="Notes" colspan="2">
                                     <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
                                 </group>
@@ -99,9 +139,10 @@
                         </form>
                     </field>
                 </page>
+
                 
                 <!-- Heating Operations Page -->
-                <page string="Heating Operations" 
+                <page string="Operation Report" 
                       invisible="operation_type_code != 'heating'"
                       id="page_heating_operations">
                     <field name="heating_operation_ids" nolabel="1">
@@ -125,7 +166,7 @@
                             <sheet>
                                 <group>
                                     <group>
-                                        <field name="sequence"/>
+                                        <!-- <field name="sequence"/> -->
                                         <field name="name"/>
                                         <field name="equipment_id"/>
                                         <field name="recipe_name"/>
@@ -171,7 +212,7 @@
                 </page>
 
                 <!-- Grinding Operations Page -->
-                <page string="Grinding Operations" 
+                <page string="Operation Report" 
                       invisible="operation_type_code != 'grinding'"
                       id="page_grinding_operations">
                     <field name="grinding_operation_ids" nolabel="1">
@@ -192,7 +233,7 @@
                             <sheet>
                                 <group>
                                     <group>
-                                        <field name="sequence"/>
+                                        <!-- <field name="sequence"/> -->
                                         <field name="name"/>
                                         <field name="equipment_id"/>
                                         <!-- <field name="recipe_name"/> -->
@@ -223,7 +264,7 @@
                 </page>
 
                 <!-- Forging Operations Page -->
-                <page string="Forging Operations" 
+                <page string="Operation Report" 
                       invisible="operation_type_code != 'forging'"
                       id="page_forging_operations">
                     <field name="forging_operation_ids" nolabel="1">
@@ -244,7 +285,7 @@
                             <sheet>
                                 <group>
                                     <group>
-                                        <field name="sequence"/>
+                                        <!-- <field name="sequence"/> -->
                                         <field name="name"/>
                                         <field name="equipment_id"/>
                                         <!-- <field name="recipe_name"/> -->
@@ -268,6 +309,83 @@
                                 <group string="Tools" colspan="2">
                                     <field name="tools_ids" nolabel="1" placeholder="Used tools..." colspan="2"/>
                                 </group>
+                                <group string="Notes" colspan="2">
+                                    <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
+                                </group>
+
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
+
+                <!-- Machining Operations Page -->
+                <page string="Operation Report" 
+                      invisible="operation_type_code != 'machining'"
+                      id="page_machining_operations">
+                    <field name="machining_operation_ids" nolabel="1">
+                        <list>
+                            <field name="sequence" widget="handle"/>
+                            <field name="name"/>
+                            <field name="equipment_id"/>
+                            <!-- <field name="recipe_name"/> -->
+                            <!-- <field name="charge_id"/> -->
+                            <field name="start_date_time"/>
+                            <field name="end_date_time"/>
+                            <field name="performer_id"/>
+                            <field name="responsible_id"/>
+                            <field name="resposible_quality_id"/>
+                            <field name="quality_approval"/>
+
+                        </list>
+                        <form string="Machining Operation">
+                            <sheet>
+                                <group>
+                                    <group string="Production">
+                                        <!-- <field name="sequence"/> -->
+                                        <field name="name"/>
+                                        <field name="equipment_id"/>
+                                        <!-- <field name="recipe_name"/> -->
+                                        <field name="workorder_id" invisible="1"/>
+                                        <!-- <field name="charge_id"/> -->
+                                        <field name="performer_id"/>
+                                        <field name="responsible_id"/>
+                                        <field name="start_date_time"/>
+                                        <field name="end_date_time"/>
+                                        <field name="income_material_crossection" string='Income size'/>
+                                        <field name="outcome_material_crossection" string='Final size'/>
+                                        <field name="income_material_length" string='Income lenght'/>
+                                        <field name="outcome_material_length" string='Final lenght'/>
+
+                                        <!-- <div string="Used Tools">
+                                            <field name="tools_ids" nolabel="1" placeholder="Used tools..." colspan="2"/>
+                                        </div> -->
+
+                                    </group>
+                                    <group string="Quality">
+                                        <field name="resposible_quality_id"/>
+                                        <field name="approver_quality_id"/>
+                                        <field name="desired_material_crossection"/>
+                                        <field name="measured_material_crossection"/>
+
+                                        <field name="ksb_form_no"/>
+                                        <field name="quality_approval"/>
+
+                                        <!-- <div string="Measurement devices">
+                                            <field name="measurement_device_ids" nolabel="1" placeholder="Used tools..." colspan="2"/>
+                                        </div> -->
+
+                                    </group>
+
+                                </group>
+                                <group colspan="2">
+                                    <group string="Tools" colspan="1">
+                                        <field name="tools_ids" nolabel="1" placeholder="Used tools..." colspan="2"/>
+                                    </group>
+                                    <group string="Measurement devices" colspan="1">
+                                        <field name="measurement_device_ids" nolabel="1" placeholder="Used tools..." colspan="2"/>
+                                    </group>
+                                </group>
+
                                 <group string="Notes" colspan="2">
                                     <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
                                 </group>

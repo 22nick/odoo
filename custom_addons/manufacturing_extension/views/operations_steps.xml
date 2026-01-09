@@ -109,7 +109,7 @@
             <field name="code"/>
             <field name="workcenter_id"/>
             <field name="equipment_id"/>
-            <field name="model_name"/>
+            <field name="model_name" invisible="1"/>
             <field name="active"/>
 
         </list>
@@ -131,7 +131,7 @@
                     <group>
                         <field name="name"/>
                         <field name="code"/>
-                        <field name="model_name"/>
+                        <field name="model_name" invisible="1"/>
                         <field name="sequence"/>
                         
                     </group>

@@ -147,20 +147,20 @@
                             <div class="section-header">WORK ORDER INFORMATION</div>
                             <table class="info-table">
                                 <tr>
-                                    <td class="label-col">Work Order:</td>
+                                    <td class="label-col"><div>Work Order:</div></td>
                                     <td><strong><span t-field="o.barcode"/></strong></td>
-                                    <td class="label-col">Work Center:</td>
+                                    <td class="label-col"><div>Work Center:</div></td>
                                     <td><span t-field="o.workcenter_id"/></td>
                                 </tr>
                                 <tr>
                                     <td class="label-col">Component:</td>
                                     <td>
                                         <!-- <span t-esc="'%s / ID: %s / Heat No.: %s' % (o.component_id.name, o.component_reference_no, o.component_id.heat_no)"/> -->
-                                        <span t-field="o.component_id"/>
-                                         / 
+                                        <!-- <span t-field="o.component_id"/> -->
+                                         <!-- /   -->
                                         <strong>ID: </strong>
                                         <span t-field="o.component_reference_no"/>
-                                         / 
+                                         <!-- /   --><br/>
                                         <strong>Heat No.: </strong>
                                         <span t-field="o.component_id.heat_no"/>
                                         
@@ -175,13 +175,13 @@
                                     <td class="label-col">Product:</td>
                                     <td>
                                         <!-- <span t-esc="'%s / ID: %s / Heat No.: %s' % (o.component_id.name, o.component_reference_no, o.component_id.heat_no)"/> -->
-                                        <span t-field="o.product_id"/>
-                                         / 
+                                        <!-- <span t-field="o.product_id"/> -->
+                                         <!-- /  -->
                                         <strong>ID: </strong>
                                         <span t-field="o.product_reference_no"/>
-                                         <!-- / 
+                                         <!-- /  --><br/>
                                         <strong>Heat No.: </strong>
-                                        <span t-field="o.component_id.heat_no"/> -->
+                                        <span t-field="o.product_id.heat_no"/>
                                         
                                     </td>
                                     <td class="label-col">Quantity:</td>
@@ -225,6 +225,31 @@
                                     </td>
                                 </tr>
                             </table>
+
+                            <!-- Operation Parameters -->
+                            <t t-if="o.operation_type_code == 'forging'">
+                                <div class="compact-section">
+                                    <div class="section-header">Operation Parameters</div>
+                                    <table class="info-table">
+                                        <tr>
+                                            <td class="label-col">Order Dimensions:</td>
+                                            <td><span t-field="o.forging_operation_params_id.order_dimensions"/> mm</td>
+                                            <td class="label-col">Start Temperature:</td>
+                                            <td><span t-field="o.forging_operation_params_id.start_temperature"/> oC</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Lubtication</td>
+                                            <td><span t-field="o.forging_operation_params_id.lubtication"/></td>
+                                            <td class="label-col">End Temperature:</td>
+                                            <td><span t-field="o.forging_operation_params_id.end_temperature"/> oC</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </t>
+
+
+
+                            <!-- Operation Notes -->
                             <t t-if="o.operation_notes">
                                 <div style=": table-cell; width: 100%; padding: 8px; vertical-align: top; border-right: 1px solid #dee2e6;">
                                     <div style="background-color: #fff; padding: 6px; border: 1px solid #e0e0e0; border-radius: 2px; min-height: 80px;">
@@ -270,11 +295,20 @@
 
                             <!-- Forgıng Operations Steps -->
                             <t t-if="o.forging_operation_ids">
-                                <t t-set="ek_form_no" t-value="'FR.87 EK-8'"/>
+                                <t t-set="ek_form_no" t-value="'FR.87 EK-14'"/>
                                 <t t-call="manufacturing_extension.report_forging_opertions_steps_template">
                                     <t t-set="o" t-value="o"/>
                                 </t>
                             </t>
+
+                            <!-- Machining Operations Steps -->
+                            <t t-if="o.machining_operation_ids">
+                                <t t-set="ek_form_no" t-value="'FR.87 EK-15'"/>
+                                <t t-call="manufacturing_extension.report_machining_opertions_steps_template">
+                                    <t t-set="o" t-value="o"/>
+                                </t>
+                            </t>
+
                         </div>
 
                         <!-- Signature Section -->

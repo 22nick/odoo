@@ -1,5 +1,6 @@
 from odoo import api, models, fields
 from odoo.fields import Domain
+import re
 
 class ProductProduct(models.Model):
     _inherit = 'product.product'
@@ -67,7 +68,9 @@ class ProductTemplate(models.Model):
     forging_diameter = fields.Integer(string='Diameter')
     forging_diameter_inner = fields.Integer(string='Inner diameter')
     
-    forging_material = fields.Char(string='Material')
+    # forging_material = fields.Char(string='Material')
+    forging_material = fields.Many2one('material.grade', string='Grade of Material')
+
 
     product_reference_no = fields.Char(string='Material reference No.', default='[New]', readonly=False, copy=False, index=True, required=True, help="Reference Number of the material")
 

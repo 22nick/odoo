@@ -30,6 +30,8 @@
         'views/operations_steps.xml',
         'views/manufacturing_ext.xml',
         # 'data/operation_types_data.xml', # initional data for operation types (examle)
+        'data/product_defaults.xml',
+        'views/material_params.xml',
         'reports/manufacturing_order_report.xml',
         # 'reports/cutting_operation_report.xml',
         'reports/workorder_operation_report.xml',
@@ -39,6 +41,7 @@
         'reports/report_heating_opertions_steps.xml',
         'reports/report_grinding_opertions_steps.xml',
         'reports/report_forging_opertions_steps.xml',
+        'reports/report_machining_opertions_steps.xml',
     ],
 
     "assets":{

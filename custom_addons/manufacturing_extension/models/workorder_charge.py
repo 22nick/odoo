@@ -1,4 +1,5 @@
 from odoo import api, models, fields
+from odoo.exceptions import ValidationError
 
 
 class MrpWorkorder(models.Model):
@@ -43,6 +44,7 @@ class MrpWorkorder(models.Model):
     
     
     # One2many relations to different operation models
+    # Steps
     cutting_operation_ids = fields.One2many(
         'operation.steps.cutting',
         'workorder_id',
@@ -67,10 +69,33 @@ class MrpWorkorder(models.Model):
         string="Grinding Operations"
     )
     
-    forging_operation_params_id = fields.Many2one(
-        'operation.params.forging',
-        string="Operation Parameters"
+    machining_operation_ids = fields.One2many(
+        'operation.steps.machining',
+        'workorder_id',
+        string="Machining Operations"
     )
+    
+    weighing_operation_ids = fields.One2many(
+        'operation.steps.weighing',
+        'workorder_id',
+        string="Weighing Operations"
+    )
+    
+    # Parameters
+    forging_operation_params_id = fields.One2many(
+        'operation.params.forging',
+        'workorder_id',
+        string="Operation Parameters",
+    )
+    
+    
+    
+    
+    @api.constrains('orging_operation_params_id')
+    def _check_one2one(self):
+        for record in self:
+            if len(record.orging_operation_params_id) > 1:
+                raise ValidationError('Only one Operation Parameters can be linked!')
     
 
     def unlink(self):
