@@ -728,7 +728,7 @@ class OperationStepsSmelting(models.Model):
     )
 
 
-    name = fields.Char(string="Operation Step Name", required=True)
+    # name = fields.Char(string="Operation Step Name", required=True)
     sequence = fields.Integer(string='Sequence', default=10)
     
     # equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
@@ -753,3 +753,224 @@ class OperationStepsSmelting(models.Model):
     
 
     notes = fields.Char(string="Notes")
+    
+    
+class OperationStepsLeakageTest(models.Model):
+    _name = 'operation.steps.leakage.test'
+    _description = 'Leakage Test Steps'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
+
+
+    name = fields.Char(string="Name", required=True)
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    # equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
+    
+    operation_date_time = fields.Datetime(string="Date & Time")
+    
+    performer_id = fields.Many2one('res.users', string="Performer")
+    responsible_id = fields.Many2one('res.users', string="Responsible")
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+    # Vakuum leakage test (before smelting)
+    chamber_pressure = fields.Float(string="Chamber Pressure (mbar)")
+    chamber_pressure_5min = fields.Float(string="Chamber Pressure after 5 min (mbar)")
+    chamber_pressure_difference = fields.Float(string="Chamber Pressure Difference (mbar)")
+    leakage_test_result = fields.Selection(
+        [('passed', 'Passed'),
+         ('failed', 'Failed')],
+        string='Leakage Test Result')
+
+    # notes = fields.Char(string="Notes")
+    
+class OperationStepsCasting(models.Model):
+    _name = 'operation.steps.casting'
+    _description = 'Casting Operation Steps'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
+
+
+    # name = fields.Char(string="Operation Step Name", required=True)
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    # equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
+    
+    # OPERATION PARAMETERS
+    operation_date_time = fields.Datetime(string="Operation Date & Time")
+    
+    performer_id = fields.Many2one('res.users', string="Performer")
+    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    # approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
+    scales_id = fields.Many2one('maintenance.equipment', string="Pyrometer")
+    measurement_id = fields.Many2one('maintenance.equipment', string="Thermocouple")
+    # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+    marking = fields.Boolean(string="Marking")
+    heat_no = fields.Char(string="Heat Number") # New heat number field
+    
+    # Can be calculated from step reports
+    mold_number = fields.Integer(string="Mold Number")
+    total_weight = fields.Float(string="Total Weight (kg)")
+    
+    
+    # ingot_product_id = fields.Many2one('product.product', string="Ingot Product")
+    # ingot_quantity = fields.Float(string="Ingot Weight (kg)")
+    
+    # hottop_height = fields.Float(string="Hottop Height (mm)")
+    # ingot_dimensions = fields.Char(string="Ingot Dimensions (mmxmm)")
+
+    
+    # CLAUDE
+    # Link to production order through workorder
+    # Link to production order through workorder
+    production_id = fields.Many2one(
+        'mrp.production',
+        related='workorder_id.production_id',
+        string="Production Order",
+        store=True,
+        readonly=True
+    )
+    
+    # Link to specific stock move (finished product move)
+    stock_move_id = fields.Many2one(
+        'stock.move',
+        string="Ingot Selection",
+        domain="[('id', 'in', available_move_ids)]",
+        ondelete='restrict'
+    )
+    
+    # Available stock moves (not yet used) - with display names
+    available_move_ids = fields.Many2many(
+        'stock.move',
+        compute='_compute_available_moves',
+        string="Available Moves"
+    )
+    
+    # Available moves with display info for selection widget
+    available_move_selection = fields.Many2many(
+        'stock.move',
+        compute='_compute_available_move_selection',
+        string="Available Moves Selection"
+    )
+    
+    # Selected ingot product (from stock move)
+    ingot_product_id = fields.Many2one(
+        'product.product', 
+        string="Ingot Product",
+        related='stock_move_id.product_id',
+        store=True,
+        readonly=True
+    )
+    
+    # Ingot quantity (from stock move)
+    ingot_quantity = fields.Float(
+        string="Ingot Weight (kg)",
+        related='stock_move_id.product_uom_qty',
+        store=True,
+        readonly=True
+    )
+    
+    stock_move_display = fields.Char(related='stock_move_id.move_display_name', string="Selected Ingot Info", readonly=True)
+    
+    hottop_height = fields.Float(string="Hottop Height (mm)")
+    ingot_dimensions = fields.Char(string="Ingot Dimensions (mmxmm)")
+    
+    @api.depends('workorder_id', 'production_id', 'production_id.move_finished_ids')
+    def _compute_available_move_selection(self):
+        """Compute selection list with formatted names"""
+        for record in self:
+            record.available_move_selection = record.available_move_ids
+    
+    @api.depends('workorder_id', 'production_id', 'production_id.move_finished_ids')
+    def _compute_available_moves(self):
+        """Compute available stock moves that haven't been used yet"""
+        for record in self:
+            if record.production_id and record.production_id.move_finished_ids:
+                all_moves = record.production_id.move_finished_ids
+                
+                # Find already used moves in this workorder (excluding current record)
+                used_steps = self.search([
+                    ('workorder_id', '=', record.workorder_id.id),
+                    ('id', '!=', record.id),
+                    ('stock_move_id', '!=', False)
+                ])
+                
+                # Extract IDs of used moves
+                used_move_ids = used_steps.mapped('stock_move_id').ids
+                
+                # Filter available moves by excluding used IDs
+                available = all_moves.filtered(lambda m: m.id not in used_move_ids)
+                
+                # If current record has a stock_move, include it in available
+                if record.stock_move_id and record.stock_move_id.id not in available.ids:
+                    available |= record.stock_move_id
+                
+                # Add context for better display in selection
+                record.available_move_ids = available.with_context(show_product_in_move_name=True)
+            else:
+                record.available_move_ids = False
+    
+    @api.onchange('stock_move_id')
+    def _onchange_stock_move_id(self):
+        """Add display info when move is selected"""
+        if self.stock_move_id and self.stock_move_id.product_id:
+            product = self.stock_move_id.product_id
+            # This will trigger related fields update
+            pass
+    
+    @api.constrains('stock_move_id', 'workorder_id')
+    def _check_unique_stock_move(self):
+        """Ensure stock move is not used twice in the same workorder"""
+        for record in self:
+            if record.stock_move_id:
+                duplicate = self.search([
+                    ('workorder_id', '=', record.workorder_id.id),
+                    ('stock_move_id', '=', record.stock_move_id.id),
+                    ('id', '!=', record.id)
+                ], limit=1)
+                
+                if duplicate:
+                    from odoo.exceptions import ValidationError
+                    raise ValidationError(
+                        f"Product '{record.ingot_product_id.name}' has already been used "
+                        f"in this workorder. Each finished product can only be used once."
+                    )
+    
+    def write(self, vals):
+        """Override write to refresh available moves when stock_move changes"""
+        result = super().write(vals)
+        if 'stock_move_id' in vals:
+            # Trigger recompute for all records in same workorder
+            self.mapped('workorder_id.casting_operation_ids')._compute_available_moves()
+        return result
+    
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Override create to refresh available moves"""
+        records = super().create(vals_list)
+        # Trigger recompute for all records in same workorders
+        records.mapped('workorder_id.casting_operation_ids')._compute_available_moves()
+        return records
+    
+    def unlink(self):
+        """Override unlink to refresh available moves"""
+        workorders = self.mapped('workorder_id')
+        result = super().unlink()
+        # Trigger recompute for remaining records
+        workorders.mapped('casting_operation_ids')._compute_available_moves()
+        return result

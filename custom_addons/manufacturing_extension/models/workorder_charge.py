@@ -27,6 +27,8 @@ class MrpWorkorder(models.Model):
     
     component_id = fields.Many2one(related='production_id.move_raw_ids.product_id', string="Component")
     
+    # component_ids = fields.Many2many(related='production_id.move_raw_ids', string="Components")
+    
     component_qty = fields.Float(related='production_id.move_raw_ids.product_uom_qty', string="Component Qty.")
     
     component_reference_no = fields.Char(related='production_id.move_raw_ids.product_id.product_reference_no', string="Component Ref.No.")
@@ -81,9 +83,34 @@ class MrpWorkorder(models.Model):
         string="Weighing Operations"
     )
     
+    smelting_operation_ids = fields.One2many(
+        'operation.steps.smelting',
+        'workorder_id',
+        string="Smelting Operations"
+    )
+    
+    leakage_test_operation_ids = fields.One2many(
+        'operation.steps.leakage.test',
+        'workorder_id',
+        string="Leakage Test Operations"
+    )
+    
+    casting_operation_ids = fields.One2many(
+        'operation.steps.casting',
+        'workorder_id',
+        string="Casting Operations"
+    )
+    
+    
     # Parameters
     forging_operation_params_id = fields.One2many(
         'operation.params.forging',
+        'workorder_id',
+        string="Operation Parameters",
+    )
+    
+    smelting_operation_params_id = fields.One2many(
+        'operation.params.smelting',
         'workorder_id',
         string="Operation Parameters",
     )

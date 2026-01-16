@@ -49,3 +49,53 @@ class StockMove(models.Model):
     min_consume_qty = fields.Float(string='Min Consume Qty')
     max_consume_qty = fields.Float(string='Max Consume Qty')
     measurement_tool_id = fields.Many2one('maintenance.equipment', string='Measurement Tool')
+    
+    move_display_name = fields.Char(
+        string='Display Name',
+        compute='_compute_move_display_name',
+        store=False
+    )
+    
+    @api.depends('product_id', 'product_id.name', 'product_id.default_code', 'product_uom_qty', 'product_uom')
+    def _compute_move_display_name(self):
+        """Compute display name with product info"""
+        for move in self:
+            if move.product_id:
+                product = move.product_id
+                ref = product.default_code or ''
+                qty = move.product_uom_qty
+                uom = move.product_uom.name if move.product_uom else ''
+                
+                name = f"{product.name}"
+                if ref:
+                    name += f" [{ref}]"
+                if qty and uom:
+                    name += f" - {qty:.2f} {uom}"
+                move.move_display_name = name
+            else:
+                move.move_display_name = move.name or ''
+    
+    def name_get(self):
+        """Override name_get to show product info for finished moves"""
+        result = []
+        for move in self:
+            # Check if this move is a finished product move
+            if move.production_id and move in move.production_id.move_finished_ids:
+                if move.product_id:
+                    product = move.product_id
+                    ref = product.default_code or ''
+                    qty = move.product_uom_qty
+                    uom = move.product_uom.name if move.product_uom else ''
+                    
+                    # Format: "Product Name [REF] - 100.0 kg"
+                    name = f"{product.name}"
+                    if ref:
+                        name += f" [{ref}]"
+                    name += f" - {qty:.2f} {uom}"
+                    result.append((move.id, name))
+                else:
+                    result.append((move.id, super(StockMove, move).name_get()[0][1]))
+            else:
+                # Default behavior for non-finished moves
+                result.append((move.id, super(StockMove, move).name_get()[0][1]))
+        return result

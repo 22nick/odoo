@@ -5,9 +5,12 @@ access_operation_steps_cutting,operation.steps.cutting,model_operation_steps_cut
 access_operation_steps_heating,operation.steps.heating,model_operation_steps_heating,base.group_user,1,1,1,1
 access_operation_steps_grinding,operation.steps.grinding,model_operation_steps_grinding,base.group_user,1,1,1,1
 access_operation_steps_forging,operation.steps.forging,model_operation_steps_forging,base.group_user,1,1,1,1
+access_operation_steps_machining,operation.steps.machining,model_operation_steps_machining,base.group_user,1,1,1,1
+access_operation_steps_smelting,operation.steps.smelting,model_operation_steps_smelting,base.group_user,1,1,1,1
+access_operation_steps_leakage_test,operation.steps.leakage.test,model_operation_steps_leakage_test,base.group_user,1,1,1,1
+access_operation_steps_casting,operation.steps.casting,model_operation_steps_casting,base.group_user,1,1,1,1
 access_operation_params_forging,operation.params.forging,model_operation_params_forging,base.group_user,1,1,1,1
 access_operation_params_smelting,operation.params.smelting,model_operation_params_smelting,base.group_user,1,1,1,1
-access_operation_steps_machining,operation.steps.machining,model_operation_steps_machining,base.group_user,1,1,1,1
 access_material_grade,material.grade,model_material_grade,base.group_user,1,1,1,1
 access_material_type,material.type,model_material_type,base.group_user,1,1,1,1
 access_material_group,material.group,model_material_group,base.group_user,1,1,1,1

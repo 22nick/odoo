@@ -68,6 +68,8 @@ class ProductTemplate(models.Model):
     forging_diameter = fields.Integer(string='Diameter')
     forging_diameter_inner = fields.Integer(string='Inner diameter')
     
+    display_dimensions = fields.Char(string='Display Dimensions') #, compute='_compute_display_dimensions')    
+    
     # forging_material = fields.Char(string='Material')
     forging_material = fields.Many2one('material.grade', string='Grade of Material')
 
@@ -120,6 +122,23 @@ class ProductTemplate(models.Model):
 class product_product(models.Model):
     _inherit = "product.product"
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        
+        for val in vals_list:
+            if val.get('product_reference_no', '[New]') == '[New]':
+                val['product_reference_no'] = (self.env['ir.sequence'].
+                next_by_code('product_sequense'))
+        records = super(ProductProduct, self).create(vals_list)
+         
+        for rec in records:
+            if rec.product_variant_ids:
+                # Мы пишем в поле шаблона, а Odoo сама должна обновить related.
+                # Но если store=True глючит, можно обновить варианты напрямую:
+                rec.product_variant_ids.write({'product_reference_no': rec.product_reference_no})
+                
+                        
+        return records
 
     @api.model
     def web_name_search(self, name, specification, domain=None, operator='ilike', limit=100):

@@ -37,11 +37,12 @@
         'reports/workorder_operation_report.xml',
         'reports/mrp_production_report_ext.xml',
         # 'reports/heating_operation_report.xml', 
-        'reports/report_cutting_opertions_steps.xml',
-        'reports/report_heating_opertions_steps.xml',
-        'reports/report_grinding_opertions_steps.xml',
-        'reports/report_forging_opertions_steps.xml',
-        'reports/report_machining_opertions_steps.xml',
+        'reports/report_cutting_opertions_steps_template.xml',
+        'reports/report_heating_opertions_steps_template.xml',
+        'reports/report_grinding_opertions_steps_template.xml',
+        'reports/report_forging_opertions_steps_template.xml',
+        'reports/report_machining_opertions_steps_template.xml',
+        'reports/report_smelting_opertions_steps_template.xml',
     ],
 
     "assets":{

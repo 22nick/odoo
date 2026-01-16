@@ -1,0 +1,145 @@
+<odoo>
+<template id="report_cutting_opertions_steps_template">
+    <div class="compact-section">
+        <div class="section-header">OPERATIONS</div>
+        <table class="steps-table">
+            <thead>
+                <tr>
+                    <th style="width: 3%;">#</th>
+                    <th style="width: 9%;">Step Name</th>
+                    <th style="width: 8%;">Equipment</th>
+                    <th style="width: 8%;">Equip. Ref.</th>       
+                    <th style="width: 7%;">Performer</th>
+                    <th style="width: 8%;">Responsible</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="o.cutting_operation_ids" t-as="step">
+                    <tr>
+                        <td class="text-center">
+                            <strong><span t-esc="step_index + 1"/></strong>
+                        </td>
+                        <td>
+                            <strong><span t-field="step.name"/></strong>
+                        </td>
+                        <td>
+                            <span t-field="step.equipment_id"/>
+                        </td>
+                        <td>
+                            <span t-field="step.equipment_reference_id"/>
+                        </td>
+                        <td>
+                            <span t-field="step.performer_id"/>
+                        </td>
+                        <td>
+                            <span t-field="step.responsible_id"/>
+                        </td>
+                        
+                    </tr>
+                </t>
+            </tbody>
+        </table>
+        <table class="steps-table">
+            <thead>
+                <tr>
+                    <th style="width: 6%;">Income<br/>kg</th>
+                    <th style="width: 6%;">Outcome<br/>kg</th>
+                    <th style="width: 9%;">Income<br/>section, mm</th>
+                    <th style="width: 9%;">Outcome<br/>section, mm</th>
+                    <th style="width: 9%;">Income<br/>length, mm</th>
+                    <th style="width: 9%;">Outcome<br/>length, mm</th>
+                    <th style="width: 9%;">Approval</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="o.cutting_operation_ids" t-as="step">
+                    <tr>
+                        <td class="text-right">
+                            <span t-field="step.income_material_weight"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="step.outcome_material_weight"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="step.income_material_crosssection"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="step.outcome_material_crosssection"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="step.income_material_length"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="step.outcome_material_length"/>
+                        </td>
+                        <td class="text-right">
+                            <span t-field="step.quality_approval"/>
+                        </td>
+                    </tr>
+
+                    <tr t-if="step.notes">
+                        <td colspan="11" style="padding: 5px;">
+                            <div style="display: table; width: 100%; border: 1px solid #dee2e6; background-color: #f8f9fa;">
+                                
+                                <!-- Tools cell (40%) -->
+                                <!-- <div style="display: table-cell; width: 40%; padding: 8px; vertical-align: top; text-align: left;">
+                                    <t t-if="step.tools_ids">
+                                        <strong style="color: #495057; font-size: 8pt; display: block; margin-bottom: 4px;">Tools:</strong>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5%;">#</th>
+                                                    <th >Ref.No.</th>
+                                                    <th >Name</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="step.tools_ids" t-as="component">
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <strong><span t-esc="component_index + 1"/></strong>
+                                                        </td>
+                                                        <td>
+                                                            <strong><span t-field="component.reference_id"/></strong>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="component.name"/>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+                                </div> -->
+
+
+                                <!-- Notes cell (60%) -->
+                                <!-- <div style="display: table-cell; width: 60%; padding: 8px; vertical-align: top; border-right: 1px solid #dee2e6;"> -->
+                                    <t t-if="step.notes">
+                                        <div style="background-color: #fff; padding: 6px; border: 1px solid #e0e0e0; border-radius: 2px; min-height: 80px;">
+                                            <strong style="color: #495057; font-size: 8pt; display: block; margin-bottom: 4px;">📝 Notes:</strong>
+                                            <div style="font-size: 7pt; line-height: 1.4; color: #333;">
+                                                <span t-field="step.notes"/>
+                                            </div>
+                                        </div>
+                                    </t>
+                                    <t t-else="">
+                                        <div style="color: #999; font-size: 7pt; font-style: italic; padding: 6px;">No notes available</div>
+                                    </t>
+                                <!-- </div> -->
+
+                                
+                                
+                            </div>
+                        </td>
+                    </tr>
+                </t>
+            </tbody>
+            
+        </table>
+    </div>
+</template>
+</odoo>

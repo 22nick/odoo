@@ -1,0 +1,336 @@
+<odoo>
+<template id="report_smelting_opertions_steps_template">
+    
+    <!-- PROCESS PREPARATION SECTION -->
+    <div class="compact-section" style="page-break-after: always;">
+        <div class="section-header">PROCESS PREPARATION</div>
+        <table class="info-table">
+            <tr>
+                <div class="row justify-content-end">
+                    <td class="label-col">Date:</td>
+                    <td><strong><span t-field="o.smelting_operation_params_id.operation_date"/></strong></td>
+                </div>
+            </tr>
+            <tr>
+                <td class="label-col"><div>Station:</div></td>
+                <td><strong><span t-field="o.smelting_operation_params_id.equipment_id.name"/></strong></td>
+                <td class="label-col"><div>Equipment ID:</div></td>
+                <td><strong><span t-field="o.smelting_operation_params_id.equipment_id.reference_id"/></strong></td>
+            </tr>
+            <tr>
+                <td class="label-col">Heat No.:</td>
+                <td><strong><span t-field="o.production_id.product_id.heat_no"/></strong></td>
+                <td class="label-col">Grade:</td>
+                <td><strong><span t-field="o.smelting_operation_params_id.material_grade_id"/></strong></td>
+            </tr>
+        </table>
+
+        <div class="section-header">CHARGE INFO</div>
+        <table class="info-table">
+            <tr>
+                <td class="label-col"><div>Mold No:</div></td>
+                <td><strong><span t-field="o.smelting_operation_params_id.mold_id"/></strong></td>
+                <td class="label-col"><div>Charge Weight:</div></td>
+                <td><strong><span t-field="o.smelting_operation_params_id.charge_weight"/></strong></td>
+            </tr>
+            <tr>
+                <td class="label-col">Hottop No:</td>
+                <td><strong><span t-field="o.smelting_operation_params_id.hottop_id"/></strong></td>
+                <td class="label-col">Ceramic Crucible Cast:</td>
+                <td><strong><span t-field="o.smelting_operation_params_id.ceramic_crucible_cast_count"/></strong></td>
+            </tr>
+            <tr>
+                <td class="label-col">Tundish No:</td>
+                <td><strong><span t-field="o.smelting_operation_params_id.tundish_id"/></strong></td>
+                <td class="label-col">Lining Cast:</td>
+                <td><strong><span t-field="o.smelting_operation_params_id.lining_cast_count"/></strong></td>
+            </tr>
+            <tr>
+                <td class="label-col">Mold Coating:</td>
+                <td><strong><span t-field="o.smelting_operation_params_id.mold_coating_id"/></strong></td>
+                <td class="label-col">Casting Speed:</td>
+                <td><strong><span t-field="o.smelting_operation_params_id.casting_speed"/></strong></td>
+            </tr>
+        </table>
+
+        <div class="section-header">COMPONENT READINESS</div>
+            
+        <table class="steps-table">
+            <thead>
+                <tr>
+                    <th style="width: 3%;">#</th>
+                    <th style="width: 12%;">Material</th>
+                    <th style="width: 10%;">ID</th>
+                    <th style="width: 10%;">Heat No.</th>
+                    <th style="width: 10%;">Min qty</th>
+                    <th style="width: 9%;">Max qty</th>
+                    <th style="width: 9%;">Chagre Weight</th>
+                    <th style="width: 9%;">Scales Dev.Id</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="o.smelting_operation_params_id.component_ids" t-as="step">
+                    <tr>
+                        <td class="text-center">
+                            <strong><span t-esc="step_index + 1"/></strong>
+                        </td>
+                        <td>
+                            <strong><span t-field="step.product_id.name"/></strong>
+                        </td>
+                        <td>
+                            <span t-field="step.product_id.product_reference_no"/>
+                        </td>
+                        <td>
+                            <span t-field="step.product_id.heat_no"/>
+                        </td>
+                        <td>
+                            <span t-field="step.min_consume_qty"/>
+                        </td>
+                        <td>
+                            <span t-field="step.max_consume_qty"/>
+                        </td>
+                        <td>
+                            <span t-field="step.product_qty"/>
+                        </td>
+                        <td>
+                            <span t-field="step.measurement_tool_id"/>
+                        </td>
+                        
+                    </tr>
+
+                </t>
+            </tbody>
+        </table>
+        <!-- Signature -->
+        <div class="row justify-content-end" style="margin-top: 10px;">
+            <div class="col-3">
+                <div class="compact-section">
+                    <div class="section-header">OPERATOR</div>
+                    <div style="padding: 15px 5px 5px 5px;">
+                        <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                        <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="compact-section">
+                    <div class="section-header">SUPERVISOR</div>
+                    <div style="padding: 15px 5px 5px 5px;">
+                        <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                        <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end" style="margin-top: 0px">
+            <div class="col-6">
+                <div class="compact-section">
+                    <strong><span>KSB Form No. (if exist): &#160; &#160;</span></strong>
+                
+                    <span t-field="o.smelting_operation_params_id.ksb_form_no"/>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div style="font-size: 7pt; text-align: right">FR.87 EK-2</div>
+        </div>
+    </div>
+
+
+    <!-- PROCESS PARAMETERS SECTION -->
+
+    <div class="compact-section" style="page-break-after: always;">
+        <div class="section-header">PROCESS PARAMETERS</div>
+        <table class="info-table">
+            <tr>
+                <td class="label-col"><div>Station:</div></td>
+                <td><strong><span t-field="o.smelting_operation_params_id.equipment_id.name"/></strong></td>
+                <td class="label-col"><div>Equipment ID:</div></td>
+                <td><strong><span t-field="o.smelting_operation_params_id.equipment_id.reference_id"/></strong></td>
+            </tr>
+            <tr>
+                <td class="label-col">Heat No.:</td>
+                <td><strong><span t-field="o.production_id.product_id.heat_no"/></strong></td>
+                <td class="label-col">Date:</td>
+                <td><strong><span t-field="o.smelting_operation_params_id.operation_date"/></strong></td>
+            </tr>
+        </table>
+
+        <div class="section-header">VACUUM LEAKAGE TEST</div>
+        <table class="steps-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Vacuum leakage test</th>
+                    <th style="width: 10%;">Reservoir Pressure</th>
+                    <th style="width: 10%;">Reservoir Pressure (after 5 min.)</th>
+                    <th style="width: 10%;">Pressure Difference</th>
+                    <th style="width: 9%;">Approval</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>
+                        <span style="font-size: 7pt; text-align: center;">(Reservoir pressure is noted. Main valve is closed. The value after 5 minutes is noted. The difference is calculated.) (Obtain approval from the process supervisor.)</span>
+                    </td>
+                    <td>
+                        <span t-field="o.leakage_test_operation_ids[0].chamber_pressure"/>
+                    </td>
+                    <td>
+                        <span t-field="o.leakage_test_operation_ids[0].chamber_pressure_5min"/>
+                    </td>
+                    <td>
+                        <span t-field="o.leakage_test_operation_ids[0].chamber_pressure_difference"/>
+                    </td>
+                    <td>
+                        <span t-field="o.leakage_test_operation_ids[0].leakage_test_result"/>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <div class="section-header">PROCESS DATA</div>
+        <table class="steps-table">
+            <thead>
+                <tr>
+                    <th style="width: 10%;">Time</th>
+                    <th style="width: 10%;">Medium (vacuum/argon)</th>
+                    <th style="width: 10%;">Pressure</th>
+                    <th style="width: 10%;">Unit</th>
+                    <th style="width: 10%;">Power, kW</th>
+                    <th style="width: 10%;">
+                        
+                        <table class="info-table">
+                                <tr>
+                                    <td><strong>Pyrometer, oC</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span t-field="o.smelting_operation_ids[0].pyrometer_id.reference_id"/></td>
+                                </tr>
+                        </table>
+
+                    </th>
+                    <th style="width: 10%;">
+                        <table class="info-table">
+                                <tr>
+                                    <td><strong>Thermocouple, oC</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><span t-field="o.smelting_operation_ids[0].thermocouple_id.reference_id"/></td>
+                                </tr>
+                        </table>
+                    
+                    </th>
+                    <th style="width: 10%;">Note</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <t t-foreach="o.smelting_operation_ids" t-as="step">
+                    <tr>
+                        <td>
+                            <span t-field="step.operation_date_time"/>
+                        </td>
+                        <td>
+                            <span t-field="step.medium"/>
+                        </td>
+                        <td>
+                            <span t-field="step.pressure"/>
+                        </td>
+                        <td>
+                            <span t-field="step.pressure_uom"/>
+                        </td>
+                        <td>
+                            <span t-field="step.power"/>
+                        </td>
+                        <td>
+                            <span t-field="step.pyrometer_value"/>
+                        </td>
+                        <td>
+                            <span t-field="step.thermocouple_value"/>
+                        </td>
+                        <td>
+                            <span t-field="step.notes"/>
+                        </td>
+                    </tr>
+                </t>
+
+            </tbody>
+        </table>
+
+        <div class="section-header">REFINING LEAKAGE TEST</div>
+        <table class="steps-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Vacuum leakage test</th>
+                    <th style="width: 10%;">Reservoir Pressure</th>
+                    <th style="width: 10%;">Reservoir Pressure (after 5 min.)</th>
+                    <th style="width: 10%;">Pressure Difference</th>
+                    <th style="width: 9%;">Approval</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                
+                <tr>
+                    <td>
+                        <span style="font-size: 7pt; text-align: center;">(Reservoir pressure is noted. Main valve is closed. The value after 5 minutes is noted. The difference is calculated.) (Obtain approval from the process supervisor.)</span>
+                    </td>
+                    <td>
+                        <span t-field="o.leakage_test_operation_ids[1].chamber_pressure"/>
+                    </td>
+                    <td>
+                        <span t-field="o.leakage_test_operation_ids[1].chamber_pressure_5min"/>
+                    </td>
+                    <td>
+                        <span t-field="o.leakage_test_operation_ids[1].chamber_pressure_difference"/>
+                    </td>
+                    <td>
+                        <span t-field="o.leakage_test_operation_ids[1].leakage_test_result"/>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+        <!-- Signature -->
+        <div class="row justify-content-end" style="margin-top: 10px;">
+            <div class="col-3">
+                <div class="compact-section">
+                    <div class="section-header">OPERATOR</div>
+                    <div style="padding: 15px 5px 5px 5px;">
+                        <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                        <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="compact-section">
+                    <div class="section-header">SUPERVISOR</div>
+                    <div style="padding: 15px 5px 5px 5px;">
+                        <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                        <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end" style="margin-top: 0px">
+            <div class="col-6">
+                <div class="compact-section">
+                    <strong><span>KSB Form No. (if exist): &#160; &#160;</span></strong>
+                
+                    <span t-field="o.smelting_operation_params_id.ksb_form_no_oper"/>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div style="font-size: 7pt; text-align: right">FR.87 EK-3</div>
+        </div>
+    </div>
+
+
+</template>
+</odoo>

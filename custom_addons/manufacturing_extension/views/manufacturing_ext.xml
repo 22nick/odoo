@@ -41,7 +41,18 @@
                     <field name="customer_requirements"/>
                     <field name="customer_requirements_notes"/>
                     <field name="binary_field" widget="many2many_binary" nolabel="1"/>
-                    
+
+                </group>
+
+                <group string="All products" class="col-md-2">
+                    <field name="move_finished_ids"  nolabel="1"/>
+                    <button name="action_update_bom" string="Update BoM" type="object"
+                                    title="Note that another version of this BOM is available." class="text-danger"
+                                    />
+                                    <!-- invisible="not is_outdated_bom or state not in ['draft', 'confirmed']" -->
+                    <!-- <field name="move_byproduct_ids"  nolabel="0"/> -->
+                    <!-- <field name="all_move_ids"  nolabel="0"/> -->
+
                 </group>
             </xpath>
             

@@ -54,17 +54,30 @@ class OperationParamsSmelting(models.Model):
     equipment_id = fields.Many2one('maintenance.equipment', string='Smelting Station')
     new_heat_no = fields.Char(string="Heat Number")
     material_grade_id = fields.Many2one('material.grade', string='Material Grade')
-    charge_weight = fields.Float(string="Charge Weight (kg)")
+    operation_date = fields.Date(string="Operation Date")
+    
+    #PREPARATION FIELDS
     mold_id = fields.Many2one('maintenance.equipment', string='Mold')
     hottop_id = fields.Many2one('maintenance.equipment', string='Hot Top')
     tundish_id = fields.Many2one('maintenance.equipment', string='Tundish')
     mold_coating_id = fields.Many2one('product.product', string='Mold Coating')
-    casting_speed = fields.Float(string="Casting Speed")
+    charge_weight = fields.Float(string="Charge Weight (kg)")
     ceramic_crucible_cast_count = fields.Integer(string="Ceramic Crucible Casting Count")
     lining_cast_count = fields.Integer(string="Lining Casting Count")
+    casting_speed = fields.Float(string="Casting Speed")
     preparation_performer = fields.Many2one('res.users', string='Preparation Performer')
+
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
 
+    component_ids = fields.One2many(related='workorder_id.production_id.move_raw_ids', string="Component")
+    
+    
+    # OPERATION FIELDS
+    operation_performer = fields.Many2one('res.users', string='Operation Performer')
+    operation_responsible = fields.Many2one('res.users', string='Operation Responsible')
+    ksb_form_no_oper = fields.Char(string="KSB Form No. (if exist)")
+    
+    
     # Vakuum leakage test (before smelting)
     chamber_pressure = fields.Float(string="Chamber Pressure (mbar)")
     chamber_pressure_5min = fields.Float(string="Chamber Pressure after 5 min (mbar)")
