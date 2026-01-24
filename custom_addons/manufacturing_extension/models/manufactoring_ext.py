@@ -1,4 +1,5 @@
-from odoo import api, models, fields
+from odoo import api, models, fields, _
+from odoo.exceptions import ValidationError
 
 class MrpProduction(models.Model):
     _inherit = "mrp.production"
@@ -50,52 +51,172 @@ class StockMove(models.Model):
     max_consume_qty = fields.Float(string='Max Consume Qty')
     measurement_tool_id = fields.Many2one('maintenance.equipment', string='Measurement Tool')
     
-    move_display_name = fields.Char(
-        string='Display Name',
-        compute='_compute_move_display_name',
-        store=False
-    )
+    @api.onchange('product_qty')
+    def _onchange_product_qty(self):
+        """Корректировка product_qty в пределах min/max"""
+        for record in self:
+            if record.product_qty and (record.min_consume_qty or record.max_consume_qty):
+                # Получаем ближайшее допустимое значение
+                corrected_qty = record._get_corrected_qty(
+                    record.product_qty,
+                    record.min_consume_qty,
+                    record.max_consume_qty
+                )
+                if corrected_qty != record.product_qty:
+                    record.product_qty = corrected_qty
     
-    @api.depends('product_id', 'product_id.name', 'product_id.default_code', 'product_uom_qty', 'product_uom')
-    def _compute_move_display_name(self):
-        """Compute display name with product info"""
-        for move in self:
-            if move.product_id:
-                product = move.product_id
-                ref = product.default_code or ''
-                qty = move.product_uom_qty
-                uom = move.product_uom.name if move.product_uom else ''
+    @api.onchange('min_consume_qty')
+    def _onchange_min_consume_qty(self):
+        """Корректировка min_consume_qty и product_qty"""
+        for record in self:
+            if record.min_consume_qty:
+                # Если min больше max, устанавливаем min = max
+                if record.max_consume_qty and record.min_consume_qty > record.max_consume_qty:
+                    record.min_consume_qty = record.max_consume_qty
                 
-                name = f"{product.name}"
-                if ref:
-                    name += f" [{ref}]"
-                if qty and uom:
-                    name += f" - {qty:.2f} {uom}"
-                move.move_display_name = name
-            else:
-                move.move_display_name = move.name or ''
+                # Корректируем product_qty если необходимо
+                if record.product_qty and record.product_qty < record.min_consume_qty:
+                    record.product_qty = record.min_consume_qty
     
-    def name_get(self):
-        """Override name_get to show product info for finished moves"""
-        result = []
-        for move in self:
-            # Check if this move is a finished product move
-            if move.production_id and move in move.production_id.move_finished_ids:
-                if move.product_id:
-                    product = move.product_id
-                    ref = product.default_code or ''
-                    qty = move.product_uom_qty
-                    uom = move.product_uom.name if move.product_uom else ''
+    @api.onchange('max_consume_qty')
+    def _onchange_max_consume_qty(self):
+        """Корректировка max_consume_qty и product_qty"""
+        for record in self:
+            if record.max_consume_qty:
+                # Если max меньше min, устанавливаем max = min
+                if record.min_consume_qty and record.max_consume_qty < record.min_consume_qty:
+                    record.max_consume_qty = record.min_consume_qty
+                
+                # Корректируем product_qty если необходимо
+                if record.product_qty and record.product_qty > record.max_consume_qty:
+                    record.product_qty = record.max_consume_qty
+    
+    @api.constrains('min_consume_qty', 'max_consume_qty', 'product_qty')
+    def _check_consume_qty_limits(self):
+        """Проверка ограничений при сохранении"""
+        for record in self:
+            # Проверяем соотношение min/max
+            if record.min_consume_qty and record.max_consume_qty:
+                if record.min_consume_qty > record.max_consume_qty:
+                    raise ValidationError(
+                        _('Min Consume Qty (%s) cannot be greater than Max Consume Qty (%s)') 
+                        % (record.min_consume_qty, record.max_consume_qty)
+                    )
+            
+            # Проверяем product_qty в пределах
+            if record.product_qty:
+                if record.min_consume_qty and record.product_qty < record.min_consume_qty:
+                    raise ValidationError(
+                        _('Real Quantity (%s) cannot be less than Min Consume Qty (%s)') 
+                        % (record.product_qty, record.min_consume_qty)
+                    )
+                if record.max_consume_qty and record.product_qty > record.max_consume_qty:
+                    raise ValidationError(
+                        _('Real Quantity (%s) cannot be greater than Max Consume Qty (%s)') 
+                        % (record.product_qty, record.max_consume_qty)
+                    )
+    
+    def _get_corrected_qty(self, qty, min_qty, max_qty):
+        """Возвращает скорректированное значение в допустимых пределах"""
+        if min_qty and qty < min_qty:
+            return min_qty
+        if max_qty and qty > max_qty:
+            return max_qty
+        return qty
+    
+    def write(self, vals):
+        """Корректировка значений при записи"""
+        # Корректируем min_consume_qty если нарушается условие с max
+        if 'min_consume_qty' in vals:
+            for record in self:
+                max_qty = vals.get('max_consume_qty', record.max_consume_qty)
+                if max_qty and vals['min_consume_qty'] > max_qty:
+                    vals['min_consume_qty'] = max_qty
+        
+        # Корректируем max_consume_qty если нарушается условие с min
+        if 'max_consume_qty' in vals:
+            for record in self:
+                min_qty = vals.get('min_consume_qty', record.min_consume_qty)
+                if min_qty and vals['max_consume_qty'] < min_qty:
+                    vals['max_consume_qty'] = min_qty
+        
+        # Корректируем product_qty в пределах min/max
+        if 'product_qty' in vals or 'min_consume_qty' in vals or 'max_consume_qty' in vals:
+            for record in self:
+                product_qty = vals.get('product_qty', record.product_qty)
+                min_qty = vals.get('min_consume_qty', record.min_consume_qty)
+                max_qty = vals.get('max_consume_qty', record.max_consume_qty)
+                
+                corrected_qty = self._get_corrected_qty(product_qty, min_qty, max_qty)
+                if corrected_qty != product_qty:
+                    vals['product_qty'] = corrected_qty
+        
+        return super(StockMove, self).write(vals)
+    
+    @api.model_create_multi
+    def create(self, vals_list):
+        """Корректировка значений при создании"""
+        for vals in vals_list:
+            min_qty = vals.get('min_consume_qty', 0)
+            max_qty = vals.get('max_consume_qty', 0)
+            product_qty = vals.get('product_qty', 0)
+            
+            # Корректируем min/max
+            if min_qty and max_qty and min_qty > max_qty:
+                vals['min_consume_qty'] = max_qty
+                min_qty = max_qty
+            
+            # Корректируем product_qty
+            if product_qty:
+                vals['product_qty'] = self._get_corrected_qty(product_qty, min_qty, max_qty)
+        
+        return super(StockMove, self).create(vals_list)
+    # move_display_name = fields.Char(
+    #     string='Display Name',
+    #     compute='_compute_move_display_name',
+    #     store=False
+    # )
+    
+    # @api.depends('product_id', 'product_id.name', 'product_id.default_code', 'product_uom_qty', 'product_uom')
+    # def _compute_move_display_name(self):
+    #     """Compute display name with product info"""
+    #     for move in self:
+    #         if move.product_id:
+    #             product = move.product_id
+    #             ref = product.default_code or ''
+    #             qty = move.product_uom_qty
+    #             uom = move.product_uom.name if move.product_uom else ''
+                
+    #             name = f"{product.name}"
+    #             if ref:
+    #                 name += f" [{ref}]"
+    #             if qty and uom:
+    #                 name += f" - {qty:.2f} {uom}"
+    #             move.move_display_name = name
+    #         else:
+    #             move.move_display_name = move.name or ''
+    
+    # def name_get(self):
+    #     """Override name_get to show product info for finished moves"""
+    #     result = []
+    #     for move in self:
+    #         # Check if this move is a finished product move
+    #         if move.production_id and move in move.production_id.move_finished_ids:
+    #             if move.product_id:
+    #                 product = move.product_id
+    #                 ref = product.default_code or ''
+    #                 qty = move.product_uom_qty
+    #                 uom = move.product_uom.name if move.product_uom else ''
                     
-                    # Format: "Product Name [REF] - 100.0 kg"
-                    name = f"{product.name}"
-                    if ref:
-                        name += f" [{ref}]"
-                    name += f" - {qty:.2f} {uom}"
-                    result.append((move.id, name))
-                else:
-                    result.append((move.id, super(StockMove, move).name_get()[0][1]))
-            else:
-                # Default behavior for non-finished moves
-                result.append((move.id, super(StockMove, move).name_get()[0][1]))
-        return result
+    #                 # Format: "Product Name [REF] - 100.0 kg"
+    #                 name = f"{product.name}"
+    #                 if ref:
+    #                     name += f" [{ref}]"
+    #                 name += f" - {qty:.2f} {uom}"
+    #                 result.append((move.id, name))
+    #             else:
+    #                 result.append((move.id, super(StockMove, move).name_get()[0][1]))
+    #         else:
+    #             # Default behavior for non-finished moves
+    #             result.append((move.id, super(StockMove, move).name_get()[0][1]))
+    #     return result

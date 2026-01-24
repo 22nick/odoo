@@ -101,6 +101,12 @@ class MrpWorkorder(models.Model):
         string="Casting Operations"
     )
     
+    smelting_quality_control_ids = fields.One2many(
+        'operation.steps.smelting.quality',
+        'workorder_id',
+        string="Smelting Quality Control"
+    )
+    
     
     # Parameters
     forging_operation_params_id = fields.One2many(
@@ -118,10 +124,10 @@ class MrpWorkorder(models.Model):
     
     
     
-    @api.constrains('orging_operation_params_id')
+    @api.constrains('forging_operation_params_id')
     def _check_one2one(self):
         for record in self:
-            if len(record.orging_operation_params_id) > 1:
+            if len(record.forging_operation_params_id) > 1:
                 raise ValidationError('Only one Operation Parameters can be linked!')
     
 

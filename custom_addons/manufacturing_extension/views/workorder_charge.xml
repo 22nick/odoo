@@ -130,7 +130,7 @@
                                 </group>
 
                                 <group string="Components" colspan="2">
-                                    <field name="component_ids" widget="many2many" readonly="1" nolabel="1"/>
+                                    <field name="component_ids" widget="many2many" readonly="0" nolabel="1"/>
 
                                 </group>
 
@@ -492,6 +492,7 @@
                                             <field name="chamber_pressure"/>
                                             <field name="chamber_pressure_5min"/>
                                             <field name="chamber_pressure_difference"/>
+                                            <field name="pressure_uom"/>
                                             <field name="leakage_test_result"/>
                                             
                                         </group>
@@ -564,55 +565,82 @@
 
                             </list>
 
-                            <form string="Smelting Operation">
+                            <form string="Casting Operation">
                                 <sheet>
                                     <group>
                                         <group string="Basic Information">
-                                            <field name="workorder_id"/>
+                                            <field name="workorder_id" readonly="1"/>
                                             <field name="production_id" invisible="1"/>
-                                            <field name="available_move_ids" invisible="1"/>
-                                            <field name="sequence"/>
-                                        </group>
-                                        <group string="Operation Details">
+                                            <!-- <field name="available_move_ids" invisible="1"/> -->
+                                            <field name="sequence" invisible="1"/>
                                             <field name="operation_date_time"/>
                                             <field name="performer_id"/>
                                             <field name="responsible_id"/>
+                                        </group>
+                                        <group string="Operation Details">
+                                            <field name="heat_no"/>
+                                            <field name="total_weight"/>
+                                            <field name="mold_number"/>
                                         </group>
                                     </group>
                                     
                                     <group string="Ingot Selection">
                                         <group>
-                                            <field name="stock_move_id" 
-                                                string="Select Ingot"
-                                                options="{'no_create': True, 'no_open': True}"
-                                                required="1"/>
-                                            
-                                            <field name="stock_move_display" readonly="1"/>
+                                            <field name="production_id" invisible="1"/>
+                                            <field name="available_ingot_product_ids" invisible="1"/>
+                                            <field name="ingot_product_id" readonly="0"/>
+                                            <field name="ingot_quantity" readonly="0"/>
                                         </group>
-                                        <group>
-                                            <field name="ingot_product_id" readonly="1"/>
-                                            <field name="ingot_quantity" readonly="1"/>
-                                        </group>
-                                    </group>
-                                    
-                                    <group string="Measurements">
                                         <group>
                                             <field name="hottop_height"/>
                                             <field name="ingot_dimensions"/>
-                                            <field name="mold_number"/>
-                                            <field name="total_weight"/>
-                                        </group>
-                                        <group>
-                                            <field name="scales_id"/>
-                                            <field name="measurement_id"/>
-                                            <field name="heat_no"/>
                                         </group>
                                     </group>
                                     
                                     <group string="Additional Information">
                                         <group>
+                                            <field name="scales_id"/>
+                                            <field name="measurement_id"/>
+                                        </group>
+                                        <group>
                                             <field name="ksb_form_no"/>
                                             <field name="marking"/>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </group>
+
+                    <group string="Smelting Quality Report" colspan="2">
+                        
+                        <field name="smelting_quality_control_ids" nolabel="1">
+                            <list>
+                                <!-- <field name="sequence" widget="handle"/> -->
+                                <field name="operation_date_time" widget="date"/>
+                                <field name="measurement_device_id"/>
+                                <field name="result"/>
+                                <field name="performer_id"/>
+                                <field name="notes"/>
+
+                            </list>
+
+                            <form string="Smelting Quality Control">
+                                <sheet>
+                                    <group>
+                                        <group>
+                                            <field name="workorder_id" readonly="1" invisible="1"/>
+                                            <field name="sequence" invisible="1"/>
+                                            <field name="operation_date_time"/>
+                                            <field name="measurement_device_id"/>
+                                            <field name="result"/>
+                                            <field name="measurement_standard_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="performer_id"/>
+                                            <field name="responsible_id"/>
+                                            <field name="ksb_form_no"/>
+                                            <field name="notes"/>
                                         </group>
                                     </group>
                                 </sheet>

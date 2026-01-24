@@ -744,8 +744,11 @@ class OperationStepsSmelting(models.Model):
     # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     
-    medium = fields.Char(string="Medium")
-    pressure = fields.Float(string="Pressure")
+    medium = fields.Selection(
+        [('vacuum', 'Vacuum'),
+         ('argon', 'Argon')],
+        string="Medium")
+    pressure = fields.Float(string="Pressure", digits='Process Parameter')
     pressure_uom = fields.Many2one('uom.uom', string="Unit Of Measure")
     power = fields.Float(string="Melting power")
     pyrometer_value = fields.Float(string="Temperature (pyrometer)")
@@ -780,15 +783,29 @@ class OperationStepsLeakageTest(models.Model):
     responsible_id = fields.Many2one('res.users', string="Responsible")
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     # Vakuum leakage test (before smelting)
-    chamber_pressure = fields.Float(string="Chamber Pressure (mbar)")
-    chamber_pressure_5min = fields.Float(string="Chamber Pressure after 5 min (mbar)")
-    chamber_pressure_difference = fields.Float(string="Chamber Pressure Difference (mbar)")
+    chamber_pressure = fields.Float(string="Chamber Pressure (mbar)", digits='Process Parameter')
+    chamber_pressure_5min = fields.Float(string="Chamber Pressure after 5 min (mbar)", digits='Process Parameter')
+    chamber_pressure_difference = fields.Float(
+        string="Chamber Pressure Difference (mbar)", 
+        digits='Process Parameter',
+        compute='_compute_chamber_pressure_difference',
+        store=True,
+        readonly=True)
+    pressure_uom = fields.Many2one('uom.uom', string="Pressure Unit Of Measure")
+    
     leakage_test_result = fields.Selection(
         [('passed', 'Passed'),
          ('failed', 'Failed')],
         string='Leakage Test Result')
 
     # notes = fields.Char(string="Notes")
+    
+    @api.depends('chamber_pressure', 'chamber_pressure_5min')
+    def _compute_chamber_pressure_difference(self):
+        for record in self:
+            record.chamber_pressure_difference = record.chamber_pressure - record.chamber_pressure_5min 
+            
+            
     
 class OperationStepsCasting(models.Model):
     _name = 'operation.steps.casting'
@@ -816,17 +833,27 @@ class OperationStepsCasting(models.Model):
     responsible_id = fields.Many2one('res.users', string="Responsible")
     # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
     # approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
-    scales_id = fields.Many2one('maintenance.equipment', string="Pyrometer")
-    measurement_id = fields.Many2one('maintenance.equipment', string="Thermocouple")
+    scales_id = fields.Many2one('maintenance.equipment', string="Scales Id.")
+    measurement_id = fields.Many2one('maintenance.equipment', string="Measurement Id.")
     # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     marking = fields.Boolean(string="Marking")
-    heat_no = fields.Char(string="Heat Number") # New heat number field
+    # heat_no = fields.Char(string="Heat Number") # New heat number field
+    heat_no = fields.Char(related='ingot_product_id.heat_no', string="Heat Number", readonly=False) # New heat number field
     
     # Can be calculated from step reports
-    mold_number = fields.Integer(string="Mold Number")
-    total_weight = fields.Float(string="Total Weight (kg)")
-    
+    mold_number = fields.Integer(
+        string="Mold Qty",
+        compute='_compute_mold_number',
+        store=True,
+        readonly=True
+    )
+    total_weight = fields.Float(
+        string="Total Weight (kg)",
+        compute='_compute_total_weight',
+        store=True,
+        readonly=True
+    )
     
     # ingot_product_id = fields.Many2one('product.product', string="Ingot Product")
     # ingot_quantity = fields.Float(string="Ingot Weight (kg)")
@@ -837,7 +864,6 @@ class OperationStepsCasting(models.Model):
     
     # CLAUDE
     # Link to production order through workorder
-    # Link to production order through workorder
     production_id = fields.Many2one(
         'mrp.production',
         related='workorder_id.production_id',
@@ -846,131 +872,264 @@ class OperationStepsCasting(models.Model):
         readonly=True
     )
     
-    # Link to specific stock move (finished product move)
-    stock_move_id = fields.Many2one(
+    # Available finished products from production
+    available_ingot_ids = fields.One2many(
         'stock.move',
-        string="Ingot Selection",
-        domain="[('id', 'in', available_move_ids)]",
-        ondelete='restrict'
+        related='production_id.move_finished_ids',
+        string="Available Ingots",
+        readonly=True
     )
     
-    # Available stock moves (not yet used) - with display names
-    available_move_ids = fields.Many2many(
-        'stock.move',
-        compute='_compute_available_moves',
-        string="Available Moves"
-    )
-    
-    # Available moves with display info for selection widget
-    available_move_selection = fields.Many2many(
-        'stock.move',
-        compute='_compute_available_move_selection',
-        string="Available Moves Selection"
-    )
-    
-    # Selected ingot product (from stock move)
+    # Selected ingot product - auto-filled
     ingot_product_id = fields.Many2one(
         'product.product', 
         string="Ingot Product",
-        related='stock_move_id.product_id',
+        compute='_compute_ingot_product',
+        required=True,
         store=True,
-        readonly=True
+        readonly=False,  # Allow manual override if needed
+        domain="[('id', 'in', available_ingot_product_ids)]"
     )
     
-    # Ingot quantity (from stock move)
+    # Computed field for domain
+    available_ingot_product_ids = fields.Many2many(
+        'product.product',
+        compute='_compute_available_ingot_products',
+        string="Available Ingot Products"
+    )
+    
+    # Ingot quantity - auto-filled
     ingot_quantity = fields.Float(
         string="Ingot Weight (kg)",
-        related='stock_move_id.product_uom_qty',
+        compute='_compute_ingot_quantity',
         store=True,
-        readonly=True
+        readonly=False  # Allow manual override
     )
-    
-    stock_move_display = fields.Char(related='stock_move_id.move_display_name', string="Selected Ingot Info", readonly=True)
     
     hottop_height = fields.Float(string="Hottop Height (mm)")
     ingot_dimensions = fields.Char(string="Ingot Dimensions (mmxmm)")
     
-    @api.depends('workorder_id', 'production_id', 'production_id.move_finished_ids')
-    def _compute_available_move_selection(self):
-        """Compute selection list with formatted names"""
+    @api.depends('production_id', 'production_id.move_finished_ids', 'workorder_id')
+    def _compute_available_ingot_products(self):
+        """Compute available products from production's finished moves, excluding already used ones"""
         for record in self:
-            record.available_move_selection = record.available_move_ids
-    
-    @api.depends('workorder_id', 'production_id', 'production_id.move_finished_ids')
-    def _compute_available_moves(self):
-        """Compute available stock moves that haven't been used yet"""
-        for record in self:
-            if record.production_id and record.production_id.move_finished_ids:
-                all_moves = record.production_id.move_finished_ids
+            if record.workorder_id and record.production_id and record.production_id.move_finished_ids:
+                # Get all products from finished moves
+                all_products = record.production_id.move_finished_ids.mapped('product_id')
                 
-                # Find already used moves in this workorder (excluding current record)
-                used_steps = self.search([
-                    ('workorder_id', '=', record.workorder_id.id),
-                    ('id', '!=', record.id),
-                    ('stock_move_id', '!=', False)
-                ])
+                # Find already used products in other casting steps for this workorder
+                domain = [
+                    ('workorder_id', 'in', record.workorder_id.ids),
+                    ('ingot_product_id', '!=', False)
+                ]
                 
-                # Extract IDs of used moves
-                used_move_ids = used_steps.mapped('stock_move_id').ids
+                # Exclude current record only if it exists (has ID)
+                if record.id and isinstance(record.id, int):
+                    domain.append(('id', '!=', record.id))
                 
-                # Filter available moves by excluding used IDs
-                available = all_moves.filtered(lambda m: m.id not in used_move_ids)
+                used_products = self.env['operation.steps.casting'].sudo().search(domain).mapped('ingot_product_id')
                 
-                # If current record has a stock_move, include it in available
-                if record.stock_move_id and record.stock_move_id.id not in available.ids:
-                    available |= record.stock_move_id
-                
-                # Add context for better display in selection
-                record.available_move_ids = available.with_context(show_product_in_move_name=True)
+                # Filter out used products
+                available_products = all_products - used_products
+                record.available_ingot_product_ids = available_products
             else:
-                record.available_move_ids = False
+                record.available_ingot_product_ids = False
     
-    @api.onchange('stock_move_id')
-    def _onchange_stock_move_id(self):
-        """Add display info when move is selected"""
-        if self.stock_move_id and self.stock_move_id.product_id:
-            product = self.stock_move_id.product_id
-            # This will trigger related fields update
-            pass
-    
-    @api.constrains('stock_move_id', 'workorder_id')
-    def _check_unique_stock_move(self):
-        """Ensure stock move is not used twice in the same workorder"""
+    @api.depends('production_id', 'production_id.move_finished_ids', 
+                 'production_id.move_finished_ids.product_id', 'workorder_id')
+    def _compute_ingot_product(self):
+        """Automatically set ingot product from production's finished moves"""
         for record in self:
-            if record.stock_move_id:
-                duplicate = self.search([
-                    ('workorder_id', '=', record.workorder_id.id),
-                    ('stock_move_id', '=', record.stock_move_id.id),
-                    ('id', '!=', record.id)
-                ], limit=1)
-                
-                if duplicate:
-                    from odoo.exceptions import ValidationError
-                    raise ValidationError(
-                        f"Product '{record.ingot_product_id.name}' has already been used "
-                        f"in this workorder. Each finished product can only be used once."
+            # Only auto-set if not manually set
+            if not record.ingot_product_id and record.workorder_id and record.production_id:
+                moves = record.production_id.move_finished_ids
+                if moves:
+                    # Get already used products
+                    domain = [
+                        ('workorder_id', 'in', record.workorder_id.ids),
+                        ('ingot_product_id', '!=', False)
+                    ]
+                    
+                    # Exclude current record only if it exists
+                    if record.id and isinstance(record.id, int):
+                        domain.append(('id', '!=', record.id))
+                    
+                    used_products = self.env['operation.steps.casting'].sudo().search(domain).mapped('ingot_product_id')
+                    
+                    # Find first unused product
+                    available_moves = moves.filtered(
+                        lambda m: m.product_id not in used_products
                     )
+                    
+                    if available_moves:
+                        record.ingot_product_id = available_moves[0].product_id
+                    # else:
+                    #     # All products used, take first one anyway
+                    #     record.ingot_product_id = moves[0].product_id
+                else:
+                    record.ingot_product_id = False
+            elif not record.production_id:
+                record.ingot_product_id = False
     
-    def write(self, vals):
-        """Override write to refresh available moves when stock_move changes"""
-        result = super().write(vals)
-        if 'stock_move_id' in vals:
-            # Trigger recompute for all records in same workorder
-            self.mapped('workorder_id.casting_operation_ids')._compute_available_moves()
-        return result
+    @api.depends('ingot_product_id', 'production_id.move_finished_ids',
+                 'production_id.move_finished_ids.product_uom_qty')
+    def _compute_ingot_quantity(self):
+        """Auto-fill quantity from corresponding stock move"""
+        for record in self:
+            if record.ingot_product_id and record.production_id:
+                # Find the stock move for selected product
+                move = record.production_id.move_finished_ids.filtered(
+                    lambda m: m.product_id == record.ingot_product_id
+                )
+                if move:
+                    # Take first move if multiple exist
+                    record.ingot_quantity = move[0].product_uom_qty
+                else:
+                    record.ingot_quantity = 0.0
+            else:
+                record.ingot_quantity = 0.0
+    
+    @api.depends('production_id', 'production_id.product_id', 'production_id.product_id.heat_no')
+    def _compute_heat_no(self):
+        """Auto-fill heat_no from production's product"""
+        for record in self:
+            if record.production_id and record.production_id.product_id:
+                # Get heat_no from production's main product
+                record.heat_no = record.production_id.product_id.heat_no or False
+            else:
+                record.heat_no = False
+    
+    @api.depends('workorder_id', 'workorder_id.casting_operation_ids')
+    def _compute_mold_number(self):
+        """Calculate mold number as count of all casting steps for this workorder"""
+        for record in self:
+            if record.workorder_id:
+                # Count all casting steps for this workorder
+                record.mold_number = self.env['operation.steps.casting'].search_count([
+                    ('workorder_id', 'in', record.workorder_id.ids)
+                ])
+            else:
+                record.mold_number = 0
+    
+    @api.depends('workorder_id', 'workorder_id.casting_operation_ids', 
+                 'workorder_id.casting_operation_ids.ingot_quantity')
+    def _compute_total_weight(self):
+        """Calculate total weight as sum of all ingot quantities for this workorder"""
+        for record in self:
+            if record.workorder_id:
+                # Get all casting steps for this workorder
+                all_steps = self.env['operation.steps.casting'].search([
+                    ('workorder_id', 'in', record.workorder_id.ids)
+                ])
+                # Sum all ingot quantities
+                record.total_weight = sum(all_steps.mapped('ingot_quantity'))
+            else:
+                record.total_weight = 0.0
+    
+    @api.onchange('workorder_id')
+    def _onchange_workorder_id(self):
+        """Update available products when workorder changes"""
+        if self.workorder_id:
+            # Force recompute of available products
+            self._compute_available_ingot_products()
+            # Force recompute of ingot product
+            if not self.ingot_product_id:
+                self._compute_ingot_product()
+    
+    @api.onchange('ingot_product_id')
+    def _onchange_ingot_product_id(self):
+        """Update quantity when product changes manually"""
+        if self.ingot_product_id and self.production_id:
+            move = self.production_id.move_finished_ids.filtered(
+                lambda m: m.product_id == self.ingot_product_id
+            )
+            if move:
+                self.ingot_quantity = move[0].product_uom_qty
     
     @api.model_create_multi
     def create(self, vals_list):
-        """Override create to refresh available moves"""
+        """Ensure fields are set on creation and update ingot product's heat_no"""
+        # Pre-fill scales_id and measurement_id from previous record
+        for vals in vals_list:
+            if 'workorder_id' in vals and vals.get('workorder_id'):
+                # Find the last (most recent) casting step for this workorder
+                last_step = self.env['operation.steps.casting'].search([
+                    ('workorder_id', '=', vals['workorder_id'])
+                ], order='id asc', limit=1)
+        
+                if last_step:
+                    # Copy scales_id if not provided
+                    if vals['scales_id']==False and last_step.scales_id:
+                        vals['scales_id'] = last_step.scales_id.id
+                        
+                    # Copy measurement_id if not provided
+                    if vals['measurement_id']==False and last_step.measurement_id:
+                        vals['measurement_id'] = last_step.measurement_id.id
+                    
+                    if vals['ksb_form_no']==False and last_step.ksb_form_no:
+                        vals['ksb_form_no'] = last_step.ksb_form_no
+                    
+                    if vals['marking']==False and last_step.marking:
+                        vals['marking'] = last_step.marking
+                        # print("Vals Being Created:}[[[[[[[[[[[[[[]]]]]]]]]]]]]]", vals['scales_id'], vals['measurement_id'])
+        
         records = super().create(vals_list)
-        # Trigger recompute for all records in same workorders
-        records.mapped('workorder_id.casting_operation_ids')._compute_available_moves()
+        
+        # Trigger computes to auto-fill fields
+        records._compute_ingot_product()
+        records._compute_heat_no()
+        
+        # Update heat_no on ingot products
+        for record in records:
+            if record.ingot_product_id and record.heat_no:
+                record.ingot_product_id.sudo().write({'heat_no': record.heat_no})
+        
         return records
     
-    def unlink(self):
-        """Override unlink to refresh available moves"""
-        workorders = self.mapped('workorder_id')
-        result = super().unlink()
-        # Trigger recompute for remaining records
-        workorders.mapped('casting_operation_ids')._compute_available_moves()
+    def write(self, vals):
+        """Handle updates and sync heat_no to ingot product"""
+        result = super().write(vals)
+        
+        # If workorder changed, recompute ingot product
+        if 'workorder_id' in vals:
+            self._compute_ingot_product()
+        
+        # If heat_no or ingot_product_id changed, update the product
+        if 'heat_no' in vals or 'ingot_product_id' in vals:
+            for record in self:
+                if record.ingot_product_id and record.heat_no:
+                    record.ingot_product_id.sudo().write({'heat_no': record.heat_no})
+        
         return result
+    
+class OperationStepsSmeltingQuality(models.Model):
+    _name = 'operation.steps.smelting.quality'
+    _description = 'Smelting Operation Quality Control Steps'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
+
+    # name = fields.Char(string="Operation Step Name", required=True)
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    # equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
+    
+    operation_date_time = fields.Datetime(string="Operation Date & Time")
+    
+    performer_id = fields.Many2one('res.users', string="Performer")
+    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    # approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
+    measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
+    measurement_standard_id = fields.Many2one('standard.info', string="Measurement Standard")
+    
+    result = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+    
+    notes = fields.Char(string="Notes")

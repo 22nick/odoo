@@ -5,3 +5,4 @@ from . import workorder_charge
 from . import manufactoring_ext
 from . import operation_params
 from . import material_param
+from . import standard_info

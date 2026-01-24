@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+                
+        <record id="decimal_accuracy_process_parameter" model="decimal.precision">
+            <field name="name">Process Parameter</field>
+            <field name="digits">6</field>
+        </record>
+    </data>
+</odoo>

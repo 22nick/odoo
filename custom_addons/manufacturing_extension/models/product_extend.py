@@ -42,6 +42,67 @@ class ProductProduct(models.Model):
     #         elif not product.product_reference_no:
     #             product.product_reference_no = '[New]'
                 
+    @api.model_create_multi
+    def create(self, vals_list):
+        
+        for val in vals_list:
+            if val.get('product_reference_no', '[New]') == '[New]':
+                val['product_reference_no'] = (self.env['ir.sequence'].
+                next_by_code('product_sequense'))
+        records = super(ProductProduct, self).create(vals_list)
+         
+        for rec in records:
+            if rec.product_variant_ids:
+                # Мы пишем в поле шаблона, а Odoo сама должна обновить related.
+                # Но если store=True глючит, можно обновить варианты напрямую:
+                rec.product_variant_ids.write({'product_reference_no': rec.product_reference_no})
+                
+                        
+        return records
+
+    @api.model
+    def web_name_search(self, name, specification, domain=None, operator='ilike', limit=100):
+
+
+        rec = super(ProductProduct, self).web_name_search(name, specification, domain, operator, limit)
+        res = []
+        for r in rec:
+            product = self.browse(r['id'])
+            
+            r['__formatted_display_name'] = f"--{product.product_reference_no}--\t {r['__formatted_display_name']}"
+            # print("Modified Record :: ", r)
+            res.append(r)
+
+        return res
+    
+    @api.model
+    def _search_display_name(self, operator, value):
+        print("Search Display Name Called :self: ", self)
+        is_positive = not operator in Domain.NEGATIVE_OPERATORS
+        combine = Domain.OR if is_positive else Domain.AND
+        domains = [
+            [('name', operator, value)],
+            [('default_code', operator, value)],
+        ]
+        if operator == 'in':
+            domains.append([('barcode', 'in', value)])
+            for v in value:
+                if isinstance(v, str) and (m := re.search(r'(\[(.*?)\])', v)):
+                    domains.append([('default_code', '=', m.group(2))])
+        elif operator.endswith('like') and is_positive:
+            domains.append([('barcode', 'in', [value])])
+        if partner_id := self.env.context.get('partner_id'):
+            supplier_domain = [
+                ('partner_id', '=', partner_id),
+                '|',
+                ('product_code', operator, value),
+                ('product_name', operator, value),
+            ]
+            domains.append([('product_tmpl_id.seller_ids', 'any', supplier_domain)])
+        return combine(domains)
+   
+    # product_reference_no = fields.Char(string='Material reference No.', default='[New]', readonly=True, copy=False, index=True, required=True, help="Reference Number of the material")
+
 
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
@@ -119,66 +180,66 @@ class ProductTemplate(models.Model):
         print("Forging Type Changed", self)
         
 
-class product_product(models.Model):
-    _inherit = "product.product"
+# class product_product(models.Model):
+#     _inherit = "product.product"
 
-    @api.model_create_multi
-    def create(self, vals_list):
+#     @api.model_create_multi
+#     def create(self, vals_list):
         
-        for val in vals_list:
-            if val.get('product_reference_no', '[New]') == '[New]':
-                val['product_reference_no'] = (self.env['ir.sequence'].
-                next_by_code('product_sequense'))
-        records = super(ProductProduct, self).create(vals_list)
+#         for val in vals_list:
+#             if val.get('product_reference_no', '[New]') == '[New]':
+#                 val['product_reference_no'] = (self.env['ir.sequence'].
+#                 next_by_code('product_sequense'))
+#         records = super(ProductProduct, self).create(vals_list)
          
-        for rec in records:
-            if rec.product_variant_ids:
-                # Мы пишем в поле шаблона, а Odoo сама должна обновить related.
-                # Но если store=True глючит, можно обновить варианты напрямую:
-                rec.product_variant_ids.write({'product_reference_no': rec.product_reference_no})
+#         for rec in records:
+#             if rec.product_variant_ids:
+#                 # Мы пишем в поле шаблона, а Odoo сама должна обновить related.
+#                 # Но если store=True глючит, можно обновить варианты напрямую:
+#                 rec.product_variant_ids.write({'product_reference_no': rec.product_reference_no})
                 
                         
-        return records
+#         return records
 
-    @api.model
-    def web_name_search(self, name, specification, domain=None, operator='ilike', limit=100):
+#     @api.model
+#     def web_name_search(self, name, specification, domain=None, operator='ilike', limit=100):
 
 
-        rec = super(product_product, self).web_name_search(name, specification, domain, operator, limit)
-        res = []
-        for r in rec:
-            product = self.browse(r['id'])
+#         rec = super(product_product, self).web_name_search(name, specification, domain, operator, limit)
+#         res = []
+#         for r in rec:
+#             product = self.browse(r['id'])
             
-            r['__formatted_display_name'] = f"--{product.product_reference_no}--\t {r['__formatted_display_name']}"
-            # print("Modified Record :: ", r)
-            res.append(r)
+#             r['__formatted_display_name'] = f"--{product.product_reference_no}--\t {r['__formatted_display_name']}"
+#             # print("Modified Record :: ", r)
+#             res.append(r)
 
-        return res
+#         return res
     
-    @api.model
-    def _search_display_name(self, operator, value):
-        print("Search Display Name Called :self: ", self)
-        is_positive = not operator in Domain.NEGATIVE_OPERATORS
-        combine = Domain.OR if is_positive else Domain.AND
-        domains = [
-            [('name', operator, value)],
-            [('default_code', operator, value)],
-        ]
-        if operator == 'in':
-            domains.append([('barcode', 'in', value)])
-            for v in value:
-                if isinstance(v, str) and (m := re.search(r'(\[(.*?)\])', v)):
-                    domains.append([('default_code', '=', m.group(2))])
-        elif operator.endswith('like') and is_positive:
-            domains.append([('barcode', 'in', [value])])
-        if partner_id := self.env.context.get('partner_id'):
-            supplier_domain = [
-                ('partner_id', '=', partner_id),
-                '|',
-                ('product_code', operator, value),
-                ('product_name', operator, value),
-            ]
-            domains.append([('product_tmpl_id.seller_ids', 'any', supplier_domain)])
-        return combine(domains)
+#     @api.model
+#     def _search_display_name(self, operator, value):
+#         print("Search Display Name Called :self: ", self)
+#         is_positive = not operator in Domain.NEGATIVE_OPERATORS
+#         combine = Domain.OR if is_positive else Domain.AND
+#         domains = [
+#             [('name', operator, value)],
+#             [('default_code', operator, value)],
+#         ]
+#         if operator == 'in':
+#             domains.append([('barcode', 'in', value)])
+#             for v in value:
+#                 if isinstance(v, str) and (m := re.search(r'(\[(.*?)\])', v)):
+#                     domains.append([('default_code', '=', m.group(2))])
+#         elif operator.endswith('like') and is_positive:
+#             domains.append([('barcode', 'in', [value])])
+#         if partner_id := self.env.context.get('partner_id'):
+#             supplier_domain = [
+#                 ('partner_id', '=', partner_id),
+#                 '|',
+#                 ('product_code', operator, value),
+#                 ('product_name', operator, value),
+#             ]
+#             domains.append([('product_tmpl_id.seller_ids', 'any', supplier_domain)])
+#         return combine(domains)
    
     # product_reference_no = fields.Char(string='Material reference No.', default='[New]', readonly=True, copy=False, index=True, required=True, help="Reference Number of the material")

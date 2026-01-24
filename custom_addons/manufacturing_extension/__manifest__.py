@@ -31,7 +31,9 @@
         'views/manufacturing_ext.xml',
         # 'data/operation_types_data.xml', # initional data for operation types (examle)
         'data/product_defaults.xml',
+        'data/decimal_precision.xml',
         'views/material_params.xml',
+        'views/standard_info.xml',
         'reports/manufacturing_order_report.xml',
         # 'reports/cutting_operation_report.xml',
         'reports/workorder_operation_report.xml',

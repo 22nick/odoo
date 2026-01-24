@@ -14,3 +14,5 @@ access_operation_params_smelting,operation.params.smelting,model_operation_param
 access_material_grade,material.grade,model_material_grade,base.group_user,1,1,1,1
 access_material_type,material.type,model_material_type,base.group_user,1,1,1,1
 access_material_group,material.group,model_material_group,base.group_user,1,1,1,1
+access_standard_info,standard.info,model_standard_info,base.group_user,1,1,1,1
+access_operation_steps_smelting_quality,operation.steps.smelting.quality,model_operation_steps_smelting_quality,base.group_user,1,1,1,1
