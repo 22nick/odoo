@@ -12,7 +12,7 @@
                     <!-- <th style="width: 8%;">Charge ID</th> -->
                     <th style="width: 10%;">Operation Date</th>
                     <th style="width: 9%;">Performer</th>
-                    <th style="width: 9%;">Responsible</th>
+                    <!-- <th style="width: 9%;">Responsible</th> -->
                     <th style="width: 9%;">Quality Resp.</th>
                     <th style="width: 10%;">KSB Form No.</th>
                     <th style="width: 10%;">Approval</th>
@@ -43,9 +43,9 @@
                         <td>
                             <span t-field="step.performer_id"/>
                         </td>
-                        <td>
+                        <!-- <td>
                             <span t-field="step.responsible_id"/>
-                        </td>
+                        </td> -->
                         <td>
                             <span t-field="step.resposible_quality_id"/>
                         </td>
@@ -118,6 +118,51 @@
                 </t>
             </tbody>
         </table>
+        <!-- Signature -->
+        <div class="row justify-content-end" style="margin-top: 10px;">
+            <div class="col-3">
+                <div class="compact-section">
+                    <div class="section-header">OPERATOR</div>
+                    <div style="padding: 5px 5px 5px 5px;">
+                        <div><strong><span t-field="o.grinding_operation_ids[0].performer_id"/></strong></div>
+                        <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                        <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="compact-section">
+                    <div class="section-header">SUPERVISOR</div>
+                    <div style="padding: 5px 5px 5px 5px;">
+                        <div><strong><span t-field="o.user_id"/></strong></div>
+                        <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                        <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="compact-section">
+                    <div class="section-header">QUALITY CONTROL</div>
+                    <div style="padding: 5px 5px 5px 5px;">
+                        <div><strong><span t-field="o.grinding_operation_ids[0].resposible_quality_id"/></strong></div>
+                        <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                        <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end" style="margin-top: 0px">
+            <div class="col-6">
+                <div class="compact-section">
+                    <strong><span>KSB Form No. (if exist): &#160; &#160;</span></strong>
+                
+                    <span t-field="o.grinding_operation_ids[0].ksb_form_no"/>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div style="font-size: 7pt; text-align: right">FR.87 EK-8</div>
+        </div>
     </div>
 </template>
 </odoo>

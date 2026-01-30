@@ -52,7 +52,7 @@ class OperationParamsSmelting(models.Model):
     )
     
     equipment_id = fields.Many2one('maintenance.equipment', string='Smelting Station')
-    new_heat_no = fields.Char(string="Heat Number")
+    new_heat_no = fields.Char(related='workorder_id.production_id.product_id.heat_no', string="Heat Number")
     material_grade_id = fields.Many2one('material.grade', string='Material Grade')
     operation_date = fields.Date(string="Operation Date")
     
@@ -96,3 +96,34 @@ class OperationParamsSmelting(models.Model):
          'UNIQUE(workorder_id)',
          'Each Work Order can have only one Parameters!')
     ]
+    
+class OperationParamsRemelting(models.Model):
+    _name = 'operation.params.remelting'
+    _description = 'Operation Parameters for Remelting'
+    _order = 'sequence, id'
+    
+    
+    sequence = fields.Integer(string='Sequence', default=10, invisible=True)
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True,
+        invisible=True
+    )
+    
+    equipment_id = fields.Many2one('maintenance.equipment', string='Smelting Station')
+    new_heat_no = fields.Char(related='workorder_id.production_id.product_id.heat_no', string="Heat Number")
+    process_type = fields.Selection([
+        ('var', 'VAR'),
+        ('esr', 'ESR')
+    ], string='Process Type')
+    # material_grade_id = fields.Many2one('material.grade', string='Material Grade')
+    
+    _sql_constraints = [
+        ('workorder_unique',
+         'UNIQUE(workorder_id)',
+         'Each Work Order can have only one Parameters!')
+    ]
+    

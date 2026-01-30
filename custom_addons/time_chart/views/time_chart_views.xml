@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- list View для списка диаграмм -->
+    <record id="view_time_chart_list" model="ir.ui.view">
+        <field name="name">time.chart.list</field>
+        <field name="model">time.chart</field>
+        <field name="arch" type="xml">
+            <list string="Временные диаграммы">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="date_created"/>
+                <field name="line_count"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View для редактирования диаграммы -->
+    <record id="view_time_chart_form" model="ir.ui.view">
+        <field name="name">time.chart.form</field>
+        <field name="model">time.chart</field>
+        <field name="arch" type="xml">
+            <form string="Временная диаграмма">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="date_created"/>
+                        </group>
+                        <group>
+                            <field name="line_count"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description"/>
+                    </group>
+                    
+                    <notebook>
+                        <page string="График">
+                            <div class="o_chart_container">
+                                <canvas id="timeChart" style="max-height: 400px;"/>
+                            </div>
+                            <script type="text/javascript">
+                                odoo.define('time_chart.chart_render', function (require) {
+                                    'use strict';
+                                    var FormController = require('web.FormController');
+                                    FormController.include({
+                                        _update: function () {
+                                            this._super.apply(this, arguments);
+                                            if (this.modelName === 'time.chart') {
+                                                this._renderChart();
+                                            }
+                                        },
+                                        _renderChart: function () {
+                                            var self = this;
+                                            var lines = this.model.get(this.handle).data.line_ids.data;
+                                            
+                                            if (lines.length === 0) return;
+                                            
+                                            var timeData = lines.map(l => l.data.time);
+                                            var powerData = lines.map(l => l.data.power);
+                                            var resistanceData = lines.map(l => l.data.resistance);
+                                            
+                                            var ctx = document.getElementById('timeChart');
+                                            if (ctx and window.Chart) {
+                                                if (window.timeChartInstance) {
+                                                    window.timeChartInstance.destroy();
+                                                }
+                                                window.timeChartInstance = new Chart(ctx, {
+                                                    type: 'line',
+                                                    data: {
+                                                        labels: timeData,
+                                                        datasets: [{
+                                                            label: 'Мощность (Вт)',
+                                                            data: powerData,
+                                                            borderColor: 'rgb(75, 192, 192)',
+                                                            yAxisID: 'y',
+                                                        }, {
+                                                            label: 'Сопротивление (Ом)',
+                                                            data: resistanceData,
+                                                            borderColor: 'rgb(255, 99, 132)',
+                                                            yAxisID: 'y1',
+                                                        }]
+                                                    },
+                                                    options: {
+                                                        responsive: true,
+                                                        interaction: {
+                                                            mode: 'index',
+                                                            intersect: false,
+                                                        },
+                                                        scales: {
+                                                            y: {
+                                                                type: 'linear',
+                                                                display: true,
+                                                                position: 'left',
+                                                            },
+                                                            y1: {
+                                                                type: 'linear',
+                                                                display: true,
+                                                                position: 'right',
+                                                                grid: {
+                                                                    drawOnChartArea: false,
+                                                                },
+                                                            },
+                                                        }
+                                                    },
+                                                });
+                                            }
+                                        }
+                                    });
+                                });
+                            </script>
+                        </page>
+                        
+                        <page string="Данные">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="time"/>
+                                    <field name="power"/>
+                                    <field name="resistance"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_time_chart_search" model="ir.ui.view">
+        <field name="name">time.chart.search</field>
+        <field name="model">time.chart</field>
+        <field name="arch" type="xml">
+            <search string="Поиск диаграмм">
+                <field name="name"/>
+                <field name="description"/>
+                <filter string="Созданные сегодня" name="today" 
+                        domain="[('date_created', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Группировка">
+                    <filter string="Дата создания" name="group_date" 
+                            context="{'group_by': 'date_created'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_time_chart" model="ir.actions.act_window">
+        <field name="name">Временные диаграммы</field>
+        <field name="res_model">time.chart</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Создайте первую временную диаграмму
+            </p>
+            <p>
+                Нажмите кнопку "Создать" чтобы добавить новую диаграмму
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_time_chart_root" 
+              name="Временные диаграммы" 
+              sequence="10"/>
+    
+    <menuitem id="menu_time_chart_list" 
+              name="Диаграммы" 
+              parent="menu_time_chart_root" 
+              action="action_time_chart" 
+              sequence="10"/>
+</odoo>

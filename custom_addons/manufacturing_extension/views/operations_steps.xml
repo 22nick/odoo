@@ -139,10 +139,12 @@
                         <field name="workcenter_id"/>
                         <field name="equipment_id"/>
                         <field name="color" widget="color_picker"/>
+                        <field name="properties_definition" widget="properties_definition" nolabel="1" readonly="0"/>
                     </group>
                 </group>
                 <group>
                     <group string="Operation Notes Template" colspan="2">
+                        
                         <field name="operation_notes_template" placeholder="Enter operation notes template..." colspan="2" nolabel="1"/>
                         
                     </group>

@@ -10,8 +10,16 @@
                 <field name="reference_id"/>
                 <field name="state"/>
                 <field name="used_on_eqiupment"/>
+                <field name="equipment_properties" nolabel="0" columns="2"/>
                 
             </field>
+
+            <field name="equipment_properties" position="replace">
+                <field name="equipment_properties" nolabel="0" columns="2"/>
+            </field>
+
+
+
 
         </field>
     </record>
@@ -37,4 +45,23 @@
         </field>
     </record>
 
+    <record id="hr_equipment_category_view_form_ext" model="ir.ui.view">
+        <field name="name">hr.equipment.category.view.form.ext</field>
+        <field name="model">maintenance.equipment.category</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_category_view_form"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//list" position="attributes">
+                <attribute name="decoration-warning">state == 'alarm'</attribute>
+                <attribute name="decoration-success">state == 'working'</attribute>
+                <attribute name="decoration-danger">state == 'out'</attribute>
+                <attribute name="decoration-info">state == 'comissioning'</attribute>
+            </xpath> -->
+            <field name="note" position="before">
+                <field name="equipment_properties_definition"/>
+
+            </field>
+
+
+        </field>
+    </record>
 </odoo>

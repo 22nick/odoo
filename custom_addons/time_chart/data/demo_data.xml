@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Демонстрационная диаграмма 1 -->
+        <record id="demo_chart_1" model="time.chart">
+            <field name="name">Тестовая диаграмма 1</field>
+            <field name="description">Пример временной диаграммы с линейным ростом мощности</field>
+            <field name="date_created" eval="(DateTime.now() - timedelta(days=5)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <!-- Точки данных для диаграммы 1 -->
+        <record id="demo_chart_1_line_1" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_1"/>
+            <field name="time">0.0</field>
+            <field name="power">10.0</field>
+            <field name="resistance">5.0</field>
+            <field name="sequence">1</field>
+        </record>
+
+        <record id="demo_chart_1_line_2" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_1"/>
+            <field name="time">1.0</field>
+            <field name="power">15.0</field>
+            <field name="resistance">5.2</field>
+            <field name="sequence">2</field>
+        </record>
+
+        <record id="demo_chart_1_line_3" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_1"/>
+            <field name="time">2.0</field>
+            <field name="power">22.0</field>
+            <field name="resistance">5.5</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <record id="demo_chart_1_line_4" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_1"/>
+            <field name="time">3.0</field>
+            <field name="power">30.0</field>
+            <field name="resistance">6.0</field>
+            <field name="sequence">4</field>
+        </record>
+
+        <record id="demo_chart_1_line_5" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_1"/>
+            <field name="time">4.0</field>
+            <field name="power">38.0</field>
+            <field name="resistance">6.8</field>
+            <field name="sequence">5</field>
+        </record>
+
+        <record id="demo_chart_1_line_6" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_1"/>
+            <field name="time">5.0</field>
+            <field name="power">45.0</field>
+            <field name="resistance">7.5</field>
+            <field name="sequence">6</field>
+        </record>
+
+        <!-- Демонстрационная диаграмма 2 -->
+        <record id="demo_chart_2" model="time.chart">
+            <field name="name">Синусоидальная диаграмма</field>
+            <field name="description">Пример диаграммы с периодическими колебаниями</field>
+            <field name="date_created" eval="(DateTime.now() - timedelta(days=2)).strftime('%Y-%m-%d')"/>
+        </record>
+
+        <!-- Точки данных для диаграммы 2 -->
+        <record id="demo_chart_2_line_1" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_2"/>
+            <field name="time">0.0</field>
+            <field name="power">20.0</field>
+            <field name="resistance">10.0</field>
+        </record>
+
+        <record id="demo_chart_2_line_2" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_2"/>
+            <field name="time">0.5</field>
+            <field name="power">28.0</field>
+            <field name="resistance">9.5</field>
+        </record>
+
+        <record id="demo_chart_2_line_3" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_2"/>
+            <field name="time">1.0</field>
+            <field name="power">35.0</field>
+            <field name="resistance">9.0</field>
+        </record>
+
+        <record id="demo_chart_2_line_4" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_2"/>
+            <field name="time">1.5</field>
+            <field name="power">28.0</field>
+            <field name="resistance">9.5</field>
+        </record>
+
+        <record id="demo_chart_2_line_5" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_2"/>
+            <field name="time">2.0</field>
+            <field name="power">20.0</field>
+            <field name="resistance">10.0</field>
+        </record>
+
+        <record id="demo_chart_2_line_6" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_2"/>
+            <field name="time">2.5</field>
+            <field name="power">12.0</field>
+            <field name="resistance">10.5</field>
+        </record>
+
+        <record id="demo_chart_2_line_7" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_2"/>
+            <field name="time">3.0</field>
+            <field name="power">5.0</field>
+            <field name="resistance">11.0</field>
+        </record>
+
+        <record id="demo_chart_2_line_8" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_2"/>
+            <field name="time">3.5</field>
+            <field name="power">12.0</field>
+            <field name="resistance">10.5</field>
+        </record>
+
+        <record id="demo_chart_2_line_9" model="time.chart.line">
+            <field name="chart_id" ref="demo_chart_2"/>
+            <field name="time">4.0</field>
+            <field name="power">20.0</field>
+            <field name="resistance">10.0</field>
+        </record>
+    </data>
+</odoo>

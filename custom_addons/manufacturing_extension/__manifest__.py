@@ -34,6 +34,7 @@
         'data/decimal_precision.xml',
         'views/material_params.xml',
         'views/standard_info.xml',
+        'views/time_chart_views.xml',
         'reports/manufacturing_order_report.xml',
         # 'reports/cutting_operation_report.xml',
         'reports/workorder_operation_report.xml',
@@ -45,6 +46,7 @@
         'reports/report_forging_opertions_steps_template.xml',
         'reports/report_machining_opertions_steps_template.xml',
         'reports/report_smelting_opertions_steps_template.xml',
+        'reports/report_remelting_opertions_steps_template.xml',
     ],
 
     "assets":{

@@ -21,7 +21,11 @@ class MrpWorkorder(models.Model):
         required=False,
         tracking=True 
     )
-                
+    
+    metadata_properties = fields.Properties(
+        'Additional Properties',
+        definition='operation_type_id.properties_definition'
+    )            
 
     product_reference_no = fields.Char(related='production_id.product_id.product_reference_no', string="Product Ref.No.")
     
@@ -101,10 +105,28 @@ class MrpWorkorder(models.Model):
         string="Casting Operations"
     )
     
+    remelting_operation_ids = fields.One2many(
+        'operation.steps.remelting',
+        'workorder_id',
+        string="Remelting Operations"
+    )
+    
     smelting_quality_control_ids = fields.One2many(
         'operation.steps.smelting.quality',
         'workorder_id',
         string="Smelting Quality Control"
+    )
+    
+    remelting_welding_control_ids = fields.One2many(
+        'operation.steps.remelting.preparation',
+        'workorder_id',
+        string="Remelting Preparation"
+    )
+    
+    remelting_quality_control_ids = fields.One2many(
+        'operation.steps.remelting.quality',
+        'workorder_id',
+        string="Remelting Quality Control"
     )
     
     
@@ -120,6 +142,14 @@ class MrpWorkorder(models.Model):
         'workorder_id',
         string="Operation Parameters",
     )
+    
+    remelting_operation_params_id = fields.One2many(
+        'operation.params.remelting',
+        'workorder_id',
+        string="Operation Parameters",
+    )
+    
+    
     
     
     

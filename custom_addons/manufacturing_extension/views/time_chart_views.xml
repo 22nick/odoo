@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- List View для списка диаграмм -->
+    <record id="view_time_chart_list" model="ir.ui.view">
+        <field name="name">time.chart.list</field>
+        <field name="model">time.chart</field>
+        <field name="arch" type="xml">
+            <list string="Time Charts">
+                <field name="name"/>
+                <!-- <field name="description"/> -->
+                <!-- <field name="date_created"/> -->
+                <!-- <field name="line_count"/> -->
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View для редактирования диаграммы -->
+    <record id="view_time_chart_form" model="ir.ui.view">
+        <field name="name">time.chart.form</field>
+        <field name="model">time.chart</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" string="Name"/>
+                        <h1><field name="name" placeholder=""/></h1>
+                    </div>
+
+                    <group string="Values and Units">
+                        <group>
+                            <separator string="Left axis"/>
+                            <field name="line_1_label"/>
+                            <field name="line_1_unit"/>
+                        </group>
+                        <group>
+                            <separator string="Right axis"/>
+                            <field name="line_2_label"/>
+                            <field name="line_2_unit"/>
+                        </group>
+                    </group>
+
+                    <div class="o_horizontal_separator"></div>
+                    <div style="width: 100%; text-align: center; background-color: #f8f9fa; padding: 10px; border-radius: 5px;">
+                        <field name="graph_image" 
+                            widget="image" 
+                            readonly="1" 
+                            nolabel="1" 
+                            options="{'zoom': false}" 
+                            class="w-100"/>
+                    </div>
+
+                    <notebook>
+                        <page string="Data">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="time"/>
+                                    <field name="line_1" string="Value 1"/>
+                                    <field name="line_2" string="Value 2"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Action -->
+    <record id="action_time_chart" model="ir.actions.act_window">
+        <field name="name">Time Chart</field>
+        <field name="res_model">time.chart</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create first new time chart
+            </p>
+            <p>
+                Press the Create button to add a new time chart.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu -->
+    <menuitem id="menu_time_chart_root" 
+              name="Time Charts" 
+              parent="mrp.menu_mrp_manufacturing" 
+
+              sequence="10"/>
+    
+    <menuitem id="menu_time_chart_list" 
+              name="Charts" 
+              parent="menu_time_chart_root" 
+              action="action_time_chart" 
+              sequence="10"/>
+</odoo>

@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_time_chart_user,access_time_chart_user,model_time_chart,base.group_user,1,1,1,1
+access_time_chart_line_user,access_time_chart_line_user,model_time_chart_line,base.group_user,1,1,1,1

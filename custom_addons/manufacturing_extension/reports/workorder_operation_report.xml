@@ -54,6 +54,13 @@
                                 color: #495057;
                                 font-size: 8pt;
                             }
+                            .info-table td.label-col4 {
+                                width: 15%;
+                                background-color: #f8f9fa;
+                                font-weight: bold;
+                                color: #495057;
+                                font-size: 8pt;
+                            }
                             .steps-table {
                                 width: 100%;
                                 border-collapse: collapse;
@@ -323,54 +330,17 @@
                                 </t>
                             </t>
 
+                            <!-- Remelting Operations Steps -->
+                            <t t-if="o.remelting_operation_ids">
+                                <t t-set="ek_form_no" t-value="'FR.87 EK-9'"/>
+                                <t t-call="manufacturing_extension.report_remelting_opertions_steps_template">
+                                    <t t-set="o" t-value="o"/>
+                                </t>
+                            </t>
+
                         <!-- </div> -->
 
-                        <!-- Signature Section -->
-                        <t t-if="o.operation_type_code not in ('smelting')">
-                            <t t-set="more_col_no" t-value="o.operation_type_code in ('heating', 'machining')"/>
-                            <div class="row" style="margin-top: 10px;">
-                                <div t-att-class="'col-3' if more_col_no else 'col-4'">
-                                    <div class="compact-section">
-                                        <div class="section-header">OPERATOR</div>
-                                        <div style="padding: 15px 5px 5px 5px;">
-                                            <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
-                                            <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div t-att-class="'col-3' if more_col_no else 'col-4'">
-                                    <div class="compact-section">
-                                        <div class="section-header">SUPERVISOR</div>
-                                        <div style="padding: 15px 5px 5px 5px;">
-                                            <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
-                                            <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div t-att-class="'col-3' if more_col_no else 'col-4'">
-                                    <div class="compact-section">
-                                        <div class="section-header">QUALITY CONTROL</div>
-                                        <div style="padding: 15px 5px 5px 5px;">
-                                            <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
-                                            <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <t t-if="more_col_no">
-                                    <div class="col-3">
-                                        <div class="compact-section">
-                                            <div class="section-header">QUALITY APPROVER</div>
-                                            <div style="padding: 15px 5px 5px 5px;">
-                                                <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
-                                                <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </t>
-                                
-                            </div>
-                        </t>
-
+                        
                         <!-- Footer -->
                         <div class="footer-info">
                             <table style="width: 100%;">
@@ -381,13 +351,6 @@
                                     <td style="width: 50%; text-align: right;">
                                         <strong>Generated:</strong> 
                                         <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" style="padding-top: 3px; text-align: right;">
-                                        <t t-if="o.operation_type_code not in ('smelting')">
-                                            <strong><span t-esc="ek_form_no"/></strong>
-                                        </t>
                                     </td>
                                 </tr>
                             </table>

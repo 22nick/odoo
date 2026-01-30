@@ -16,6 +16,7 @@ class MaterialGrade(models.Model):
     material_type_id = fields.Many2one("material.type", string="Material Type", required=True)
     material_group_id = fields.Many2one("material.group", string="Material Group", required=True, domain="[('material_type_id', '=', material_type_id)]")
     density = fields.Float(string="Density (g/cm3)")
+    shrinkage_factor = fields.Float(string="Shrinkage Factor")
     description = fields.Text(string="Description")
     
     @api.onchange('material_type_id')
@@ -77,4 +78,43 @@ class MateriaGroup(models.Model):
     name = fields.Char(string="Material Group", required=True)
     material_type_id = fields.Many2one("material.type", string="Material Type", required=True)
     description = fields.Text(string="Description")
-   
+    
+
+class ProductSlagData(models.Model):
+    _name = 'product.slag.data'
+    _description = 'Slag Data for Material'
+    _order = 'sequence, id'
+    
+    
+    sequence = fields.Integer(string='Sequence', default=11, invisible=True)
+    active = fields.Boolean(string='Active', default=True)
+     
+    name = fields.Char(string="Slag Name", required=True)
+    description = fields.Text(string="Description")
+    
+    # product_id = fields.Many2one('product.template', string='Product')
+    product_id = fields.One2many('product.template', 'slag_data_id', string='Product')
+    
+    slag_caf2_part = fields.Float(string="Slag CaF2 Part (%)")
+    slag_al2o3_part = fields.Float(string="Slag Al2O3 Part (%)")
+    slag_mgO_part = fields.Float(string="Slag MgO Part (%)")
+    slag_cao_part = fields.Float(string="Slag CaO Part (%)")
+    slag_sio2_part = fields.Float(string="Slag SiO2 Part (%)")
+    slag_tio2_part = fields.Float(string="Slag TiO2 Part (%)")
+
+    
+    
+class ProductPhysicalData(models.Model):
+    _name = 'product.physical.data'
+    _description = 'Product Physical Data'
+    _order = 'sequence, id'
+    
+    
+    sequence = fields.Integer(string='Sequence', default=11, invisible=True)
+    active = fields.Boolean(string='Active', default=True)
+     
+    name = fields.Char(string="Name", required=True)
+    description = fields.Text(string="Description")
+    
+    # product_id = fields.Many2one('product.template', string='Product')
+    product_id = fields.One2many('product.template', 'physical_data_id', string='Product')

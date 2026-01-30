@@ -31,6 +31,8 @@ class OperationTypes(models.Model):
     operation_notes_template = fields.Text(
         string="Operation Notes Template"
     )
+    
+    properties_definition = fields.PropertiesDefinition('Additional Properties Definition')
 
     
 
@@ -448,7 +450,7 @@ class OperationStepsCutting(models.Model):
     equipment_reference_id = fields.Char(related='equipment_id.reference_id', string="Equipment Ref.Id")
     
     performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # responsible_id = fields.Many2one('res.users', string="Responsible")
     resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
@@ -491,7 +493,7 @@ class OperationStepsHeating(models.Model):
     heating_date = fields.Date(string="Heating Date")
     
     performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # responsible_id = fields.Many2one('res.users', string="Responsible")
     resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
     approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
@@ -590,7 +592,7 @@ class OperationStepsGringing(models.Model):
     operation_date = fields.Date(string="Operation Date")
     
     performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # responsible_id = fields.Many2one('res.users', string="Responsible")
     resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
     # measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
@@ -628,7 +630,7 @@ class OperationStepsForging(models.Model):
     operation_date = fields.Date(string="Operation Date")
     
     performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # responsible_id = fields.Many2one('res.users', string="Responsible")
     resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
     approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
@@ -667,7 +669,7 @@ class OperationStepsMachining(models.Model):
     end_date_time = fields.Datetime(string="End Date & Time")
     
     performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # responsible_id = fields.Many2one('res.users', string="Responsible")
     resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
     approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
     # measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
@@ -707,7 +709,7 @@ class OperationStepsWeighing(models.Model):
     # operation_date = fields.Date(string="Operation Date")
     
     performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # responsible_id = fields.Many2one('res.users', string="Responsible")
     # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
     # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
@@ -736,7 +738,7 @@ class OperationStepsSmelting(models.Model):
     operation_date_time = fields.Datetime(string="Operation Date & Time")
     
     performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # responsible_id = fields.Many2one('res.users', string="Responsible")
     # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
     # approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
     pyrometer_id = fields.Many2one('maintenance.equipment', string="Pyrometer")
@@ -780,7 +782,7 @@ class OperationStepsLeakageTest(models.Model):
     operation_date_time = fields.Datetime(string="Date & Time")
     
     performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # responsible_id = fields.Many2one('res.users', string="Responsible")
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     # Vakuum leakage test (before smelting)
     chamber_pressure = fields.Float(string="Chamber Pressure (mbar)", digits='Process Parameter')
@@ -830,7 +832,7 @@ class OperationStepsCasting(models.Model):
     operation_date_time = fields.Datetime(string="Operation Date & Time")
     
     performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
+    # responsible_id = fields.Many2one('res.users', string="Responsible")
     # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
     # approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
     scales_id = fields.Many2one('maintenance.equipment', string="Scales Id.")
@@ -902,6 +904,7 @@ class OperationStepsCasting(models.Model):
     ingot_quantity = fields.Float(
         string="Ingot Weight (kg)",
         compute='_compute_ingot_quantity',
+        inverse='_inverse_ingot_quantity',
         store=True,
         readonly=False  # Allow manual override
     )
@@ -988,6 +991,21 @@ class OperationStepsCasting(models.Model):
                     record.ingot_quantity = 0.0
             else:
                 record.ingot_quantity = 0.0
+    
+    def _inverse_ingot_quantity(self):
+        """Sync ingot_quantity back to stock move's product_uom_qty"""
+        for record in self:
+            if record.ingot_product_id and record.production_id:
+                # Find the corresponding stock move
+                move = record.production_id.move_finished_ids.filtered(
+                    lambda m: m.product_id == record.ingot_product_id
+                )
+                if move:
+                    # Update the stock move quantity
+                    move[0].sudo().write({
+                        'product_uom_qty': record.ingot_quantity,
+                        'quantity': record.ingot_quantity,  # Also update quantity field
+                    })
     
     @api.depends('production_id', 'production_id.product_id', 'production_id.product_id.heat_no')
     def _compute_heat_no(self):
@@ -1118,8 +1136,6 @@ class OperationStepsSmeltingQuality(models.Model):
     # name = fields.Char(string="Operation Step Name", required=True)
     sequence = fields.Integer(string='Sequence', default=10)
     
-    # equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
-    
     operation_date_time = fields.Datetime(string="Operation Date & Time")
     
     performer_id = fields.Many2one('res.users', string="Performer")
@@ -1133,3 +1149,212 @@ class OperationStepsSmeltingQuality(models.Model):
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     
     notes = fields.Char(string="Notes")
+    
+    operation_files = fields.Many2many("ir.attachment", string="Upload Files")
+    
+    
+class OperationStepsWeighing(models.Model):
+    _name = 'operation.steps.weighing'
+    _description = 'Weighing Operation Steps'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
+
+
+    name = fields.Char(string="Operation Step Name", required=True)
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    equipment_id = fields.Many2one('maintenance.equipment', string="Measurement Equipment")
+    
+    # operation_date = fields.Date(string="Operation Date")
+    
+    performer_id = fields.Many2one('res.users', string="Performer")
+    # responsible_id = fields.Many2one('res.users', string="Responsible")
+    # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+
+    notes = fields.Text(string="Additional Notes")      
+              
+    
+class OperationStepsRemeltingPreparation(models.Model):
+    _name = 'operation.steps.remelting.preparation'
+    _description = 'Remelting Operation Preparation Steps'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
+
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    operation_date_time = fields.Datetime(string="Operation Date & Time")
+    
+    # WELDING FIELDS
+    weld_material_id = fields.Many2one('product.product', string='Welding Material')
+    electrod_dia = fields.Float(string='Electrod Diameter (mm)')
+    electrod_length = fields.Float(string='Electrod Length (mm)')
+    electrod_surface = fields.Char(string='Electrod Surface')
+    performer_id = fields.Many2one('res.users', string='Preparation Performer')
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+    
+    stub_weight = fields.Float(string="Stub Weight (kg)")
+    stub_length = fields.Float(string="Stub Length (mm)")
+    total_length = fields.Float(string="Total Length (mm)")
+    
+    # HARDNESS CONTROL FIELDS
+    quality_date_time = fields.Datetime(string="Control Date & Time")
+    quality_performer = fields.Many2one('res.users', string='Quality Performer')
+    quality_responsible = fields.Many2one('res.users', string='Quality Responsible')
+    measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
+    ksb_form_no_quality = fields.Char(string="KSB Form No. (if exist)")
+    
+    hardness_top = fields.Float(string="Hardness Top")
+    hardness_middle = fields.Float(string="Hardness Middle")
+    hardness_bottom = fields.Float(string="Hardness Bottom")
+    hardness_average = fields.Float(string="Hardness Average", compute='_compute_hardness_average', store=True, readonly=True)
+        
+    hardness_UOM =fields.Selection([('hrc','HRC'), ('hb', 'HB')], string="Unit", default='hrc')
+
+    @api.depends('hardness_top', 'hardness_middle', 'hardness_bottom')
+    def _compute_hardness_average(self):
+        for record in self:
+            total = 0
+            count = 0
+            for value in [record.hardness_top, record.hardness_middle, record.hardness_bottom]:
+                if value:
+                    total += value
+                    count += 1
+            record.hardness_average = total / count if count > 0 else 0.0
+
+class OperationStepsRemeltingQuality(models.Model):
+    _name = 'operation.steps.remelting.quality'
+    _description = 'Remelting Operation Quality Control Steps'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
+
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    operation_date_time = fields.Datetime(string="Operation Date & Time")
+    
+    performer_id = fields.Many2one('res.users', string="Performer")
+    responsible_id = fields.Many2one('res.users', string="Responsible")
+    measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
+    etching_info = fields.Char(string="Etching Info")
+    
+    image = fields.Binary(string="Upload Image")
+       
+    operation_files = fields.Many2many("ir.attachment", string="Upload Addition Files")
+
+
+
+class OperationStepsRemelting(models.Model):
+    _name = 'operation.steps.remelting'
+    _description = 'Remelting Operation Steps'
+    _order = 'sequence, id'
+    
+    workorder_id = fields.Many2one(
+        'mrp.workorder', 
+        string='Work Order', 
+        required=True,
+        ondelete='cascade',
+        index=True
+    )
+
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    operation_date_time = fields.Datetime(string="Operation Date & Time")
+    process_type = fields.Selection(related='workorder_id.remelting_operation_params_id.process_type', string="Process Type", readonly=True)
+    
+    performer_id = fields.Many2one('res.users', string="Performer")
+    mould_id = fields.Many2one('maintenance.equipment', string="Mould")
+    aim_ingot_weight = fields.Float(string="Aim Ingot Weight (kg)")
+    instuction_no = fields.Char(string="Instruction No.")
+    
+    # start_curve_id = fields.Char(string="Starting Curve ID")
+    start_curve_id = fields.Many2one('time.chart', string="Starting Curve ID")
+    start_curve_img = fields.Binary(related='start_curve_id.graph_image', string="Starting Curve Image", store=True)
+    start_time = fields.Integer(string="Starting duration time (min)")
+    hottop_start_weight = fields.Float(string="Hottoping Start Weight (kg)")
+    
+    # hottop_curve_id = fields.Char(string="Hottoping Curve ID")
+    hottop_curve_id = fields.Many2one('time.chart', string="Hottoping Curve ID")
+    hottop_curve_img = fields.Binary(related='hottop_curve_id.graph_image', string="Hottoping Curve Image", store=True)
+    hottop_time = fields.Integer(string="Hottoping duration time (min)")
+    hottop_stop_weight = fields.Float(string="Hottoping Stop Weight (kg)")
+
+    
+    # ESR MELTING FIELDS
+    voltage_max = fields.Float(string="ESR Voltage Max (V)")
+    current_max = fields.Float(string="ESR Current Max (kA)")
+    swing = fields.Float(string="ESR Swing (mOhm)")
+    swing_increase_ht = fields.Float(string="ECR Swing Increase HT (%)")
+    
+    # VAR MELTING FIELDS
+    gap_set_value = fields.Float(string="VAR Gap Set Value (mm)")
+    gap_auto_adjustment = fields.Boolean(string="VAR Gap Auto Adjustment")
+    gap_set_value_start = fields.Float(string="VAR Gap Set Value at Start (mm)")
+    gap_measurement_interval = fields.Integer(string="VAR Gap Measurement Interval (min)")
+    dripshort_detection = fields.Float(string="VAR Dripshort Detection (V)")
+    shortcircuit_detection = fields.Float(string="VAR Short Circuit Detection (V)")
+    dripshort_frequency = fields.Integer(string="VAR Dripshort Frequency (Hz)")
+    dripshort_controller = fields.Boolean(string="VAR Dripshort Controller On/Off")
+    
+    # ESR & VAR MELTING FIELDS
+    meltrate = fields.Float(string="Meltrate (kg/h)")
+    
+    # COOLING FIELDS
+    delta_t_set = fields.Float(string="Delta T (°C)")
+    aftercooling_time = fields.Integer(string="Aftercooling Time (min)")
+    pressure_hold_time = fields.Integer(string="Pressure Hold Time (min)")
+
+    # ESR VACUUM AND PROTECTIVE GAS FIELDS
+    vacuum_overpressure = fields.Float(string="Vacuum overpressure (mbar)")
+    nitrogen_part = fields.Float(string="Nitrogen part (%)")
+    argon_part = fields.Float(string="Argon part (%)")
+    amount_flooding = fields.Float(string="Amount of Flooding (Nm3/h)")
+    hood = fields.Float(string="Hood (mbar)")
+    
+    # VAR VACUUM AND PROTECTIVE GAS FIELDS
+    leak_rate_max = fields.Float(string="VAR Leak Rate Max (mbar/min)")
+    leak_rate_test_time = fields.Integer(string="VAR Leak Rate Test Time (min)")
+    leak_rate_test_wait_time = fields.Integer(string="VAR Leak Rate Test Wait Time (min)")
+    oil_boost_1 = fields.Boolean(string="Oil Boost 1 On/Off")
+    oil_boost_2 = fields.Boolean(string="Oil Boost 2 On/Off")
+    partial_pressure_on = fields.Boolean(string="Partial Pressure On/Off")
+    helium_on = fields.Boolean(string="Helium On/Off")  
+    gas_pressure_set = fields.Float(string="Pressure Gas Set (mbar)")
+    gas_ingot_weight_start = fields.Float(string="Gas Ingot Weight at Start (kg)")
+    gas_ingot_weight_stop = fields.Float(string="Gas Ingot Weight at Stop (kg)")
+    helium_pressure_set = fields.Float(string="Helium Pressure Set (mbar)")
+    helium_ingot_weight_start = fields.Float(string="Helium Ingot Weight at Start (kg)")
+    helium_ingot_weight_stop = fields.Float(string="Helium Ingot Weight at Stop (kg)")
+    
+    # ESR SLAG FIELDS
+    # slag_id = fields.One2many('product.product', string="Slag Type")
+    # slag_amount = fields.Float(string="Slag Amount (kg)")
+    start_slag_amount = fields.Float(string="Starting Slag Amount (%)")
+    start_slag_time = fields.Integer(string="Start of Slag Dosing Afler Power On (min)", info="Start of Slag Dosing Afler Power On (%) min of start duration")
+    continous_slag_dosing = fields.Integer(string="Continuous Slag Dosing (min)")
+    # slag_total_weight = fields.Float(string="Slag Total Weight (kg)")
+
+    
+    notes = fields.Text(string="Notes")
+    

@@ -29,6 +29,9 @@
                     readonly="state in ['cancel', 'done']"
                     options="{'no_create': False, 'no_edit': False}"/>
                 
+                <field name="metadata_properties"/>
+
+                
                 <!-- 2. Скрытое системное поле name (обязательно должно быть во view) -->
                 <field name="name" invisible="1" force_save='1'/>
                 <field name="operation_type_code" invisible="1"/>
@@ -104,7 +107,6 @@
                                         <field name="operation_date"/>
                                     </group>
                                 </group>
-
                                 <group string="Charge Details" colspan="2">
                                     <group>
                                         <field name="mold_id"/>
@@ -119,7 +121,6 @@
                                         <field name="casting_speed"/>
                                     </group>
                                 </group>
-
                                 <group string="input preparations" colspan="2">
                                     <group>
                                         <field name="preparation_performer"/>
@@ -128,13 +129,42 @@
                                         <field name="ksb_form_no"/>
                                     </group>
                                 </group>
-
                                 <group string="Components" colspan="2">
                                     <field name="component_ids" widget="many2many" readonly="0" nolabel="1"/>
 
                                 </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </page>
 
 
+                <!-- Remelting Operation Parameters -->
+                <page string="Operation Parameters" 
+                    invisible="operation_type_code != 'remelting'"
+                    id="group_remelting_operation_parameters">
+                    
+                    <field name="remelting_operation_params_id" nolabel="1">
+                        <list>
+                            <field name="equipment_id"/>
+                            <field name="new_heat_no"/>
+                            <field name="process_type"/>
+
+                        </list>
+
+                        <form string="Smelting Parameters">
+                            <sheet>
+                                <group colspan="2">
+                                    <group>
+                                        <!-- <field name="sequence" invisible="1"/> -->
+                                        <field name="equipment_id"/>
+                                        <field name="new_heat_no"/>
+                                    </group>
+                                    <group>
+                                        <field name="process_type"/>
+                                        <!-- <field name="material_grade_id"/> -->
+                                    </group>
+                                </group>
                             </sheet>
                         </form>
                     </field>
@@ -158,7 +188,7 @@
                             <field name="name"/>
                             <field name="equipment_id"/>
                             <field name="performer_id"/>
-                            <field name="responsible_id"/>
+                            <!-- <field name="resposible_quality_id"/> -->
                             <field name="ksb_form_no"/>
                             <field name="income_material_weight"/>
                             <field name="outcome_material_weight"/>
@@ -178,9 +208,9 @@
                                         <field name="name"/>
                                         <field name="equipment_id"/>
                                         <field name="performer_id"/>
-                                        <field name="responsible_id"/>
+                                        <field name="resposible_quality_id"/>
                                         <field name="ksb_form_no"/>
-                                        <field name="workorder_id"/>
+                                        <field name="workorder_id" invisible="1"/>
                                         <!-- <field name="layout_json" widget="layout_editor"/> -->
                                         
                                     </group>
@@ -219,7 +249,7 @@
                             <field name="charge_id"/>
                             <field name="heating_date"/>
                             <field name="performer_id"/>
-                            <field name="responsible_id"/>
+                            <!-- <field name="responsible_id"/> -->
                             <field name="hardness_target_low"/>
                             <field name="hardness_target_high"/>
                             <field name="hardness_UOM"/>
@@ -241,7 +271,7 @@
                                     </group>
                                     <group>
                                         <field name="performer_id"/>
-                                        <field name="responsible_id"/>
+                                        <!-- <field name="responsible_id"/> -->
                                         <field name="resposible_quality_id"/>
                                         <field name="approver_quality_id"/>
                                         <field name="measurement_device_id"/>
@@ -289,7 +319,7 @@
                             <!-- <field name="charge_id"/> -->
                             <field name="operation_date"/>
                             <field name="performer_id"/>
-                            <field name="responsible_id"/>
+                            <!-- <field name="responsible_id"/> -->
                             <field name="resposible_quality_id"/>
                             <field name="quality_approval"/>
 
@@ -308,7 +338,7 @@
                                     </group>
                                     <group>
                                         <field name="performer_id"/>
-                                        <field name="responsible_id"/>
+                                        <!-- <field name="responsible_id"/> -->
                                         <field name="resposible_quality_id"/>
                                         <field name="ksb_form_no"/>
                                         <field name="quality_approval"/>
@@ -341,7 +371,7 @@
                             <!-- <field name="charge_id"/> -->
                             <field name="operation_date"/>
                             <field name="performer_id"/>
-                            <field name="responsible_id"/>
+                            <!-- <field name="responsible_id"/> -->
                             <field name="resposible_quality_id"/>
                             <field name="quality_approval"/>
 
@@ -357,7 +387,7 @@
                                         <field name="workorder_id"/>
                                         <!-- <field name="charge_id"/> -->
                                         <field name="performer_id"/>
-                                        <field name="responsible_id"/>
+                                        <!-- <field name="responsible_id"/> -->
                                         <field name="resposible_quality_id"/>
                                     </group>
                                     <group>
@@ -397,7 +427,7 @@
                             <field name="start_date_time"/>
                             <field name="end_date_time"/>
                             <field name="performer_id"/>
-                            <field name="responsible_id"/>
+                            <!-- <field name="responsible_id"/> -->
                             <field name="resposible_quality_id"/>
                             <field name="quality_approval"/>
 
@@ -413,7 +443,7 @@
                                         <field name="workorder_id" invisible="1"/>
                                         <!-- <field name="charge_id"/> -->
                                         <field name="performer_id"/>
-                                        <field name="responsible_id"/>
+                                        <!-- <field name="responsible_id"/> -->
                                         <field name="start_date_time"/>
                                         <field name="end_date_time"/>
                                         <field name="income_material_crossection" string='Income size'/>
@@ -474,7 +504,7 @@
                                 <field name="name"/>
                                 <field name="operation_date_time" widget="date"/>
                                 <field name="performer_id" string="Performer"/>
-                                <field name="responsible_id" string="Responsible"/>
+                                <!-- <field name="responsible_id" string="Responsible"/> -->
                                 <field name="ksb_form_no"/>
 
                             </list>
@@ -485,7 +515,7 @@
                                             <field name="name"/>
                                             <field name="operation_date_time" widget="date"/>
                                             <field name="performer_id"/>
-                                            <field name="responsible_id"/>
+                                            <!-- <field name="responsible_id"/> -->
                                             <field name="ksb_form_no"/>
                                         </group>
                                         <group>
@@ -518,6 +548,7 @@
                                 <field name="power"/>
                                 <field name="pyrometer_value"/>
                                 <field name="thermocouple_value"/>
+                                <!-- <field name="performer_id" string="Performer"/> -->
                                 <field name="notes"/>
 
                             </list>
@@ -530,6 +561,7 @@
                                             <field name="medium"/>
                                             <field name="pressure"/>
                                             <field name="pressure_uom"/>
+                                            <field name="performer_id"/>
 
                                         </group>
                                         <group>
@@ -553,7 +585,7 @@
                         
                         <field name="casting_operation_ids" nolabel="1">
                             <list>
-                                <!-- <field name="sequence" widget="handle"/> -->
+                                <field name="sequence" widget="handle"/>
                                 <field name="operation_date_time" widget="date"/>
                                 <!-- <field name="name"/> -->
                                 <field name="ingot_product_id"/>
@@ -575,7 +607,7 @@
                                             <field name="sequence" invisible="1"/>
                                             <field name="operation_date_time"/>
                                             <field name="performer_id"/>
-                                            <field name="responsible_id"/>
+                                            <!-- <field name="responsible_id"/> -->
                                         </group>
                                         <group string="Operation Details">
                                             <field name="heat_no"/>
@@ -641,6 +673,7 @@
                                             <field name="responsible_id"/>
                                             <field name="ksb_form_no"/>
                                             <field name="notes"/>
+                                            <field name="operation_files" widget="many2many_binary" nolabel="0"/>
                                         </group>
                                     </group>
                                 </sheet>
@@ -648,6 +681,253 @@
                         </field>
                     </group>
                 </page>
+
+
+                <!-- Remelting Operations Page -->
+                <page string="Operation Report" 
+                      invisible="operation_type_code != 'remelting'"
+                      id="page_remelting_operations">
+
+                    <list></list>
+                    <group string="Welding Report" colspan="2">
+                        <field name="remelting_welding_control_ids" nolabel="1">
+                            <list>
+                                <field name="operation_date_time" widget="date"/>
+                                <field name="performer_id" string="Performer"/>
+                                <field name="quality_date_time" widget="date"/>
+                                <field name="quality_performer"/>
+                                <field name="quality_responsible"/>
+
+                            </list>
+                            <form string="Welding an Quality Control">
+                                <sheet>
+                                    <group string="" colspan="2">
+                                        <group string="Welding Operation">
+                                            <field name="operation_date_time" widget="date"/>
+                                            <field name="performer_id"/>
+                                            <field name="weld_material_id"/>
+                                            <field name="electrod_dia"/>
+                                            <field name="electrod_length"/>
+                                            <field name="electrod_surface"/>
+                                            <field name="ksb_form_no"/>
+                                        </group>
+                                        <group string="Stub">
+                                            <br colspan="2"/>
+                                            <field name="stub_weight"/>
+                                            <field name="stub_length"/>
+                                            <field name="total_length"/>
+                                        </group>
+                                        <group string="Quality Control">
+                                            <field name="quality_date_time" widget="date"/>
+                                            <field name="quality_performer"/>
+                                            <field name="quality_responsible"/>
+                                            <field name="measurement_device_id"/>
+                                        </group>
+                                        <group string="Hardness Measurements">
+                                            <field name="hardness_top"/>
+                                            <field name="hardness_middle"/>
+                                            <field name="hardness_bottom"/>
+                                            <field name="hardness_UOM"/>
+                                            <field name="ksb_form_no_quality"/>
+                                            
+                                        </group>
+                                    </group>
+
+                                </sheet>
+                            </form>
+                        </field>
+                    </group>
+
+                    <group string="Remelting Report" colspan="2">
+                        
+                        <field name="remelting_operation_ids" nolabel="1">
+                            <list>
+                                <!-- <field name="sequence" widget="handle"/> -->
+                                <field name="operation_date_time" widget="date"/>
+                                <!-- <field name="process_type" invisible="1"/> -->
+                                <field name="mould_id"/>
+                                <!-- <field name="recipe_name"/> -->
+                                <!-- <field name="charge_id"/> -->
+                                <field name="aim_ingot_weight"/>
+                                <field name="instuction_no"/>
+                                <field name="performer_id"/>
+                                <!-- <field name="pyrometer_value"/> -->
+                                <!-- <field name="thermocouple_value"/> -->
+                                <!-- <field name="performer_id" string="Performer"/> -->
+                                <!-- <field name="notes"/> -->
+
+                            </list>
+                            <form string="Remelting Operation">
+                                <sheet>
+                                    <group >
+                                        <group >
+                                            <!-- <field name="sequence"/> -->
+                                            <field name="operation_date_time"/>
+                                            <field name="process_type" invisible="1"/>
+                                            <field name="performer_id"/>
+                                        </group>
+                                        <group>
+                                            <field name="instuction_no"/>
+                                            <field name="mould_id"/>
+                                            <field name="aim_ingot_weight"/>
+                                        </group>
+
+                                    </group>
+                                    <group>
+                                        <group string="Start Curve">
+                                            <field name="start_curve_id"/>
+                                            <field name="start_time"/>
+                                        </group>
+                                        <group string="Hot Top Curve">
+                                            <field name="hottop_curve_id"/>
+                                            <field name="hottop_start_weight"/>
+                                            <field name="hottop_time"/>
+                                            <field name="hottop_stop_weight"/>
+                                        </group>
+                                    </group>
+
+                                    <group>
+                                        <group>
+                                            <field name="start_curve_img" widget="image" nolabel="1" placeholder="Starting Curve Image"/>
+                                        </group>
+                                        <group>
+                                            <field name="hottop_curve_img" widget="image" nolabel="1" placeholder="Hottop Curve Image"/>
+                                        </group>
+                                    </group>
+                                    
+                                    <group string="Melting Parameters">
+                                        <group invisible="process_type != 'esr'">
+                                            <field name="meltrate"/>
+                                            <!-- ESR -->
+                                            <field name="voltage_max"/>
+                                            <field name="current_max"/>
+                                        </group>
+                                        <group invisible="process_type != 'var'">
+                                            <field name="meltrate"/>
+                                            <!-- VAR -->
+                                            <field name="gap_set_value"/>
+                                            <field name="gap_auto_adjustment" widget="boolean"/>
+                                            <field name="gap_set_value_start"/>
+                                            <field name="gap_measurement_interval"/>
+
+                                        </group>
+                                        <group invisible="process_type != 'esr'">
+                                            <!-- ESR -->
+                                            <field name="swing"/>
+                                            <field name="swing_increase_ht"/>
+                                        </group>
+                                        <group invisible="process_type != 'var'">
+                                            <!-- VAR -->
+                                            <field name="dripshort_detection"/>
+                                            <field name="shortcircuit_detection"/>
+                                            <field name="dripshort_frequency"/>
+                                            <field name="dripshort_controller" widget="boolean"/>
+                                        </group>
+                                    </group>
+
+                                    <group string="Cooling Parameters">
+                                        <group>
+                                            <field name="delta_t_set"/>
+                                            <field name="aftercooling_time"/>
+                                        </group>
+                                        <group>
+                                            <field name="pressure_hold_time"/>
+                                        </group>
+                                    </group>
+
+                                    <group string="Vacuum and Protective Gas Parameters">
+                                        <group invisible="process_type != 'esr'">
+                                            <!-- ESR -->
+                                            <field name="vacuum_overpressure"/>
+                                            <field name="nitrogen_part"/>
+                                            <field name="argon_part"/>
+                                        </group>
+                                        <group invisible="process_type != 'var'">
+                                            <!-- VAR -->
+                                            <field name="leak_rate_max"/>
+                                            <field name="leak_rate_test_time"/>
+                                            <field name="leak_rate_test_wait_time"/>
+                                            <field name="oil_boost_1" widget="boolean"/>
+                                            <field name="oil_boost_2" widget="boolean"/>
+                                            <field name="partial_pressure_on" widget="boolean"/>
+                                            <field name="helium_on" widget="boolean"/>
+                                        </group>
+                                        <group invisible="process_type != 'esr'">
+                                            <!-- ESR -->
+                                            <field name="amount_flooding"/>
+                                            <field name="hood"/>
+                                        </group>
+                                        <group invisible="process_type != 'var'">    
+                                            <!-- VAR -->
+                                            <field name="gas_pressure_set"/>
+                                            <field name="gas_ingot_weight_start"/>
+                                            <field name="gas_ingot_weight_stop"/>
+                                            <field name="helium_pressure_set"/>
+                                            <field name="helium_ingot_weight_start"/>
+                                            <field name="helium_ingot_weight_stop"/>
+
+                                        </group>
+                                    </group>
+
+                                    <group string="Slag Parameters" invisible="process_type != 'esr'">
+                                        <group>
+                                            <field name="start_slag_amount"/>
+                                            <field name="start_slag_time"/>
+                                        </group>
+                                        <group>
+                                            <field name="continous_slag_dosing"/>
+                                        </group>
+                                    </group>
+                                    <group string="Notes">
+
+                                        <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
+                                    </group>
+
+
+
+
+
+                                </sheet>
+                            </form>
+                        </field>
+                    </group>
+
+                    <group string="Remelting Quality Report" colspan="2">
+                        
+                        <field name="remelting_quality_control_ids" nolabel="1">
+                            <list>
+                                <!-- <field name="sequence" widget="handle"/> -->
+                                <field name="operation_date_time" widget="date"/>
+                                <field name="performer_id"/>
+                                <field name="measurement_device_id"/>
+                                <field name="etching_info"/>
+
+                            </list>
+
+                            <form string="Remelting Quality Control">
+                                <sheet>
+                                    <group>
+                                        <group>
+                                            <field name="workorder_id" readonly="1" invisible="1"/>
+                                            <field name="sequence" invisible="1"/>
+                                            <field name="operation_date_time"/>
+                                            <field name="performer_id"/>
+                                            <field name="responsible_id"/>
+                                            <field name="measurement_device_id"/>
+                                            <field name="etching_info"/>
+                                            <field name="operation_files" widget="many2many_binary" nolabel="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="image" widget="image" nolabel="1" placeholder="MACRO VIEWING AREA"/>
+                                        </group>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                    </group>
+                </page>
+
+
             </xpath>
         </field>
     </record>

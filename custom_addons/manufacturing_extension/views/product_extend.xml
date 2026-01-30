@@ -39,6 +39,7 @@
                     <group>
                         <group string="Material" name="material">
                             <field name="forging_material"/>
+                            <field name="slag_data_id"/>
                         </group>
                         <group string="Reference No." name="reference_no">
                             <field name="product_reference_no"/>

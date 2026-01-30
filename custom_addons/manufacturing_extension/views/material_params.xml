@@ -11,6 +11,7 @@
                 <field name="material_type_id"/>
                 <field name="material_group_id"/>
                 <field name="density"/>
+                <field name="shrinkage_factor"/>
                 <field name="description"/>
 
             </list>
