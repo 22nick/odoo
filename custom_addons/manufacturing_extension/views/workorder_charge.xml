@@ -149,19 +149,23 @@
                             <field name="equipment_id"/>
                             <field name="new_heat_no"/>
                             <field name="process_type"/>
+                            <field name="grade"/>
 
                         </list>
 
-                        <form string="Smelting Parameters">
+                        <form string="Remelting Parameters">
                             <sheet>
                                 <group colspan="2">
                                     <group>
                                         <!-- <field name="sequence" invisible="1"/> -->
+                                        <field name="process_type"/>
                                         <field name="equipment_id"/>
                                         <field name="new_heat_no"/>
+                                        <field name="grade"/>
                                     </group>
                                     <group>
-                                        <field name="process_type"/>
+                                        <!-- <field name="component_ids" widget="many2many" readonly="0" nolabel="1"/> -->
+
                                         <!-- <field name="material_grade_id"/> -->
                                     </group>
                                 </group>
@@ -749,7 +753,7 @@
                                 <!-- <field name="recipe_name"/> -->
                                 <!-- <field name="charge_id"/> -->
                                 <field name="aim_ingot_weight"/>
-                                <field name="instuction_no"/>
+                                <field name="instruction_no"/>
                                 <field name="performer_id"/>
                                 <!-- <field name="pyrometer_value"/> -->
                                 <!-- <field name="thermocouple_value"/> -->
@@ -765,11 +769,14 @@
                                             <field name="operation_date_time"/>
                                             <field name="process_type" invisible="1"/>
                                             <field name="performer_id"/>
+                                            <field name="instruction_no"/>
                                         </group>
                                         <group>
-                                            <field name="instuction_no"/>
                                             <field name="mould_id"/>
+                                            <!-- <field name="equipment_properties"/> -->
+                                            <field name="mould_dia"/>
                                             <field name="aim_ingot_weight"/>
+                                            <field name="ksb_form_no"/>
                                         </group>
 
                                     </group>
@@ -879,6 +886,7 @@
                                         </group>
                                     </group>
                                     <group string="Notes">
+                                        
 
                                         <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
                                     </group>
@@ -906,7 +914,7 @@
 
                             <form string="Remelting Quality Control">
                                 <sheet>
-                                    <group>
+                                    <group string="Macrostructure Control" colspan="2">
                                         <group>
                                             <field name="workorder_id" readonly="1" invisible="1"/>
                                             <field name="sequence" invisible="1"/>
@@ -915,10 +923,29 @@
                                             <field name="responsible_id"/>
                                             <field name="measurement_device_id"/>
                                             <field name="etching_info"/>
+                                            <field name="ksb_form_no"/>
+
                                             <field name="operation_files" widget="many2many_binary" nolabel="1"/>
                                         </group>
                                         <group>
                                             <field name="image" widget="image" nolabel="1" placeholder="MACRO VIEWING AREA"/>
+                                        </group>
+                                    </group>
+                                    <group string="Quality Control" colspan="2">
+                                        <group>
+                                            <field name="operation_date_time_2"/>
+                                            <field name="performer_id_2"/>
+                                            <field name="ksb_form_no_2"/>
+                                            <field name="heat_treatment_requirement"/>
+
+                                        </group>
+                                        <group>
+                                            <field name="size_measurement_device_id"/>
+                                            <field name="size_measurement_result"/>
+                                            <field name="weight_measurement_device_id"/>
+                                            <field name="weight_measurement_result"/>
+                                            <field name="hardness_measurement_device_id"/>
+                                            <field name="hardness_measurement_result"/>
                                         </group>
                                     </group>
                                 </sheet>

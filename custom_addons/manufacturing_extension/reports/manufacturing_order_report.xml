@@ -333,6 +333,10 @@
                 </div>
             </t>
 
+            <!-- Final quality report -->
+            <t t-call="manufacturing_extension.report_manufactoring_final_quality_document"/>
+
+
         </t>
     </template>
 </odoo>

@@ -237,7 +237,6 @@
                             <div style="display: table-cell; width: 20%; padding: 8px; vertical-align: top; border-right: 1px solid #dee2e6;">
                                 <img t-att-src="'manufacturing_extension/static/src/img/electrog bottom.png'" style="width:100px;"/>
                             </div>
-
                         </div>
                     </td>
                 </tr>
@@ -245,21 +244,16 @@
             <div class="row justify-content-end">
                 <div style="font-size: 7pt; text-align: right">FR.87 EK-9</div>
             </div>
-
-
         </t>
     </div>
 
-
-
-
-
-
-
-    <!-- ESR SECTION -->
-    <t t-if="o.remelting_operation_ids and o.remelting_operation_params_id.process_type == 'esr'">
-        <div class="compact-section">
-            <div class="section-header">ELECTRO SLAG REMELTING</div>
+    <!-- ESR & VAR SECTION -->
+    <t t-if="o.remelting_operation_ids">
+        <div class="compact-section" style="page-break-before: always;">
+            <div class="section-header">
+                <t t-if="o.remelting_operation_params_id.process_type == 'esr'">ELECTRO SLAG REMELTING</t>
+                <t t-else="">VACUUM ARC REMELTING</t>
+            </div>
             <table class="info-table">
                 <!-- 1 -->
                 <tr>
@@ -269,9 +263,9 @@
                         <td class="label-col4">Shrinkage factor:</td>
                         <td><strong><span t-field="o.component_id.forging_material.shrinkage_factor"/></strong></td>
                         <td class="label-col4">Instruction No:</td>
-                        <td><strong><span t-field="o.remelting_welding_control_ids.instuction_no"/></strong></td>
+                        <td><strong><span t-field="o.remelting_operation_ids.instruction_no"/></strong></td>
                         <td class="label-col4">Aim ingot weight, kg:</td>
-                        <td><strong><span t-field="o.remelting_welding_control_ids.aim_ingot_weight"/></strong></td>
+                        <td><strong><span t-field="o.remelting_operation_ids.aim_ingot_weight"/></strong></td>
                     </div>
                 </tr>
 
@@ -289,9 +283,19 @@
                         <td class="label-col4">Density, kg/m3:</td>
                         <td><strong><span t-field="o.component_id.forging_material.density"/></strong></td>
                         <td class="label-col4">Mould diameter, mm:</td>
-                        <td><strong><span t-field="o.component_id.forging_material.density"/></strong></td>
+                        <td><t t-set="matching_names" t-value="[p['name'] for p in o.remelting_operation_ids.mould_id.category_id.equipment_properties_definition if p['string'] == 'Diameter']"/>
+                            <t t-if="matching_names">
+                                <t t-set="prop_key" t-value="matching_names[0]"/>
+                                <strong><span t-esc="o.remelting_operation_ids.mould_id.equipment_properties.get(prop_key)"/></strong>
+                            </t>
+                        </td>
                         <td class="label-col4">Mould lenght, mm:</td>
-                        <td><strong><span t-field="o.component_id.forging_material.density"/></strong></td>
+                        <td><t t-set="matching_names" t-value="[p['name'] for p in o.remelting_operation_ids.mould_id.category_id.equipment_properties_definition if p['string'] == 'Lenght']"/>
+                            <t t-if="matching_names">
+                                <t t-set="prop_key" t-value="matching_names[0]"/>
+                                <strong><span t-esc="o.remelting_operation_ids.mould_id.equipment_properties.get(prop_key)"/></strong>
+                            </t>
+                        </td>
 
                     </div>
                 </tr>
@@ -303,9 +307,9 @@
                         <td><span t-field="o.component_qty"/></td>
                         <td class="label-col4">Electrod lenght, mm:</td>
                         <td><span t-field="o.remelting_welding_control_ids.electrod_length"/></td>
-                        <td class="label-col">Electrod diameter, mm:</td>
+                        <td class="label-col4">Electrod diameter, mm:</td>
                         <td><span t-field="o.remelting_welding_control_ids.electrod_dia"/></td>
-                        <td class="label-col">Stub weight, kg:</td>
+                        <td class="label-col4">Stub weight, kg:</td>
                         <td><span t-field="o.remelting_welding_control_ids.stub_weight"/></td>
 
                     </div>
@@ -313,221 +317,635 @@
 
                 
             </table>
+
+
+            <table class="info-table" string="Controller instruction">
+                <!-- 1 -->
+                <tr>
+                    <div>
+                        <td class="label-col3">Starting Curve ID:</td>
+                        <td><strong><span t-field="o.remelting_operation_ids.start_curve_id"/></strong></td>
+                        <td class="label-col3">Hottop Curve ID:</td>
+                        <td><strong><span t-field="o.remelting_operation_ids.hottop_curve_id"/></strong></td>
+                        <td class="label-col3">Hottoping Start Weight, kg:</td>
+                        <td><strong><span t-field="o.remelting_operation_ids.hottop_start_weight"/></strong></td>
+                    </div>
+                </tr>
+
+                <!-- 2 -->
+                <tr>
+                    <div>
+                        <td class="label-col3">Starting duration, min:</td>
+                        <td><strong><span t-field="o.remelting_operation_ids.start_time"/></strong></td>
+                        <td class="label-col3">Hottoping duration, min:</td>
+                        <td><strong><span t-field="o.remelting_operation_ids.hottop_time"/></strong></td>
+                        <td class="label-col3">Hottoping Stop Weight, mm:</td>
+                        <td><strong><span t-field="o.remelting_operation_ids.hottop_stop_weight"/></strong></td>
+                    </div>
+                </tr>
+
+            </table>
             
             <table class="info-table">
                 <tr>
                     <td colspan="12" style="padding: 5px;">
                         <div style="display: table; width: 100%; border: 1px solid #dee2e6; background-color: #ffffff;">
                             
-                            <!-- Info cell (80%) -->
-                            <div style="display: table-cell; width: 80%; padding: 8px; vertical-align: top; text-align: left;">
-                                <!-- <div class="section-header">ELECTROD</div> -->
-                                <table class="info-table">
-                                    <tr>
-                                        <td colspan="2">
-                                            <div class="section-header">ELECTROD</div>
-                                        </td>
-                                        <td colspan="2">
-                                            <div class="section-header">STUB</div>
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-col">Welding wire:</td>
-                                        <td><strong><span t-field="o.remelting_welding_control_ids.weld_material_id"/></strong></td>
-                                        <td class="label-col">Lenght, mm:</td>
-                                        <td>
-                                            <span t-field="o.remelting_welding_control_ids.stub_length"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-col">Material grade:</td>
-                                        <td><strong><span t-field="o.component_id.forging_material"/></strong></td>
-                                        <td class="label-col">Total length, mm:</td>
-                                        <td>
-                                            <span t-field="o.remelting_welding_control_ids.total_length"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-col">Weight, kg:</td>
-                                    </tr>
-                                    <tr>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-col">Lenght, mm:</td>
-                                        <td>
-                                            <span t-field="o.remelting_welding_control_ids.electrod_length"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-col">Surface:</td>
-                                        <td>
-                                            <span t-field="o.remelting_welding_control_ids.electrod_surface"/>
-                                        </td>
-                                    </tr>
-
-                                </table>
-
-                                <!-- Signature -->
-                                <div class="row justify-content-end" style="margin-top: 10px;">
-                                    <div class="col-4">
-                                        <div class="compact-section">
-                                            <div style="padding: 5px 5px 5px 5px;">
-                                                <div style="font-size: 9pt; color: #6c757d;">Unless otherwise specified, the electrode must be heat-treated at 200°C for 2 hours after welding. Add heat treatment process.</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="compact-section">
-                                            <div class="section-header">OPERATOR</div>
-                                            <div style="padding: 5px 5px 5px 5px;">
-                                                <div><strong><span t-field="o.remelting_welding_control_ids[0].performer_id"/></strong></div>
-                                                <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
-                                                <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="compact-section">
-                                            <div class="section-header">SUPERVISOR</div>
-                                            <div style="padding: 5px 5px 5px 5px;">
-                                                <div><strong><span t-field="o.user_id"/></strong></div>
-                                                <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
-                                                <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <!-- Start Image cell (35%) -->
+                            <t t-if="o.remelting_operation_ids.start_curve_img">
+                                <div style="display: table-cell; width: 25%; padding: 8px; vertical-align: top; border-right: 1px solid #dee2e6;">
+                                    <img t-att-src="'/web/image/%s/%s/start_curve_img' % (o.remelting_operation_ids._name, o.remelting_operation_ids.id)" 
+                                        style="width:200px; max-height:300px; " />
                                 </div>
-                                <div class="row justify-content-end" style="margin-top: 0px">
-                                    <div class="col-8">
-                                        <div class="compact-section">
-                                            <strong><span>KSB Form No. (if exist): &#160; &#160;</span></strong>
-                                            <span t-field="o.remelting_welding_control_ids[0].ksb_form_no"/>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                            <!-- Image cell (20%) -->
-                            <div style="display: table-cell; width: 20%; padding: 8px; vertical-align: top; border-right: 1px solid #dee2e6;">
-                                <img t-att-src="'manufacturing_extension/static/src/img/electrod top.png'" style="width:100px;"/>
-                            </div>
+                            </t>
                             
+                            <!-- Start Info cell (15%) -->
+                            <t t-if="o.remelting_operation_ids.start_curve_id">
+                                <div style="display: table-cell; width: 10%; padding: 8px; vertical-align: top; text-align: center;">
+                                    <!-- <strong style="color: #495057; font-size: 8pt; display: block; margin-bottom: 4px;">Used Tools:</strong> -->
+                                    <table class="steps-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5%; text-align: center;">t (min)</th>
+                                                <t t-if="o.remelting_operation_params_id.process_type == 'esr'">
+                                                    <th style="width: 5%; text-align: center;">P (kW)</th>
+                                                    <th style="width: 5%; text-align: center;">R (mOhm)</th>
+                                                </t>
+                                                <t t-else="">
+                                                    <th style="width: 5%; text-align: center;">U (V)</th>
+                                                    <th style="width: 5%; text-align: center;">I (kA)</th>
+                                                </t>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="o.remelting_operation_ids.start_curve_id.line_ids" t-as="line">
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <strong><span t-field="line.time"/></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong><span t-field="line.line_1"/></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong><span t-field="line.line_2"/></strong>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </t>        
+                            
+                            <!-- Hottop Image cell (35%) -->
+                            <t t-if="o.remelting_operation_ids.hottop_curve_img">
+                                <div style="display: table-cell; width: 25%; padding: 8px; vertical-align: top; border-right: 1px solid #dee2e6;">
+                                    <img t-att-src="'/web/image/%s/%s/hottop_curve_img' % (o.remelting_operation_ids._name, o.remelting_operation_ids.id)" 
+                                        style="width:200px; max-height:300px;" />
+                                </div>
+                            </t>
+                            
+                            <!-- Hottop Info cell (15%) -->
+                            <t t-if="o.remelting_operation_ids.hottop_curve_id">
+                                <div style="display: table-cell; width: 10%; padding: 8px; vertical-align: top; text-align: left;">
+                                    <!-- <strong style="color: #495057; font-size: 8pt; display: block; margin-bottom: 4px;">Used Tools:</strong> -->
+                                    <table class="steps-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 5%; text-align: center;">t (min)</th>
+                                                <t t-if="o.remelting_operation_params_id.process_type == 'esr'">
+                                                    <th style="width: 5%; text-align: center;">P (%)</th>
+                                                    <th style="width: 5%; text-align: center;">R (%)</th>
+                                                </t>
+                                                <t t-else="">
+                                                    <th style="width: 5%; text-align: center;">U (%)</th>
+                                                    <th style="width: 5%; text-align: center;">I (%)</th>
+                                                </t>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="o.remelting_operation_ids.hottop_curve_id.line_ids" t-as="line">
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <strong><span t-field="line.time"/></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong><span t-field="line.line_1"/></strong>
+                                                    </td>
+                                                    <td>
+                                                        <strong><span t-field="line.line_2"/></strong>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </t>        
                         </div>
                     </td>
                 </tr>
             </table>
 
+            <!-- MELTING FIELDS -->
+            <table class="info-table" string="MELTING FIELDS">
+                <!-- ESR -->
+                <t t-if="o.remelting_operation_params_id.process_type == 'esr'">
+                    <tr>
+                        <div>
+                            <td class="label-col3">Voltage (max) (V):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.voltage_max"/></strong></td>
+                            <td class="label-col3">Swing (mOhm):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.swing"/></strong></td>
+                            <td class="label-col3">Meltrate (kg/h):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.meltrate"/></strong></td>
+                        </div>
+                    </tr>
 
-            <!-- <div class="section-header">HARDNESS</div> -->
+                    <tr>
+                        <div>
+                            <td class="label-col3">Current (max) (A):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.current_max"/></strong></td>
+                            <td class="label-col3">Swing Increase HT (%):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.swing_increase_ht"/></strong></td>
+                            <td class="label-col3"></td>
+                            <td><strong></strong></td>
+                        </div>
+                    </tr>
+                </t>
+
+                <!-- VAR -->
+                <t t-if="o.remelting_operation_params_id.process_type == 'var'">
+                    <tr>
+                        <div>
+                            <td class="label-col3">Gap Set Value (mm):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.gap_set_value"/></strong></td>
+                            <td class="label-col3">Gap Measurement Interval (min):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.gap_measurement_interval"/></strong></td>
+                            <td class="label-col3">Meltrate (kg/h):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.meltrate"/></strong></td>
+                        </div>
+                    </tr>
+
+                    <tr>
+                        <div>
+                            <td class="label-col3">Gap Auto On/Off:</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.gap_auto_adjustment"/></strong></td>
+                            <td class="label-col3">Dripshort Detection (V):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.dripshort_detection"/></strong></td>
+                            <td class="label-col3">Dripshort Frequency (Hz):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.dripshort_frequency"/></strong></td>
+                        </div>
+                    </tr>
+
+                    <tr>
+                        <div>
+                            <td class="label-col3">Gap Set Value at Start (mm):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.gap_set_value_start"/></strong></td>
+                            <td class="label-col3">Short Circuit Detection (V):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.shortcircuit_detection"/></strong></td>
+                            <td class="label-col3">Dripshort On/Off:</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.dripshort_controller"/></strong></td>
+                        </div>
+                    </tr>
+                </t>
+            </table>
+
+            <!-- COOLING FIELDS -->
+            <div class="section-header">WATER COOLING</div>
             <table class="info-table">
                 <tr>
-                    <td colspan="12" style="padding: 5px;">
-                        <div style="display: table; width: 100%; border: 1px solid #dee2e6; background-color: #ffffff;">
-                            
-                            <!-- Info cell (80%) -->
-                            <div style="display: table-cell; width: 80%; padding: 8px; vertical-align: top; text-align: left;">
-                                <div class="section-header">HARDNESS</div>
-                                <table class="info-table">
-                                    
-                                <!-- </table> -->
-
-                                <!-- <div class="section-header">HARDNESS</div>
-                                <table class="info-table"> -->
-                                    
-                                    <tr>
-                                        <td class="label-col">Date:</td>
-                                        <td>
-                                            <span t-field="o.remelting_welding_control_ids.quality_date_time"/>
-                                        </td>
-                                        <td class="label-col">Top:</td>
-                                        <td>
-                                            <span t-field="o.remelting_welding_control_ids.hardness_top"/>
-                                            <span t-field="o.remelting_welding_control_ids.hardness_UOM"/>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="label-col">Device ID:</td>
-                                        <td>
-                                            <span t-field="o.remelting_welding_control_ids.measurement_device_id.reference_id"/>
-                                        </td>
-                                        <td class="label-col">Middle:</td>
-                                        <td>
-                                            <span t-field="o.remelting_welding_control_ids.hardness_middle"/>
-                                            <span t-field="o.remelting_welding_control_ids.hardness_UOM"/>
-                                        </td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td class="label-col">Bottom:</td>
-                                        <td>
-                                            <span t-field="o.remelting_welding_control_ids.hardness_bottom"/>
-                                            <span t-field="o.remelting_welding_control_ids.hardness_UOM"/>
-                                        </td>
-                                    </tr>
-                                </table>
-
-                                <!-- Signature -->
-                                <div class="row justify-content-end" style="margin-top: 10px;">
-                                    
-                                    <div class="col-4">
-                                        <div class="compact-section">
-                                            <div class="section-header">OPERATOR</div>
-                                            <div style="padding: 5px 5px 5px 5px;">
-                                                <div><strong><span t-field="o.remelting_welding_control_ids[0].quality_performer"/></strong></div>
-                                                <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
-                                                <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div class="compact-section">
-                                            <div class="section-header">SUPERVISOR</div>
-                                            <div style="padding: 5px 5px 5px 5px;">
-                                                <div><strong><span t-field="o.remelting_welding_control_ids[0].quality_responsible"/></strong></div>
-                                                <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
-                                                <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row justify-content-end" style="margin-top: 0px">
-                                    <div class="col-8">
-                                        <div class="compact-section">
-                                            <strong><span>KSB Form No. (if exist): &#160; &#160;</span></strong>
-                                            <span t-field="o.remelting_welding_control_ids[0].ksb_form_no_quality"/>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <!-- Image cell (20%) -->
-                            <div style="display: table-cell; width: 20%; padding: 8px; vertical-align: top; border-right: 1px solid #dee2e6;">
-                                <img t-att-src="'manufacturing_extension/static/src/img/electrog bottom.png'" style="width:100px;"/>
-                            </div>
-
-                        </div>
-                    </td>
+                    <div>
+                        <td class="label-col3">Delta T (°C):</td>
+                        <td><strong><span t-field="o.remelting_operation_ids.delta_t_set"/></strong></td>
+                        <td class="label-col3">Pressure Hold Time (min):</td>
+                        <td><strong><span t-field="o.remelting_operation_ids.pressure_hold_time"/></strong></td>
+                        <td class="label-col3">Aftercooling Time (min):</td>
+                        <td><strong><span t-field="o.remelting_operation_ids.aftercooling_time"/></strong></td>
+                    </div>
                 </tr>
-            </table>
-            <div class="row justify-content-end">
-                <div style="font-size: 7pt; text-align: right">FR.87 EK-9</div>
-            </div>
 
+                <tr>
+                </tr>
+
+            </table>
+
+            <!-- VACUUM AND PROTECTIVE GAS FIELDS -->
+            <div class="section-header">VACUUM AND PROTECTIVE GAS FIELDS</div>
+            <table class="info-table">
+                <!-- ESR -->
+                <t t-if="o.remelting_operation_params_id.process_type == 'esr'">
+                    <tr>
+                        <div>
+                            <td class="label-col3">Vacuum overpressure (mbar):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.vacuum_overpressure"/></strong></td>
+                            <td class="label-col3">Argon part (%):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.argon_part"/></strong></td>
+                            <td class="label-col3">Hood (mbar):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.hood"/></strong></td>
+                        </div>
+                    </tr>
+
+                    <tr>
+                        <div>
+                            <td class="label-col3">Nitrogen part (%):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.nitrogen_part"/></strong></td>
+                            <td class="label-col3">Amount of Flooding (Nm3/h):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.amount_flooding"/></strong></td>
+                            <td class="label-col3"></td>
+                            <td><strong></strong></td>
+                        </div>
+                    </tr>
+                </t>
+
+                <!-- VAR -->
+                <t t-if="o.remelting_operation_params_id.process_type == 'var'">
+                    <tr>
+                        <div>
+                            <td class="label-col3">Leak Rate Max (mbar/min):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.leak_rate_max"/></strong></td>
+                            <td class="label-col3">Leak Rate Test Time (min):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.leak_rate_test_time"/></strong></td>
+                            <td class="label-col3">Leak Rate Test Wait Time (min):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.leak_rate_test_wait_time"/></strong></td>
+                        </div>
+                    </tr>
+
+                    <tr>
+                        <div>
+                            <td class="label-col4">Oil Boost 1 On/Off:</td>
+                            <td><strong><span t-esc="( 'ON' ) if o.remelting_operation_ids.oil_boost_1 else ( 'OFF' )"/></strong></td>
+                            <td class="label-col4">Oil Boost 2 On/Off:</td>
+                            <td><strong><span t-esc="( 'ON' ) if o.remelting_operation_ids.oil_boost_2 else ( 'OFF' )"/></strong></td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div>
+                            <td class="label-col4">Partial Pressure On/Off:</td>
+                            <td><strong><span t-esc="( 'ON' ) if o.remelting_operation_ids.partial_pressure_on else ( 'OFF' )"/></strong></td>
+                            <td class="label-col3">Pressure Gas Set (mbar):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.gas_pressure_set"/></strong></td>
+                            <td class="label-col3">Gas Ingot Weight at Start (kg):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.gas_ingot_weight_start"/></strong></td>
+                            <td class="label-col3">Gas Ingot Weight at Stop (kg):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.gas_ingot_weight_stop"/></strong></td>
+                        </div>
+                    </tr>
+                    <tr>
+                        <div>
+                            <td class="label-col4">Helium On/Off:</td>
+                            <td><strong><span t-esc="( 'ON' ) if o.remelting_operation_ids.helium_on else ( 'OFF' )"/></strong></td>
+                            <td class="label-col3">Helium Pressure Set (mbar):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.helium_pressure_set"/></strong></td>
+                            <td class="label-col3">Helium Ingot Weight at Start (kg):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.helium_ingot_weight_start"/></strong></td>
+                            <td class="label-col3">Helium Ingot Weight at Stop (kg):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.helium_ingot_weight_stop"/></strong></td>
+                        </div>
+                    </tr>
+                </t>
+            </table>
+
+            <!-- ESR SLAG FIELDS -->
+            <t t-if="o.remelting_operation_params_id.process_type == 'esr'">
+                <div class="section-header">SLAG</div>
+                <table class="info-table">
+                    <tr>
+                        <div>
+                            <td class="label-col3">Starting Slag Amount (%):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.start_slag_amount"/></strong></td>
+                            <td class="label-col3">Start of Slag Dosing Afler Power On (min):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.start_slag_time"/></strong></td>
+                            <td class="label-col3">Continuous Slag Dosing (min):</td>
+                            <td><strong><span t-field="o.remelting_operation_ids.continous_slag_dosing"/></strong></td>
+                        </div>
+                    </tr>
+
+                    <tr>
+                    </tr>
+
+                </table>
+
+                
+                <table class="steps-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 12%;">Type</th>
+                            <th style="width: 9%;">Qty (kg)</th>
+                            <th style="width: 9%;">CaF<sub class="sub">2</sub> (%)</th>
+                            <th style="width: 9%;">Al<sub class="sub">2</sub>O<sub class="sub">3</sub> (%)</th>
+                            <th style="width: 9%;">MgO (%)</th>
+                            <th style="width: 9%;">CaO (%)</th>
+                            <th style="width: 9%;">SiO<sub class="sub">2</sub> (%)</th>
+                            <th style="width: 9%;">TiO<sub class="sub">2</sub> (%)</th>
+                            <th style="width: 9%;">Density (g/cm<sup class="sub">3</sup>)</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="total_volume" t-value="0"/>
+                        <t t-set="total_weight" t-value="0"/>
+                        <t t-foreach="o.remelting_operation_params_id.component_ids" t-as="step">
+                            <t t-if="step.product_id.product_type_properties">
+                                <t t-set="matching_names" t-value="[p['name'] for p in step.product_id.product_type_id.product_type_properties_definition if p['string'] == 'Slag ID']"/>
+                                <t t-if="matching_names">
+                                    <t t-set="slag_id" t-value="step.product_id.product_type_properties.get(matching_names[0])"/>
+                                    <t t-set="total_weight" t-value="total_weight + step.product_qty"/>
+                                    
+                                    <t t-set="total_volume" t-value="total_volume + step.product_qty / slag_id.density"/>
+
+                                    <tr>
+                                        <td class="text-center">
+                                            <strong><span t-esc="slag_id.name"/></strong>
+                                        </td>
+                                        <td>
+                                            <span t-field="step.product_qty"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="slag_id.slag_caf2_part"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="slag_id.slag_al2o3_part"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="slag_id.slag_mgO_part"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="slag_id.slag_cao_part"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="slag_id.slag_sio2_part"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="slag_id.slag_tio2_part"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="slag_id.density"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </t>
+
+                        <t t-if="total_weight">
+                            <tr>
+                                <td class="text-center"><strong>Total:</strong></td>
+                                <td><strong><span t-esc="total_weight"/></strong></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><strong><span t-esc="'%.2f' % (total_weight / total_volume)"/></strong></td>
+                            </tr>
+                        </t>
+
+                    </tbody>
+                </table>
+            </t>
+
+            <!-- Signature -->
+            <div class="row justify-content-end" style="margin-top: 10px;">
+                <div class="col-4">
+                    <t t-if="o.remelting_operation_ids.notes">
+                        <div class="compact-section">
+                            <div class="section-header">Notes</div>
+                            <div style="padding: 5px 5px 5px 5px; font-size: 7pt;">
+                                <span t-field="o.remelting_operation_ids.notes"/>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+                <div class="col-4">
+                    <div class="compact-section">
+                        <div class="section-header">OPERATOR</div>
+                        <div style="padding: 5px 5px 5px 5px;">
+                            <div><strong><span t-field="o.remelting_operation_ids[0].performer_id"/></strong></div>
+                            <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                            <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="compact-section">
+                        <div class="section-header">SUPERVISOR</div>
+                        <div style="padding: 5px 5px 5px 5px;">
+                            <div><strong><span t-field="o.user_id"/></strong></div>
+                            <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                            <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                            
+                        </div>
+                    </div>
+                    <div class="compact-section">
+                        <strong><span>KSB Form No. (if exist): &#160; &#160;</span></strong>
+                        <span t-field="o.remelting_operation_ids[0].ksb_form_no"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-end">
+                <div style="font-size: 7pt; text-align: right">
+                    <t t-if="o.remelting_operation_params_id.process_type == 'esr'">FR.87 EK-11</t>
+                    <t t-else="">FR.87 EK-12</t>
+                </div>
+            </div>
 
         </div>
     </t>
 
 
+    <!-- REMELTING MACROSTRUCTORE AND QUALITY CONTROL SECTION -->
+    <t t-if="o.remelting_quality_control_ids">
+        <t t-if="o.remelting_quality_control_ids[0].image">
+            <div class="compact-section" style="page-break-before: always;">
+                <div class="section-header">REMELTING MACROSTRUCTURE CONTROL</div>
+                <table class="info-table">
+                    <tr>
+                        <td colspan="12" style="padding: 5px;">
+                            <div style="display: table; width: 100%; border: 1px solid #dee2e6; background-color: #ffffff;">
+                                
+                                <!-- Info cell (80%) -->
+                                <div style="display: table-cell; width: 65%; padding: 8px; vertical-align: top; text-align: left;">
+                                    <!-- <div class="section-header">HARDNESS</div> -->
+                                    <table class="info-table">
+                                        <tr>
+                                            <td class="label-col">Date and Time:</td>
+                                            <td><strong><span t-field="o.remelting_quality_control_ids.operation_date_time"/></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Material grade:</td>
+                                            <td><strong><span t-field="o.component_id.forging_material"/></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Heat No.:</td>
+                                            <td><strong><span t-field="o.product_id.heat_no"/></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Measurement Device ID:</td>
+                                            <td><strong><span t-field="o.remelting_quality_control_ids.measurement_device_id"/></strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label-col">Etching Info:</td>
+                                            <td><strong><span t-field="o.remelting_quality_control_ids.etching_info"/></strong></td>
+                                        </tr>
+                                        
+                                        
+                                    </table>
 
-        
+                                    <!-- Signature -->
+                                    <div class="row justify-content-end" style="margin-top: 10px;">
+                                        <div class="col-4">
+                                            <div class="compact-section">
+                                                <div style="padding: 5px 5px 5px 5px;">
+                                                    <div style="font-size: 10pt; color: #6c757d;">Please attach the macro images. Confirmation must be on this page.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="compact-section">
+                                                <div class="section-header">OPERATOR</div>
+                                                <div style="padding: 5px 5px 5px 5px;">
+                                                    <div><strong><span t-field="o.remelting_quality_control_ids[0].performer_id"/></strong></div>
+                                                    <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                                                    <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="compact-section">
+                                                <div class="section-header">SUPERVISOR</div>
+                                                <div style="padding: 5px 5px 5px 5px;">
+                                                    <div><strong><span t-field="o.remelting_quality_control_ids[0].responsible_id"/></strong></div>
+                                                    <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                                                    <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-end" style="margin-top: 0px">
+                                        <div class="col-8">
+                                            <div class="compact-section">
+                                                <strong><span>KSB Form No. (if exist): &#160; &#160;</span></strong>
+                                                <span t-field="o.remelting_quality_control_ids[0].ksb_form_no"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <t t-if="o.remelting_quality_control_ids[0].image">
+                                    <div style="display: table-cell; width: 35%; padding: 8px; vertical-align: top; border-right: 1px solid #dee2e6;">
+                                        <img t-att-src="'/web/image/%s/%s/image' % (o.remelting_quality_control_ids[0]._name, o.remelting_operation_ids[0].id)" 
+                                            style="width:300px; max-height:600px; " />
+                                    </div>
+                                </t>
+
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="row justify-content-end">
+                    <div style="font-size: 7pt; text-align: right">FR.87 EK-10</div>
+                </div>
+
+            </div>
+        </t>
+
+
+        <div class="compact-section" >
+            <div class="section-header">REMELTING QUALITY CONTROL</div>
+            <table class="info-table">
+                <tr>
+                    <td class="label-col">Date and Time:</td>
+                    <td><strong><span t-field="o.remelting_quality_control_ids.operation_date_time"/></strong></td>
+                </tr>
+                <tr>
+                    <td class="label-col">Grade:</td>
+                    <td><strong><span t-field="o.component_id.forging_material"/></strong></td>
+                </tr>
+                <tr>
+                    <td class="label-col">Material:</td>
+                    <td>
+                        <strong>ID: </strong>
+                        <span t-field="o.product_id.product_reference_no"/>
+                        <br/>
+                        <strong>Heat No.: </strong>
+                        <span t-field="o.product_id.heat_no"/>
+                    </td>
+                    <td class="label-col">Measurement Result:</td>
+
+                </tr>
+                <tr>
+                    <td class="label-col">Size Measurement Device ID:</td>
+                    <td><strong><span t-field="o.remelting_quality_control_ids.size_measurement_device_id"/></strong></td>
+                    <td><strong><span t-field="o.remelting_quality_control_ids.size_measurement_result"/></strong></td>
+                </tr>
+                <tr>
+                    <td class="label-col">Hardness Measurement Device ID:</td>
+                    <td><strong><span t-field="o.remelting_quality_control_ids.hardness_measurement_device_id"/></strong></td>
+                    <td><strong><span t-field="o.remelting_quality_control_ids.hardness_measurement_result"/></strong></td>
+                </tr>
+                <tr>
+                    <td class="label-col">Weight Measurement Device ID:</td>
+                    <td><strong><span t-field="o.remelting_quality_control_ids.weight_measurement_device_id"/></strong></td>
+                    <td><strong><span t-field="o.remelting_quality_control_ids.weight_measurement_result"/></strong></td>
+                </tr>
+                <tr>
+                    <td class="label-col">Is Heat Treatment Required?</td>
+                    <td><strong><span t-esc="( 'YES' ) if o.remelting_quality_control_ids.heat_treatment_requirement else ( 'NO' )"/></strong></td>
+
+                </tr>
+
+                
+                
+            </table>
+
+            <!-- Signature -->
+            <div class="row justify-content-end" style="margin-top: 10px;">
+                <div class="col-4">
+                    <div class="compact-section">
+                        <div style="padding: 5px 5px 5px 5px;">
+                            <div style="font-size: 10pt; color: #6c757d;">Hardness should be below 260 HB.For exceptional circumstances, please obtain approval from the Process Supervisor.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="compact-section">
+                        <div class="section-header">OPERATOR</div>
+                        <div style="padding: 5px 5px 5px 5px;">
+                            <div><strong><span t-field="o.remelting_quality_control_ids[0].performer_id_2"/></strong></div>
+                            <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                            <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="compact-section">
+                        <div class="section-header">SUPERVISOR</div>
+                        <div style="padding: 5px 5px 5px 5px;">
+                            <div><strong><span t-field="o.remelting_quality_control_ids[0].responsible_id"/></strong></div>
+                            <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                            <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-end" style="margin-top: 0px">
+                <div class="col-8">
+                    <div class="compact-section">
+                        <strong><span>KSB Form No. (if exist): &#160; &#160;</span></strong>
+                        <span t-field="o.remelting_quality_control_ids[0].ksb_form_no_2"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-end">
+                <div style="font-size: 7pt; text-align: right">FR.87 EK-13</div>
+            </div>
+        </div>
+                            
+
+    </t>
 
 
 </template>

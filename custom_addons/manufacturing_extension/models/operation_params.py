@@ -114,12 +114,19 @@ class OperationParamsRemelting(models.Model):
     )
     
     equipment_id = fields.Many2one('maintenance.equipment', string='Smelting Station')
-    new_heat_no = fields.Char(related='workorder_id.production_id.product_id.heat_no', string="Heat Number")
+    new_heat_no = fields.Char(related='workorder_id.production_id.product_id.heat_no', string="New Heat No.", readonly=False)
     process_type = fields.Selection([
         ('var', 'VAR'),
         ('esr', 'ESR')
     ], string='Process Type')
     # material_grade_id = fields.Many2one('material.grade', string='Material Grade')
+    
+    grade = fields.Many2one(related='workorder_id.production_id.product_id.forging_material', string="Grade", readonly=False)
+    
+    component_ids = fields.One2many(
+        related='workorder_id.production_id.move_raw_ids', 
+        string="Component"
+    )
     
     _sql_constraints = [
         ('workorder_unique',

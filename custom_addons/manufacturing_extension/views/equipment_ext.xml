@@ -10,13 +10,13 @@
                 <field name="reference_id"/>
                 <field name="state"/>
                 <field name="used_on_eqiupment"/>
-                <field name="equipment_properties" nolabel="0" columns="2"/>
+                <!-- <field name="equipment_properties" nolabel="0" columns="2"/> -->
                 
             </field>
 
-            <field name="equipment_properties" position="replace">
+            <!-- <field name="equipment_properties" position="replace">
                 <field name="equipment_properties" nolabel="0" columns="2"/>
-            </field>
+            </field> -->
 
 
 

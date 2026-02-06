@@ -47,6 +47,7 @@
         'reports/report_machining_opertions_steps_template.xml',
         'reports/report_smelting_opertions_steps_template.xml',
         'reports/report_remelting_opertions_steps_template.xml',
+        'reports/manufactoring_final_quality_report.xml',
     ],
 
     "assets":{

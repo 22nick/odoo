@@ -11,7 +11,7 @@
                 <field name="material_type_id"/>
                 <field name="material_group_id"/>
                 <field name="density"/>
-                <field name="shrinkage_factor"/>
+                <field name="shrinkage_factor" />
                 <field name="description"/>
 
             </list>
@@ -36,6 +36,7 @@
                         <!-- <field name="material_group_id" options="{'no_create': True, 'no_open': True}"/> -->
                         <field name="material_group_id"/>
                         <field name="density"/>
+                        <field name="shrinkage_factor"/>
                     </group>
                     <group>
                         
@@ -147,6 +148,7 @@
                 <field name="sequence" widget="handle"/>
                 <field name="name"/>
                 <field name="material_type_id" invisible="1"/>
+
 
                 <field name="description"/>
 

@@ -22,5 +22,8 @@ access_standard_info,standard.info,model_standard_info,base.group_user,1,1,1,1
 access_operation_steps_smelting_quality,operation.steps.smelting.quality,model_operation_steps_smelting_quality,base.group_user,1,1,1,1
 access_product_physical_data,product.physical.data,model_product_physical_data,base.group_user,1,1,1,1
 access_product_slag_data,product.slag.data,model_product_slag_data,base.group_user,1,1,1,1
+access_product_types,product.types,model_product_types,base.group_user,1,1,1,1
 access_time_chart,time.chart,model_time_chart,base.group_user,1,1,1,1
 access_time_chart_line,time.chart.line,model_time_chart_line,base.group_user,1,1,1,1
+access_mrp_production_final_quality,mrp.production.final.quality,model_mrp_production_final_quality,base.group_user,1,1,1,1
+access_mrp_production_final_quality_step,mrp.production.final.quality.step,model_mrp_production_final_quality_step,base.group_user,1,1,1,1

@@ -39,6 +39,7 @@ class MrpProduction(models.Model):
     component_reference_no = fields.Char(related='move_raw_ids.product_id.product_reference_no', string="Component Ref.No.")
     manufactoring_explanation_note = fields.Text(string='Explanations')
     
+    final_quality_ids = fields.One2many('mrp.production.final.quality', 'production_id', string='Final Quality')
     
     def action_print_report(self):
         """Метод для печати отчета"""
@@ -171,52 +172,100 @@ class StockMove(models.Model):
                 vals['product_qty'] = self._get_corrected_qty(product_qty, min_qty, max_qty)
         
         return super(StockMove, self).create(vals_list)
-    # move_display_name = fields.Char(
-    #     string='Display Name',
-    #     compute='_compute_move_display_name',
-    #     store=False
-    # )
     
-    # @api.depends('product_id', 'product_id.name', 'product_id.default_code', 'product_uom_qty', 'product_uom')
-    # def _compute_move_display_name(self):
-    #     """Compute display name with product info"""
-    #     for move in self:
-    #         if move.product_id:
-    #             product = move.product_id
-    #             ref = product.default_code or ''
-    #             qty = move.product_uom_qty
-    #             uom = move.product_uom.name if move.product_uom else ''
-                
-    #             name = f"{product.name}"
-    #             if ref:
-    #                 name += f" [{ref}]"
-    #             if qty and uom:
-    #                 name += f" - {qty:.2f} {uom}"
-    #             move.move_display_name = name
-    #         else:
-    #             move.move_display_name = move.name or ''
+
+
+class MrpProductionFinalQuality(models.Model):
+    _name = 'mrp.production.final.quality'
+    _description = 'Production Final Quality Control'
+    _order = 'sequence, id'
     
-    # def name_get(self):
-    #     """Override name_get to show product info for finished moves"""
-    #     result = []
-    #     for move in self:
-    #         # Check if this move is a finished product move
-    #         if move.production_id and move in move.production_id.move_finished_ids:
-    #             if move.product_id:
-    #                 product = move.product_id
-    #                 ref = product.default_code or ''
-    #                 qty = move.product_uom_qty
-    #                 uom = move.product_uom.name if move.product_uom else ''
-                    
-    #                 # Format: "Product Name [REF] - 100.0 kg"
-    #                 name = f"{product.name}"
-    #                 if ref:
-    #                     name += f" [{ref}]"
-    #                 name += f" - {qty:.2f} {uom}"
-    #                 result.append((move.id, name))
-    #             else:
-    #                 result.append((move.id, super(StockMove, move).name_get()[0][1]))
-    #         else:
-    #             # Default behavior for non-finished moves
-    #             result.append((move.id, super(StockMove, move).name_get()[0][1]))
-    #     return result
+    production_id = fields.Many2one(
+        'mrp.production', 
+        string='Manufacturing Order', 
+        required=True,
+        ondelete='cascade',
+        index=True,
+        readonly=True
+    )
+
+    sequence = fields.Integer(string='Sequence', default=10)
+    
+    name = fields.Datetime(string="Date & Time")
+    # operation_date_time = fields.Datetime(string="Operation Date & Time")
+    performer_id = fields.Many2one('res.users', string="Performer")
+    responsible_id = fields.Many2one('res.users', string="Responsible")
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+    
+    controlled_qty = fields.Integer(string="Controlled Quantity")
+    accepted_qty = fields.Integer(string="Accepted Quantity")
+    rejected_qty = fields.Integer(string="Rejected Quantity")
+    non_report_no = fields.Char(string="Non-Comformity Report No.")
+    
+    step_ids = fields.One2many('mrp.production.final.quality.step', 'report_id', string="Step")
+        
+    # QUESTION FIELDS
+    question_1 = fields.Selection(
+        [('yes', 'Yes'),
+         ('no', 'No'),
+         ('na', 'N/A')],
+        string='Overall, is the visual examination result satisfactory?', 
+        default='na')
+    reference_1 = fields.Char(string="Reference Document(s)")
+
+    question_2 = fields.Selection(
+        [('yes', 'Yes'),
+         ('no', 'No'),
+         ('na', 'N/A')],
+        string='Does the material meet the specifications? (If requested with specifications)', 
+        default='na')
+    reference_2 = fields.Char(string="Reference Document(s)")
+        
+    question_3 = fields.Selection(
+        [('yes', 'Yes'),
+         ('no', 'No'),
+         ('na', 'N/A')],
+        string='Does the product conform to the technical drawing? (If applicable)', 
+        default='na')
+    reference_3 = fields.Char(string="Reference Document(s)")
+        
+    question_4 = fields.Selection(
+        [('yes', 'Yes'),
+         ('no', 'No'),
+         ('na', 'N/A')],
+        string='Have tests been conducted? Please attach the test reports if any have been completed.', 
+        default='na')
+    reference_4 = fields.Char(string="Reference Document(s)")
+        
+    question_5 = fields.Selection(
+        [('yes', 'Yes'),
+         ('no', 'No'),
+         ('na', 'N/A')],
+        string='Is there FOD?', 
+        default='na')
+    reference_5 = fields.Char(string="Reference Document(s)")
+        
+    
+    
+        
+class MrpProductionFinalQualityStep(models.Model):
+    _name = 'mrp.production.final.quality.step'
+    _description = 'Production Final Quality Control Step'
+    _order = 'sequence, id'
+    
+    report_id = fields.Many2one(
+        'mrp.production.final.quality', 
+        string='Quality Report', 
+        required=True,
+        ondelete='cascade',
+        # index=True,
+        readonly = True
+    )
+    
+    sequence = fields.Integer(string='Sequence', default=10)
+
+    name = fields.Char(string="Requested Features")
+    requested_values = fields.Char(string="Requested Values (min-max)", infotext="Minimum-maximum value range is entered")
+    measured_values = fields.Char(string="Measured Values")
+    measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
+    reference = fields.Char(string="Referenced Technical Plan/Instructions")

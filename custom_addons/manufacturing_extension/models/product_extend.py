@@ -92,11 +92,16 @@ class ProductProduct(models.Model):
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    product_type = fields.Selection([
-        ('forging', 'Forging'),
-        ('ingot', 'Ingot'),
-        ('part', 'Part'),
-    ], string='Product Type', default='forging')
+    # product_type = fields.Selection([
+    #     ('forging', 'Forging'),
+    #     ('ingot', 'Ingot'),
+    #     ('part', 'Part'),
+    # ], string='Product Type', default='forging')
+    
+    product_type_id = fields.Many2one('product.types', string='Product Type')
+    
+    product_type_properties = fields.Properties('Properties', definition='product_type_id.product_type_properties_definition', copy=True)
+
 
     forging_type = fields.Selection([
         ('round', 'Round Bar'),
@@ -116,7 +121,7 @@ class ProductTemplate(models.Model):
     
     display_dimensions = fields.Char(string='Display Dimensions') #, compute='_compute_display_dimensions')    
     
-    # forging_material = fields.Char(string='Material')
+    # MATERIAL GRADE
     forging_material = fields.Many2one('material.grade', string='Grade of Material')
 
 
@@ -125,10 +130,10 @@ class ProductTemplate(models.Model):
     heat_no = fields.Char(string='Heat No.', required=True, help="Heat Number of the material", default="N/A")
     
     # slag_data_ids = fields.One2many('product.slag.data', 'product_id', string='Slag Inclusion Data')
-    slag_data_id = fields.Many2one('product.slag.data', string='Slag Inclusion Data')
+    # slag_data_id = fields.Many2one('product.slag.data', string='Slag Inclusion Data')
     
     # physical_data_ids = fields.One2many('product.physical.data', 'product_id', string='Physical Data')
-    physical_data_id = fields.Many2one('product.physical.data', string='Physical Data')
+    # physical_data_id = fields.Many2one('product.physical.data', string='Physical Data')
 
 
     @api.model_create_multi
@@ -154,5 +159,68 @@ class ProductTemplate(models.Model):
     @api.onchange('forging_type')
     def _change_forging_type(self):
         print("Forging Type Changed", self)
+        
+class ProductTypes(models.Model):
+    _name = 'product.types'
+    _description = 'Product Type'
+
+    name = fields.Char('Name', required=True)
+    code = fields.Char('Code')
+    active = fields.Boolean(string='Active', default=True)
+    
+    product_type_properties_definition = fields.PropertiesDefinition('Product Type Properties')
+    
+    description = fields.Text(string="Description Notes")
+
+
+# class MaterialGrade(models.Model):
+#     _name = 'material.grade'
+#     _description = 'Material Grade'
+
+#     name = fields.Char('Grade Name', required=True)
+#     description = fields.Text('Description')
+
+class ProductSlagData(models.Model):
+    _name = 'product.slag.data'
+    _description = 'Slag Data for Material'
+    _order = 'sequence, id'
+    
+    
+    # sequence = fields.Integer(string='Sequence', default=11, invisible=True)
+    active = fields.Boolean(string='Active', default=True)
+     
+    name = fields.Char(string="Slag Name", required=True)
+    description = fields.Text(string="Description")
+    
+    # product_id = fields.Many2one('product.template', string='Product')
+    # product_id = fields.One2many('product.product', 'slag_data_id', string='Product')
+    
+    slag_caf2_part = fields.Float(string="Slag CaF2 Part (%)")
+    slag_al2o3_part = fields.Float(string="Slag Al2O3 Part (%)")
+    slag_mgO_part = fields.Float(string="Slag MgO Part (%)")
+    slag_cao_part = fields.Float(string="Slag CaO Part (%)")
+    slag_sio2_part = fields.Float(string="Slag SiO2 Part (%)")
+    slag_tio2_part = fields.Float(string="Slag TiO2 Part (%)")
+    
+    density = fields.Float(string="Density (g/cm3)")
+    
+
+    
+    
+class ProductPhysicalData(models.Model):
+    _name = 'product.physical.data'
+    _description = 'Product Physical Data'
+    _order = 'sequence, id'
+    
+    
+    # sequence = fields.Integer(string='Sequence', default=11, invisible=True)
+    active = fields.Boolean(string='Active', default=True)
+     
+    name = fields.Char(string="Name", required=True)
+    description = fields.Text(string="Description")
+    
+    # product_id = fields.Many2one('product.template', string='Product')
+    # product_id = fields.One2many('product.template', 'physical_data_id', string='Product')
+
         
 

@@ -441,7 +441,8 @@ class OperationStepsCutting(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
     
     sequence = fields.Integer(string='Sequence', default=10)
@@ -475,7 +476,8 @@ class OperationStepsHeating(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
 
 
@@ -574,7 +576,8 @@ class OperationStepsGringing(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
 
 
@@ -613,7 +616,7 @@ class OperationStepsForging(models.Model):
         required=True,
         ondelete='cascade',
         index=True,
-        readonly=True,
+        readonly=True
     )
 
     name = fields.Char(string="Operation Step Name", required=True)
@@ -656,7 +659,7 @@ class OperationStepsMachining(models.Model):
         required=True,
         ondelete='cascade',
         index=True,
-        readonly=True,
+        readonly=True
     )
 
     name = fields.Char(string="Operation Step Name", required=True)
@@ -697,7 +700,8 @@ class OperationStepsWeighing(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
 
 
@@ -726,7 +730,8 @@ class OperationStepsSmelting(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
 
 
@@ -770,7 +775,8 @@ class OperationStepsLeakageTest(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
 
 
@@ -819,7 +825,8 @@ class OperationStepsCasting(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
 
 
@@ -1130,7 +1137,8 @@ class OperationStepsSmeltingQuality(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
 
     # name = fields.Char(string="Operation Step Name", required=True)
@@ -1153,34 +1161,35 @@ class OperationStepsSmeltingQuality(models.Model):
     operation_files = fields.Many2many("ir.attachment", string="Upload Files")
     
     
-class OperationStepsWeighing(models.Model):
-    _name = 'operation.steps.weighing'
-    _description = 'Weighing Operation Steps'
-    _order = 'sequence, id'
+# class OperationStepsWeighing(models.Model):
+#     _name = 'operation.steps.weighing'
+#     _description = 'Weighing Operation Steps'
+#     _order = 'sequence, id'
     
-    workorder_id = fields.Many2one(
-        'mrp.workorder', 
-        string='Work Order', 
-        required=True,
-        ondelete='cascade',
-        index=True
-    )
+#     workorder_id = fields.Many2one(
+#         'mrp.workorder', 
+#         string='Work Order', 
+#         required=True,
+#         ondelete='cascade',
+#         index=True,
+#         readonly=True
+#     )
 
 
-    name = fields.Char(string="Operation Step Name", required=True)
-    sequence = fields.Integer(string='Sequence', default=10)
+#     name = fields.Char(string="Operation Step Name", required=True)
+#     sequence = fields.Integer(string='Sequence', default=10)
     
-    equipment_id = fields.Many2one('maintenance.equipment', string="Measurement Equipment")
+#     equipment_id = fields.Many2one('maintenance.equipment', string="Measurement Equipment")
     
-    # operation_date = fields.Date(string="Operation Date")
+#     # operation_date = fields.Date(string="Operation Date")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    # responsible_id = fields.Many2one('res.users', string="Responsible")
-    # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
-    # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
-    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+#     performer_id = fields.Many2one('res.users', string="Performer")
+#     # responsible_id = fields.Many2one('res.users', string="Responsible")
+#     # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+#     # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
+#     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
 
-    notes = fields.Text(string="Additional Notes")      
+#     notes = fields.Text(string="Additional Notes")      
               
     
 class OperationStepsRemeltingPreparation(models.Model):
@@ -1193,7 +1202,8 @@ class OperationStepsRemeltingPreparation(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
 
     sequence = fields.Integer(string='Sequence', default=10)
@@ -1210,7 +1220,7 @@ class OperationStepsRemeltingPreparation(models.Model):
     
     stub_weight = fields.Float(string="Stub Weight (kg)")
     stub_length = fields.Float(string="Stub Length (mm)")
-    total_length = fields.Float(string="Total Length (mm)")
+    total_length = fields.Float(string="Total Length (mm)", compute='_compute_total_length', store=True, readonly=True)
     
     # HARDNESS CONTROL FIELDS
     quality_date_time = fields.Datetime(string="Control Date & Time")
@@ -1225,6 +1235,8 @@ class OperationStepsRemeltingPreparation(models.Model):
     hardness_average = fields.Float(string="Hardness Average", compute='_compute_hardness_average', store=True, readonly=True)
         
     hardness_UOM =fields.Selection([('hrc','HRC'), ('hb', 'HB')], string="Unit", default='hrc')
+    
+    
 
     @api.depends('hardness_top', 'hardness_middle', 'hardness_bottom')
     def _compute_hardness_average(self):
@@ -1236,6 +1248,11 @@ class OperationStepsRemeltingPreparation(models.Model):
                     total += value
                     count += 1
             record.hardness_average = total / count if count > 0 else 0.0
+            
+    @api.depends('stub_length', 'electrod_length')
+    def _compute_total_length(self):
+        for record in self:
+            record.total_length = record.stub_length + record.electrod_length
 
 class OperationStepsRemeltingQuality(models.Model):
     _name = 'operation.steps.remelting.quality'
@@ -1247,22 +1264,33 @@ class OperationStepsRemeltingQuality(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
 
     sequence = fields.Integer(string='Sequence', default=10)
     
+    # MACROSTRUCTURE FIELDS
     operation_date_time = fields.Datetime(string="Operation Date & Time")
-    
     performer_id = fields.Many2one('res.users', string="Performer")
     responsible_id = fields.Many2one('res.users', string="Responsible")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     etching_info = fields.Char(string="Etching Info")
-    
-    image = fields.Binary(string="Upload Image")
-       
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     operation_files = fields.Many2many("ir.attachment", string="Upload Addition Files")
-
+    image = fields.Binary(string="Upload Image")
+    
+    # QUALITY FIELDS
+    operation_date_time_2 = fields.Datetime(string="Operation Date & Time")
+    performer_id_2 = fields.Many2one('res.users', string="Performer")
+    ksb_form_no_2 = fields.Char(string="KSB Form No. (if exist)")
+    size_measurement_device_id = fields.Many2one('maintenance.equipment', string="Size Measurement Device")
+    hardness_measurement_device_id = fields.Many2one('maintenance.equipment', string="Hardness Measurement Device")
+    weight_measurement_device_id = fields.Many2one('maintenance.equipment', string="Weight Measurement Device")
+    size_measurement_result = fields.Char(string="Size Measurement Result")
+    hardness_measurement_result = fields.Char(string="Hardness Measurement Result")
+    weight_measurement_result = fields.Char(string="Weight Measurement Result")
+    heat_treatment_requirement = fields.Boolean(string="Is Heat Treatment Required?", infotext="Hardness should be below 260 HB.For exceptional circumstances, please obtain approval from the Process Supervisor.")
 
 
 class OperationStepsRemelting(models.Model):
@@ -1275,7 +1303,8 @@ class OperationStepsRemelting(models.Model):
         string='Work Order', 
         required=True,
         ondelete='cascade',
-        index=True
+        index=True,
+        readonly=True
     )
 
     sequence = fields.Integer(string='Sequence', default=10)
@@ -1285,19 +1314,25 @@ class OperationStepsRemelting(models.Model):
     
     performer_id = fields.Many2one('res.users', string="Performer")
     mould_id = fields.Many2one('maintenance.equipment', string="Mould")
+    # equipment_properties = fields.Properties(related='mould_id.equipment_properties', string="Mould Properties", readonly=True)
+    mould_dia = fields.Float( string="Mould Diameter (mm)", readonly=True)
+    
+
+                
     aim_ingot_weight = fields.Float(string="Aim Ingot Weight (kg)")
-    instuction_no = fields.Char(string="Instruction No.")
+    instruction_no = fields.Char(string="Instruction No.")
     
     # start_curve_id = fields.Char(string="Starting Curve ID")
     start_curve_id = fields.Many2one('time.chart', string="Starting Curve ID")
-    start_curve_img = fields.Binary(related='start_curve_id.graph_image', string="Starting Curve Image", store=True)
-    start_time = fields.Integer(string="Starting duration time (min)")
+    start_curve_img = fields.Binary(related='start_curve_id.graph_image', string="Starting Curve Image", store=False)
+    start_time = fields.Integer(string="Starting duration time (min)", compute="_compute_start_time", store=True, readonly=True)
+                
     hottop_start_weight = fields.Float(string="Hottoping Start Weight (kg)")
     
     # hottop_curve_id = fields.Char(string="Hottoping Curve ID")
     hottop_curve_id = fields.Many2one('time.chart', string="Hottoping Curve ID")
-    hottop_curve_img = fields.Binary(related='hottop_curve_id.graph_image', string="Hottoping Curve Image", store=True)
-    hottop_time = fields.Integer(string="Hottoping duration time (min)")
+    hottop_curve_img = fields.Binary(related='hottop_curve_id.graph_image', string="Hottoping Curve Image", store=False)
+    hottop_time = fields.Integer(string="Hottoping duration time (min)", compute="_compute_hottop_time", store=True, readonly=True)
     hottop_stop_weight = fields.Float(string="Hottoping Stop Weight (kg)")
 
     
@@ -1355,6 +1390,42 @@ class OperationStepsRemelting(models.Model):
     continous_slag_dosing = fields.Integer(string="Continuous Slag Dosing (min)")
     # slag_total_weight = fields.Float(string="Slag Total Weight (kg)")
 
-    
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     notes = fields.Text(string="Notes")
     
+    
+    @api.depends("start_curve_id", "start_curve_id.line_ids", "start_curve_id.line_ids.time")
+    def _compute_start_time(self):
+        for record in self:
+            if record.start_curve_id:
+                times = record.start_curve_id.mapped('line_ids.time')
+                record.start_time = int(max(times))
+            else:
+                record.start_time = 0
+                
+                
+    @api.depends("hottop_curve_id", "hottop_curve_id.line_ids", "hottop_curve_id.line_ids.time")
+    def _compute_hottop_time(self):
+        for record in self:
+            if record.hottop_curve_id:
+                times = record.hottop_curve_id.mapped('line_ids.time')
+                record.hottop_time = int(max(times))
+            else:
+                record.hottop_time = 0
+    
+    
+    @api.depends("mould_id")
+    @api.onchange("mould_id")
+    def _compute_mould_dia(self, label='Diameter'):
+        self.ensure_one()
+        # 1. Находим определение свойства по его метке 'string'
+        definition = self.mould_id.category_id.equipment_properties_definition or []
+        prop_def = next((p for p in definition if p.get('string') == label), None)
+
+        if not prop_def:
+            return False
+
+        # 2. Получаем техническое имя (ключ)
+        internal_name = prop_def.get('name')
+        
+        self.mould_dia = self.mould_id.equipment_properties.get(internal_name)
