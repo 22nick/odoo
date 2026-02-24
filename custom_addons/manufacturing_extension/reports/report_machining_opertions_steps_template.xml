@@ -106,8 +106,8 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 5%;">#</th>
-                                                    <th >Ref.No.</th>
                                                     <th >Name</th>
+                                                    <th >Serial.No.</th>
 
                                                 </tr>
                                             </thead>
@@ -118,10 +118,10 @@
                                                             <strong><span t-esc="component_index + 1"/></strong>
                                                         </td>
                                                         <td>
-                                                            <strong><span t-field="component.reference_id"/></strong>
+                                                            <span t-field="component.name"/>
                                                         </td>
                                                         <td>
-                                                            <span t-field="component.name"/>
+                                                            <strong><span t-field="component.serial_no"/></strong>
                                                         </td>
                                                     </tr>
                                                 </t>

@@ -29,8 +29,9 @@
             <div class="section-header">CHARGE INFO</div>
             <table class="info-table">
                 <tr>
-                    <td class="label-col"><div>Mold No:</div></td>
-                    <td><strong><span t-field="o.smelting_operation_params_id.mold_id"/></strong></td>
+                    <td class="label-col"><div>Mould No:</div></td>
+                    <td><strong><span t-field="o.smelting_operation_params_id.mould_id"/>
+                     <span t-field="o.smelting_operation_params_id.mould_id.reference_id"/></strong></td>
                     <td class="label-col"><div>Charge Weight:</div></td>
                     <td><strong><span t-field="o.smelting_operation_params_id.charge_weight"/></strong></td>
                 </tr>
@@ -47,8 +48,8 @@
                     <td><strong><span t-field="o.smelting_operation_params_id.lining_cast_count"/></strong></td>
                 </tr>
                 <tr>
-                    <td class="label-col">Mold Coating:</td>
-                    <td><strong><span t-field="o.smelting_operation_params_id.mold_coating_id"/></strong></td>
+                    <td class="label-col">Mould Coating:</td>
+                    <td><strong><span t-field="o.smelting_operation_params_id.mould_coating_id"/></strong></td>
                     <td class="label-col">Casting Speed:</td>
                     <td><strong><span t-field="o.smelting_operation_params_id.casting_speed"/></strong></td>
                 </tr>
@@ -63,9 +64,10 @@
                         <th style="width: 12%;">Material</th>
                         <th style="width: 10%;">ID</th>
                         <th style="width: 10%;">Heat No.</th>
-                        <th style="width: 10%;">Min, kg</th>
-                        <th style="width: 9%;">Max, kg</th>
-                        <th style="width: 9%;">Chagre Weight, kg</th>
+                        <!-- <th style="width: 10%;">Min, kg</th> -->
+                        <!-- <th style="width: 9%;">Max, kg</th> -->
+                        <th style="width: 9%;">Chagre Weight</th>
+                        <th style="width: 9%;">Weight range</th>
                         <th style="width: 9%;">Scales Dev.Id</th>
 
                     </tr>
@@ -85,17 +87,22 @@
                             <td>
                                 <span t-field="step.product_id.heat_no"/>
                             </td>
-                            <td>
+                            <!-- <td>
                                 <span t-field="step.min_consume_qty"/>
                             </td>
                             <td>
                                 <span t-field="step.max_consume_qty"/>
+                            </td> -->
+                            <td>
+                                <span t-field="step.product_uom_qty"/> 
+                                <span t-field="step.product_uom"/>
                             </td>
                             <td>
-                                <span t-field="step.product_qty"/>
+                                <span t-field="step.min_consume_qty"/> - <span t-field="step.max_consume_qty"/> 
+                                <span t-field="step.product_uom"/>
                             </td>
                             <td>
-                                <span t-field="step.measurement_tool_id"/>
+                                <span t-field="step.measurement_tool_id.reference_id"/>
                             </td>
                             
                         </tr>
@@ -174,111 +181,114 @@
                 </tr>
             </thead>
             <tbody>
-                
-                <tr>
-                    <td>
-                        <span style="font-size: 7pt; text-align: center;">(Reservoir pressure is noted. Main valve is closed. The value after 5 minutes is noted. The difference is calculated.) (Obtain approval from the process supervisor.)</span>
-                    </td>
-                    <td>
-                        <div style="display:flex; justify-content:space-between; width:100%;">
-                                <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[0].chamber_pressure"/></span>
-                                <span><t t-esc="o.leakage_test_operation_ids[0].pressure_uom.name"/></span>
-                        </div>
-                    </td>
-                    <td>
-                        <div style="display:flex; justify-content:space-between; width:100%;">
-                                <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[0].chamber_pressure_5min"/></span>
-                                <span><t t-esc="o.leakage_test_operation_ids[0].pressure_uom.name"/></span>
-                        </div>
-                    </td>
-                    <td>
-                        <div style="display:flex; justify-content:space-between; width:100%;">
-                                <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[0].chamber_pressure_difference"/></span>
-                                <span><t t-esc="o.leakage_test_operation_ids[0].pressure_uom.name"/></span>
-                        </div>
-                    </td>
-                    <td>
-                        <span t-field="o.leakage_test_operation_ids[0].leakage_test_result"/>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-
-        <div class="section-header">PROCESS DATA</div>
-        <table class="steps-table">
-            <thead>
-                <tr>
-                    <th style="width: 15%;">Date and Time</th>
-                    <th style="width: 10%;">Medium (vacuum/argon)</th>
-                    <th style="width: 10%;">Pressure</th>
-                    <th style="width: 10%;">Power, kW</th>
-                    <th style="width: 10%;">
-                        
-                        <table class="info-table">
-                                <tr>
-                                    <td><strong>Pyrometer, oC</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><span t-field="o.smelting_operation_ids[0].pyrometer_id.reference_id"/></td>
-                                </tr>
-                        </table>
-
-                    </th>
-                    <th style="width: 10%;">
-                        <table class="info-table">
-                                <tr>
-                                    <td><strong>Thermocouple, oC</strong></td>
-                                </tr>
-                                <tr>
-                                    <td><span t-field="o.smelting_operation_ids[0].thermocouple_id.reference_id"/></td>
-                                </tr>
-                        </table>
-                    
-                    </th>
-                    <th style="width: 10%;">Note</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <t t-foreach="o.smelting_operation_ids" t-as="step">
+                <t t-if="o.leakage_test_operation_ids">
                     <tr>
                         <td>
-                            <span t-field="step.operation_date_time"/>
-                        </td>
-                        <td>
-                            <span t-field="step.medium"/>
+                            <span style="font-size: 7pt; text-align: center;">(Reservoir pressure is noted. Main valve is closed. The value after 5 minutes is noted. The difference is calculated.) (Obtain approval from the process supervisor.)</span>
                         </td>
                         <td>
                             <div style="display:flex; justify-content:space-between; width:100%;">
-                                <span>
-                                    <t t-esc="'%.3e' % step.pressure"/>
-                                </span>
-                                <span>
-                                    <t t-esc="step.pressure_uom.name"/>
-                                </span>
+                                    <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[0].chamber_pressure"/></span>
+                                    <span><t t-esc="o.leakage_test_operation_ids[0].pressure_uom.name"/></span>
                             </div>
-
-                            <!-- <span t-esc="'%.3e' % step.pressure"/>  <span style="font-size: 7pt; text-align: center;" t-field="step.pressure_uom"/> -->
                         </td>
                         <td>
-                            <span t-field="step.power"/>
+                            <div style="display:flex; justify-content:space-between; width:100%;">
+                                    <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[0].chamber_pressure_5min"/></span>
+                                    <span><t t-esc="o.leakage_test_operation_ids[0].pressure_uom.name"/></span>
+                            </div>
                         </td>
                         <td>
-                            <span t-field="step.pyrometer_value"/>
+                            <div style="display:flex; justify-content:space-between; width:100%;">
+                                    <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[0].chamber_pressure_difference"/></span>
+                                    <span><t t-esc="o.leakage_test_operation_ids[0].pressure_uom.name"/></span>
+                            </div>
                         </td>
                         <td>
-                            <span t-field="step.thermocouple_value"/>
-                        </td>
-                        <td>
-                            <span t-field="step.notes"/>
+                            <span t-field="o.leakage_test_operation_ids[0].leakage_test_result"/>
                         </td>
                     </tr>
                 </t>
-
             </tbody>
         </table>
 
+        <t t-if="o.smelting_operation_ids">
+            <div class="section-header">PROCESS DATA</div>
+            <table class="steps-table">
+                <thead>
+                    <tr>
+                        <th style="width: 15%;">Date and Time</th>
+                        <th style="width: 10%;">Medium (vacuum/argon)</th>
+                        <th style="width: 10%;">Pressure</th>
+                        <th style="width: 10%;">Power, kW</th>
+                        <th style="width: 10%;">
+                            
+                            <table class="info-table">
+                                    <tr>
+                                        <td><strong>Pyrometer, oC</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span t-field="o.smelting_operation_ids[0].pyrometer_id.reference_id"/></td>
+                                    </tr>
+                            </table>
+
+                        </th>
+                        <th style="width: 10%;">
+                            <table class="info-table">
+                                    <tr>
+                                        <td><strong>Thermocouple, oC</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span t-field="o.smelting_operation_ids[0].thermocouple_id.reference_id"/></td>
+                                    </tr>
+                            </table>
+                        
+                        </th>
+                        <th style="width: 10%;">Note</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="o.smelting_operation_ids" t-as="step">
+                        <tr>
+                            <td>
+                                <span t-field="step.operation_date_time"/>
+                            </td>
+                            <td>
+                                <span t-field="step.medium"/>
+                            </td>
+                            <td>
+                                <div style="display:flex; justify-content:space-between; width:100%;">
+                                    <span>
+                                        <t t-esc="'%.3e' % step.pressure"/>
+                                    </span>
+                                    <span>
+                                        <t t-esc="step.pressure_uom.name"/>
+                                    </span>
+                                </div>
+
+                                <!-- <span t-esc="'%.3e' % step.pressure"/>  <span style="font-size: 7pt; text-align: center;" t-field="step.pressure_uom"/> -->
+                            </td>
+                            <td>
+                                <span t-field="step.power"/>
+                            </td>
+                            <td>
+                                <span t-field="step.pyrometer_value"/>
+                            </td>
+                            <td>
+                                <span t-field="step.thermocouple_value"/>
+                            </td>
+                            <td>
+                                <span t-field="step.notes"/>
+                            </td>
+                        </tr>
+                    </t>
+
+                </tbody>
+            </table>
+        </t>
+
+        
         <div class="section-header">REFINING LEAKAGE TEST</div>
         <table class="steps-table">
             <thead>
@@ -292,34 +302,34 @@
                 </tr>
             </thead>
             <tbody>
-                
-                <tr>
-                    <td>
-                        <span style="font-size: 7pt; text-align: center;">(Reservoir pressure is noted. Main valve is closed. The value after 5 minutes is noted. The difference is calculated.) (Obtain approval from the process supervisor.)</span>
-                    </td>
-                    <td>
-                        <div style="display:flex; justify-content:space-between; width:100%;">
-                                <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[1].chamber_pressure"/></span>
-                                <span><t t-esc="o.leakage_test_operation_ids[1].pressure_uom.name"/></span>
-                        </div>
-                    </td>
-                    <td>
-                        <div style="display:flex; justify-content:space-between; width:100%;">
-                                <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[1].chamber_pressure_5min"/></span>
-                                <span><t t-esc="o.leakage_test_operation_ids[1].pressure_uom.name"/></span>
-                        </div>
-                    </td>
-                    <td>
-                        <div style="display:flex; justify-content:space-between; width:100%;">
-                                <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[1].chamber_pressure_difference"/></span>
-                                <span><t t-esc="o.leakage_test_operation_ids[1].pressure_uom.name"/></span>
-                        </div>
-                    </td>
-                    <td>
-                        <span t-field="o.leakage_test_operation_ids[1].leakage_test_result"/>
-                    </td>
-                </tr>
-
+                <t t-if="len(o.leakage_test_operation_ids) &gt; 1">
+                    <tr>
+                        <td>
+                            <span style="font-size: 7pt; text-align: center;">(Reservoir pressure is noted. Main valve is closed. The value after 5 minutes is noted. The difference is calculated.) (Obtain approval from the process supervisor.)</span>
+                        </td>
+                        <td>
+                            <div style="display:flex; justify-content:space-between; width:100%;">
+                                    <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[1].chamber_pressure"/></span>
+                                    <span><t t-esc="o.leakage_test_operation_ids[1].pressure_uom.name"/></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display:flex; justify-content:space-between; width:100%;">
+                                    <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[1].chamber_pressure_5min"/></span>
+                                    <span><t t-esc="o.leakage_test_operation_ids[1].pressure_uom.name"/></span>
+                            </div>
+                        </td>
+                        <td>
+                            <div style="display:flex; justify-content:space-between; width:100%;">
+                                    <span><t t-esc="'%.3e' % o.leakage_test_operation_ids[1].chamber_pressure_difference"/></span>
+                                    <span><t t-esc="o.leakage_test_operation_ids[1].pressure_uom.name"/></span>
+                            </div>
+                        </td>
+                        <td>
+                            <span t-field="o.leakage_test_operation_ids[1].leakage_test_result"/>
+                        </td>
+                    </tr>
+                </t>
             </tbody>
         </table>
 
@@ -377,8 +387,8 @@
                 <tr>
                     <td class="label-col"><div>Total weignt:</div></td>
                     <td><strong><span t-field="o.casting_operation_ids[0].total_weight"/></strong></td>
-                    <td class="label-col"><div>Mold Qty:</div></td>
-                    <td><strong><span t-field="o.casting_operation_ids[0].mold_number"/></strong></td>
+                    <td class="label-col"><div>Mould Qty:</div></td>
+                    <td><strong><span t-field="o.casting_operation_ids[0].mould_number"/></strong></td>
                 </tr>
             </table>
 
@@ -386,6 +396,7 @@
             <table class="steps-table">
                 <thead>
                     <tr>
+                        <th style="width: 5%;">Ingot No.</th>
                         <th style="width: 15%;">Ingot Mat.Id.</th>
                         <th style="width: 10%;">Ingot weight, kg</th>
                         <th style="width: 10%;">Hottop height, mm</th>
@@ -396,6 +407,9 @@
                 <tbody>
                     <t t-foreach="o.casting_operation_ids" t-as="step">
                         <tr>
+                            <td class="text-center">
+                                <strong><span t-esc="step_index + 1"/></strong>
+                            </td>
                             <td>
                                 <span t-field="step.ingot_product_id.product_reference_no"/>
                             </td>

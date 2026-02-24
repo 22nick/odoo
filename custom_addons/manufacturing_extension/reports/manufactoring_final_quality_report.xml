@@ -16,337 +16,340 @@
     <template id="report_manufactoring_final_quality_document">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
-                <t t-call="web.external_layout">
-                    <div class="page">
-                        <style>
-                            .page {
-                                font-size: 9pt;
-                                line-height: 1.2;
-                            }
-                            .compact-section {
-                                border: 1px solid #333;
-                                padding: 6px;
-                                margin-bottom: 8px;
-                            }
-                            .section-header {
-                                background-color: #e9ecef;
-                                padding: 4px 8px;
-                                margin: -6px -6px 6px -6px;
-                                font-weight: bold;
-                                font-size: 10pt;
-                                border-bottom: 1px solid #333;
-                            }
-                            .info-table {
-                                width: 100%;
-                                border-collapse: collapse;
-                                margin-bottom: 8px;
-                                font-size: 8.5pt;
-                            }
-                            .info-table td {
-                                padding: 3px 5px;
-                                border: 1px solid #dee2e6;
-                                vertical-align: top;
-                            }
-                            .info-table td.label-col {
-                                width: 28%;
-                                background-color: #f8f9fa;
-                                font-weight: bold;
-                                color: #495057;
-                                font-size: 8pt;
-                            }
-                            .info-table td.label-col4 {
-                                width: 15%;
-                                background-color: #f8f9fa;
-                                font-weight: bold;
-                                color: #495057;
-                                font-size: 8pt;
-                            }
-                            .info-table td.label-col3 {
-                                width: 20%;
-                                background-color: #f8f9fa;
-                                font-weight: bold;
-                                color: #495057;
-                                font-size: 8pt;
-                            }
-                            .steps-table {
-                                width: 100%;
-                                border-collapse: collapse;
-                                margin-top: 8px;
-                            }
-                            .steps-table thead th {
-                                background-color: #f8f9fa;
-                                <!-- color: white; -->
-                                padding: 5px 3px;
-                                text-align: center;
-                                font-weight: bold;
-                                color: #495057;
-                                font-size: 8pt;
-                                border: 1px solid #222;
-                                line-height: 1.1;
-                            }
-                            .steps-table tbody td {
-                                padding: 4px 3px;
-                                border: 1px solid #dee2e6;
-                                font-size: 7.5pt;
-                                vertical-align: top;
-                                text-align: right;
-                            }
-                            .steps-table tbody tr:nth-child(even) {
-                                background-color: #f8f9fa;
-                            }
-                            .steps-table tfoot td {
-                                padding: 5px 8px;
-                                border: 2px solid #333;
-                                font-size: 8pt;
-                                background-color: #e9ecef;
-                            }
-                            .badge-sm {
-                                display: inline-block;
-                                padding: 2px 6px;
-                                border-radius: 2px;
-                                font-size: 7.5pt;
-                                font-weight: bold;
-                                color: white;
-                            }
-                            .text-right {
-                                text-align: right;
-                            }
-                            .text-center {
-                                text-align: center;
-                            }
-                            .text-left {
-                                text-align: left;
-                            }
-                            .notes-section {
-                                background-color: #f8f9fa;
-                                border: 1px solid #dee2e6;
-                                padding: 5px;
-                                margin-top: 3px;
-                                font-size: 7pt;
-                                border-radius: 2px;
-                            }
-                            .footer-info {
-                                margin-top: 12px;
-                                padding-top: 6px;
-                                border-top: 1px solid #dee2e6;
-                                font-size: 7pt;
-                                color: #6c757d;
-                            }
-                            .signature-box {
-                                border: 1px solid #dee2e6;
-                                padding: 10px;
-                                border-radius: 3px;
-                            }
-                            .signature-line {
-                                margin-top: 20px;
-                                border-bottom: 1px solid #333;
-                                width: 80%;
-                            }
-                            h1.title {
-                                margin: 0;
-                                font-size: 18pt;
-                            }
-                            h3.subtitle {
-                                margin: 3px 0 0 0;
-                                font-weight: normal;
-                                font-size: 12pt;
-                                color: #6c757d;
-                            }
-                            .sub {
-                                font-size: 70%;
-                            }
-                        </style>
+                <t t-if="o.final_quality_ids">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <style>
+                                .page {
+                                    font-size: 9pt;
+                                    line-height: 1.2;
+                                }
+                                .compact-section {
+                                    border: 1px solid #333;
+                                    padding: 6px;
+                                    margin-bottom: 8px;
+                                }
+                                .section-header {
+                                    background-color: #e9ecef;
+                                    padding: 4px 8px;
+                                    margin: -6px -6px 6px -6px;
+                                    font-weight: bold;
+                                    font-size: 10pt;
+                                    border-bottom: 1px solid #333;
+                                }
+                                .info-table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                    margin-bottom: 8px;
+                                    font-size: 8.5pt;
+                                }
+                                .info-table td {
+                                    padding: 3px 5px;
+                                    border: 1px solid #dee2e6;
+                                    vertical-align: top;
+                                }
+                                .info-table td.label-col {
+                                    width: 28%;
+                                    background-color: #f8f9fa;
+                                    font-weight: bold;
+                                    color: #495057;
+                                    font-size: 8pt;
+                                }
+                                .info-table td.label-col4 {
+                                    width: 15%;
+                                    background-color: #f8f9fa;
+                                    font-weight: bold;
+                                    color: #495057;
+                                    font-size: 8pt;
+                                }
+                                .info-table td.label-col3 {
+                                    width: 20%;
+                                    background-color: #f8f9fa;
+                                    font-weight: bold;
+                                    color: #495057;
+                                    font-size: 8pt;
+                                }
+                                .steps-table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                    margin-top: 8px;
+                                }
+                                .steps-table thead th {
+                                    background-color: #f8f9fa;
+                                    <!-- color: white; -->
+                                    padding: 5px 3px;
+                                    text-align: center;
+                                    font-weight: bold;
+                                    color: #495057;
+                                    font-size: 8pt;
+                                    border: 1px solid #222;
+                                    line-height: 1.1;
+                                }
+                                .steps-table tbody td {
+                                    padding: 4px 3px;
+                                    border: 1px solid #dee2e6;
+                                    font-size: 7.5pt;
+                                    vertical-align: top;
+                                    text-align: right;
+                                }
+                                .steps-table tbody tr:nth-child(even) {
+                                    background-color: #f8f9fa;
+                                }
+                                .steps-table tfoot td {
+                                    padding: 5px 8px;
+                                    border: 2px solid #333;
+                                    font-size: 8pt;
+                                    background-color: #e9ecef;
+                                }
+                                .badge-sm {
+                                    display: inline-block;
+                                    padding: 2px 6px;
+                                    border-radius: 2px;
+                                    font-size: 7.5pt;
+                                    font-weight: bold;
+                                    color: white;
+                                }
+                                .text-right {
+                                    text-align: right;
+                                }
+                                .text-center {
+                                    text-align: center;
+                                }
+                                .text-left {
+                                    text-align: left;
+                                }
+                                .notes-section {
+                                    background-color: #f8f9fa;
+                                    border: 1px solid #dee2e6;
+                                    padding: 5px;
+                                    margin-top: 3px;
+                                    font-size: 7pt;
+                                    border-radius: 2px;
+                                }
+                                .footer-info {
+                                    margin-top: 12px;
+                                    padding-top: 6px;
+                                    border-top: 1px solid #dee2e6;
+                                    font-size: 7pt;
+                                    color: #6c757d;
+                                }
+                                .signature-box {
+                                    border: 1px solid #dee2e6;
+                                    padding: 10px;
+                                    border-radius: 3px;
+                                }
+                                .signature-line {
+                                    margin-top: 20px;
+                                    border-bottom: 1px solid #333;
+                                    width: 80%;
+                                }
+                                h1.title {
+                                    margin: 0;
+                                    font-size: 18pt;
+                                }
+                                h3.subtitle {
+                                    margin: 3px 0 0 0;
+                                    font-weight: normal;
+                                    font-size: 12pt;
+                                    color: #6c757d;
+                                }
+                                .sub {
+                                    font-size: 70%;
+                                }
+                            </style>
 
-                        <!-- Header Section -->
-                        <div class="text-center">
-                            <h1 class="title">FINAL QUALITY REPORT</h1>
-                            <h3 class="subtitle">
-                                <span t-field="o.name"/>
-                            </h3>
-                        </div>
+                            
+                            <!-- Header Section -->
+                            <div class="text-center">
+                                <h1 class="title">FINAL QUALITY REPORT</h1>
+                                <h3 class="subtitle">
+                                    <span t-field="o.name"/>
+                                </h3>
+                            </div>
 
-                        <!-- Order Information -->
-                        <div class="compact-section">
-                            <div class="section-header">ORDER INFORMATION</div>
-                            <table class="info-table">
-                                <tr>
-                                    <td class="label-col4"><div>Order No:</div></td>
-                                    <td><strong><span t-field="o.name"/></strong></td>
-                                    <td class="label-col4">Date/Time:</td>
-                                    <td><span t-field="o.final_quality_ids.name"/></td>
-                                </tr>
-                                <t t-foreach="o.move_finished_ids.product_id" t-as="product">
+                            <!-- Order Information -->
+                            <div class="compact-section">
+                                <div class="section-header">ORDER INFORMATION</div>
+                                <table class="info-table">
                                     <tr>
-                                        <td class="label-col4">Product:</td>
-                                        <td>
-                                            <strong>ID: </strong>
-                                            <span t-field="product.product_reference_no"/>
-                                            <strong> &#160; &#160;Heat No.: </strong>
-                                            <span t-field="product.heat_no"/>
-                                            
-                                        </td>
+                                        <td class="label-col4"><div>Order No:</div></td>
+                                        <td><strong><span t-field="o.name"/></strong></td>
+                                        <td class="label-col4">Date/Time:</td>
+                                        <td><span t-field="o.final_quality_ids.name"/></td>
                                     </tr>
-                                </t>
-                            </table>
+                                    <t t-foreach="o.move_finished_ids.product_id" t-as="product">
+                                        <tr>
+                                            <td class="label-col4">Product:</td>
+                                            <td>
+                                                <strong>ID: </strong>
+                                                <span t-field="product.product_reference_no"/>
+                                                <strong> &#160; &#160;Heat No.: </strong>
+                                                <span t-field="product.heat_no"/>
+                                                
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </table>
 
-                            <!-- Cutting Operations Steps -->
-                            <t t-if="o.final_quality_ids">
-                                <t t-if="o.final_quality_ids.step_ids">
-                                    <div class="section-header">CONTROL PARAMETERS</div>
+                                <!-- Cutting Operations Steps -->
+                                <t t-if="o.final_quality_ids">
+                                    <t t-if="o.final_quality_ids.step_ids">
+                                        <div class="section-header">CONTROL PARAMETERS</div>
+                                        <table class="steps-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 3%;">#</th>
+                                                    <th style="width: 9%;">Requested Features</th>
+                                                    <th style="width: 15%;">Requested Values (min-max)<sub class="sub">2</sub> (%)</th>
+                                                    <th style="width: 9%;">Measured Values<sub class="sub">2</sub>O<sub class="sub">3</sub> (%)</th>
+                                                    <th style="width: 9%;">Measurement Device</th>
+                                                    <th style="width: 25%;">Referenced Technical Plan/Instructions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <t t-foreach="o.final_quality_ids.step_ids" t-as="step">
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            <strong><span t-esc="step_index + 1"/></strong>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="step.name"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="step.requested_values"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="step.measured_values"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="step.measurement_device_id"/>
+                                                        </td>
+                                                        <td>
+                                                            <span t-field="step.reference"/>
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                    </t>
+
+                                    <div class="section-header">CHECKLIST</div>
                                     <table class="steps-table">
                                         <thead>
                                             <tr>
                                                 <th style="width: 3%;">#</th>
-                                                <th style="width: 9%;">Requested Features</th>
-                                                <th style="width: 15%;">Requested Values (min-max)<sub class="sub">2</sub> (%)</th>
-                                                <th style="width: 9%;">Measured Values<sub class="sub">2</sub>O<sub class="sub">3</sub> (%)</th>
-                                                <th style="width: 9%;">Measurement Device</th>
-                                                <th style="width: 25%;">Referenced Technical Plan/Instructions</th>
+                                                <th style="width: 60%;">Question</th>
+                                                <th style="width: 10%;">Result</th>
+                                                <th style="width: 20%;">Reference Document(s)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <t t-foreach="o.final_quality_ids.step_ids" t-as="step">
-                                                <tr>
-                                                    <td class="text-center">
-                                                        <strong><span t-esc="step_index + 1"/></strong>
-                                                    </td>
-                                                    <td>
-                                                        <span t-field="step.name"/>
-                                                    </td>
-                                                    <td>
-                                                        <span t-field="step.requested_values"/>
-                                                    </td>
-                                                    <td>
-                                                        <span t-field="step.measured_values"/>
-                                                    </td>
-                                                    <td>
-                                                        <span t-field="step.measurement_device_id"/>
-                                                    </td>
-                                                    <td>
-                                                        <span t-field="step.reference"/>
-                                                    </td>
-                                                </tr>
-                                            </t>
+                                            <tr>
+                                                <td class="text-center"><strong>1</strong></td>
+                                                <td style="text-align: left"><span t-esc="o.final_quality_ids._fields['question_1'].string"/></td>
+                                                <td class="text-center"><span t-field="o.final_quality_ids.question_1"/></td>
+                                                <td class="text-center"><span t-field="o.final_quality_ids.reference_1"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center"><strong>2</strong></td>
+                                                <td style="text-align: left"><span t-esc="o.final_quality_ids._fields['question_2'].string"/></td>
+                                                <td class="text-center"><span t-field="o.final_quality_ids.question_2"/></td>
+                                                <td class="text-center"><span t-field="o.final_quality_ids.reference_2"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center"><strong>3</strong></td>
+                                                <td style="text-align: left"><span t-esc="o.final_quality_ids._fields['question_3'].string"/></td>
+                                                <td class="text-center"><span t-field="o.final_quality_ids.question_3"/></td>
+                                                <td class="text-center"><span t-field="o.final_quality_ids.reference_3"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center"><strong>4</strong></td>
+                                                <td style="text-align: left"><span t-esc="o.final_quality_ids._fields['question_4'].string"/></td>
+                                                <td class="text-center"><span t-field="o.final_quality_ids.question_4"/></td>
+                                                <td class="text-center"><span t-field="o.final_quality_ids.reference_4"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center"><strong>5</strong></td>
+                                                <td style="text-align: left"><span t-esc="o.final_quality_ids._fields['question_5'].string"/></td>
+                                                <td class="text-center"><span t-field="o.final_quality_ids.question_5"/></td>
+                                                <td class="text-center"><span t-field="o.final_quality_ids.reference_5"/></td>
+                                            </tr>
+
                                         </tbody>
                                     </table>
                                 </t>
 
-                                <div class="section-header">CHECKLIST</div>
-                                <table class="steps-table">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 3%;">#</th>
-                                            <th style="width: 60%;">Question</th>
-                                            <th style="width: 10%;">Result</th>
-                                            <th style="width: 20%;">Reference Document(s)</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-center"><strong>1</strong></td>
-                                            <td style="text-align: left"><span t-esc="o.final_quality_ids._fields['question_1'].string"/></td>
-                                            <td class="text-center"><span t-field="o.final_quality_ids.question_1"/></td>
-                                            <td class="text-center"><span t-field="o.final_quality_ids.reference_1"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center"><strong>2</strong></td>
-                                            <td style="text-align: left"><span t-esc="o.final_quality_ids._fields['question_2'].string"/></td>
-                                            <td class="text-center"><span t-field="o.final_quality_ids.question_2"/></td>
-                                            <td class="text-center"><span t-field="o.final_quality_ids.reference_2"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center"><strong>3</strong></td>
-                                            <td style="text-align: left"><span t-esc="o.final_quality_ids._fields['question_3'].string"/></td>
-                                            <td class="text-center"><span t-field="o.final_quality_ids.question_3"/></td>
-                                            <td class="text-center"><span t-field="o.final_quality_ids.reference_3"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center"><strong>4</strong></td>
-                                            <td style="text-align: left"><span t-esc="o.final_quality_ids._fields['question_4'].string"/></td>
-                                            <td class="text-center"><span t-field="o.final_quality_ids.question_4"/></td>
-                                            <td class="text-center"><span t-field="o.final_quality_ids.reference_4"/></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center"><strong>5</strong></td>
-                                            <td style="text-align: left"><span t-esc="o.final_quality_ids._fields['question_5'].string"/></td>
-                                            <td class="text-center"><span t-field="o.final_quality_ids.question_5"/></td>
-                                            <td class="text-center"><span t-field="o.final_quality_ids.reference_5"/></td>
-                                        </tr>
+                                <!-- Signature -->
+                                <div class="row justify-content-end" style="margin-top: 10px;">
+                                    <div class="col-6">
+                                        <div class="compact-section">
+                                            <div style="padding: 5px 5px 5px 5px;">
+                                                <table class="info-table">
+                                                    <tr>
+                                                        <td class="label-col"><div>Controlled Qty:</div></td>
+                                                        <td><strong><span t-field="o.final_quality_ids.controlled_qty"/></strong></td>
+                                                        <td class="label-col">Rejected Qty:</td>
+                                                        <td><span t-field="o.final_quality_ids.rejected_qty"/></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="label-col">Accepted Qty:</td>
+                                                        <td><span t-field="o.final_quality_ids.accepted_qty"/></td>
+                                                        <td class="label-col">Non-Comf. Report No.:</td>
+                                                        <td><span t-field="o.final_quality_ids.non_report_no"/></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="compact-section">
+                                            <div class="section-header">OPERATOR</div>
+                                            <div style="padding: 5px 5px 5px 5px;">
+                                                <div><strong><span t-field="o.final_quality_ids.performer_id"/></strong></div>
+                                                <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                                                <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="compact-section">
+                                            <div class="section-header">SUPERVISOR</div>
+                                            <div style="padding: 5px 5px 5px 5px;">
+                                                <div><strong><span t-field="o.final_quality_ids.responsible_id"/></strong></div>
+                                                <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
+                                                <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
+                                            </div>
+                                        </div>
+                                        <div class="compact-section">
+                                            <strong><span>KSB Form No. (if exist): &#160; &#160;</span></strong>
+                                            <span t-field="o.final_quality_ids.ksb_form_no"/>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                    </tbody>
+                                <div class="row justify-content-end">
+                                    <div style="font-size: 7pt; text-align: right">FR.87 EK-16</div>
+                                </div>
+
+                            </div>
+
+                            
+                            <!-- Footer -->
+                            <div class="footer-info">
+                                <table style="width: 100%;">
+                                    <tr>
+                                        <td style="width: 50%;">
+                                            <strong>Company:</strong> <span t-field="o.company_id"/>
+                                        </td>
+                                        <td style="width: 50%; text-align: right;">
+                                            <strong>Generated:</strong> 
+                                            <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
+                                        </td>
+                                    </tr>
                                 </table>
-                            </t>
-
-                            <!-- Signature -->
-                            <div class="row justify-content-end" style="margin-top: 10px;">
-                                <div class="col-6">
-                                    <div class="compact-section">
-                                        <div style="padding: 5px 5px 5px 5px;">
-                                            <table class="info-table">
-                                                <tr>
-                                                    <td class="label-col"><div>Controlled Qty:</div></td>
-                                                    <td><strong><span t-field="o.final_quality_ids.controlled_qty"/></strong></td>
-                                                    <td class="label-col">Rejected Qty:</td>
-                                                    <td><span t-field="o.final_quality_ids.rejected_qty"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="label-col">Accepted Qty:</td>
-                                                    <td><span t-field="o.final_quality_ids.accepted_qty"/></td>
-                                                    <td class="label-col">Non-Comf. Report No.:</td>
-                                                    <td><span t-field="o.final_quality_ids.non_report_no"/></td>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="compact-section">
-                                        <div class="section-header">OPERATOR</div>
-                                        <div style="padding: 5px 5px 5px 5px;">
-                                            <div><strong><span t-field="o.final_quality_ids.performer_id"/></strong></div>
-                                            <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
-                                            <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-3">
-                                    <div class="compact-section">
-                                        <div class="section-header">SUPERVISOR</div>
-                                        <div style="padding: 5px 5px 5px 5px;">
-                                            <div><strong><span t-field="o.final_quality_ids.responsible_id"/></strong></div>
-                                            <div style="border-bottom: 1px solid #333; margin-bottom: 3px;"></div>
-                                            <div style="font-size: 7pt; color: #6c757d;">Signature / Date</div>
-                                        </div>
-                                    </div>
-                                    <div class="compact-section">
-                                        <strong><span>KSB Form No. (if exist): &#160; &#160;</span></strong>
-                                        <span t-field="o.final_quality_ids.ksb_form_no"/>
-                                    </div>
-                                </div>
                             </div>
-
-                            <div class="row justify-content-end">
-                                <div style="font-size: 7pt; text-align: right">FR.87 EK-16</div>
-                            </div>
-
                         </div>
-
-                        
-                        <!-- Footer -->
-                        <div class="footer-info">
-                            <table style="width: 100%;">
-                                <tr>
-                                    <td style="width: 50%;">
-                                        <strong>Company:</strong> <span t-field="o.company_id"/>
-                                    </td>
-                                    <td style="width: 50%; text-align: right;">
-                                        <strong>Generated:</strong> 
-                                        <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d %H:%M')"/>
-                                    </td>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
+                    </t>
                 </t>
             </t>
         </t>

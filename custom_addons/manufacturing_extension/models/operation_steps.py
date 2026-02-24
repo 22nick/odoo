@@ -764,6 +764,12 @@ class OperationStepsSmelting(models.Model):
 
     notes = fields.Char(string="Notes")
     
+    def action_duplicate_line(self):
+        for rec in self:
+            rec.copy({
+                'id': rec.id,
+            })
+    
     
 class OperationStepsLeakageTest(models.Model):
     _name = 'operation.steps.leakage.test'
@@ -791,10 +797,10 @@ class OperationStepsLeakageTest(models.Model):
     # responsible_id = fields.Many2one('res.users', string="Responsible")
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     # Vakuum leakage test (before smelting)
-    chamber_pressure = fields.Float(string="Chamber Pressure (mbar)", digits='Process Parameter')
-    chamber_pressure_5min = fields.Float(string="Chamber Pressure after 5 min (mbar)", digits='Process Parameter')
+    chamber_pressure = fields.Float(string="Chamber Pressure", digits='Process Parameter')
+    chamber_pressure_5min = fields.Float(string="Chamber Pressure after 5 min", digits='Process Parameter')
     chamber_pressure_difference = fields.Float(
-        string="Chamber Pressure Difference (mbar)", 
+        string="Chamber Pressure Difference", 
         digits='Process Parameter',
         compute='_compute_chamber_pressure_difference',
         store=True,
@@ -851,9 +857,9 @@ class OperationStepsCasting(models.Model):
     heat_no = fields.Char(related='ingot_product_id.heat_no', string="Heat Number", readonly=False) # New heat number field
     
     # Can be calculated from step reports
-    mold_number = fields.Integer(
-        string="Mold Qty",
-        compute='_compute_mold_number',
+    mould_number = fields.Integer(
+        string="Mould Qty",
+        compute='_compute_mould_number',
         store=True,
         readonly=True
     )
@@ -1025,12 +1031,12 @@ class OperationStepsCasting(models.Model):
                 record.heat_no = False
     
     @api.depends('workorder_id', 'workorder_id.casting_operation_ids')
-    def _compute_mold_number(self):
+    def _compute_mould_number(self):
         """Calculate mold number as count of all casting steps for this workorder"""
         for record in self:
             if record.workorder_id:
                 # Count all casting steps for this workorder
-                record.mold_number = self.env['operation.steps.casting'].search_count([
+                record.mould_number = self.env['operation.steps.casting'].search_count([
                     ('workorder_id', 'in', record.workorder_id.ids)
                 ])
             else:

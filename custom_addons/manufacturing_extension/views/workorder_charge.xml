@@ -85,7 +85,13 @@
                     
                     <field name="smelting_operation_params_id" nolabel="1">
                         <list>
-                            <field name="equipment_id"/>
+                            <field name="equipment_id" 
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Melting and casting workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                             <field name="new_heat_no"/>
                             <field name="material_grade_id"/>
                             <field name="charge_weight"/>
@@ -98,7 +104,13 @@
                                 <group colspan="2">
                                     <group>
                                         <!-- <field name="sequence" invisible="1"/> -->
-                                        <field name="equipment_id"/>
+                                        <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Melting and casting workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                                         <field name="new_heat_no"/>
 
                                     </group>
@@ -109,10 +121,10 @@
                                 </group>
                                 <group string="Charge Details" colspan="2">
                                     <group>
-                                        <field name="mold_id"/>
+                                        <field name="mould_id"/>
                                         <field name="hottop_id"/>
                                         <field name="tundish_id"/>
-                                        <field name="mold_coating_id"/>
+                                        <field name="mould_coating_id"/>
                                     </group>
                                     <group>
                                         <field name="charge_weight"/>
@@ -130,7 +142,21 @@
                                     </group>
                                 </group>
                                 <group string="Components" colspan="2">
-                                    <field name="component_ids" widget="many2many" readonly="0" nolabel="1"/>
+                                    <!-- <field name="component_ids" widget="many2many" readonly="0" nolabel="1"/> -->
+                                    <field name="component_ids" readonly="0" nolabel="1" options="{'no_open': True}">
+                                        <list default_order="sequence" editable="bottom" create="false" delete="false" no_open="true">
+                                            <field name="product_id" readonly="1" options="{'no_open': True}"/>
+                                            <field name="product_uom_qty" string="Actual weight" readonly="0"/>
+                                            <field name="min_consume_qty" readonly="1"/>
+                                            <field name="max_consume_qty" readonly="1"/>
+                                            <field name="product_uom" readonly="1" options="{'no_open': True}"/>
+                                            <field name="measurement_tool_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
+
+                                        </list>
+
+                                    </field>
 
                                 </group>
                             </sheet>
@@ -146,7 +172,13 @@
                     
                     <field name="remelting_operation_params_id" nolabel="1">
                         <list>
-                            <field name="equipment_id"/>
+                            <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Melting and casting workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                             <field name="new_heat_no"/>
                             <field name="process_type"/>
                             <field name="grade"/>
@@ -190,7 +222,13 @@
                         <list>
                             <field name="sequence" widget="handle"/>
                             <field name="name"/>
-                            <field name="equipment_id"/>
+                            <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Cutting and machining workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                             <field name="performer_id"/>
                             <!-- <field name="resposible_quality_id"/> -->
                             <field name="ksb_form_no"/>
@@ -210,7 +248,13 @@
                                     <group>
                                         <!-- <field name="sequence"/> -->
                                         <field name="name"/>
-                                        <field name="equipment_id"/>
+                                        <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Cutting and machining workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                                         <field name="performer_id"/>
                                         <field name="resposible_quality_id"/>
                                         <field name="ksb_form_no"/>
@@ -248,7 +292,13 @@
                         <list>
                             <field name="sequence" widget="handle"/>
                             <field name="name"/>
-                            <field name="equipment_id"/>
+                            <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Heat treatment workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                             <field name="recipe_name"/>
                             <field name="charge_id"/>
                             <field name="heating_date"/>
@@ -267,7 +317,13 @@
                                     <group>
                                         <!-- <field name="sequence"/> -->
                                         <field name="name"/>
-                                        <field name="equipment_id"/>
+                                        <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Heat treatment workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                                         <field name="recipe_name"/>
                                         <field name="workorder_id"/>
                                         <field name="charge_id"/>
@@ -278,7 +334,9 @@
                                         <!-- <field name="responsible_id"/> -->
                                         <field name="resposible_quality_id"/>
                                         <field name="approver_quality_id"/>
-                                        <field name="measurement_device_id"/>
+                                        <field name="measurement_device_id" 
+                                            domain="[
+                                                ('category_id', '=', 'Measurement Devices')]"/>
                                         <field name="ksb_form_no"/>
                                         <field name="hardness_target_low"/>
                                         <field name="hardness_target_high"/>
@@ -318,7 +376,13 @@
                         <list>
                             <field name="sequence" widget="handle"/>
                             <field name="name"/>
-                            <field name="equipment_id"/>
+                            <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Cutting and machining workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                             <!-- <field name="recipe_name"/> -->
                             <!-- <field name="charge_id"/> -->
                             <field name="operation_date"/>
@@ -334,7 +398,13 @@
                                     <group>
                                         <!-- <field name="sequence"/> -->
                                         <field name="name"/>
-                                        <field name="equipment_id"/>
+                                        <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Cutting and machining workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                                         <!-- <field name="recipe_name"/> -->
                                         <field name="workorder_id"/>
                                         <!-- <field name="charge_id"/> -->
@@ -370,7 +440,13 @@
                         <list>
                             <field name="sequence" widget="handle"/>
                             <field name="name"/>
-                            <field name="equipment_id"/>
+                            <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Forging and rolling workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                             <!-- <field name="recipe_name"/> -->
                             <!-- <field name="charge_id"/> -->
                             <field name="operation_date"/>
@@ -386,7 +462,13 @@
                                     <group>
                                         <!-- <field name="sequence"/> -->
                                         <field name="name"/>
-                                        <field name="equipment_id"/>
+                                        <field name="equipment_id" 
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Forging and rolling workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                                         <!-- <field name="recipe_name"/> -->
                                         <field name="workorder_id"/>
                                         <!-- <field name="charge_id"/> -->
@@ -406,7 +488,13 @@
                                     </group>
                                 </group>
                                 <group string="Tools" colspan="2">
-                                    <field name="tools_ids" nolabel="1" placeholder="Used tools..." colspan="2"/>
+                                    <field name="tools_ids" nolabel="1" placeholder="Used tools..." colspan="2" 
+                                            domain="[
+                                                ('category_id', '=', 'Tools'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Forging and rolling workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                                 </group>
                                 <group string="Notes" colspan="2">
                                     <field name="notes" nolabel="1" placeholder="Additional notes..." colspan="2"/>
@@ -425,7 +513,13 @@
                         <list>
                             <field name="sequence" widget="handle"/>
                             <field name="name"/>
-                            <field name="equipment_id"/>
+                            <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Cutting and machining workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                             <!-- <field name="recipe_name"/> -->
                             <!-- <field name="charge_id"/> -->
                             <field name="start_date_time"/>
@@ -442,7 +536,13 @@
                                     <group string="Production">
                                         <!-- <field name="sequence"/> -->
                                         <field name="name"/>
-                                        <field name="equipment_id"/>
+                                        <field name="equipment_id"
+                                            domain="[
+                                                ('category_id', '=', 'Production equipment'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Cutting and machining workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                                         <!-- <field name="recipe_name"/> -->
                                         <field name="workorder_id" invisible="1"/>
                                         <!-- <field name="charge_id"/> -->
@@ -478,10 +578,18 @@
                                 </group>
                                 <group colspan="2">
                                     <group string="Tools" colspan="1">
-                                        <field name="tools_ids" nolabel="1" placeholder="Used tools..." colspan="2"/>
+                                        <field name="tools_ids" nolabel="1" placeholder="Used tools..." colspan="2"
+                                            domain="[
+                                                ('category_id', '=', 'Tools'),
+                                                '|',
+                                                ('workcenter_id', '=', 'Cutting and machining workcenter'),
+                                                ('workcenter_id', '=', False)
+                                            ]"/>
                                     </group>
                                     <group string="Measurement devices" colspan="1">
-                                        <field name="measurement_device_ids" nolabel="1" placeholder="Used tools..." colspan="2"/>
+                                        <field name="measurement_device_ids" nolabel="1" placeholder="Used tools..." colspan="2" 
+                                            domain="[
+                                                ('category_id', '=', 'Measurement Devices')]"/>
                                     </group>
                                 </group>
 
@@ -540,19 +648,26 @@
                     <group string="Smelting Report" colspan="2">
                         
                         <field name="smelting_operation_ids" nolabel="1">
-                            <list>
+                            <list editable="bottom">
+                                <button name="action_duplicate_line"
+                                    type="object"
+                                    icon="fa-copy"
+                                    string=" "/>
                                 <!-- <field name="sequence" widget="handle"/> -->
                                 <field name="operation_date_time" widget="date"/>
-                                <!-- <field name="name"/> -->
                                 <field name="medium"/>
-                                <!-- <field name="recipe_name"/> -->
-                                <!-- <field name="charge_id"/> -->
                                 <field name="pressure"/>
                                 <field name="pressure_uom"/>
                                 <field name="power"/>
                                 <field name="pyrometer_value"/>
+                                <field name="pyrometer_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
                                 <field name="thermocouple_value"/>
-                                <!-- <field name="performer_id" string="Performer"/> -->
+                                <field name="thermocouple_id"
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                <field name="performer_id" string="Performer"/>
                                 <field name="notes"/>
 
                             </list>
@@ -570,9 +685,13 @@
                                         </group>
                                         <group>
                                             <field name="power"/>
-                                            <field name="pyrometer_id"/>
+                                            <field name="pyrometer_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
                                             <field name="pyrometer_value"/>
-                                            <field name="thermocouple_id"/>
+                                            <field name="thermocouple_id"
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
                                             <field name="thermocouple_value"/>
                                             <field name="notes"/>
 
@@ -616,7 +735,7 @@
                                         <group string="Operation Details">
                                             <field name="heat_no"/>
                                             <field name="total_weight"/>
-                                            <field name="mold_number"/>
+                                            <field name="mould_number"/>
                                         </group>
                                     </group>
                                     
@@ -635,8 +754,12 @@
                                     
                                     <group string="Additional Information">
                                         <group>
-                                            <field name="scales_id"/>
-                                            <field name="measurement_id"/>
+                                            <field name="scales_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"   />
+                                            <field name="measurement_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
                                         </group>
                                         <group>
                                             <field name="ksb_form_no"/>
@@ -654,7 +777,9 @@
                             <list>
                                 <!-- <field name="sequence" widget="handle"/> -->
                                 <field name="operation_date_time" widget="date"/>
-                                <field name="measurement_device_id"/>
+                                <field name="measurement_device_id" 
+                                            domain="[
+                                                ('category_id', '=', 'Measurement Devices')]"/>
                                 <field name="result"/>
                                 <field name="performer_id"/>
                                 <field name="notes"/>
@@ -668,7 +793,9 @@
                                             <field name="workorder_id" readonly="1" invisible="1"/>
                                             <field name="sequence" invisible="1"/>
                                             <field name="operation_date_time"/>
-                                            <field name="measurement_device_id"/>
+                                            <field name="measurement_device_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
                                             <field name="result"/>
                                             <field name="measurement_standard_id"/>
                                         </group>
@@ -725,7 +852,9 @@
                                             <field name="quality_date_time" widget="date"/>
                                             <field name="quality_performer"/>
                                             <field name="quality_responsible"/>
-                                            <field name="measurement_device_id"/>
+                                            <field name="measurement_device_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
                                         </group>
                                         <group string="Hardness Measurements">
                                             <field name="hardness_top"/>
@@ -907,7 +1036,9 @@
                                 <!-- <field name="sequence" widget="handle"/> -->
                                 <field name="operation_date_time" widget="date"/>
                                 <field name="performer_id"/>
-                                <field name="measurement_device_id"/>
+                                <field name="measurement_device_id" 
+                                            domain="[
+                                                ('category_id', '=', 'Measurement Devices')]"/>
                                 <field name="etching_info"/>
 
                             </list>
@@ -921,7 +1052,9 @@
                                             <field name="operation_date_time"/>
                                             <field name="performer_id"/>
                                             <field name="responsible_id"/>
-                                            <field name="measurement_device_id"/>
+                                            <field name="measurement_device_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
                                             <field name="etching_info"/>
                                             <field name="ksb_form_no"/>
 
@@ -940,11 +1073,17 @@
 
                                         </group>
                                         <group>
-                                            <field name="size_measurement_device_id"/>
+                                            <field name="size_measurement_device_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
                                             <field name="size_measurement_result"/>
-                                            <field name="weight_measurement_device_id"/>
+                                            <field name="weight_measurement_device_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
                                             <field name="weight_measurement_result"/>
-                                            <field name="hardness_measurement_device_id"/>
+                                            <field name="hardness_measurement_device_id" 
+                                                domain="[
+                                                    ('category_id', '=', 'Measurement Devices')]"/>
                                             <field name="hardness_measurement_result"/>
                                         </group>
                                     </group>
@@ -979,8 +1118,9 @@
                 -->
                 <field name="operation_type_id" 
                        string="Operation" 
-                       readonly="state in ['cancel', 'done']"
-                       widget="many2one"/>
+                       readonly="1"
+                       widget="many2one"
+                       options="{'no_open': True}"/> 
 
                 <!-- 
                     2. Оригинальное поле name оставляем, но делаем невидимым (column_invisible).

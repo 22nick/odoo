@@ -62,3 +62,8 @@
    
 }
 
+#/home/user/odoo19env/bin/python3 /home/user/odoo/odoo-bin -c /home/user/odoo/odoo.conf -u manufacturing_extension
+
+# sudo systemctl start odoo
+
+# sudo systemctl status odoo

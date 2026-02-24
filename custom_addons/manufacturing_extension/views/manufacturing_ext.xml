@@ -37,6 +37,7 @@
 
                 <group string="Information" class="col-md-2">
                     <field name="product_dimensions"/>
+                    <!-- <field name="component_reference_no"/> -->
                     <field name="product_material_standart"/>
                     <field name="customer_requirements"/>
                     <field name="customer_requirements_notes"/>
@@ -64,7 +65,9 @@
             <xpath expr="//notebook/page/field/list" position="inside">
                 <field name="min_consume_qty"/>
                 <field name="max_consume_qty"/>
-                <field name="measurement_tool_id"/>
+                <field name="measurement_tool_id" 
+                    domain="[
+                        ('category_id', '=', 'Measurement Devices')]"/>
             </xpath>
 
         </field>

@@ -64,4 +64,25 @@
 
         </field>
     </record>
+
+     <record id="hr_equipment_view_search_ext" model="ir.ui.view">
+        <field name="name">equipment.search.ext</field>
+        <field name="model">maintenance.equipment</field>
+        <field name="inherit_id" ref="maintenance.hr_equipment_view_search"/>
+        <field name="arch" type="xml">
+            <!-- <field name="name" position="after">
+                <field string="Reference ID" name="reference_id" filter_domain="[('reference_id', 'ilike', self)]"/>
+            </field> -->
+
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="filter_domain">
+                    ['|', '|', '|', '|',
+                    ('name', 'ilike', self), ('model', 'ilike', self), ('serial_no', 'ilike', self), ('partner_ref', 'ilike', self), ('reference_id', 'ilike', self)]
+                </attribute>
+            </xpath>
+            
+
+        </field>
+    </record>   
+
 </odoo>

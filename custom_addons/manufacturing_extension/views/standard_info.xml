@@ -54,6 +54,13 @@
         parent="mrp.menu_mrp_configuration"
     />
 
+    <menuitem id="standard_info_root_menu_duplicate"
+        action="standard_info_action"
+        name="Standard Info"
+        parent="mrp.menu_mrp_bom"
+
+    />
+
   </data>
 
 </odoo>

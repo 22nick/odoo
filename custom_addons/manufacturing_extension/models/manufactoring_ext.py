@@ -52,47 +52,47 @@ class StockMove(models.Model):
     max_consume_qty = fields.Float(string='Max Consume Qty')
     measurement_tool_id = fields.Many2one('maintenance.equipment', string='Measurement Tool')
     
-    @api.onchange('product_qty')
-    def _onchange_product_qty(self):
-        """Корректировка product_qty в пределах min/max"""
+    @api.onchange('product_uom_qty')
+    def _onchange_product_uom_qty(self):
+        """Корректировка product_uom_qty в пределах min/max"""
         for record in self:
-            if record.product_qty and (record.min_consume_qty or record.max_consume_qty):
+            if record.product_uom_qty and (record.min_consume_qty or record.max_consume_qty):
                 # Получаем ближайшее допустимое значение
                 corrected_qty = record._get_corrected_qty(
-                    record.product_qty,
+                    record.product_uom_qty,
                     record.min_consume_qty,
                     record.max_consume_qty
                 )
-                if corrected_qty != record.product_qty:
-                    record.product_qty = corrected_qty
+                if corrected_qty != record.product_uom_qty:
+                    record.product_uom_qty = corrected_qty
     
     @api.onchange('min_consume_qty')
     def _onchange_min_consume_qty(self):
-        """Корректировка min_consume_qty и product_qty"""
+        """Корректировка min_consume_qty и product_uom_qty"""
         for record in self:
             if record.min_consume_qty:
                 # Если min больше max, устанавливаем min = max
                 if record.max_consume_qty and record.min_consume_qty > record.max_consume_qty:
                     record.min_consume_qty = record.max_consume_qty
                 
-                # Корректируем product_qty если необходимо
-                if record.product_qty and record.product_qty < record.min_consume_qty:
-                    record.product_qty = record.min_consume_qty
+                # Корректируем product_uom_qty если необходимо
+                if record.product_uom_qty and record.product_uom_qty < record.min_consume_qty:
+                    record.product_uom_qty = record.min_consume_qty
     
     @api.onchange('max_consume_qty')
     def _onchange_max_consume_qty(self):
-        """Корректировка max_consume_qty и product_qty"""
+        """Корректировка max_consume_qty и product_uom_qty"""
         for record in self:
             if record.max_consume_qty:
                 # Если max меньше min, устанавливаем max = min
                 if record.min_consume_qty and record.max_consume_qty < record.min_consume_qty:
                     record.max_consume_qty = record.min_consume_qty
                 
-                # Корректируем product_qty если необходимо
-                if record.product_qty and record.product_qty > record.max_consume_qty:
-                    record.product_qty = record.max_consume_qty
+                # Корректируем product_uom_qty если необходимо
+                if record.product_uom_qty and record.product_uom_qty > record.max_consume_qty:
+                    record.product_uom_qty = record.max_consume_qty
     
-    @api.constrains('min_consume_qty', 'max_consume_qty', 'product_qty')
+    @api.constrains('min_consume_qty', 'max_consume_qty', 'product_uom_qty')
     def _check_consume_qty_limits(self):
         """Проверка ограничений при сохранении"""
         for record in self:
@@ -104,17 +104,17 @@ class StockMove(models.Model):
                         % (record.min_consume_qty, record.max_consume_qty)
                     )
             
-            # Проверяем product_qty в пределах
-            if record.product_qty:
-                if record.min_consume_qty and record.product_qty < record.min_consume_qty:
+            # Проверяем product_uom_qty в пределах
+            if record.product_uom_qty:
+                if record.min_consume_qty and record.product_uom_qty < record.min_consume_qty:
                     raise ValidationError(
                         _('Real Quantity (%s) cannot be less than Min Consume Qty (%s)') 
-                        % (record.product_qty, record.min_consume_qty)
+                        % (record.product_uom_qty, record.min_consume_qty)
                     )
-                if record.max_consume_qty and record.product_qty > record.max_consume_qty:
+                if record.max_consume_qty and record.product_uom_qty > record.max_consume_qty:
                     raise ValidationError(
                         _('Real Quantity (%s) cannot be greater than Max Consume Qty (%s)') 
-                        % (record.product_qty, record.max_consume_qty)
+                        % (record.product_uom_qty, record.max_consume_qty)
                     )
     
     def _get_corrected_qty(self, qty, min_qty, max_qty):
@@ -141,16 +141,16 @@ class StockMove(models.Model):
                 if min_qty and vals['max_consume_qty'] < min_qty:
                     vals['max_consume_qty'] = min_qty
         
-        # Корректируем product_qty в пределах min/max
-        if 'product_qty' in vals or 'min_consume_qty' in vals or 'max_consume_qty' in vals:
+        # Корректируем product_uom_qty в пределах min/max
+        if 'product_uom_qty' in vals or 'min_consume_qty' in vals or 'max_consume_qty' in vals:
             for record in self:
-                product_qty = vals.get('product_qty', record.product_qty)
+                product_uom_qty = vals.get('product_uom_qty', record.product_uom_qty)
                 min_qty = vals.get('min_consume_qty', record.min_consume_qty)
                 max_qty = vals.get('max_consume_qty', record.max_consume_qty)
                 
-                corrected_qty = self._get_corrected_qty(product_qty, min_qty, max_qty)
-                if corrected_qty != product_qty:
-                    vals['product_qty'] = corrected_qty
+                corrected_qty = self._get_corrected_qty(product_uom_qty, min_qty, max_qty)
+                if corrected_qty != product_uom_qty:
+                    vals['product_uom_qty'] = corrected_qty
         
         return super(StockMove, self).write(vals)
     
@@ -160,16 +160,16 @@ class StockMove(models.Model):
         for vals in vals_list:
             min_qty = vals.get('min_consume_qty', 0)
             max_qty = vals.get('max_consume_qty', 0)
-            product_qty = vals.get('product_qty', 0)
+            product_uom_qty = vals.get('product_uom_qty', 0)
             
             # Корректируем min/max
             if min_qty and max_qty and min_qty > max_qty:
                 vals['min_consume_qty'] = max_qty
                 min_qty = max_qty
             
-            # Корректируем product_qty
-            if product_qty:
-                vals['product_qty'] = self._get_corrected_qty(product_qty, min_qty, max_qty)
+            # Корректируем product_uom_qty
+            if product_uom_qty:
+                vals['product_uom_qty'] = self._get_corrected_qty(product_uom_qty, min_qty, max_qty)
         
         return super(StockMove, self).create(vals_list)
     

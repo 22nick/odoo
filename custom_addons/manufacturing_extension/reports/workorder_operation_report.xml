@@ -334,7 +334,7 @@
                             </t>
 
                             <!-- Smelting Operations Steps -->
-                            <t t-if="o.smelting_operation_ids">
+                            <t t-if="o.operation_type_code in ('smelting')">
                                 <t t-set="ek_form_no" t-value="'FR.87 EK-2'"/>
                                 <t t-call="manufacturing_extension.report_smelting_opertions_steps_template">
                                     <t t-set="o" t-value="o"/>
