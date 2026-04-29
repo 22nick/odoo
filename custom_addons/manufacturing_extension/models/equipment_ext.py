@@ -19,6 +19,9 @@ class MaintenanceEquipmentWorkcenter(models.Model):
    
     used_on_eqiupment = fields.Many2one('maintenance.equipment', string= "Used on Equipment")
     
+    binary_field = fields.Many2many("ir.attachment", string="Upload Files",)
+
+    
     # @api.model
     # def name_search(self, name='', args=None, operator='ilike', limit=10):
     #     args = args or []

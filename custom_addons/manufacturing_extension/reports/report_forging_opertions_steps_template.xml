@@ -32,7 +32,7 @@
                             <strong><span t-field="step.name"/></strong>
                         </td>
                         <td>
-                            <span t-field="step.equipment_id"/>
+                            <span t-field="step.equipment_id.reference_id"/>
                         </td>
                         <!-- <td>
                             <span t-field="step.recipe_name"/>

@@ -69,9 +69,9 @@
                         <td>
                             <span t-field="step.resposible_quality_id"/>
                         </td>
-                        <td>
+                        <!-- <td>
                             <span t-field="step.approver_quality_id"/>
-                        </td>
+                        </td> -->
                         <td>
                             <span t-field="step.measurement_device_id"/>
                         </td>

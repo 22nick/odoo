@@ -18,6 +18,12 @@
                 <field name="equipment_properties" nolabel="0" columns="2"/>
             </field> -->
 
+            <xpath expr="//page[@name='product_information']//group" position="after">
+                <group name="documents_group" colspan="2">
+                    <field name="binary_field" string="Documents" widget="many2many_binary"/>
+                </group>
+            </xpath>
+
 
 
 

@@ -194,7 +194,7 @@
                                         </tr>
                                         <tr>
                                             <td class="label-col">Material Ref.No.</td>
-                                            <td><span t-field="mo.component_reference_no"/></td>
+                                            <td><span t-field="mo.product_id.product_reference_no"/></td>
                                         </tr>
                                         <tr>
                                             <td class="label-col">Explanations</td>

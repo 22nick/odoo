@@ -5,15 +5,15 @@ class MrpProduction(models.Model):
     _inherit = "mrp.production"
 
     # Example field to extend mrp.production
-    partner_id = fields.Many2one('res.partner', string='Customer')
-    sales_order_reference = fields.Char(string='Sales Order')
-    customer_order_reference = fields.Char(string='Customer Order')
-    manufacturing_order_revision_number = fields.Char(string='Manufacturing Order Rev.No.')
-    manufacturing_order_revision_note = fields.Text(string='Manufacturing Order Revision Note')
-    technical_drawing_revision_number = fields.Char(string='Technical Drawing Rev.No.')
-    technical_drawing_revision_note = fields.Text(string='Technical Drawing Rev. Note')
-    technical_feasibility = fields.Boolean(string='HAS THE TECHNICAL FEASIBILITY BEEN EVALUATED?')
-    technical_feasibility_form_no = fields.Char(string='Technical Feasibility Form No.')
+    partner_id = fields.Many2one('res.partner', string='Customer', tracking=True)
+    sales_order_reference = fields.Char(string='Sales Order', tracking=True)
+    customer_order_reference = fields.Char(string='Customer Order', tracking=True)
+    manufacturing_order_revision_number = fields.Char(string='Manufacturing Order Rev.No.', tracking=True)
+    manufacturing_order_revision_note = fields.Text(string='Manufacturing Order Revision Note', tracking=True)
+    technical_drawing_revision_number = fields.Char(string='Technical Drawing Rev.No.', tracking=True)
+    technical_drawing_revision_note = fields.Text(string='Technical Drawing Rev. Note', tracking=True)
+    technical_feasibility = fields.Boolean(string='HAS THE TECHNICAL FEASIBILITY BEEN EVALUATED?', tracking=True)
+    technical_feasibility_form_no = fields.Char(string='Technical Feasibility Form No.', tracking=True)
     manufactoring_features = fields.Selection(
         [('prototype', 'Customer prototype'),
          ('trial', 'Trial'),
@@ -21,25 +21,31 @@ class MrpProduction(models.Model):
          ('serial', 'Serial Production'),
          ('special', 'Special Process'),
          ('other', 'Other')],
-        string='Manufacturing Features')
+        string='Manufacturing Features', tracking=True)
     
-    manufactoring_part_no = fields.Char(string='Manufacturing Part No.')
-    product_dimensions = fields.Char(string='Product Dimensions')
-    product_material_standart= fields.Char(string='Material Quality and Standart')
-    customer_requirements = fields.Selection(string='Customer Requirements',
+    manufactoring_part_no = fields.Char(string='Manufacturing Part No.', tracking=True)
+    product_dimensions = fields.Char(string='Product Dimensions', tracking=True)
+    product_material_standart= fields.Char(string='Material Quality and Standart', tracking=True)
+    customer_requirements = fields.Selection(string='Customer Requirements', tracking=True,
                                              selection=[('item', 'Item'),
                                                         ('tolerance', 'Tolerance'),
                                                         ('heattrearment', 'Heat Treatment'),
                                                         ('documents', 'Customer Documentstion'),])
-    customer_requirements_notes = fields.Text(string='Customer Requirements Notes')
+    customer_requirements_notes = fields.Text(string='Customer Requirements Notes', tracking=True)
     
-    binary_field = fields.Many2many("ir.attachment", string="Upload Files",)
+    binary_field = fields.Many2many("ir.attachment", string="Upload Documents",)
     
     
-    component_reference_no = fields.Char(related='move_raw_ids.product_id.product_reference_no', string="Component Ref.No.")
-    manufactoring_explanation_note = fields.Text(string='Explanations')
+    component_reference_no = fields.Char(related='move_raw_ids.product_id.product_reference_no', string="Component Ref.No.", tracking=True)
+    manufactoring_explanation_note = fields.Text(string='Explanations', tracking=True)
     
-    final_quality_ids = fields.One2many('mrp.production.final.quality', 'production_id', string='Final Quality')
+    final_quality_ids = fields.One2many('mrp.production.final.quality', 'production_id', string='Final Quality', tracking=True)
+    
+    # Inherited fields for tracking changes
+    
+    move_raw_ids = fields.One2many(tracking=True)
+    workorder_ids = fields.One2many(tracking=True)
+    
     
     def action_print_report(self):
         """Метод для печати отчета"""
@@ -48,9 +54,9 @@ class MrpProduction(models.Model):
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    min_consume_qty = fields.Float(string='Min Consume Qty')
-    max_consume_qty = fields.Float(string='Max Consume Qty')
-    measurement_tool_id = fields.Many2one('maintenance.equipment', string='Measurement Tool')
+    min_consume_qty = fields.Float(string='Min Consume Qty', tracking=True)
+    max_consume_qty = fields.Float(string='Max Consume Qty', tracking=True)
+    measurement_tool_id = fields.Many2one('maintenance.equipment', string='Measurement Tool', tracking=True)
     
     @api.onchange('product_uom_qty')
     def _onchange_product_uom_qty(self):
@@ -186,23 +192,23 @@ class MrpProductionFinalQuality(models.Model):
         required=True,
         ondelete='cascade',
         index=True,
-        readonly=True
+        readonly=True, tracking=True
     )
 
     sequence = fields.Integer(string='Sequence', default=10)
     
-    name = fields.Datetime(string="Date & Time")
+    name = fields.Datetime(string="Date & Time", tracking=True)
     # operation_date_time = fields.Datetime(string="Operation Date & Time")
-    performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
-    ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
+    performer_id = fields.Many2one('res.users', string="Performer", tracking=True)
+    responsible_id = fields.Many2one('res.users', string="Responsible", tracking=True)
+    ksb_form_no = fields.Char(string="KSB Form No. (if exist)", tracking=True)
     
-    controlled_qty = fields.Integer(string="Controlled Quantity")
-    accepted_qty = fields.Integer(string="Accepted Quantity")
-    rejected_qty = fields.Integer(string="Rejected Quantity")
-    non_report_no = fields.Char(string="Non-Comformity Report No.")
+    controlled_qty = fields.Integer(string="Controlled Quantity", tracking=True)
+    accepted_qty = fields.Integer(string="Accepted Quantity", tracking=True)
+    rejected_qty = fields.Integer(string="Rejected Quantity", tracking=True)
+    non_report_no = fields.Char(string="Non-Comformity Report No.", tracking=True)
     
-    step_ids = fields.One2many('mrp.production.final.quality.step', 'report_id', string="Step")
+    step_ids = fields.One2many('mrp.production.final.quality.step', 'report_id', string="Step", tracking=True)
         
     # QUESTION FIELDS
     question_1 = fields.Selection(
@@ -210,40 +216,40 @@ class MrpProductionFinalQuality(models.Model):
          ('no', 'No'),
          ('na', 'N/A')],
         string='Overall, is the visual examination result satisfactory?', 
-        default='na')
-    reference_1 = fields.Char(string="Reference Document(s)")
+        default='na', tracking=True)
+    reference_1 = fields.Char(string="Reference Document(s)", tracking=True)
 
     question_2 = fields.Selection(
         [('yes', 'Yes'),
          ('no', 'No'),
          ('na', 'N/A')],
         string='Does the material meet the specifications? (If requested with specifications)', 
-        default='na')
-    reference_2 = fields.Char(string="Reference Document(s)")
+        default='na', tracking=True)
+    reference_2 = fields.Char(string="Reference Document(s)", tracking=True)
         
     question_3 = fields.Selection(
         [('yes', 'Yes'),
          ('no', 'No'),
          ('na', 'N/A')],
         string='Does the product conform to the technical drawing? (If applicable)', 
-        default='na')
-    reference_3 = fields.Char(string="Reference Document(s)")
+        default='na', tracking=True)
+    reference_3 = fields.Char(string="Reference Document(s)", tracking=True)
         
     question_4 = fields.Selection(
         [('yes', 'Yes'),
          ('no', 'No'),
          ('na', 'N/A')],
         string='Have tests been conducted? Please attach the test reports if any have been completed.', 
-        default='na')
-    reference_4 = fields.Char(string="Reference Document(s)")
+        default='na', tracking=True)
+    reference_4 = fields.Char(string="Reference Document(s)", tracking=True)
         
     question_5 = fields.Selection(
         [('yes', 'Yes'),
          ('no', 'No'),
          ('na', 'N/A')],
         string='Is there FOD?', 
-        default='na')
-    reference_5 = fields.Char(string="Reference Document(s)")
+        default='na', tracking=True)
+    reference_5 = fields.Char(string="Reference Document(s)", tracking=True)
         
     
     
@@ -259,13 +265,13 @@ class MrpProductionFinalQualityStep(models.Model):
         required=True,
         ondelete='cascade',
         # index=True,
-        readonly = True
+        readonly = True, tracking=True
     )
     
     sequence = fields.Integer(string='Sequence', default=10)
 
-    name = fields.Char(string="Requested Features")
-    requested_values = fields.Char(string="Requested Values (min-max)", infotext="Minimum-maximum value range is entered")
-    measured_values = fields.Char(string="Measured Values")
-    measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
-    reference = fields.Char(string="Referenced Technical Plan/Instructions")
+    name = fields.Char(string="Requested Features", tracking=True)
+    requested_values = fields.Char(string="Requested Values (min-max)", infotext="Minimum-maximum value range is entered", tracking=True)
+    measured_values = fields.Char(string="Measured Values", tracking=True)
+    measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device", tracking=True)
+    reference = fields.Char(string="Referenced Technical Plan/Instructions", tracking=True)

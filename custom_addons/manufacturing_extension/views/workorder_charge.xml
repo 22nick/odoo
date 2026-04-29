@@ -87,7 +87,7 @@
                         <list>
                             <field name="equipment_id" 
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Melting and casting workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -106,7 +106,7 @@
                                         <!-- <field name="sequence" invisible="1"/> -->
                                         <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Melting and casting workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -152,7 +152,7 @@
                                             <field name="product_uom" readonly="1" options="{'no_open': True}"/>
                                             <field name="measurement_tool_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
 
                                         </list>
 
@@ -174,7 +174,7 @@
                         <list>
                             <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Melting and casting workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -224,7 +224,7 @@
                             <field name="name"/>
                             <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Cutting and machining workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -250,7 +250,7 @@
                                         <field name="name"/>
                                         <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Cutting and machining workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -294,7 +294,7 @@
                             <field name="name"/>
                             <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Heat treatment workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -319,7 +319,7 @@
                                         <field name="name"/>
                                         <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Heat treatment workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -336,7 +336,7 @@
                                         <field name="approver_quality_id"/>
                                         <field name="measurement_device_id" 
                                             domain="[
-                                                ('category_id', '=', 'Measurement Devices')]"/>
+                                                ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                         <field name="ksb_form_no"/>
                                         <field name="hardness_target_low"/>
                                         <field name="hardness_target_high"/>
@@ -378,7 +378,7 @@
                             <field name="name"/>
                             <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Cutting and machining workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -400,7 +400,7 @@
                                         <field name="name"/>
                                         <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Cutting and machining workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -442,7 +442,7 @@
                             <field name="name"/>
                             <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Forging and rolling workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -464,7 +464,7 @@
                                         <field name="name"/>
                                         <field name="equipment_id" 
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Forging and rolling workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -515,7 +515,7 @@
                             <field name="name"/>
                             <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Cutting and machining workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -538,7 +538,7 @@
                                         <field name="name"/>
                                         <field name="equipment_id"
                                             domain="[
-                                                ('category_id', '=', 'Production equipment'),
+                                                ('category_id', '=', 'MAKİNE'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Cutting and machining workcenter'),
                                                 ('workcenter_id', '=', False)
@@ -569,7 +569,7 @@
                                         <field name="ksb_form_no"/>
                                         <field name="quality_approval"/>
 
-                                        <!-- <div string="Measurement devices">
+                                        <!-- <div string="ÖLÇÜM CİHAZLARI">
                                             <field name="measurement_device_ids" nolabel="1" placeholder="Used tools..." colspan="2"/>
                                         </div> -->
 
@@ -580,16 +580,16 @@
                                     <group string="Tools" colspan="1">
                                         <field name="tools_ids" nolabel="1" placeholder="Used tools..." colspan="2"
                                             domain="[
-                                                ('category_id', '=', 'Tools'),
+                                                ('category_id', '=', 'YARDIMCI EKİPMANLAR KALIPLAR'),
                                                 '|',
                                                 ('workcenter_id', '=', 'Cutting and machining workcenter'),
                                                 ('workcenter_id', '=', False)
                                             ]"/>
                                     </group>
-                                    <group string="Measurement devices" colspan="1">
-                                        <field name="measurement_device_ids" nolabel="1" placeholder="Used tools..." colspan="2" 
+                                    <group string="ÖLÇÜM CİHAZLARI" colspan="1">
+                                        <field name="measurement_device_ids" nolabel="1" placeholder="ÖLÇÜM CİHAZLARI..." colspan="2" 
                                             domain="[
-                                                ('category_id', '=', 'Measurement Devices')]"/>
+                                                ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                     </group>
                                 </group>
 
@@ -662,11 +662,11 @@
                                 <field name="pyrometer_value"/>
                                 <field name="pyrometer_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                 <field name="thermocouple_value"/>
                                 <field name="thermocouple_id"
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                 <field name="performer_id" string="Performer"/>
                                 <field name="notes"/>
 
@@ -687,11 +687,11 @@
                                             <field name="power"/>
                                             <field name="pyrometer_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                             <field name="pyrometer_value"/>
                                             <field name="thermocouple_id"
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                             <field name="thermocouple_value"/>
                                             <field name="notes"/>
 
@@ -756,10 +756,10 @@
                                         <group>
                                             <field name="scales_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"   />
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"   />
                                             <field name="measurement_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                         </group>
                                         <group>
                                             <field name="ksb_form_no"/>
@@ -779,7 +779,7 @@
                                 <field name="operation_date_time" widget="date"/>
                                 <field name="measurement_device_id" 
                                             domain="[
-                                                ('category_id', '=', 'Measurement Devices')]"/>
+                                                ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                 <field name="result"/>
                                 <field name="performer_id"/>
                                 <field name="notes"/>
@@ -795,7 +795,7 @@
                                             <field name="operation_date_time"/>
                                             <field name="measurement_device_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                             <field name="result"/>
                                             <field name="measurement_standard_id"/>
                                         </group>
@@ -854,7 +854,7 @@
                                             <field name="quality_responsible"/>
                                             <field name="measurement_device_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                         </group>
                                         <group string="Hardness Measurements">
                                             <field name="hardness_top"/>
@@ -1038,7 +1038,7 @@
                                 <field name="performer_id"/>
                                 <field name="measurement_device_id" 
                                             domain="[
-                                                ('category_id', '=', 'Measurement Devices')]"/>
+                                                ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                 <field name="etching_info"/>
 
                             </list>
@@ -1054,7 +1054,7 @@
                                             <field name="responsible_id"/>
                                             <field name="measurement_device_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                             <field name="etching_info"/>
                                             <field name="ksb_form_no"/>
 
@@ -1075,15 +1075,15 @@
                                         <group>
                                             <field name="size_measurement_device_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                             <field name="size_measurement_result"/>
                                             <field name="weight_measurement_device_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                             <field name="weight_measurement_result"/>
                                             <field name="hardness_measurement_device_id" 
                                                 domain="[
-                                                    ('category_id', '=', 'Measurement Devices')]"/>
+                                                    ('category_id', '=', 'ÖLÇÜM CİHAZLARI')]"/>
                                             <field name="hardness_measurement_result"/>
                                         </group>
                                     </group>
@@ -1118,7 +1118,7 @@
                 -->
                 <field name="operation_type_id" 
                        string="Operation" 
-                       readonly="1"
+                       readonly="0"
                        widget="many2one"
                        options="{'no_open': True}"/> 
 

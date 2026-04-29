@@ -38,7 +38,10 @@
                             <span t-field="step.responsible_id"/>
                         </td> -->
                         <td class="text-center">
-                            <span t-field="step.start_date_time" t-options="{'widget': 'date'}"/>
+                            <span t-field="step.start_date_time" />
+                        </td>
+                        <td class="text-center">
+                            <span t-field="step.end_date_time" />
                         </td>
                         <td>
                             <span t-field="step.income_material_crossection"/>
