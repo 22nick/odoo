@@ -194,6 +194,23 @@ test("suggested recipients should not be notified when posting an internal note"
     await waitForSteps(["message_post"]);
 });
 
+test("suggested recipients without name should show display_name instead", async () => {
+    const pyEnv = await startServer();
+    const [partner1, partner2] = pyEnv["res.partner"].create([
+        { name: "Test Partner" },
+        // Partner without name
+        { type: "invoice" },
+    ]);
+
+    pyEnv["res.partner"].write([partner2], { parent_id: partner1 });
+    const fakeId = pyEnv["res.fake"].create({ partner_ids: [partner2] });
+    registerArchs(archs);
+    await start();
+    await openFormView("res.fake", fakeId);
+    await click("button", { text: "Send message" });
+    await contains(".o-mail-RecipientsInput .o_tag_badge_text", { text: "Test Partner, Invoice" });
+});
+
 test("update email for the partner on the fly", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
@@ -211,6 +228,19 @@ test("update email for the partner on the fly", async () => {
     await click(".o-mail-Composer-send:enabled");
     await contains(".o-mail-Message");
     await contains(".o-mail-Followers-counter", { text: "0" });
+});
+
+test("recipients dropdown only offers 'Create' when the input has text", async () => {
+    const pyEnv = await startServer();
+    const fakeId = pyEnv["res.fake"].create({});
+    registerArchs(archs);
+    await start();
+    await openFormView("res.fake", fakeId);
+    await click("button", { text: "Send message" });
+    await insertText(".o-mail-RecipientsInput .o-autocomplete--input", "New");
+    await contains(".o_m2o_dropdown_option_create", { text: "Create New" });
+    await insertText(".o-mail-RecipientsInput .o-autocomplete--input", "", { replace: true });
+    await contains(".o_m2o_dropdown_option_create", { count: 0 });
 });
 
 test("suggested recipients should not be added as follower when posting a message", async () => {

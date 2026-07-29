@@ -12,14 +12,15 @@
 # krnkris, 2022
 # Martin Trigaux, 2022
 # Tamás Németh <ntomasz81@gmail.com>, 2023
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-09-29 19:46+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2026-06-29 23:07+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Hungarian <https://translate.odoo.com/projects/odoo-19/"
 "sale_timesheet/hu/>\n"
 "Language: hu\n"
@@ -27,7 +28,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: sale_timesheet
 #. odoo-python
@@ -306,6 +307,11 @@ msgstr ""
 "  - Készletmozgások: a mennyiség a jóváhagyott kiszedések mennyisége\n"
 
 #. module: sale_timesheet
+#: model:ir.model,name:sale_timesheet.model_account_move_reversal
+msgid "Account Move Reversal"
+msgstr ""
+
+#. module: sale_timesheet
 #: model_terms:hr.job,website_description:sale_timesheet.job_engineer
 #: model_terms:hr.job,website_description:sale_timesheet.job_interior_designer
 #: model_terms:hr.job,website_description:sale_timesheet.job_labour
@@ -486,7 +492,7 @@ msgstr "Költség"
 #. module: sale_timesheet
 #: model:ir.model,website_form_label:sale_timesheet.model_project_task
 msgid "Create a Task"
-msgstr ""
+msgstr "Feladat létrehozása"
 
 #. module: sale_timesheet
 #: model_terms:hr.job,website_description:sale_timesheet.job_engineer
@@ -547,6 +553,7 @@ msgstr "Fedezze fel termékeinket."
 #: model:ir.model.fields,field_description:sale_timesheet.field_account_analytic_line__display_name
 #: model:ir.model.fields,field_description:sale_timesheet.field_account_move__display_name
 #: model:ir.model.fields,field_description:sale_timesheet.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:sale_timesheet.field_account_move_reversal__display_name
 #: model:ir.model.fields,field_description:sale_timesheet.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:sale_timesheet.field_product_product__display_name
 #: model:ir.model.fields,field_description:sale_timesheet.field_product_template__display_name
@@ -565,7 +572,7 @@ msgstr "Megjelenített név"
 #. module: sale_timesheet
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.timesheet_sale_page
 msgid "Draft"
-msgstr ""
+msgstr "Piszkozat"
 
 #. module: sale_timesheet
 #: model_terms:ir.ui.view,arch_db:sale_timesheet.portal_my_task_inherit
@@ -704,6 +711,7 @@ msgstr "óra maradék)"
 #: model:ir.model.fields,field_description:sale_timesheet.field_account_analytic_line__id
 #: model:ir.model.fields,field_description:sale_timesheet.field_account_move__id
 #: model:ir.model.fields,field_description:sale_timesheet.field_account_move_line__id
+#: model:ir.model.fields,field_description:sale_timesheet.field_account_move_reversal__id
 #: model:ir.model.fields,field_description:sale_timesheet.field_hr_employee__id
 #: model:ir.model.fields,field_description:sale_timesheet.field_product_product__id
 #: model:ir.model.fields,field_description:sale_timesheet.field_product_template__id
@@ -913,8 +921,7 @@ msgstr "Még nincs adat!"
 #: model_terms:hr.job,website_description:sale_timesheet.job_interior_designer
 #: model_terms:hr.job,website_description:sale_timesheet.job_labour
 msgid "No dumb managers, no stupid tools to use, no rigid working hours"
-msgstr ""
-"Nincsenek: ostoba főnökök, használhatatlan eszközök és szigorú munkaidő"
+msgstr "Nincsenek: ostoba főnökök, használhatatlan eszközök és szigorú munkaidő"
 
 #. module: sale_timesheet
 #: model_terms:hr.job,website_description:sale_timesheet.job_engineer
@@ -1610,6 +1617,17 @@ msgid ""
 "        Make sure to use the right format and order e.g. Improve the "
 "configuration screen 5h #feature #v16 @Mitchell !"
 msgstr ""
+"Használja ezeket a kulcsszavakat a címben új feladatok létrehozására:\n"
+"\n"
+"        30h betervez 30 órát a feladatra\n"
+"        #tags címkéket állít be a feladatra\n"
+"        @user hozzárendeli felhasználóhoz a feladatot\n"
+"        ! közepes prioritást ad a feladatnak\n"
+"        !! magas prioritást ad a feladatnak\n"
+"        !!! sürgős prioritást ad a feladatnak\n"
+"\n"
+"        Figyeljen a megfelelő formátumra és sorrendre, pl.: Konfiguráció "
+"fejlesztése 5h #funkció #v19 @Mitchell !"
 
 #. module: sale_timesheet
 #: model_terms:hr.job,website_description:sale_timesheet.job_engineer
@@ -1674,8 +1692,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/sale_timesheet/models/hr_timesheet.py:0
 msgid "You cannot modify timesheets that are already invoiced."
-msgstr ""
-"Nem módosíthatók olyan időkimutatások, melyek már számlázásra kerültek."
+msgstr "Nem módosíthatók olyan időkimutatások, melyek már számlázásra kerültek."
 
 #. module: sale_timesheet
 #. odoo-python

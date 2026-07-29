@@ -164,7 +164,8 @@
                     <field name="employee_id" invisible="1"/>
                     <button string="Create employee"
                             type="object" name="action_create_employee"
-                            invisible="not id or share or employee_id"/>
+                            invisible="not id or share or employee_id"
+                            groups="hr.group_hr_user"/>
                             <!-- share is not correctly recomputed because it depends on fields of reified view => invisible before saving (id=False) -->
                 </xpath>
                 <xpath expr="//div[@name='button_box']" position="inside">
@@ -222,9 +223,6 @@
                         <i class="fa fa-mobile fa-fw me-1 text-primary" title="Work Mobile"/>
                         <field name="mobile_phone" widget="phone" placeholder="Work Mobile" string="Work Mobile" class="w-75"/>
                     </h5>
-                </xpath>
-                <xpath expr="//group[@name='other_preferences']" position="inside">
-                    <field name="pin" string="Attendance PIN" invisible="not employee_id"/>
                 </xpath>
                 <xpath expr="//group[@name='other_calendar_preferences']" position="inside">
                     <field name="work_location_id" string="Main Work Location" invisible="not employee_id or share"/>

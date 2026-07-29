@@ -7,6 +7,7 @@
     'depends': ['point_of_sale', 'account_payment'],
     'data': [
         'views/res_config_settings_views.xml',
+        'security/ir.model.access.csv',
         'views/payment_transaction_views.xml',
         'views/pos_payment_views.xml',
         'views/pos_payment_method_views.xml',
@@ -27,6 +28,7 @@
         ],
         'point_of_sale.customer_display_assets_test': [
             'pos_online_payment/static/tests/tours/customer_display_tour.js',
+            'point_of_sale/static/tests/generic_helpers/dialog_util.js',
         ],
         'web.assets_tests': [
             'pos_online_payment/static/tests/tours/**/*',

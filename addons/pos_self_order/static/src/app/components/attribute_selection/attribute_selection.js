@@ -4,16 +4,19 @@ import { AttributeSelectionHelper } from "./attribute_selection_helper";
 
 export class AttributeSelection extends Component {
     static template = "pos_self_order.AttributeSelection";
-    static props = ["productTemplate", "onSelection?"];
+    static props = ["productTemplate", "onSelection?", "isCombo?"];
 
     setup() {
         this.selfOrder = useSelfOrder();
         this.envSelectedValues = useState(this.env.selectedValues);
+        this.attributesToDisplay = this.props.productTemplate.attribute_line_ids.filter(
+            (a) => this.availableAttributeValue(a).length > 0
+        );
     }
 
     get selectedValues() {
         return (this.envSelectedValues[this.props.productTemplate.id] ??=
-            new AttributeSelectionHelper(this.selfOrder));
+            new AttributeSelectionHelper(this.selfOrder, this.attributesToDisplay));
     }
 
     isValueSelected(attribute, value) {
@@ -25,9 +28,17 @@ export class AttributeSelection extends Component {
     }
 
     availableAttributeValue(attribute) {
-        return this.selfOrder.config.self_ordering_mode === "kiosk"
-            ? attribute.product_template_value_ids.filter((a) => !a.is_custom)
-            : attribute.product_template_value_ids;
+        const isKiosk = this.selfOrder.kioskMode;
+        const isNoVariantCreation = attribute.attribute_id.create_variant === "no_variant";
+        return attribute.product_template_value_ids.filter((a) => {
+            if (isKiosk && a.is_custom) {
+                return false;
+            }
+            if (this.props.isCombo) {
+                return isNoVariantCreation;
+            }
+            return true;
+        });
     }
 
     getCustomSelectedValue(attribute) {

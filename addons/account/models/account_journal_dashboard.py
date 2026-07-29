@@ -115,6 +115,7 @@ class AccountJournal(models.Model):
       LEFT JOIN mail_activity_type act_type ON activity.activity_type_id = act_type.id
           WHERE move.journal_id = ANY(%(ids)s)
             AND move.company_id = ANY(%(company_ids)s)
+            AND activity.active = TRUE
 
       UNION ALL
 
@@ -133,6 +134,7 @@ class AccountJournal(models.Model):
       LEFT JOIN mail_activity_type act_type ON activity.activity_type_id = act_type.id
           WHERE journal.id = ANY(%(ids)s)
             AND journal.company_id = ANY(%(company_ids)s)
+            AND activity.active = TRUE
             """,
             today=today,
             act_type_name=act_type_name,
@@ -408,7 +410,7 @@ class AccountJournal(models.Model):
             dashboard_data[journal.id] = {
                 'currency_id': journal.currency_id.id or journal.company_id.sudo().currency_id.id,
                 'show_company': len(self.env.companies) > 1 or journal.company_id.id != self.env.company.id,
-                'company_name': journal.company_id.name,
+                'company_name': journal.company_id.sudo().name,
             }
         self._fill_bank_cash_dashboard_data(dashboard_data)
         self._fill_sale_purchase_dashboard_data(dashboard_data)
@@ -732,7 +734,7 @@ class AccountJournal(models.Model):
             *self.env['account.move']._check_company_domain(self.env.companies),
             ('journal_id', 'in', self.ids),
             ('payment_state', 'in', ('not_paid', 'partial')),
-            ('move_type', 'in', ('out_invoice', 'out_refund') if journal_type == 'sale' else ('in_invoice', 'in_refund')),
+            ('move_type', 'in', ('out_invoice', 'out_refund', 'out_receipt') if journal_type == 'sale' else ('in_invoice', 'in_refund', 'in_receipt')),
             ('state', '=', 'posted'),
         ], bypass_access=True)
         selects = [
@@ -754,7 +756,7 @@ class AccountJournal(models.Model):
             ('journal_id', 'in', self.ids),
             ('checked', '=', False),
             ('state', '=', 'posted'),
-        ])
+        ], bypass_access=True)
         selects = [
             SQL("journal_id"),
             SQL("company_id"),
@@ -925,23 +927,26 @@ class AccountJournal(models.Model):
                 journal_types=', '.join(journal_types),
             )
 
+    @api.model
+    def is_sample_action_available(self):
+        """Used to hide 'try our sample' when demo data is not installed."""
+        return bool(self.env.ref('base.res_partner_2', raise_if_not_found=False))
+
     def action_create_vendor_bill(self):
         """ This function is called by the "try our sample" button of Vendor Bills,
         visible on dashboard if no bill has been created yet.
         """
         context = dict(self.env.context)
         purchase_journal = self.browse(context.get('default_journal_id')) or self.search([('type', '=', 'purchase')], limit=1)
+        partner = self.env.ref('base.res_partner_2', raise_if_not_found=False)
         if not purchase_journal:
             raise UserError(self._build_no_journal_error_msg(self.env.company.display_name, ['purchase']))
+        if not partner:
+            raise UserError(_('You may only use samples in demo mode, try uploading one of your invoices instead.'))
         context['default_move_type'] = 'in_invoice'
         invoice_date = fields.Date.today() - timedelta(days=12)
-        partner = self.env['res.partner'].search([('name', '=', 'Deco Addict')], limit=1)
+        partner = self.env.ref('base.res_partner_2', raise_if_not_found=False)
         company = purchase_journal.company_id
-        if not partner:
-            partner = self.env['res.partner'].create({
-                'name': 'Deco Addict',
-                'is_company': True,
-            })
         default_expense_account = company.expense_account_id
         ref = 'DE%s' % invoice_date.strftime('%Y%m')
         bill = self.env['account.move'].with_context(default_extract_state='done').create({

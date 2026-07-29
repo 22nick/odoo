@@ -6,15 +6,16 @@
 # Martin Trigaux, 2022
 # Ryoko Tsuda <ryoko@quartile.co>, 2023
 # Andy Yiu, 2023
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Junko Augias (juau)" <juau@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Junko Augias (juau)" <juau@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-10-27 02:31+0000\n"
-"Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
+"POT-Creation-Date: 2026-04-10 18:38+0000\n"
+"PO-Revision-Date: 2026-07-01 18:09+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/lunch/"
 "ja/>\n"
 "Language: ja\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: lunch
 #: model_terms:lunch.product,description:lunch.product_temaki
@@ -83,8 +84,8 @@ msgid ""
 "<i class=\"fa fa-money\" role=\"img\" aria-label=\"Amount\" title=\"Amount\"/"
 ">"
 msgstr ""
-"<i class=\"fa fa-money\" role=\"img\" aria-label=\"Amount\" title=\"Amount\"/"
-">"
+"<i class=\"fa fa-money\" role=\"img\" aria-label=\"Amount\" "
+"title=\"Amount\"/>"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_order_view_kanban
@@ -318,18 +319,18 @@ msgstr ""
 "width=\"590\" style=\"min-width: 590px; background-color: white; padding: "
 "0px 8px 0px 8px; border-collapse:separate;\">\n"
 "                <tr><td valign=\"middle\">\n"
-"                    <span style=\"font-size: 10px;\">ランチオーダ</span><br/"
-">\n"
+"                    <span style=\"font-size: 10px;\">ランチオーダ</span><br/>"
+"\n"
 "                </td><td valign=\"middle\" align=\"right\" t-if=\"not "
 "user.company_id.uses_default_logo\">\n"
-"                    <img t-attf-src=\"/logo.png?"
-"company={{ user.company_id.id }}\" style=\"padding: 0px; margin: 0px; "
-"height: auto; width: 80px;\" t-att-alt=\"user.company_id.name\"/>\n"
+"                    <img t-attf-src=\"/logo.png?company={{ "
+"user.company_id.id }}\" style=\"padding: 0px; margin: 0px; height: auto; "
+"width: 80px;\" t-att-alt=\"user.company_id.name\"/>\n"
 "                </td></tr>\n"
 "                <tr><td colspan=\"2\" style=\"text-align:center;\">\n"
-"                  <hr width=\"100%\" style=\"background-"
-"color:rgb(204,204,204);border:medium none;clear:both;display:block;font-"
-"size:0px;min-height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
+"                  <hr width=\"100%\" style=\"background-color:rgb"
+"(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-"
+"height:1px;line-height:0; margin:16px 0px 16px 0px;\"/>\n"
 "                </td></tr>\n"
 "            </table>\n"
 "        </td>\n"
@@ -345,14 +346,14 @@ msgstr ""
 "    <div>\n"
 "        <t t-set=\"lines\" t-value=\"ctx.get('lines', [])\"/>\n"
 "        <t t-set=\"order\" t-value=\"ctx.get('order')\"/>\n"
-"        <t t-set=\"currency\" t-"
-"value=\"user.env['res.currency'].browse(order.get('currency_id'))\"/>\n"
+"        <t t-set=\"currency\" t-value=\"user.env['res.currency'].browse"
+"(order.get('currency_id'))\"/>\n"
 "        <p>\n"
-"        Dear <t t-out=\"order.get('supplier_name', '')\">Laurie Poiret</t>"
-"様、\n"
+"        Dear <t t-out=\"order.get('supplier_name', '')\">Laurie Poiret</t>様"
+"、\n"
 "        </p><p>\n"
-"        以下が本日の <t t-out=\"order.get('company_name', '')"
-"\">LunchCompany</t>用のオーダです:\n"
+"        以下が本日の <t t-out=\"order.get('company_name', '')\">"
+"LunchCompany</t>用のオーダです:\n"
 "        </p>\n"
 "\n"
 "        <t t-if=\"sites\">\n"
@@ -427,9 +428,9 @@ msgstr ""
 "                </tr>\n"
 "                <tr>\n"
 "                    <td style=\"text-align:center;\">\n"
-"                        <hr width=\"100%\" style=\"background-"
-"color:rgb(204,204,204);border:medium none;clear:both;display:block;font-"
-"size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
+"                        <hr width=\"100%\" style=\"background-color:rgb"
+"(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-"
+"height:1px;line-height:0; margin: 16px 0px 16px 0px;\"/>\n"
 "                    </td>\n"
 "                </tr>\n"
 "            </table>\n"
@@ -446,14 +447,14 @@ msgstr ""
 "                </td></tr>\n"
 "                <tr><td valign=\"middle\" align=\"left\" style=\"opacity: "
 "0.7;\">\n"
-"                    <t t-out=\"user.company_id.phone or ''\">+1 "
-"650-123-4567</t>\n"
+"                    <t t-out=\"user.company_id.phone or ''\">+1 650-123-"
+"4567</t>\n"
 "                    <t t-if=\"user.company_id.phone and "
 "(user.company_id.email or user.company_id.website)\">|</t>\n"
 "                    <t t-if=\"user.company_id.email\">\n"
-"                        <a t-attf-href=\"'mailto:%s' % "
-"{{ user.company_id.email }}\" style=\"text-decoration:none; color: "
-"#454748;\" t-out=\"user.company_id.email or ''\">info@yourcompany.com</a>\n"
+"                        <a t-attf-href=\"'mailto:%s' % {{ "
+"user.company_id.email }}\" style=\"text-decoration:none; color: #454748;\" t-"
+"out=\"user.company_id.email or ''\">info@yourcompany.com</a>\n"
 "                    </t>\n"
 "                    <t t-if=\"user.company_id.email and "
 "user.company_id.website\">|</t>\n"
@@ -476,8 +477,8 @@ msgstr ""
 "padding: 8px; border-collapse:separate;\">\n"
 "      <tr><td style=\"text-align: center; font-size: 13px;\">\n"
 "        Powered by <a target=\"_blank\" href=\"https://www.odoo.com\" t-attf-"
-"style=\"color: {{user.company_id.email_secondary_color or '#875A7B'}};"
-"\">Odoo</a>\n"
+"style=\"color: {{user.company_id.email_secondary_color or '#875A7B'}};\">"
+"Odoo</a>\n"
 "      </td></tr>\n"
 "    </table>\n"
 "</td></tr>\n"
@@ -520,7 +521,7 @@ msgstr "要アクション"
 #: model:ir.model.fields,field_description:lunch.field_lunch_supplier__active
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_alert_view_search
 msgid "Active"
-msgstr "アクティブ"
+msgstr "有効"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_supplier__activity_ids
@@ -535,12 +536,12 @@ msgstr "例外の活動を示す装飾"
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_supplier__activity_state
 msgid "Activity State"
-msgstr "活動状態"
+msgstr "活動ステータス"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_supplier__activity_type_icon
 msgid "Activity Type Icon"
-msgstr "活動種別アイコン"
+msgstr "活動タイプアイコン"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_order_view_form
@@ -621,13 +622,13 @@ msgstr "自動Eメール送信時間は0から12の間でなければなりま�
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_supplier_view_form
 msgid "Availability"
-msgstr "利用可能状況"
+msgstr "利用可否"
 
 #. module: lunch
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Available Balance"
-msgstr ""
+msgstr "利用可能残高"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_order__available_on_date
@@ -664,8 +665,7 @@ msgstr "ベーコン"
 #: model:res.groups,comment:lunch.group_lunch_manager
 msgid ""
 "Be able to create new products, cashmoves and to confirm or cancel orders."
-msgstr ""
-"新しいプロダクトや現金移動を作成し、オーダを確定またはキャンセルできる権限。"
+msgstr "新しいプロダクトや現金移動を作成し、オーダを確定またはキャンセルできる権限。"
 
 #. module: lunch
 #: model_terms:lunch.product,description:lunch.product_bacon
@@ -785,7 +785,7 @@ msgstr "市町村"
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Clear Order"
-msgstr ""
+msgstr "オーダをクリア"
 
 #. module: lunch
 #: model_terms:ir.actions.act_window,help:lunch.lunch_order_action_control_suppliers
@@ -811,7 +811,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Close"
-msgstr ""
+msgstr "閉じる"
 
 #. module: lunch
 #: model:lunch.product,name:lunch.product_club
@@ -891,7 +891,7 @@ msgstr "新しい支払を作成しましょう"
 #. module: lunch
 #: model_terms:ir.actions.act_window,help:lunch.lunch_product_category_action
 msgid "Create a new product category"
-msgstr "新しいプロダクトカテゴリを作成しましょう"
+msgstr "新しいプロダクトカテゴリを作成"
 
 #. module: lunch
 #: model_terms:ir.actions.act_window,help:lunch.lunch_product_action
@@ -948,7 +948,7 @@ msgstr "通貨"
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_alert_view_search
 msgid "Currently inactive"
-msgstr "現在、アクティブではありません"
+msgstr "現在、有効ではありません"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_cashmove__date
@@ -960,7 +960,7 @@ msgstr "日付"
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Decrease quantity"
-msgstr ""
+msgstr "数量を減らす"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_supplier__delivery
@@ -1222,7 +1222,7 @@ msgstr "チェックした場合は、新しいメッセージに注意が必要
 #. module: lunch
 #: model:ir.model.fields,help:lunch.field_lunch_supplier__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr "選択されている場合、一部のメッセージで配信エラーが発生しています。"
+msgstr "有効にすると、一部のメッセージに配信エラーが発生します。"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_product__image_1920
@@ -1264,7 +1264,7 @@ msgstr "画像512"
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Increase quantity"
-msgstr ""
+msgstr "数量を増やす"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_order_view_form
@@ -1279,7 +1279,7 @@ msgstr "本日表示有効"
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_product__is_favorite
 msgid "Is Favorite"
-msgstr "お気に入り化"
+msgstr "お気に入り"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_supplier__message_is_follower
@@ -1464,32 +1464,32 @@ msgid "Lunch: Supplier Order"
 msgstr "ランチ: サプライヤオーダ"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_alert_cron_sa_230
+#: model:ir.actions.server,name:lunch.lunch_alert_cron_sa_231
 msgid "Lunch: alert chat notification (Alert for Office 3)"
 msgstr "ランチ：チャットアラート通知（オフィス３へのアラート）"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_231
+#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_232
 msgid "Lunch: send automatic email to Coin gourmand"
 msgstr "ランチ: Coin gourmandに自動的にメールを送付"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_226
+#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_227
 msgid "Lunch: send automatic email to Lunch Supplier"
 msgstr "ランチ：ランチ仕入先に自動的にメールを送付"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_232
+#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_233
 msgid "Lunch: send automatic email to Pizza Inn"
 msgstr "ランチ：Pizza Inn に自動的にメールを送付"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_234
+#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_235
 msgid "Lunch: send automatic email to Sushi Shop"
 msgstr "ランチ：Sushi Shop に自動的にメールを送付"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_233
+#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_234
 msgid "Lunch: send automatic email to The Corner"
 msgstr "ランチ：The Corner に自動的にメールを送付"
 
@@ -1695,7 +1695,7 @@ msgstr "今日の注文はありません"
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Nothing to order, add some meals to begin."
-msgstr ""
+msgstr "オーダがありません。まずは食事を追加してください。"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_alert__notification_moment
@@ -1829,7 +1829,7 @@ msgstr "PM"
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
 msgid "Passed orders"
-msgstr ""
+msgstr "過去のオーダ"
 
 #. module: lunch
 #: model:lunch.product.category,name:lunch.categ_pasta
@@ -2129,7 +2129,7 @@ msgstr "都道府県・州"
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_order__state
 msgid "Status"
-msgstr "状態"
+msgstr "ステータス"
 
 #. module: lunch
 #: model:ir.model.fields,help:lunch.field_lunch_supplier__activity_state
@@ -2140,7 +2140,7 @@ msgid ""
 "Planned: Future activities."
 msgstr ""
 "活動に基づくステータス\n"
-"遅延: 期限が既に過ぎています\n"
+"期限超過：期限日がすでに過ぎています\n"
 "今日: 活動日は今日です\n"
 "予定: 将来の活動。"
 
@@ -2208,8 +2208,8 @@ msgid ""
 "the categories or change the category of the product.\n"
 "%s"
 msgstr ""
-"以下のプロダクトカテゴリはアーカイブされています。アーカイブ解除するか、プロ"
-"ダクトのカテゴリを変更して下さい。\n"
+"以下のプロダクトカテゴリはアーカイブされています。アーカイブ解除するか、"
+"プロダクトのカテゴリを変更して下さい。\n"
 "%s"
 
 #. module: lunch
@@ -2220,8 +2220,8 @@ msgid ""
 "suppliers or change the supplier of the product.\n"
 "%s"
 msgstr ""
-"以下のプロダクトカテゴリはアーカイブされています。アーカイブ解除するか、プロ"
-"ダクトの仕入先を変更して下さい。\n"
+"以下のプロダクトカテゴリはアーカイブされています。アーカイブ解除するか、"
+"プロダクトの仕入先を変更して下さい。\n"
 "%s"
 
 #. module: lunch
@@ -2351,8 +2351,7 @@ msgstr "今日の注文"
 #. module: lunch
 #: model_terms:lunch.product,description:lunch.product_4formaggi
 msgid "Tomato sauce, Olive oil, Fresh Tomatoes, Onions, Vegetables, Parmesan"
-msgstr ""
-"トマトソース、オリーブオイル、フレッシュトマト、玉ねぎ、野菜、パルメザン"
+msgstr "トマトソース、オリーブオイル、フレッシュトマト、玉ねぎ、野菜、パルメザン"
 
 #. module: lunch
 #: model_terms:lunch.product,description:lunch.product_Napoli
@@ -2434,7 +2433,7 @@ msgstr "ツナ、マヨネーズ"
 #. module: lunch
 #: model:ir.model.fields,help:lunch.field_lunch_supplier__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr "記録上の例外活動の種類。"
+msgstr "レコード上の例外の活動タイプ。"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_supplier__recurrency_end_date
@@ -2603,6 +2602,13 @@ msgstr "on"
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_alert_view_kanban
 msgid "to"
 msgstr "to"
+
+#. module: lunch
+#. odoo-javascript
+#: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
+#, fuzzy
+msgid "x"
+msgstr "x"
 
 #~ msgid "Group By"
 #~ msgstr "グループ化"

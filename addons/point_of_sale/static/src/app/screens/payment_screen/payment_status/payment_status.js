@@ -13,6 +13,10 @@ export class PaymentScreenStatus extends Component {
         return this.isRemaining && this.order.orderHasZeroRemaining;
     }
 
+    get isIncompleteAndPositive() {
+        return !this.isComplete && this.order.remainingDue > 0;
+    }
+
     get order() {
         return this.props.order;
     }
@@ -21,7 +25,7 @@ export class PaymentScreenStatus extends Component {
         const isNegative = this.order.totalDue < 0;
         const remainingDue = this.order.remainingDue;
 
-        if ((isNegative && remainingDue > 0) || (!isNegative && remainingDue <= 0)) {
+        if ((isNegative && remainingDue >= 0) || (!isNegative && remainingDue <= 0)) {
             return false;
         } else {
             return true;

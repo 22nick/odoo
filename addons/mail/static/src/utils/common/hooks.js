@@ -340,9 +340,6 @@ export function useMessageScrolling(duration = 2000) {
          * @param {import("models").Thread} thread
          */
         async highlightMessage(message, thread) {
-            if (thread.model !== "mail.box" && thread.notEq(message.thread)) {
-                return;
-            }
             state.initiated = true;
             let messageScrollDirection;
             if (message.notIn(thread.messages)) {
@@ -552,8 +549,21 @@ export function useSequential() {
     };
 }
 
-export function useDiscussSystray() {
+export function useDiscussSystray(dropdownState) {
     const ui = useService("ui");
+    if (dropdownState) {
+        useEffect(
+            (isOpen) => {
+                if (isOpen) {
+                    document.body.classList.add("o-mail-discuss-systray-menu-open");
+                    return () => {
+                        document.body.classList.remove("o-mail-discuss-systray-menu-open");
+                    };
+                }
+            },
+            () => [dropdownState.isOpen]
+        );
+    }
     return {
         class: "o-mail-DiscussSystray-class",
         get contentClass() {

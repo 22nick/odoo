@@ -84,6 +84,8 @@
                   class="o_todo_form_view"
                   js_class="todo_form">
                 <field name="html_field_history_metadata" invisible="1"/>
+                <field name="company_id" invisible="1"/>
+                <field name="project_id" invisible="1"/>
                 <header>
                     <field name="personal_stage_type_id"
                            domain="[('user_id','=',uid)]"
@@ -284,6 +286,7 @@
             'list_view_ref': 'project_todo.project_task_view_todo_tree',
             'default_project_id': False,
             'show_todo_mail_helper': True,
+            'show_task_options': False,
         }</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

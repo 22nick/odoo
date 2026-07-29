@@ -17,7 +17,7 @@ class AccountMove(models.Model):
     campaign_id = fields.Many2one(ondelete='set null')
     medium_id = fields.Many2one(ondelete='set null')
     source_id = fields.Many2one(ondelete='set null')
-    sale_order_count = fields.Integer(compute="_compute_origin_so_count", string='Sale Order Count')
+    sale_order_count = fields.Integer(compute="_compute_origin_so_count", string='Sale Order Count', compute_sudo=True)
     sale_warning_text = fields.Text(
         "Sale Warning",
         help="Internal warning for the partner or the products as set by the user.",
@@ -50,6 +50,9 @@ class AccountMove(models.Model):
 
     @api.depends('partner_id.name', 'partner_id.sale_warn_msg', 'invoice_line_ids.product_id.sale_line_warn_msg', 'invoice_line_ids.product_id.display_name')
     def _compute_sale_warning_text(self):
+        if not self.env.user.has_group('sale.group_warning_sale'):
+            self.sale_warning_text = ''
+            return
         for move in self:
             if move.move_type != 'out_invoice':
                 move.sale_warning_text = ''
@@ -57,6 +60,9 @@ class AccountMove(models.Model):
             warnings = OrderedSet()
             if partner_msg := move.partner_id.sale_warn_msg:
                 warnings.add((move.partner_id.name or move.partner_id.display_name) + ' - ' + partner_msg)
+            if partner_parent_msg := move.partner_id.parent_id.sale_warn_msg:
+                parent = move.partner_id.parent_id
+                warnings.add((parent.name or parent.display_name) + ' - ' + partner_parent_msg)
             for product in move.invoice_line_ids.product_id:
                 if product_msg := product.sale_line_warn_msg:
                     warnings.add(product.display_name + ' - ' + product_msg)
@@ -101,8 +107,13 @@ class AccountMove(models.Model):
     def button_cancel(self):
         res = super().button_cancel()
 
-        self.line_ids.filtered('is_downpayment').sale_line_ids.filtered(
-            lambda sol: not sol.display_type)._compute_name()
+        dp_lines = self.line_ids.sale_line_ids.filtered(lambda l: l.is_downpayment and not l.display_type)
+        dp_lines._compute_name()
+        downpayment_lines = dp_lines.filtered(lambda sol: not sol.order_id.locked)
+        other_so_lines = downpayment_lines.order_id.order_line - downpayment_lines
+        real_invoices = set(other_so_lines.invoice_lines.move_id)
+        for so_dpl in downpayment_lines:
+            so_dpl.price_unit = so_dpl._get_downpayment_line_price_unit(real_invoices)
 
         return res
 
@@ -113,7 +124,9 @@ class AccountMove(models.Model):
         posted = super()._post(soft)
 
         for invoice in posted.filtered(lambda move: move.is_invoice()):
-            payments = invoice.mapped('transaction_ids.payment_id').filtered(lambda x: x.state == 'in_process')
+            payments = invoice.mapped("transaction_ids.payment_id").filtered(
+                lambda x: x.state in ("in_process", "paid")
+            )
             move_lines = payments.move_id.line_ids.filtered(lambda line: line.account_type in ('asset_receivable', 'liability_payable') and not line.reconciled)
             for line in move_lines:
                 invoice.js_assign_outstanding_line(line.id)

@@ -20,6 +20,8 @@ ERROR_MESSAGES = {
     ),
     'closed_feature': _lt("The SMS Service is currently unavailable for new users and new accounts registrations are suspended."),
     'banned_account': _lt("This phone number/account has been banned from our service."),
+    'country_not_supported': _lt("Your country is not supported due to sender registration legislation"),
+    'not_active_db': _lt("Your database is not activated"),
 
     # Errors that could occur while verifying the code
     'invalid_code': _lt("The verification code is incorrect."),
@@ -70,6 +72,7 @@ class SmsApi(SmsApiBase):  # TODO RIGR in master: rename SmsApi to SmsApiIAP, an
             raise exceptions.AccessError("Unavailable during module installation.")  # pylint: disable=missing-gettext
 
         params['account_token'] = self.account.sudo().account_token
+        params['dbuuid'] = self.env['ir.config_parameter'].sudo().get_param('database.uuid')
         endpoint = self.env['ir.config_parameter'].sudo().get_param('sms.endpoint', self.DEFAULT_ENDPOINT)
         return iap_tools.iap_jsonrpc(endpoint + local_endpoint, params=params, timeout=timeout)
 

@@ -7,15 +7,15 @@
 # Martin Trigaux, 2022
 # Larissa Manderfeld, 2023
 # Stefan Reisich <nafex@gmx.net>, 2023
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-10-31 13:02+0000\n"
-"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
+"POT-Creation-Date: 2026-02-20 18:37+0000\n"
+"PO-Revision-Date: 2026-06-30 08:27+0000\n"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: German <https://translate.odoo.com/projects/odoo-19/"
 "website_forum/de/>\n"
 "Language: de\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_forum
 #. odoo-javascript
@@ -57,7 +57,7 @@ msgstr "# Beiträge"
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__total_views
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_view_tree
 msgid "# Views"
-msgstr "# Ansichten"
+msgstr "Anzahl Ansichten"
 
 #. module: website_forum
 #. odoo-javascript
@@ -87,7 +87,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/website_forum/models/forum_post.py:0
 msgid "%d karma required to answer a question."
-msgstr "%d Karma-Punkte benötigt, um eine Frage zu beanworten."
+msgstr "%d Karma-Punkte benötigt, um eine Frage zu beantworten."
 
 #. module: website_forum
 #. odoo-python
@@ -254,29 +254,8 @@ msgid ""
 "<a class=\"btn btn-primary forum_register_url o_translate_inline\" href=\"/"
 "web/login\">Sign up</a>"
 msgstr ""
-"<a class=\"btn btn-primary forum_register_url o_translate_inline\" href="
-"\"/web/login\">Registrieren</a>"
-
-#. module: website_forum
-#: model_terms:ir.ui.view,arch_db:website_forum.404
-msgid ""
-"<a class=\"btn-link o_translate_inline\" t-attf-href=\"/forum\"><i "
-"class=\"oi oi-arrow-right display-inline-block\"/> Return to questions list</"
-"a>"
-msgstr ""
-"<a class=\"btn-link o_translate_inline\" t-attf-href=\"/forum\"><i class="
-"\"oi oi-arrow-right display-inline-block\"/> Zurück zur Fragenliste</a>"
-
-#. module: website_forum
-#: model_terms:ir.ui.view,arch_db:website_forum.forum_all_oe_structure_forum_all_top
-msgid ""
-"<a class=\"mb-2 o_translate_inline\" t-attf-href=\"/profile/users\" data-bs-"
-"original-title=\"\" title=\"\" target=\"_blank\">Meet our community members</"
-"a>"
-msgstr ""
-"<a class=\"mb-2 o_translate_inline\" t-attf-href=\"/profile/users\" data-bs-"
-"original-title=\"\" title=\"\" target=\"_blank\">Unsere Community-Mitglieder "
-"treffen</a>"
+"<a class=\"btn btn-primary forum_register_url o_translate_inline\" href=\"/"
+"web/login\">Registrieren</a>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_display
@@ -355,9 +334,9 @@ msgid ""
 "information."
 msgstr ""
 "<b>Antworten sollten nicht auf andere Fragen verweisen</b>. Stattdessen "
-"fügen Sie einen Kommentar hinzu mit dem Verweis „Mögliches Duplikat "
-"von ...“. Links zu anderen Fragen oder Antworten sind jedoch erlaubt, wenn "
-"sie wichtige zusätzliche Informationen enthalten."
+"fügen Sie einen Kommentar hinzu mit dem Verweis „Mögliches Duplikat von "
+"...“. Links zu anderen Fragen oder Antworten sind jedoch erlaubt, wenn sie "
+"wichtige zusätzliche Informationen enthalten."
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
@@ -448,8 +427,8 @@ msgid ""
 "role=\"img\" aria-label=\"Gold badge\" title=\"Gold badge\"/>"
 msgstr ""
 "<b>|</b>\n"
-"                    <span class=\"fa fa-trophy o-text-gold ms-2\" role="
-"\"img\" aria-label=\"Gold badge\" title=\"Gold badge\"/>"
+"                    <span class=\"fa fa-trophy o-text-gold ms-2\" "
+"role=\"img\" aria-label=\"Gold badge\" title=\"Gold badge\"/>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_description_full
@@ -477,8 +456,8 @@ msgid ""
 "<i class=\"fa fa-caret-down\" data-bs-toggle=\"tooltip\" data-bs-"
 "placement=\"top\" title=\"Downvote\"/>"
 msgstr ""
-"<i class=\"fa fa-caret-down\" data-bs-toggle=\"tooltip\" data-bs-placement="
-"\"top\" title=\"Downvote\"/>"
+"<i class=\"fa fa-caret-down\" data-bs-toggle=\"tooltip\" data-bs-"
+"placement=\"top\" title=\"Downvote\"/>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.vote
@@ -486,8 +465,8 @@ msgid ""
 "<i class=\"fa fa-caret-up\" data-bs-toggle=\"tooltip\" data-bs-"
 "placement=\"top\" title=\"Upvote\"/>"
 msgstr ""
-"<i class=\"fa fa-caret-up\" data-bs-toggle=\"tooltip\" data-bs-placement="
-"\"top\" title=\"Upvote\"/>"
+"<i class=\"fa fa-caret-up\" data-bs-toggle=\"tooltip\" data-bs-"
+"placement=\"top\" title=\"Upvote\"/>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_description_full
@@ -609,8 +588,8 @@ msgid ""
 "<i class=\"fa fa-share-alt\" data-bs-toggle=\"tooltip\" data-bs-"
 "placement=\"top\" title=\"Share\"/>"
 msgstr ""
-"<i class=\"fa fa-share-alt\" data-bs-toggle=\"tooltip\" data-bs-placement="
-"\"top\" title=\"Share\"/>"
+"<i class=\"fa fa-share-alt\" data-bs-toggle=\"tooltip\" data-bs-"
+"placement=\"top\" title=\"Share\"/>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.user_sidebar_body
@@ -681,13 +660,21 @@ msgid "<i class=\"oi oi-arrow-right d-inline-block\"/> Go to Forums"
 msgstr "<i class=\"oi oi-arrow-right d-inline-block\"/> Zu den Foren"
 
 #. module: website_forum
+#: model_terms:ir.ui.view,arch_db:website_forum.404
+msgid ""
+"<i class=\"oi oi-arrow-right display-inline-block\"/> Return to questions "
+"list"
+msgstr ""
+"<i class=\"oi oi-arrow-right display-inline-block\"/> Zurück zur Fragenliste"
+
+#. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_dropdown
 msgid ""
 "<i class=\"oi oi-ellipsis-h\" data-bs-toggle=\"tooltip\" data-bs-"
 "placement=\"top\" title=\"More\"/>"
 msgstr ""
-"<i class=\"oi oi-ellipsis-h\" data-bs-toggle=\"tooltip\" data-bs-placement="
-"\"top\" title=\"Mehr\"/>"
+"<i class=\"oi oi-ellipsis-h\" data-bs-toggle=\"tooltip\" data-bs-"
+"placement=\"top\" title=\"Mehr\"/>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.user_profile_content
@@ -710,8 +697,8 @@ msgid ""
 "<span class=\"fa fa-trophy o-text-bronze ms-2\" role=\"img\" aria-"
 "label=\"Bronze badge\" title=\"Bronze badge\"/>"
 msgstr ""
-"<span class=\"fa fa-trophy o-text-bronze ms-2\" role=\"img\" aria-label="
-"\"Bronze badge\" title=\"Bronze badge\"/>"
+"<span class=\"fa fa-trophy o-text-bronze ms-2\" role=\"img\" aria-"
+"label=\"Bronze badge\" title=\"Bronze badge\"/>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.contact
@@ -719,8 +706,8 @@ msgid ""
 "<span class=\"fa fa-trophy o-text-silver ms-2\" role=\"img\" aria-"
 "label=\"Silver badge\" title=\"Silver badge\"/>"
 msgstr ""
-"<span class=\"fa fa-trophy o-text-silver ms-2\" role=\"img\" aria-label="
-"\"Silver badge\" title=\"Silver badge\"/>"
+"<span class=\"fa fa-trophy o-text-silver ms-2\" role=\"img\" aria-"
+"label=\"Silver badge\" title=\"Silver badge\"/>"
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
@@ -734,8 +721,8 @@ msgstr "<span class=\"flex-grow-1\">Welche Art Fragen darf ich stellen?</span>"
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
 msgid "<span class=\"flex-grow-1\">What should I avoid in my answers?</span>"
 msgstr ""
-"<span class=\"flex-grow-1\">Was sollte ich in meinen Antworten "
-"vermeiden?</span>"
+"<span class=\"flex-grow-1\">Was sollte ich in meinen Antworten vermeiden?</"
+"span>"
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
@@ -791,8 +778,8 @@ msgid ""
 "<span class=\"form-text small text-muted me-1\"><i class=\"fa fa-lightbulb-"
 "o\"/> Tip:</span>"
 msgstr ""
-"<span class=\"form-text small text-muted me-1\"><i class="
-"\"fa fa-lightbulb-o\"/> Tipp:</span>"
+"<span class=\"form-text small text-muted me-1\"><i class=\"fa fa-lightbulb-"
+"o\"/> Tipp:</span>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_forum_view_form
@@ -819,8 +806,8 @@ msgstr "<span class=\"text-muted\">Es gibt noch keine Aktivität.</span>"
 #: model_terms:web_tour.tour,rainbow_man_message:website_forum.question
 msgid "<span><b>Good job!</b> You went through all steps of this tour.</span>"
 msgstr ""
-"<span><b>Gut gemacht!</b> Sie haben alle Schritte dieser Tour "
-"absolviert.</span>"
+"<span><b>Gut gemacht!</b> Sie haben alle Schritte dieser Tour absolviert.</"
+"span>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_description_full
@@ -845,8 +832,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_forum.user_sidebar_header
 msgid "<span>You need to be registered to interact with the community.</span>"
 msgstr ""
-"<span>Sie müssen registriert sein, um mit der Community zu "
-"interagieren.</span>"
+"<span>Sie müssen registriert sein, um mit der Community zu interagieren.</"
+"span>"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.forum_post_template_new_answer
@@ -896,7 +883,7 @@ msgstr "Zugriff verweigert"
 #: model:ir.model.fields,field_description:website_forum.field_forum_post__message_needaction
 #: model:ir.model.fields,field_description:website_forum.field_forum_tag__message_needaction
 msgid "Action Needed"
-msgstr "Aktion notwendig"
+msgstr "Aktion erforderlich"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__active
@@ -1609,8 +1596,7 @@ msgstr "Standardsortierung"
 #. module: website_forum
 #: model:ir.model.fields,help:website_forum.field_gamification_challenge__challenge_category
 msgid "Define the visibility of the challenge through menus"
-msgstr ""
-"Legen Sie fest, in welchen Menüs die Herausforderung sichtbar sein soll"
+msgstr "Legen Sie fest, in welchen Menüs die Herausforderung sichtbar sein soll"
 
 #. module: website_forum
 #. odoo-javascript
@@ -2263,10 +2249,10 @@ msgid ""
 "probably OK."
 msgstr ""
 "Wenn auf Sie eines dieser Beispiele zutrifft oder wenn Ihre Motivation für "
-"die Frage lautet „Ich möchte mich an einer Diskussion über ______ "
-"beteiligen“, dann sollten Sie nicht hier, sondern über unsere Mailinglisten "
-"fragen. Wenn Ihre Motivation jedoch lautet: „Ich möchte, dass andere mir "
-"______ erklären“, dann ist das wahrscheinlich in Ordnung."
+"die Frage lautet „Ich möchte mich an einer Diskussion über ______ beteiligen"
+"“, dann sollten Sie nicht hier, sondern über unsere Mailinglisten fragen. "
+"Wenn Ihre Motivation jedoch lautet: „Ich möchte, dass andere mir ______ "
+"erklären“, dann ist das wahrscheinlich in Ordnung."
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.mark_as_offensive
@@ -2491,6 +2477,11 @@ msgid "Mark as spam"
 msgstr "Als Spam markieren"
 
 #. module: website_forum
+#: model_terms:ir.ui.view,arch_db:website_forum.forum_all_oe_structure_forum_all_top
+msgid "Meet our community members"
+msgstr "Unsere Community-Mitglieder kennenlernen"
+
+#. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__message_has_error
 #: model:ir.model.fields,field_description:website_forum.field_forum_post__message_has_error
 #: model:ir.model.fields,field_description:website_forum.field_forum_tag__message_has_error
@@ -2668,7 +2659,7 @@ msgstr "Bemerkenswerte Antwort"
 #: model:ir.model.fields,field_description:website_forum.field_forum_post__message_needaction_counter
 #: model:ir.model.fields,field_description:website_forum.field_forum_tag__message_needaction_counter
 msgid "Number of Actions"
-msgstr "Anzahl der Aktionen"
+msgstr "Anzahl Aktionen"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_tag__posts_count
@@ -2680,7 +2671,7 @@ msgstr "Anzahl der Beiträge"
 #: model:ir.model.fields,field_description:website_forum.field_forum_post__message_has_error_counter
 #: model:ir.model.fields,field_description:website_forum.field_forum_tag__message_has_error_counter
 msgid "Number of errors"
-msgstr "Anzahl der Fehler"
+msgstr "Anzahl Fehler"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__count_flagged_posts
@@ -2699,7 +2690,7 @@ msgstr "Anzahl der Nachrichten, die eine Aktion erfordern"
 #: model:ir.model.fields,help:website_forum.field_forum_post__message_has_error_counter
 #: model:ir.model.fields,help:website_forum.field_forum_tag__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr "Anzahl der Nachrichten mit Zustellungsfehler."
+msgstr "Anzahl Nachrichten mit Zustellungsfehler"
 
 #. module: website_forum
 #: model:ir.model.fields,field_description:website_forum.field_forum_forum__count_posts_waiting_validation
@@ -3355,8 +3346,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_forum/static/src/interactions/website_forum.js:0
 msgid "Sorry, you cannot vote for your own posts"
-msgstr ""
-"Es tut uns leid, Sie dürfen nicht über Ihren eigenen Beiträge abstimmen"
+msgstr "Es tut uns leid, Sie dürfen nicht über Ihren eigenen Beiträge abstimmen"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.moderation_queue
@@ -3544,9 +3534,9 @@ msgid ""
 "represents number of votes for a post, and 'days' is number of days since "
 "the post creation"
 msgstr ""
-"Diese Formel wird verwendet für die Sortierung nach Relevanz. Die Variable "
-"„votes“ beinhaltet die Anzahl Stimmen für einen Beitrag und „days“ die "
-"Anzahl Tage seit Erstellung des Beitrags"
+"Diese Formel wird verwendet für die Sortierung nach Relevanz. Die Variable „"
+"votes“ beinhaltet die Anzahl Stimmen für einen Beitrag und „days“ die Anzahl "
+"Tage seit Erstellung des Beitrags"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.header
@@ -3578,8 +3568,8 @@ msgid ""
 "<b>Reject</b> this post."
 msgstr ""
 "Der Beitrag wartet auf Moderation und wurde noch nicht veröffentlicht.<br/>\n"
-"                    Als Moderator können Sie diesen Beitrag entweder "
-"<b>Akzeptieren</b> oder <b>Ablehnen</b>."
+"                    Als Moderator können Sie diesen Beitrag entweder <b>"
+"Akzeptieren</b> oder <b>Ablehnen</b>."
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_description_full
@@ -4332,8 +4322,7 @@ msgstr ""
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
 msgid "what's the best way to use Odoo for a specific business need,"
-msgstr ""
-"wie man Odoo am besten für eine spezifische Geschäftsanforderung nutzt,"
+msgstr "wie man Odoo am besten für eine spezifische Geschäftsanforderung nutzt,"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.author_box
@@ -4359,6 +4348,24 @@ msgstr "Ihre Biographie kann in einem Hilfefenster gesehen werden"
 #: model_terms:ir.ui.view,arch_db:website_forum.follow
 msgid "your email..."
 msgstr "Ihre E-Mail ..."
+
+#~ msgid ""
+#~ "<a class=\"btn-link o_translate_inline\" t-attf-href=\"/forum\"><i "
+#~ "class=\"oi oi-arrow-right display-inline-block\"/> Return to questions "
+#~ "list</a>"
+#~ msgstr ""
+#~ "<a class=\"btn-link o_translate_inline\" t-attf-href=\"/forum\"><i "
+#~ "class=\"oi oi-arrow-right display-inline-block\"/> Zurück zur "
+#~ "Fragenliste</a>"
+
+#~ msgid ""
+#~ "<a class=\"mb-2 o_translate_inline\" t-attf-href=\"/profile/users\" data-"
+#~ "bs-original-title=\"\" title=\"\" target=\"_blank\">Meet our community "
+#~ "members</a>"
+#~ msgstr ""
+#~ "<a class=\"mb-2 o_translate_inline\" t-attf-href=\"/profile/users\" data-"
+#~ "bs-original-title=\"\" title=\"\" target=\"_blank\">Unsere Community-"
+#~ "Mitglieder treffen</a>"
 
 #~ msgid "%d karma required to unlink a comment."
 #~ msgstr "%dKarma benötigt um Verlinkungen für Kommentare zu entfernen."

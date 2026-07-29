@@ -2,14 +2,15 @@
 # This file contains the translation of the following modules:
 # * pos_loyalty
 #
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# Žiga Trček <ziga.trcek@implex.si>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 21:34+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-03-20 18:35+0000\n"
+"PO-Revision-Date: 2026-07-01 03:56+0000\n"
+"Last-Translator: Žiga Trček <ziga.trcek@implex.si>\n"
 "Language-Team: Slovenian <https://translate.odoo.com/projects/odoo-19/"
 "pos_loyalty/sl/>\n"
 "Language: sl\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: pos_loyalty
 #: model:ir.model.fields,help:pos_loyalty.field_pos_order_line__reward_identifier_code
@@ -33,6 +34,14 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/pos_loyalty/static/src/app/screens/partner_list_screen/partner_line/partner_line.js:0
 msgid "%s Points"
+msgstr ""
+
+#. module: pos_loyalty
+#. odoo-javascript
+#: code:addons/pos_loyalty/static/src/app/services/pos_store.js:0
+msgid ""
+"%s: %s\n"
+"Balance: %s"
 msgstr ""
 
 #. module: pos_loyalty
@@ -183,12 +192,6 @@ msgstr ""
 
 #. module: pos_loyalty
 #. odoo-javascript
-#: code:addons/pos_loyalty/static/src/app/screens/receipt_screen/order_receipt/order_receipt.xml:0
-msgid "Customer"
-msgstr "Stranka"
-
-#. module: pos_loyalty
-#. odoo-javascript
 #: code:addons/pos_loyalty/static/src/app/services/pos_store.js:0
 msgid "Customer needed"
 msgstr ""
@@ -206,6 +209,7 @@ msgid "Discount & Loyalty"
 msgstr "Popust in zvestoba"
 
 #. module: pos_loyalty
+#: model:ir.model.fields,field_description:pos_loyalty.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:pos_loyalty.field_barcode_rule__display_name
 #: model:ir.model.fields,field_description:pos_loyalty.field_loyalty_card__display_name
 #: model:ir.model.fields,field_description:pos_loyalty.field_loyalty_mail__display_name
@@ -272,14 +276,6 @@ msgstr ""
 
 #. module: pos_loyalty
 #. odoo-javascript
-#: code:addons/pos_loyalty/static/src/app/services/pos_store.js:0
-msgid ""
-"Gift Card: %s\n"
-"Balance: %s"
-msgstr ""
-
-#. module: pos_loyalty
-#. odoo-javascript
 #: code:addons/pos_loyalty/static/src/app/screens/product_screen/control_buttons/control_buttons.js:0
 msgid "Gift card or Discount code"
 msgstr "Darilna kartica ali koda za popust"
@@ -296,6 +292,7 @@ msgid "How many point this reward cost on the coupon."
 msgstr ""
 
 #. module: pos_loyalty
+#: model:ir.model.fields,field_description:pos_loyalty.field_account_move_line__id
 #: model:ir.model.fields,field_description:pos_loyalty.field_barcode_rule__id
 #: model:ir.model.fields,field_description:pos_loyalty.field_loyalty_card__id
 #: model:ir.model.fields,field_description:pos_loyalty.field_loyalty_mail__id
@@ -346,6 +343,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:pos_loyalty.field_pos_order_line__is_reward_line
 msgid "Is Reward Line"
 msgstr ""
+
+#. module: pos_loyalty
+#: model:ir.model,name:pos_loyalty.model_account_move_line
+msgid "Journal Item"
+msgstr "Postavka"
 
 #. module: pos_loyalty
 #: model:ir.model,name:pos_loyalty.model_loyalty_mail
@@ -480,7 +482,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:pos_loyalty.field_loyalty_mail__pos_report_print_id
 #: model:ir.model.fields,field_description:pos_loyalty.field_loyalty_program__pos_report_print_id
 msgid "Print Report"
-msgstr ""
+msgstr "Natisni poročilo"
 
 #. module: pos_loyalty
 #: model:ir.model,name:pos_loyalty.model_product_template
@@ -526,7 +528,9 @@ msgstr ""
 
 #. module: pos_loyalty
 #: model:ir.model.fields,help:pos_loyalty.field_loyalty_program__pos_config_ids
-msgid "Restrict publishing to those shops."
+msgid ""
+"Restrict publishing to those shops. Note: A program will only be used in the "
+"shops using the same currency as the program."
 msgstr ""
 
 #. module: pos_loyalty
@@ -859,3 +863,6 @@ msgstr ""
 #: code:addons/pos_loyalty/static/src/app/screens/receipt_screen/order_receipt/order_receipt.xml:0
 msgid "no expiration"
 msgstr ""
+
+#~ msgid "Customer"
+#~ msgstr "Stranka"

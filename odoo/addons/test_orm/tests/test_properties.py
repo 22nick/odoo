@@ -4,7 +4,6 @@ import psycopg2
 import unittest
 from collections import abc
 from unittest.mock import patch
-
 import babel.dates
 
 from odoo.addons.base.tests.test_expression import TransactionExpressionCase
@@ -1162,6 +1161,28 @@ class PropertiesCase(TestPropertiesMixin):
         self.assertTrue(isinstance(data['float_value'], int))
         self.assertTrue(isinstance(data['boolean_value'], bool))
         self.assertEqual(self._get_sql_properties(self.message_1), {'int_value': 0, 'float_value': 0, 'boolean_value': False})
+
+    def test_properties_field_search_domain_with_number_edge_case(self):
+        """Tests that a condition where we compare a number to 1 or 0 is not wrongly altered"""
+        for ftype in ['integer', 'float']:
+            def_name = ftype + '_value'
+            self.discussion_1.attributes_definition = [
+            {
+                'name': def_name,
+                'string': 'Number value',
+                'type': ftype,
+            }]
+            self.message_1.attributes = [{
+                'name': def_name,
+                'type': ftype,
+                'value': 1,
+            }]
+            self.message_2.attributes = [{
+                'name': def_name,
+                'type': ftype,
+                'value': 2,
+            }]
+            self.assertEqual(self.env['test_orm.message'].search_count([('attributes.' + def_name, '=', 1)]), 1)
 
     def test_properties_field_integer_float_falsy_value_edge_cases(self):
         self.discussion_1.attributes_definition = [
@@ -2594,7 +2615,7 @@ class PropertiesGroupByCase(TestPropertiesMixin):
         self.message_3.attributes = {'mychar': 'boum'}
 
         Model = self.env['test_orm.message']
-        with self.assertQueryCount(6):  # 3 for formatted_read_group + 1 query by group opened
+        with self.assertQueryCount(9):  # 3 for formatted_read_group + 1 query by group opened + 1 query by get_property_definition
             result = Model.web_read_group(
                 domain=[],
                 aggregates=['__count'],
@@ -2602,6 +2623,7 @@ class PropertiesGroupByCase(TestPropertiesMixin):
                 auto_unfold=True,
                 unfold_read_specification={'id': {}},
             )
+
         groups = result['groups']
 
         self.assertEqual(len(groups), 3)
@@ -2630,6 +2652,35 @@ class PropertiesGroupByCase(TestPropertiesMixin):
         self.assertEqual(groups[1]['__records'], [{'id': self.message_1.id}, {'id': self.message_2.id}])
         # group False
         self.assertEqual(groups[2]['__records'], [{'id': self.message_4.id}])
+
+    def test_properties_tags_field_web_read_group(self):
+        self.discussion_1.attributes_definition = [
+            {
+                'name': 'my_tags',
+                'string': 'My Tags',
+                'type': 'tags',
+                'tags': [
+                    ('be', 'BE', 1),
+                    ('it', 'IT', 2),
+                ],
+                'default': ['be'],
+            },
+        ]
+        self.env['test_orm.message'].create(
+            {'discussion': self.discussion_1.id, 'author': self.user.id})
+
+        self.env.flush_all()
+        result = self.env['test_orm.message'].web_read_group(
+            domain=[],
+            aggregates=['__count'],
+            groupby=['attributes.my_tags'],
+            opening_info=[{'folded': True, 'value': '1'}],
+            unfold_read_specification={'id': {}},
+        )
+
+        self.assertEqual(len(result['groups']), 2)
+        self.assertEqual(result['groups'][0]['attributes.my_tags'], ('be', 'BE', 1))
+        self.assertEqual(result['groups'][1]['attributes.my_tags'], False)
 
     @mute_logger('odoo.fields')
     def test_properties_field_read_progress_bar(self):
@@ -3240,7 +3291,7 @@ class PropertiesGroupByCase(TestPropertiesMixin):
         self.assertEqual(len(result), 6)
 
         all_tags = self.message_1.read(['attributes'])[0]['attributes'][0]['tags']
-        all_tags = {tag[0]: tag for tag in all_tags}
+        all_tags = {tag[0]: tuple(tag) for tag in all_tags}
 
         for group, (tag, count) in zip(result, (('a', 3), ('c', 1), ('d', 1), ('e', 2), ('g', 2))):
             self.assertEqual(group['attributes.mytags'], all_tags[tag])
@@ -3419,3 +3470,52 @@ class PropertiesGroupByCase(TestPropertiesMixin):
 
     def test_properties_field_read_group_datetime(self):
         self.subtest_properties_field_web_read_group_date_like('datetime')
+
+    def test_unfold_read_specification_on_web_read_group(self):
+        """
+        - When 'unfold_read_specification' is provided, unfolded records
+        include the explicitly requested fields (here: 'author').
+        - When 'unfold_read_specification' is None, unfolding falls back to the
+        default behavior and only returns record 'id'.
+        """
+        self.messages.discussion = self.discussion_1
+        self.discussion_1.write({'participants': [Command.link(self.test_user.id)]})
+        self.message_2.author = self.test_user
+
+        result = self.env['test_orm.message'].web_read_group(
+            domain=[],
+            aggregates=['__count'],
+            groupby=['author'],
+            auto_unfold=True,
+            unfold_read_specification={'author': {}},
+        )
+        group1 = result['groups']
+
+        # If no unfold specification is provided, only `id` is returned by default
+        result = self.env['test_orm.message'].web_read_group(
+            domain=[],
+            aggregates=['__count'],
+            groupby=['author'],
+            auto_unfold=True,
+            unfold_read_specification=None,
+        )
+        group2 = result['groups']
+
+        # group user 1
+        self.assertEqual(
+            group1[0]["__records"],
+            [
+                {"id": self.message_1.id, "author": self.env.user.id},
+                {"id": self.message_3.id, "author": self.env.user.id},
+                {"id": self.message_4.id, "author": self.env.user.id},
+            ],
+        )
+        self.assertEqual(
+            group2[0]["__records"],
+            [
+                {"id": self.message_1.id}, {"id": self.message_3.id}, {"id": self.message_4.id},
+            ],
+        )
+        # group user 2
+        self.assertEqual(group1[1]['__records'], [{'id': self.message_2.id, 'author': self.test_user.id}])
+        self.assertEqual(group2[1]['__records'], [{'id': self.message_2.id}])

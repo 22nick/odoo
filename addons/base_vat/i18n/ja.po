@@ -6,14 +6,14 @@
 # Andy Yiu, 2023
 # Martin Trigaux, 2023
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Junko Augias (juau)" <juau@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Junko Augias (juau)" <juau@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-10-16 02:30+0000\n"
+"POT-Creation-Date: 2026-07-24 17:38+0000\n"
+"PO-Revision-Date: 2026-06-29 11:20+0000\n"
 "Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/"
 "base_vat/ja/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: base_vat
 #. odoo-python
@@ -41,8 +41,21 @@ msgstr ""
 #. module: base_vat
 #. odoo-python
 #: code:addons/base_vat/models/res_partner.py:0
-msgid "17291716060 (NIN) or 1729171602 (VKN)"
-msgstr "17291716060 (NIN) または 1729171602 (VKN)"
+msgid "11111111111 (NIN) or 2222222222 (VKN)"
+msgstr ""
+
+#. module: base_vat
+#. odoo-python
+#: code:addons/base_vat/models/res_partner.py:0
+msgid ""
+"12345678 or UA12345678 (EDRPOU), 1234567890 (RNOPP) or 123456789012 (IPN)"
+msgstr ""
+
+#. module: base_vat
+#. odoo-python
+#: code:addons/base_vat/models/res_partner.py:0
+msgid "123456789 (TIN) or 12345678901234 (PINFL)"
+msgstr ""
 
 #. module: base_vat
 #. odoo-python
@@ -63,6 +76,11 @@ msgid "49-098-576 or 49098576"
 msgstr "49-098-576 または 49098576"
 
 #. module: base_vat
+#: model:ir.actions.server,name:base_vat.vies_iap_check_update_ir_actions_server
+msgid "Base VAT: Sync updates from IAP VIES"
+msgstr ""
+
+#. module: base_vat
 #. odoo-python
 #: code:addons/base_vat/models/res_partner.py:0
 msgid "CHE-123.456.788 TVA or CHE-123.456.788 MWST or CHE-123.456.788 IVA"
@@ -78,14 +96,6 @@ msgstr "会社"
 #: model:ir.model,name:base_vat.model_res_config_settings
 msgid "Config Settings"
 msgstr "構成設定"
-
-#. module: base_vat
-#. odoo-python
-#: code:addons/base_vat/models/res_partner.py:0
-msgid ""
-"Connection with the VIES server failed. The VAT number %s could not be "
-"validated."
-msgstr "VIESサーバとの接続に失敗しました。VAT番号%sが検証できませんでした。"
 
 #. module: base_vat
 #: model:ir.model,name:base_vat.model_res_partner
@@ -173,10 +183,23 @@ msgstr ""
 "は、欧州VIESサービスによる検証の出力によって異なります。"
 
 #. module: base_vat
+#. odoo-python
+#: code:addons/base_vat/models/res_partner.py:0
+msgid ""
+"If you are trying to input a European number, this is the expected format: "
+msgstr "欧州の電話番号を入力する場合、以下の形式が想定されています： "
+
+#. module: base_vat
 #: model:ir.model.fields,field_description:base_vat.field_res_partner__vies_valid
 #: model:ir.model.fields,field_description:base_vat.field_res_users__vies_valid
 msgid "Intra-Community Valid"
 msgstr "域内無効"
+
+#. module: base_vat
+#. odoo-python
+#: code:addons/base_vat/models/res_partner.py:0
+msgid "Invalid IAP VIES endpoint"
+msgstr ""
 
 #. module: base_vat
 #. odoo-python
@@ -217,31 +240,22 @@ msgstr ""
 "す。 %(expected_note)s"
 
 #. module: base_vat
-#: model:ir.model.fields,help:base_vat.field_res_partner__vat
-#: model:ir.model.fields,help:base_vat.field_res_users__vat
-msgid ""
-"The Tax Identification Number. Values here will be validated based on the "
-"country format. You can use '/' to indicate that the partner is not subject "
-"to tax."
+#. odoo-python
+#: code:addons/base_vat/models/res_partner.py:0
+msgid "The Intra-Community validity has been updated to: %s."
 msgstr ""
-"登録番号(Tax Identification Number)。ここでの値は、国の形式に基づいて検証され"
-"ます。取引先に税金がかからないことを示すには、'/' を使用して下さい。"
 
 #. module: base_vat
 #. odoo-python
 #: code:addons/base_vat/models/res_partner.py:0
-msgid "The VAT number %s could not be interpreted by the VIES server."
-msgstr "VAT 番号 %s はVIESサーバで解釈することはできませんでした。"
+msgid "The VIES check failed. Please check the Tax ID manually."
+msgstr ""
 
 #. module: base_vat
 #. odoo-python
 #: code:addons/base_vat/models/res_partner.py:0
-msgid ""
-"The request for VAT validation was not processed. VIES service has responded "
-"with the following error: %s"
+msgid "The VIES check is pending. The status will be updated soon."
 msgstr ""
-"VAT検証のリクエストは処理されませんでした。VIESサービスは以下のエラーで応答し"
-"ました:%s"
 
 #. module: base_vat
 #. odoo-python
@@ -275,16 +289,51 @@ msgstr ""
 "XXXXXXXXX [9 桁] でLuhnアルゴリズムのチェックサムにならう必要があります。"
 
 #. module: base_vat
+#: model:ir.model.fields,help:base_vat.field_res_partner__vat
+#: model:ir.model.fields,help:base_vat.field_res_users__vat
+msgid "You can use '/' to indicate that the customer has no Tax ID."
+msgstr ""
+
+#. module: base_vat
 #. odoo-python
 #: code:addons/base_vat/models/res_partner.py:0
-msgid "either 11 digits for CPF or 14 digits for CNPJ"
-msgstr "CPF用に11桁またはCNPJ用に14桁"
+msgid "either 11 digits for CPF or 14 characters for CNPJ"
+msgstr ""
 
 #. module: base_vat
 #. odoo-python
 #: code:addons/base_vat/models/res_partner.py:0
 msgid "partner [%s]"
 msgstr "取引先 [%s]"
+
+#~ msgid ""
+#~ "The Tax Identification Number. Values here will be validated based on the "
+#~ "country format. You can use '/' to indicate that the partner is not "
+#~ "subject to tax."
+#~ msgstr ""
+#~ "登録番号(Tax Identification Number)。ここでの値は、国の形式に基づいて検証"
+#~ "されます。取引先に税金がかからないことを示すには、'/' を使用して下さい。"
+
+#~ msgid "either 11 digits for CPF or 14 digits for CNPJ"
+#~ msgstr "CPF用に11桁またはCNPJ用に14桁"
+
+#~ msgid ""
+#~ "Connection with the VIES server failed. The VAT number %s could not be "
+#~ "validated."
+#~ msgstr "VIESサーバとの接続に失敗しました。VAT番号%sが検証できませんでした。"
+
+#~ msgid "The VAT number %s could not be interpreted by the VIES server."
+#~ msgstr "VAT 番号 %s はVIESサーバで解釈することはできませんでした。"
+
+#~ msgid ""
+#~ "The request for VAT validation was not processed. VIES service has "
+#~ "responded with the following error: %s"
+#~ msgstr ""
+#~ "VAT検証のリクエストは処理されませんでした。VIESサービスは以下のエラーで応"
+#~ "答しました:%s"
+
+#~ msgid "17291716060 (NIN) or 1729171602 (VKN)"
+#~ msgstr "17291716060 (NIN) または 1729171602 (VKN)"
 
 #~ msgid "Fiscal Position"
 #~ msgstr "会計ポジション"

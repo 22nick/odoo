@@ -16,7 +16,12 @@ export class ProductProduct extends models.ServerModel {
             "product_tag_ids",
             "default_code",
             "standard_price",
+            "pos_categ_ids",
         ];
+    }
+
+    has_access(operation) {
+        return true;
     }
 
     _records = [
@@ -31,6 +36,7 @@ export class ProductProduct extends models.ServerModel {
             default_code: false,
             product_template_attribute_value_ids: [],
             product_template_variant_value_ids: [],
+            pos_categ_ids: [1],
         },
         {
             id: 5,
@@ -69,6 +75,7 @@ export class ProductProduct extends models.ServerModel {
             default_code: false,
             product_template_attribute_value_ids: [],
             product_template_variant_value_ids: [],
+            pos_categ_ids: [],
         },
         {
             id: 8,
@@ -81,6 +88,7 @@ export class ProductProduct extends models.ServerModel {
             default_code: false,
             product_template_attribute_value_ids: [],
             product_template_variant_value_ids: [],
+            pos_categ_ids: [],
         },
         {
             id: 9,
@@ -93,6 +101,7 @@ export class ProductProduct extends models.ServerModel {
             default_code: false,
             product_template_attribute_value_ids: [],
             product_template_variant_value_ids: [],
+            pos_categ_ids: [],
         },
         {
             id: 10,
@@ -105,6 +114,7 @@ export class ProductProduct extends models.ServerModel {
             default_code: false,
             product_template_attribute_value_ids: [],
             product_template_variant_value_ids: [],
+            pos_categ_ids: [],
         },
         {
             id: 11,
@@ -117,6 +127,7 @@ export class ProductProduct extends models.ServerModel {
             default_code: false,
             product_template_attribute_value_ids: [],
             product_template_variant_value_ids: [],
+            pos_categ_ids: [],
         },
         {
             id: 12,
@@ -129,6 +140,7 @@ export class ProductProduct extends models.ServerModel {
             default_code: false,
             product_template_attribute_value_ids: [],
             product_template_variant_value_ids: [],
+            pos_categ_ids: [4],
         },
         {
             id: 13,
@@ -141,6 +153,7 @@ export class ProductProduct extends models.ServerModel {
             default_code: false,
             product_template_attribute_value_ids: [],
             product_template_variant_value_ids: [],
+            pos_categ_ids: [5],
         },
         {
             id: 14,
@@ -153,6 +166,7 @@ export class ProductProduct extends models.ServerModel {
             default_code: false,
             product_template_attribute_value_ids: [],
             product_template_variant_value_ids: [],
+            pos_categ_ids: [4],
         },
         {
             id: 15,
@@ -177,6 +191,103 @@ export class ProductProduct extends models.ServerModel {
             default_code: false,
             product_template_attribute_value_ids: [],
             product_template_variant_value_ids: [],
+        },
+        {
+            id: 17,
+            product_tmpl_id: 17,
+            lst_price: 100,
+            standard_price: 0,
+            display_name: "Multi Category Product",
+            product_tag_ids: [],
+            barcode: false,
+            default_code: false,
+            product_template_attribute_value_ids: [],
+            product_template_variant_value_ids: [],
+        },
+        {
+            id: 18,
+            product_tmpl_id: 18,
+            lst_price: 0,
+            standard_price: 0,
+            display_name: "Free Product - Wood chair",
+            product_tag_ids: [],
+            barcode: false,
+            default_code: false,
+            product_template_attribute_value_ids: [],
+            product_template_variant_value_ids: [],
+            pos_categ_ids: [],
+        },
+        {
+            id: 24,
+            product_tmpl_id: 24,
+            lst_price: 100,
+            standard_price: 0,
+            display_name: "Tax Included Product",
+            product_tag_ids: [],
+            barcode: false,
+            default_code: false,
+            product_template_attribute_value_ids: [],
+            product_template_variant_value_ids: [],
+        },
+        {
+            id: 25,
+            product_tmpl_id: 25,
+            lst_price: 100,
+            standard_price: 0,
+            display_name: "Special Product",
+            product_tag_ids: [],
+            barcode: false,
+            default_code: false,
+            product_template_attribute_value_ids: [],
+            product_template_variant_value_ids: [],
+        },
+        {
+            id: 51,
+            product_tmpl_id: 51,
+            lst_price: 10,
+            standard_price: 0,
+            display_name: "Cake (Chocolate)",
+            product_tag_ids: [],
+            barcode: false,
+            default_code: false,
+            product_template_attribute_value_ids: [],
+            product_template_variant_value_ids: [5],
+        },
+        {
+            id: 52,
+            product_tmpl_id: 51,
+            lst_price: 15,
+            standard_price: 0,
+            display_name: "Cake (Vanilla)",
+            product_tag_ids: [],
+            barcode: false,
+            default_code: false,
+            product_template_attribute_value_ids: [],
+            product_template_variant_value_ids: [6],
+        },
+        {
+            id: 60,
+            product_tmpl_id: 60,
+            lst_price: 20,
+            standard_price: 0,
+            display_name: "Leather Belt (S)",
+            product_tag_ids: [],
+            barcode: "BELT_S",
+            default_code: false,
+            product_template_attribute_value_ids: [8, 10],
+            product_template_variant_value_ids: [8],
+        },
+        {
+            id: 61,
+            product_tmpl_id: 60,
+            lst_price: 20,
+            standard_price: 0,
+            display_name: "Leather Belt (M)",
+            product_tag_ids: [],
+            barcode: "BELT_M",
+            default_code: false,
+            product_template_attribute_value_ids: [9, 10],
+            product_template_variant_value_ids: [9],
         },
     ];
 }

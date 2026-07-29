@@ -13,14 +13,16 @@
 # Matjaz Mozetic <m.mozetic@matmoz.si>, 2022
 # Martin Trigaux, 2022
 # Tomaž Jug <tomaz@editor.si>, 2023
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# Žiga Trček <ziga.trcek@implex.si>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 21:35+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-06-19 17:35+0000\n"
+"PO-Revision-Date: 2026-07-01 23:26+0000\n"
+"Last-Translator: Žiga Trček <ziga.trcek@implex.si>\n"
 "Language-Team: Slovenian <https://translate.odoo.com/projects/odoo-19/"
 "website_slides/sl/>\n"
 "Language: sl\n"
@@ -29,7 +31,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__members_engaged_count
@@ -192,13 +194,6 @@ msgstr ""
 msgid ""
 "<a href=\"/contactus\" class=\"btn btn-primary rounded-circle "
 "o_translate_inline\">Contact us</a>"
-msgstr ""
-
-#. module: website_slides
-#: model_terms:ir.ui.view,arch_db:website_slides.profile_access_denied
-msgid ""
-"<a t-attf-href=\"/slides/course-#{request.params.get('channel_id')}\" "
-"class=\"o_translate_inline\">Return to the course.</a>"
 msgstr ""
 
 #. module: website_slides
@@ -483,7 +478,7 @@ msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
-msgid "<i class=\"fa fa-comments\"/> Comments ("
+msgid "<i class=\"fa fa-comments\"/> Comments"
 msgstr ""
 
 #. module: website_slides
@@ -928,7 +923,7 @@ msgstr "<span> ure</span>"
 #. module: website_slides
 #: model_terms:web_tour.tour,rainbow_man_message:website_slides.slides_tour
 msgid "<span><b>Good job!</b> You went through all steps of this tour.</span>"
-msgstr ""
+msgstr "<span><b>Dobro opravljeno!</b> Prešli ste vse korake te poti.</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_main
@@ -1177,7 +1172,7 @@ msgstr "Aktivnosti"
 #. module: website_slides
 #: model:ir.model,name:website_slides.model_mail_activity
 msgid "Activity"
-msgstr ""
+msgstr "Aktivnost"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__activity_exception_decoration
@@ -1431,7 +1426,7 @@ msgstr "Odgovori"
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_channel__visibility__link
 msgid "Anyone with the link"
-msgstr ""
+msgstr "Vsakdo s povezavo"
 
 #. module: website_slides
 #. odoo-javascript
@@ -1619,7 +1614,7 @@ msgstr ""
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel_invite__body_has_template_value
 msgid "Body content is the same as the template"
-msgstr ""
+msgstr "Vsebina telesa je enaka kot v predlogi"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__can_comment
@@ -1822,7 +1817,7 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_home
 msgid "Clear Filters"
-msgstr ""
+msgstr "Počisti filtre"
 
 #. module: website_slides
 #. odoo-javascript
@@ -2148,7 +2143,7 @@ msgstr "Naprej"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/slide_share_dialog.js:0
 msgid "Copied"
-msgstr ""
+msgstr "Kopirano"
 
 #. module: website_slides
 #. odoo-javascript
@@ -2409,7 +2404,7 @@ msgstr ""
 #. module: website_slides
 #: model:ir.model,website_form_label:website_slides.model_res_partner
 msgid "Create a Customer"
-msgstr ""
+msgstr "Ustvari stranko"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.res_config_settings_view_form
@@ -2509,6 +2504,15 @@ msgid "Defines the content that will be promoted on the course home page"
 msgstr ""
 
 #. module: website_slides
+#: model:ir.model.fields,help:website_slides.field_slide_channel__channel_type
+#: model:ir.model.fields,help:website_slides.field_slide_channel_partner__channel_type
+#: model:ir.model.fields,help:website_slides.field_slide_slide__channel_type
+msgid ""
+"Defines the course type (e.g., \"Training\" for interactive learning, or "
+"\"Documentation\" for resources and guides)."
+msgstr ""
+
+#. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__publish_template_id
 msgid ""
 "Defines the email your Attendees will receive each time you upload new "
@@ -2596,9 +2600,11 @@ msgid "Display"
 msgstr "Prikaz"
 
 #. module: website_slides
+#: model:ir.model.fields,field_description:website_slides.field_base_partner_merge_automatic_wizard__display_name
 #: model:ir.model.fields,field_description:website_slides.field_gamification_challenge__display_name
 #: model:ir.model.fields,field_description:website_slides.field_gamification_karma_tracking__display_name
 #: model:ir.model.fields,field_description:website_slides.field_mail_activity__display_name
+#: model:ir.model.fields,field_description:website_slides.field_mail_message__display_name
 #: model:ir.model.fields,field_description:website_slides.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:website_slides.field_res_groups__display_name
 #: model:ir.model.fields,field_description:website_slides.field_res_partner__display_name
@@ -2929,7 +2935,7 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_fullscreen
 msgid "Exit Fullscreen"
-msgstr ""
+msgstr "Izhod iz celozaslonskega načina"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide__embed_code_external
@@ -2955,7 +2961,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_install_module.js:0
 msgid "Failed to install \"%s\""
-msgstr ""
+msgstr "Ni uspelo namestiti \"%s\""
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__promote_strategy
@@ -2989,7 +2995,7 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_home
 msgid "Filters"
-msgstr ""
+msgstr "Filtri"
 
 #. module: website_slides
 #. odoo-javascript
@@ -3316,9 +3322,11 @@ msgid "HowTo"
 msgstr ""
 
 #. module: website_slides
+#: model:ir.model.fields,field_description:website_slides.field_base_partner_merge_automatic_wizard__id
 #: model:ir.model.fields,field_description:website_slides.field_gamification_challenge__id
 #: model:ir.model.fields,field_description:website_slides.field_gamification_karma_tracking__id
 #: model:ir.model.fields,field_description:website_slides.field_mail_activity__id
+#: model:ir.model.fields,field_description:website_slides.field_mail_message__id
 #: model:ir.model.fields,field_description:website_slides.field_res_config_settings__id
 #: model:ir.model.fields,field_description:website_slides.field_res_groups__id
 #: model:ir.model.fields,field_description:website_slides.field_res_partner__id
@@ -3859,7 +3867,7 @@ msgstr ""
 #. module: website_slides
 #: model:slide.channel.tag.group,name:website_slides.slide_channel_tag_group_level
 msgid "Level"
-msgstr ""
+msgstr "Nivo"
 
 #. module: website_slides
 #. odoo-javascript
@@ -3998,6 +4006,16 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_tag_group_view_tree
 msgid "Menu Entry"
 msgstr "Vnos v meniju"
+
+#. module: website_slides
+#: model:ir.model,name:website_slides.model_base_partner_merge_automatic_wizard
+msgid "Merge Partner Wizard"
+msgstr "Čarovnik spajanja partnerjev"
+
+#. module: website_slides
+#: model:ir.model,name:website_slides.model_mail_message
+msgid "Message"
+msgstr "Sporočilo"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__message_has_error
@@ -4348,7 +4366,7 @@ msgstr "Število napak"
 #: model:ir.model.fields,help:website_slides.field_slide_channel__message_needaction_counter
 #: model:ir.model.fields,help:website_slides.field_slide_slide__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Število sporočil, ki zahtevajo ukrepanje"
 
 #. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__message_has_error_counter
@@ -4428,7 +4446,7 @@ msgstr "Možnosti"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_home
 msgid "Overview"
-msgstr ""
+msgstr "Pregled"
 
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_slide__slide_type__pdf
@@ -4473,6 +4491,7 @@ msgstr "Pivot"
 #: code:addons/website_slides/static/src/xml/slide_course_join.xml:0
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_social_email
 msgid "Please"
 msgstr "Prosim"
 
@@ -4488,13 +4507,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_slides/static/src/interactions/slide_like.js:0
 msgid "Please %(a_login_open)slogin%(a_login_close)s to vote for this lesson"
-msgstr ""
-
-#. module: website_slides
-#: model_terms:ir.ui.view,arch_db:website_slides.slide_social_email
-msgid ""
-"Please <a t-attf-href=\"/odoo?redirect=#{request.httprequest.url}\" "
-"class=\"fw-bold o_translate_inline\"> login </a> to share this"
 msgstr ""
 
 #. module: website_slides
@@ -4587,7 +4599,7 @@ msgstr "Predogled"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
 msgid "Previous"
-msgstr ""
+msgstr "Nazaj"
 
 #. module: website_slides
 #. odoo-javascript
@@ -4614,7 +4626,7 @@ msgstr "Potek"
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_fullscreen
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_main
 msgid "Progress bar"
-msgstr ""
+msgstr "Vrstica napredka"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__promoted_slide_id
@@ -4846,7 +4858,7 @@ msgstr ""
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_mail_activity__request_partner_id
 msgid "Requesting Partner"
-msgstr ""
+msgstr "Partner, ki je vložil zahtevek"
 
 #. module: website_slides
 #. odoo-javascript
@@ -4913,6 +4925,11 @@ msgid "Retry"
 msgstr "Ponovno"
 
 #. module: website_slides
+#: model_terms:ir.ui.view,arch_db:website_slides.profile_access_denied
+msgid "Return to the course."
+msgstr ""
+
+#. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
 msgid "Review Course"
 msgstr ""
@@ -4969,7 +4986,7 @@ msgstr "Nagrade"
 #. module: website_slides
 #: model:slide.channel.tag.group,name:website_slides.slide_channel_tag_group_role
 msgid "Role"
-msgstr ""
+msgstr "Vloga"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__is_seo_optimized
@@ -5091,7 +5108,7 @@ msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
-#: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.js:0
+#: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
 msgid "Select or create a category"
 msgstr ""
 
@@ -5109,7 +5126,7 @@ msgstr ""
 
 #. module: website_slides
 #. odoo-javascript
-#: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_select_tags.xml:0
+#: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
 msgid "Select or create tags"
 msgstr ""
 
@@ -5444,7 +5461,7 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_card
 msgid "Start now"
-msgstr ""
+msgstr "Začni zdaj"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
@@ -6076,7 +6093,7 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_invite_view_form
 msgid "Use template"
-msgstr ""
+msgstr "Uporabi predlogo"
 
 #. module: website_slides
 #. odoo-javascript
@@ -6500,6 +6517,14 @@ msgstr ""
 
 #. module: website_slides
 #. odoo-python
+#: code:addons/website_slides/models/base_partner_merge.py:0
+msgid ""
+"You cannot merge these contacts because multiple contacts are enrolled in "
+"the same courses: %s"
+msgstr ""
+
+#. module: website_slides
+#. odoo-python
 #: code:addons/website_slides/controllers/main.py:0
 msgid "You cannot upload on this channel."
 msgstr ""
@@ -6835,7 +6860,7 @@ msgstr ""
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_my
 msgid "hours"
-msgstr ""
+msgstr "ure"
 
 #. module: website_slides
 #. odoo-javascript
@@ -6852,6 +6877,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/email_sharing_input.xml:0
 #: code:addons/website_slides/static/src/xml/slide_course_join.xml:0
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_social_email
 msgid "login"
 msgstr ""
 
@@ -6936,6 +6962,7 @@ msgstr ""
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/email_sharing_input.xml:0
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_social_email
 msgid "to share this"
 msgstr ""
 

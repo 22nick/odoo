@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from unittest import skip
-
 from odoo import tools
 import odoo
 from odoo.addons.point_of_sale.tests.common import TestPoSCommon
 
 
 @odoo.tests.tagged('post_install', '-at_install')
-@skip('Temporary to fast merge new valuation')
 class TestPoSStock(TestPoSCommon):
     """ Tests for anglo saxon accounting scenario.
     """
@@ -38,7 +35,6 @@ class TestPoSStock(TestPoSCommon):
         self.product2.write({'standard_price': 13.0})
         self.adjust_inventory([self.product1, self.product2, self.product3], [25, 25, 25])
 
-        self.output_account = self.categ_anglo.property_stock_account_output_categ_id
         self.expense_account = self.categ_anglo.property_account_expense_categ_id
         self.valuation_account = self.categ_anglo.property_stock_valuation_account_id
 
@@ -110,7 +106,7 @@ class TestPoSStock(TestPoSCommon):
                         {'account_id': self.sales_account.id, 'partner_id': False, 'debit': 0, 'credit': 1070.0, 'reconciled': False},
                         {'account_id': self.expense_account.id, 'partner_id': False, 'debit': 327, 'credit': 0, 'reconciled': False},
                         {'account_id': self.cash_pm1.receivable_account_id.id, 'partner_id': False, 'debit': 1070.0, 'credit': 0, 'reconciled': True},
-                        {'account_id': self.output_account.id, 'partner_id': False, 'debit': 0, 'credit': 327, 'reconciled': True},
+                        {'account_id': self.valuation_account.id, 'partner_id': False, 'debit': 0, 'credit': 327, 'reconciled': False},
                     ],
                 },
                 'cash_statement': [
@@ -191,7 +187,7 @@ class TestPoSStock(TestPoSCommon):
                         {'account_id': self.expense_account.id, 'partner_id': False, 'debit': 206, 'credit': 0, 'reconciled': False},
                         {'account_id': self.cash_pm1.receivable_account_id.id, 'partner_id': False, 'debit': 1010.0, 'credit': 0, 'reconciled': True},
                         {'account_id': self.pos_receivable_account.id, 'partner_id': False, 'debit': 0, 'credit': 360, 'reconciled': True},
-                        {'account_id': self.output_account.id, 'partner_id': False, 'debit': 0, 'credit': 206, 'reconciled': True},
+                        {'account_id': self.valuation_account.id, 'partner_id': False, 'debit': 0, 'credit': 206, 'reconciled': False},
                     ],
                 },
                 'cash_statement': [
@@ -272,3 +268,13 @@ class TestPoSStock(TestPoSCommon):
         self.pos_session.action_pos_session_validate()
         expense_account_move_line = self.env['account.move.line'].search([('account_id', '=', self.expense_account.id), ('product_id', '=', False)])
         self.assertEqual(expense_account_move_line.balance, 0.0, "Expense account should be 0.0")
+
+    def test_stock_duplicate_warehouse_with_PoS_operation_type(self):
+        wh = self.env['stock.warehouse'].create({
+            'name': 'WH1',
+            'code': 'WH1',
+            'company_id': self.env.company.id,
+        })
+        wh_copy = wh.copy()
+        self.assertTrue(wh_copy.pos_type_id)
+        self.assertNotEqual(wh.pos_type_id, wh_copy.pos_type_id)

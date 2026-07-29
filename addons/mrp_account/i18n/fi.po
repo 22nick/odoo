@@ -11,14 +11,16 @@
 # Svante Suominen <svante.suominen@web-veistamo.fi>, 2022
 # Martin Trigaux, 2023
 # Ossi Mantylahti <ossi.mantylahti@obs-solutions.fi>, 2023
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# Saara Hakanen <sahak@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-09-16 15:26+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-06-05 19:29+0000\n"
+"PO-Revision-Date: 2026-07-01 20:50+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Finnish <https://translate.odoo.com/projects/odoo-19/"
 "mrp_account/fi/>\n"
 "Language: fi\n"
@@ -26,28 +28,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: mrp_account
-#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
-msgid "$1000"
-msgstr "$1000"
-
-#. module: mrp_account
-#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
-msgid "$5000"
-msgstr "$5000"
+#. odoo-python
+#: code:addons/mrp_account/models/stock_move.py:0
+msgid "%(value)s for %(quantity)s %(unit)s from %(production)s"
+msgstr "%(production)s:n %(quantity)s %(unit)s arvo on %(value)s"
 
 #. module: mrp_account
 #. odoo-python
 #: code:addons/mrp_account/models/mrp_production.py:0
 msgid "%s - Labour"
-msgstr ""
-
-#. module: mrp_account
-#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
-msgid "2023-08-15"
-msgstr "2023-08-15"
+msgstr "%s - Työ"
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.view_move_form_inherit_mrp_account
@@ -82,7 +75,7 @@ msgstr "<span>Tuote</span>"
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
 msgid "<span>Quantity</span>"
-msgstr "<span>Määrä</span>"
+msgstr "<span>Lukumäärä</span>"
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
@@ -107,17 +100,12 @@ msgstr "Tili"
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter_productivity__account_move_line_id
 msgid "Account Move Line"
-msgstr "Tilisiirtorivi"
+msgstr "Tilikirjauksen rivi"
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting_line
 msgid "Account move line to be created when posting WIP account move"
-msgstr "Tilinsiirtorivi, joka luodaan WIP-tilin siirtoa kirjattaessa"
-
-#. module: mrp_account
-#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
-msgid "Acme Corp."
-msgstr "Acme Corp."
+msgstr "Tilikirjauksen rivi, joka luodaan WIP-tilikirjauksen yhteydessä"
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_account_analytic_account
@@ -154,17 +142,22 @@ msgstr "Osaluettelot"
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__bom_count
 msgid "BoM Count"
-msgstr "Osaluetteloiden määrä"
+msgstr "Materiaaliluetteloiden määrä"
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__bom_ids
 msgid "Bom"
-msgstr "Osaluettelo"
+msgstr "Materiaaliluettelo"
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_line__category
 msgid "Category"
 msgstr "Kategoria"
+
+#. module: mrp_account
+#: model:ir.model,name:mrp_account.model_res_company
+msgid "Companies"
+msgstr "Yritykset"
 
 #. module: mrp_account
 #: model:ir.actions.server,name:mrp_account.action_compute_price_bom_product
@@ -173,7 +166,7 @@ msgstr "Kategoria"
 #: model_terms:ir.ui.view,arch_db:mrp_account.product_product_view_form_normal_inherit_extended
 #: model_terms:ir.ui.view,arch_db:mrp_account.product_variant_easy_edit_view_bom_inherit
 msgid "Compute Price from BoM"
-msgstr "Laske hinta osaluettelosta"
+msgstr "Laske hinta materiaaliluettelosta"
 
 #. module: mrp_account
 #: model_terms:ir.ui.view,arch_db:mrp_account.product_product_ext_form_view2
@@ -191,8 +184,9 @@ msgstr ""
 #. odoo-python
 #: code:addons/mrp_account/report/stock_valuation_report.py:0
 #: code:addons/mrp_account/static/src/stock_valuation/stock_valuation_report.js:0
+#: code:addons/mrp_account/static/src/stock_valuation/stock_valuation_report.xml:0
 msgid "Cost of Production"
-msgstr ""
+msgstr "Tuotantokustannukset"
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__costs_hour_account_ids
@@ -252,6 +246,7 @@ msgstr "Hylkää"
 #: model:ir.model.fields,field_description:mrp_account.field_product_product__display_name
 #: model:ir.model.fields,field_description:mrp_account.field_product_template__display_name
 #: model:ir.model.fields,field_description:mrp_account.field_report_mrp_report_mo_overview__display_name
+#: model:ir.model.fields,field_description:mrp_account.field_res_company__display_name
 #: model:ir.model.fields,field_description:mrp_account.field_stock_account_stock_valuation_report__display_name
 #: model:ir.model.fields,field_description:mrp_account.field_stock_move__display_name
 msgid "Display Name"
@@ -270,18 +265,12 @@ msgstr "Verkkotunnus"
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_workcenter__expense_account_id
 msgid "Expense Account"
-msgstr "Menotili"
+msgstr "Kulutili"
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_production__extra_cost
 msgid "Extra Unit Cost"
 msgstr "Ylimääräinen yksikkökustannus"
-
-#. module: mrp_account
-#. odoo-python
-#: code:addons/mrp_account/models/stock_move.py:0
-msgid "From Production Order %(reference)s"
-msgstr ""
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__id
@@ -299,6 +288,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mrp_account.field_product_product__id
 #: model:ir.model.fields,field_description:mrp_account.field_product_template__id
 #: model:ir.model.fields,field_description:mrp_account.field_report_mrp_report_mo_overview__id
+#: model:ir.model.fields,field_description:mrp_account.field_res_company__id
 #: model:ir.model.fields,field_description:mrp_account.field_stock_account_stock_valuation_report__id
 #: model:ir.model.fields,field_description:mrp_account.field_stock_move__id
 msgid "ID"
@@ -317,17 +307,12 @@ msgstr "Päiväkirjan kirjaus"
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_account_move_line
 msgid "Journal Item"
-msgstr "Päiväkirjamerkintä"
+msgstr "Kirjausrivi"
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting_line__label
 msgid "Label"
 msgstr "Otsikko"
-
-#. module: mrp_account
-#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
-msgid "Laptop"
-msgstr "Kannettava tietokone"
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__write_uid
@@ -425,7 +410,7 @@ msgstr "Tuoteryhmä"
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_product_product
 msgid "Product Variant"
-msgstr "Tuotevariaatio"
+msgstr "Tuotevariantti"
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_account_analytic_account__production_ids
@@ -436,11 +421,6 @@ msgstr "Valmistus"
 #: model:ir.model.fields,field_description:mrp_account.field_product_category__property_stock_account_production_cost_id
 msgid "Production Account"
 msgstr "Tuotantotili"
-
-#. module: mrp_account
-#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
-msgid "REF123"
-msgstr "REF123"
 
 #. module: mrp_account
 #: model:ir.model.fields,field_description:mrp_account.field_mrp_account_wip_accounting__reference
@@ -483,7 +463,7 @@ msgstr "Varastosiirto"
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_stock_account_stock_valuation_report
 msgid "Stock Valuation"
-msgstr ""
+msgstr "Varaston arvonmääritys"
 
 #. module: mrp_account
 #: model:ir.model.fields,help:mrp_account.field_account_bank_statement_line__wip_production_ids
@@ -502,8 +482,8 @@ msgid ""
 "If not set, it is the expense account of the final product that will be used "
 "instead."
 msgstr ""
-"Kulu kirjataan, kun tuotantotilaus merkitään tehdyksi. Jos sitä ei ole "
-"määritetty, sen sijaan käytetään lopputuotteen menotiliä."
+"Kulu kirjataan, kun tuotantotilaus merkitään valmiiksi. Jos ei määritetty, "
+"sen sijaan käytetään lopputuotteen kulutiliä."
 
 #. module: mrp_account
 #: model:ir.model.fields,help:mrp_account.field_product_category__property_stock_account_production_cost_id
@@ -527,11 +507,6 @@ msgstr "Kredit yhteensä"
 #: model_terms:ir.ui.view,arch_db:mrp_account.view_wip_accounting_form
 msgid "Total Debit"
 msgstr "Debet yhteensä"
-
-#. module: mrp_account
-#: model_terms:ir.ui.view,arch_db:mrp_account.report_wip
-msgid "Units"
-msgstr "Kpl"
 
 #. module: mrp_account
 #. odoo-python
@@ -595,8 +570,7 @@ msgstr "KET-siirto"
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_account_wip_accounting
 msgid "Wizard to post Manufacturing WIP account move"
-msgstr ""
-"Ohjattu tuotannon käynnissä olevan työn (WIP) tilisiirron kirjaamistoiminto"
+msgstr "Ohjattu tuotannon käynnissä olevan työn tilikirjaustoiminto"
 
 #. module: mrp_account
 #: model:ir.model,name:mrp_account.model_mrp_workcenter
@@ -635,6 +609,27 @@ msgstr "Työpisteen tuottavuusloki"
 #: code:addons/mrp_account/models/mrp_workorder.py:0
 msgid "[WC] %s"
 msgstr "[WC] %s"
+
+#~ msgid "Acme Corp."
+#~ msgstr "Acme Corp."
+
+#~ msgid "Laptop"
+#~ msgstr "Kannettava tietokone"
+
+#~ msgid "REF123"
+#~ msgstr "REF123"
+
+#~ msgid "Units"
+#~ msgstr "Kpl"
+
+#~ msgid "$1000"
+#~ msgstr "$1000"
+
+#~ msgid "$5000"
+#~ msgstr "$5000"
+
+#~ msgid "2023-08-15"
+#~ msgstr "2023-08-15"
 
 #~ msgid ""
 #~ "Analytic account in which cost and revenue entries will take        place "

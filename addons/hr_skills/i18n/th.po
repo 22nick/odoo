@@ -2,14 +2,15 @@
 # This file contains the translation of the following modules:
 # * hr_skills
 #
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 21:21+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-04-10 18:38+0000\n"
+"PO-Revision-Date: 2026-07-01 06:07+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Thai <https://translate.odoo.com/projects/odoo-19/hr_skills/"
 "th/>\n"
 "Language: th\n"
@@ -17,13 +18,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: hr_skills
 #. odoo-python
 #: code:addons/hr_skills/models/hr_skill_type.py:0
-msgid "%s (copy)"
-msgstr "%s (สำเนา)"
+#, fuzzy
+msgid "%(skill_type_name)s (copy)"
+msgstr "%(skill_type_name)s (สำเนา)"
 
 #. module: hr_skills
 #: model:ir.actions.report,print_report_name:hr_skills.action_report_employee_cv
@@ -31,26 +33,13 @@ msgid "'CV - %s' % (object.name)"
 msgstr "'CV - %s' % (object.name)"
 
 #. module: hr_skills
-#: model_terms:ir.ui.view,arch_db:hr_skills.report_employee_cv_sidepanel
-msgid "+1234567890"
-msgstr "+1234567890"
-
-#. module: hr_skills
-#: model_terms:ir.ui.view,arch_db:hr_skills.report_employee_cv_main_panel
-msgid "2022"
-msgstr "2022"
-
-#. module: hr_skills
-#: model_terms:ir.ui.view,arch_db:hr_skills.report_employee_cv_main_panel
-msgid "2023"
-msgstr "2023"
-
-#. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
 msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Arrow icon\" "
 "title=\"Arrow\"/>"
 msgstr ""
+"<i class=\"fa fa-long-arrow-right mx-2\" aria-label=\"Arrow icon\" title=\"ลูก"
+"ศร\"/>"
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_line_admin_7
@@ -90,7 +79,8 @@ msgstr "Allen-Keller"
 msgid ""
 "Allows to encrypt/decrypt plain text or files. Available as a web app or as "
 "an API."
-msgstr "อนุญาตให้เข้ารหัส/ถอดรหัสข้อความธรรมดาหรือไฟล์ มีให้บริการในรูปแบบเว็บแอปหรือเป็น API"
+msgstr ""
+"อนุญาตให้เข้ารหัส/ถอดรหัสข้อความธรรมดาหรือไฟล์ มีให้บริการในรูปแบบเว็บแอปหรือเป็น API"
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_jth_goodman_inc
@@ -148,7 +138,7 @@ msgstr "Arroyo Ltd"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__avatar_128
 msgid "Avatar 128"
-msgstr ""
+msgstr "อวตาร 128"
 
 #. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_chs_avoca_primary_school
@@ -196,6 +186,11 @@ msgid "Burtho Inc."
 msgstr "Burtho Inc."
 
 #. module: hr_skills
+#: model:hr.skill,name:hr_skills.hr_skill_csharp
+msgid "C#"
+msgstr ""
+
+#. module: hr_skills
 #: model:hr.skill,name:hr_skills.hr_skill_c
 msgid "C/C++"
 msgstr "C/C++"
@@ -234,7 +229,7 @@ msgstr "หมวดหมู่"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__certificate_file
 msgid "Certificate"
-msgstr ""
+msgstr "ใบรับรอง"
 
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__certificate_filename
@@ -361,12 +356,12 @@ msgstr "นักเขียนโฆษณา"
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__is_course
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__is_course
 msgid "Course"
-msgstr ""
+msgstr "คอร์ส"
 
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__course_type
 msgid "Course Type"
-msgstr ""
+msgstr "ประเภทหลักสูตร"
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_resume_line_type_tree_view
@@ -376,7 +371,7 @@ msgstr ""
 #. module: hr_skills
 #: model:ir.ui.menu,name:hr_skills.menu_learnings_training_attendances_courses
 msgid "Courses"
-msgstr ""
+msgstr "คอร์ส"
 
 #. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_ngh_craigmore_south_junior_primary_school
@@ -581,6 +576,12 @@ msgid "Discard"
 msgstr "ละทิ้ง"
 
 #. module: hr_skills
+#: model:ir.model.fields,field_description:hr_skills.field_hr_employee__display_certification_page
+#: model:ir.model.fields,field_description:hr_skills.field_hr_employee_public__display_certification_page
+msgid "Display Certification Page"
+msgstr ""
+
+#. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_certification_report__display_name
 #: model:ir.model.fields,field_description:hr_skills.field_hr_employee_cv_wizard__display_name
@@ -719,8 +720,8 @@ msgid ""
 "future incomes/expenses. The application uses machine learning to train "
 "itself."
 msgstr ""
-"กรอกข้อมูลทางการเงินของคุณ จากนั้นแอปจะพยายามคาดการณ์รายได้/ค่าใช้จ่ายในอนาคตของคุณ "
-"แอปพลิเคชันใช้การเรียนรู้ของเครื่องเพื่อฝึกฝนให้กับตัวเอง"
+"กรอกข้อมูลทางการเงินของคุณ จากนั้นแอปจะพยายามคาดการณ์รายได้/ค่าใช้จ่ายในอนาคตของคุณ แอปพลิ"
+"เคชันใช้การเรียนรู้ของเครื่องเพื่อฝึกฝนให้กับตัวเอง"
 
 #. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_qdp_evans_cooper_and_white
@@ -730,7 +731,7 @@ msgstr "Evans, Cooper และ White"
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.view_hr_job_form
 msgid "Expected Skills"
-msgstr ""
+msgstr "ทักษะที่คาดหวัง"
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.report_employee_cv_main_panel
@@ -751,12 +752,12 @@ msgstr ""
 #. module: hr_skills
 #: model:ir.model.fields.selection,name:hr_skills.selection__hr_resume_line__course_type__external
 msgid "External"
-msgstr ""
+msgstr "ภายนอก"
 
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__external_url
 msgid "External URL"
-msgstr ""
+msgstr "URL ภายนอก"
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_jep_cole_ltd
@@ -786,7 +787,7 @@ msgstr "คล่องแคล่ว"
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
 msgid "Forever"
-msgstr ""
+msgstr "ตลอดไป"
 
 #. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_jgo_fox_and_sons
@@ -999,7 +1000,8 @@ msgstr "เจ้าหน้าที่สนับสนุนด้านเ
 msgid ""
 "If checked, this level will be the default one selected when choosing this "
 "skill."
-msgstr "หากทำเครื่องหมาย ระดับนี้จะเป็นระดับเริ่มต้นที่เลือกไว้เมื่อเลือกทักษะนี้"
+msgstr ""
+"หากทำเครื่องหมาย ระดับนี้จะเป็นระดับเริ่มต้นที่เลือกไว้เมื่อเลือกทักษะนี้"
 
 #. module: hr_skills
 #. odoo-javascript
@@ -1075,7 +1077,7 @@ msgstr "งาน"
 #. module: hr_skills
 #: model:ir.model,name:hr_skills.model_hr_job
 msgid "Job Position"
-msgstr ""
+msgstr "ตำแหน่งงาน"
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_line_admin_4
@@ -1091,11 +1093,10 @@ msgstr ""
 "ตำแหน่งงาน : หัวหน้าทีมพัฒนา\n"
 "- สนับสนุนการดำเนินการทางเทคนิคด้วยการตรวจสอบและแก้ไขปัญหาสนับสนุนการผลิตที่หลากหลาย "
 "(Java, Perl, สคริปต์ Shell, SQL)\n"
-"- "
-"ดำเนินการวางแผนการประกันคุณภาพสำหรับโปรเจ็กต์ที่เกิดขึ้นพร้อมกันหลายโปรเจ็กต์โดยสัมพันธ์กับสถาปัตยกรรมระบบโดยรวมหรือการเปลี่ยนแปลงระบบการซื้อขาย/"
-"การพัฒนาใหม่\n"
-"- กำหนดค่าและเผยแพร่โมเดลอัลฟ่าและความเสี่ยงที่สำคัญต่อธุรกิจโดยใช้ MATLAB และ SQL "
-"พร้อมด้วยอินพุตจากผู้จัดการพอร์ตโฟลิโอ"
+"- ดำเนินการวางแผนการประกันคุณภาพสำหรับโปรเจ็กต์ที่เกิดขึ้นพร้อมกันหลายโปรเจ็กต์โดยสัมพันธ์กับสถา"
+"ปัตยกรรมระบบโดยรวมหรือการเปลี่ยนแปลงระบบการซื้อขาย/การพัฒนาใหม่\n"
+"- กำหนดค่าและเผยแพร่โมเดลอัลฟ่าและความเสี่ยงที่สำคัญต่อธุรกิจโดยใช้ MATLAB และ SQL พร้อมด้วย"
+"อินพุตจากผู้จัดการพอร์ตโฟลิโอ"
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_line_admin_3
@@ -1108,11 +1109,11 @@ msgid ""
 "installations and defense-related."
 msgstr ""
 "ตำแหน่งงาน: ผู้จัดการผลิตภัณฑ์\n"
-"- "
-"ประสานงานและจัดการการปรับใช้ซอฟต์แวร์ในสภาพแวดล้อมระบบทั้งห้าระบบตั้งแต่การพัฒนาไปจนถึงการผลิต\n"
+"- ประสานงานและจัดการการปรับใช้ซอฟต์แวร์ในสภาพแวดล้อมระบบทั้งห้าระบบตั้งแต่การพัฒนาไปจนถึงกา"
+"รผลิต\n"
 "- พัฒนากระบวนการจัดเก็บเพื่อช่วยในการเขียนโปรแกรมในระดับ Java\n"
-"- พัฒนาสถาปัตยกรรมโรงงานพลังงานหมุนเวียนหลายแห่ง "
-"ทั้งการติดตั้งเชิงพาณิชย์และที่เกี่ยวข้องกับการป้องกันประเทศ"
+"- พัฒนาสถาปัตยกรรมโรงงานพลังงานหมุนเวียนหลายแห่ง ทั้งการติดตั้งเชิงพาณิชย์และที่เกี่ยวข้องกับการป้"
+"องกันประเทศ"
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_employee_skill_report_view_search
@@ -1197,7 +1198,7 @@ msgstr "ความเป็นผู้นำ"
 #. module: hr_skills
 #: model:ir.ui.menu,name:hr_skills.hr_skill_learning_menu
 msgid "Learning"
-msgstr ""
+msgstr "การเรียนรู้"
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_vad_gallegos_little_and_walters
@@ -1318,8 +1319,8 @@ msgid ""
 "machine learning"
 msgstr ""
 "ปริญญาโทสาขาวิศวกรรมไฟฟ้า\n"
-"            วิทยานิพนธ์ระดับปริญญาโท: "
-"การจัดการกริดที่ดีขึ้นและการควบคุมผ่านการเรียนรู้ของเครื่อง"
+"            วิทยานิพนธ์ระดับปริญญาโท: การจัดการกริดที่ดีขึ้นและการควบคุมผ่านการเรียนรู้ของเครื่อ"
+"ง"
 
 #. module: hr_skills
 #: model:hr.skill,name:hr_skills.hr_skill_matlab
@@ -1420,7 +1421,7 @@ msgstr "Norton-Silva"
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.hr_resume_line_list_view
 msgid "Number of Hours"
-msgstr ""
+msgstr "จำนวนชั่วโมง"
 
 #. module: hr_skills
 #: model:ir.model.fields,help:hr_skills.field_hr_employee_skill__levels_count
@@ -1618,7 +1619,7 @@ msgstr "การจัดการโปรเจ็กต์"
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line__resume_line_properties
 msgid "Properties"
-msgstr ""
+msgstr "คุณสมบัติ"
 
 #. module: hr_skills
 #: model_terms:hr.resume.line,description:hr_skills.employee_resume_mit_robinson_crawford_and_norman
@@ -1650,6 +1651,11 @@ msgstr "ภาษาปัญจาบ"
 #: model_terms:ir.ui.view,arch_db:hr_skills.report_employee_cv_main_panel
 msgid "Python"
 msgstr "Python"
+
+#. module: hr_skills
+#: model:hr.skill,name:hr_skills.hr_skill_r
+msgid "R"
+msgstr ""
 
 #. module: hr_skills
 #: model:hr.skill,name:hr_skills.hr_skill_sql
@@ -1812,7 +1818,7 @@ msgstr "เลขานุการบริษัท"
 #. module: hr_skills
 #: model:ir.ui.menu,name:hr_skills.hr_resume_line_type_menu
 msgid "Sections"
-msgstr ""
+msgstr "ส่วน"
 
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__resume_line_type_properties_definition
@@ -1835,7 +1841,7 @@ msgstr "เลือกและสร้าง"
 #. odoo-javascript
 #: code:addons/hr_skills/static/src/fields/one2many_tags_skills/one2many_tags_skills.js:0
 msgid "Select Skills"
-msgstr ""
+msgstr "เลือกทักษะ"
 
 #. module: hr_skills
 #: model:ir.model.fields,field_description:hr_skills.field_hr_resume_line_type__sequence
@@ -2209,7 +2215,7 @@ msgstr "เจ้าหน้าที่วิจัยสหภาพแรง
 #. module: hr_skills
 #: model:hr.resume.line.type,name:hr_skills.resume_type_training
 msgid "Training"
-msgstr ""
+msgstr "การอบรม"
 
 #. module: hr_skills
 #: model:ir.actions.act_window,name:hr_skills.hr_resume_lines_training_action
@@ -2410,7 +2416,7 @@ msgstr ""
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
 msgid "hours"
-msgstr ""
+msgstr "ชั่วโมง"
 
 #. module: hr_skills
 #. odoo-javascript
@@ -2441,6 +2447,18 @@ msgstr "www.demo.com"
 #: code:addons/hr_skills/models/hr_individual_skill_mixin.py:0
 msgid "• %(skill_name)s from %(valid_from)s to %(valid_to)s"
 msgstr ""
+
+#~ msgid "+1234567890"
+#~ msgstr "+1234567890"
+
+#~ msgid "2022"
+#~ msgstr "2022"
+
+#~ msgid "2023"
+#~ msgstr "2023"
+
+#~ msgid "%s (copy)"
+#~ msgstr "%s (สำเนา)"
 
 #~ msgid "Classic"
 #~ msgstr "คลาสสิก"

@@ -11,6 +11,7 @@ class StockValuationReport(models.AbstractModel):
         if not self._must_include_cost_of_production():
             return report_data
         production_locations_valuation_vals = self.env.company._get_location_valuation_vals(
+            date,
             location_domain=[('usage', '=', 'production')]
         )
         cost_of_production = {
@@ -24,8 +25,9 @@ class StockValuationReport(models.AbstractModel):
         })
         for vals in production_locations_valuation_vals:
             account = self.env['account.account'].browse(vals['account_id'])
-            account_vals = account.read(['name', 'code', 'display_name'])[0]
-            report_data['accounts_by_id'][account.id] = account_vals
+            if account:
+                account_vals = account.read(['name', 'code', 'display_name'])[0]
+                report_data['accounts_by_id'][account.id] = account_vals
             cost_of_production['value'] -= vals['debit']
             lines_by_account_id[account.id]['debit'] += vals['debit']
             lines_by_account_id[account.id]['credit'] += vals['credit']

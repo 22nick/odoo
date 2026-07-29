@@ -2,15 +2,17 @@
 # This file contains the translation of the following modules:
 # * auth_totp_mail
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Abe Manyo (abem)" <abem@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Abe Manyo (abem)" <abem@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# "Nurul Aini Akrima Sabila (nuaas)" <nuaas@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-10-31 03:21+0000\n"
-"Last-Translator: \"Abe Manyo (abem)\" <abem@odoo.com>\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-06-30 01:46+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Indonesian <https://translate.odoo.com/projects/odoo-19/"
 "auth_totp_mail/id/>\n"
 "Language: id\n"
@@ -18,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: auth_totp_mail
 #: model_terms:ir.ui.view,arch_db:auth_totp_mail.auth_totp_mail_form
@@ -71,9 +73,9 @@ msgstr ""
 "        </p><p style=\"margin: 16px 0px 16px 0px; text-align: center;\">\n"
 "            <a t-att-href=\"object.get_totp_invite_url()\" t-attf-"
 "style=\"background-color:{{object.company_id.email_secondary_color or "
-"'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: "
-"{{object.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px;"
-"\">\n"
+"'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: {"
+"{object.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px;\">"
+"\n"
 "                Aktifkan Autentikasi dua-faktor\n"
 "            </a>\n"
 "        </p>\n"
@@ -210,8 +212,7 @@ msgstr "Perangkat baru digunakan untuk sign in ke akun Anda."
 #: code:addons/auth_totp_mail/models/auth_totp_device.py:0
 msgid ""
 "A trusted device has just been removed from your account: %(device_names)s"
-msgstr ""
-"Perangkat terpercaya baru saja dihapus dari akun Anda: %(device_names)s"
+msgstr "Perangkat terpercaya baru saja dihapus dari akun Anda: %(device_names)s"
 
 #. module: auth_totp_mail
 #: model:ir.model.fields.selection,name:auth_totp_mail.selection__res_config_settings__auth_totp_policy__all_required
@@ -255,7 +256,7 @@ msgstr "Hanya karyawan"
 #. module: auth_totp_mail
 #: model_terms:ir.ui.view,arch_db:auth_totp_mail.res_users_view_form
 msgid "Enable 2FA"
-msgstr ""
+msgstr "Aktifkan 2FA"
 
 #. module: auth_totp_mail
 #: model_terms:ir.ui.view,arch_db:auth_totp_mail.res_config_settings_view_form
@@ -292,8 +293,7 @@ msgid ""
 "Invitation to use two-factor authentication sent for the following user(s): "
 "%s"
 msgstr ""
-"Undangan untuk menggunakan autentikasi dua-faktor dikirim ke user-user "
-"berikut: %s"
+"Undangan untuk menggunakan autentikasi dua-faktor dikirim ke user berikut: %s"
 
 #. module: auth_totp_mail
 #: model_terms:ir.ui.view,arch_db:auth_totp_mail.view_users_form
@@ -330,7 +330,7 @@ msgstr "Kirim ulang email"
 #. odoo-python
 #: code:addons/auth_totp_mail/models/res_users.py:0
 msgid "Security"
-msgstr ""
+msgstr "Keamanan"
 
 #. module: auth_totp_mail
 #. odoo-python
@@ -363,7 +363,7 @@ msgstr "Pengaturan: Login 2FA Baru"
 #. module: auth_totp_mail
 #: model_terms:ir.ui.view,arch_db:auth_totp_mail.res_users_view_form
 msgid "Two-factor Authentication"
-msgstr ""
+msgstr "Autentikasi Dua-faktor"
 
 #. module: auth_totp_mail
 #: model:ir.model.fields,field_description:auth_totp_mail.field_res_config_settings__auth_totp_policy

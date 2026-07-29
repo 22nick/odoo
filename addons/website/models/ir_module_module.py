@@ -522,10 +522,10 @@ class IrModuleModule(models.Model):
                 if not langs_update:
                     continue
                 # get dictionaries limited to the requested languages
-                generic_arch_db_en = generic_arch_db.get('en_US')
-                specific_arch_db_en = specific_arch_db.get('en_US')
-                generic_arch_db_update = {k: generic_arch_db[k] for k in langs_update}
-                specific_arch_db_update = {k: specific_arch_db.get(k, specific_arch_db_en) for k in langs_update}
+                generic_arch_db_en = generic_arch_db.get('_en_US', generic_arch_db.get('en_US'))
+                specific_arch_db_en = specific_arch_db.get('_en_US', specific_arch_db.get('en_US'))
+                generic_arch_db_update = {k: generic_arch_db.get('_' + k, generic_arch_db[k]) for k in langs_update}
+                specific_arch_db_update = {k: specific_arch_db.get('_' + k, specific_arch_db.get(k, specific_arch_db_en)) for k in langs_update}
                 generic_translation_dictionary = field.get_translation_dictionary(generic_arch_db_en, generic_arch_db_update)
                 specific_translation_dictionary = field.get_translation_dictionary(specific_arch_db_en, specific_arch_db_update)
                 # update specific_translation_dictionary
@@ -536,7 +536,9 @@ class IrModuleModule(models.Model):
                         if overwrite or term_en == specific_term_langs[lang]:
                             specific_term_langs[lang] = generic_term_lang
                 for lang in langs_update:
-                    specific_arch_db[lang] = field.translate(
+                    if specific_arch_db.get('_' + lang) == specific_arch_db.get(lang):
+                        specific_arch_db.pop('_' + lang, None)
+                    specific_arch_db[('_' + lang) if ('_' + lang) in specific_arch_db else lang] = field.translate(
                         lambda term: specific_translation_dictionary.get(term, {lang: None})[lang], specific_arch_db_en)
                 field._update_cache(View.with_context(prefetch_langs=True).browse(specific_id), specific_arch_db, dirty=True)
         default_menu = self.env.ref('website.main_menu', raise_if_not_found=False)
@@ -675,18 +677,34 @@ class IrModuleModule(models.Model):
         # ------------------------------------------------------------
 
         configurator_snippets = dict(manifest.get('configurator_snippets', {}))
-        addons = manifest.get('configurator_snippets_addons', {})
         installed_modules = self.env['ir.module.module']._installed()
 
-        # Add addon snippets to the main snippet list for batch generation
-        for module_name, pages in addons.items():
-            # generate snippet only if the module is installed
-            if module_name not in installed_modules and module_name != self.name:
-                continue
-            for page, snippets_to_insert in pages.items():
-                snippets = configurator_snippets.setdefault(page, [])
-                dynamic_snippets = [snippet for snippet, *_ in snippets_to_insert]
-                configurator_snippets[page] = list(dict.fromkeys(snippets + dynamic_snippets))
+        def add_addons_snippets(addons):
+            """ Add installable addon snippets to the configurator snippets. """
+            for module_name, pages in addons.items():
+                # A snippet such as `website_sale.x` can only be generated
+                # once `website_sale` exists, or while installing it.
+                if module_name not in installed_modules and module_name != self.name:
+                    continue
+                for page, snippets_to_insert in pages.items():
+                    snippets = configurator_snippets.setdefault(page, [])
+                    dynamic_snippets = [snippet for snippet, *_ in snippets_to_insert]
+                    configurator_snippets[page] = list(dict.fromkeys(snippets + dynamic_snippets))
+
+        theme = self.env['website'].get_current_website().theme_id
+        if theme and theme.name == self.name:
+            # The theme itself is being installed. Its manifest may add
+            # snippets for already installed modules such as `website_sale`.
+            addons = manifest.get('configurator_snippets_addons', {})
+            add_addons_snippets(addons)
+        elif theme:
+            # Another module is being installed after the theme was selected.
+            # Only include the theme addon snippets targeting this module.
+            theme_manifest = Manifest.for_addon(theme.name)
+            if theme_manifest:
+                theme_addons = theme_manifest.get('configurator_snippets_addons', {})
+                addons = {self.name: theme_addons.get(self.name, {})}
+                add_addons_snippets(addons)
 
         # Generate general configurator snippet templates
         create_values = []

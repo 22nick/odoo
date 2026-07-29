@@ -46,6 +46,14 @@ class PosOrder(models.Model):
                 invoice_vals['partner_id'] = sale_orders[0].partner_invoice_id.id
         return invoice_vals
 
+    def action_pos_order_paid(self):
+        res = super().action_pos_order_paid()
+        if any(p.payment_method_id._is_online_payment() for p in self.payment_ids):
+            sale_orders = self.lines.mapped('sale_order_origin_id')
+            for so in sale_orders.filtered(lambda s: s.state in ('draft', 'sent')):
+                so.action_confirm()
+        return res
+
     @api.model
     def sync_from_ui(self, orders):
         data = super().sync_from_ui(orders)
@@ -78,6 +86,8 @@ class PosOrder(models.Model):
                 sale_order_sudo._create_down_payment_lines_from_base_lines(down_payment_base_lines)
 
             # Confirm the unconfirmed sale orders that are linked to the sale order lines.
+            so_lines = pos_order.lines.mapped('sale_order_line_id')
+            sale_orders |= so_lines.mapped('order_id')
             if pos_order.state != 'draft':
                 for sale_order in sale_orders.filtered(lambda so: so.state in ['draft', 'sent']):
                     sale_order.action_confirm()
@@ -85,7 +95,6 @@ class PosOrder(models.Model):
             # update the demand qty in the stock moves related to the sale order line
             # flush the qty_delivered to make sure the updated qty_delivered is used when
             # updating the demand value
-            so_lines = pos_order.lines.mapped('sale_order_line_id')
             so_lines.flush_recordset(['qty_delivered'])
             # track the waiting pickings
             waiting_picking_ids = set()
@@ -163,10 +172,13 @@ class PosOrder(models.Model):
     def _get_invoice_lines_values(self, line_values, pos_line, move_type):
         inv_line_vals = super()._get_invoice_lines_values(line_values, pos_line, move_type)
 
-        if pos_line.sale_order_origin_id:
+        if pos_line.sale_order_origin_id and pos_line.sale_order_line_id:
             origin_line = pos_line.sale_order_line_id
             inv_line_vals["name"] = origin_line.name
             origin_line._set_analytic_distribution(inv_line_vals)
+
+        if self.config_id.down_payment_product_id == pos_line.product_id:
+            inv_line_vals["is_downpayment"] = True
 
         return inv_line_vals
 
@@ -174,6 +186,10 @@ class PosOrder(models.Model):
         if 'crm_team_id' in vals:
             vals['crm_team_id'] = vals['crm_team_id'] if vals.get('crm_team_id') else self.session_id.crm_team_id.id
         return super().write(vals)
+
+    def _force_create_picking_real_time(self):
+        result = super()._force_create_picking_real_time()
+        return result or any(self.lines.mapped('sale_order_origin_id'))
 
 
 class PosOrderLine(models.Model):
@@ -225,3 +241,10 @@ class PosOrderLine(models.Model):
         for order in orders:
             self.env['stock.move'].browse(order.lines.sale_order_line_id.move_ids._rollup_move_origs()).filtered(lambda ml: ml.state not in ['cancel', 'done'])._action_cancel()
         return super()._launch_stock_rule_from_pos_order_lines()
+
+    def _prepare_refund_data(self, refund_order, PosOrderLineLot):
+        data = super()._prepare_refund_data(refund_order, PosOrderLineLot)
+        data.update({
+            'sale_order_line_id': False,  # Remove the sale order line id to be coherent with frontend refund
+        })
+        return data

@@ -24,6 +24,9 @@ class ProductProduct(models.Model):
         string="Base Unit Count",
         help="Display base unit price on your eCommerce pages. Set to 0 to hide it for this"
              " product.",
+        # Force NUMERIC with unlimited precision, as for `uom.uom.relative_factor`,
+        # to support very small ratios, e.g. one unit in a box of 10000.
+        digits=0,
         required=True,
         default=1,
     )
@@ -163,6 +166,16 @@ class ProductProduct(models.Model):
         """
         self.ensure_one()
 
+        product_price = request.pricelist._get_product_price(
+            self, quantity=1, currency=website.currency_id
+        )
+        # Use sudo to access cross-company taxes.
+        product_taxes_sudo = self.sudo().taxes_id._filter_taxes_by_company(self.env.company)
+        taxes = request.fiscal_position.map_tax(product_taxes_sudo)
+        price = self.product_tmpl_id._apply_taxes_to_price(
+            product_price, website.currency_id, product_taxes_sudo, taxes, self, website=website
+        )
+
         base_url = website.get_base_url()
         markup_data = {
             '@context': 'https://schema.org',
@@ -172,9 +185,7 @@ class ProductProduct(models.Model):
             'image': f'{base_url}{website.image_url(self, "image_1920")}',
             'offers': {
                 '@type': 'Offer',
-                'price': float_round(request.pricelist._get_product_price(
-                    self, quantity=1, target_currency=website.currency_id
-                ), 2),
+                'price': price,
                 'priceCurrency': website.currency_id.name,
             },
         }
@@ -187,6 +198,8 @@ class ProductProduct(models.Model):
                 'ratingValue': self.sudo().rating_avg,
                 'reviewCount': self.rating_count,
             }
+        if self.barcode:
+            markup_data['gtin'] = self.barcode
         return markup_data
 
     def _get_image_1920_url(self):

@@ -3,6 +3,7 @@ from odoo import api, fields, models, _, Command
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import frozendict
 
+from collections import defaultdict
 from datetime import date
 import json
 
@@ -154,6 +155,8 @@ class AccountPartialReconcile(models.Model):
 
     def _get_to_update_payments(self, from_state):
         to_update = []
+        group_payments = defaultdict(float)
+        moves_in_group_payment = list()
         for partial in self:
             matched_payments = (partial.credit_move_id | partial.debit_move_id).move_id.matched_payment_ids
             to_check_payments = matched_payments.filtered(lambda payment: not payment.outstanding_account_id and payment.state == from_state)
@@ -165,6 +168,19 @@ class AccountPartialReconcile(models.Model):
                 if not payment.currency_id.compare_amounts(payment.amount_signed, amount):
                     to_update.append(payment)
                     break
+            # Group payments are not handled because the partial amount never matches the payment amount. It matches the invoice amount instead.
+            # If the partial amount matches the amount of an invoice linked to a group payment, the payment is set aside to potentially be set
+            # as "to update" when the total amount of the group payment will be covered.
+            if len(to_check_payments) == 1 and to_check_payments not in to_update and len(to_check_payments.invoice_ids) > 1 and (
+                moves := to_check_payments.invoice_ids.filtered(
+                    lambda m: m not in moves_in_group_payment and not to_check_payments.currency_id.compare_amounts(m.amount_total_signed, amount)
+                )
+            ):
+                moves_in_group_payment.append(moves[0])
+                group_payments[to_check_payments] += amount
+
+                if not to_check_payments.currency_id.compare_amounts(to_check_payments.amount_signed, group_payments[to_check_payments]):
+                    to_update.append(to_check_payments)
         return self.env['account.payment'].union(*to_update)
 
     @api.model
@@ -232,7 +248,8 @@ class AccountPartialReconcile(models.Model):
             return {}
 
         for partial in self:
-            for move in {partial.debit_move_id.move_id, partial.credit_move_id.move_id}:
+            for field, counterpart_field in (('debit', 'credit'), ('credit', 'debit')):
+                move, counterpart_move = partial[f'{field}_move_id'].move_id, partial[f'{counterpart_field}_move_id'].move_id
 
                 # Collect data about cash basis.
                 if move.id in tax_cash_basis_values_per_move:
@@ -322,6 +339,7 @@ class AccountPartialReconcile(models.Model):
                     'percentage': percentage,
                     'payment_rate': payment_rate,
                     'both_move_posted': partial.debit_move_id.move_id.state == 'posted' and partial.credit_move_id.move_id.state == 'posted',
+                    'counterpart_move': counterpart_move,
                 }
 
                 # Add partials.
@@ -514,6 +532,7 @@ class AccountPartialReconcile(models.Model):
         for move_values in tax_cash_basis_values_per_move.values():
             move = move_values['move']
             pending_cash_basis_lines = []
+            amount_residual_per_tax_line = {line.id: line.amount_residual_currency for line_type, line in move_values['to_process_lines'] if line_type == 'tax'}
 
             for partial_values in move_values['partials']:
                 partial = partial_values['partial']
@@ -553,8 +572,13 @@ class AccountPartialReconcile(models.Model):
                             move_values['is_fully_paid']
                             or line.currency_id.compare_amounts(abs(line.amount_residual_currency), abs(amount_currency)) < 0
                         )
+                        and partial_values == move_values['partials'][-1]
                     ):
-                        amount_currency = line.amount_residual_currency
+                        # If the move is supposed to be fully paid, and we're on the last partial for it,
+                        # put the remaining amount to avoid rounding issues
+                        amount_currency = amount_residual_per_tax_line[line.id]
+                    if caba_treatment == 'tax':
+                        amount_residual_per_tax_line[line.id] -= amount_currency
                     balance = partial_values['payment_rate'] and amount_currency / partial_values['payment_rate'] or 0.0
 
                     # ==========================================================================
@@ -576,6 +600,8 @@ class AccountPartialReconcile(models.Model):
                         # Base line.
 
                         cb_line_vals = self._prepare_cash_basis_base_line_vals(line, balance, amount_currency)
+                        cb_line_vals['name'] = ' - '.join(filter(None, (line.move_id.name, partial_values['counterpart_move'].name)))
+
                         grouping_key = self._get_cash_basis_base_line_grouping_key_from_vals(cb_line_vals)
 
                     if grouping_key in partial_lines_to_create:

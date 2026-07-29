@@ -1,9 +1,8 @@
 #-----------------------------------------------------------
 # Threaded, Gevent and Prefork Servers
 #-----------------------------------------------------------
-import contextlib
 import collections
-import datetime
+import contextlib
 import errno
 import logging
 import os
@@ -18,6 +17,7 @@ import sys
 import threading
 import time
 from collections import deque
+from email.utils import parsedate_to_datetime
 from io import BytesIO
 
 import psutil
@@ -60,6 +60,7 @@ from odoo.release import nt_service_name
 from odoo.tools import config, gc, osutil, OrderedSet, profiler
 from odoo.tools.cache import log_ormcache_stats
 from odoo.tools.misc import stripped_sys_argv, dumpstacks
+from odoo.tools.osutil import memory_info
 from .db import list_dbs
 
 _logger = logging.getLogger(__name__)
@@ -72,18 +73,6 @@ thread_local = threading.local()
 
 # the model and method name that was called via rpc, for logging
 thread_local.rpc_model_method = ''
-
-
-def memory_info(process):
-    """
-    :return: the relevant memory usage according to the OS in bytes.
-    """
-    # psutil < 2.0 does not have memory_info, >= 3.0 does not have get_memory_info
-    pmem = (getattr(process, 'memory_info', None) or process.get_memory_info)()
-    # MacOSX allocates very large vms to all processes so we only monitor the rss usage.
-    if platform.system() == 'Darwin':
-        return pmem.rss
-    return pmem.vms
 
 
 def set_limit_memory_hard():
@@ -137,7 +126,12 @@ class BaseWSGIServerNoBind(LoggingBaseWSGIServerMixIn, werkzeug.serving.BaseWSGI
         pass
 
 class CommonRequestHandler(werkzeug.serving.WSGIRequestHandler):
-    def log_request(self, code = "-", size = "-"):
+    def __init__(self, *args, **kwargs):
+        self._sent_date_header = None
+        self._sent_server_header = None
+        super().__init__(*args, **kwargs)
+
+    def log_request(self, code="-", size="-"):
         try:
             path = uri_to_iri(self.path)
             fragment = thread_local.rpc_model_method
@@ -166,6 +160,35 @@ class CommonRequestHandler(werkzeug.serving.WSGIRequestHandler):
             msg = werkzeug.serving._ansi_style(msg, "bold", "magenta")
 
         self.log("info", '"%s" %s %s', msg, code, size)
+
+    def send_header(self, keyword, value):
+        if keyword.casefold() == 'date':
+            if self._sent_date_header is None:
+                self._sent_date_header = value
+            elif self._sent_date_header == value:
+                return  # don't send the same header twice
+            else:
+                sent_datetime = parsedate_to_datetime(self._sent_date_header)
+                new_datetime = parsedate_to_datetime(value)
+                if sent_datetime == new_datetime:
+                    return  # don't send the same date twice (differ in format)
+                if abs((sent_datetime - new_datetime).total_seconds()) <= 1:
+                    return  # don't send the same date twice (jitter of 1 second)
+                _logger.warning(
+                    "sending two different Date response headers: %r vs %r",
+                    self._sent_date_header, value)
+
+        if keyword.casefold() == 'server':
+            if self._sent_server_header is None:
+                self._sent_server_header = value
+            elif self._sent_server_header == value:
+                return  # don't send the same header twice
+            else:
+                _logger.warning(
+                    "sending two different Server response headers: %r vs %r",
+                    self._sent_server_header, value)
+
+        return super().send_header(keyword, value)
 
 
 class RequestHandler(CommonRequestHandler):
@@ -432,6 +455,11 @@ class ThreadedServer(CommonServer):
         # Variable keeping track of the number of calls to the signal handler defined
         # below. This variable is monitored by ``quit_on_signals()``.
         self.quit_signals_received = 0
+        # True only while run()'s signal wait-loop is active. A SIGHUP that
+        # arrives before the loop (start/preload/cron_spawn) or during teardown
+        # must not raise KeyboardInterrupt: that would escape run() and kill the
+        # process (130/129) instead of restarting cleanly.
+        self.running = False
 
         #self.socket = None
         self.httpd = None
@@ -453,10 +481,22 @@ class ThreadedServer(CommonServer):
             sys.stderr.flush()
             os._exit(0)
         elif sig == signal.SIGHUP:
+            if self.quit_signals_received:
+                # A shutdown or phoenix restart is already pending. One file
+                # change can emit several FS events, so a duplicate SIGHUP may
+                # land during the teardown/_reexec path, which runs outside the
+                # wait-loop's try/except; raising there would escape run(). The
+                # pending restart reloads fresh code anyway.
+                return
             # restart on kill -HUP
             global server_phoenix  # noqa: PLW0603
             server_phoenix = True
             self.quit_signals_received += 1
+            if not self.running:
+                # SIGHUP during the startup section, before the wait-loop: don't
+                # raise (it would escape run()). quit_signals_received is now set,
+                # so the loop exits at once when reached and the restart proceeds.
+                return
             # interrupt run() to start shutdown
             raise KeyboardInterrupt()
 
@@ -685,6 +725,10 @@ class ThreadedServer(CommonServer):
         # Wait for a first signal to be handled. (time.sleep will be interrupted
         # by the signal handler)
         try:
+            # Arm the SIGHUP-raises-KeyboardInterrupt path only now, from inside
+            # the try that catches it; setting it before the try would leave a
+            # one-statement window where the raise escapes run().
+            self.running = True
             while self.quit_signals_received == 0:
                 self.process_limit()
                 if self.limit_reached_time:
@@ -712,6 +756,8 @@ class ThreadedServer(CommonServer):
                     time.sleep(SLEEP_INTERVAL)
         except KeyboardInterrupt:
             pass
+        finally:
+            self.running = False
 
         self.stop()
 
@@ -827,6 +873,8 @@ class GeventServer(CommonServer):
         gevent.shutdown()
 
     def run(self, preload, stop):
+        if rc := preload_registries(preload):
+            return rc
         self.start()
         self.stop()
 
@@ -1430,9 +1478,11 @@ class WorkerCron(Worker):
 
     def start(self):
         os.nice(10)     # mommy always told me to be nice with others...
-        Worker.start(self)
+        super().start()
         if self.multi.socket:
             self.multi.socket.close()
+        if registries_size := os.environ.get('ODOO_REGISTRY_LRU_SIZE_CRON'):
+            Registry.registries.count = int(registries_size)
 
         dbconn = sql_db.db_connect('postgres')
         self.dbcursor = dbconn.cursor()
@@ -1483,6 +1533,13 @@ def _reexec(updated_modules=None):
         args += ["-u", ','.join(updated_modules)]
     if not args or args[0] != exe:
         args.insert(0, exe)
+    if os.name == 'posix':
+        # execve resets caught signal handlers to their default disposition
+        # (SIGHUP terminates -> exit 129) but preserves SIG_IGN, so a SIGHUP that
+        # lands before the re-exec'd process reinstalls its handler would kill it.
+        # The reload loads fresh code, so dropping SIGHUPs across the gap is safe.
+        # Guard on posix: signal.SIGHUP is a shim (-1) on nt and would raise here.
+        signal.signal(signal.SIGHUP, signal.SIG_IGN)
     # We should keep the LISTEN_* environment variabled in order to support socket activation on reexec
     os.execve(sys.executable, args, os.environ)
 
@@ -1495,6 +1552,21 @@ def preload_registries(dbnames):
 
     preload_profiler = contextlib.nullcontext()
 
+    registries_size = int(os.environ.get('ODOO_REGISTRY_LRU_SIZE') or 0)
+    if not registries_size and os.name == 'posix':
+        # Size the LRU depending of the memory limits
+        # A registry takes 10MB of memory on average, so we reserve
+        # 10Mb (registry) + 5Mb (working memory) per registry
+        avgsz = 15 * 1024 * 1024
+        limit_memory_soft = config['limit_memory_soft'] if config['limit_memory_soft'] > 0 else (2048 * 1024 * 1024)
+        registries_size = (limit_memory_soft // avgsz) or 1
+    elif not registries_size and len(dbnames) > Registry.registries.count:
+        # If we give a list of databases higher and did not specify the size,
+        # use the number of preloaded databases as the limit.
+        registries_size = len(dbnames)
+    if registries_size:
+        Registry.registries.count = registries_size
+
     for dbname in dbnames:
         if os.environ.get('ODOO_PROFILE_PRELOAD'):
             interval = float(os.environ.get('ODOO_PROFILE_PRELOAD_INTERVAL', '0.1'))
@@ -1505,11 +1577,7 @@ def preload_registries(dbnames):
         try:
             with preload_profiler:
                 threading.current_thread().dbname = dbname
-                update_from_config = update_module = config['init'] or config['update'] or config['reinit']
-                if not update_module:
-                    with sql_db.db_connect(dbname).cursor() as cr:
-                        cr.execute("SELECT 1 FROM ir_module_module WHERE state IN ('to remove', 'to upgrade', 'to install') FETCH FIRST 1 ROW ONLY")
-                        update_module = bool(cr.rowcount)
+                update_module = config['init'] or config['update'] or config['reinit']
 
                 registry = Registry.new(dbname, update_module=update_module, install_modules=config['init'], upgrade_modules=config['update'], reinit_modules=config['reinit'])
 
@@ -1518,7 +1586,7 @@ def preload_registries(dbnames):
                     from odoo.tests import loader  # noqa: PLC0415
                     t0 = time.time()
                     t0_sql = sql_db.sql_counter
-                    module_names = (registry.updated_modules if update_from_config else
+                    module_names = (registry.updated_modules if update_module else
                                     sorted(registry._init_modules))
                     _logger.info("Starting post tests")
                     tests_before = registry._assertion_report.testsRun

@@ -82,6 +82,58 @@ test("a selection placeholder is inserted between two tables, and removed on cle
     });
 });
 
+test("a selection placeholder is inserted inside a <td> before and after a contenteditable=false element, and removed on clean", async () => {
+    await testEditor({
+        contentBefore: unformat(
+            `<table class="table o_table table-bordered">
+                <tbody><tr><td><div contenteditable="false">X</div></td></tr></tbody>
+            </table>`
+        ),
+        contentBeforeEdit: unformat(
+            `<p data-selection-placeholder=""><br></p>
+            <table class="table o_table table-bordered">
+                <tbody><tr><td>
+                    <p data-selection-placeholder=""><br></p>
+                    <div contenteditable="false">X</div>
+                    <p data-selection-placeholder=""><br></p>
+                </td></tr></tbody>
+            </table>
+            <p data-selection-placeholder="" style="margin: -9px 0px 8px;"><br></p>`
+        ),
+        contentAfter: unformat(
+            `<table class="table o_table table-bordered">
+                <tbody><tr><td><div contenteditable="false">X</div></td></tr></tbody>
+            </table>`
+        ),
+    });
+});
+
+test("a selection placeholder is inserted inside a <th> before and after a contenteditable=false element, and removed on clean", async () => {
+    await testEditor({
+        contentBefore: unformat(
+            `<table class="table o_table table-bordered">
+                <tbody><tr><th><div contenteditable="false">X</div></th></tr></tbody>
+            </table>`
+        ),
+        contentBeforeEdit: unformat(
+            `<p data-selection-placeholder=""><br></p>
+            <table class="table o_table table-bordered">
+                <tbody><tr><th>
+                    <p data-selection-placeholder=""><br></p>
+                    <div contenteditable="false">X</div>
+                    <p data-selection-placeholder=""><br></p>
+                </th></tr></tbody>
+            </table>
+            <p data-selection-placeholder="" style="margin: -9px 0px 8px;"><br></p>`
+        ),
+        contentAfter: unformat(
+            `<table class="table o_table table-bordered">
+                <tbody><tr><th><div contenteditable="false">X</div></th></tr></tbody>
+            </table>`
+        ),
+    });
+});
+
 test.tags("focus required");
 test("can navigate in and out of selection placeholders", async () => {
     await testEditor({
@@ -510,14 +562,14 @@ test("selection placeholders are vertically positioned in the middle between it 
     const style = document.createElement("style");
     await testEditor({
         contentBefore: unformat(
-            `<table style="margin: 50px"><tbody><tr><td>a</td></tr></tbody></table>
-            <table style="margin: 10px"><tbody><tr><td>[]a</td></tr></tbody></table>`
+            `<table style="margin-top: 50px; margin-bottom: 50px;"><tbody><tr><td>a</td></tr></tbody></table>
+            <table style="margin-top: 10px; margin-bottom: 10px;"><tbody><tr><td>[]a</td></tr></tbody></table>`
         ),
         contentBeforeEdit: unformat(
             `<p data-selection-placeholder="" style="margin: 25px 0px -26px;"><br></p>
-            <table style="margin: 50px"><tbody><tr><td>a</td></tr></tbody></table>
+            <table style="margin-top: 50px; margin-bottom: 50px;"><tbody><tr><td>a</td></tr></tbody></table>
             <p data-selection-placeholder="" style="margin: -21px 0px 30px;"><br></p>
-            <table style="margin: 10px"><tbody><tr><td>[]a</td></tr></tbody></table>
+            <table style="margin-top: 10px; margin-bottom: 10px;"><tbody><tr><td>[]a</td></tr></tbody></table>
             <p data-selection-placeholder="" style="margin: -6px 0px 5px;"><br></p>`
         ),
         stepFunction: async (editor) => {
@@ -543,8 +595,8 @@ test("selection placeholder margins remain correct when an element gets added", 
     const style = document.createElement("style");
     await testEditor({
         contentBefore: unformat(
-            `<table style="margin: 50px"><tbody><tr><td>a</td></tr></tbody></table>
-            <table style="margin: 10px"><tbody><tr><td>[]a</td></tr></tbody></table>`
+            `<table style="margin-top: 50px; margin-bottom: 50px;"><tbody><tr><td>a</td></tr></tbody></table>
+            <table style="margin-top: 10px; margin-bottom: 10px;"><tbody><tr><td>[]a</td></tr></tbody></table>`
         ),
         stepFunction: async (editor) => {
             style.innerText = `
@@ -561,7 +613,7 @@ test("selection placeholder margins remain correct when an element gets added", 
             editor.document.head.append(style);
             const table = parseHTML(
                 editor.document,
-                `<table style="margin: 100px"><tbody><tr><td>[]a</td></tr></tbody></table>`
+                `<table style="margin-top: 100px; margin-bottom: 100px;"><tbody><tr><td>[]a</td></tr></tbody></table>`
             ).firstChild;
             editor.editable.append(table);
             editor.shared.history.addStep();
@@ -569,11 +621,11 @@ test("selection placeholder margins remain correct when an element gets added", 
         },
         contentAfterEdit: unformat(
             `<p data-selection-placeholder="" style="margin: 25px 0px -26px;"><br></p>
-            <table style="margin: 50px"><tbody><tr><td>a</td></tr></tbody></table>
+            <table style="margin-top: 50px; margin-bottom: 50px;"><tbody><tr><td>a</td></tr></tbody></table>
             <p data-selection-placeholder="" style="margin: -21px 0px 30px;"><br></p>
-            <table style="margin: 10px"><tbody><tr><td>[]a</td></tr></tbody></table>
+            <table style="margin-top: 10px; margin-bottom: 10px;"><tbody><tr><td>[]a</td></tr></tbody></table>
             <p data-selection-placeholder="" style="margin: 55px 0px -46px;"><br></p>
-            <table style="margin: 100px"><tbody><tr><td>[]a</td></tr></tbody></table>
+            <table style="margin-top: 100px; margin-bottom: 100px;"><tbody><tr><td>[]a</td></tr></tbody></table>
             <p data-selection-placeholder="" style="margin: -51px 0px 50px;"><br></p>`
         ),
     });

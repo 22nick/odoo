@@ -409,19 +409,6 @@ class TestProjectSubtasks(TestProjectCommon):
         task = task_form.save()
         self.assertEqual(task.message_follower_ids.mapped('email'), task.child_ids[0].message_follower_ids.mapped('email'), "The parent and child message_follower_ids should have the same emails")
 
-    def test_subtask_is_visible_after_archiving(self):
-        """
-            Check if `display_in_project` of subtask is set to `True` once the subtask is archived
-        """
-        subtask = self.env['project.task'].create({
-            'name': 'Subtask',
-            'parent_id': self.task_1.id,
-            'project_id': self.project_pigs.id,
-        })
-        self.assertFalse(subtask.display_in_project)
-        subtask.action_archive()
-        self.assertTrue(subtask.display_in_project)
-
     def test_toggle_active_task_with_subtasks(self):
         """ This test will check archiving task should archive it's subtasks and vice versa """
         parent_task = self.env['project.task'].with_context({'mail_create_nolog': True}).create({
@@ -470,7 +457,7 @@ class TestProjectSubtasks(TestProjectCommon):
                 }),
             ],
         })
-        child_1, child_2, child_3, child_4 = parent_task.child_ids
+        child_1, child_2, child_3, child_4 = parent_task.child_ids.sorted('id')
         self.assertEqual(9, len(parent_task._get_all_subtasks()), "Should have 9 subtasks")
         parent_task.action_archive()
         self.assertFalse(all((parent_task + child_1._get_all_subtasks() + child_2).mapped('active')),
@@ -562,7 +549,7 @@ class TestProjectSubtasks(TestProjectCommon):
                 Command.create({'name': 'Sub-task 1', 'project_id': self.project_pigs.id}),
             ],
         })
-        subtask_1, subtask_2 = task.child_ids
+        subtask_1, subtask_2 = task.child_ids.sorted('id')
 
         self.assertFalse(subtask_1.display_in_project)
         self.assertTrue(subtask_2.display_in_project)

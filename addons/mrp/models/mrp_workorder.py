@@ -321,6 +321,8 @@ class MrpWorkorder(models.Model):
 
         for workorder in self:
             workorder.blocked_by_workorder_ids.needed_by_workorder_ids = workorder.needed_by_workorder_ids
+
+        self.end_all()
         res = super().unlink()
         # We need to go through `_action_confirm` for all workorders of the current productions to
         # make sure the links between them are correct (`next_work_order_id` could be obsolete now).
@@ -342,7 +344,7 @@ class MrpWorkorder(models.Model):
                 or (workorder._origin != workorder and workorder._origin.qty_producing and workorder.qty_producing != workorder._origin.qty_producing)):
                 workorder.duration_expected = workorder._get_duration_expected()
 
-    @api.depends('time_ids.duration', 'qty_produced')
+    @api.depends('time_ids.duration', 'time_ids.loss_type', 'qty_produced')
     def _compute_duration(self):
         for order in self:
             order.duration = order.get_duration()
@@ -372,6 +374,14 @@ class MrpWorkorder(models.Model):
                     order.state = 'progress'
                 enddate = fields.Datetime.now()
                 date_start = enddate - timedelta(seconds=_float_duration_to_second(delta_duration))
+                # If existing entries would overlap with the new one, push the new entry
+                # to start exactly where the latest existing entry ends.
+                end_dates = order.time_ids.filtered('date_end').mapped('date_end')
+                if end_dates:
+                    latest_end = max(end_dates)
+                    if latest_end > date_start:
+                        date_start = latest_end
+                        enddate = latest_end + timedelta(seconds=_float_duration_to_second(delta_duration))
                 if order.duration_expected >= new_order_duration or old_order_duration >= order.duration_expected:
                     # either only productive or only performance (i.e. reduced speed) time respectively
                     self.env['mrp.workcenter.productivity'].create(
@@ -481,11 +491,13 @@ class MrpWorkorder(models.Model):
         values = vals
         new_workcenter = False
         if 'qty_produced' in values:
-            if any(w.state in ['done', 'cancel'] for w in self):
-                raise UserError(_('You cannot change the quantity produced of a work order that is in done or cancel state.'))
-            elif self.product_uom_id.compare(values['qty_produced'], 0) < 0:
-                raise UserError(_('The quantity produced must be positive.'))
+            for wo in self:
+                if wo.state in ['done', 'cancel']:
+                    raise UserError(_('You cannot change the quantity produced of a work order that is in done or cancel state.'))
+                elif wo.product_uom_id.compare(values['qty_produced'], 0) < 0:
+                    raise UserError(_('The quantity produced must be positive.'))
 
+        workorders_with_new_wc = self.env['mrp.workorder']
         if 'production_id' in values and any(values['production_id'] != w.production_id.id for w in self):
             raise UserError(_('You cannot link this work order to another manufacturing order.'))
         if 'workcenter_id' in values:
@@ -497,9 +509,7 @@ class MrpWorkorder(models.Model):
                     workorder.leave_id.resource_id = new_workcenter.resource_id
                     if workorder.state == 'progress':
                         continue
-                    workorder.duration_expected = workorder._get_duration_expected()
-                    if workorder.date_start:
-                        workorder.date_finished = workorder._calculate_date_finished(new_workcenter=new_workcenter)
+                    workorders_with_new_wc |= workorder
         if 'date_start' in values or 'date_finished' in values:
             for workorder in self:
                 date_start = fields.Datetime.to_datetime(values.get('date_start', workorder.date_start))
@@ -527,12 +537,19 @@ class MrpWorkorder(models.Model):
                         })
 
         res = super().write(values)
-        if 'qty_produced' in values and self.production_id.product_uom_id.compare(values.get('qty_produced', 0), 0) > 0:
-            for production in self.production_id:
+        productions = self.production_id.filtered(
+            lambda p: p.product_uom_id.compare(values.get('qty_produced', 0), 0) > 0
+        )
+        if 'qty_produced' in values and productions:
+            for production in productions:
                 min_wo_qty = min(production.workorder_ids.mapped('qty_produced'))
-                if self.production_id.product_uom_id.compare(min_wo_qty, 0) > 0:
+                if production.product_uom_id.compare(min_wo_qty, 0) > 0:
                     production.workorder_ids.filtered(lambda w: w.state != 'done').qty_producing = min_wo_qty
             self._set_qty_producing()
+        for workorder in workorders_with_new_wc:
+            workorder.duration_expected = workorder._get_duration_expected()
+            if workorder.date_start:
+                workorder.date_finished = workorder._calculate_date_finished(new_workcenter=new_workcenter)
 
         return res
 
@@ -688,20 +705,23 @@ class MrpWorkorder(models.Model):
     def button_finish(self):
         date_finished = fields.Datetime.now()
         all_vals_dict = defaultdict(lambda: self.env['mrp.workorder'])
-        for workorder in self:
-            if workorder.state in ('done', 'cancel'):
-                continue
-            moves = (self.move_raw_ids + self.production_id.move_byproduct_ids.filtered(lambda m: m.operation_id == self.operation_id))
-            for move in moves:
-                if not move.picked:
-                    if workorder.production_id.product_uom_id.is_zero(workorder.production_id.qty_producing):
-                        qty_available = workorder.production_id.product_qty
-                    else:
-                        qty_available = workorder.production_id.qty_producing
-                    new_qty = move.product_uom.round(qty_available * move.unit_factor)
-                    move._set_quantity_done(new_qty)
-            moves.picked = True
-            workorder.end_all()
+        workorders_to_end = self.filtered(lambda workorder: workorder.state not in ('done', 'cancel'))
+        operations = workorders_to_end.operation_id
+        moves_to_pick = workorders_to_end.move_raw_ids.filtered(lambda move: not move.picked)
+        moves_to_pick += workorders_to_end.production_id.move_byproduct_ids.filtered(lambda move: not move.picked and move.operation_id in operations)
+
+        for move in moves_to_pick:
+            production_id = move.raw_material_production_id or move.production_id
+            if production_id.product_uom_id.is_zero(production_id.qty_producing):
+                qty_available = production_id.product_qty
+            else:
+                qty_available = production_id.qty_producing
+            new_qty = move.product_uom.round(qty_available * move.unit_factor)
+            move._set_quantity_done(new_qty)
+
+        moves_to_pick.picked = True
+        workorders_to_end.end_all()
+        for workorder in workorders_to_end:
             vals = {
                 'qty_produced': workorder.qty_produced or workorder.qty_producing or workorder.qty_production,
                 'state': 'done',
@@ -895,9 +915,25 @@ class MrpWorkorder(models.Model):
             duration += (now - time.date_start).total_seconds() / 60
         return duration
 
+    def _intervals_duration(self, intervals):
+        """Return merged interval duration (minutes). Overlapping intervals are counted once."""
+        if not intervals:
+            return 0.0
+        duration = 0
+        for date_start, date_stop, timer in Intervals(intervals):
+            duration += timer.loss_id._convert_to_duration(date_start, date_stop, timer.workcenter_id)
+        return duration
+
     def get_duration(self):
         self.ensure_one()
-        return sum(self.time_ids.mapped('duration')) + self.get_working_duration()
+        now = self.env.cr.now()
+        loss_type_times = defaultdict(lambda: self.env['mrp.workcenter.productivity'])
+        for time in self.time_ids:
+            loss_type_times[time.loss_id.loss_type] |= time
+        duration = 0
+        for times in loss_type_times.values():
+            duration += self._intervals_duration([(t.date_start or now, t.date_end or now, t) for t in times])
+        return duration
 
     def action_mark_as_done(self):
         for wo in self:

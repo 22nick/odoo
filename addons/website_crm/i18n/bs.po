@@ -9,16 +9,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-26 21:55+0000\n"
-"PO-Revision-Date: 2018-09-21 13:17+0000\n"
-"Last-Translator: Boško Stojaković <bluesoft83@gmail.com>, 2018\n"
-"Language-Team: Bosnian (https://www.transifex.com/odoo/teams/41243/bs/)\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-06-30 01:41+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Bosnian <https://translate.odoo.com/projects/odoo-19/"
+"website_crm/bs/>\n"
 "Language: bs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_crm
 #: model:ir.model.fields,field_description:website_crm.field_website_visitor__lead_count
@@ -43,6 +45,11 @@ msgid "Assign leads/opportunities to a salesperson."
 msgstr ""
 
 #. module: website_crm
+#: model:ir.model,website_form_label:website_crm.model_crm_lead
+msgid "Create an Opportunity"
+msgstr ""
+
+#. module: website_crm
 #: model:ir.model.fields,help:website_crm.field_website__crm_default_team_id
 msgid "Default Sales Team for new leads created through the Contact Us form."
 msgstr ""
@@ -63,9 +70,23 @@ msgid "Default salesperson for new leads created through the Contact Us form."
 msgstr ""
 
 #. module: website_crm
+#: model:ir.model.fields,field_description:website_crm.field_crm_lead__display_name
+#: model:ir.model.fields,field_description:website_crm.field_website__display_name
+#: model:ir.model.fields,field_description:website_crm.field_website_visitor__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: website_crm
+#: model:ir.model.fields,field_description:website_crm.field_crm_lead__id
+#: model:ir.model.fields,field_description:website_crm.field_website__id
+#: model:ir.model.fields,field_description:website_crm.field_website_visitor__id
+msgid "ID"
+msgstr ""
+
+#. module: website_crm
 #: model:ir.model,name:website_crm.model_crm_lead
-msgid "Lead/Opportunity"
-msgstr "Potencijal/Prilika"
+msgid "Lead"
+msgstr ""
 
 #. module: website_crm
 #: model:ir.actions.act_window,name:website_crm.crm_lead_action_from_visitor
@@ -162,3 +183,6 @@ msgstr ""
 #: code:addons/website_crm/static/src/js/website_crm_editor.js:0
 msgid "Your Question"
 msgstr ""
+
+#~ msgid "Lead/Opportunity"
+#~ msgstr "Potencijal/Prilika"

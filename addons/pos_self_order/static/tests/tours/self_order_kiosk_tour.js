@@ -1,3 +1,5 @@
+/* global posmodel */
+
 import { registry } from "@web/core/registry";
 import * as Utils from "@pos_self_order/../tests/tours/utils/common";
 import * as CartPage from "@pos_self_order/../tests/tours/utils/cart_page_util";
@@ -43,6 +45,24 @@ registry.category("web_tour.tours").add("self_kiosk_each_table_takeaway_out", {
         Utils.clickBtn("Order Now"),
         ProductPage.clickCategory("Miscellaneous"),
         Utils.checkIsDisabledBtn("Checkout"),
+        {
+            content: "Check for base url",
+            trigger: "body",
+            run: () => {
+                const order = posmodel.currentOrder;
+                const selfInvoicingURL = `${order.config._base_url}/pos/ticket`; // With this way self invocing URL generated in OrderReceipt Component
+                if (!selfInvoicingURL || selfInvoicingURL.includes("undefined")) {
+                    throw new Error(
+                        `Invalid self invoicing URL (contains undefined): ${selfInvoicingURL}`
+                    );
+                }
+                try {
+                    new URL(selfInvoicingURL);
+                } catch {
+                    throw new Error(`Invalid self invoicing URL: ${selfInvoicingURL}`);
+                }
+            },
+        },
     ],
 });
 
@@ -206,6 +226,17 @@ registry.category("web_tour.tours").add("test_self_order_pricelist", {
         Utils.clickBtn("Order"),
         Utils.clickBtn("Close"),
         Utils.checkIsNoBtn("My Order"),
+    ],
+});
+
+registry.category("web_tour.tours").add("test_self_order_kiosk_unpaid", {
+    steps: () => [
+        Utils.clickBtn("Order now"),
+        ProductPage.clickCategory("Miscellaneous"),
+        ProductPage.clickProduct("Coca-Cola"),
+        Utils.clickBtn("Checkout"),
+        Utils.clickBtn("Order"),
+        ConfirmationPage.orderNumberShown(),
     ],
 });
 

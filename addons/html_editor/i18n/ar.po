@@ -2,15 +2,17 @@
 # This file contains the translation of the following modules:
 # * html_editor
 #
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-10-13 12:17+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-06-05 19:29+0000\n"
+"PO-Revision-Date: 2026-07-02 00:24+0000\n"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
 "Language-Team: Arabic <https://translate.odoo.com/projects/odoo-19/"
 "html_editor/ar/>\n"
 "Language: ar\n"
@@ -19,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: html_editor
 #. odoo-javascript
@@ -98,8 +100,8 @@ msgid ""
 "Action %s not found, link preview is not available, please check your url is "
 "correct"
 msgstr ""
-"لم يتم العثور على الإجراء%s ، لا تتوفر معاينة للرابط، يرجى التحقق من صحة "
-"عنوان url الخاص بك"
+"لم يتم العثور على الإجراء%s ، لا تتوفر معاينة للرابط، يرجى التحقق من صحة عنوان "
+"url الخاص بك"
 
 #. module: html_editor
 #. odoo-javascript
@@ -172,7 +174,7 @@ msgstr "أضف شيئاً داخل زر التبديل"
 #. odoo-javascript
 #: code:addons/html_editor/static/src/others/embedded_components/plugins/caption_plugin/caption_plugin.js:0
 msgid "Add/remove a caption"
-msgstr ""
+msgstr "إضافة/إزالة الوصف"
 
 #. module: html_editor
 #. odoo-javascript
@@ -220,7 +222,7 @@ msgstr "حدث خطأ عند جلب رابط URL الذي تم إدخاله."
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "Angle"
-msgstr ""
+msgstr "الزاوية"
 
 #. module: html_editor
 #. odoo-javascript
@@ -326,7 +328,7 @@ msgstr "تحذير العارضة"
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_base
 msgid "Base"
-msgstr ""
+msgstr "قاعدة"
 
 #. module: html_editor
 #. odoo-javascript
@@ -378,6 +380,12 @@ msgstr "إلغاء"
 
 #. module: html_editor
 #. odoo-javascript
+#: code:addons/html_editor/static/src/others/embedded_components/plugins/caption_plugin/caption_plugin.js:0
+msgid "Caption"
+msgstr ""
+
+#. module: html_editor
+#. odoo-javascript
 #: code:addons/html_editor/static/src/main/list/list_plugin.js:0
 msgid "Checklist"
 msgstr "قائمة مرجعية"
@@ -402,6 +410,12 @@ msgstr "اضغط مجدداً لإعادة تعيين التحويل"
 
 #. module: html_editor
 #. odoo-javascript
+#: code:addons/html_editor/static/src/main/movenode_plugin.js:0
+msgid "Click to select"
+msgstr ""
+
+#. module: html_editor
+#. odoo-javascript
 #: code:addons/html_editor/static/src/main/media/media_dialog/upload_progress_toast/upload_progress_toast.xml:0
 #: code:addons/html_editor/static/src/others/embedded_components/core/file/readonly_file.js:0
 msgid "Close"
@@ -410,12 +424,13 @@ msgstr "إغلاق"
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/font_plugin.js:0
+#: code:addons/html_editor/static/src/others/embedded_components/backend/syntax_highlighting/syntax_highlighting.xml:0
 msgid "Code"
 msgstr "رمز"
 
 #. module: html_editor
 #. odoo-javascript
-#: code:addons/html_editor/static/src/others/embedded_components/plugins/syntax_highlighting_plugin/code_toolbar.xml:0
+#: code:addons/html_editor/static/src/others/embedded_components/backend/syntax_highlighting/code_toolbar.xml:0
 msgid "Code copied to the clipboard."
 msgstr ""
 
@@ -463,15 +478,15 @@ msgstr "تحويل إلى أعمدة"
 
 #. module: html_editor
 #. odoo-javascript
-#: code:addons/html_editor/static/src/others/embedded_components/plugins/syntax_highlighting_plugin/code_toolbar.xml:0
-msgid "Copy"
+#: code:addons/html_editor/static/src/others/embedded_components/backend/syntax_highlighting/code_toolbar.xml:0
+msgid "Convert to paragraph"
 msgstr ""
 
 #. module: html_editor
 #. odoo-javascript
-#: code:addons/html_editor/static/src/main/link/link_popover.xml:0
-msgid "Copy Link"
-msgstr "نسخ الرابط"
+#: code:addons/html_editor/static/src/others/embedded_components/backend/syntax_highlighting/code_toolbar.xml:0
+msgid "Copy"
+msgstr "نسخ"
 
 #. module: html_editor
 #. odoo-javascript
@@ -506,12 +521,12 @@ msgstr "إنشاء رابط URL."
 #. module: html_editor
 #: model:ir.model.fields,field_description:html_editor.field_html_editor_converter_test_sub__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "أنشئ بواسطة"
 
 #. module: html_editor
 #: model:ir.model.fields,field_description:html_editor.field_html_editor_converter_test_sub__create_date
 msgid "Created on"
-msgstr ""
+msgstr "أنشئ في"
 
 #. module: html_editor
 #. odoo-javascript
@@ -536,7 +551,7 @@ msgstr "Dailymotion"
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/color_picker_gradient_tab.xml:0
 msgid "Define a custom gradient"
-msgstr ""
+msgstr "تحديد تدرج ألوان مخصص"
 
 #. module: html_editor
 #. odoo-javascript
@@ -600,6 +615,12 @@ msgstr "المستندات"
 
 #. module: html_editor
 #. odoo-javascript
+#: code:addons/html_editor/static/src/main/movenode_plugin.js:0
+msgid "Drag to move"
+msgstr ""
+
+#. module: html_editor
+#. odoo-javascript
 #: code:addons/html_editor/static/src/others/dynamic_placeholder_plugin.js:0
 msgid "Dynamic Placeholder"
 msgstr "عنصر نائب ديناميكي"
@@ -613,6 +634,7 @@ msgstr "خطأ: تعذر إحضار روابط التنزيل من مكتبة ا
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/fields/x2many_field/x2many_image_field.xml:0
+#: code:addons/html_editor/static/src/main/link/link_popover.xml:0
 msgid "Edit"
 msgstr "تحرير"
 
@@ -674,30 +696,30 @@ msgstr "توسيع شريط الأدوات"
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "Extend to the closest corner"
-msgstr ""
+msgstr "التمديد لأقرب زاوية"
 
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "Extend to the closest side"
-msgstr ""
+msgstr "التمديد لأقرب جهة"
 
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "Extend to the farthest corner"
-msgstr ""
+msgstr "التمديد لأبعد زاوية"
 
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "Extend to the farthest side"
-msgstr ""
+msgstr "التمديد لأبعد جهة"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_html_field_history_mixin
 msgid "Field html History"
-msgstr ""
+msgstr "سجل html الحقل"
 
 #. module: html_editor
 #. odoo-javascript
@@ -745,12 +767,12 @@ msgstr "التنسيق"
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/color_picker_gradient_tab.js:0
 msgid "Gradient"
-msgstr ""
+msgstr "تدرج ألوان"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_http
 msgid "HTTP Routing"
-msgstr ""
+msgstr "مسار HTTP"
 
 #. module: html_editor
 #. odoo-javascript
@@ -832,12 +854,6 @@ msgstr "العنوان 6"
 
 #. module: html_editor
 #. odoo-javascript
-#: code:addons/html_editor/static/src/main/media/media_dialog/video_selector.js:0
-msgid "Hide Dailymotion logo"
-msgstr "إخفاء شعار Dailymotion"
-
-#. module: html_editor
-#. odoo-javascript
 #: code:addons/html_editor/static/src/others/embedded_components/plugins/toggle_block_plugin/toggle_block_plugin.js:0
 msgid "Hide Text under foldable toggles"
 msgstr "قم بإخفاء النص تحت أزرار التبديل التي يمكن طيها"
@@ -856,12 +872,6 @@ msgstr "إخفاء متحكمات التشغيل"
 
 #. module: html_editor
 #. odoo-javascript
-#: code:addons/html_editor/static/src/main/media/media_dialog/video_selector.js:0
-msgid "Hide sharing button"
-msgstr "إخفاء زر المشاركة"
-
-#. module: html_editor
-#. odoo-javascript
 #: code:addons/html_editor/static/src/others/embedded_components/plugins/table_of_content_plugin/table_of_content_plugin.js:0
 msgid "Highlight the structure (headings)"
 msgstr "قم بتحديد الهيكل (الترويسات)"
@@ -875,12 +885,12 @@ msgstr "السجل"
 #. module: html_editor
 #: model:ir.model.fields,field_description:html_editor.field_html_field_history_mixin__html_field_history
 msgid "History data"
-msgstr ""
+msgstr "بيانات السجل"
 
 #. module: html_editor
 #: model:ir.model.fields,field_description:html_editor.field_html_field_history_mixin__html_field_history_metadata
 msgid "History metadata"
-msgstr ""
+msgstr "البيانات الوصفية للسجل"
 
 #. module: html_editor
 #. odoo-javascript
@@ -989,6 +999,12 @@ msgstr "إدراج فاصل قاعدة أفقي"
 
 #. module: html_editor
 #. odoo-javascript
+#: code:addons/html_editor/static/src/main/banner_plugin.js:0
+msgid "Insert a monospace banner"
+msgstr ""
+
+#. module: html_editor
+#. odoo-javascript
 #: code:addons/html_editor/static/src/main/star_plugin.js:0
 msgid "Insert a rating"
 msgstr "إدراج تقييم"
@@ -1066,10 +1082,16 @@ msgid "Insert right"
 msgstr "إدراج في اليمين"
 
 #. module: html_editor
+#. odoo-javascript
+#: code:addons/html_editor/static/src/main/media/media_dialog/video_selector.xml:0
+msgid "Instagram"
+msgstr "Instagram"
+
+#. module: html_editor
 #. odoo-python
 #: code:addons/html_editor/models/ir_ui_view.py:0
 msgid "Invalid field value for %(field_name)s: %(value)s"
-msgstr ""
+msgstr "قيمة الحقل غير صالحة لـ %(field_name)s: %(value)s"
 
 #. module: html_editor
 #. odoo-javascript
@@ -1086,18 +1108,18 @@ msgstr "كبير"
 #. module: html_editor
 #: model:ir.model.fields,field_description:html_editor.field_html_editor_converter_test_sub__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: html_editor
 #: model:ir.model.fields,field_description:html_editor.field_html_editor_converter_test_sub__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "Linear"
-msgstr ""
+msgstr "خطي"
 
 #. module: html_editor
 #. odoo-javascript
@@ -1105,6 +1127,12 @@ msgstr ""
 #: code:addons/html_editor/static/src/main/link/link_popover.js:0
 msgid "Link"
 msgstr "الرابط"
+
+#. module: html_editor
+#. odoo-javascript
+#: code:addons/html_editor/static/src/main/link/link_popover.xml:0
+msgid "Link Popover"
+msgstr ""
 
 #. module: html_editor
 #. odoo-javascript
@@ -1117,8 +1145,7 @@ msgstr "تم نسخ الرابط إلى الحافظة."
 #: code:addons/html_editor/controllers/main.py:0
 msgid ""
 "Link preview is not available because %s, please check if your url is correct"
-msgstr ""
-"معاينة الرابط غير متوفرة بسبب %s، يرجى التحقق من صحة عنوان url الخاص بك"
+msgstr "معاينة الرابط غير متوفرة بسبب %s، يرجى التحقق من صحة عنوان url الخاص بك"
 
 #. module: html_editor
 #. odoo-javascript
@@ -1191,6 +1218,24 @@ msgstr "الملف مفقود"
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/powerbox/powerbox_plugin.js:0
+msgid "Modules"
+msgstr ""
+
+#. module: html_editor
+#. odoo-javascript
+#: code:addons/html_editor/static/src/main/banner_plugin.js:0
+msgid "Monospace"
+msgstr ""
+
+#. module: html_editor
+#. odoo-javascript
+#: code:addons/html_editor/static/src/main/banner_plugin.js:0
+msgid "Monospace Banner"
+msgstr ""
+
+#. module: html_editor
+#. odoo-javascript
+#: code:addons/html_editor/static/src/main/powerbox/search_powerbox_plugin.js:0
 #: code:addons/html_editor/static/src/others/embedded_components/backend/video/video.xml:0
 msgid "More options"
 msgstr "المزيد من الخيارات"
@@ -1228,7 +1273,7 @@ msgstr "صوري"
 #. module: html_editor
 #: model:ir.model.fields,field_description:html_editor.field_html_editor_converter_test_sub__name
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: html_editor
 #. odoo-javascript
@@ -1283,7 +1328,7 @@ msgstr "قائمة مرقمة"
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/media/media_dialog/attachment_error.xml:0
 msgid "Ok"
-msgstr ""
+msgstr "موافق"
 
 #. module: html_editor
 #. odoo-python
@@ -1346,13 +1391,13 @@ msgstr "لصق كرابط URL"
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "Position X"
-msgstr ""
+msgstr "الموضع X"
 
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "Position Y"
-msgstr ""
+msgstr "الموضع Y"
 
 #. module: html_editor
 #. odoo-javascript
@@ -1381,17 +1426,17 @@ msgstr "شريط التقدم"
 #. module: html_editor
 #: model:ir.model.fields.selection,name:html_editor.selection__html_editor_converter_test__selection_str__c
 msgid "Qu'est-ce qu'il fout ce maudit pancake, tabernacle ?"
-msgstr ""
+msgstr "Qu'est-ce qu'il fout ce maudit pancake, tabernacle ?"
 
 #. module: html_editor
 #: model:ir.model.fields.selection,name:html_editor.selection__html_editor_converter_test__selection_str__a
 msgid "Qu'il n'est pas arrivé à Toronto"
-msgstr ""
+msgstr "Qu'il n'est pas arrivé à Toronto"
 
 #. module: html_editor
 #: model:ir.model.fields.selection,name:html_editor.selection__html_editor_converter_test__selection_str__b
 msgid "Qu'il était supposé arriver à Toronto"
-msgstr ""
+msgstr "Qu'il était supposé arriver à Toronto"
 
 #. module: html_editor
 #. odoo-javascript
@@ -1402,88 +1447,88 @@ msgstr "اقتباس"
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb
 msgid "Qweb"
-msgstr ""
+msgstr "Qweb"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field
 msgid "Qweb Field"
-msgstr ""
+msgstr "حقل Qweb"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_contact
 msgid "Qweb Field Contact"
-msgstr ""
+msgstr "جهة اتصال حقل Qweb"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_date
 msgid "Qweb Field Date"
-msgstr ""
+msgstr "تاريخ حقل Qweb"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_datetime
 msgid "Qweb Field Datetime"
-msgstr ""
+msgstr "حقل Qweb من النوع Datetime"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_duration
 msgid "Qweb Field Duration"
-msgstr ""
+msgstr "مدة حقل Qweb"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_float
 msgid "Qweb Field Float"
-msgstr ""
+msgstr "قيمة عشرية لحقل Qweb"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_html
 msgid "Qweb Field HTML"
-msgstr ""
+msgstr "حقل Qweb من النوع HTML"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_image
 msgid "Qweb Field Image"
-msgstr ""
+msgstr "صورة حقل Qweb"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_integer
 msgid "Qweb Field Integer"
-msgstr ""
+msgstr "حقل Qweb صحيح"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_many2one
 msgid "Qweb Field Many to One"
-msgstr ""
+msgstr "حقل Qweb واحد لواحد"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_monetary
 msgid "Qweb Field Monetary"
-msgstr ""
+msgstr "حقل Qweb نقدي"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_relative
 msgid "Qweb Field Relative"
-msgstr ""
+msgstr "حقل Qweb نسبي"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_selection
 msgid "Qweb Field Selection"
-msgstr ""
+msgstr "اختيار حقل Qweb"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_text
 msgid "Qweb Field Text"
-msgstr ""
+msgstr "نص حقل Qweb"
 
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_qweb_field_qweb
 msgid "Qweb Field qweb"
-msgstr ""
+msgstr "حقل Qweb من النوع qweb"
 
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "Radial"
-msgstr ""
+msgstr "نصف قطري"
 
 #. module: html_editor
 #. odoo-javascript
@@ -1495,7 +1540,7 @@ msgstr "إعادة تنفيذ"
 #. odoo-javascript
 #: code:addons/html_editor/static/src/others/embedded_components/backend/video/video.xml:0
 msgid "Remove"
-msgstr ""
+msgstr "إزالة"
 
 #. module: html_editor
 #. odoo-javascript
@@ -1506,8 +1551,8 @@ msgstr "إزالة (حذف) الصورة"
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/core/format_plugin.js:0
-msgid "Remove Format"
-msgstr "إزالة التنسيق"
+msgid "Remove Format (Ctrl + Space)"
+msgstr ""
 
 #. module: html_editor
 #. odoo-javascript
@@ -1641,7 +1686,7 @@ msgstr "التدوير لليمين"
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/media/media_dialog/search_media.xml:0
 msgid "Search"
-msgstr ""
+msgstr "بحث"
 
 #. module: html_editor
 #. odoo-javascript
@@ -1684,6 +1729,18 @@ msgstr "اختر لون الخط"
 #: code:addons/html_editor/static/src/main/media/media_dialog/media_dialog.js:0
 msgid "Select a media"
 msgstr "قم بتحديد الوسط"
+
+#. module: html_editor
+#. odoo-javascript
+#: code:addons/html_editor/static/src/main/link/link_popover.xml:0
+msgid "Select button shape"
+msgstr ""
+
+#. module: html_editor
+#. odoo-javascript
+#: code:addons/html_editor/static/src/main/link/link_popover.xml:0
+msgid "Select button size"
+msgstr ""
 
 #. module: html_editor
 #. odoo-javascript
@@ -1747,12 +1804,6 @@ msgstr "تعيين الشكل: صورة مصغرة"
 
 #. module: html_editor
 #. odoo-javascript
-#: code:addons/html_editor/static/src/main/link/link_popover.xml:0
-msgid "Shape"
-msgstr "الشكل"
-
-#. module: html_editor
-#. odoo-javascript
 #: code:addons/html_editor/static/src/main/media/media_dialog/file_selector.xml:0
 msgid "Show optimized images"
 msgstr "إظهار الصور المحسنة"
@@ -1764,6 +1815,7 @@ msgid ""
 "Showing all differences between the current version and the selected one "
 "updated by"
 msgstr ""
+"عرض جميع الاختلافات بين النسخة الحالية والنسخة المحددة الذي تم تحديثها بواسطة"
 
 #. module: html_editor
 #. odoo-javascript
@@ -1774,7 +1826,6 @@ msgstr ""
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
-#: code:addons/html_editor/static/src/main/link/link_popover.xml:0
 msgid "Size"
 msgstr "الحجم"
 
@@ -1891,7 +1942,7 @@ msgstr "يبدو رابط URL صالحاً."
 #. odoo-python
 #: code:addons/html_editor/models/ir_qweb_fields.py:0
 msgid "The datetime %(value)s does not match the format %(format)s"
-msgstr ""
+msgstr "لا يطابق تنسيق %(value)s لـ datetime تنسيق %(format)s"
 
 #. module: html_editor
 #. odoo-python
@@ -1900,6 +1951,8 @@ msgid ""
 "The document was already saved from someone with a different history for "
 "model \"%(model)s\", field \"%(field)s\" with id \"%(id)d\"."
 msgstr ""
+"لقد تم حفظ المستند بالفعل بواسطة شخص ذو سجل مختلف للنموذج \"%(model)s\"، "
+"الحقل \"%(field)s\" مع المعرف \"%(id)d\"."
 
 #. module: html_editor
 #. odoo-javascript
@@ -2068,7 +2121,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "Type"
-msgstr ""
+msgstr "النوع"
 
 #. module: html_editor
 #. odoo-javascript
@@ -2170,7 +2223,7 @@ msgstr "يتم كتم الصوت في مقاطع الفيديو عندما يت�
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_ui_view
 msgid "View"
-msgstr ""
+msgstr "أداة العرض"
 
 #. module: html_editor
 #. odoo-javascript
@@ -2216,7 +2269,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/html_editor/static/src/others/embedded_components/plugins/caption_plugin/caption_plugin.js:0
 msgid "Write a caption..."
-msgstr ""
+msgstr "اكتب وصفاً..."
 
 #. module: html_editor
 #. odoo-javascript
@@ -2272,12 +2325,6 @@ msgstr "عليك تحديد إما البيانات أو رابط URL لإنشا
 
 #. module: html_editor
 #. odoo-javascript
-#: code:addons/html_editor/static/src/main/media/media_dialog/video_selector.xml:0
-msgid "Youku"
-msgstr "Youku"
-
-#. module: html_editor
-#. odoo-javascript
 #: code:addons/html_editor/static/src/others/embedded_components/core/video/readonly_video.xml:0
 msgid "Your browser does not support iframe."
 msgstr "لا يدعم متصفحك iframe."
@@ -2316,7 +2363,13 @@ msgstr "و"
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/font/gradient_picker/gradient_picker.xml:0
 msgid "deg"
-msgstr ""
+msgstr "deg"
+
+#. module: html_editor
+#. odoo-javascript
+#: code:addons/html_editor/static/src/main/separator_plugin.js:0
+msgid "divider"
+msgstr "فاصل"
 
 #. module: html_editor
 #. odoo-javascript
@@ -2338,6 +2391,12 @@ msgstr "ملف"
 
 #. module: html_editor
 #. odoo-javascript
+#: code:addons/html_editor/static/src/main/separator_plugin.js:0
+msgid "line"
+msgstr ""
+
+#. module: html_editor
+#. odoo-javascript
 #: code:addons/html_editor/static/src/main/link/link_popover.xml:0
 msgid "noopener"
 msgstr ""
@@ -2346,7 +2405,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/html_editor/static/src/components/history_dialog/history_dialog.xml:0
 msgid "on"
-msgstr ""
+msgstr "في"
 
 #. module: html_editor
 #. odoo-javascript
@@ -2362,6 +2421,12 @@ msgstr "بيكسل"
 
 #. module: html_editor
 #. odoo-javascript
+#: code:addons/html_editor/static/src/main/font/font_plugin.js:0
+msgid "title"
+msgstr ""
+
+#. module: html_editor
+#. odoo-javascript
 #: code:addons/html_editor/static/src/main/media/media_dialog/video_selector.xml:0
 msgid "videos"
 msgstr "مقاطع الفيديو"
@@ -2369,7 +2434,31 @@ msgstr "مقاطع الفيديو"
 #. module: html_editor
 #: model:ir.model,name:html_editor.model_ir_websocket
 msgid "websocket message handling"
+msgstr "التعامل مع رسائل websocket"
+
+#. module: html_editor
+#. odoo-javascript
+#: code:addons/html_editor/static/src/main/table/table_picker.xml:0
+msgid "x"
 msgstr ""
+
+#~ msgid "Remove Format"
+#~ msgstr "إزالة التنسيق"
+
+#~ msgid "Copy Link"
+#~ msgstr "نسخ الرابط"
+
+#~ msgid "Shape"
+#~ msgstr "الشكل"
+
+#~ msgid "Hide Dailymotion logo"
+#~ msgstr "إخفاء شعار Dailymotion"
+
+#~ msgid "Hide sharing button"
+#~ msgstr "إخفاء زر المشاركة"
+
+#~ msgid "Youku"
+#~ msgstr "Youku"
 
 #~ msgid "Basic Bloc"
 #~ msgstr "الكتلة البرمجية الأساسية"

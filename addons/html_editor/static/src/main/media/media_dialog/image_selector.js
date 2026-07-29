@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "@odoo/owl";
+import { useRef, useState } from "@odoo/owl";
 import { _t } from "@web/core/l10n/translation";
 import { rpc } from "@web/core/network/rpc";
 import { KeepLast } from "@web/core/utils/concurrency";
@@ -18,14 +18,6 @@ export class AutoResizeImage extends Attachment {
         this.state = useState({
             loaded: false,
         });
-
-        useEffect(
-            () => {
-                this.image.el.addEventListener("load", () => this.onImageLoaded());
-                return this.image.el.removeEventListener("load", () => this.onImageLoaded());
-            },
-            () => []
-        );
     }
 
     async onImageLoaded() {
@@ -51,7 +43,7 @@ export class AutoResizeImage extends Attachment {
 const newLocal = "img-fluid";
 export class ImageSelector extends FileSelector {
     static mediaSpecificClasses = ["img", newLocal, "o_we_custom_image"];
-    static mediaSpecificStyles = [];
+    static mediaSpecificStyles = ["transform", "width"];
     static mediaExtraClasses = [
         "rounded-circle",
         "rounded",
@@ -95,6 +87,7 @@ export class ImageSelector extends FileSelector {
         this.fileMimetypes = IMAGE_MIMETYPES.join(",");
         this.isImageField =
             !!this.props.media?.closest("[data-oe-type=image]") || !!this.props.addFieldImage;
+        this.isProcessingClick = false;
     }
 
     get canLoadMore() {
@@ -175,11 +168,22 @@ export class ImageSelector extends FileSelector {
     }
 
     async uploadFiles(files) {
-        await this.uploadService.uploadFiles(
+        let abortFn;
+
+        const uploadPromise = this.uploadService.uploadFiles(
             files,
-            { resModel: this.props.resModel, resId: this.props.resId, isImage: true },
-            (attachment) => this.onUploaded(attachment)
+            {
+                resModel: this.props.resModel,
+                resId: this.props.resId,
+                isImage: true,
+            },
+            (attachment) => this.onUploaded(attachment),
+            (abort) => {
+                abortFn = abort;
+            }
         );
+        this.props.setAbortUploadsCallback(() => abortFn?.());
+        await uploadPromise;
     }
 
     async validateUrl(...args) {
@@ -341,6 +345,10 @@ export class ImageSelector extends FileSelector {
     }
 
     async onClickAttachment(attachment) {
+        if (this.isProcessingClick) {
+            return;
+        }
+        this.isProcessingClick = true;
         if (attachment.unselectable) {
             this.notificationService.add(
                 _t(
@@ -357,6 +365,11 @@ export class ImageSelector extends FileSelector {
         if (!this.props.multiSelect) {
             await this.props.save();
         }
+        // The use of requestAnimationFrame is not ideal but we do it as a
+        // temporary fix as the media dialog will be refactored
+        requestAnimationFrame(() => {
+            this.isProcessingClick = false;
+        });
     }
 
     async onClickMedia(media) {

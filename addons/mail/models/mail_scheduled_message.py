@@ -82,7 +82,7 @@ class MailScheduledMessage(models.Model):
         for scheduled_message in scheduled_messages:
             if attachments := scheduled_message.attachment_ids:
                 attachments.filtered(
-                    lambda a: a.res_model == 'mail.compose.message' and not a.res_id and a.create_uid.id == self.env.uid
+                    lambda a: a.res_model == 'mail.compose.message' and a.create_uid.id == self.env.uid
                 ).write({
                     'res_model': scheduled_message._name,
                     'res_id': scheduled_message.id,
@@ -158,6 +158,9 @@ class MailScheduledMessage(models.Model):
             'views': [[False, 'form']],
             'target': 'new',
             'res_id': self.id,
+            'context': {
+                'is_thread_composer': True,
+            }
         }
 
     def post_message(self):
@@ -197,7 +200,7 @@ class MailScheduledMessage(models.Model):
                     subtype_xmlid='mail.mt_note' if scheduled_message.is_note else 'mail.mt_comment',
                     **{k: v for k, v in json.loads(scheduled_message.notification_parameters or '{}').items() if k in notification_parameters_whitelist},
                 )
-                self._message_created_hook(message)
+                scheduled_message._message_created_hook(message)
                 if auto_commit:
                     self.env.cr.commit()
             except Exception:

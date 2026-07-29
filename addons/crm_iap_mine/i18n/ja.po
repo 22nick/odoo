@@ -2,15 +2,17 @@
 # This file contains the translation of the following modules:
 # * crm_iap_mine
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Junko Augias (juau)" <juau@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Junko Augias (juau)" <juau@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# Ryoko Tsuda <ryoko@quartile.co>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-10-20 02:31+0000\n"
-"Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-06-30 02:00+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/"
 "crm_iap_mine/ja/>\n"
 "Language: ja\n"
@@ -18,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: crm_iap_mine
 #. odoo-python
@@ -27,8 +29,8 @@ msgid ""
 "%(credit_count)d credits will be consumed to find %(company_count)d "
 "companies."
 msgstr ""
-"%(credit_count)dクレジットが%(company_count)d会社を見つけるために消費されま"
-"す。"
+"%(credit_count)dクレジットが%(company_count)d会社を見つけるために消費されます"
+"。"
 
 #. module: crm_iap_mine
 #: model_terms:ir.ui.view,arch_db:crm_iap_mine.enrich_company
@@ -50,11 +52,39 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p>様</p>\n"
 "    <p>IAPリード作成アカウントのクレジットがなくなりました。<br/>\n"
-"    CRMアプリの設定でIAPリード作成アカウントにチャージすることができます。<"
-"br/></p>\n"
+"    CRMアプリの設定でIAPリード作成アカウントにチャージすることができます"
+"。<br/></p>\n"
 "    <p>宜しくお願い致します。</p>\n"
 "    <p>Odoo S.A.</p>\n"
 "</div>"
+
+#. module: crm_iap_mine
+#: model_terms:ir.ui.view,arch_db:crm_iap_mine.enrich_company
+msgid ""
+"<i class=\"fa fa-fw me-2 fa-address-book text-primary\"/>\n"
+"                    <b>Address</b>"
+msgstr ""
+
+#. module: crm_iap_mine
+#: model_terms:ir.ui.view,arch_db:crm_iap_mine.enrich_company
+msgid ""
+"<i class=\"fa fa-fw me-2 fa-cube text-primary\"/>\n"
+"                    <b>Industries</b>"
+msgstr ""
+
+#. module: crm_iap_mine
+#: model_terms:ir.ui.view,arch_db:crm_iap_mine.enrich_company
+msgid ""
+"<i class=\"fa fa-fw me-2 fa-globe text-primary\"/>\n"
+"                    <b>Website</b>"
+msgstr ""
+
+#. module: crm_iap_mine
+#: model_terms:ir.ui.view,arch_db:crm_iap_mine.enrich_company
+msgid ""
+"<i class=\"fa fa-fw me-2 fa-solid fa-id-card text-primary\"/>\n"
+"                    <b>Tax ID</b>"
+msgstr ""
 
 #. module: crm_iap_mine
 #: model_terms:ir.ui.view,arch_db:crm_iap_mine.crm_iap_lead_mining_request_view_form
@@ -77,8 +107,9 @@ msgid ""
 "<span invisible=\"error_type != 'no_result'\">Your request did not return "
 "any result (no credits were used). Try removing some filters.</span>"
 msgstr ""
-"<span invisible=\"error_type != 'no_result'\">要求は対応されませんでした。(ク"
-"レジットは使用されていません)いくつかのフィルタを解除してみて下さい。</span>"
+"<span invisible=\"error_type != 'no_result'\">要求は対応されませんでした。"
+"(クレジットは使用されていません)いくつかのフィルタを解除してみて下さい。</"
+"span>"
 
 #. module: crm_iap_mine
 #: model:crm.iap.lead.industry,name:crm_iap_mine.crm_iap_mine_industry_238
@@ -200,7 +231,7 @@ msgstr "リード発掘リクエストを作成"
 #. module: crm_iap_mine
 #: model:ir.model,website_form_label:crm_iap_mine.model_crm_lead
 msgid "Create an Opportunity"
-msgstr ""
+msgstr "案件作成"
 
 #. module: crm_iap_mine
 #: model:ir.model.fields,field_description:crm_iap_mine.field_crm_iap_lead_helpers__create_uid
@@ -327,7 +358,7 @@ msgstr "from"
 #: model_terms:ir.ui.view,arch_db:crm_iap_mine.crm_lead_view_tree_opportunity
 #: model_terms:ir.ui.view,arch_db:crm_iap_mine.view_crm_lead_kanban
 msgid "Generate Leads"
-msgstr "リードを作成"
+msgstr "リード生成"
 
 #. module: crm_iap_mine
 #. odoo-python
@@ -432,7 +463,7 @@ msgstr "最終更新日"
 #. module: crm_iap_mine
 #: model:ir.model,name:crm_iap_mine.model_crm_lead
 msgid "Lead"
-msgstr ""
+msgstr "リード"
 
 #. module: crm_iap_mine
 #: model:ir.model.fields,field_description:crm_iap_mine.field_crm_iap_lead_mining_request__lead_contacts_credits
@@ -481,8 +512,7 @@ msgstr "法務"
 #. odoo-javascript
 #: code:addons/crm_iap_mine/static/src/js/tours/crm_iap_lead.js:0
 msgid "Looking for more opportunities?<br>Try the <b>Lead Generation</b> tool."
-msgstr ""
-"より多くの案件をお探しですか？<br><b>リード作成</b>ツールをお試し下さい。"
+msgstr "より多くの案件をお探しですか？<br><b>リード作成</b>ツールをお試し下さい。"
 
 #. module: crm_iap_mine
 #: model:crm.iap.lead.role,name:crm_iap_mine.crm_iap_mine_role_13
@@ -705,7 +735,7 @@ msgstr "シーケンス"
 #. module: crm_iap_mine
 #: model:ir.model.fields,field_description:crm_iap_mine.field_crm_iap_lead_mining_request__company_size_min
 msgid "Size"
-msgstr "サイズ"
+msgstr "規模"
 
 #. module: crm_iap_mine
 #: model:crm.iap.lead.industry,name:crm_iap_mine.crm_iap_mine_industry_165
@@ -720,7 +750,7 @@ msgstr "ステータス"
 #. module: crm_iap_mine
 #: model:ir.model.fields,field_description:crm_iap_mine.field_crm_iap_lead_mining_request__state
 msgid "Status"
-msgstr "状態"
+msgstr "ステータス"
 
 #. module: crm_iap_mine
 #: model_terms:ir.ui.view,arch_db:crm_iap_mine.crm_iap_lead_mining_request_view_form

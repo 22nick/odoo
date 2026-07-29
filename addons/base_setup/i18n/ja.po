@@ -6,15 +6,16 @@
 # 江口和志 <sandwhale1010@gmail.com>, 2022
 # Martin Trigaux, 2023
 # Ryoko Tsuda <ryoko@quartile.co>, 2023
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Junko Augias (juau)" <juau@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Junko Augias (juau)" <juau@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-10-21 08:00+0000\n"
-"Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-07-01 00:52+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/"
 "base_setup/ja/>\n"
 "Language: ja\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
@@ -43,11 +44,11 @@ msgid ""
 "                                    </span>"
 msgstr ""
 "<span class=\"o_form_label\" invisible=\"active_user_count &gt; 1\">\n"
-"                                        アクティブユーザ\n"
+"                                        有効ユーザ\n"
 "                                    </span>\n"
 "                                    <span class=\"o_form_label\" "
 "invisible=\"active_user_count &lt;= 1\">\n"
-"                                        アクティブユーザ\n"
+"                                        有効ユーザ\n"
 "                                    </span>"
 
 #. module: base_setup
@@ -143,8 +144,8 @@ msgid ""
 "API Keys allow your users to access Odoo with external tools when multi-"
 "factor authentication is enabled."
 msgstr ""
-"APIキーを使用すると、多要素認証が有効な場合、ユーザは外部ツールからOdooにアク"
-"セスできます。"
+"APIキーを使用すると、多要素認証が有効な場合、ユーザは外部ツールからOdooに"
+"アクセスできます。"
 
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
@@ -186,8 +187,7 @@ msgstr "ユーザーがカレンダーをOutlookカレンダーと同期でき�
 #: model:ir.model.fields,field_description:base_setup.field_res_config_settings__module_base_import
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
 msgid "Allow users to import data from CSV/XLS/XLSX/ODS files"
-msgstr ""
-"ユーザーはCSV/XLS/XLSX/ODSファイルからデータをインポートできるようにします"
+msgstr "ユーザーはCSV/XLS/XLSX/ODSファイルからデータをインポートできるようにします"
 
 #. module: base_setup
 #: model:ir.model.fields,help:base_setup.field_res_config_settings__group_multi_currency
@@ -265,8 +265,8 @@ msgid ""
 "Configure company rules to automatically create SO/PO when one of your "
 "company sells/buys to another of your company."
 msgstr ""
-"会社の規則を構成して、あなたの会社の1つが別のあなたの会社に販売/購入した時に"
-"販売/購買オーダを自動的に作成します。"
+"会社のルールを構成して、あなたの会社の1つが別のあなたの会社に販売/購入した時"
+"に販売/購買オーダを自動的に作成します。"
 
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
@@ -336,8 +336,8 @@ msgid ""
 "Enable the profiling tool. Profiling may impact performance while being "
 "active."
 msgstr ""
-"プロファイリングツールを有効化します。プロファイリングを有効にすると、パ"
-"フォーマンスに影響が出る場合があります。"
+"プロファイリングツールを有効化します。プロファイリングを有効にすると、"
+"パフォーマンスに影響が出る場合があります。"
 
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
@@ -368,7 +368,7 @@ msgstr "取引先をジオローカライズする"
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
 msgid "Geolocation"
-msgstr "ジオロケーション"
+msgstr "位置情報"
 
 #. module: base_setup
 #: model:ir.model.fields,field_description:base_setup.field_res_config_settings__module_google_address_autocomplete
@@ -416,7 +416,7 @@ msgstr "ルート会社"
 #. module: base_setup
 #: model:ir.model,name:base_setup.model_kpi_provider
 msgid "KPI Provider"
-msgstr ""
+msgstr "KPI生成元"
 
 #. module: base_setup
 #: model:ir.model.fields,field_description:base_setup.field_res_config_settings__module_auth_ldap
@@ -447,7 +447,7 @@ msgstr "APIキーを管理"
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
 msgid "Manage Companies"
-msgstr "複数会社管理"
+msgstr "マルチカンパニー管理"
 
 #. module: base_setup
 #: model:ir.model.fields,field_description:base_setup.field_res_config_settings__module_account_inter_company_rules
@@ -512,7 +512,7 @@ msgstr "権限"
 #. module: base_setup
 #: model:ir.model.fields,field_description:base_setup.field_res_config_settings__module_voip
 msgid "Phone"
-msgstr ""
+msgstr "電話"
 
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
@@ -543,7 +543,7 @@ msgstr "CF Turnstileでフォームを保護"
 #. odoo-javascript
 #: code:addons/base_setup/static/src/views/module_views.xml:0
 msgid "Reset Updating States"
-msgstr ""
+msgstr "更新状態をリセット"
 
 #. module: base_setup
 #: model:ir.model.fields,field_description:base_setup.field_res_config_settings__module_sms

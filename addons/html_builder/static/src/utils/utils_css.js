@@ -1,7 +1,7 @@
 import { EDITOR_COLOR_CSS_VARIABLES, isColorCombinationName } from "@html_editor/utils/color";
 import { selectElements } from "@html_editor/utils/dom_traversal";
 import { backgroundImageCssToParts, getBgImageURLFromURL } from "@html_editor/utils/image";
-import { normalizeCSSColor, isCSSColor, isColorGradient, rgbaToHex } from "@web/core/utils/colors";
+import { normalizeCSSColor, isCSSColor, isColorGradient } from "@web/core/utils/colors";
 import { convertNumericToUnit, getCSSVariableValue } from "@html_editor/utils/formatting";
 
 /**
@@ -207,7 +207,10 @@ export function areCssValuesEqual(value1, value2, cssProp, htmlStyle) {
         return false;
     }
     const numValue1 = data[0];
-    const numValue2 = convertValueToUnit(value2, data[1], htmlStyle);
+    // Zero values don't need unit conversion (0px === 0rem === 0em === 0)
+    const numValue2 = parseFloat(numValue1) === 0
+        ? getNumericAndUnit(value2)[0]
+        : convertValueToUnit(value2, data[1], htmlStyle);
     return Math.abs(numValue1 - numValue2) < Number.EPSILON;
 }
 /**
@@ -358,6 +361,7 @@ export function forwardToThumbnail(imgEl) {
     }
 }
 
+// TODO: to remove in master (use the one of html_editor instead)
 /**
  * @param {HTMLImageElement} img
  * @returns {Promise<Boolean>}
@@ -456,14 +460,14 @@ export function setBuilderCSSVariables(htmlStyle) {
 export function parseBoxShadow(value) {
     const regex =
         /(?<color>(rgb(a)?\([^)]*\))|(var\([^)]+\)))\s+(?<offsetX>-?\d+\.?\d*px)\s+(?<offsetY>-?\d+\.?\d*px)\s+(?<blur>-?\d+\.?\d*px)\s+(?<spread>-?\d+\.?\d*px)(?:\s+(?<mode>\w+))?/;
-    return value.match(regex).groups;
+    return value.match(regex)?.groups ?? {};
 }
 
 export function getAllUsedColors(el) {
     const usedCustomColors = new Set();
     const collectColor = (colorValue) => {
         if (isCSSColor(colorValue)) {
-            usedCustomColors.add(rgbaToHex(colorValue));
+            usedCustomColors.add(normalizeCSSColor(colorValue));
         }
     };
     for (const coloredEl of selectElements(el, '[style*="color"]')) {

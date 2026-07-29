@@ -15,6 +15,8 @@ from odoo import http
 from odoo.exceptions import UserError
 from odoo.http import content_disposition, request
 from odoo.tools import osutil
+from odoo.tools.misc import split_every
+from odoo.tools.constants import PREFETCH_MAX
 
 
 _logger = logging.getLogger(__name__)
@@ -90,6 +92,8 @@ class GroupsTreeNode:
 
     def _get_avg_aggregate(self, field_name, data):
         aggregate_func = OPERATOR_MAPPING.get('sum')
+        if not self.count:
+            return None
         if self.data:
             return aggregate_func(data) / self.count
         children_sums = (child.aggregated_values.get(field_name) * child.count for child in self.children.values())
@@ -312,7 +316,8 @@ class Export(http.Controller):
             definition_record = field['definition_record']
             definition_record_field = field['definition_record_field']
 
-            target_model = Model.env[Model._fields[definition_record].comodel_name]
+            # sudo(): user may lack access to property definition model
+            target_model = Model.env[Model._fields[definition_record].comodel_name].sudo()
             domain_definition = [(definition_record_field, '!=', False)]
             # Depends of the records selected to avoid showing useless Properties
             if domain:
@@ -566,7 +571,7 @@ class ExportFormat(object):
         groupby = params.get('groupby')
         if not import_compat and groupby:
             export_data = records.export_data(['.id'] + field_names).get('datas', [])
-            groupby_type = [Model._fields[x.split(':')[0]].type for x in groupby]
+            groupby_type = [Model._fields[x.split(':', 1)[0].split('.', 1)[0]].type for x in groupby]
             tree = GroupsTreeNode(Model, field_names, groupby, groupby_type)
             if ids:
                 domain = [('id', 'in', ids)]
@@ -606,8 +611,13 @@ class ExportFormat(object):
 
             response_data = self.from_group_data(fields, columns_headers, tree)
         else:
-            export_data = records.export_data(field_names).get('datas', [])
-            response_data = self.from_data(fields, columns_headers, export_data)
+            all_rows = []
+            for batch in split_every(PREFETCH_MAX, records.ids, Model.browse):
+                export_data = batch.export_data(field_names).get('datas', [])
+                all_rows.extend(export_data)
+                batch.invalidate_recordset()
+
+            response_data = self.from_data(fields, columns_headers, all_rows)
 
         _logger.info(
             "User %d exported %d %r records from %s. Fields: %s. %s: %s",

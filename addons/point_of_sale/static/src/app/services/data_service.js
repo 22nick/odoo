@@ -1,8 +1,7 @@
-import { Reactive } from "@web/core/utils/reactive";
 import { Base, createRelatedModels } from "@point_of_sale/app/models/related_models";
 import { registry } from "@web/core/registry";
 import { Mutex } from "@web/core/utils/concurrency";
-import { markRaw } from "@odoo/owl";
+import { markRaw, reactive } from "@odoo/owl";
 import { debounce } from "@web/core/utils/timing";
 import IndexedDB from "../models/utils/indexed_db";
 import { DataServiceOptions } from "../models/data_service_options";
@@ -16,14 +15,9 @@ import { logPosMessage } from "../utils/pretty_console_log";
 const { DateTime } = luxon;
 const CONSOLE_COLOR = "#28ffeb";
 
-export class PosData extends Reactive {
+export class PosData {
     static modelToLoad = []; // When empty all models are loaded
     static serviceDependencies = ["orm", "bus_service"];
-
-    constructor() {
-        super();
-        this.ready = this.setup(...arguments).then(() => this);
-    }
 
     async setup(env, { orm, bus_service }) {
         this.orm = orm;
@@ -32,6 +26,7 @@ export class PosData extends Reactive {
         this.custom = {};
         this.syncInProgress = false;
         this.mutex = markRaw(new Mutex());
+        this.indexedDBMutex = markRaw(new Mutex());
         this.records = {};
         this.opts = new DataServiceOptions();
         this.channels = [];
@@ -40,16 +35,18 @@ export class PosData extends Reactive {
             300
         );
 
-        this.network = {
+        this.network = reactive({
             warningTriggered: false,
             offline: false,
             loading: true,
             unsyncData: [],
-        };
+        });
 
-        if (!navigator.onLine) {
-            await this.checkConnectivity();
-        }
+        // UUIDs of paid orders written to IndexedDB but not yet confirmed synced to the server.
+        // Used by the beforeunload guard to prevent data loss on accidental page close/reload.
+        this.localUnsyncedPaidOrderUuids = new Set();
+
+        await this.checkConnectivity();
 
         this.initializeWebsocket();
         await this.initializeDeviceIdentifier();
@@ -136,6 +133,10 @@ export class PosData extends Reactive {
         await this.indexedDB.reset();
     }
 
+    async deleteRecordsInIndexedDB(model, ids) {
+        return await this.indexedDB.delete(model, ids);
+    }
+
     async initIndexedDB(relations) {
         // This method initializes indexedDB with all models loaded into the PoS. The default key is ID.
         // But some models have another key configured in data_service_options.js. These models are
@@ -149,53 +150,134 @@ export class PosData extends Reactive {
         });
 
         return new Promise((resolve) => {
-            this.indexedDB = new IndexedDB(this.databaseName, false, models, resolve);
+            this.indexedDB = new IndexedDB(this.databaseName, false, models, resolve, this.dialog);
         });
     }
 
     async synchronizeLocalDataInIndexedDB() {
+        return this.indexedDBMutex.exec(async () => await this._synchronizeLocalDataInIndexedDB());
+    }
+
+    /**
+     * Private method that synchronizes local data and state in indexedDB.
+     * DO NOT CALL THIS METHOD DIRECTLY, use synchronizeLocalDataInIndexedDB instead.
+     */
+    async _synchronizeLocalDataInIndexedDB() {
         // This methods will synchronize local data and state in indexedDB. This methods is mostly
         // used with models like pos.order, pos.order.line, pos.payment etc. These models are created
         // in the frontend and are not loaded from the backend.
         const modelsParams = Object.entries(this.opts.databaseTable);
         const data = {};
+        const dataToKeep = {};
+        let orderlinesToKeep = [];
+
         for (const [model, params] of modelsParams) {
-            const put = [];
-            const remove = [];
-            const modelData = this.models[model].getAll();
+            if (!params.getRecordsBasedOnLines) {
+                const data = this.models[model].getAll();
+                const recordsToPut = data.filter((record) => !params.condition(record));
 
-            for (const record of modelData) {
-                const isToRemove = params.condition(record);
+                if (model === "pos.order.line") {
+                    orderlinesToKeep = recordsToPut;
+                }
 
-                if (isToRemove === undefined || isToRemove === true) {
-                    if (record[params.key]) {
-                        remove.push(record[params.key]);
-                    }
-                } else {
-                    put.push(record.serializeForIndexedDB());
+                data[model] = recordsToPut;
+
+                if (recordsToPut.length) {
+                    await this.indexedDB.create(
+                        model,
+                        recordsToPut.map((r) => r.serializeForIndexedDB())
+                    );
+                    dataToKeep[model] = recordsToPut.map((r) => r[params.key]);
                 }
             }
+        }
 
-            await this.indexedDB.delete(model, remove);
-            await this.indexedDB.create(model, put);
-            data[model] = put;
+        for (const [model, params] of modelsParams) {
+            if (params.getRecordsBasedOnLines) {
+                const recordsToPut = params.getRecordsBasedOnLines(orderlinesToKeep);
 
-            if (remove.length) {
-                await this.indexedDB.delete(model, remove);
-            }
+                if (recordsToPut?.length) {
+                    const uniqueRecords = [
+                        ...new Map(recordsToPut.map((r) => [r[params.key], r])).values(),
+                    ];
 
-            if (put.length) {
-                await this.indexedDB.create(model, put);
+                    data[model] = uniqueRecords;
+
+                    await this.indexedDB.create(
+                        model,
+                        uniqueRecords.map((r) => r.serializeForIndexedDB())
+                    );
+                    dataToKeep[model] = uniqueRecords.map((r) => r[params.key]);
+                }
             }
         }
+
+        this.indexedDB.readAll(Object.keys(this.opts.databaseTable)).then((data) => {
+            if (!data) {
+                return;
+            }
+
+            for (const [model, records] of Object.entries(data)) {
+                const key = this.opts.databaseTable[model].key;
+                const keysToDelete = [];
+
+                for (const record of records) {
+                    const localRecord = this.models[model].get(record.id);
+                    if (!localRecord) {
+                        keysToDelete.push(record[key]);
+                        continue;
+                    }
+                    if (!dataToKeep[model] || !dataToKeep[model].includes(record[key])) {
+                        keysToDelete.push(record[key]);
+                    }
+                }
+
+                if (model === "pos.order") {
+                    const idbOrdersByUuid = new Map(records.map((r) => [r[key], r]));
+                    for (const trackedUuid of [...this.localUnsyncedPaidOrderUuids]) {
+                        const idbRecord = idbOrdersByUuid.get(trackedUuid);
+                        if (!idbRecord) {
+                            logPosMessage(
+                                "IndexedDB",
+                                "localUnsyncedPaidOrderUuids",
+                                `Paid order ${trackedUuid} is flagged but not found in IndexedDB — potential data loss`,
+                                CONSOLE_COLOR,
+                                [],
+                                true
+                            );
+                            continue;
+                        }
+                        const localRecord = this.models[model].get(idbRecord.id);
+                        if (idbRecord.state === "paid" || !localRecord?.isUnsyncedPaid) {
+                            // Remove guard when either:
+                            // - the order is confirmed in IndexedDB in paid state (safe on reload), or
+                            // - the order is no longer unsynced in memory (synced to server).
+                            this.localUnsyncedPaidOrderUuids.delete(trackedUuid);
+                        } else {
+                            logPosMessage(
+                                "IndexedDB",
+                                "localUnsyncedPaidOrderUuids",
+                                `Paid order ${trackedUuid} is in IndexedDB but has state "${idbRecord.state}" instead of "paid"`,
+                                CONSOLE_COLOR,
+                                [],
+                                true
+                            );
+                        }
+                    }
+                }
+
+                if (keysToDelete.length) {
+                    this.indexedDB.delete(model, keysToDelete);
+                }
+            }
+        });
 
         return data;
     }
 
     async synchronizeServerDataInIndexedDB(serverData = {}) {
         try {
-            const clone = JSON.parse(JSON.stringify(serverData));
-            for (const [model, data] of Object.entries(clone)) {
+            for (const [model, data] of Object.entries(serverData)) {
                 try {
                     await this.indexedDB.create(model, data);
                 } catch {
@@ -230,17 +312,16 @@ export class PosData extends Reactive {
             return;
         }
 
-        const newData = {};
-        for (const model of models) {
-            const rawRec = data[model];
-
-            if (rawRec) {
-                newData[model] = rawRec.filter((r) => !this.models[model].get(r.id));
-            }
-        }
-
         const preLoadData = await this.preLoadData(data);
         const missing = await this.missingRecursive(preLoadData);
+
+        const serverProductIds = this.models["product.product"].map((p) => p.id);
+        const databaseProductIds = missing["product.product"]?.map((p) => p.id) ?? [];
+        const loadedProductIds = new Set([...databaseProductIds, ...serverProductIds]);
+        missing["pos.order.line"] = missing["pos.order.line"]?.filter((line) =>
+            loadedProductIds.has(line.product_id)
+        );
+
         const results = this.models.loadConnectedData(missing, []);
 
         await this.checkAndDeleteMissingOrders(results);
@@ -251,18 +332,7 @@ export class PosData extends Reactive {
     async getCachedServerDataFromIndexedDB() {
         // Used to load models that have not yet been loaded into related_models.
         // These models have been sent to the indexedDB directly after the RPC load_data.
-        const data = await this.indexedDB.readAll();
-        const modelToIgnore = Object.keys(this.opts.databaseTable);
-        const results = {};
-
-        for (const name in data) {
-            if (name in modelToIgnore) {
-                continue;
-            }
-            results[name] = data[name];
-        }
-
-        return results;
+        return await this.indexedDB.readAllExceptStores(Object.keys(this.opts.databaseTable));
     }
 
     async loadInitialData() {
@@ -283,7 +353,7 @@ export class PosData extends Reactive {
                 if (serverDateTime < lastConfigChange) {
                     await this.resetIndexedDB();
                     await this.initIndexedDB(this.relations);
-                    localData = [];
+                    localData = {};
                 }
 
                 const data = await this.orm.call(
@@ -361,7 +431,7 @@ export class PosData extends Reactive {
 
     async sanitizeData() {
         const order_to_delete = this.models["pos.order"].filter((order) =>
-            order.lines.some((line) => line.is_reward_line && !line.coupon_id)
+            order.lines.some((line) => line.is_reward_line && !line.coupon_id && !line.reward_id)
         );
         for (const order of order_to_delete) {
             for (let i = order.lines.length - 1; i >= 0; i--) {
@@ -922,20 +992,17 @@ export class PosData extends Reactive {
     }
 
     localDeleteCascade(record, removeFromServer = false) {
-        const recordModel = record.constructor.pythonModel;
+        const recordModel = record.model.name;
 
         const relationsToDelete = Object.values(this.relations[recordModel])
             .filter((rel) => this.opts.cascadeDeleteModels.includes(rel.relation))
             .map((rel) => rel.name);
-        const recordsToDelete = Object.entries(record)
-            .filter(([idx, values]) => relationsToDelete.includes(idx) && values)
-            .map(([idx, values]) => values)
-            .flat();
+        const recordsToDelete = relationsToDelete.flatMap((relation) => record[relation] || []);
 
         // Delete all children records before main record
-        this.indexedDB.delete(recordModel, [record.uuid]);
+        this.deleteRecordsInIndexedDB(recordModel, [record.uuid]);
         for (const item of recordsToDelete) {
-            this.indexedDB.delete(item.model.name, [item.uuid]);
+            this.deleteRecordsInIndexedDB(item.model.name, [item.uuid]);
             item.delete({ silent: !removeFromServer });
         }
 
@@ -964,7 +1031,9 @@ export class PosData extends Reactive {
 export const PosDataService = {
     dependencies: PosData.serviceDependencies,
     async start(env, deps) {
-        return new PosData(env, deps).ready;
+        const data = new PosData();
+        await data.setup(env, deps);
+        return reactive(data);
     },
 };
 

@@ -15,7 +15,6 @@ from odoo.tools import SQL, human_size
 from odoo.tools.mimetypes import guess_mimetype
 
 from .fields import Field
-from .utils import SQL_OPERATORS
 
 if typing.TYPE_CHECKING:
     from odoo.tools import Query
@@ -236,11 +235,11 @@ class Binary(Field):
             return super().condition_to_sql(field_expr, operator, value, model, alias, query)
         assert operator in ('in', 'not in') and set(value) == {False}, "Should have been done in Domain optimization"
         return SQL(
-            "%s%s(SELECT res_id FROM ir_attachment WHERE res_model = %s AND res_field = %s)",
-            model._field_to_sql(alias, 'id', query),
-            SQL_OPERATORS['not in' if operator in ('in', '=') else 'in'],
+            "%sEXISTS (SELECT 1 FROM ir_attachment WHERE res_model = %s AND res_field = %s AND res_id = %s)",
+            SQL("NOT ") if operator == 'in' else SQL(),
             model._name,
             self.name,
+            model._field_to_sql(alias, 'id', query),
         )
 
 
@@ -310,7 +309,14 @@ class Image(Binary):
             self._update_cache(record, value, dirty=True)
 
     def _image_process(self, value, env):
-        if self.readonly and not self.max_width and not self.max_height:
+        if self.readonly and (
+            (not self.max_width and not self.max_height)
+            or (
+                isinstance(self.related_field, Image)
+                and self.max_width == self.related_field.max_width
+                and self.max_height == self.related_field.max_height
+            )
+        ):
             # no need to process images for computed fields, or related fields
             return value
         try:

@@ -23,6 +23,10 @@ class SaleOrderLine(models.Model):
         reward = self.filtered('reward_id')
         super(SaleOrderLine, self - reward)._compute_name()
 
+    def _compute_discount(self):
+        rewards = self.filtered('reward_id')
+        return super(SaleOrderLine, self - rewards)._compute_discount()
+
     @api.depends('reward_id')
     def _compute_is_reward_line(self):
         for line in self:
@@ -65,6 +69,7 @@ class SaleOrderLine(models.Model):
         vals = {
             'points_cost': 0,
             'price_unit': 0,
+            'technical_price_unit': 0,
         }
         if complete:
             vals.update({
@@ -97,6 +102,14 @@ class SaleOrderLine(models.Model):
                 if line.points_cost != previous_cost or line.coupon_id != previous_coupon:
                     previous_coupon.points += previous_cost
                     line.coupon_id.points -= line.points_cost
+                    # Same coupon: apply the delta in a single call to avoid a redundant search.
+                    if line.coupon_id == previous_coupon:
+                        line.order_id._update_loyalty_history(line.coupon_id, line.points_cost - previous_cost)
+                    else:
+                        if previous_coupon:
+                            line.order_id._update_loyalty_history(previous_coupon, -previous_cost)
+                        if line.coupon_id:
+                            line.order_id._update_loyalty_history(line.coupon_id, line.points_cost)
         return res
 
     def unlink(self):

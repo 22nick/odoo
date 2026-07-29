@@ -183,6 +183,41 @@ class TestSaleStockReports(TestReportsCommon):
         with self.assertRaises(AccessError):
             draft.with_user(other).check_access('read')
 
+    def test_add_reference_remove_reference_works_with_multiple_records(self):
+        so = self.env['sale.order'].create({
+            'partner_id': self.partner.id,
+            'order_line': [Command.create({
+                'product_id': self.product.id,
+                'product_uom_qty': 5,
+            })],
+        })
+        so.action_confirm()
+        so_delivery = so.picking_ids
+
+        so_delivery.reference_ids.copy()
+
+        picking_receipt = self.env['stock.picking'].create({
+            'picking_type_id': self.env.ref('stock.picking_type_in').id,
+            'partner_id': self.partner.id,
+            'move_ids': [Command.create({
+                'product_id': self.product.id,
+                'product_uom_qty': 18,
+            })],
+        })
+        picking_receipt.action_confirm()
+
+        self.env['report.stock.report_reception']._action_assign(
+            picking_receipt.move_ids,
+            so_delivery.move_ids,
+        )
+        self.assertEqual(picking_receipt.move_ids.reference_ids, so_delivery.move_ids.reference_ids)
+
+        self.env['report.stock.report_reception']._action_unassign(
+            picking_receipt.move_ids,
+            so_delivery.move_ids,
+        )
+        self.assertNotIn(picking_receipt.move_ids.reference_ids, so_delivery.move_ids.reference_ids)
+
 
 @tagged('post_install', '-at_install')
 class TestSaleStockInvoices(TestSaleCommon):
@@ -284,6 +319,40 @@ class TestSaleStockInvoices(TestSaleCommon):
         text = html2plaintext(html)
         self.assertRegex(text, r'Product By Lot\n4.00Units\nLOT0001', "There should be a line that specifies 4 x LOT0001")
 
+    def test_picking_description(self):
+        """
+        Verify that for a no-variant product, the product name is not included as the first element in the picking description,
+        as this avoids repeating the name on the delivery slip.
+        """
+
+        product_attr = self.env['product.attribute'].create({'name': 'Color', 'create_variant': 'no_variant'})
+        product_attrv1, product_attrv2 = self.env['product.attribute.value'].create([
+            {'name': 'Value1', 'attribute_id': product_attr.id},
+            {'name': 'Value2', 'attribute_id': product_attr.id},
+        ])
+        product_template_no_variant = self.env['product.template'].create({
+            'name': 'product name',
+            'attribute_line_ids': [
+                Command.create({
+                    'attribute_id': product_attr.id,
+                    'value_ids': [Command.set([product_attrv1.id, product_attrv2.id])],
+                })]
+        })
+        so = self.env['sale.order'].create({
+            'partner_id': self.partner_a.id,
+            'order_line': [
+                Command.create({'name': product_template_no_variant.name,
+                'product_id': product_template_no_variant.product_variant_id.id,
+                'product_uom_qty': 4,
+                'product_no_variant_attribute_value_ids': product_template_no_variant.product_variant_id.attribute_line_ids.product_template_value_ids
+                }),
+            ],
+        })
+        so.action_confirm()
+        picking = so.picking_ids[0]
+        picking_description = picking.move_ids._get_report_description_picking()
+        self.assertEqual(picking_description, 'Color: Value1\nColor: Value2')
+
     def test_backorder_and_several_invoices(self):
         """
         Suppose the lots are printed on the invoices.
@@ -347,6 +416,96 @@ class TestSaleStockInvoices(TestSaleCommon):
         text = html2plaintext(html)
         self.assertRegex(text, r'Product By USN\n1.00Units\nUSN0002', "There should be a line that specifies 1 x USN0002")
         self.assertNotIn('USN0001', text)
+
+    def test_refund_renamed_credit_note_keeps_previous_invoice_lots(self):
+        """
+        Suppose the lots are printed on the invoices.
+        A later refund renamed so that it sorts before the invoices should not change
+        the lot shown on already posted invoices.
+
+        Steps to reproduce:
+        - Sell 20 units of a product tracked by lot.
+        - Deliver 10 units from LOT0001 and 10 units from LOT0002 in a backorder.
+        - Create 2 invoices, one per delivery.
+        - Create and post a credit note for the first invoice.
+        - Create and post a new invoice for the refunded quantity.
+        - Rename the credit note so that it sorts before the invoices, then repost it.
+        - The 3 invoices should still show LOT0001, LOT0002 and LOT0001 respectively.
+        """
+        display_lots = self.env.ref('stock_account.group_lot_on_invoice')
+        display_uom = self.env.ref('uom.group_uom')
+        self.env.user.write({'group_ids': [(4, display_lots.id), (4, display_uom.id)]})
+        self.product_by_lot.invoice_policy = 'delivery'
+
+        lot01 = self.env['stock.lot'].search([
+            ('name', '=', 'LOT0001'),
+            ('product_id', '=', self.product_by_lot.id),
+        ], limit=1)
+        lot02 = self.env['stock.lot'].create({
+            'name': 'LOT0002',
+            'product_id': self.product_by_lot.id,
+        })
+        self.env['stock.quant']._update_available_quantity(self.product_by_lot, self.stock_location, 10, lot_id=lot02)
+
+        so = self.env['sale.order'].create({
+            'partner_id': self.partner_a.id,
+            'order_line': [
+                (0, 0, {'name': self.product_by_lot.name, 'product_id': self.product_by_lot.id, 'product_uom_qty': 20}),
+            ],
+        })
+        so.action_confirm()
+
+        delivery01 = so.picking_ids
+        delivery01.do_unreserve()
+        move_form = Form(delivery01.move_ids, view='stock.view_stock_move_operations')
+        with move_form.move_line_ids.new() as line:
+            line.lot_id = lot01
+            line.quantity = 10
+        move_form.save()
+        delivery01.move_ids.picked = True
+        Form.from_action(self.env, delivery01.button_validate()).save().process()
+
+        invoice01 = so._create_invoices()
+        invoice01.action_post()
+
+        delivery02 = delivery01.backorder_ids
+        delivery02.do_unreserve()
+        move_form = Form(delivery02.move_ids, view='stock.view_stock_move_operations')
+        with move_form.move_line_ids.new() as line:
+            line.lot_id = lot02
+            line.quantity = 10
+        move_form.save()
+        delivery02.move_ids.picked = True
+        delivery02.button_validate()
+
+        invoice02 = so._create_invoices()
+        invoice02.action_post()
+        self.assertEqual([rec['lot_id'] for rec in invoice01._get_invoiced_lot_values()], [lot01.id])
+        self.assertEqual([rec['lot_id'] for rec in invoice02._get_invoiced_lot_values()], [lot02.id])
+
+        refund_wizard = self.env['account.move.reversal'].with_context(active_model="account.move", active_ids=invoice01.ids).create({
+            'journal_id': invoice01.journal_id.id,
+        })
+        res = refund_wizard.refund_moves()
+        refund_invoice = self.env['account.move'].browse(res['res_id'])
+        refund_invoice.action_post()
+
+        invoice03 = so._create_invoices()
+        invoice03.action_post()
+
+        self.assertEqual([rec['lot_id'] for rec in invoice01._get_invoiced_lot_values()], [lot01.id])
+        self.assertEqual([rec['lot_id'] for rec in invoice02._get_invoiced_lot_values()], [lot02.id])
+        self.assertEqual([rec['lot_id'] for rec in invoice03._get_invoiced_lot_values()], [lot01.id])
+
+        refund_name = refund_invoice.name
+        refund_invoice.button_draft()
+        refund_invoice.name = f"A{refund_name}"
+        self.assertLess(refund_invoice.name, invoice01.name)
+        refund_invoice.action_post()
+
+        self.assertEqual([rec['lot_id'] for rec in invoice01._get_invoiced_lot_values()], [lot01.id])
+        self.assertEqual([rec['lot_id'] for rec in invoice02._get_invoiced_lot_values()], [lot02.id])
+        self.assertEqual([rec['lot_id'] for rec in invoice03._get_invoiced_lot_values()], [lot01.id])
 
     def test_invoice_with_several_returns(self):
         """

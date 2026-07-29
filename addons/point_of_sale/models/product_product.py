@@ -1,5 +1,5 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-from odoo import api, models, fields, _
+from odoo import api, models, _
 from odoo.exceptions import UserError
 
 
@@ -16,7 +16,7 @@ class ProductProduct(models.Model):
         taxes = self.env['account.tax'].search(self.env['account.tax']._check_company_domain(config.company_id.id))
         product_fields = taxes._eval_taxes_computation_prepare_product_fields()
         return list(product_fields.union({
-            'id', 'lst_price', 'display_name', 'product_tmpl_id', 'product_template_variant_value_ids',
+            'id', 'lst_price', 'display_name', 'product_tmpl_id', 'product_template_variant_value_ids', 'currency_id', 'cost_currency_id',
             'product_template_attribute_value_ids', 'barcode', 'product_tag_ids', 'default_code', 'standard_price'
         }))
 
@@ -30,15 +30,15 @@ class ProductProduct(models.Model):
                     "Deleting a product available in a session would be like attempting to snatch a hamburger from a customer’s hand mid-bite; chaos will ensue as ketchup and mayo go flying everywhere!",
                 ))
 
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_special_product(self):
+        self.product_tmpl_id._check_is_special_product()
+
     @api.model
     def _load_pos_data_read(self, records, config):
         read_records = super()._load_pos_data_read(records, config)
-        different_currency = config.currency_id != self.env.company.currency_id
-        if different_currency:
-            for product in read_records:
-                product['lst_price'] = config.currency_id._convert(
-                    product['lst_price'], self.env.company.currency_id, self.env.company, fields.Date.today()
-                )
+        self._convert_pos_data_currency(read_records, config, 'lst_price', 'currency_id')
+        self._convert_pos_data_currency(read_records, config, 'standard_price', 'cost_currency_id')
         return read_records
 
     def _can_return_content(self, field_name=None, access_token=None):
@@ -48,4 +48,5 @@ class ProductProduct(models.Model):
 
     def action_archive(self):
         self.product_tmpl_id._ensure_unused_in_pos()
+        self.product_tmpl_id._check_is_special_product()
         return super().action_archive()

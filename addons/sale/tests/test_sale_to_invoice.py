@@ -431,6 +431,21 @@ class TestSaleToInvoice(TestSaleCommon):
                 self.assertEqual(line.untaxed_amount_to_invoice, line.product_uom_qty * line.price_unit, "The amount to invoice should the total of the line, as the line is confirmed (no confirmed invoice)")
                 self.assertEqual(line.untaxed_amount_invoiced, 0.0, "The invoiced amount should be zero, as no invoice are validated for now")
 
+        invoice.button_cancel()
+        # amount to invoice / invoiced should should be reset
+        for line in self.sale_order.order_line:
+            if line.product_id.invoice_policy == 'delivery':
+                self.assertEqual(line.qty_to_invoice, 0.0, 'Quantity to invoice should be same as ordered quantity')
+                self.assertEqual(line.qty_invoiced, 0.0, 'Invoiced quantity should be zero as no any invoice created for SO')
+                self.assertEqual(line.untaxed_amount_to_invoice, 0.0, "The amount to invoice should be zero, as the line based on delivered quantity")
+                self.assertEqual(line.untaxed_amount_invoiced, 0.0, "The invoiced amount should be zero, as the line based on delivered quantity")
+            else:
+                self.assertEqual(line.qty_to_invoice, line.product_uom_qty, 'Quantity to invoice should be same as ordered quantity')
+                self.assertEqual(line.qty_invoiced, 0.0, 'Invoiced quantity should be zero as no any invoice created for SO')
+                self.assertEqual(line.untaxed_amount_to_invoice, line.product_uom_qty * line.price_unit, "The amount to invoice should the total of the line, as the line is confirmed")
+                self.assertEqual(line.untaxed_amount_invoiced, 0.0, "The invoiced amount should be zero, as the line is confirmed")
+
+        invoice.button_draft()
         invoice.action_post()
 
         # Check quantity to invoice on SO lines
@@ -703,11 +718,11 @@ class TestSaleToInvoice(TestSaleCommon):
         sol_prod_deliver.env.add_to_compute(qty_invoiced_field, sol_prod_deliver)
         self.assertEqual(sol_prod_deliver.qty_invoiced, quantity)
 
-        # Rounding to 0.1, should be rounded with UP (ceil) rounding_method
-        # Not floor or half up rounding.
+        # If rounding of used uom is different from decimal precision, it's the decimal precision
+        # that is used for 'qty_invoiced'. No rounding is done.
         sol_prod_deliver.product_uom_id.rounding *= 10
         sol_prod_deliver.product_uom_id.flush_recordset(['rounding'])
-        expected_qty = 5.2
+        expected_qty = 5.13
         qty_invoiced_field = sol_prod_deliver._fields.get('qty_invoiced')
         sol_prod_deliver.env.add_to_compute(qty_invoiced_field, sol_prod_deliver)
         self.assertEqual(sol_prod_deliver.qty_invoiced, expected_qty)
@@ -1230,10 +1245,10 @@ class TestSaleToInvoice(TestSaleCommon):
         inv = self.sale_order._create_invoices()
 
         # Check the invoice line names
-        self.assertEqual(inv.invoice_line_ids[0].name, f"{so.order_line[0].product_id.display_name} {so.order_line[0].name}", "When the description doesn't contain the product name, it should be added to the invoice line name")
+        self.assertEqual(inv.invoice_line_ids[0].name, f"{so.order_line[0].product_id.display_name}\n{so.order_line[0].name}", "When the description doesn't contain the product name, it should be added to the invoice line name")
         self.assertEqual(inv.invoice_line_ids[1].name, f"{so.order_line[1].name}", "When the description is the product name, the invoice line name should only be the description")
         self.assertEqual(inv.invoice_line_ids[2].name, f"{so.order_line[2].name}", "When description contains the product name, the invoice line name should only be the description")
-        self.assertEqual(inv.invoice_line_ids[3].name, f"{so.order_line[3].product_id.display_name} {so.order_line[3].name}", "When the product name contains the description, the invoice line name should contain the product name and the description")
+        self.assertEqual(inv.invoice_line_ids[3].name, f"{so.order_line[3].product_id.display_name}\n{so.order_line[3].name}", "When the product name contains the description, the invoice line name should contain the product name and the description")
 
     def test_credit_note_automatic_matching(self):
         sale_order = self.env['sale.order'].create({
@@ -1492,3 +1507,37 @@ class TestSaleToInvoice(TestSaleCommon):
             {'debit': 0.0, 'credit': -100.0, 'balance': 100.0, 'account_type': 'income', 'display_type': 'product'},
             {'debit': 450.0, 'credit': 0.0, 'balance': 450.0, 'account_type': 'asset_receivable', 'display_type': 'payment_term'},
         ])
+
+    def test_keep_distribution_on_analytic_account_change(self):
+        """
+        Checks that when we create an invoice from a SO on which we set an analytic distribution manually,
+        that analytic distribution doesn't change when we change the analytic account of the product on the bill.
+        """
+        analytic_plan = self.env['account.analytic.plan'].create({
+            'name': 'default',
+            'applicability_ids': [Command.create({
+                'business_domain': 'bill',
+                'applicability': 'optional',
+            })]
+        })
+        analytic_account = self.env['account.analytic.account'].create({'name': 'default', 'plan_id': analytic_plan.id})
+        distribution_model_product = self.env['account.analytic.distribution.model'].create({
+            'product_id': self.product_a.id,
+            'analytic_distribution': {str(analytic_account.id): 100},
+            'company_id': self.company.id,
+        })
+        analytic_plan_2 = self.env['account.analytic.plan'].create({'name': 'Plan Test'})
+        analytic_account_2 = self.env['account.analytic.account'].create({'name': 'manual', 'plan_id': analytic_plan_2.id})
+        sale_order = self.env['sale.order'].create({
+            'partner_id': self.partner_a.id,
+            'order_line': [
+                Command.create({'product_id': self.product_a.id}),
+            ],
+        })
+        self.assertEqual(sale_order.order_line.analytic_distribution, distribution_model_product.analytic_distribution)
+        analytic_distribution_manual = {str(analytic_account.id) + "," + str(analytic_account_2.id): 100}
+        sale_order.order_line.write({'analytic_distribution': analytic_distribution_manual})
+        sale_order.action_confirm()
+        invoice = sale_order._create_invoices()
+        invoice.line_ids[0].account_id = self.cash_rounding_a.profit_account_id
+        self.assertEqual(invoice.line_ids[0].analytic_distribution, analytic_distribution_manual)

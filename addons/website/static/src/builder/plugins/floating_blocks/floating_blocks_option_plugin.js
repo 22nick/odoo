@@ -6,6 +6,7 @@ import { DEVICE_VISIBILITY } from "@website/builder/option_sequence";
 import { renderToElement } from "@web/core/utils/render";
 import { BuilderAction } from "@html_builder/core/builder_action";
 import { BaseOptionComponent } from "@html_builder/core/utils";
+import { scrollTo } from "@html_builder/utils/scrolling";
 
 export class FloatingBlocksOption extends BaseOptionComponent {
     static template = "website.FloatingBlocksOption";
@@ -14,6 +15,7 @@ export class FloatingBlocksOption extends BaseOptionComponent {
 
 export class FloatingBlocksOptionPlugin extends Plugin {
     static id = "floatingBlocksOptionPlugin";
+    /** @type {import("plugins").WebsiteResources} */
     resources = {
         builder_options: [withSequence(after(DEVICE_VISIBILITY), FloatingBlocksOption)],
         builder_actions: {
@@ -47,7 +49,9 @@ export class AddFloatingBlockCardAction extends BuilderAction {
         const newCardEl = renderToElement("website.s_floating_blocks.new_card");
         const wrapperEl = el.querySelector(".s_floating_blocks_wrapper");
         wrapperEl.appendChild(newCardEl);
-        newCardEl.scrollIntoView({ behavior: "smooth", block: "center" });
+        const viewportHeight = this.document.defaultView.innerHeight;
+        const newCardHeight = newCardEl.getBoundingClientRect().height;
+        scrollTo(newCardEl, { forcedOffset: viewportHeight / 2 - newCardHeight / 2 });
         this.dependencies.builderOptions.setNextTarget(newCardEl);
     }
 }

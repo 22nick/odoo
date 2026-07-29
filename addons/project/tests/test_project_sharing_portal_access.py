@@ -30,25 +30,29 @@ class TestProjectSharingPortalAccess(TestProjectSharingCommon):
 
         Task = cls.env['project.task']
         readable_fields, writeable_fields = Task._portal_accessible_fields()
+
+        # html_field_history is always silently ignored.
+        field_exception = {"html_field_history"}
+
         cls.read_protected_fields_task = OrderedDict([
             (k, v)
             for k, v in Task._fields.items()
-            if k in readable_fields
+            if k in readable_fields and k not in field_exception
         ])
         cls.write_protected_fields_task = OrderedDict([
             (k, v)
             for k, v in Task._fields.items()
-            if k in writeable_fields
+            if k in writeable_fields and k not in field_exception
         ])
         cls.readonly_protected_fields_task = OrderedDict([
             (k, v)
             for k, v in Task._fields.items()
-            if k in readable_fields and k not in writeable_fields
+            if k in readable_fields and k not in writeable_fields and k not in field_exception
         ])
         cls.other_fields_task = OrderedDict([
             (k, v)
             for k, v in Task._fields.items()
-            if k not in readable_fields
+            if k not in readable_fields and k not in field_exception
         ])
 
     def test_mention_suggestions(self):
@@ -169,6 +173,15 @@ class TestProjectSharingPortalAccess(TestProjectSharingCommon):
         self.assertTrue(mail_partner, 'A mail should have been sent to the non portal user')
         self.assertIn(f'href="http://localhost:{config["http_port"]}/web/signup', str(mail_partner.body), 'The message link should contain the url to register to the portal')
         self.assertIn('token=', str(mail_partner.body), 'The message link should contain a personalized token to register to the portal')
+
+    def test_followers_task_created_by_portal_user(self):
+        """Tests that the auto-subscription system properly add the followers of
+        the parent project when a portal user creates a task
+        """
+        self.project_portal.message_subscribe(self.user_projectmanager.partner_id.ids)
+        task = self.env["project.task"].with_user(self.user_portal).with_context(default_project_id=self.project_portal.id).create({'name': 'Task created by portal_user'})
+        self.assertIn(self.user_portal.partner_id, task.sudo().message_partner_ids)
+        self.assertIn(self.user_projectmanager.partner_id, task.sudo().message_partner_ids)
 
 
 class TestProjectSharingChatterAccess(TestProjectSharingCommon, HttpCase):

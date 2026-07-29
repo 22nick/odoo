@@ -22,7 +22,6 @@ export class MessagingMenu extends Component {
     setup() {
         super.setup();
         this.isIosPwa = isIOS() && isDisplayStandalone();
-        this.discussSystray = useDiscussSystray();
         this.store = useService("mail.store");
         this.hasTouch = hasTouch;
         this.ui = useService("ui");
@@ -31,6 +30,7 @@ export class MessagingMenu extends Component {
             adding: false,
         });
         this.dropdown = useDropdownState();
+        this.discussSystray = useDiscussSystray(this.dropdown);
         this.notificationList = useRef("notification-list");
         useSubEnv({ inMessagingMenu: { dropdown: this.dropdown } });
 
@@ -49,6 +49,19 @@ export class MessagingMenu extends Component {
             return;
         }
         this.markAsRead(thread);
+    }
+
+    onClickInboxMsg(isMarkAsRead, msg) {
+        if (!isMarkAsRead) {
+            this.store.inbox.highlightMessage = msg;
+            this.env.services.action.doAction({
+                tag: "mail.action_discuss",
+                type: "ir.actions.client",
+                context: { active_id: "mail.box_inbox" },
+            });
+            return;
+        }
+        msg.setDone();
     }
 
     markAsRead(thread) {
@@ -125,6 +138,17 @@ export class MessagingMenu extends Component {
 
     get threads() {
         return this.store.menuThreads;
+    }
+
+    get visibleStandaloneMessages() {
+        const tab = this.store.discuss.activeTab;
+        if (tab !== "notification") {
+            return [];
+        }
+        if (this.store.discuss.searchTerm) {
+            return [];
+        }
+        return this.store.standaloneInboxMessages;
     }
 
     /**

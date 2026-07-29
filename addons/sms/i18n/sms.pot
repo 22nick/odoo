@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-10-08 18:39+0000\n"
+"POT-Creation-Date: 2026-06-12 17:37+0000\n"
+"PO-Revision-Date: 2026-06-12 17:37+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -43,11 +43,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/sms/wizard/sms_composer.py:0
 msgid "%s invalid recipients"
-msgstr ""
-
-#. module: sms
-#: model_terms:ir.ui.view,arch_db:sms.sms_account_phone_view_form
-msgid "+1 555-555-555"
 msgstr ""
 
 #. module: sms
@@ -1485,6 +1480,18 @@ msgstr ""
 #. odoo-python
 #: code:addons/sms/wizard/sms_account_code.py:0
 msgid "Your SMS account has been successfully registered."
+msgstr ""
+
+#. module: sms
+#. odoo-python
+#: code:addons/sms/tools/sms_api.py:0
+msgid "Your country is not supported due to sender registration legislation"
+msgstr ""
+
+#. module: sms
+#. odoo-python
+#: code:addons/sms/tools/sms_api.py:0
+msgid "Your database is not activated"
 msgstr ""
 
 #. module: sms

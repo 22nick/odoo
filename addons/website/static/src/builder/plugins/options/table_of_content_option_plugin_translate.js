@@ -1,19 +1,16 @@
 import { Plugin } from "@html_editor/plugin";
-import { applyFunDependOnSelectorAndExclude } from "@html_builder/plugins/utils";
 
+// TODO: remove this plugin on master
 export class TranslateTableOfContentOptionPlugin extends Plugin {
     static id = "tableOfContentOption";
 
+    /** @type {import("plugins").WebsiteResources} */
     resources = {
         normalize_handlers: this.normalize.bind(this),
         content_not_editable_selectors: [".s_table_of_content_navbar"],
     };
 
-    normalize(root) {
-        applyFunDependOnSelectorAndExclude(this.updateTableOfContentNavbar.bind(this), root, {
-            selector: ".s_table_of_content_main",
-        });
-    }
+    normalize(root) {}
 
     updateTableOfContentNavbar(tableOfContentMain) {
         const tableOfContent = tableOfContentMain.closest(".s_table_of_content");

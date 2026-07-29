@@ -64,6 +64,12 @@ class _Relational(Field[BaseModel]):
                     # a lot of missing records, just fetch that field
                     remaining = records[len(vals):]
                     remaining.fetch([self.name])
+                    # fetch does not raise MissingError, check value
+                    if record_id not in field_cache:
+                        raise MissingError("\n".join([
+                            env._("Record does not exist or has been deleted."),
+                            env._("(Record: %(record)s, User: %(user)s)", record=record_id, user=env.uid),
+                        ])) from None
                 else:
                     remaining = records.__class__(env, (record_id,), records._prefetch_ids)
                     super().__get__(remaining, owner)
@@ -397,6 +403,13 @@ class Many2one(_Relational):
 
         # discard the records that are not modified
         cache_value = self.convert_to_cache(value, records)
+
+        if self.bypass_search_access and not records.env.su:
+            try:
+                records.env[self.comodel_name].browse(cache_value).check_access('read')
+            except AccessError as e:
+                raise AccessError(records.env._("Failed to write field %s", self) + "\n" + str(e)) from e
+
         records = self._filter_not_equal(records, cache_value)
         if not records:
             return
@@ -870,7 +883,8 @@ class One2many(_RelationalMulti):
             # link self to its inverse field and vice-versa
             comodel = model.env[self.comodel_name]
             try:
-                comodel._fields[self.inverse_name]
+                field = comodel._fields[self.inverse_name]
+                field.setup(comodel)
             except KeyError:
                 raise ValueError(f"{self.inverse_name!r} declared in {self!r} does not exist on {comodel._name!r}.")
 

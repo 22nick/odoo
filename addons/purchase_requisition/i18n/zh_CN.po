@@ -8,13 +8,13 @@
 # Raymond Yu <cl_yu@hotmail.com>, 2022
 # Jeffery CHEN <jeffery9@gmail.com>, 2022
 # Emily Jia <eji@odoo.com>, 2023
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-09-16 15:28+0000\n"
+"POT-Creation-Date: 2026-04-10 18:39+0000\n"
+"PO-Revision-Date: 2026-06-29 10:36+0000\n"
 "Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
 "projects/odoo-19/purchase_requisition/zh_Hans/>\n"
@@ -23,37 +23,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
-
-#. module: purchase_requisition
-#: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
-msgid "$50"
-msgstr "$50"
-
-#. module: purchase_requisition
-#: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
-msgid "$500"
-msgstr "$500"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: purchase_requisition
 #: model:ir.actions.report,print_report_name:purchase_requisition.action_report_purchase_requisitions
 msgid "'Purchase Agreement - %s' % (object.name)"
 msgstr "'采购协议 - %s' % (object.name)"
-
-#. module: purchase_requisition
-#: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
-msgid "02/16/2024"
-msgstr "02/16/2024"
-
-#. module: purchase_requisition
-#: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
-msgid "12/25/2024"
-msgstr "12/25/2024"
-
-#. module: purchase_requisition
-#: model_terms:ir.ui.view,arch_db:purchase_requisition.report_purchaserequisition_document
-msgid "2023-09-15"
-msgstr "2023-09-15"
 
 #. module: purchase_requisition
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
@@ -329,9 +304,9 @@ msgid ""
 "vendor."
 msgstr ""
 "通过向不同供应商添加备选报价单来创建招标。                                 请"
-"选择交货时间、最短交货期和/或总金额的最佳组"
-"合。                                 通过比较产品系列，您还可以决定从一个供应"
-"商那里订购某些产品，而从另一个供应商那里订购其他产品。"
+"选择交货时间、最短交货期和/或总金额的最佳组合。"
+"                                 通过比较产品系列，您还可以决定从一个供应商那"
+"里订购某些产品，而从另一个供应商那里订购其他产品。"
 
 #. module: purchase_requisition
 #. odoo-python
@@ -1101,6 +1076,21 @@ msgstr "已经确认的一揽子订单，不可包括负数或数值为 0（零�
 #: model_terms:ir.ui.view,arch_db:purchase_requisition.view_purchase_requisition_form
 msgid "e.g. PO0025"
 msgstr "例如：PO0025"
+
+#~ msgid "$50"
+#~ msgstr "$50"
+
+#~ msgid "$500"
+#~ msgstr "$500"
+
+#~ msgid "02/16/2024"
+#~ msgstr "02/16/2024"
+
+#~ msgid "12/25/2024"
+#~ msgstr "12/25/2024"
+
+#~ msgid "2023-09-15"
+#~ msgstr "2023-09-15"
 
 #~ msgid "<strong>Agreement Deadline:</strong><br/>"
 #~ msgstr "<strong>协议截止日期:</strong><br/>"

@@ -7,15 +7,16 @@
 # Linkup <link-up@naver.com>, 2022
 # Martin Trigaux, 2023
 # Sarah Park, 2023
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Kwanghee Park (kwpa)" <kwpa@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Kwanghee Park (kwpa)" <kwpa@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-10-15 07:20+0000\n"
-"Last-Translator: \"Kwanghee Park (kwpa)\" <kwpa@odoo.com>\n"
+"POT-Creation-Date: 2026-07-03 17:35+0000\n"
+"PO-Revision-Date: 2026-06-30 17:18+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/"
 "hr_expense/ko/>\n"
 "Language: ko\n"
@@ -23,27 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
-
-#. module: hr_expense
-#: model_terms:ir.ui.view,arch_db:hr_expense.report_expense
-msgid "$100.00"
-msgstr "$100.00"
-
-#. module: hr_expense
-#: model_terms:ir.ui.view,arch_db:hr_expense.report_expense
-msgid "$120.00"
-msgstr "$120.00"
-
-#. module: hr_expense
-#: model_terms:ir.ui.view,arch_db:hr_expense.report_expense
-msgid "$500.00"
-msgstr "$500.00"
-
-#. module: hr_expense
-#: model_terms:ir.ui.view,arch_db:hr_expense.report_expense
-msgid "$600.00"
-msgstr "$600.00"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: hr_expense
 #. odoo-python
@@ -103,11 +84,6 @@ msgstr "(포함 내역"
 #: code:addons/hr_expense/models/hr_expense.py:0
 msgid "1 %(exp_cur)s = %(rate)s %(comp_cur)s"
 msgstr "1 %(exp_cur)s = %(rate)s %(comp_cur)s"
-
-#. module: hr_expense
-#: model_terms:ir.ui.view,arch_db:hr_expense.report_expense
-msgid "2023-08-11"
-msgstr "2023-08-11"
 
 #. module: hr_expense
 #. odoo-javascript
@@ -347,6 +323,11 @@ msgid "Attach a receipt - usually an image or a PDF file."
 msgstr "영수증을 첨부하세요 - 이미지 또는 PDF 파일."
 
 #. module: hr_expense
+#: model:ir.model,name:hr_expense.model_ir_attachment
+msgid "Attachment"
+msgstr ""
+
+#. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__message_attachment_count
 msgid "Attachment Count"
 msgstr "첨부 파일 수"
@@ -561,6 +542,7 @@ msgstr "OCR 및 인공 지능을 활용하여 영수증을 디지털로 변환�
 #: model:ir.model.fields,field_description:hr_expense.field_account_move__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_account_payment__display_name
+#: model:ir.model.fields,field_description:hr_expense.field_account_payment_register__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_account_tax__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_hr_department__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_hr_employee__display_name
@@ -572,6 +554,7 @@ msgstr "OCR 및 인공 지능을 활용하여 영수증을 디지털로 변환�
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_split__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_split_wizard__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_ir_actions_report__display_name
+#: model:ir.model.fields,field_description:hr_expense.field_ir_attachment__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_product_product__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_product_template__display_name
 #: model:ir.model.fields,field_description:hr_expense.field_res_company__display_name
@@ -811,6 +794,7 @@ msgstr "경비 승인 대기 중"
 #. module: hr_expense
 #. odoo-python
 #: code:addons/hr_expense/models/account_move.py:0
+#: code:addons/hr_expense/models/account_payment.py:0
 #: model:ir.model.fields,field_description:hr_expense.field_product_product__can_be_expensed
 #: model:ir.model.fields,field_description:hr_expense.field_product_template__can_be_expensed
 #: model:ir.ui.menu,name:hr_expense.menu_hr_expense_root
@@ -839,6 +823,11 @@ msgstr "경비 분석"
 #: model_terms:ir.ui.view,arch_db:hr_expense.report_expense
 msgid "Expenses Report"
 msgstr "지출결의서"
+
+#. module: hr_expense
+#: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
+msgid "Expenses approval"
+msgstr "경비 승인"
 
 #. module: hr_expense
 #. odoo-python
@@ -934,12 +923,17 @@ msgstr "고객 또는 공급업체에 대한 선물"
 #. odoo-python
 #: code:addons/hr_expense/models/hr_expense.py:0
 msgid "Go to Account"
-msgstr ""
+msgstr "계정으로 가기"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.product_product_expense_form_view
 msgid "Guideline"
 msgstr "가이드라인"
+
+#. module: hr_expense
+#: model:ir.actions.server,name:hr_expense.ir_cron_send_submitted_expenses_mail_ir_actions_server
+msgid "HR Expense: Send Submitted Expenses Mail"
+msgstr ""
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__has_message
@@ -962,6 +956,7 @@ msgstr "HR 비용 별칭 도메인"
 #: model:ir.model.fields,field_description:hr_expense.field_account_move__id
 #: model:ir.model.fields,field_description:hr_expense.field_account_move_line__id
 #: model:ir.model.fields,field_description:hr_expense.field_account_payment__id
+#: model:ir.model.fields,field_description:hr_expense.field_account_payment_register__id
 #: model:ir.model.fields,field_description:hr_expense.field_account_tax__id
 #: model:ir.model.fields,field_description:hr_expense.field_hr_department__id
 #: model:ir.model.fields,field_description:hr_expense.field_hr_employee__id
@@ -973,6 +968,7 @@ msgstr "HR 비용 별칭 도메인"
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_split__id
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_split_wizard__id
 #: model:ir.model.fields,field_description:hr_expense.field_ir_actions_report__id
+#: model:ir.model.fields,field_description:hr_expense.field_ir_attachment__id
 #: model:ir.model.fields,field_description:hr_expense.field_product_product__id
 #: model:ir.model.fields,field_description:hr_expense.field_product_template__id
 #: model:ir.model.fields,field_description:hr_expense.field_res_company__id
@@ -1259,11 +1255,9 @@ msgstr "새 경비 항목"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
 msgid ""
-"New expenses are awaiting your approval.\n"
-"                You can review them by following this link"
+"New expenses are waiting for your approval. You can Review them by following "
+"this link."
 msgstr ""
-"승인 대기 중인 새 경비가 있습니다.\n"
-"                검토하려면 다음의 링크를 누르세요:"
 
 #. module: hr_expense
 #. odoo-python
@@ -1364,6 +1358,7 @@ msgstr "개인 경비로 계산된 수치입니다."
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register_no_user
+#: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
 msgid "Odoo"
 msgstr "Odoo"
 
@@ -1470,6 +1465,11 @@ msgid "Partner"
 msgstr "협력사"
 
 #. module: hr_expense
+#: model:ir.model,name:hr_expense.model_account_payment_register
+msgid "Pay"
+msgstr "페이"
+
+#. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__payment_method_line_id
 msgid "Payment Method"
 msgstr "결제 방법"
@@ -1548,6 +1548,7 @@ msgstr "발행 완료"
 
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register_no_user
+#: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
 msgid "Powered by"
 msgstr "저작권자"
 
@@ -1715,7 +1716,7 @@ msgstr "동일한 영수증 경비"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid "Save this page and come back here to set up the feature."
-msgstr ""
+msgstr "이 페이지를 저장하고 돌아와서 기능을 설정합니다."
 
 #. module: hr_expense
 #. odoo-javascript
@@ -1927,6 +1928,14 @@ msgid "The account %(name)s (%(code)s) is archived. Activate it to continue"
 msgstr ""
 
 #. module: hr_expense
+#. odoo-python
+#: code:addons/hr_expense/models/ir_actions_report.py:0
+msgid ""
+"The attachment (%(attachment_name)s) has not been added to the report due to "
+"the following error: '%(error)s'"
+msgstr ""
+
+#. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_res_company__expense_journal_id
 #: model:ir.model.fields,help:hr_expense.field_res_config_settings__expense_journal_id
 msgid "The company's default journal used when an employee expense is created."
@@ -1958,6 +1967,15 @@ msgstr ""
 "사합니다. 해당 지출결의서에 중복되는 항목이 없는지 다시 한번 확인해주세요."
 
 #. module: hr_expense
+#. odoo-python
+#: code:addons/hr_expense/models/hr_expense.py:0
+msgid ""
+"The following expenses payment method leads to several accounts payable and "
+"this isn't supported:\n"
+"%(expenses)s"
+msgstr ""
+
+#. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_expense_post_wizard__employee_journal_id
 msgid "The journal used when the expense is paid by employee."
 msgstr "직원이 비용을 지불할 때 사용하는 전표입니다."
@@ -1977,6 +1995,15 @@ msgstr "여기에서 현재 모든 비용의 상태를 확인할 수 있습니�
 #: model:ir.model.fields,help:hr_expense.field_hr_expense_split_wizard__split_possible
 msgid "The sum of after split shut remain the same"
 msgstr "분할 후의 합계는 동일하게 유지됩니다."
+
+#. module: hr_expense
+#. odoo-python
+#: code:addons/hr_expense/models/hr_expense.py:0
+msgid ""
+"The vendor is required for expenses using SEPA Credit Transfer as the "
+"payment method.\n"
+"Please set a vendor on the following expenses: %s"
+msgstr ""
 
 #. module: hr_expense
 #. odoo-python
@@ -2144,11 +2171,6 @@ msgid "Vendor"
 msgstr "공급업체"
 
 #. module: hr_expense
-#: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_view_expenses_analysis_tree
-msgid "View Attachments"
-msgstr "첨부문서 보기"
-
-#. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register
 msgid "View Expense"
 msgstr "비용 보기"
@@ -2232,6 +2254,25 @@ msgstr "승인된 비용에 대한 회계 항목만 생성할 수 있습니다."
 #. module: hr_expense
 #. odoo-python
 #: code:addons/hr_expense/models/hr_expense.py:0
+msgid "You can't add an attachment to an expense once it has been approved."
+msgstr ""
+
+#. module: hr_expense
+#. odoo-python
+#: code:addons/hr_expense/models/ir_attachment.py:0
+msgid "You can't add attachments to an expense once it has been approved."
+msgstr ""
+
+#. module: hr_expense
+#. odoo-python
+#: code:addons/hr_expense/models/ir_attachment.py:0
+msgid ""
+"You can't delete attachments from an expense once it has been submitted."
+msgstr ""
+
+#. module: hr_expense
+#. odoo-python
+#: code:addons/hr_expense/models/hr_expense.py:0
 msgid ""
 "You can't post simultaneously employee-paid expenses belonging to different "
 "companies"
@@ -2311,6 +2352,12 @@ msgstr "이 경비를 제출할 권한이 없습니다."
 #: code:addons/hr_expense/models/hr_expense.py:0
 msgid "You do not have the rights to edit this expense."
 msgstr "이 경비를 편집할 권한이 없습니다."
+
+#. module: hr_expense
+#. odoo-python
+#: code:addons/hr_expense/models/hr_expense.py:0
+msgid "You don't have the access rights to modify this expense."
+msgstr ""
 
 #. module: hr_expense
 #. odoo-python
@@ -2403,6 +2450,37 @@ msgstr "OCR을 사용하여 청구서 사진의 데이터 채우기"
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_view_form
 msgid "with the same receipt already exists."
 msgstr "동일한 영수증이 이미 존재합니다."
+
+#~ msgid "$100.00"
+#~ msgstr "$100.00"
+
+#~ msgid "$120.00"
+#~ msgstr "$120.00"
+
+#~ msgid "$500.00"
+#~ msgstr "$500.00"
+
+#~ msgid "$600.00"
+#~ msgstr "$600.00"
+
+#~ msgid "2023-08-11"
+#~ msgstr "2023-08-11"
+
+#~ msgid ""
+#~ "New expenses are awaiting your approval.\n"
+#~ "                You can review them by following this link"
+#~ msgstr ""
+#~ "승인 대기 중인 새 경비가 있습니다.\n"
+#~ "                검토하려면 다음의 링크를 누르세요:"
+
+#~ msgid "View Attachments"
+#~ msgstr "첨부문서 보기"
+
+#~ msgid "Accounting Settings"
+#~ msgstr "회계 설정"
+
+#~ msgid "You should install a Fiscal Localization first."
+#~ msgstr "재정 현지화 항목을 먼저 설치해야 합니다."
 
 #~ msgid ""
 #~ "'Expenses - %s - %s' % (object.employee_id.name, "

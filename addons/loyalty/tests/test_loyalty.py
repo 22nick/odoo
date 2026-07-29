@@ -27,6 +27,16 @@ class TestLoyalty(TransactionCase):
             'list_price': 20.0,
         })
 
+    def create_program_with_code(self, code):
+        return self.env['loyalty.program'].create({
+            'name': "Discount delivery",
+            'program_type': 'promo_code',
+            'rule_ids': [Command.create({
+                'code': code,
+                'minimum_amount': 0,
+            })],
+        })
+
     def test_loyalty_program_default_values(self):
         # Test that the default values are correctly set when creating a new program
         program = self.env['loyalty.program'].create({'name': "Test"})
@@ -306,3 +316,45 @@ class TestLoyalty(TransactionCase):
             "Free Product - [Test Product, Test Product 2]",
             "Reward description for reward with tag should be 'Free Product - [Test Product, Test Product 2]'"
         )
+
+    def test_prevent_unarchive_when_conflicting_active_program_exists(self):
+        """Unarchiving a program should fail if another active program already has the same rule
+           code."""
+        program = self.create_program_with_code("FREE")
+        program.action_archive()
+        # create another active program with the same rule code
+        self.create_program_with_code("FREE")
+        # attempt to unarchive the first program
+        with self.assertRaises(ValidationError):
+            program.action_unarchive()
+
+    def test_prevent_unarchive_when_batch_contains_duplicate_codes(self):
+        """Unarchiving multiple programs at once should fail if they share the same rule code."""
+        program1 = self.create_program_with_code("FREE")
+        program1.action_archive()
+        # create another program with the same rule code and archive it
+        program2 = self.create_program_with_code("FREE")
+        program2.action_archive()
+        # attempt to unarchive both programs together
+        with self.assertRaises(ValidationError):
+            (program1 + program2).action_unarchive()
+
+    def test_discount_description_translation(self):
+        """A discount product's name field should automatically update for all languages for which changes
+        are made on the reward's description"""
+        self.env['res.lang']._activate_lang('fr_FR')
+        program = self.env['loyalty.program'].create({
+            'name': 'Test Program',
+            'reward_ids': [(0, 0, {})],
+        })
+        reward = self.env['loyalty.reward'].with_context(lang='en_US').create({
+            'program_id': program.id,
+            'reward_type': 'discount',
+            'description': 'My Discount'
+        })
+        product = reward.discount_line_product_id
+        translations = {'en_US': 'Test Discount EN', 'fr_FR': 'Test Discount FR'}
+        reward.update_field_translations('description', translations)
+        product.invalidate_recordset(['name'])
+        self.assertEqual(product.with_context(lang='en_US').name, 'Test Discount EN')
+        self.assertEqual(product.with_context(lang='fr_FR').name, 'Test Discount FR')

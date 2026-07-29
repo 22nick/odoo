@@ -13,13 +13,14 @@
 # RGB Consulting <odoo@rgbconsulting.com>, 2022
 # Ivan Espinola, 2022
 # jabiri7, 2022
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 02:37+0000\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-07-01 10:17+0000\n"
 "Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: Catalan <https://translate.odoo.com/projects/odoo-19/barcodes/"
 "ca/>\n"
@@ -28,7 +29,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: barcodes
 #. odoo-python
@@ -104,7 +105,7 @@ msgstr "Alguna"
 #. odoo-javascript
 #: code:addons/barcodes/static/src/components/manual_barcode.xml:0
 msgid "Apply"
-msgstr ""
+msgstr "Aplica"
 
 #. module: barcodes
 #. odoo-javascript
@@ -151,7 +152,7 @@ msgstr "Codi de barres escanejat"
 #. odoo-javascript
 #: code:addons/barcodes/static/src/barcode_handlers.js:0
 msgid "Barcode: %(barcode)s"
-msgstr ""
+msgstr "Codi de barres: %(barcode)s"
 
 #. module: barcodes
 #: model:ir.model,name:barcodes.model_res_company
@@ -203,7 +204,7 @@ msgstr "Codificació"
 #. odoo-javascript
 #: code:addons/barcodes/static/src/components/manual_barcode.js:0
 msgid "Enter a barcode..."
-msgstr ""
+msgstr "Introdueix un codi de barres..."
 
 #. module: barcodes
 #: model:ir.model,name:barcodes.model_ir_http
@@ -226,6 +227,8 @@ msgid ""
 "In order to use barcodes.barcode_events_mixin, method on_barcode_scanned "
 "must be implemented"
 msgstr ""
+"Per poder utiltizar barcodes.barcode_events_mixin, cal implementar el mètode "
+"on_barcode_scanned"
 
 #. module: barcodes
 #: model:ir.model.fields,field_description:barcodes.field_barcode_nomenclature__write_uid
@@ -266,8 +269,8 @@ msgid ""
 msgstr ""
 "Els patrons també poden definir com es codifiquen els valors numèrics, tals "
 "com el pes o el preu,\n"
-"                                en el codi de barres. S'indica amb "
-"<code>{NNN}</code>, on les N\n"
+"                                en el codi de barres. S'indica amb <code>"
+"{NNN}</code>, on les N\n"
 "                                defineixen en quina posició es codifiquen "
 "els dígits. També es permeten\n"
 "                                 nombres reals si els decimals s'indiquen "
@@ -319,6 +322,8 @@ msgstr "El patró de coincidència de codis de barres"
 msgid ""
 "The barcode pattern %(pattern)s does not lead to a valid regular expression."
 msgstr ""
+"El patró de codi de barres %(pattern)s no condueix a una expressió regular "
+"vàlida."
 
 #. module: barcodes
 #: model:ir.model.fields,help:barcodes.field_barcode_nomenclature__rule_ids

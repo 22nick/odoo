@@ -6,14 +6,15 @@
 # Martin Trigaux, 2022
 # Jolien De Paepe, 2023
 # Erwin van der Ploeg <erwin@odooexperts.nl>, 2023
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# Bren Driesen <brdri@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Bren Driesen <brdri@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-10-28 10:04+0000\n"
+"POT-Creation-Date: 2026-06-12 17:37+0000\n"
+"PO-Revision-Date: 2026-07-01 04:08+0000\n"
 "Last-Translator: Bren Driesen <brdri@odoo.com>\n"
 "Language-Team: Dutch <https://translate.odoo.com/projects/odoo-19/sms/nl/>\n"
 "Language: nl\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_composer__recipient_invalid_count
@@ -54,11 +55,6 @@ msgstr "%s (kopie)"
 #: code:addons/sms/wizard/sms_composer.py:0
 msgid "%s invalid recipients"
 msgstr "%s ongeldige ontvangers"
-
-#. module: sms
-#: model_terms:ir.ui.view,arch_db:sms.sms_account_phone_view_form
-msgid "+1 555-555-555"
-msgstr "+1 555-555-555"
 
 #. module: sms
 #: model_terms:ir.ui.view,arch_db:sms.iap_account_view_form
@@ -165,8 +161,8 @@ msgstr ""
 "                                    als een interne notitie in de "
 "berichtengeschiedenis.\n"
 "                                </span>\n"
-"                                <span invisible=\"sms_method != "
-"'comment'\">\n"
+"                                <span invisible=\"sms_method != 'comment'\">"
+"\n"
 "                                    De sms wordt als sms verzonden naar de "
 "ontvangers van het\n"
 "                                    sjabloon en ook toegevoegd als een "
@@ -324,7 +320,7 @@ msgstr "Kies je afzendernaam"
 #. module: sms
 #: model:ir.model,name:sms.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Bedrijven"
 
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_composer__composition_mode
@@ -392,7 +388,7 @@ msgstr "Aangemaakt op"
 #. module: sms
 #: model:iap.service,unit_name:sms.iap_service_sms
 msgid "Credits"
-msgstr "Krediet"
+msgstr "Credits"
 
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_sms__partner_id
@@ -439,7 +435,7 @@ msgstr "Negeren"
 #: model:ir.model.fields,field_description:sms.field_sms_template_reset__display_name
 #: model:ir.model.fields,field_description:sms.field_sms_tracker__display_name
 msgid "Display Name"
-msgstr "Weergavenaam"
+msgstr "Schermnaam"
 
 #. module: sms
 #: model:ir.model,name:sms.model_mail_followers
@@ -508,7 +504,7 @@ msgstr "Storingstype"
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_mail_notification__failure_type
 msgid "Failure type"
-msgstr "Soort mislukking"
+msgstr "Fouttype"
 
 #. module: sms
 #: model:ir.model.fields,help:sms.field_sms_template__template_fs
@@ -608,7 +604,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/sms/static/src/components/sms_widget/fields_sms_widget.xml:0
 msgid "Insert Field"
-msgstr ""
+msgstr "Voeg veld in"
 
 #. module: sms
 #. odoo-javascript
@@ -687,7 +683,7 @@ msgstr "Laatst bijgewerkt op"
 #. module: sms
 #: model:ir.model,name:sms.model_sms_tracker
 msgid "Link SMS to mailing/sms tracking models"
-msgstr "Koppel SMS aan mailing-/sms-trackingmodellen"
+msgstr "Sms koppelen aan mailing-/sms-trackingmodellen"
 
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_sms__mail_message_id
@@ -1181,7 +1177,7 @@ msgstr "Nu verzenden"
 #: model:ir.actions.act_window,name:sms.sms_composer_action_form
 #: model:ir.model.fields.selection,name:sms.selection__ir_actions_server__state__sms
 msgid "Send SMS"
-msgstr "SMS verzenden"
+msgstr "Sms verzenden"
 
 #. module: sms
 #. odoo-python
@@ -1458,15 +1454,15 @@ msgstr ""
 "Type van serveractie. De volgende waarden zijn beschikbaar:\n"
 "\n"
 "- 'Werk een record bij': werk de waarden van een record bij\n"
-"- 'Maak activiteit aan': maak een activiteit (Discuss)\n"
-"- 'Stuur e-mail': plaats een bericht, een notitie of stuur een e-mail "
-"(Discuss)\n"
-"- 'Stuur SMS': stuur een SMS, log ze op documenten (SMS)\n"
+"- 'Activiteit aanmaken': maak een activiteit (Chat)\n"
+"- 'E-mail sturen': plaats een bericht, een notitie of stuur een e-mail (Chat)"
+"\n"
+"- 'Sms sturen': stuur een sms, log ze op documenten (sms)\n"
 "- 'Volgers toevoegen/verwijderen': voeg volgers toe of verwijder volgers van "
-"een record (Discuss)\n"
-"- 'Maak record aan': maak een nieuw record met nieuwe waarden\n"
-"- 'Voer code uit': een blok Python-code dat uitgevoerd zal worden\n"
-"- 'Stuur Webhook-melding': stuur een POST-verzoek naar een extern systeem, "
+"een record (Chat)\n"
+"- 'Record aanmaken': maak een nieuw record met nieuwe waarden\n"
+"- 'Code uitvoeren': een blok Python-code die uitgevoerd zal worden\n"
+"- 'Webhook-melding sturen': stuur een POST-verzoek naar een extern systeem, "
 "ook wel een Webhook genoemd\n"
 "- 'Meerdere acties': definieer een actie die verschillende andere "
 "serveracties triggert\n"
@@ -1497,7 +1493,7 @@ msgstr "Niet-geregistreerd account"
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_composer__use_exclusion_list
 msgid "Use Exclusion List"
-msgstr ""
+msgstr "Uitsluitingslijst gebruiken"
 
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_composer__template_id
@@ -1576,7 +1572,7 @@ msgstr ""
 #. module: sms
 #: model_terms:ir.ui.view,arch_db:sms.sms_composer_view_form
 msgid "Write a message..."
-msgstr "Schrijf een reactie..."
+msgstr "Schrijf een bericht..."
 
 #. module: sms
 #. odoo-javascript
@@ -1616,6 +1612,18 @@ msgstr "Je sms-bericht moet ten minste één niet-whitespace karakter bevatten"
 #: code:addons/sms/wizard/sms_account_code.py:0
 msgid "Your SMS account has been successfully registered."
 msgstr "Je SMS account is succesvol geregistreerd."
+
+#. module: sms
+#. odoo-python
+#: code:addons/sms/tools/sms_api.py:0
+msgid "Your country is not supported due to sender registration legislation"
+msgstr ""
+
+#. module: sms
+#. odoo-python
+#: code:addons/sms/tools/sms_api.py:0
+msgid "Your database is not activated"
+msgstr "Je database is niet geactiveerd"
 
 #. module: sms
 #. odoo-python
@@ -1685,6 +1693,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sms.sms_template_preview_form
 msgid "record:"
 msgstr "regel:"
+
+#~ msgid "+1 555-555-555"
+#~ msgstr "+1 555-555-555"
 
 #~ msgid ""
 #~ "%s out of the %s selected SMS Text Messages have successfully been resent."

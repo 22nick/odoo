@@ -5,14 +5,13 @@ import {
     fillEmpty,
     fillShrunkPhrasingParent,
     removeClass,
-    splitTextNode,
+    removeStyle,
 } from "@html_editor/utils/dom";
 import {
     getDeepestPosition,
     isProtected,
     isProtecting,
     isEmptyBlock,
-    isTextNode,
     nextLeaf,
     previousLeaf,
     isTableCell,
@@ -33,6 +32,7 @@ import { getColumnIndex, getRowIndex, getTableCells } from "@html_editor/utils/t
 import { isBrowserFirefox } from "@web/core/browser/feature_detection";
 import { getActiveHotkey } from "@web/core/hotkeys/hotkey_service";
 import { isHtmlContentSupported } from "@html_editor/core/selection_plugin";
+import { rgbaToHex } from "@web/core/utils/colors";
 
 export const BORDER_SENSITIVITY = 5;
 
@@ -66,6 +66,10 @@ function isUnremovableTableComponent(node, root) {
  */
 
 /**
+ * @typedef {((el: HTMLElement) => void)[]} deselect_custom_selected_nodes_handlers
+ */
+
+/**
  * This plugin only contains the table manipulation and selection features. All UI overlay
  * code is located in the table_ui plugin
  */
@@ -96,6 +100,7 @@ export class TablePlugin extends Plugin {
         "clearColumnContent",
         "clearRowContent",
     ];
+    /** @type {import("plugins").EditorResources} */
     resources = {
         user_commands: [
             {
@@ -106,13 +111,21 @@ export class TablePlugin extends Plugin {
                 isAvailable: isHtmlContentSupported,
             },
         ],
+        toolbar_namespace_providers: [
+            withSequence(
+                90,
+                (targetedNodes, editableSelection) =>
+                    closestElement(editableSelection.anchorNode, ".o_selected_td") && "compact"
+            ),
+        ],
 
         /** Handlers */
-        selectionchange_handlers: this.updateSelectionTable.bind(this),
+        selectionchange_handlers: withSequence(5, this.updateSelectionTable.bind(this)),
         clipboard_content_processors: this.processContentForClipboard.bind(this),
         clean_for_save_handlers: ({ root }) => this.deselectTable(root),
         before_line_break_handlers: this.resetTableSelection.bind(this),
         before_split_block_handlers: this.resetTableSelection.bind(this),
+        before_insert_processors: this.normalizeTableStructure.bind(this),
 
         /** Overrides */
         tab_overrides: withSequence(20, this.handleTab.bind(this)),
@@ -126,8 +139,6 @@ export class TablePlugin extends Plugin {
         fully_selected_node_predicates: (node) => !!closestElement(node, ".o_selected_td"),
         targeted_nodes_processors: this.adjustTargetedNodes.bind(this),
         move_node_whitelist_selectors: "table",
-        collapsed_selection_toolbar_predicate: (selectionData) =>
-            !!closestElement(selectionData.editableSelection.anchorNode, ".o_selected_td"),
         selection_blocker_predicates: (node) => {
             if (node.nodeName === "TABLE") {
                 return true;
@@ -136,9 +147,16 @@ export class TablePlugin extends Plugin {
         selection_placeholder_container_predicates: (container) => {
             if (container.nodeName === "TABLE") {
                 return false;
+            } else if (["TD", "TH"].includes(container.nodeName) && container.closest(".o_table")) {
+                return true;
             }
         },
         normalize_handlers: this.distributeTableColorsToAllCells.bind(this),
+        overlay_selection_target_rect_providers: this.getTableSelectionRangeRect.bind(this),
+        selected_background_color_providers: withSequence(
+            5,
+            this.computeBackgroundColorForTable.bind(this)
+        ),
     };
 
     setup() {
@@ -166,6 +184,18 @@ export class TablePlugin extends Plugin {
             }
         });
         this.onMousemove = this.onMousemove.bind(this);
+
+        this.normalizeTableStructure(this.editable);
+        // Move table width and margin to tbody to prevent scrollbars on the editable.
+        this.editable.querySelectorAll("table").forEach((table) => {
+            const tBody = table.tBodies[0];
+            for (const property of ["width", "marginLeft"]) {
+                if (table.style[property]) {
+                    tBody.style[property] = table.style[property];
+                }
+            }
+            removeStyle(table, "width", "margin-left");
+        });
     }
 
     handleTab() {
@@ -226,22 +256,6 @@ export class TablePlugin extends Plugin {
 
     _insertTable({ rows = 2, cols = 2 } = {}) {
         const newTable = this.createTable({ rows, cols });
-        let sel = this.dependencies.selection.getEditableSelection();
-        if (!sel.isCollapsed) {
-            this.dependencies.delete.deleteSelection();
-        }
-        while (!isBlock(sel.anchorNode)) {
-            const anchorNode = sel.anchorNode;
-            const isTextNode = anchorNode.nodeType === Node.TEXT_NODE;
-            const newAnchorNode = isTextNode
-                ? splitTextNode(anchorNode, sel.anchorOffset, DIRECTIONS.LEFT) + 1 && anchorNode
-                : this.dependencies.split.splitElement(anchorNode, sel.anchorOffset).shift();
-            const newPosition = rightPos(newAnchorNode);
-            sel = this.dependencies.selection.setSelection(
-                { anchorNode: newPosition[0], anchorOffset: newPosition[1] },
-                { normalize: false }
-            );
-        }
         const [table] = this.dependencies.dom.insert(newTable);
         return table;
     }
@@ -258,28 +272,28 @@ export class TablePlugin extends Plugin {
      */
     addColumn(position, reference) {
         const columnIndex = getColumnIndex(reference);
-        const table = closestElement(reference, "table");
-        const tableWidth = table.style.width && parseFloat(table.style.width);
-        const referenceColumn = table.querySelectorAll(
+        const tBody = closestElement(reference, "tbody");
+        const tBodyWidth = tBody.style.width && parseFloat(tBody.style.width);
+        const referenceColumn = tBody.querySelectorAll(
             `tr :is(td, th):nth-of-type(${columnIndex + 1})`
         );
         const referenceCellWidth = reference.style.width
             ? parseFloat(reference.style.width)
             : reference.clientWidth;
         // Temporarily set widths so proportions are respected.
-        const firstRow = table.querySelector("tr");
+        const firstRow = tBody.querySelector("tr");
         const firstRowCells = [...firstRow.children].filter(
             (child) => child.nodeName === "TD" || child.nodeName === "TH"
         );
         let totalWidth = 0;
-        if (tableWidth) {
+        if (tBodyWidth) {
             for (const cell of firstRowCells) {
                 const width = parseFloat(cell.style.width);
                 cell.style.width = width + "px";
                 // Spread the widths to preserve proportions.
                 // -1 for the width of the border of the new column.
                 const newWidth = Math.max(
-                    Math.round((width * tableWidth) / (tableWidth + referenceCellWidth - 1)),
+                    Math.round((width * tBodyWidth) / (tBodyWidth + referenceCellWidth - 1)),
                     13
                 );
                 cell.style.width = newWidth + "px";
@@ -297,21 +311,21 @@ export class TablePlugin extends Plugin {
             if (rowIndex === 0 && cell.classList.contains("o_table_header")) {
                 newCell.classList.add("o_table_header");
             }
-            if (rowIndex === 0 && tableWidth) {
+            if (rowIndex === 0 && tBodyWidth) {
                 newCell.style.width = cell.style.width;
                 totalWidth += parseFloat(cell.style.width);
             }
         });
-        if (tableWidth) {
-            if (totalWidth !== tableWidth - 1) {
+        if (tBodyWidth) {
+            if (totalWidth !== tBodyWidth - 1) {
                 // -1 for the width of the border of the new column.
                 firstRowCells[firstRowCells.length - 1].style.width =
                     parseFloat(firstRowCells[firstRowCells.length - 1].style.width) +
-                    (tableWidth - totalWidth - 1) +
+                    (tBodyWidth - totalWidth - 1) +
                     "px";
             }
             // Fix the table and row's width so it doesn't change.
-            table.style.width = tableWidth + "px";
+            tBody.style.width = tBodyWidth + "px";
         }
     }
     /**
@@ -397,7 +411,7 @@ export class TablePlugin extends Plugin {
             .forEach((td) => td.remove());
         // not sure we should move the cursor?
         siblingCell
-            ? this.dependencies.selection.setCursorStart(siblingCell)
+            ? this.dependencies.selection.setCursorEnd(lastLeaf(siblingCell))
             : this.deleteTable(table);
     }
     /**
@@ -407,9 +421,8 @@ export class TablePlugin extends Plugin {
         const table = closestElement(row, "table");
         const siblingRow = row.previousElementSibling || row.nextElementSibling;
         row.remove();
-        // not sure we should move the cursor?
         siblingRow
-            ? this.dependencies.selection.setCursorStart(siblingRow.querySelector("td, th"))
+            ? this.dependencies.selection.setCursorEnd(lastLeaf(siblingRow.cells[0]))
             : this.deleteTable(table);
     }
     /**
@@ -503,12 +516,12 @@ export class TablePlugin extends Plugin {
     /**
      * @param {HTMLTableElement} table
      */
-    normalizeColumnWidth(table) {
-        const rows = [...table.rows];
+    normalizeColumnWidth(tBody) {
+        const rows = [...tBody.rows];
         const firstRowCells = [...rows[0].cells];
-        const tableWidth = parseFloat(table.style.width);
-        if (tableWidth) {
-            const expectedCellWidth = tableWidth / firstRowCells.length;
+        const tBodyWidth = parseFloat(tBody.style.width);
+        if (tBodyWidth) {
+            const expectedCellWidth = tBodyWidth / firstRowCells.length;
             firstRowCells.forEach((cell, i) => {
                 const cellWidth = parseFloat(cell.style.width);
                 if (cellWidth && Math.abs(cellWidth - expectedCellWidth) <= 1) {
@@ -527,12 +540,12 @@ export class TablePlugin extends Plugin {
             return;
         }
 
-        const table = closestElement(cell, "table");
-        const tableWidth = parseFloat(table.style.width);
+        const tBody = closestElement(cell, "tbody");
+        const tBodyWidth = parseFloat(tBody.style.width);
         const currentRow = cell.parentElement;
         const currentRowCells = [...currentRow.cells];
         const rowCellCount = currentRowCells.length;
-        const expectedCellWidth = tableWidth / rowCellCount;
+        const expectedCellWidth = tBodyWidth / rowCellCount;
         const widthDifference = currentCellWidth - expectedCellWidth;
         const currentColumnIndex = getColumnIndex(cell);
 
@@ -593,15 +606,15 @@ export class TablePlugin extends Plugin {
                 adjCellWidth + (widthDifference > 0 ? adjustmentWidth : -adjustmentWidth)
             }px`;
         });
-        this.normalizeColumnWidth(table);
+        this.normalizeColumnWidth(tBody);
     }
 
     /**
      * @param {HTMLTableElement} table
      */
-    resetTableSize(table) {
-        table.removeAttribute("style");
-        const cells = [...table.querySelectorAll("tr, td, th")];
+    resetTableSize(tBody) {
+        tBody.removeAttribute("style");
+        const cells = [...tBody.querySelectorAll("tr, td, th")];
         cells.forEach((cell) => {
             const cStyle = cell.style;
             if (cell.tagName === "TR") {
@@ -757,6 +770,25 @@ export class TablePlugin extends Plugin {
         return false;
     }
 
+    getTableSelectionRangeRect() {
+        const selection = this.dependencies.selection.getEditableSelection();
+        if (closestElement(selection.commonAncestorContainer, "table.o_selected_table")) {
+            let [startTd, endTd] = [
+                closestElement(selection.anchorNode, isTableCell),
+                closestElement(selection.focusNode, isTableCell),
+            ];
+            if (selection.direction === DIRECTIONS.LEFT) {
+                [startTd, endTd] = [endTd, startTd];
+            }
+            const startTdRect = startTd.getBoundingClientRect();
+            const endTdRect = endTd.getBoundingClientRect();
+            const { left, top } = startTdRect;
+            const { bottom, right } = endTdRect;
+            const rect = new DOMRect(left, top, right - left, bottom - top);
+            return rect;
+        }
+    }
+
     /**
      * Moves the cursor by shiftIndex table cells.
      *
@@ -791,14 +823,18 @@ export class TablePlugin extends Plugin {
                 // To solve the issue we merge the ranges of the selection together the first time we find
                 // selection.rangeCount > 1. Morover, when hitting a double click on a cell, it spans a row
                 // inside selection which needs to be simplified here.
-                const [anchorNode, anchorOffset] = getDeepestPosition(
+                let [anchorNode, anchorOffset] = getDeepestPosition(
                     selection.getRangeAt(0).startContainer,
                     selection.getRangeAt(0).startOffset
                 );
-                const [focusNode, focusOffset] = getDeepestPosition(
+                let [focusNode, focusOffset] = getDeepestPosition(
                     selection.getRangeAt(selection.rangeCount - 1).startContainer,
                     selection.getRangeAt(selection.rangeCount - 1).startOffset
                 );
+                if (this.selectionDirection === "backward") {
+                    [anchorNode, focusNode] = [focusNode, anchorNode];
+                    [anchorOffset, focusOffset] = [focusOffset, anchorOffset];
+                }
                 this.dependencies.selection.setSelection({
                     anchorNode,
                     anchorOffset,
@@ -822,6 +858,7 @@ export class TablePlugin extends Plugin {
                     focusNode: ev.target,
                     focusOffset: 0,
                 });
+                this.selectionDirection = selection.direction;
                 return true;
             }
         }
@@ -875,25 +912,36 @@ export class TablePlugin extends Plugin {
         }
         // Handle selection for the single cell.
         if (startTd === endTd && !startTd.classList.contains("o_selected_td")) {
-            const { focusNode, focusOffset } = selection;
+            const { focusNode } = selection;
             // Do not prevent default when there is a text in cell.
-            if (focusNode.nodeType === Node.TEXT_NODE) {
-                const textNodes = descendants(startTd).filter(isTextNode);
-                const lastTextChild = textNodes.pop();
-                const firstTextChild = textNodes.shift();
-                const isAtTextBoundary = {
-                    ArrowRight: nodeSize(focusNode) === focusOffset && focusNode === lastTextChild,
-                    ArrowLeft: focusOffset === 0 && focusNode === firstTextChild,
-                    ArrowUp: focusNode === firstTextChild,
-                    ArrowDown: focusNode === lastTextChild,
+            if (
+                !(ev.ctrlKey && ["ArrowUp", "ArrowDown"].includes(ev.key)) &&
+                (focusNode.nodeType === Node.TEXT_NODE ||
+                    focusNode.matches("br, p, div.o-paragraph"))
+            ) {
+                const isAtTextBoundary = (key) => {
+                    const actualSelection = this.document.getSelection();
+                    const preserveSelection = this.dependencies.selection.preserveSelection();
+                    actualSelection.modify(
+                        "extend",
+                        ["ArrowDown", "ArrowRight"].includes(ev.key) ? "forward" : "backward",
+                        ["ArrowUp", "ArrowDown"].includes(key) ? "line" : "character"
+                    );
+                    const reachedTd = closestElement(actualSelection.focusNode, "td");
+                    preserveSelection.restore();
+                    return startTd !== reachedTd;
                 };
-                if (isAtTextBoundary[ev.key]) {
+                if (isAtTextBoundary(ev.key)) {
                     ev.preventDefault();
                     this.selectTableCells(this.dependencies.selection.getEditableSelection());
                 }
             } else {
                 ev.preventDefault();
                 this.selectTableCells(this.dependencies.selection.getEditableSelection());
+                // For an empty cell with a div inside, we need to use setSelection to trigger the selectionchange event.
+                this.dependencies.selection.setSelection(
+                    this.dependencies.selection.getEditableSelection()
+                );
             }
             return;
         }
@@ -954,6 +1002,7 @@ export class TablePlugin extends Plugin {
             return;
         }
         if (!selectionData.documentSelectionIsInEditable) {
+            this.deselectTable();
             return;
         }
         const selection = selectionData.editableSelection;
@@ -988,26 +1037,37 @@ export class TablePlugin extends Plugin {
                 this.selectTableCells(selection);
             }
         } else if (!targetedNodes.every((node) => closestElement(node.parentElement, "table"))) {
-            const endSelectionTable = closestElement(selection.focusNode, "table");
-            const endSelectionTableTds = endSelectionTable && getTableCells(endSelectionTable);
+            const startEdgeSelectionTable = closestElement(selection.startContainer, "table");
+            const endEdgeSelectionTable = closestElement(selection.endContainer, "table");
+            const startsInTable = !!startEdgeSelectionTable;
+            const edgeSelectionTable = startEdgeSelectionTable || endEdgeSelectionTable;
+            const edgeSelectionTableTds = edgeSelectionTable && getTableCells(edgeSelectionTable);
             const targetedTds = new Set(
                 targetedNodes.map((node) => closestElement(node, isTableCell))
             );
-            const isTableFullySelected = endSelectionTableTds?.every((td) => targetedTds.has(td));
-            if (endSelectionTable && !isTableFullySelected) {
+            const isTableFullySelected = edgeSelectionTableTds?.every((td) => targetedTds.has(td));
+            if (edgeSelectionTable && !isTableFullySelected) {
                 // Make sure all the cells are targeted in actual selection
                 // when selecting full table. If not, they will be selected
                 // forcefully and updateSelectionTable will be called again.
                 const targetTd =
-                    selection.direction === DIRECTIONS.RIGHT
-                        ? endSelectionTableTds.pop()
-                        : endSelectionTableTds.shift();
-                this.dependencies.selection.setSelection({
-                    anchorNode: selection.anchorNode,
-                    anchorOffset: selection.anchorOffset,
-                    focusNode: targetTd,
-                    focusOffset: selection.direction === DIRECTIONS.RIGHT ? nodeSize(targetTd) : 0,
-                });
+                    edgeSelectionTableTds[startsInTable ? 0 : edgeSelectionTableTds.length - 1];
+                const targetOffset = startsInTable ? 0 : nodeSize(targetTd);
+                if (selection.direction === DIRECTIONS.RIGHT) {
+                    this.dependencies.selection.setSelection({
+                        anchorNode: startsInTable ? targetTd : selection.anchorNode,
+                        anchorOffset: startsInTable ? targetOffset : selection.anchorOffset,
+                        focusNode: startsInTable ? selection.focusNode : targetTd,
+                        focusOffset: startsInTable ? selection.focusOffset : targetOffset,
+                    });
+                } else {
+                    this.dependencies.selection.setSelection({
+                        anchorNode: startsInTable ? selection.anchorNode : targetTd,
+                        anchorOffset: startsInTable ? selection.anchorOffset : targetOffset,
+                        focusNode: startsInTable ? targetTd : selection.focusNode,
+                        focusOffset: startsInTable ? targetOffset : selection.focusOffset,
+                    });
+                }
             }
             const targetedTables = new Set(
                 targetedNodes
@@ -1030,35 +1090,44 @@ export class TablePlugin extends Plugin {
     onMousedown(ev) {
         this._currentMouseState = ev.type;
         this._lastMousedownPosition = [ev.x, ev.y];
-        this.deselectTable();
         const isPointerInsideCell = this.isPointerInsideCell(ev);
         const td = closestElement(ev.target, isTableCell);
-        if (
-            isPointerInsideCell &&
-            !isProtected(td) &&
-            !isProtecting(td) &&
-            ((isEmptyBlock(td) && ev.detail === 2) || ev.detail === 3)
-        ) {
-            this.hanldeFirefoxSelection();
-            this.selectTableCells(this.dependencies.selection.getEditableSelection());
-            if (isBrowserFirefox()) {
-                // In firefox, selection changes when hitting mouseclick
-                // second time in an empty cell. It calls updateSelectionTable
-                // which deselects the single cell. Hence, we need a label
-                // to keep it selected.
-                this._isFirefoxDoubleMousedown = true;
+        if (isPointerInsideCell) {
+            if (
+                !isProtected(td) &&
+                !isProtecting(td) &&
+                ((isEmptyBlock(td) && ev.detail === 2) || ev.detail === 3)
+            ) {
+                this.hanldeFirefoxSelection();
+                this.selectTableCells(this.dependencies.selection.getEditableSelection());
+                if (isBrowserFirefox()) {
+                    // In firefox, selection changes when hitting mouseclick
+                    // second time in an empty cell. It calls updateSelectionTable
+                    // which deselects the single cell. Hence, we need a label
+                    // to keep it selected.
+                    this._isFirefoxDoubleMousedown = true;
+                }
+                if (ev.detail === 2) {
+                    // Specifically for double click on empty cell, to trigger
+                    // selectionchange event and update the toolbar button states.
+                    this.dependencies.selection.setSelection(
+                        this.dependencies.selection.getEditableSelection()
+                    );
+                }
+                if (ev.detail === 3) {
+                    // Doing a tripleclick on a text will change the selection.
+                    // In such case updateSelectionTable should not do anything.
+                    this._isTripleClickInTable = true;
+                }
+            } else {
+                this.editable.addEventListener("mousemove", this.onMousemove);
+                const currentSelection = this.dependencies.selection.getEditableSelection();
+                // disable dragging on table
+                if (closestElement(ev.target, "td.o_selected_td")) {
+                    this.dependencies.selection.setCursorStart(currentSelection.anchorNode);
+                }
+                this.deselectTable();
             }
-            if (ev.detail === 3) {
-                // Doing a tripleclick on a text will change the selection.
-                // In such case updateSelectionTable should not do anything.
-                this._isTripleClickInTable = true;
-            }
-        }
-        if (isPointerInsideCell && ev.detail === 1) {
-            this.editable.addEventListener("mousemove", this.onMousemove);
-            const currentSelection = this.dependencies.selection.getEditableSelection();
-            // disable dragging on table
-            this.dependencies.selection.setCursorStart(currentSelection.anchorNode);
         }
     }
 
@@ -1102,13 +1171,9 @@ export class TablePlugin extends Plugin {
         const startTd = closestElement(selection.startContainer, isTableCell);
         const endTd = closestElement(selection.endContainer, isTableCell);
         if (startTd && startTd === endTd && !isProtected(startTd) && !isProtecting(startTd)) {
-            const selectedNodes = this.dependencies.selection
-                .getTargetedNodes()
-                .filter(this.dependencies.selection.areNodeContentsFullySelected);
             const cellContents = descendants(startTd);
-            const areCellContentsFullySelected = cellContents
-                .filter((d) => !isBlock(d))
-                .every((child) => selectedNodes.includes(child));
+            const areCellContentsFullySelected =
+                this.dependencies.selection.areNodeContentsFullySelected(startTd);
             if (areCellContentsFullySelected) {
                 const SENSITIVITY = 5;
                 if (!this._mouseMovePositionWhenAllContentsSelected) {
@@ -1137,13 +1202,33 @@ export class TablePlugin extends Plugin {
 
     navigateCell(ev) {
         const selection = this.dependencies.selection.getSelectionData().deepEditableSelection;
-        const anchorNode = selection.anchorNode;
-        const currentCell = closestElement(anchorNode, isTableCell);
-        const currentTable = closestElement(anchorNode, "table");
-        if (!selection.isCollapsed || !currentCell) {
+        // Using focusNode because we might be leaving a multi-cell selection.
+        const focusNode = selection.focusNode;
+        const currentCell = closestElement(focusNode, isTableCell);
+        if (!currentCell) {
             return;
         }
+        const currentTable = closestElement(currentCell, "table");
+        const areCellsSelected = currentCell.classList.contains("o_selected_td");
         const isArrowUp = ev.key === "ArrowUp";
+        // Should navigate within multi-line text node itself ?
+        if (!areCellsSelected) {
+            if (ev.ctrlKey) {
+                ev.preventDefault();
+                this.dependencies.selection.setSelection({
+                    anchorNode: currentCell,
+                    anchorOffset: isArrowUp ? 0 : currentCell.childNodes.length,
+                });
+                return;
+            }
+            const actualSelection = this.document.getSelection();
+            actualSelection.modify("move", isArrowUp ? "backward" : "forward", "line");
+            const reachedCell = closestElement(actualSelection.focusNode, "td");
+            ev.preventDefault();
+            if (currentCell === reachedCell) {
+                return;
+            }
+        }
         const cellPosition = {
             row: getRowIndex(currentCell),
             col: getColumnIndex(currentCell),
@@ -1175,7 +1260,7 @@ export class TablePlugin extends Plugin {
             // If no target cell is available, navigate to sibling element
             targetNode = siblingElement;
         }
-        if (shouldNavigateCell(anchorNode)) {
+        if (shouldNavigateCell(focusNode)) {
             ev.preventDefault();
             if (targetNode) {
                 targetNode = isArrowUp ? lastLeaf(targetNode) : firstLeaf(targetNode);
@@ -1265,6 +1350,33 @@ export class TablePlugin extends Plugin {
         }
     }
 
+    computeBackgroundColorForTable() {
+        const selectedTds = Array.from(this.editable.querySelectorAll(".o_selected_td"));
+        if (selectedTds.length === 0) {
+            return null;
+        }
+
+        const firstStyle = getComputedStyle(selectedTds[0]);
+        const backgroundColor = firstStyle.backgroundColor;
+        const backgroundImage = firstStyle.backgroundImage;
+        // If the first selected cell doesn't have any background style, we
+        // consider that there's no common background style.
+        if (backgroundImage === "none" && backgroundColor === "rgba(0, 0, 0, 0)") {
+            return null;
+        }
+
+        const allSameStyle = selectedTds.slice(1).every((td) => {
+            const s = getComputedStyle(td);
+            return s.backgroundColor === backgroundColor && s.backgroundImage === backgroundImage;
+        });
+
+        if (!allSameStyle) {
+            return "#00000000";
+        }
+
+        return backgroundImage !== "none" ? backgroundImage : rgbaToHex(backgroundColor);
+    }
+
     adjustTargetedNodes(targetedNodes) {
         const modifiedTargetedNodes = [];
         const visitedTables = new Set();
@@ -1298,6 +1410,45 @@ export class TablePlugin extends Plugin {
             focusNode: anchorTD.lastChild,
             focusOffset: nodeSize(anchorTD.lastChild),
         });
+    }
+
+    /**
+     * Normalize the structure of all tables contained in `container`.
+     *
+     * Ensures every table has a `<tbody>` and merges or converts `<thead>`
+     * elements when necessary. Table operations rely on the presence of a
+     * `<tbody>`, so every table must contain one.
+     *
+     * @param {HTMLElement | DocumentFragment} container
+     * @returns {HTMLElement | DocumentFragment}
+     */
+    normalizeTableStructure(container) {
+        container.querySelectorAll("table").forEach((table) => {
+            let tbody = table.tBodies[0];
+            const thead = table.tHead;
+
+            if (thead) {
+                const thChildren = thead.querySelectorAll("th");
+                thChildren.forEach((th) => th.classList.add("o_table_header"));
+
+                if (tbody) {
+                    // If a <tbody> already exists, move all rows from
+                    // <thead> into the start of <tbody>.
+                    tbody.prepend(...thead.rows);
+                    thead.remove();
+                } else {
+                    // Otherwise, replace the <thead> with <tbody>
+                    tbody = this.dependencies.dom.setTagName(thead, "TBODY");
+                }
+            }
+
+            if (!tbody) {
+                tbody = table.ownerDocument.createElement("tbody");
+                tbody.innerHTML = `<tr><td><div class="o-paragraph"><br></div></td></tr>`;
+                table.append(tbody);
+            }
+        });
+        return container;
     }
 
     /**

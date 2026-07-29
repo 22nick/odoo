@@ -37,6 +37,10 @@
             </td>
         </xpath>
 
+        <xpath expr="//t[@name='account_invoice_line_accountable']/following-sibling::*[1]/td[1]" position="after">
+            <td t-if="o.company_id.account_fiscal_country_id.code == 'IN' and o.company_id.l10n_in_is_gst_registered"></td>
+        </xpath>
+
         <xpath expr="//div[@id='qrcode_info']" position="attributes">
             <attribute name="t-if" add="o.company_id.account_fiscal_country_id.code != 'IN'" separator="and"/>
         </xpath>
@@ -61,21 +65,13 @@
 
         <t name="invoice_title" position="replace">
             <t name="invoice_title">
-                <span t-if="o.invoice_line_ids.tax_ids">
-                    Tax Invoice
-                </span>
-                <span t-else="">
-                    Invoice
-                </span>
+                <span t-out="o._get_l10n_in_invoice_label()"/>
             </t>
         </t>
         <t name="proforma_invoice_title" position="replace">
-                <span t-if="o.invoice_line_ids.tax_ids">
-                   Proforma Tax Invoice
-                </span>
-                <span t-else="">
-                    Proforma Invoice
-                </span>
+            <t name="proforma_invoice_title">
+                Proforma <span t-out="o._get_l10n_in_invoice_label()"/>
+            </t>
         </t>
 
         <xpath expr="//div[@id='payment_term']" position="after">
@@ -83,7 +79,7 @@
                 <t t-set="hsn_summary" t-value="o._l10n_in_get_hsn_summary_table()"/>
                 <t t-if="hsn_summary">
                     <div name="l10n_in_hsn_summary" class="mt-3" style="page-break-inside: avoid;">
-                        <h3>HSN Summary</h3>
+                        <h4>HSN Summary</h4>
                         <table class="table table-sm table-borderless col-6">
                             <thead>
                                 <th>HSN/SAC</th>
@@ -129,6 +125,12 @@
             </t>
         </xpath>
 
+        <xpath expr="//div[hasclass('row')]" position="after">
+            <div t-if="l10n_in_report_title" style="position:absolute;left:0;right:0;opacity:0.15;font-size:3em;color:#666666;width:100%;text-align:center;z-index:1000;-webkit-transform:rotate(-45deg);">
+                <t t-out="l10n_in_report_title"/>
+            </div>
+        </xpath>
+
     </template>
 
     <!-- Workaround for Studio reports, see odoo/odoo#60660 -->
@@ -144,6 +146,25 @@
         <div t-if="o.company_id.l10n_in_is_gst_registered and o.l10n_in_state_id">
             Place of supply: <span t-out="o.l10n_in_state_id.name" />
         </div>
+    </template>
+
+    <template id="l10n_in_invoice_document_duplicate">
+        <t t-call="l10n_in.document_renderer" copies_to_print="['ORIGINAL FOR RECIPIENT', 'DUPLICATE FOR SUPPLIER']"/>
+    </template>
+
+    <template id="l10n_in_invoice_document_triplicate">
+        <t t-call="l10n_in.document_renderer" copies_to_print="['ORIGINAL FOR RECIPIENT', 'DUPLICATE FOR TRANSPORTER', 'TRIPLICATE FOR SUPPLIER']"/>
+    </template>
+
+    <template id="document_renderer">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-foreach="copies_to_print" t-as="l10n_in_report_title">
+                    <t t-set="lang" t-value="o.partner_id.lang"/>
+                    <t t-call="l10n_in.l10n_in_report_invoice_document_inherit" t-lang="lang"/>
+                </t>
+            </t>
+        </t>
     </template>
 
 </odoo>

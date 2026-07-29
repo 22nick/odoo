@@ -128,22 +128,21 @@ export class SelectMenu extends Component {
         this.inputRef = useRef("inputRef");
         this.menuRef = useChildRef();
         this.props.menuRef?.(this.menuRef);
-        this.debouncedOnInput = useDebounced((ev) => {
+        this.debouncedOnInput = useDebounced((searchString) => {
             if (!this.dropdownState.isOpen) {
                 this.dropdownState.open();
             }
-            const searchString = ev.target.value;
-            this.state.searchValue = searchString;
             this.onInput(searchString);
         }, DEBOUNCED_DELAY);
         this.dropdownState = useDropdownState();
 
         this.selectedChoice = this.getSelectedChoice(this.props);
         onWillUpdateProps((nextProps) => {
-            if (this.state.choices !== nextProps.choices) {
+            const choicesChanged = this.state.choices !== nextProps.choices;
+            if (choicesChanged) {
                 this.state.choices = nextProps.choices;
             }
-            if (this.props.value !== nextProps.value) {
+            if (choicesChanged || this.props.value !== nextProps.value) {
                 this.selectedChoice = this.getSelectedChoice(nextProps);
             }
         });
@@ -252,8 +251,12 @@ export class SelectMenu extends Component {
 
     onInputBlur(ev) {
         this.state.isFocused = false;
-        if (ev.target.value === "" && this.canDeselect && !this.props.multiSelect) {
-            this.onInputClear();
+        if (ev.target.value === "" && !this.props.multiSelect) {
+            if (this.canDeselect) {
+                this.onInputClear();
+            } else {
+                this.state.searchValue = null;
+            }
         }
     }
 
@@ -261,6 +264,11 @@ export class SelectMenu extends Component {
         if (!ev.target.classList.contains("o_select_menu_toggler")) {
             ev.stopPropagation();
         }
+    }
+
+    onSearchInput(ev) {
+        this.state.searchValue = ev.target.value;
+        this.debouncedOnInput(this.state.searchValue);
     }
 
     onInputClear() {
@@ -278,7 +286,7 @@ export class SelectMenu extends Component {
                 this.inputRef.el.focus();
             }
             this.menuRef.el?.addEventListener("scroll", (ev) => this.onScroll(ev));
-            const selectedElement = this.menuRef.el?.querySelectorAll(".active")[0];
+            const selectedElement = this.menuRef.el?.querySelectorAll(".selected")[0];
             if (selectedElement) {
                 scrollTo(selectedElement);
             }
@@ -298,7 +306,7 @@ export class SelectMenu extends Component {
 
     getItemClass(choice) {
         if (this.isOptionSelected(choice)) {
-            return "o_select_menu_item fw-bolder active";
+            return "o_select_menu_item fw-bolder selected";
         } else {
             return "o_select_menu_item";
         }
@@ -340,6 +348,9 @@ export class SelectMenu extends Component {
             }
         } else if (!this.selectedChoice || this.selectedChoice.value !== value) {
             this.props.onSelect(value);
+            if (this.inputRef.el) {
+                this.inputRef.el.value = this.state.choices.find((c) => c.value === value).label;
+            }
         }
         this.state.searchValue = null;
     }

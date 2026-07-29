@@ -1,6 +1,5 @@
-import { after } from "@odoo/hoot";
-import { Deferred, mockWorker } from "@odoo/hoot-mock";
-import { MockServer } from "@web/../tests/web_test_helpers";
+import { after, Deferred, mockWorker } from "@odoo/hoot";
+import { MockServer, patchWithCleanup } from "@web/../tests/web_test_helpers";
 
 import { WebsocketWorker } from "@bus/workers/websocket_worker";
 import { patch } from "@web/core/utils/patch";
@@ -14,7 +13,7 @@ function cleanupWebSocketCallbacks() {
     wsCallbacks = null;
 }
 
-function cleanupWekSocketWorker() {
+function cleanupWebSocketWorker() {
     if (currentWebSocketWorker.connectTimeout) {
         clearTimeout(currentWebSocketWorker.connectTimeout);
     }
@@ -34,17 +33,16 @@ function getWebSocketCallbacks() {
     return wsCallbacks;
 }
 
-/**
- * @param {SharedWorker | Worker} worker
- */
-function onWorkerConnected(worker) {
-    currentWebSocketWorker.registerClient(worker._messageChannel.port2);
-}
-
 function setupWebSocketWorker() {
     currentWebSocketWorker = new WebsocketWorker();
+    // Fixed reconnect delay, longer than the mocked WebSocket's open/close ticks.
+    currentWebSocketWorker.INITIAL_RECONNECT_DELAY = 1000;
+    currentWebSocketWorker.RECONNECT_JITTER = 0;
+    currentWebSocketWorker.connectRetryDelay = 1000;
 
-    mockWorker(onWorkerConnected);
+    mockWorker(function onWorkerConnected(worker) {
+        currentWebSocketWorker.registerClient(worker._messageChannel.port2);
+    });
 }
 
 /** @type {WebsocketWorker | null} */
@@ -80,18 +78,15 @@ export function onWebsocketEvent(eventName, callback) {
 // Setup
 //-----------------------------------------------------------------------------
 
-patch(MockServer.prototype, {
+patchWithCleanup(MockServer.prototype, {
     start() {
         setupWebSocketWorker();
-        after(cleanupWekSocketWorker);
-
+        after(cleanupWebSocketWorker);
         return super.start(...arguments);
     },
 });
 
 patch(WebsocketWorker.prototype, {
-    INITIAL_RECONNECT_DELAY: 0,
-    RECONNECT_JITTER: 5,
     // `runAllTimers` advances time based on the longest registered timeout.
     // Some tests rely on the fragile assumption that time won’t advance too much.
     // Disable the interval until those tests are rewritten to be more robust.

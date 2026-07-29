@@ -1256,6 +1256,27 @@ test("no content helper after update", async () => {
     expect(".abc").toHaveCount(0);
 });
 
+test("display the provided no content helper when search has no matching data", async () => {
+    Foo._records = [];
+
+    await mountView({
+        type: "graph",
+        resModel: "foo",
+        noContentHelp: /* xml */ `
+            <p class="abc">This helper should be displayed</p>
+        `,
+    });
+
+    expect(".o_graph_canvas_container canvas").toHaveCount(1);
+    expect(".o_view_nocontent").toHaveCount(0);
+
+    await toggleSearchBarMenu();
+    await toggleMenuItem("color");
+
+    expect(".o_graph_canvas_container canvas").toHaveCount(0);
+    expect(".o_nocontent_help:contains(This helper should be displayed)").toHaveCount(1);
+});
+
 test("can reload with other group by", async () => {
     const view = await mountView({
         type: "graph",
@@ -1850,6 +1871,7 @@ test("clicking on bar charts triggers a do_action", async () => {
                 domain: [["bar", "=", false]],
                 name: "Foo Analysis",
                 res_model: "foo",
+                search_view_id: [67, "search"],
                 target: "current",
                 type: "ir.actions.act_window",
                 views: [
@@ -1864,6 +1886,7 @@ test("clicking on bar charts triggers a do_action", async () => {
     const view = await mountView({
         type: "graph",
         resModel: "foo",
+        searchViewId: 67,
         arch: /* xml */ `
             <graph string="Foo Analysis">
                 <field name="bar" />
@@ -1889,6 +1912,7 @@ test("middle click on bar charts triggers a do_action", async () => {
                 domain: [["bar", "=", false]],
                 name: "Foo Analysis",
                 res_model: "foo",
+                search_view_id: [67, "search"],
                 target: "current",
                 type: "ir.actions.act_window",
                 views: [
@@ -1903,6 +1927,7 @@ test("middle click on bar charts triggers a do_action", async () => {
     const view = await mountView({
         type: "graph",
         resModel: "foo",
+        searchViewId: 67,
         arch: /* xml */ `
             <graph string="Foo Analysis">
                 <field name="bar" />
@@ -1928,6 +1953,7 @@ test("Clicking on bar charts removes group_by and search_default_* context keys"
                 domain: [["bar", "=", false]],
                 name: "Foo Analysis",
                 res_model: "foo",
+                search_view_id: [67, "search"],
                 target: "current",
                 type: "ir.actions.act_window",
                 views: [
@@ -1942,6 +1968,7 @@ test("Clicking on bar charts removes group_by and search_default_* context keys"
     const view = await mountView({
         type: "graph",
         resModel: "foo",
+        searchViewId: 67,
         arch: /* xml */ `
             <graph string="Foo Analysis">
                 <field name="bar" />
@@ -1969,6 +1996,7 @@ test("clicking on a pie chart trigger a do_action with correct views", async () 
                 domain: [["bar", "=", false]],
                 name: "Foo Analysis",
                 res_model: "foo",
+                search_view_id: [67, "search"],
                 target: "current",
                 type: "ir.actions.act_window",
                 views: [
@@ -1983,6 +2011,7 @@ test("clicking on a pie chart trigger a do_action with correct views", async () 
     const view = await mountView({
         type: "graph",
         resModel: "foo",
+        searchViewId: 67,
         arch: /* xml */ `
             <graph string="Foo Analysis" type="pie">
                 <field name="bar" />
@@ -2017,6 +2046,7 @@ test("middle click on a pie chart trigger a do_action with correct views", async
                 domain: [["bar", "=", false]],
                 name: "Foo Analysis",
                 res_model: "foo",
+                search_view_id: [67, "search"],
                 target: "current",
                 type: "ir.actions.act_window",
                 views: [
@@ -2031,6 +2061,7 @@ test("middle click on a pie chart trigger a do_action with correct views", async
     const view = await mountView({
         type: "graph",
         resModel: "foo",
+        searchViewId: 67,
         arch: /* xml */ `
             <graph string="Foo Analysis" type="pie">
                 <field name="bar" />
@@ -2109,6 +2140,24 @@ test("graph view with invisible attribute on field", async () => {
         message: "there should be only two menu items in the measures dropdown (count and foo)",
     });
     expect(".o_menu_item:contains(Revenue)").toHaveCount(0);
+});
+
+test("graph view reserved word", async () => {
+    // Check that the use of reserved words does not interfere with the view.
+    Product._records.push({ id: 150, name: "constructor" });
+    Foo._records.at(-1).product_id = 150;
+
+    const view = await mountView({
+        type: "graph",
+        resModel: "foo",
+        arch: /* xml */ `
+            <graph order="DESC">
+                <field name="product_id" />
+            </graph>
+        `,
+    });
+    checkLabels(view, ["xphone", "xpad", "constructor"]);
+    checkDatasets(view, ["data", "label"], [{ data: [4, 3, 1], label: "Count" }]);
 });
 
 test("graph view sort by measure", async () => {
@@ -3033,4 +3082,94 @@ test("monetary chart rendering with multiple currencies", async () => {
     // should display the sum in the company currency, i.e. EUR
     checkTooltip(view, { title: "Amount", lines: [{ label: "false", value: "1,200.00 €" }] }, 0);
     checkTooltip(view, { title: "Amount", lines: [{ label: "true", value: "1,000.00 €" }] }, 1);
+});
+
+test.tags("desktop");
+test("monetary chart rendering with a single foreign currency", async () => {
+    // simulate that the company currency is EUR
+    serverState.companies[0].currency_id = 2;
+
+    onRpc("formatted_read_group", ({ kwargs }) => {
+        // FIXME: context.fill_temporal isn't handled in the MockServer
+        expect(kwargs.context.fill_temporal).toBe(true);
+        return [
+            {
+                "date:day": ["2016-01-01", "2016-01-01"],
+                __extra_domain: [
+                    ["date", ">=", "2016-01-01"],
+                    ["date", "<", "2016-01-02"],
+                ],
+                __count: 1,
+                "currency_id:array_agg_distinct": [1],
+                "amount:sum_currency": 300,
+                "amount:sum": 300,
+            },
+            {
+                "date:day": ["2016-01-02", "2016-01-02"],
+                __extra_domain: [
+                    ["date", ">=", "2016-01-02"],
+                    ["date", "<", "2016-01-03"],
+                ],
+                __count: 0,
+                "currency_id:array_agg_distinct": [],
+                "amount:sum_currency": 0,
+                "amount:sum": 0,
+            },
+            {
+                "date:day": ["2016-01-03", "2016-01-03"],
+                __extra_domain: [
+                    ["date", ">=", "2016-01-03"],
+                    ["date", "<", "2016-01-04"],
+                ],
+                __count: 1,
+                "currency_id:array_agg_distinct": [1],
+                "amount:sum_currency": 400,
+                "amount:sum": 400,
+            },
+        ];
+    });
+
+    onRpc("/web/domain/validate", () => true);
+    Foo._fields.amount = fields.Monetary({ currency_field: "currency_id" });
+    Foo._fields.currency_id = fields.Many2one({ relation: "res.currency", default: 1 });
+    Foo._records = [
+        {
+            id: 1,
+            foo: 3,
+            bar: true,
+            product_id: 100,
+            date: "2016-01-01",
+            revenue: 1,
+            color_ids: [2],
+            amount: 300,
+        },
+        {
+            id: 2,
+            foo: 53,
+            bar: true,
+            product_id: 100,
+            color_id: 2,
+            date: "2016-01-03",
+            revenue: 2,
+            color_ids: [1],
+            amount: 400,
+        },
+    ];
+
+    const view = await mountView({
+        type: "graph",
+        resModel: "foo",
+        groupBy: ["date:day"],
+        arch: `
+            <graph>
+                <field name="bar" />
+                <field name="amount" type="measure" />
+            </graph>
+        `,
+    });
+
+    expect(".o_graph_canvas_container canvas").toHaveCount(1);
+    // should display the sum in the records currency, i.e. USD
+    checkTooltip(view, { title: "Amount", lines: [{ label: "2016-01-01", value: "$ 300.00" }] }, 0);
+    checkTooltip(view, { title: "Amount", lines: [{ label: "2016-01-03", value: "$ 400.00" }] }, 1);
 });

@@ -14,6 +14,18 @@ _logger = logging.getLogger(__name__)
 
 @odoo.tests.tagged('click_all', 'post_install', '-at_install', '-standard')
 class TestMenusAdmin(odoo.tests.HttpCase):
+    allow_end_on_form = True
+
+    @classmethod
+    def _request_handler(cls, s: Session, r: PreparedRequest, /, **kw):
+        # mock odoofin requests
+        if 'proxy/v2/get_dashboard_institutions' in r.url:
+            r = Response()
+            r.status_code = 200
+            r.json = list
+            return r
+        return super()._request_handler(s, r, **kw)
+
     def test_01_click_everywhere_as_admin(self):
         if 'tour_enabled' in self.env['res.users']._fields:
             self.env.ref('base.user_admin').tour_enabled = False
@@ -73,8 +85,19 @@ class TestMenusAdminLight(odoo.tests.HttpCase):
             })
         self.browser_js("/odoo", "odoo.loader.modules.get('@web/webclient/clickbot/clickbot_loader').startClickEverywhere(undefined, true);", "odoo.isReady === true", login="admin", timeout=120, success_signal="clickbot test succeeded")
 
+
 @odoo.tests.tagged('post_install', '-at_install')
 class TestMenusDemoLight(HttpCaseWithUserDemo):
+
+    @classmethod
+    def _request_handler(cls, s: Session, r: PreparedRequest, /, **kw):
+        # mock odoofin requests
+        if 'proxy/v2/get_dashboard_institutions' in r.url:
+            r = Response()
+            r.status_code = 200
+            r.json = list
+            return r
+        return super()._request_handler(s, r, **kw)
 
     def test_01_click_apps_menus_as_demo(self):
         # Disable onboarding tours to remove warnings

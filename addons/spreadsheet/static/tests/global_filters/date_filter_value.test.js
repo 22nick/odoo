@@ -86,7 +86,7 @@ test("Date filter with range value", async function () {
         value: { type: "range", from: "2023-01-01", to: "2023-01-31" },
         update: () => {},
     });
-    expect("input").toHaveValue("January 1 – 31, 2023");
+    expect("input").toHaveValue("January 1 – 31, 2023");
 });
 
 test("Date options are computed from the current date", async function () {
@@ -180,6 +180,23 @@ test("All the options should be displayed", async function () {
     expect(options[11].textContent).toBe("Year");
     expect(options[12].textContent).toBe("All time");
     expect(options[13].textContent).toBe("Custom Range");
+});
+
+test("Opening the custom range calendar does not trigger update", async function () {
+    const env = await makeMockEnv();
+    await mountDateFilterValue(env, {
+        value: { type: "range", from: "2023-01-01", to: "2023-01-31" },
+        update: () => {
+            expect.step("update");
+        },
+    });
+
+    expect.verifySteps([]);
+    await contains("input").click();
+    expect.verifySteps([]);
+    await contains("input.o_datetime_input:first").click();
+    expect(".o_datetime_picker").toHaveCount(1);
+    expect.verifySteps([]);
 });
 
 test("Can select a relative period", async function () {
@@ -407,7 +424,7 @@ test("Input value is correct for range", async function () {
         value: { type: "range", from: "2023-01-01", to: "2023-01-31" },
         update: () => {},
     });
-    expect("input").toHaveValue("January 1 – 31, 2023");
+    expect("input").toHaveValue("January 1 – 31, 2023");
     await contains("input").click();
     expect("div.selected .o-date-option-label").toHaveText("Custom Range");
 });
@@ -436,24 +453,17 @@ test("Can open date time picker to select a range", async function () {
 });
 
 test("Choosing a from after the to will re-order dates", async function () {
-    let firstCall = true;
     const env = await makeMockEnv();
     await mountDateFilterValue(env, {
         value: { type: "range", from: "2023-01-30", to: "2023-01-31" },
         update: (value) => {
-            if (firstCall) {
-                // Bypass the first call as it is just the initial value
-                // (activate when clicking on the input)
-                firstCall = false;
-                return;
-            }
             expect(value).toEqual({ type: "range", from: "2023-01-01", to: "2023-01-30" });
             expect.step("update");
         },
     });
     await contains("input").click();
     await contains("input.o_datetime_input:last").click();
-    // Select 1th of January 2023
+    // Select 1st of January 2023
     await contains(".o_date_item_cell.o_datetime_button:first").click();
     expect.verifySteps(["update"]);
 });

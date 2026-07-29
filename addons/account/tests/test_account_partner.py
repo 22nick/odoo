@@ -137,9 +137,12 @@ class TestAccountPartner(AccountTestInvoicingCommon):
         self.partner_a.parent_id = self.partner_b
 
     def test_res_partner_bank(self):
-        self.env.user.group_ids -= self.env.ref('base.group_system')  # it is implying the group below
-        self.env.user.group_ids += self.env.ref('base.group_partner_manager')
-        self.env.user.group_ids += self.env.ref('account.group_validate_bank_account')
+        self.env.user.group_ids = (
+            self.env.ref('base.group_partner_manager')
+            + self.env.ref('account.group_account_user')
+            + self.env.ref('account.group_validate_bank_account')
+        )
+
         partner = self.env['res.partner'].create({'name': 'MyCustomer'})
         account = self.env['res.partner.bank'].create({
             'acc_number': '123456789',
@@ -160,3 +163,26 @@ class TestAccountPartner(AccountTestInvoicingCommon):
         self.env.user.group_ids -= self.env.ref('account.group_validate_bank_account')
         with self.assertRaisesRegex(UserError, "You do not have the rights to trust"), self.cr.savepoint():
             account.write({'allow_out_payment': True})
+
+    def test_res_partner_bank_from_branch(self):
+        branch = self.env['res.company'].create({
+            'name': 'branch',
+            'parent_id': self.env.company.id,
+        })
+
+        partner = self.env['res.partner'].create({
+            'name': 'partner test',
+            'company_id': self.env.company.id,
+        })
+
+        bank_account = self.env['res.partner.bank'].create({
+            'acc_number': '123456789',
+            'partner_id': partner.id,
+        })
+
+        # Should be able to create a move in the branch with the bank account
+        self.env['account.move'].with_company(branch).create({
+            'move_type': 'in_invoice',
+            'partner_id': partner.id,
+            'partner_bank_id': bank_account.id,
+        })

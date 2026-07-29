@@ -1,5 +1,5 @@
 import { closestElement } from "@html_editor/utils/dom_traversal";
-import { Component } from "@odoo/owl";
+import { Component, onMounted, useEffect, useExternalListener, useRef } from "@odoo/owl";
 import { Dropdown } from "@web/core/dropdown/dropdown";
 import { DropdownItem } from "@web/core/dropdown/dropdown_item";
 import { _t } from "@web/core/l10n/translation";
@@ -21,33 +21,54 @@ export class TableMenu extends Component {
         resetTableSize: Function,
         clearColumnContent: Function,
         clearRowContent: Function,
-        overlay: Object,
+        close: Function,
         dropdownState: Object,
         target: { validate: (el) => el.nodeType === Node.ELEMENT_NODE },
+        document: { validate: (el) => el.nodeType === Node.DOCUMENT_NODE },
         direction: { type: String, optional: true },
     };
     static defaultProps = { direction: "ltr" };
     static components = { Dropdown, DropdownItem };
 
     setup() {
-        if (this.props.type === "column") {
-            this.isFirst = this.props.target.cellIndex === 0;
-            this.isLast = !this.props.target.nextElementSibling;
-        } else {
-            const tr = this.props.target.parentElement;
-            this.isFirst = !tr.previousElementSibling;
-            this.isLast = !tr.nextElementSibling;
-            this.isTableHeader = [...tr.children][0].nodeName === "TH";
+        this.dropdownRef = useRef("dropdown");
+        onMounted(() => {
+            this.overlayEl = this.dropdownRef.el;
+        });
+        useEffect(
+            () => {
+                if (this.props.type === "column") {
+                    this.isFirst = this.props.target.cellIndex === 0;
+                    this.isLast = !this.props.target.nextElementSibling;
+                } else {
+                    const tr = this.props.target.parentElement;
+                    this.isFirst = !tr.previousElementSibling;
+                    this.isLast = !tr.nextElementSibling;
+                    this.isTableHeader = [...tr.children][0].nodeName === "TH";
+                }
+                this.items = this.props.type === "column" ? this.colItems() : this.rowItems();
+                this.updatePosition();
+            },
+            () => [this.props.target]
+        );
+        if (this.props.document.defaultView.frameElement) {
+            useExternalListener(this.props.document, "scroll", () => {
+                this.updatePosition();
+            });
+            useExternalListener(this.props.document, "pointerdown", (ev) => {
+                if (!this.overlayEl.contains(ev.target)) {
+                    this.props.close();
+                }
+            });
         }
-        this.items = this.props.type === "column" ? this.colItems() : this.rowItems();
     }
 
     get hasCustomTableSize() {
-        const table = closestElement(this.props.target, "table");
-        if (!table) {
+        const tBody = closestElement(this.props.target, "tbody");
+        if (!tBody) {
             return false;
         }
-        const rows = [...table.rows];
+        const rows = [...tBody.rows];
         const firstRowCells = [...rows[0].cells];
         const rowHasHeight = rows.some((row) => row.style.height);
         const cellHasWidth = firstRowCells.some((cell) => cell.style.width);
@@ -65,9 +86,51 @@ export class TableMenu extends Component {
         );
     }
 
+    updatePosition() {
+        const { target, type, direction } = this.props;
+        if (!this.overlayEl || !target) {
+            return;
+        }
+        let frameRect = { top: 0, left: 0 };
+        let frameElement;
+        try {
+            frameElement = this.props.document.defaultView.frameElement;
+        } catch {
+            // We don't access the frameElement if we don't have access to it.
+            // (i.e. iframe origin or sandbox restriction)
+        }
+        if (frameElement) {
+            frameRect = frameElement.getBoundingClientRect();
+        }
+        const targetRect = target.getBoundingClientRect();
+        const container = this.overlayEl.parentElement;
+        const containerRect = container.getBoundingClientRect();
+        const top = frameRect.top + targetRect.top - containerRect.top;
+        const left = frameRect.left + targetRect.left - containerRect.left;
+        this.overlayEl.classList.remove("h-100", "w-100");
+        if (type === "column") {
+            Object.assign(this.overlayEl.style, {
+                position: "absolute",
+                top: `${top - this.overlayEl.offsetHeight}px`,
+                left: `${left}px`,
+                width: `${targetRect.width}px`,
+            });
+        } else {
+            const isLTR = direction === "ltr";
+            const inlineStartOffset = isLTR
+                ? left
+                : containerRect.right - (frameRect.left + targetRect.right);
+            Object.assign(this.overlayEl.style, {
+                position: "absolute",
+                top: `${top}px`,
+                insetInlineStart: `${inlineStartOffset - this.overlayEl.offsetWidth}px`,
+                height: `${targetRect.height}px`,
+            });
+        }
+    }
     onSelected(item) {
         item.action(this.props.target);
-        this.props.overlay.close();
+        this.props.close();
     }
 
     colItems() {
@@ -113,7 +176,7 @@ export class TableMenu extends Component {
                 name: "reset_table_size",
                 icon: "fa-table",
                 text: _t("Reset table size"),
-                action: (target) => this.props.resetTableSize(target.closest("table")),
+                action: (target) => this.props.resetTableSize(target.closest("tbody")),
             },
             {
                 name: "clear_content",
@@ -180,7 +243,7 @@ export class TableMenu extends Component {
                 name: "reset_table_size",
                 icon: "fa-table",
                 text: _t("Reset table size"),
-                action: (target) => this.props.resetTableSize(target.closest("table")),
+                action: (target) => this.props.resetTableSize(target.closest("tbody")),
             },
             {
                 name: "clear_content",

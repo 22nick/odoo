@@ -3,7 +3,7 @@ import { normalizeColor } from "@html_builder/utils/utils_css";
 import { Plugin } from "@html_editor/plugin";
 import { _t } from "@web/core/l10n/translation";
 import { registry } from "@web/core/registry";
-import { pick } from "@web/core/utils/objects";
+import { deepCopy, deepMerge, pick } from "@web/core/utils/objects";
 import { backgroundShapesDefinition } from "./background_shapes_definition";
 import { ShapeSelector } from "@html_builder/plugins/shape/shape_selector";
 import { getDefaultColors } from "./background_shape_option";
@@ -12,9 +12,25 @@ import { getBgImageURLFromURL } from "@html_editor/utils/image";
 import { BuilderAction } from "@html_builder/core/builder_action";
 import { getHtmlStyle } from "@html_editor/utils/formatting";
 
+/**
+ * @typedef {Object.<string, {
+ *   label?: string,
+ *   subgroups: Object.<string, {
+ *     label?: string,
+ *     shapes: Object.<string, {
+ *       selectLabel?: string,
+ *       animated?: boolean,
+ *     }>,
+ *   }>,
+ * }>} BackgroundShapeGroups
+ * @typedef {((shapeGroups: BackgroundShapeGroups) => BackgroundShapeGroups | void)[]} background_shape_groups_providers
+ * @typedef {((editingElement: HTMLElement) => HTMLElement)[]} background_shape_target_providers
+ */
+
 export class BackgroundShapeOptionPlugin extends Plugin {
     static id = "backgroundShapeOption";
     static dependencies = ["customizeTab"];
+    /** @type {import("plugins").BuilderResources} */
     resources = {
         builder_actions: {
             SetBackgroundShapeAction,
@@ -24,11 +40,15 @@ export class BackgroundShapeOptionPlugin extends Plugin {
             SetBgAnimationSpeedAction,
             BackgroundShapeColorAction,
         },
+        background_shape_groups_providers: withSequence(0, () =>
+            deepCopy(backgroundShapesDefinition)
+        ),
         background_shape_target_providers: withSequence(5, (editingElement) =>
             editingElement.querySelector(":scope > .o_we_bg_filter")
         ),
         content_not_editable_selectors: ".o_we_shape",
         system_node_selectors: ".o_we_shape",
+        on_website_color_updated_handlers: this.syncBackgroundShapeColorsWithTheme.bind(this),
     };
     static shared = [
         "getShapeStyleUrl",
@@ -61,6 +81,32 @@ export class BackgroundShapeOptionPlugin extends Plugin {
         const flipEls = [...this.editable.querySelectorAll(".o_we_flip_x, .o_we_flip_y")];
         for (const flipEl of flipEls) {
             this.applyShape(flipEl, () => ({ flip: this.getShapeData(flipEl).flip }));
+        }
+    }
+    /**
+     * Update the shape color (when a theme color is selected) whenever the
+     * theme preset color changes.
+     *
+     * @param {String[]} updatedColorVariables - Updated theme color variables.
+     */
+    syncBackgroundShapeColorsWithTheme(updatedColorVariables) {
+        for (const colorVar of updatedColorVariables) {
+            if (!colorVar.startsWith("o-color-")) {
+                continue;
+            }
+            const selector = `[data-oe-shape-data*='"${colorVar}"'] .o_we_shape[style*="background-image"]`;
+            this.refreshBgShapes([...this.document.querySelectorAll(selector)]);
+            this.config.snippetModel.updateContent("snippet_custom", (snippetContent) => {
+                this.refreshBgShapes([...snippetContent.querySelectorAll(selector)]);
+            });
+        }
+    }
+    refreshBgShapes(shapeEls) {
+        for (const shapeEl of shapeEls) {
+            shapeEl.style.setProperty(
+                "background-image",
+                `url("${this.getShapeSrc(shapeEl.parentElement)}")`
+            );
         }
     }
     /**
@@ -105,8 +151,13 @@ export class BackgroundShapeOptionPlugin extends Plugin {
 
         shapeContainerEl.classList.toggle("o_we_animated", animated === "true");
 
+        const areDefaultColors = Object.entries(colors || {}).every(
+            ([colorName, colorValue]) => colorValue === `o-color-${colorName.slice(1)}`
+        );
         const shouldCustomize =
-            Boolean(colors) || flip.length > 0 || parseFloat(shapeAnimationSpeed) !== 0;
+            (Boolean(colors) && !areDefaultColors) ||
+            flip.length > 0 ||
+            parseFloat(shapeAnimationSpeed) !== 0;
 
         if (shouldCustomize) {
             // Apply custom image, flip, speed
@@ -182,11 +233,16 @@ export class BackgroundShapeOptionPlugin extends Plugin {
      * Returns the default colors for the a shape in the selector.
      *
      * @param {String} selectedBackgroundUrl
+     * @returns {Object} A mapping of color keys (e.g., c1, c2) to their
+     * corresponding `o-color-*` values.
      */
     getShapeDefaultColors(selectedBackgroundUrl) {
         const shapeSrc = selectedBackgroundUrl && getBgImageURLFromURL(selectedBackgroundUrl);
         const url = new URL(shapeSrc, window.location.origin);
-        return Object.fromEntries(url.searchParams.entries());
+        const params = Object.fromEntries(url.searchParams.entries());
+        return Object.fromEntries(
+            Object.keys(params).map((key) => [key, `o-color-${key.slice(1)}`])
+        );
     }
     /**
      * Retrieves current shape data from the target's dataset.
@@ -203,7 +259,12 @@ export class BackgroundShapeOptionPlugin extends Plugin {
             shapeAnimationSpeed: "0",
         };
         const json = editingElement.dataset.oeShapeData;
-        return json ? Object.assign(defaultData, JSON.parse(json.replace(/'/g, '"'))) : defaultData;
+        if (json) {
+            Object.assign(defaultData, JSON.parse(json.replace(/'/g, '"')));
+            // Compatibility with old shapes.
+            defaultData.shape = defaultData.shape.replace("web_editor", "html_builder");
+        }
+        return defaultData;
     }
     /**
      * Returns the src of the shape corresponding to the current parameters.
@@ -216,6 +277,8 @@ export class BackgroundShapeOptionPlugin extends Plugin {
             return "";
         }
         const searchParams = Object.entries(colors).map(([colorName, colorValue]) => {
+            // To convert 'o-color-*' colorValue to respective hex code.
+            colorValue = normalizeColor(colorValue, getHtmlStyle(this.document));
             const encodedCol = encodeURIComponent(colorValue);
             return `${colorName}=${encodedCol}`;
         });
@@ -305,17 +368,30 @@ export class BackgroundShapeOptionPlugin extends Plugin {
         });
     }
     getBackgroundShapeGroups() {
-        return backgroundShapesDefinition;
+        if (!this.backgroundShapeGroups) {
+            const shapeGroups = {};
+            for (const provider of this.getResource("background_shape_groups_providers")) {
+                const providedGroups = provider(shapeGroups);
+                if (providedGroups) {
+                    Object.assign(shapeGroups, deepMerge(shapeGroups, providedGroups));
+                }
+            }
+            this.backgroundShapeGroups = shapeGroups;
+        }
+        return this.backgroundShapeGroups;
     }
     getBackgroundShapes() {
-        const entries = Object.values(this.getBackgroundShapeGroups())
-            .map((x) =>
-                Object.values(x.subgroups)
-                    .map((x) => Object.entries(x.shapes))
-                    .flat()
-            )
-            .flat();
-        return Object.fromEntries(entries);
+        if (!this.backgroundShapesById) {
+            const entries = Object.values(this.getBackgroundShapeGroups())
+                .map((x) =>
+                    Object.values(x.subgroups)
+                        .map((x) => Object.entries(x.shapes))
+                        .flat()
+                )
+                .flat();
+            this.backgroundShapesById = Object.fromEntries(entries);
+        }
+        return this.backgroundShapesById;
     }
 }
 

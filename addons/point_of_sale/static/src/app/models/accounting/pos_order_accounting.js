@@ -6,12 +6,49 @@ import { formatCurrency } from "@web/core/currency";
 const CONSOLE_COLOR = "#4EFF4D";
 
 export class PosOrderAccounting extends Base {
+    static accountingFields = new Set(["pricelist_id", "fiscal_position_id"]);
+
+    setup() {
+        super.setup();
+
+        this._prices = {};
+        this._pricesDirty = false;
+        this._doRecomputeAllPrices();
+    }
+
+    /**
+     * Mark prices as dirty so they are recomputed lazily on the next read of
+     * `prices` or `unitPrices`. Multiple mutations in the same synchronous
+     * operation (e.g. line create → merge → delete during addLineToOrder) all
+     * collapse into a single recomputation instead of running it three times.
+     */
+    triggerRecomputeAllPrices() {
+        if (!this._prices) {
+            return;
+        }
+        this._pricesDirty = true;
+    }
+
+    _doRecomputeAllPrices() {
+        this._pricesDirty = false;
+        this._prices.original = this._constructPriceData();
+        this._prices.unit = this._constructPriceData({ baseLineOpts: { quantity: 1 } });
+    }
+
     /**
      * Currency formatted prices, these getters already handle included/excluded tax configuration.
      * They must be used each time a price is displayed to the user.
      */
     get currencyDisplayPrice() {
         return formatCurrency(this.displayPrice, this.currency.id);
+    }
+
+    get currencyDisplayPriceIncl() {
+        return formatCurrency(this.priceIncl, this.currency.id);
+    }
+
+    get currencyDisplayPriceExcl() {
+        return formatCurrency(this.priceExcl, this.currency.id);
     }
 
     get currencyAmountTaxes() {
@@ -45,15 +82,18 @@ export class PosOrderAccounting extends Base {
     get remainingDue() {
         const isNegative = this.totalDue < 0;
         const total = this.totalDue;
-        const remaining = total - this.amountPaid;
+        const remaining = this.currency.round(total - this.amountPaid);
 
         // Amount paid covers the total due
         if ((isNegative && remaining >= 0) || (!isNegative && remaining <= 0)) {
             return 0;
         }
 
-        const tolerance = this.orderIsRounded ? this.config.rounding_method.rounding : 0;
-        const amount = Math.abs(total - this.amountPaid) <= tolerance ? 0 : Math.abs(remaining);
+        const amount =
+            this.orderIsRounded &&
+            this.config.rounding_method.asymmetricRound(isNegative ? -remaining : remaining) == 0
+                ? 0
+                : Math.abs(remaining);
         return isNegative ? this.currency.round(-amount) : this.currency.round(amount);
     }
     get change() {
@@ -67,12 +107,17 @@ export class PosOrderAccounting extends Base {
         }
 
         const total =
-            Math.abs(this.displayPrice) -
+            Math.abs(this.priceIncl) -
             Math.abs(this.amountPaid) +
             (isNegative ? -roundingSanatizer : roundingSanatizer);
 
         const amount = isNegative ? -this.currency.round(total) : this.currency.round(total);
-        return this.config.cash_rounding ? this.config.rounding_method.round(amount) : amount;
+        return this.shouldRoundChange
+            ? this.config.rounding_method.asymmetricRound(amount)
+            : amount;
+    }
+    get shouldRoundChange() {
+        return this.config.cash_rounding;
     }
     get orderIsRounded() {
         const cashPm = this.payment_ids.some((p) => p.payment_method_id.is_cash_count);
@@ -81,9 +126,12 @@ export class PosOrderAccounting extends Base {
     get appliedRounding() {
         const total = this.prices.taxDetails.total_amount_no_rounding;
         const isNegative = this.amountPaid > total;
-        const remaining = total - this.amountPaid;
-        const tolerance = this.orderIsRounded ? this.config.rounding_method.rounding : 0;
-        const amount = Math.abs(total - this.amountPaid) <= tolerance ? Math.abs(remaining) : 0;
+        const remaining = this.currency.round(total - this.amountPaid);
+        const amount =
+            this.orderIsRounded &&
+            this.config.rounding_method.asymmetricRound(total < 0 ? -remaining : remaining) == 0
+                ? Math.abs(remaining)
+                : 0;
         return isNegative ? this.currency.round(amount) : this.currency.round(-amount);
     }
 
@@ -92,12 +140,28 @@ export class PosOrderAccounting extends Base {
      * These getters must be used each time the order prices are needed.
      *
      * Do not try to make your own price computation outside these getters.
+     *
+     * The dirty-check flush here is intentional: `triggerRecomputeAllPrices()`
+     * only marks the cache as stale rather than recomputing immediately, so
+     * the first read after one or more mutations recomputes exactly once.
      */
     get prices() {
-        return this._constructPriceData();
+        if (this._pricesDirty) {
+            this._doRecomputeAllPrices();
+        }
+        return this._prices.original;
+    }
+    get unitPrices() {
+        if (this._pricesDirty) {
+            this._doRecomputeAllPrices();
+        }
+        return this._prices.unit;
     }
     get priceIncl() {
         return this.prices.taxDetails.total_amount_no_rounding;
+    }
+    get roundedPriceIncl() {
+        return this.prices.taxDetails.total_amount_currency;
     }
     get priceExcl() {
         return this.prices.taxDetails.base_amount;
@@ -118,7 +182,7 @@ export class PosOrderAccounting extends Base {
             this.payment_ids.reduce(function (sum, paymentLine) {
                 // Return lines are created after the sync, should not be taken into account in
                 // the paid amount otherwise, the change would be wrong.
-                if (paymentLine.isDone() && paymentLine.name !== "return") {
+                if (paymentLine.isDone() && !paymentLine.is_change) {
                     sum += paymentLine.getAmount();
                 }
                 return sum;
@@ -168,8 +232,8 @@ export class PosOrderAccounting extends Base {
         this.amount_total = this.currency.round(this.priceIncl);
         this.amount_return = this.change; // Already rounded by the getter
         this.lines.forEach((line) => {
-            line.price_subtotal = line.displayPriceUnit;
-            line.price_subtotal_incl = line.displayPrice;
+            line.price_subtotal = line.priceExcl;
+            line.price_subtotal_incl = line.priceIncl;
         });
     }
     /**
@@ -193,7 +257,9 @@ export class PosOrderAccounting extends Base {
      */
     _constructPriceData(opts = {}) {
         const data = this._computeAllPrices(opts);
-        const noDiscount = this._computeAllPrices({ baseLineOpts: { discount: 0.0 }, ...opts });
+        const addedBlOpts = opts.baseLineOpts || {};
+        const ndBaseLineOpts = { ...addedBlOpts, discount: 0.0 };
+        const noDiscount = this._computeAllPrices({ ...opts, baseLineOpts: ndBaseLineOpts });
         const currency = this.currency;
 
         for (const key of Object.keys(data.baseLineByLineUuids)) {
@@ -242,7 +308,10 @@ export class PosOrderAccounting extends Base {
 
         // Cash rounding is added only if the document needs to be globaly rounded.
         // See cash_rounding and only_round_cash_method config fields.
-        const cashRounding = this.config.cash_rounding ? this.config.rounding_method : null;
+        const cashRounding =
+            this.config.cash_rounding && this.config.rounding_method
+                ? this.config.rounding_method
+                : null;
         const data = accountTaxHelpers.get_tax_totals_summary(baseLines, currency, company, {
             cash_rounding: cashRounding,
         });

@@ -373,13 +373,13 @@ export function clickPartnerButton() {
         },
         {
             content: "partner screen is shown",
-            trigger: `${PartnerList.clickPartner().trigger}`,
+            trigger: PartnerList.partnerListTrigger(),
         },
     ];
 }
 
 export function clickCustomer(name) {
-    return [...PartnerList.searchCustomerValue(name), PartnerList.clickPartner(name)];
+    return [...PartnerList.clickPartner(name)];
 }
 
 export function shippingLaterHighlighted() {
@@ -404,6 +404,15 @@ export function syncCurrentOrder() {
                     throw new Error("Order ID is not a number after sync.");
                 }
             },
+        },
+    ];
+}
+
+export function isInvoiceButtonUnchecked() {
+    return [
+        {
+            content: "check invoice button is not highlighted",
+            trigger: ".js_invoice:not(.highlight)",
         },
     ];
 }

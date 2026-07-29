@@ -120,8 +120,9 @@ class PurchaseRequisition(models.Model):
         for requisition in self:
             for requisition_line in requisition.line_ids:
                 requisition_line.supplier_info_ids.sudo().unlink()
-            requisition.purchase_ids.button_cancel()
-            for po in requisition.purchase_ids:
+            cancellable_pos = requisition.purchase_ids.filtered(lambda po: po.state == 'draft')
+            cancellable_pos.button_cancel()
+            for po in cancellable_pos:
                 po.message_post(body=_('Cancelled by the agreement associated to this quotation.'))
         self.state = 'cancel'
 
@@ -173,7 +174,7 @@ class PurchaseRequisitionLine(models.Model):
     product_qty = fields.Float(string='Quantity', digits='Product Unit')
     product_description_variants = fields.Char('Description')
     price_unit = fields.Float(
-        string='Unit Price', digits='Product Price', default=0.0,
+        string='Unit Price', min_display_digits='Product Price', default=0.0,
         compute="_compute_price_unit", readonly=False, store=True)
     qty_ordered = fields.Float(compute='_compute_ordered_qty', string='Ordered')
     requisition_id = fields.Many2one('purchase.requisition', required=True, string='Purchase Agreement', ondelete='cascade', index=True)

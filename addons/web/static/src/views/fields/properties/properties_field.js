@@ -718,9 +718,9 @@ export class PropertiesField extends Component {
             definition_changed: true,
         });
         this.initialValues[newName] = { name: newName, type: "char" };
-        this.openPropertyDefinition = newName;
         await this.props.record.update({ [this.props.name]: propertiesDefinitions });
         await this._unfoldPropertyGroup(count - 1, propertiesDefinitions);
+        this.openPropertyDefinition = newName;
     }
 
     /**
@@ -984,6 +984,11 @@ export class PropertiesField extends Component {
      * bus event, if the PropertiesField component cannot enter edit mode.
      */
     _getPropertyEditWarningText() {
+        if (!this.definitionRecordId) {
+            return _t("Oops! A %(parentFieldLabel)s is needed to add property fields.", {
+                parentFieldLabel: this.props.record.fields[this.definitionRecordField].string,
+            });
+        }
         return _t('Oops! You cannot edit the %(parentFieldLabel)s "%(parentName)s".', {
             parentName: this.props.record.data[this.definitionRecordField].display_name,
             parentFieldLabel: this.props.record.fields[this.definitionRecordField].string,

@@ -7,14 +7,15 @@
 # Ryanto The <ry.the77@gmail.com>, 2022
 # Muftiara Syuhada <muftiara.syuhada@gmail.com>, 2023
 # Abe Manyo, 2023
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Abe Manyo (abem)" <abem@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 02:33+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-05-29 17:36+0000\n"
+"PO-Revision-Date: 2026-06-30 06:18+0000\n"
+"Last-Translator: \"Abe Manyo (abem)\" <abem@odoo.com>\n"
 "Language-Team: Indonesian <https://translate.odoo.com/projects/odoo-19/"
 "account_payment/id/>\n"
 "Language: id\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: account_payment
 #. odoo-python
@@ -130,8 +131,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_payment/wizards/payment_link_wizard.py:0
 msgid "A discount will be applied if the customer pays before %s included."
-msgstr ""
-"Diskon akan diterapkan bila pelanggan membayar sebelum dan termasuk %s."
+msgstr "Diskon akan diterapkan bila pelanggan membayar sebelum dan termasuk %s."
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
@@ -192,6 +192,11 @@ msgid "Authorized Transactions"
 msgstr "Transaksi Diotorisasi"
 
 #. module: account_payment
+#: model:ir.model,name:account_payment.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr ""
+
+#. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.account_invoice_view_form_inherit_payment
 msgid "Capture Transaction"
 msgstr "Cetak Transaksi"
@@ -202,11 +207,6 @@ msgstr "Cetak Transaksi"
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment_paid
 msgid "Close"
 msgstr "Tutup"
-
-#. module: account_payment
-#: model:ir.model.fields,field_description:account_payment.field_account_payment_register__payment_method_code
-msgid "Code"
-msgstr "Kode"
 
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_res_config_settings
@@ -234,6 +234,7 @@ msgid "Discount Date"
 msgstr "Tanggal Diskon"
 
 #. module: account_payment
+#: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__display_name
 #: model:ir.model.fields,field_description:account_payment.field_account_journal__display_name
 #: model:ir.model.fields,field_description:account_payment.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_payment.field_account_payment__display_name
@@ -298,6 +299,7 @@ msgid "Has a pending refund"
 msgstr "Memiliki refund yang pending"
 
 #. module: account_payment
+#: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__id
 #: model:ir.model.fields,field_description:account_payment.field_account_journal__id
 #: model:ir.model.fields,field_description:account_payment.field_account_move__id
 #: model:ir.model.fields,field_description:account_payment.field_account_payment__id
@@ -624,8 +626,7 @@ msgstr "Token akses tidak valid."
 #: code:addons/account_payment/wizards/payment_refund_wizard.py:0
 msgid ""
 "The amount to be refunded must be positive and cannot be superior to %s."
-msgstr ""
-"Jumlah yang akan di-refund harus positif dan tidak boleh lebih dari %s."
+msgstr "Jumlah yang akan di-refund harus positif dan tidak boleh lebih dari %s."
 
 #. module: account_payment
 #: model:ir.model.fields,help:account_payment.field_payment_provider__journal_id
@@ -636,7 +637,7 @@ msgstr "Jurnal di mana transaksi sukses ditulis."
 #. odoo-python
 #: code:addons/account_payment/models/payment_transaction.py:0
 msgid "The payment related to transaction %(ref)s has been posted: %(link)s"
-msgstr ""
+msgstr "Pembayaran terkait transaksi %(ref)s telah dipost: %(link)s"
 
 #. module: account_payment
 #. odoo-python
@@ -792,6 +793,9 @@ msgstr "telah diterapkan."
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid "overdue"
 msgstr "terlambat"
+
+#~ msgid "Code"
+#~ msgstr "Kode"
 
 #~ msgid ""
 #~ "<strong>No suitable payment option could be found.</strong><br/>\n"

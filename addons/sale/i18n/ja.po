@@ -6,17 +6,19 @@
 # Martin Trigaux, 2022
 # 江口和志 <sandwhale1010@gmail.com>, 2023
 # Andy Yiu, 2023
-# Ryoko Tsuda <ryoko@quartile.co>, 2023, 2025.
+# Ryoko Tsuda <ryoko@quartile.co>, 2023, 2025, 2026.
 # Yoshi Tashiro (Quartile) <tashiro@roomsfor.hk>, 2023
 # Tatsuki Kanda, 2023
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Junko Augias (juau)" <juau@odoo.com>, 2025.
+# "Junko Augias (juau)" <juau@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025.
+# Yoshi Tashiro <tashiro@quartile.co>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-11-04 05:20+0000\n"
+"POT-Creation-Date: 2026-07-10 17:37+0000\n"
+"PO-Revision-Date: 2026-07-09 08:35+0000\n"
 "Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
 "Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/sale/ja/"
 ">\n"
@@ -25,7 +27,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: sale
 #. odoo-javascript
@@ -82,7 +84,7 @@ msgstr "&amp;nbsp;"
 #. module: sale
 #: model:ir.actions.report,print_report_name:sale.action_report_pro_forma_invoice
 msgid "'PRO-FORMA - %s' % (object.name)"
-msgstr "PRO-FORMA - %s' % (object.name)"
+msgstr "プロフォーマ -%s % (object.name)"
 
 #. module: sale
 #: model:ir.actions.report,print_report_name:sale.action_report_saleorder
@@ -90,8 +92,8 @@ msgid ""
 "(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or "
 "'Order - %s' % (object.name)"
 msgstr ""
-"(object.state in ('draft', 'sent') and 'Quotation - %s' % (object.name)) or "
-"'Order - %s' % (object.name)"
+"(object.state in ('draft', 'sent') and '見積 - %s' % (object.name)) or 'オー"
+"ダ - %s' % (object.name)"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
@@ -100,32 +102,6 @@ msgid ""
 "sales."
 msgstr ""
 "100％無料です！きれいな見積書を作成し、販売を追跡する時間を節約できます。"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "2023-12-31"
-msgstr "2023-12-31"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "25.00"
-msgstr "25.00"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-#: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
-msgid "27.00"
-msgstr "27.00"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "30.00"
-msgstr "30.00"
-
-#. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
-msgid "31.05"
-msgstr "31.05"
 
 #. module: sale
 #. odoo-javascript
@@ -199,7 +175,7 @@ msgstr ""
 "    <p style=\"margin: 0px; padding: 0px; font-size: 12px;\">\n"
 "        <t t-set=\"transaction_sudo\" t-"
 "value=\"object.get_portal_last_transaction()\"/>\n"
-"        お世話になっております。\n"
+"       いつもお世話になっております。\n"
 "        <br/><br/>\n"
 "        参照番号:\n"
 "        <span style=\"font-weight:bold;\" t-out=\"transaction_sudo.reference "
@@ -225,7 +201,7 @@ msgstr ""
 "                <span style=\"font-weight:bold;\" t-"
 "out=\"format_amount(object.amount_total - object.amount_paid - "
 "transaction_sudo.amount, object.currency_id) or ''\">$ 10.00</span>\n"
-"                をお支払いください。\n"
+"                のお支払いをお願いいたします。\n"
 "            </t>\n"
 "        </t>\n"
 "        <t t-else=\"\">\n"
@@ -242,7 +218,8 @@ msgstr ""
 "        <br/><br/>\n"
 "        何卒よろしくお願いいたします。\n"
 "        <br/>\n"
-"        ご不明な点がございましたら、お問合せ下さい。\n"
+"        ご不明な点がございましたら、お問合せ下さい。よろしくお願いいたしま"
+"す。\n"
 "        <t t-if=\"not is_html_empty(object.user_id.signature)\" data-o-mail-"
 "quote-container=\"1\">\n"
 "            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-"
@@ -320,9 +297,8 @@ msgid ""
 "weight:bold;\">Quantity</span></td>\n"
 "                <td width=\"20%\" align=\"right\">\n"
 "                    <span style=\"font-weight:bold;\">\n"
-"                        <t t-"
-"if=\"object.website_id.show_line_subtotals_tax_selection == "
-"'tax_excluded'\">\n"
+"                        <t t-if=\"hasattr(object, 'website_id') and "
+"object.website_id.show_line_subtotals_tax_selection == 'tax_excluded'\">\n"
 "                            Tax Excl.\n"
 "                        </t>\n"
 "                        <t t-else=\"\">\n"
@@ -335,7 +311,7 @@ msgid ""
 "        <t t-set=\"current_subtotal\" t-value=\"0\"/>\n"
 "        <t t-foreach=\"object.order_line\" t-as=\"line\">\n"
 "            <t t-set=\"line_subtotal\" t-value=\"                     "
-"line.price_subtotal                     if "
+"line.price_subtotal                     if hasattr(object, 'website_id') and "
 "object.website_id.show_line_subtotals_tax_selection == "
 "'tax_excluded'                     else line.price_total                 \"/"
 ">\n"
@@ -385,9 +361,9 @@ msgid ""
 "                        <td style=\"width: 150px;\">\n"
 "                            <img t-attf-src=\"/web/image/product.product/"
 "{{ line.product_id.id }}/image_128\" t-attf-style=\"width: 64px; height: "
-"{{object.website_id and object.website_id._get_product_image_ratio_height() "
-"or '64px'}}; object-fit: cover; object-position: center;\" alt=\"Product "
-"image\"/>\n"
+"{{hasattr(object, 'website_id') and object.website_id and "
+"object.website_id._get_product_image_ratio_height() or '64px'}}; object-fit: "
+"cover; object-position: center;\" alt=\"Product image\"/>\n"
 "                        </td>\n"
 "                        <td align=\"left\" t-out=\"line.product_id.name or "
 "''\">\tTaking care of Trees Course</td>\n"
@@ -395,9 +371,8 @@ msgid ""
 "out=\"line.product_uom_qty or ''\">1</td>\n"
 "                        <td width=\"20%\" align=\"right\"><span style=\"font-"
 "weight:bold; white-space: nowrap;\">\n"
-"                        <t t-"
-"if=\"object.website_id.show_line_subtotals_tax_selection == "
-"'tax_excluded'\">\n"
+"                        <t t-if=\"hasattr(object, 'website_id') and "
+"object.website_id.show_line_subtotals_tax_selection == 'tax_excluded'\">\n"
 "                            <t t-"
 "out=\"format_amount(line.price_reduce_taxexcl, object.currency_id) or ''\">$ "
 "10.00</t>\n"
@@ -532,8 +507,9 @@ msgid ""
 "            </tr>\n"
 "        </table>\n"
 "    </div>\n"
-"    <div t-if=\"object.partner_shipping_id and not object.only_services\" "
-"style=\"margin: 0px; padding: 0px;\">\n"
+"    <div t-if=\"hasattr(object, 'only_services') and "
+"object.partner_shipping_id and not object.only_services\" style=\"margin: "
+"0px; padding: 0px;\">\n"
 "        <table width=\"100%\" style=\"color: #454748; font-size: 12px;\">\n"
 "            <tr>\n"
 "                <td>\n"
@@ -581,53 +557,54 @@ msgid ""
 msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 12px;\">\n"
-"        お世話になっております。\n"
+"        いつもお世話になっております。\n"
 "        <br/><br/>\n"
-"        <t t-set=\"tx_sudo\" t-value=\"object.get_portal_last_transaction()\""
-"/>\n"
-"        お客様のご注文<span style=\"font-weight:bold;\" t-out=\"object.name "
-"or ''\">S00049</span> (金額：<span style=\"font-weight:bold;\" t-out=\""
-"format_amount(object.amount_total, object.currency_id) or ''\">$ "
-"10.00)</span>\n"
-"        <t t-if=\"object.state == 'sale' or (tx_sudo and tx_sudo.state in ("
-"'done', 'authorized'))\">\n"
-"            が確定されました。<br/>\n"
-"            当店をご利用頂きましてまことにありがとうございます。\n"
+"        <t t-set=\"tx_sudo\" t-value=\"object.get_portal_last_transaction()"
+"\"/>\n"
+"        お客様のご注文 <span style=\"font-weight:bold;\" t-out=\"object.name "
+"or ''\">S00049</span> 金額： <span style=\"font-weight:bold;\" t-"
+"out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ "
+"10.00</span>\n"
+"        <t t-if=\"object.state == 'sale' or (tx_sudo and tx_sudo.state in "
+"('done', 'authorized'))\">\n"
+"            が確定いたしました。<br/>\n"
+"            ご利用いただきありがとうございました。\n"
 "        </t>\n"
 "        <t t-elif=\"tx_sudo and tx_sudo.state == 'pending'\">\n"
-"            は現在保留中です。お支払いの確認後、確定されます。\n"
+"            は保留中です。ご入金が確認できましたら、確定されます。\n"
 "            <t t-if=\"object.reference\">\n"
-"                お支払い参照番号：<span style=\"font-weight:bold;\" t-out=\""
-"object.reference or ''\"/>\n"
+"                お支払い参照番号： <span style=\"font-weight:bold;\" t-"
+"out=\"object.reference or ''\"/>.\n"
 "            </t>\n"
 "        </t>\n"
 "        <br/>\n"
-"        <t t-set=\"documents\" t-value=\"object._get_product_documents()\"/>"
-"\n"
+"        <t t-set=\"documents\" t-value=\"object._get_product_documents()\"/"
+">\n"
 "        <t t-if=\"documents\">\n"
 "            <br/>\n"
 "            <t t-if=\"len(documents)&gt;1\">\n"
-"                ご参考までに、以下の追加資料をご覧ください:\n"
+"                ご参考までに追加のドキュメントをお送りいたします：\n"
 "            </t>\n"
 "            <t t-else=\"\">\n"
-"                ご参考までに、以下の追加資料をご覧ください:\n"
+"                ご参考までに追加のドキュメントをお送りいたします：\n"
 "            </t>\n"
 "            <ul style=\"margin-bottom: 0;\">\n"
 "                <t t-foreach=\"documents\" t-as=\"document\">\n"
 "                    <li style=\"font-size: 13px;\">\n"
 "                        <a t-out=\"document.ir_attachment_id.name\" t-att-"
-"href=\"object.get_portal_url('/document/' + str(document.id))\" t-att-target="
-"\"target\"/>\n"
+"href=\"object.get_portal_url('/document/' + str(document.id))\" t-att-"
+"target=\"target\"/>\n"
 "                    </li>\n"
 "                </t>\n"
 "            </ul>\n"
 "        </t>\n"
 "        <br/>\n"
-"        何かご不明な点がございましたら、お気軽にお問い合わせください。\n"
+"        何かご不明な点がございましたら、お気軽にお問い合わせください。よろし"
+"くおねがいいたします。\n"
 "        <t t-if=\"not is_html_empty(object.user_id.signature)\" data-o-mail-"
 "quote-container=\"1\">\n"
-"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t "
-"t-out=\"object.user_id.signature or ''\" data-o-mail-quote=\"1\">Mitchell "
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-"
+"out=\"object.user_id.signature or ''\" data-o-mail-quote=\"1\">Mitchell "
 "Admin</t></div>\n"
 "        </t>\n"
 "    </p>\n"
@@ -636,19 +613,19 @@ msgstr ""
 "        <table width=\"100%\" style=\"color: #454748; font-size: 12px; "
 "border-collapse: collapse; white-space: nowrap;\">\n"
 "            <tr style=\"border-bottom: 2px solid #dee2e6;\">\n"
-"                <td style=\"width: 150px;\"><span style=\"font-weight:bold;\""
-">プロダクト</span></td>\n"
+"                <td style=\"width: 150px;\"><span style=\"font-weight:bold;"
+"\">プロダクト</span></td>\n"
 "                <td/>\n"
 "                <td width=\"15%\" align=\"center\"><span style=\"font-"
 "weight:bold;\">数量</span></td>\n"
 "                <td width=\"20%\" align=\"right\">\n"
 "                    <span style=\"font-weight:bold;\">\n"
-"                        <t t-if="
-"\"object.website_id.show_line_subtotals_tax_selection == 'tax_excluded'\">\n"
-"                            税抜き価格\n"
+"                        <t t-if=\"hasattr(object, 'website_id') and "
+"object.website_id.show_line_subtotals_tax_selection == 'tax_excluded'\">\n"
+"                            税抜き\n"
 "                        </t>\n"
 "                        <t t-else=\"\">\n"
-"                            税込み価格\n"
+"                            税込み\n"
 "                        </t>\n"
 "                    </span>\n"
 "                </td>\n"
@@ -657,127 +634,127 @@ msgstr ""
 "        <t t-set=\"current_subtotal\" t-value=\"0\"/>\n"
 "        <t t-foreach=\"object.order_line\" t-as=\"line\">\n"
 "            <t t-set=\"line_subtotal\" t-value=\"                     "
-"line.price_subtotal                     if "
+"line.price_subtotal                     if hasattr(object, 'website_id') and "
 "object.website_id.show_line_subtotals_tax_selection == "
-"'tax_excluded'                     else line.price_total                 \"/>"
-"\n"
-"            <t t-set=\"current_subtotal\" t-value="
-"\"current_subtotal + line_subtotal\"/>\n"
+"'tax_excluded'                     else line.price_total                 \"/"
+">\n"
+"            <t t-set=\"current_subtotal\" t-value=\"current_subtotal + "
+"line_subtotal\"/>\n"
 "            <t t-if=\"(not hasattr(line, 'is_delivery') or not "
 "line.is_delivery) and (                     line.display_type in "
 "['line_section', 'line_subsection', 'line_note']                     or "
 "line.product_type == 'combo'                 )\">\n"
-"                <table width=\"100%\" style="
-"\"color: #454748; font-size: 12px; border-collapse: collapse;\">\n"
-"                    <t t-set=\"loop_cycle_number\" t-value="
-"\"loop_cycle_number or 0\"/>\n"
+"                <table width=\"100%\" style=\"color: #454748; font-size: "
+"12px; border-collapse: collapse;\">\n"
+"                    <t t-set=\"loop_cycle_number\" t-"
+"value=\"loop_cycle_number or 0\"/>\n"
 "                    <tr t-att-style=\"'background-color: #f2f2f2' if "
 "loop_cycle_number % 2 == 0 else 'background-color: #ffffff'\">\n"
-"                        <t t-set=\"loop_cycle_number\" t-value="
-"\"loop_cycle_number + 1\"/>\n"
+"                        <t t-set=\"loop_cycle_number\" t-"
+"value=\"loop_cycle_number + 1\"/>\n"
 "                        <td colspan=\"4\">\n"
 "                            <t t-if=\"line.display_type in ('line_section', "
 "'line_subsection') or line.product_type == 'combo'\">\n"
 "                                <span t-att-style=\"'font-weight:bold;' if "
-"line.display_type == 'line_subsection' else 'font-weight:bolder;'\" t-out=\""
-"line.name or ''\">樹木の手入れについて学ぶコース</span>\n"
-"                                <t t-set=\"current_section\" t-value=\"line\""
-"/>\n"
-"                                <t t-set=\"current_subtotal\" t-value=\"0\"/>"
-"\n"
+"line.display_type == 'line_subsection' else 'font-weight:bolder;'\" t-"
+"out=\"line.name or ''\">Taking care of Trees Course</span>\n"
+"                                <t t-set=\"current_section\" t-"
+"value=\"line\"/>\n"
+"                                <t t-set=\"current_subtotal\" t-value=\"0\"/"
+">\n"
 "                            </t>\n"
 "                            <t t-elif=\"line.display_type == 'line_note'\">\n"
-"                                <i t-out=\"line.name or ''\""
-">樹木の手入れについて学ぶコース</i>\n"
+"                                <i t-out=\"line.name or ''\">樹木の手入れコー"
+"ス</i>\n"
 "                            </t>\n"
 "                        </td>\n"
 "                    </tr>\n"
 "                </table>\n"
 "            </t>\n"
-"            <t t-elif="
-"\"(not hasattr(line, 'is_delivery') or not line.is_delivery)\">\n"
-"                <table width=\"100%\" style="
-"\"color: #454748; font-size: 12px; border-collapse: collapse;\">\n"
-"                    <t t-set=\"loop_cycle_number\" t-value="
-"\"loop_cycle_number or 0\"/>\n"
+"            <t t-elif=\"(not hasattr(line, 'is_delivery') or not "
+"line.is_delivery)\">\n"
+"                <table width=\"100%\" style=\"color: #454748; font-size: "
+"12px; border-collapse: collapse;\">\n"
+"                    <t t-set=\"loop_cycle_number\" t-"
+"value=\"loop_cycle_number or 0\"/>\n"
 "                    <tr t-att-style=\"'background-color: #f2f2f2' if "
 "loop_cycle_number % 2 == 0 else 'background-color: #ffffff'\">\n"
-"                        <t t-set=\"loop_cycle_number\" t-value="
-"\"loop_cycle_number + 1\"/>\n"
+"                        <t t-set=\"loop_cycle_number\" t-"
+"value=\"loop_cycle_number + 1\"/>\n"
 "                        <td style=\"width: 150px;\">\n"
-"                            <img t-attf-src="
-"\"/web/image/product.product/{{ line.product_id.id }}/image_128\" t-attf-"
-"style=\"width: 64px; height: {{object.website_id and "
+"                            <img t-attf-src=\"/web/image/product.product/"
+"{{ line.product_id.id }}/image_128\" t-attf-style=\"width: 64px; height: "
+"{{hasattr(object, 'website_id') and object.website_id and "
 "object.website_id._get_product_image_ratio_height() or '64px'}}; object-fit: "
 "cover; object-position: center;\" alt=\"Product image\"/>\n"
 "                        </td>\n"
-"                        <td align=\"left\" t-out="
-"\"line.product_id.name or ''\">\t樹木の手入れについて学ぶコース</td>\n"
-"                        <td width=\"15%\" align=\"center\" t-out="
-"\"line.product_uom_qty or ''\">1</td>\n"
+"                        <td align=\"left\" t-out=\"line.product_id.name or "
+"''\">\t樹木の手入れコース</td>\n"
+"                        <td width=\"15%\" align=\"center\" t-"
+"out=\"line.product_uom_qty or ''\">1</td>\n"
 "                        <td width=\"20%\" align=\"right\"><span style=\"font-"
 "weight:bold; white-space: nowrap;\">\n"
-"                        <t t-if="
-"\"object.website_id.show_line_subtotals_tax_selection == 'tax_excluded'\">\n"
-"                            <t t-out="
-"\"format_amount(line.price_reduce_taxexcl, object.currency_id) or ''\">$ "
+"                        <t t-if=\"hasattr(object, 'website_id') and "
+"object.website_id.show_line_subtotals_tax_selection == 'tax_excluded'\">\n"
+"                            <t t-"
+"out=\"format_amount(line.price_reduce_taxexcl, object.currency_id) or ''\">$ "
 "10.00</t>\n"
 "                        </t>\n"
 "                        <t t-else=\"\">\n"
-"                            <t t-out="
-"\"format_amount(line.price_reduce_taxinc, object.currency_id) or ''\">$ "
+"                            <t t-"
+"out=\"format_amount(line.price_reduce_taxinc, object.currency_id) or ''\">$ "
 "10.00</t>\n"
 "                        </t>\n"
 "                        </span></td>\n"
 "                    </tr>\n"
 "                </table>\n"
 "            </t>\n"
-"            <t t-if=\"current_section and (                     "
-"line_last                     or object.order_line[line_index+1]"
-".display_type in ('line_section', 'line_subsection')                     or "
+"            <t t-if=\"current_section and "
+"(                     line_last                     or "
+"object.order_line[line_index+1].display_type in ('line_section', "
+"'line_subsection')                     or "
 "object.order_line[line_index+1].product_type == 'combo'                     "
 "or (                         line.combo_item_id                         and "
-"not object.order_line[line_index+1].combo_item_id                     )"
-"                 ) and not line.is_downpayment\">\n"
+"not "
+"object.order_line[line_index+1].combo_item_id                     )                 ) "
+"and not line.is_downpayment\">\n"
 "                <t t-set=\"current_section\" t-value=\"None\"/>\n"
-"                <table width=\"100%\" style="
-"\"color: #454748; font-size: 12px; border-collapse: collapse;\">\n"
-"                    <t t-set=\"loop_cycle_number\" t-value="
-"\"loop_cycle_number or 0\"/>\n"
+"                <table width=\"100%\" style=\"color: #454748; font-size: "
+"12px; border-collapse: collapse;\">\n"
+"                    <t t-set=\"loop_cycle_number\" t-"
+"value=\"loop_cycle_number or 0\"/>\n"
 "                    <tr t-att-style=\"'background-color: #f2f2f2' if "
 "loop_cycle_number % 2 == 0 else 'background-color: #ffffff'\">\n"
-"                        <t t-set=\"loop_cycle_number\" t-value="
-"\"loop_cycle_number + 1\"/>\n"
+"                        <t t-set=\"loop_cycle_number\" t-"
+"value=\"loop_cycle_number + 1\"/>\n"
 "                        <td style=\"width: 100%\" align=\"right\">\n"
 "                            <span style=\"font-weight: bold;\">小計:</span>\n"
-"                            <span t-out="
-"\"format_amount(current_subtotal, object.currency_id) or ''\">$ 10.00</span>"
-"\n"
+"                            <span t-out=\"format_amount(current_subtotal, "
+"object.currency_id) or ''\">$ 10.00</span>\n"
 "                        </td>\n"
 "                    </tr>\n"
 "                </table>\n"
 "            </t>\n"
 "        </t>\n"
 "    </div>\n"
-"    <div style=\"margin: 0px; padding: 0px;\" t-if="
-"\"hasattr(object, 'carrier_id') and object.carrier_id\">\n"
+"    <div style=\"margin: 0px; padding: 0px;\" t-if=\"hasattr(object, "
+"'carrier_id') and object.carrier_id\">\n"
 "        <table width=\"100%\" style=\"color: #454748; font-size: 12px; "
 "border-spacing: 0px 4px; white-space: nowrap;\" align=\"right\">\n"
 "            <tr>\n"
 "                <td style=\"width: 60%\"/>\n"
 "                <td style=\"width: 30%; border-top: 1px solid #dee2e6;\" "
-"align=\"right\"><span style=\"font-weight:bold;\">配送:</span></td>\n"
+"align=\"right\"><span style=\"font-weight:bold;\">配送料:</span></td>\n"
 "                <td style=\"width: 10%; border-top: 1px solid #dee2e6;\" "
-"align=\"right\" t-out="
-"\"format_amount(object.amount_delivery, object.currency_id) or ''\">$ "
-"0.00</td>\n"
+"align=\"right\" t-out=\"format_amount(object.amount_delivery, "
+"object.currency_id) or ''\">$ 0.00</td>\n"
 "            </tr>\n"
 "            <tr>\n"
 "                <td style=\"width: 60%\"/>\n"
 "                <td style=\"width: 30%;\" align=\"right\"><span style=\"font-"
-"weight:bold;\">税抜き金額:</span></td>\n"
-"                <td style=\"width: 10%;\" align=\"right\" t-out="
-"\"format_amount(object.amount_untaxed, object.currency_id) or ''\">$ "
+"weight:bold;\">税抜金額:</span></td>\n"
+"                <td style=\"width: 10%;\" align=\"right\" t-"
+"out=\"format_amount(object.amount_untaxed, object.currency_id) or ''\">$ "
 "10.00</td>\n"
 "            </tr>\n"
 "        </table>\n"
@@ -788,11 +765,10 @@ msgstr ""
 "            <tr>\n"
 "                <td style=\"width: 60%\"/>\n"
 "                <td style=\"width: 30%; border-top: 1px solid #dee2e6;\" "
-"align=\"right\"><span style=\"font-weight:bold;\">税抜き金額:</span></td>\n"
+"align=\"right\"><span style=\"font-weight:bold;\">税抜金額:</span></td>\n"
 "                <td style=\"width: 10%; border-top: 1px solid #dee2e6;\" "
-"align=\"right\" t-out="
-"\"format_amount(object.amount_untaxed, object.currency_id) or ''\">$ "
-"10.00</td>\n"
+"align=\"right\" t-out=\"format_amount(object.amount_untaxed, "
+"object.currency_id) or ''\">$ 10.00</td>\n"
 "            </tr>\n"
 "        </table>\n"
 "    </div>\n"
@@ -803,22 +779,22 @@ msgstr ""
 "                <td style=\"width: 60%\"/>\n"
 "                <td style=\"width: 30%;\" align=\"right\"><span style=\"font-"
 "weight:bold;\">税:</span></td>\n"
-"                <td style=\"width: 10%;\" align=\"right\" t-out="
-"\"format_amount(object.amount_tax, object.currency_id) or ''\">$ 0.00</td>\n"
+"                <td style=\"width: 10%;\" align=\"right\" t-"
+"out=\"format_amount(object.amount_tax, object.currency_id) or ''\">$ 0.00</"
+"td>\n"
 "            </tr>\n"
 "            <tr>\n"
 "                <td style=\"width: 60%\"/>\n"
 "                <td style=\"width: 30%; border-top: 1px solid #dee2e6;\" "
 "align=\"right\"><span style=\"font-weight:bold;\">合計:</span></td>\n"
 "                <td style=\"width: 10%; border-top: 1px solid #dee2e6;\" "
-"align=\"right\" t-out="
-"\"format_amount(object.amount_total, object.currency_id) or ''\">$ 10.00</td>"
-"\n"
+"align=\"right\" t-out=\"format_amount(object.amount_total, "
+"object.currency_id) or ''\">$ 10.00</td>\n"
 "            </tr>\n"
 "        </table>\n"
 "    </div>\n"
-"    <div t-if=\"object.partner_invoice_id\" style="
-"\"margin: 0px; padding: 0px;\">\n"
+"    <div t-if=\"object.partner_invoice_id\" style=\"margin: 0px; padding: "
+"0px;\">\n"
 "        <table width=\"100%\" style=\"color: #454748; font-size: 12px;\">\n"
 "            <tr>\n"
 "                <td style=\"padding-top: 10px;\">\n"
@@ -827,47 +803,48 @@ msgstr ""
 "S Figueroa St</t>\n"
 "                    <t t-out=\"object.partner_invoice_id.city or ''\">Los "
 "Angeles</t>\n"
-"                    <t t-out="
-"\"object.partner_invoice_id.state_id.name or ''\">California</t>\n"
-"                    <t t-out=\"object.partner_invoice_id.zip or ''\""
-">90015</t>\n"
-"                    <t t-out="
-"\"object.partner_invoice_id.country_id.name or ''\">United States</t>\n"
+"                    <t t-out=\"object.partner_invoice_id.state_id.name or "
+"''\">California</t>\n"
+"                    <t t-out=\"object.partner_invoice_id.zip or ''\">90015</"
+"t>\n"
+"                    <t t-out=\"object.partner_invoice_id.country_id.name or "
+"''\">United States</t>\n"
 "                </td>\n"
 "            </tr>\n"
 "            <tr>\n"
 "                <td>\n"
-"                    <span style=\"font-weight:bold;\">支払い方法:</span>\n"
+"                    <span style=\"font-weight:bold;\">支払方法:</span>\n"
 "                    <t t-if=\"tx_sudo.token_id\">\n"
 "                        <t t-out=\"tx_sudo.token_id.display_name or ''\"/>\n"
 "                    </t>\n"
 "                    <t t-else=\"\">\n"
-"                        <t t-out=\"tx_sudo.provider_id.sudo().name or ''\"/>"
-"\n"
+"                        <t t-out=\"tx_sudo.provider_id.sudo().name or ''\"/"
+">\n"
 "                    </t>\n"
-"                    (<t t-out="
-"\"format_amount(tx_sudo.amount, object.currency_id) or ''\">$ 10.00</t>)\n"
+"                    (<t t-out=\"format_amount(tx_sudo.amount, "
+"object.currency_id) or ''\">$ 10.00</t>)\n"
 "                </td>\n"
 "            </tr>\n"
 "        </table>\n"
 "    </div>\n"
-"    <div t-if=\"object.partner_shipping_id and not object.only_services\" "
-"style=\"margin: 0px; padding: 0px;\">\n"
+"    <div t-if=\"hasattr(object, 'only_services') and "
+"object.partner_shipping_id and not object.only_services\" style=\"margin: "
+"0px; padding: 0px;\">\n"
 "        <table width=\"100%\" style=\"color: #454748; font-size: 12px;\">\n"
 "            <tr>\n"
 "                <td>\n"
 "                    <br/>\n"
 "                    <span style=\"font-weight:bold;\">配送先:</span>\n"
-"                    <t t-out=\"object.partner_shipping_id.street or ''\""
-">1201 S Figueroa St</t>\n"
+"                    <t t-out=\"object.partner_shipping_id.street or "
+"''\">1201 S Figueroa St</t>\n"
 "                    <t t-out=\"object.partner_shipping_id.city or ''\">Los "
 "Angeles</t>\n"
-"                    <t t-out="
-"\"object.partner_shipping_id.state_id.name or ''\">California</t>\n"
-"                    <t t-out=\"object.partner_shipping_id.zip or ''\""
-">90015</t>\n"
-"                    <t t-out="
-"\"object.partner_shipping_id.country_id.name or ''\">United States</t>\n"
+"                    <t t-out=\"object.partner_shipping_id.state_id.name or "
+"''\">California</t>\n"
+"                    <t t-out=\"object.partner_shipping_id.zip or ''\">90015</"
+"t>\n"
+"                    <t t-out=\"object.partner_shipping_id.country_id.name or "
+"''\">United States</t>\n"
 "                </td>\n"
 "            </tr>\n"
 "        </table>\n"
@@ -881,15 +858,14 @@ msgstr ""
 "                        (無料)\n"
 "                    </t>\n"
 "                    <t t-else=\"\">\n"
-"                        (<t t-out="
-"\"format_amount(object.amount_delivery, object.currency_id) or ''\">$ "
-"10.00</t>)\n"
+"                        (<t t-out=\"format_amount(object.amount_delivery, "
+"object.currency_id) or ''\">$ 10.00</t>)\n"
 "                    </t>\n"
 "                </td>\n"
 "            </tr>\n"
 "            <tr t-if=\"object.carrier_id.carrier_description\">\n"
 "                <td>\n"
-"                    <strong>配送についての詳細:</strong>\n"
+"                    <strong>配送詳細:</strong>\n"
 "                    <t t-out=\"object.carrier_id.carrier_description\"/>\n"
 "                </td>\n"
 "            </tr>\n"
@@ -950,45 +926,46 @@ msgid ""
 msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"        <t t-set=\"doc_name\" t-value="
-"\"'quotation' if object.state in ('draft', 'sent') else 'order'\"/>\n"
+"        <t t-set=\"doc_name\" t-value=\"'quotation' if object.state in "
+"('draft', 'sent') else 'order'\"/>\n"
 "        いつもご利用いただきありがとうございます。\n"
 "        <br/><br/>\n"
-"        <t t-out=\"doc_name or ''\">見積もり</t> <span style=\"font-weight: "
+"        <t t-out=\"doc_name or ''\">見積書</t> <span style=\"font-weight: "
 "bold;\" t-out=\"object.name or ''\"/>\n"
 "        <t t-if=\"object.origin\">\n"
 "            (参照番号: <t t-out=\"object.origin or ''\">S00052</t> )\n"
 "        </t>\n"
-"        金額： <span style=\"font-weight: bold;\" t-out=\"format_amount("
-"object.amount_total, object.currency_id) or ''\">$ "
+"        金額： <span style=\"font-weight: bold;\" t-"
+"out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ "
 "10.00</span>のご用意ができました。ご確認をお願いたします。\n"
 "        <br/>\n"
-"        <t t-set=\"documents\" t-value=\"object._get_product_documents()\"/>"
-"\n"
+"        <t t-set=\"documents\" t-value=\"object._get_product_documents()\"/"
+">\n"
 "        <t t-if=\"documents\">\n"
 "            <br/>\n"
 "            <t t-if=\"len(documents)&gt;1\">\n"
-"                ご参考までに、いくつかの追加資料をご案内いたします:\n"
+"                追加で関連ドキュメントをお送りいたします:\n"
 "            </t>\n"
 "            <t t-else=\"\">\n"
-"                ご参考までに、いくつかの追加資料をご案内いたします:\n"
+"                追加で関連ドキュメントをお送りいたします:\n"
 "            </t>\n"
 "            <ul style=\"margin-bottom: 0;\">\n"
 "                <t t-foreach=\"documents\" t-as=\"document\">\n"
 "                    <li style=\"font-size: 13px;\">\n"
 "                        <a t-out=\"document.ir_attachment_id.name\" t-att-"
-"href=\"object.get_portal_url('/document/' + str(document.id))\" t-att-target="
-"\"target\"/>\n"
+"href=\"object.get_portal_url('/document/' + str(document.id))\" t-att-"
+"target=\"target\"/>\n"
 "                    </li>\n"
 "                </t>\n"
 "            </ul>\n"
 "        </t>\n"
 "        <br/>\n"
-"        何かご不明な点がございましたら、お気軽にお問い合わせください。\n"
+"        何かご不明な点がございましたら、お気軽にお問い合わせください。よろし"
+"くお願いいたします。\n"
 "        <t t-if=\"not is_html_empty(object.user_id.signature)\" data-o-mail-"
 "quote-container=\"1\">\n"
-"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t "
-"t-out=\"object.user_id.signature or ''\" data-o-mail-quote=\"1\">Mitchell "
+"            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/><t t-"
+"out=\"object.user_id.signature or ''\" data-o-mail-quote=\"1\">Mitchell "
 "Admin</t></div>\n"
 "        </t>\n"
 "    </p>\n"
@@ -1029,7 +1006,7 @@ msgstr ""
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        <t t-set=\"doc_name\" t-value=\"'quotation' if object.state in "
 "('draft', 'sent') else 'order'\"/>\n"
-"        お世話になっております。\n"
+"        いつもお世話になっております。\n"
 "        <br/><br/>\n"
 "        <t t-out=\"doc_name or ''\">見積書</t> <span style=\"font-weight: "
 "bold;\" t-out=\"object.name or ''\">S00052</span>\n"
@@ -1038,10 +1015,10 @@ msgstr ""
 "        </t>\n"
 "        金額 <span style=\"font-weight: bold;\" t-"
 "out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ "
-"10.00</span> の見積送状のご用意ができましたのでお知らせいたします。\n"
+"10.00</span> の仮請求書のご用意ができました。ご確認をお願いいたします。\n"
 "        <br/><br/>\n"
-"         ご不明な点がございましたら、お気軽にお問合せ下さい。宜しくお願いいた"
-"します。\n"
+"         ご不明な点がございましたら、お気軽にお問合せ下さい。よろしくお願いい"
+"たします。\n"
 "        <t t-if=\"not is_html_empty(object.user_id.signature)\" data-o-mail-"
 "quote-container=\"1\">\n"
 "                      <div data-o-mail-quote=\"1\">--<br data-o-mail-"
@@ -1150,15 +1127,6 @@ msgstr ""
 "is_product_archived\"/>"
 
 #. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
-msgid ""
-"<span class=\"fa fa-lg fa-building-o p-2\" title=\"Values set here are "
-"company-specific.\" groups=\"base.group_multi_company\"/>"
-msgstr ""
-"<span class=\"fa fa-lg fa-building-o p-2\" title=\"Values set here are "
-"company-specific.\" groups=\"base.group_multi_company\"/>"
-
-#. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.crm_team_salesteams_view_form
 msgid "<span class=\"flex-grow-1\">/ Month</span>"
 msgstr "<span class=\"flex-grow-1\">/ 月</span>"
@@ -1193,7 +1161,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
 msgid "<span>1.00 Units</span>"
-msgstr ""
+msgstr "<span>1.00 単位</span>"
 
 #. module: sale
 #: model_terms:web_tour.tour,rainbow_man_message:sale.sale_tour
@@ -1243,12 +1211,12 @@ msgstr "<span>警告: このオーダは以下と重複している可能性が�
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
 msgid "<strong class=\"d-block mt-3\">Shipping Address</strong>"
-msgstr "<strong class=\"d-block mt-3\">配送先住所</strong>"
+msgstr "<strong class=\"d-block mt-3\">配送先</strong>"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
 msgid "<strong>Delivery Date</strong>"
-msgstr ""
+msgstr "<strong>納品予定日</strong>"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
@@ -1392,6 +1360,7 @@ msgstr "勘定科目表テンプレート"
 
 #. module: sale
 #: model:ir.actions.act_window,name:sale.action_accrued_revenue_entry
+#: model:ir.actions.act_window,name:sale.action_accrued_revenue_entry_sale_order_line
 msgid "Accrued Revenue Entry"
 msgstr "未収収益仕訳"
 
@@ -1403,12 +1372,12 @@ msgstr "要アクション"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "Activate"
-msgstr ""
+msgstr "有効化"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "Activate Stripe"
-msgstr ""
+msgstr "Stripeを有効化"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__activity_ids
@@ -1434,12 +1403,12 @@ msgstr "活動計画"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__activity_state
 msgid "Activity State"
-msgstr "活動状態"
+msgstr "活動ステータス"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__activity_type_icon
 msgid "Activity Type Icon"
-msgstr "活動種別アイコン"
+msgstr "活動タイプアイコン"
 
 #. module: sale
 #: model:ir.actions.act_window,name:sale.mail_activity_type_action_config_sale
@@ -1520,7 +1489,7 @@ msgstr "グリッドビューからオーダに複数のバリアントを追加
 #. odoo-javascript
 #: code:addons/sale/static/src/js/combo_configurator_dialog/combo_configurator_dialog.xml:0
 msgid "Add to order"
-msgstr ""
+msgstr "オーダに追加"
 
 #. module: sale
 #: model:ir.actions.act_window,name:sale.mail_followers_edit_action_from_sale
@@ -1586,6 +1555,7 @@ msgstr "Amazon連携"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order_discount__discount_amount
+#: model:ir.model.fields,field_description:sale.field_sale_order_line__amount_to_invoice_at_date
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_line_view_form_readonly
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Amount"
@@ -1619,7 +1589,7 @@ msgstr ""
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order_line__analytic_distribution
 msgid "Analytic Distribution"
-msgstr "分析用配分"
+msgstr "分析分配"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__qty_delivered_method__analytic
@@ -1629,7 +1599,7 @@ msgstr "経費からの分析"
 #. module: sale
 #: model:ir.model,name:sale.model_account_analytic_line
 msgid "Analytic Line"
-msgstr "分析明細行"
+msgstr "分析明細"
 
 #. module: sale
 #: model:ir.model,name:sale.model_account_analytic_applicability
@@ -1644,7 +1614,7 @@ msgstr "分析精度"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order_line__analytic_line_ids
 msgid "Analytic lines"
-msgstr "分析明細行"
+msgstr "分析明細"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_line_wizard_form
@@ -1726,7 +1696,7 @@ msgstr "属性"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__authorized_transaction_ids
 msgid "Authorized Transactions"
-msgstr "承認されたトランザクション"
+msgstr "承認された取引"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_res_config_settings__automatic_invoice
@@ -1919,7 +1889,7 @@ msgstr "ここをクリックして見積にプロダクトやサービスを追
 #. odoo-javascript
 #: code:addons/sale/static/src/js/product_card/product_card.xml:0
 msgid "Click to configure"
-msgstr ""
+msgstr "クリックして設定"
 
 #. module: sale
 #. odoo-javascript
@@ -1937,12 +1907,12 @@ msgstr "閉じる"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order_line__collapse_composition
 msgid "Collapse Composition"
-msgstr ""
+msgstr "構成を折りたたむ"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order_line__collapse_prices
 msgid "Collapse Prices"
-msgstr ""
+msgstr "価格を折りたたむ"
 
 #. module: sale
 #: model:ir.ui.menu,name:sale.menu_product_combos
@@ -1958,7 +1928,7 @@ msgstr "コンボアイテム"
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
 msgid "Combo Product"
-msgstr ""
+msgstr "コンボプロダクト"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_res_config_settings__module_sale_commission
@@ -2088,7 +2058,7 @@ msgstr "設定"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "Configure"
-msgstr ""
+msgstr "設定"
 
 #. module: sale
 #. odoo-javascript
@@ -2114,11 +2084,6 @@ msgid "Connect with your software!"
 msgstr "自社のシステムと連携"
 
 #. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "Connect your software"
-msgstr "自社のシステムと連携"
-
-#. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "Connectors"
 msgstr "コネクター"
@@ -2126,7 +2091,7 @@ msgstr "コネクター"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_advance_payment_inv__consolidated_billing
 msgid "Consolidated Billing"
-msgstr "連結請求"
+msgstr "まとめ請求"
 
 #. module: sale
 #: model:ir.model,name:sale.model_res_partner
@@ -2222,8 +2187,8 @@ msgid ""
 "Create one invoice for all orders related to same customer, same invoicing "
 "address and same delivery address."
 msgstr ""
-"同じ顧客、請求先住所、配送先住所に関連するすべてのオーダについて、1つの顧客請"
-"求書を作成します。"
+"同じ顧客、請求先、配送先に関連するすべてのオーダについて、1つの顧客請求書を作"
+"成します。"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_advance_payment_inv__create_uid
@@ -2406,7 +2371,7 @@ msgstr "値引に使用されるデフォルトプロダクト"
 #. odoo-javascript
 #: code:addons/sale/static/src/js/sale_order_line_field/sale_order_line_field.xml:0
 msgid "Delete"
-msgstr ""
+msgstr "削除"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
@@ -2414,6 +2379,7 @@ msgid "Deliver Content by Email"
 msgstr "Eメールで内容を配信"
 
 #. module: sale
+#: model:ir.model.fields,field_description:sale.field_sale_order_line__qty_delivered_at_date
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Delivered"
 msgstr "配送済"
@@ -2432,7 +2398,7 @@ msgstr "配送済数量"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__partner_shipping_id
 msgid "Delivery Address"
-msgstr "配送先住所"
+msgstr "配送先"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__commitment_date
@@ -2750,7 +2716,7 @@ msgstr "構成の編集"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_res_config_settings__invoice_mail_template_id
 msgid "Email Template"
-msgstr ""
+msgstr "メールテンプレート"
 
 #. module: sale
 #: model:ir.model.fields,help:sale.field_res_config_settings__invoice_mail_template_id
@@ -2860,6 +2826,8 @@ msgid ""
 "For formula or fixed pricing, the original price isn’t shown in\n"
 "                                sale orders."
 msgstr ""
+"定価または固定価格の場合、販売オーダには元の\n"
+"                                価格は表示されません。"
 
 #. module: sale
 #: model:ir.model.constraint,message:sale.constraint_sale_order_line_non_accountable_null_fields
@@ -2889,7 +2857,7 @@ msgstr "全額<br/>"
 #: model:ir.model.fields.selection,name:sale.selection__sale_report__line_invoice_status__invoiced
 #: model_terms:ir.ui.view,arch_db:sale.view_order_product_search
 msgid "Fully Invoiced"
-msgstr "完全請求済"
+msgstr "全額請求済"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_sales_order_filter
@@ -2950,7 +2918,7 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "Grant discounts on sales order lines"
-msgstr "販売オーダラインに値引適用"
+msgstr "販売オーダ明細に値引を適用"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_report__weight
@@ -2960,7 +2928,7 @@ msgstr "総重量"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__has_active_pricelist
 msgid "Has Active Pricelist"
-msgstr "アクティブな価格表あり"
+msgstr "有効な価格表あり"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__has_archived_products
@@ -2970,7 +2938,7 @@ msgstr "アーカイブ済プロダクトあり"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__has_authorized_transaction_ids
 msgid "Has Authorized Transactions"
-msgstr ""
+msgstr "承認済み取引あり"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_mass_cancel_orders__has_confirmed_order
@@ -3053,7 +3021,7 @@ msgstr "チェックした場合は、新しいメッセージに注意が必要
 #: model:ir.model.fields,help:sale.field_sale_order__message_has_error
 #: model:ir.model.fields,help:sale.field_sale_order__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr "選択されている場合、一部のメッセージで配信エラーが発生しています。"
+msgstr "有効にすると、一部のメッセージに配信エラーが発生します。"
 
 #. module: sale
 #: model:ir.model.fields,help:sale.field_sale_order__journal_id
@@ -3103,14 +3071,14 @@ msgstr "プロダクトテンプレートをインポート"
 #. odoo-python
 #: code:addons/sale/models/sale_order.py:0
 msgid "Import Template for Quotations"
-msgstr ""
+msgstr "見積もり用テンプレートをインポート"
 
 #. module: sale
 #. odoo-javascript
 #: code:addons/sale/static/src/views/sale_file_upload_kanban/sale_file_upload_kanban_renderer.js:0
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid "Import a request for quotation from a customer"
-msgstr ""
+msgstr "顧客からの見積申請をインポート"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.product_pricelist_item_form
@@ -3135,7 +3103,7 @@ msgstr "税込)"
 #. odoo-javascript
 #: code:addons/sale/static/src/js/combo_configurator_dialog/combo_configurator_dialog.xml:0
 msgid "Included"
-msgstr ""
+msgstr "込み"
 
 #. module: sale
 #: model:ir.model.fields,help:sale.field_account_bank_statement_line__sale_warning_text
@@ -3171,7 +3139,7 @@ msgstr "請求書 %s 支払済"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__partner_invoice_id
 msgid "Invoice Address"
-msgstr "請求先住所"
+msgstr "請求先"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__invoice_count
@@ -3186,12 +3154,12 @@ msgstr "請求明細"
 #. module: sale
 #: model:mail.message.subtype,name:sale.mt_salesteam_invoice_paid
 msgid "Invoice Paid"
-msgstr ""
+msgstr "請求書が支払われました"
 
 #. module: sale
 #: model:mail.message.subtype,name:sale.mt_salesteam_invoice_posted
 msgid "Invoice Posted"
-msgstr ""
+msgstr "請求書が計上されました"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_sale_advance_payment_inv
@@ -3238,6 +3206,7 @@ msgid "Invoice what is ordered"
 msgstr "オーダ済数量を請求"
 
 #. module: sale
+#: model:ir.model.fields,field_description:sale.field_sale_order_line__qty_invoiced_at_date
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Invoiced"
 msgstr "請求済"
@@ -3296,7 +3265,7 @@ msgstr "請求"
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
 msgid "Invoicing Address"
-msgstr "請求住所"
+msgstr "請求先"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__journal_id
@@ -3319,7 +3288,7 @@ msgstr "請求目標"
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
 msgid "Invoicing and Shipping Address"
-msgstr "請求および配送先住所"
+msgstr "請求および配送先"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_account_move_line__is_downpayment
@@ -3410,7 +3379,7 @@ msgstr "最終更新日"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_sales_order_filter
 msgid "Late Activities"
-msgstr "遅れた活動"
+msgstr "期限超過の活動"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order_line__customer_lead
@@ -3580,13 +3549,13 @@ msgstr "Mitchell Admin"
 #. odoo-javascript
 #: code:addons/sale/static/src/js/sale_order_line_field/sale_order_line_field.xml:0
 msgid "Move Down"
-msgstr ""
+msgstr "下へ移動"
 
 #. module: sale
 #. odoo-javascript
 #: code:addons/sale/static/src/js/sale_order_line_field/sale_order_line_field.xml:0
 msgid "Move Up"
-msgstr ""
+msgstr "上へ移動"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_sales_order_filter
@@ -3734,7 +3703,7 @@ msgstr "Odoo"
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
 msgid "Office chairs can harm your floor: protect it"
-msgstr ""
+msgstr "オフィスチェアで床が傷つくことがあります:床を保護しましょう"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_discount__discount_type__sol_discount
@@ -3890,7 +3859,7 @@ msgstr "オーダ日:"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_product_search
 msgid "Order Date: Last 365 Days"
-msgstr "オーダ日: 過去365日"
+msgstr "オーダ日: 直近365日"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_report__invoice_status
@@ -3984,7 +3953,7 @@ msgstr "PDF見積書ビルダ"
 #. module: sale
 #: model:ir.actions.report,name:sale.action_report_pro_forma_invoice
 msgid "PRO-FORMA Invoice"
-msgstr "見積送状"
+msgstr "仮請求書"
 
 #. module: sale
 #. odoo-javascript
@@ -3995,7 +3964,7 @@ msgstr "パッケージング"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order_line__parent_id
 msgid "Parent Section Line"
-msgstr ""
+msgstr "親セクション明細行"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__partner_credit_warning
@@ -4151,7 +4120,7 @@ msgstr "価格表項目"
 #. module: sale
 #: model:ir.model,name:sale.model_product_pricelist_item
 msgid "Pricelist Rule"
-msgstr "価格表規則"
+msgstr "価格表ルール"
 
 #. module: sale
 #: model:ir.ui.menu,name:sale.menu_product_pricelist_main
@@ -4172,12 +4141,12 @@ msgstr "印刷"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_res_config_settings__group_proforma_sales
 msgid "Pro-Forma Invoice"
-msgstr "見積送状"
+msgstr "仮請求書"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
 msgid "Pro-Forma Invoice #"
-msgstr "見積送状番号"
+msgstr "仮請求書番号"
 
 #. module: sale
 #: model:res.groups,name:sale.group_proforma_sales
@@ -4214,6 +4183,7 @@ msgid "Product Catalog Product Is In Sale Order"
 msgstr "プロダクトカタログのプロダクトが販売オーダにあります"
 
 #. module: sale
+#: model:ir.model.fields,field_description:sale.field_sale_order_line__categ_id
 #: model:ir.model.fields,field_description:sale.field_sale_report__categ_id
 #: model_terms:ir.ui.view,arch_db:sale.view_order_product_search
 msgid "Product Category"
@@ -4458,7 +4428,7 @@ msgstr "評価"
 #: model:ir.model.fields,field_description:sale.field_product_product__expense_policy
 #: model:ir.model.fields,field_description:sale.field_product_template__expense_policy
 msgid "Re-Invoice Costs"
-msgstr "経費を再請求する"
+msgstr "経費再請求"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_product_product__visible_expense_policy
@@ -4581,7 +4551,7 @@ msgstr "キャンペーンによって生み出された収益"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr "SMS送信エラー"
+msgstr "SMS配信エラー"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
@@ -4603,6 +4573,12 @@ msgstr "販売 : 以下で表示"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
 msgid "Sale Information"
 msgstr "販売情報"
+
+#. module: sale
+#: model:ir.model.fields,field_description:sale.field_account_move_line__sale_line_warn_msg
+#: model:ir.model.fields,field_description:sale.field_sale_order_line__sale_line_warn_msg
+msgid "Sale Line Warn Msg"
+msgstr "販売明細行警告メッセージ"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_advance_payment_inv__sale_order_ids
@@ -4751,12 +4727,10 @@ msgid "Sales Order Line"
 msgstr "販売オーダ明細"
 
 #. module: sale
-#: model:ir.model.fields,field_description:sale.field_account_move_line__sale_line_warn_msg
 #: model:ir.model.fields,field_description:sale.field_product_product__sale_line_warn_msg
 #: model:ir.model.fields,field_description:sale.field_product_template__sale_line_warn_msg
-#: model:ir.model.fields,field_description:sale.field_sale_order_line__sale_line_warn_msg
 msgid "Sales Order Line Warning"
-msgstr ""
+msgstr "販売オーダ明細警告"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_account_move_line__sale_line_ids
@@ -4829,7 +4803,7 @@ msgid ""
 "entry to be non-billable."
 msgstr ""
 "顧客に請求するために、使用した時間を追加する販売オーダ項目。タイムシートエン"
-"トリーを請求不可にするには、販売オーダ項目を削除して下さい。"
+"トリーを非請求対象にするには、販売オーダ項目を削除して下さい。"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__product_template__expense_policy__sales_price
@@ -4849,12 +4823,12 @@ msgstr "販売: 支払済"
 #. module: sale
 #: model:mail.template,name:sale.email_template_proforma
 msgid "Sales: Send Proforma"
-msgstr "販売: 見積送状を送付"
+msgstr "販売: 仮請求書を送付"
 
 #. module: sale
 #: model:mail.template,name:sale.email_template_edi_sale
 msgid "Sales: Send Quotation"
-msgstr "販売: 見積送付"
+msgstr "販売: 見積書を送付"
 
 #. module: sale
 #: model:ir.actions.server,name:sale.send_pending_emails_cron_ir_actions_server
@@ -4902,7 +4876,7 @@ msgstr "セクション名 (例 プロダクト、サービス)"
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
 msgid "Section Summary"
-msgstr ""
+msgstr "セクション要約"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__access_token
@@ -4941,7 +4915,7 @@ msgstr "送信"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Send PRO-FORMA Invoice"
-msgstr "見積送状を送付"
+msgstr "仮請求書を送付"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
@@ -4965,14 +4939,14 @@ msgid ""
 "content about a product (instructions, rules, links, media, etc.). Create "
 "and set the email template from the product detail form (in Accounting tab)."
 msgstr ""
-"プロダクトに関する特定の情報や内容（取扱説明、規則、リンク、メディア等）を"
+"プロダクトに関する特定の情報や内容（取扱説明、ルール、リンク、メディア等）を"
 "シェアしたい場合、メール配信が役立ちます。プロダクト詳細フォーム（会計タブ）"
 "から、Eメールテンプレートを作成してください。"
 
 #. module: sale
 #: model:mail.template,description:sale.mail_template_sale_confirmation
 msgid "Sent to customers on order confirmation"
-msgstr "注文確認時に、顧客に自動的に送られる"
+msgstr "オーダ確定時に、顧客に自動的に送られる"
 
 #. module: sale
 #: model:mail.template,description:sale.mail_template_sale_payment_executed
@@ -5016,7 +4990,7 @@ msgstr "配送"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_content
 msgid "Shipping Address"
-msgstr "配送住所"
+msgstr "配送先"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_res_config_settings__module_delivery_shiprocket
@@ -5091,7 +5065,7 @@ msgstr "販売数"
 #: model_terms:ir.ui.view,arch_db:sale.product_form_view_sale_order_button
 #: model_terms:ir.ui.view,arch_db:sale.product_template_form_view_sale_order_button
 msgid "Sold in the last 365 days"
-msgstr "過去365日で販売"
+msgstr "直近365日で販売"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.mass_cancel_orders_view_form
@@ -5150,7 +5124,7 @@ msgstr "Odooで始めましょう"
 #: model:ir.model.fields,field_description:sale.field_sale_report__state
 #: model_terms:ir.ui.view,arch_db:sale.view_order_product_search
 msgid "Status"
-msgstr "状態"
+msgstr "ステータス"
 
 #. module: sale
 #: model:ir.model.fields,help:sale.field_sale_order__activity_state
@@ -5176,16 +5150,18 @@ msgid ""
 "Stripe Connect is not available in your country, please use another payment "
 "provider."
 msgstr ""
+"Stripe Connectはお客様の国では使用できません。他の決済プロバイダーをご利用く"
+"ださい。"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_subsection
 msgid "Subsection"
-msgstr ""
+msgstr "サブセクション"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Subsection Name"
-msgstr ""
+msgstr "サブセクション名"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order_line__price_subtotal
@@ -5214,7 +5190,7 @@ msgid ""
 "state 'done' or 'authorized' and linked to this order."
 msgstr ""
 "オンライン支払フォームを通じて行われた取引のうち、 '完了' または '認証済' の"
-"状態にあり、このオーダにリンクされている取引の合計。"
+"ステータスにあり、このオーダにリンクされている取引の合計。"
 
 #. module: sale
 #: model:ir.model,name:sale.model_ir_config_parameter
@@ -5287,9 +5263,8 @@ msgid ""
 "Team %(team_name)s has %(sale_order_count)s active sale orders. Consider "
 "cancelling them or archiving the team instead."
 msgstr ""
-"%(team_name)sチームには %(sale_order_count)sのアクティブな販売オーダがありま"
-"す。 それらをキャンセルするか、代わりにチームをアーカイブすることを検討して下"
-"さい。"
+"%(team_name)sチームには %(sale_order_count)sの有効な販売オーダがあります。 そ"
+"れらをキャンセルするか、代わりにチームをアーカイブすることを検討して下さい。"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order_line__technical_price_unit
@@ -5324,12 +5299,12 @@ msgstr "諸条件"
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__note
 msgid "Terms and conditions"
-msgstr "諸条件"
+msgstr "取引条件"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Terms and conditions..."
-msgstr "諸条件..."
+msgstr "取引条件..."
 
 #. module: sale
 #: model:ir.model.fields,help:sale.field_sale_order__country_code
@@ -5522,6 +5497,12 @@ msgstr "プロダクト(%(product)s)に互換性のない値があります:%(va
 
 #. module: sale
 #. odoo-python
+#: code:addons/sale/wizard/payment_link_wizard.py:0
+msgid "The sale order has expired."
+msgstr ""
+
+#. module: sale
+#. odoo-python
 #: code:addons/sale/wizard/sale_make_invoice_advance.py:0
 msgid "The value of the down payment amount must be positive."
 msgstr "前受金の金額は正の値でなければなりません。"
@@ -5584,7 +5565,7 @@ msgid ""
 "This is the delivery date promised to the customer. If set, the delivery "
 "order will be scheduled based on this date rather than product lead times."
 msgstr ""
-"これは、顧客に対して約束した納品予定日です。設定されている場合、配送オーダ"
+"これは、顧客に対して約束した納品予定日です。設定されている場合、出荷オーダ"
 "は、プロダクトのリードタイムではなく、この日付に基づいてスケジュールされま"
 "す。"
 
@@ -5689,7 +5670,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sale.view_order_product_search
 #: model_terms:ir.ui.view,arch_db:sale.view_sales_order_line_filter
 msgid "To Invoice"
-msgstr "未請求"
+msgstr "請求対象"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_view_search_inherit_sale
@@ -5773,17 +5754,17 @@ msgstr "タイプ名"
 #. module: sale
 #: model:ir.model.fields,help:sale.field_sale_order__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr "記録上の例外活動の種類。"
+msgstr "レコード上の例外の活動タイプ。"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Type to find a customer..."
-msgstr "顧客を見つけるためにタイプ..."
+msgstr "タイプして顧客を検索..."
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
 msgid "Type to find a product..."
-msgstr "プロダクトを見つけるためにタイプ..."
+msgstr "タイプしてプロダクトを検索..."
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_res_config_settings__module_delivery_ups_rest
@@ -5878,7 +5859,7 @@ msgstr "税の更新"
 #. odoo-javascript
 #: code:addons/sale/static/src/js/upload_rfq_cog_menu/upload_rfq_cog_menu.xml:0
 msgid "Upload Request For Quotation"
-msgstr ""
+msgstr "見積依頼をアップロード"
 
 #. module: sale
 #. odoo-python
@@ -5905,17 +5886,17 @@ msgstr ""
 #. module: sale
 #: model:mail.template,description:sale.email_template_proforma
 msgid "Used by salespeople when they send proforma to prospects"
-msgstr "営業担当者によって見積送状を見込み客に送付する際に使用される"
+msgstr "販売担当者によって仮請求書を見込み客に送付する際に使用される"
 
 #. module: sale
 #: model:mail.template,description:sale.email_template_edi_sale
 msgid "Used by salespeople when they send quotations or proforma to prospects"
-msgstr "営業担当者によって見積書や見積送状を見込み客に送付する際に使用される"
+msgstr "販売担当者によって見積書や仮請求書を見込み客に送付する際に使用される"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.portal_my_quotations
 msgid "Valid Until"
-msgstr "有効期限日"
+msgstr "使用期限日"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_sign_modal
@@ -5947,13 +5928,18 @@ msgstr ""
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
+msgid "Values set here are company-specific."
+msgstr ""
+
+#. module: sale
+#: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "Variant Grid Entry"
 msgstr "バリアントグリッド入力"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "View Alternatives"
-msgstr ""
+msgstr "他の選択肢を確認"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
@@ -5963,7 +5949,7 @@ msgstr "詳細を見る"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.res_config_settings_view_form
 msgid "View Other Providers"
-msgstr ""
+msgstr "他のプロバイダーを表示"
 
 #. module: sale
 #. odoo-python
@@ -6156,7 +6142,7 @@ msgstr "ご注文は署名済みです。"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid "Your order is not in a state to be rejected."
-msgstr "ご注文は拒否される状態ではありません。"
+msgstr "ご注文は拒否されるステータスではありません。"
 
 #. module: sale
 #. odoo-python
@@ -6245,11 +6231,6 @@ msgid "sale order"
 msgstr "販売注文"
 
 #. module: sale
-#: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "to create quotes automatically."
-msgstr "自動的に見積書を作成します。"
-
-#. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid "to learn all the ways to connect your software with"
 msgstr "自社システムとの連携方法について詳しくはこちら。"
@@ -6261,8 +6242,8 @@ msgstr "単位"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.report_saleorder_document
-msgid "with"
-msgstr "と:"
+msgid "x"
+msgstr ""
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_pay_modal
@@ -6278,8 +6259,8 @@ msgid ""
 "a' }})"
 msgstr ""
 "{{ object.company_id.name }} {{ (object.get_portal_last_transaction().state "
-"== 'pending') and 'Pending Order' or 'Order' }} (Ref {{ object.name or 'n/"
-"a' }})"
+"== 'pending') and '保留中のオーダ' or 'オーダ' }} (参照番号：{{ object.name "
+"or 'n/a' }})"
 
 #. module: sale
 #: model:mail.template,subject:sale.email_template_proforma
@@ -6287,8 +6268,8 @@ msgid ""
 "{{ object.company_id.name }} {{ object.state in ('draft', 'sent') and "
 "'Proforma' or 'Order'}} (Ref {{ object.name or 'n/a' }})"
 msgstr ""
-"{{ object.company_id.name }} {{ object.state in ('draft', 'sent') and "
-"'Proforma' or 'Order'}} (Ref {{ object.name or 'n/a' }})"
+"{{ object.company_id.name }} {{ object.state in ('draft', 'sent') and '仮請求"
+"書' or オーダ'}} (参照番号{{ object.name or 'n/a' }})"
 
 #. module: sale
 #: model:mail.template,subject:sale.email_template_edi_sale
@@ -6296,8 +6277,698 @@ msgid ""
 "{{ object.company_id.name }} {{ object.state in ('draft', 'sent') and "
 "'Quotation' or 'Order' }} (Ref {{ object.name or 'n/a' }})"
 msgstr ""
-"{{ object.company_id.name }} {{ object.state in ('draft', 'sent') and "
-"'Quotation' or 'Order' }} (Ref {{ object.name or 'n/a' }})"
+"{{ object.company_id.name }} {{ object.state in ('draft', 'sent') and '見積"
+"書' or 'オーダ' }} (参照 {{ object.name or 'n/a' }})"
+
+#~ msgid "Connect your software"
+#~ msgstr "自社のシステムと連携"
+
+#~ msgid "to create quotes automatically."
+#~ msgstr "自動的に見積書を作成します。"
+
+#~ msgid "with"
+#~ msgstr "と:"
+
+#~ msgid "2023-12-31"
+#~ msgstr "2023-12-31"
+
+#~ msgid "25.00"
+#~ msgstr "25.00"
+
+#~ msgid "27.00"
+#~ msgstr "27.00"
+
+#~ msgid "30.00"
+#~ msgstr "30.00"
+
+#~ msgid "31.05"
+#~ msgstr "31.05"
+
+#~ msgid ""
+#~ "<span class=\"fa fa-lg fa-building-o p-2\" title=\"Values set here are "
+#~ "company-specific.\" groups=\"base.group_multi_company\"/>"
+#~ msgstr ""
+#~ "<span class=\"fa fa-lg fa-building-o p-2\" title=\"Values set here are "
+#~ "company-specific.\" groups=\"base.group_multi_company\"/>"
+
+#~ msgid ""
+#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 12px;\">\n"
+#~ "        Hello,\n"
+#~ "        <br/><br/>\n"
+#~ "        <t t-set=\"tx_sudo\" t-"
+#~ "value=\"object.get_portal_last_transaction()\"/>\n"
+#~ "        Your order <span style=\"font-weight:bold;\" t-out=\"object.name "
+#~ "or ''\">S00049</span> amounting in <span style=\"font-weight:bold;\" t-"
+#~ "out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ "
+#~ "10.00</span>\n"
+#~ "        <t t-if=\"object.state == 'sale' or (tx_sudo and tx_sudo.state in "
+#~ "('done', 'authorized'))\">\n"
+#~ "            has been confirmed.<br/>\n"
+#~ "            Thank you for your trust!\n"
+#~ "        </t>\n"
+#~ "        <t t-elif=\"tx_sudo and tx_sudo.state == 'pending'\">\n"
+#~ "            is pending. It will be confirmed when the payment is "
+#~ "received.\n"
+#~ "            <t t-if=\"object.reference\">\n"
+#~ "                Your payment reference is <span style=\"font-weight:bold;"
+#~ "\" t-out=\"object.reference or ''\"/>.\n"
+#~ "            </t>\n"
+#~ "        </t>\n"
+#~ "        <br/>\n"
+#~ "        <t t-set=\"documents\" t-value=\"object._get_product_documents()"
+#~ "\"/>\n"
+#~ "        <t t-if=\"documents\">\n"
+#~ "            <br/>\n"
+#~ "            <t t-if=\"len(documents)&gt;1\">\n"
+#~ "                Here are some additional documents that may interest "
+#~ "you:\n"
+#~ "            </t>\n"
+#~ "            <t t-else=\"\">\n"
+#~ "                Here is an additional document that may interest you:\n"
+#~ "            </t>\n"
+#~ "            <ul style=\"margin-bottom: 0;\">\n"
+#~ "                <t t-foreach=\"documents\" t-as=\"document\">\n"
+#~ "                    <li style=\"font-size: 13px;\">\n"
+#~ "                        <a t-out=\"document.ir_attachment_id.name\" t-att-"
+#~ "href=\"object.get_portal_url('/document/' + str(document.id))\" t-att-"
+#~ "target=\"target\"/>\n"
+#~ "                    </li>\n"
+#~ "                </t>\n"
+#~ "            </ul>\n"
+#~ "        </t>\n"
+#~ "        <br/>\n"
+#~ "        Do not hesitate to contact us if you have any questions.\n"
+#~ "        <t t-if=\"not is_html_empty(object.user_id.signature)\" data-o-"
+#~ "mail-quote-container=\"1\">\n"
+#~ "            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/"
+#~ "><t t-out=\"object.user_id.signature or ''\" data-o-mail-"
+#~ "quote=\"1\">Mitchell Admin</t></div>\n"
+#~ "        </t>\n"
+#~ "    </p>\n"
+#~ "<t t-if=\"hasattr(object, 'website_id') and object.website_id\">\n"
+#~ "    <div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px; "
+#~ "border-collapse: collapse; white-space: nowrap;\">\n"
+#~ "            <tr style=\"border-bottom: 2px solid #dee2e6;\">\n"
+#~ "                <td style=\"width: 150px;\"><span style=\"font-"
+#~ "weight:bold;\">Products</span></td>\n"
+#~ "                <td/>\n"
+#~ "                <td width=\"15%\" align=\"center\"><span style=\"font-"
+#~ "weight:bold;\">Quantity</span></td>\n"
+#~ "                <td width=\"20%\" align=\"right\">\n"
+#~ "                    <span style=\"font-weight:bold;\">\n"
+#~ "                        <t t-"
+#~ "if=\"object.website_id.show_line_subtotals_tax_selection == "
+#~ "'tax_excluded'\">\n"
+#~ "                            Tax Excl.\n"
+#~ "                        </t>\n"
+#~ "                        <t t-else=\"\">\n"
+#~ "                            Tax Incl.\n"
+#~ "                        </t>\n"
+#~ "                    </span>\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "        <t t-set=\"current_subtotal\" t-value=\"0\"/>\n"
+#~ "        <t t-foreach=\"object.order_line\" t-as=\"line\">\n"
+#~ "            <t t-set=\"line_subtotal\" t-value=\"                     "
+#~ "line.price_subtotal                     if "
+#~ "object.website_id.show_line_subtotals_tax_selection == "
+#~ "'tax_excluded'                     else line.price_total                 "
+#~ "\"/>\n"
+#~ "            <t t-set=\"current_subtotal\" t-value=\"current_subtotal + "
+#~ "line_subtotal\"/>\n"
+#~ "            <t t-if=\"(not hasattr(line, 'is_delivery') or not "
+#~ "line.is_delivery) and (                     line.display_type in "
+#~ "['line_section', 'line_subsection', 'line_note']                     or "
+#~ "line.product_type == 'combo'                 )\">\n"
+#~ "                <table width=\"100%\" style=\"color: #454748; font-size: "
+#~ "12px; border-collapse: collapse;\">\n"
+#~ "                    <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number or 0\"/>\n"
+#~ "                    <tr t-att-style=\"'background-color: #f2f2f2' if "
+#~ "loop_cycle_number % 2 == 0 else 'background-color: #ffffff'\">\n"
+#~ "                        <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number + 1\"/>\n"
+#~ "                        <td colspan=\"4\">\n"
+#~ "                            <t t-if=\"line.display_type in "
+#~ "('line_section', 'line_subsection') or line.product_type == 'combo'\">\n"
+#~ "                                <span t-att-style=\"'font-weight:bold;' "
+#~ "if line.display_type == 'line_subsection' else 'font-weight:bolder;'\" t-"
+#~ "out=\"line.name or ''\">Taking care of Trees Course</span>\n"
+#~ "                                <t t-set=\"current_section\" t-"
+#~ "value=\"line\"/>\n"
+#~ "                                <t t-set=\"current_subtotal\" t-"
+#~ "value=\"0\"/>\n"
+#~ "                            </t>\n"
+#~ "                            <t t-elif=\"line.display_type == "
+#~ "'line_note'\">\n"
+#~ "                                <i t-out=\"line.name or ''\">Taking care "
+#~ "of Trees Course</i>\n"
+#~ "                            </t>\n"
+#~ "                        </td>\n"
+#~ "                    </tr>\n"
+#~ "                </table>\n"
+#~ "            </t>\n"
+#~ "            <t t-elif=\"(not hasattr(line, 'is_delivery') or not "
+#~ "line.is_delivery)\">\n"
+#~ "                <table width=\"100%\" style=\"color: #454748; font-size: "
+#~ "12px; border-collapse: collapse;\">\n"
+#~ "                    <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number or 0\"/>\n"
+#~ "                    <tr t-att-style=\"'background-color: #f2f2f2' if "
+#~ "loop_cycle_number % 2 == 0 else 'background-color: #ffffff'\">\n"
+#~ "                        <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number + 1\"/>\n"
+#~ "                        <td style=\"width: 150px;\">\n"
+#~ "                            <img t-attf-src=\"/web/image/product.product/"
+#~ "{{ line.product_id.id }}/image_128\" t-attf-style=\"width: 64px; height: "
+#~ "{{object.website_id and "
+#~ "object.website_id._get_product_image_ratio_height() or '64px'}}; object-"
+#~ "fit: cover; object-position: center;\" alt=\"Product image\"/>\n"
+#~ "                        </td>\n"
+#~ "                        <td align=\"left\" t-out=\"line.product_id.name "
+#~ "or ''\">\tTaking care of Trees Course</td>\n"
+#~ "                        <td width=\"15%\" align=\"center\" t-"
+#~ "out=\"line.product_uom_qty or ''\">1</td>\n"
+#~ "                        <td width=\"20%\" align=\"right\"><span "
+#~ "style=\"font-weight:bold; white-space: nowrap;\">\n"
+#~ "                        <t t-"
+#~ "if=\"object.website_id.show_line_subtotals_tax_selection == "
+#~ "'tax_excluded'\">\n"
+#~ "                            <t t-"
+#~ "out=\"format_amount(line.price_reduce_taxexcl, object.currency_id) or "
+#~ "''\">$ 10.00</t>\n"
+#~ "                        </t>\n"
+#~ "                        <t t-else=\"\">\n"
+#~ "                            <t t-"
+#~ "out=\"format_amount(line.price_reduce_taxinc, object.currency_id) or "
+#~ "''\">$ 10.00</t>\n"
+#~ "                        </t>\n"
+#~ "                        </span></td>\n"
+#~ "                    </tr>\n"
+#~ "                </table>\n"
+#~ "            </t>\n"
+#~ "            <t t-if=\"current_section and "
+#~ "(                     line_last                     or "
+#~ "object.order_line[line_index+1].display_type in ('line_section', "
+#~ "'line_subsection')                     or "
+#~ "object.order_line[line_index+1].product_type == "
+#~ "'combo'                     or "
+#~ "(                         line.combo_item_id                         and "
+#~ "not "
+#~ "object.order_line[line_index+1].combo_item_id                     )                 ) "
+#~ "and not line.is_downpayment\">\n"
+#~ "                <t t-set=\"current_section\" t-value=\"None\"/>\n"
+#~ "                <table width=\"100%\" style=\"color: #454748; font-size: "
+#~ "12px; border-collapse: collapse;\">\n"
+#~ "                    <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number or 0\"/>\n"
+#~ "                    <tr t-att-style=\"'background-color: #f2f2f2' if "
+#~ "loop_cycle_number % 2 == 0 else 'background-color: #ffffff'\">\n"
+#~ "                        <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number + 1\"/>\n"
+#~ "                        <td style=\"width: 100%\" align=\"right\">\n"
+#~ "                            <span style=\"font-weight: bold;\">Subtotal:</"
+#~ "span>\n"
+#~ "                            <span t-out=\"format_amount(current_subtotal, "
+#~ "object.currency_id) or ''\">$ 10.00</span>\n"
+#~ "                        </td>\n"
+#~ "                    </tr>\n"
+#~ "                </table>\n"
+#~ "            </t>\n"
+#~ "        </t>\n"
+#~ "    </div>\n"
+#~ "    <div style=\"margin: 0px; padding: 0px;\" t-if=\"hasattr(object, "
+#~ "'carrier_id') and object.carrier_id\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px; "
+#~ "border-spacing: 0px 4px; white-space: nowrap;\" align=\"right\">\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"width: 60%\"/>\n"
+#~ "                <td style=\"width: 30%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\"><span style=\"font-weight:bold;\">Delivery:</span></td>\n"
+#~ "                <td style=\"width: 10%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\" t-out=\"format_amount(object.amount_delivery, "
+#~ "object.currency_id) or ''\">$ 0.00</td>\n"
+#~ "            </tr>\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"width: 60%\"/>\n"
+#~ "                <td style=\"width: 30%;\" align=\"right\"><span "
+#~ "style=\"font-weight:bold;\">Untaxed Amount:</span></td>\n"
+#~ "                <td style=\"width: 10%;\" align=\"right\" t-"
+#~ "out=\"format_amount(object.amount_untaxed, object.currency_id) or ''\">$ "
+#~ "10.00</td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "    </div>\n"
+#~ "    <div style=\"margin: 0px; padding: 0px;\" t-else=\"\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px; "
+#~ "border-spacing: 0px 4px; white-space: nowrap;\" align=\"right\">\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"width: 60%\"/>\n"
+#~ "                <td style=\"width: 30%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\"><span style=\"font-weight:bold;\">Untaxed Amount:</span></"
+#~ "td>\n"
+#~ "                <td style=\"width: 10%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\" t-out=\"format_amount(object.amount_untaxed, "
+#~ "object.currency_id) or ''\">$ 10.00</td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "    </div>\n"
+#~ "    <div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px; "
+#~ "border-spacing: 0px 4px; white-space: nowrap;\" align=\"right\">\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"width: 60%\"/>\n"
+#~ "                <td style=\"width: 30%;\" align=\"right\"><span "
+#~ "style=\"font-weight:bold;\">Taxes:</span></td>\n"
+#~ "                <td style=\"width: 10%;\" align=\"right\" t-"
+#~ "out=\"format_amount(object.amount_tax, object.currency_id) or ''\">$ "
+#~ "0.00</td>\n"
+#~ "            </tr>\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"width: 60%\"/>\n"
+#~ "                <td style=\"width: 30%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\"><span style=\"font-weight:bold;\">Total:</span></td>\n"
+#~ "                <td style=\"width: 10%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\" t-out=\"format_amount(object.amount_total, "
+#~ "object.currency_id) or ''\">$ 10.00</td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "    </div>\n"
+#~ "    <div t-if=\"object.partner_invoice_id\" style=\"margin: 0px; padding: "
+#~ "0px;\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px;"
+#~ "\">\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"padding-top: 10px;\">\n"
+#~ "                    <span style=\"font-weight:bold;\">Bill to:</span>\n"
+#~ "                    <t t-out=\"object.partner_invoice_id.street or "
+#~ "''\">1201 S Figueroa St</t>\n"
+#~ "                    <t t-out=\"object.partner_invoice_id.city or ''\">Los "
+#~ "Angeles</t>\n"
+#~ "                    <t t-out=\"object.partner_invoice_id.state_id.name or "
+#~ "''\">California</t>\n"
+#~ "                    <t t-out=\"object.partner_invoice_id.zip or "
+#~ "''\">90015</t>\n"
+#~ "                    <t t-out=\"object.partner_invoice_id.country_id.name "
+#~ "or ''\">United States</t>\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "            <tr>\n"
+#~ "                <td>\n"
+#~ "                    <span style=\"font-weight:bold;\">Payment Method:</"
+#~ "span>\n"
+#~ "                    <t t-if=\"tx_sudo.token_id\">\n"
+#~ "                        <t t-out=\"tx_sudo.token_id.display_name or ''\"/"
+#~ ">\n"
+#~ "                    </t>\n"
+#~ "                    <t t-else=\"\">\n"
+#~ "                        <t t-out=\"tx_sudo.provider_id.sudo().name or "
+#~ "''\"/>\n"
+#~ "                    </t>\n"
+#~ "                    (<t t-out=\"format_amount(tx_sudo.amount, "
+#~ "object.currency_id) or ''\">$ 10.00</t>)\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "    </div>\n"
+#~ "    <div t-if=\"object.partner_shipping_id and not object.only_services\" "
+#~ "style=\"margin: 0px; padding: 0px;\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px;"
+#~ "\">\n"
+#~ "            <tr>\n"
+#~ "                <td>\n"
+#~ "                    <br/>\n"
+#~ "                    <span style=\"font-weight:bold;\">Ship to:</span>\n"
+#~ "                    <t t-out=\"object.partner_shipping_id.street or "
+#~ "''\">1201 S Figueroa St</t>\n"
+#~ "                    <t t-out=\"object.partner_shipping_id.city or "
+#~ "''\">Los Angeles</t>\n"
+#~ "                    <t t-out=\"object.partner_shipping_id.state_id.name "
+#~ "or ''\">California</t>\n"
+#~ "                    <t t-out=\"object.partner_shipping_id.zip or "
+#~ "''\">90015</t>\n"
+#~ "                    <t t-out=\"object.partner_shipping_id.country_id.name "
+#~ "or ''\">United States</t>\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "        <table t-if=\"hasattr(object, 'carrier_id') and "
+#~ "object.carrier_id\" width=\"100%\" style=\"color: #454748; font-size: "
+#~ "12px;\">\n"
+#~ "            <tr>\n"
+#~ "                <td>\n"
+#~ "                    <span style=\"font-weight:bold;\">Shipping Method:</"
+#~ "span>\n"
+#~ "                    <t t-out=\"object.carrier_id.name or ''\"/>\n"
+#~ "                    <t t-if=\"object.amount_delivery == 0.0\">\n"
+#~ "                        (Free)\n"
+#~ "                    </t>\n"
+#~ "                    <t t-else=\"\">\n"
+#~ "                        (<t t-out=\"format_amount(object.amount_delivery, "
+#~ "object.currency_id) or ''\">$ 10.00</t>)\n"
+#~ "                    </t>\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "            <tr t-if=\"object.carrier_id.carrier_description\">\n"
+#~ "                <td>\n"
+#~ "                    <strong>Shipping Description:</strong>\n"
+#~ "                    <t t-out=\"object.carrier_id.carrier_description\"/>\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "    </div>\n"
+#~ "</t>\n"
+#~ "</div>"
+#~ msgstr ""
+#~ "<div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "    <p style=\"margin: 0px; padding: 0px; font-size: 12px;\">\n"
+#~ "        お世話になっております。\n"
+#~ "        <br/><br/>\n"
+#~ "        <t t-set=\"tx_sudo\" t-"
+#~ "value=\"object.get_portal_last_transaction()\"/>\n"
+#~ "        お客様のご注文<span style=\"font-weight:bold;\" t-"
+#~ "out=\"object.name or ''\">S00049</span> (金額：<span style=\"font-"
+#~ "weight:bold;\" t-out=\"format_amount(object.amount_total, "
+#~ "object.currency_id) or ''\">$ 10.00)</span>\n"
+#~ "        <t t-if=\"object.state == 'sale' or (tx_sudo and tx_sudo.state in "
+#~ "('done', 'authorized'))\">\n"
+#~ "            が確定されました。<br/>\n"
+#~ "            当店をご利用頂きましてまことにありがとうございます。\n"
+#~ "        </t>\n"
+#~ "        <t t-elif=\"tx_sudo and tx_sudo.state == 'pending'\">\n"
+#~ "            は現在保留中です。お支払いの確認後、確定されます。\n"
+#~ "            <t t-if=\"object.reference\">\n"
+#~ "                お支払い参照番号：<span style=\"font-weight:bold;\" t-"
+#~ "out=\"object.reference or ''\"/>\n"
+#~ "            </t>\n"
+#~ "        </t>\n"
+#~ "        <br/>\n"
+#~ "        <t t-set=\"documents\" t-value=\"object._get_product_documents()"
+#~ "\"/>\n"
+#~ "        <t t-if=\"documents\">\n"
+#~ "            <br/>\n"
+#~ "            <t t-if=\"len(documents)&gt;1\">\n"
+#~ "                ご参考までに、以下の追加資料をご覧ください:\n"
+#~ "            </t>\n"
+#~ "            <t t-else=\"\">\n"
+#~ "                ご参考までに、以下の追加資料をご覧ください:\n"
+#~ "            </t>\n"
+#~ "            <ul style=\"margin-bottom: 0;\">\n"
+#~ "                <t t-foreach=\"documents\" t-as=\"document\">\n"
+#~ "                    <li style=\"font-size: 13px;\">\n"
+#~ "                        <a t-out=\"document.ir_attachment_id.name\" t-att-"
+#~ "href=\"object.get_portal_url('/document/' + str(document.id))\" t-att-"
+#~ "target=\"target\"/>\n"
+#~ "                    </li>\n"
+#~ "                </t>\n"
+#~ "            </ul>\n"
+#~ "        </t>\n"
+#~ "        <br/>\n"
+#~ "        何かご不明な点がございましたら、お気軽にお問い合わせください。\n"
+#~ "        <t t-if=\"not is_html_empty(object.user_id.signature)\" data-o-"
+#~ "mail-quote-container=\"1\">\n"
+#~ "            <div data-o-mail-quote=\"1\">--<br data-o-mail-quote=\"1\"/"
+#~ "><t t-out=\"object.user_id.signature or ''\" data-o-mail-"
+#~ "quote=\"1\">Mitchell Admin</t></div>\n"
+#~ "        </t>\n"
+#~ "    </p>\n"
+#~ "<t t-if=\"hasattr(object, 'website_id') and object.website_id\">\n"
+#~ "    <div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px; "
+#~ "border-collapse: collapse; white-space: nowrap;\">\n"
+#~ "            <tr style=\"border-bottom: 2px solid #dee2e6;\">\n"
+#~ "                <td style=\"width: 150px;\"><span style=\"font-"
+#~ "weight:bold;\">プロダクト</span></td>\n"
+#~ "                <td/>\n"
+#~ "                <td width=\"15%\" align=\"center\"><span style=\"font-"
+#~ "weight:bold;\">数量</span></td>\n"
+#~ "                <td width=\"20%\" align=\"right\">\n"
+#~ "                    <span style=\"font-weight:bold;\">\n"
+#~ "                        <t t-"
+#~ "if=\"object.website_id.show_line_subtotals_tax_selection == "
+#~ "'tax_excluded'\">\n"
+#~ "                            税抜き価格\n"
+#~ "                        </t>\n"
+#~ "                        <t t-else=\"\">\n"
+#~ "                            税込み価格\n"
+#~ "                        </t>\n"
+#~ "                    </span>\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "        <t t-set=\"current_subtotal\" t-value=\"0\"/>\n"
+#~ "        <t t-foreach=\"object.order_line\" t-as=\"line\">\n"
+#~ "            <t t-set=\"line_subtotal\" t-value=\"                     "
+#~ "line.price_subtotal                     if "
+#~ "object.website_id.show_line_subtotals_tax_selection == "
+#~ "'tax_excluded'                     else line.price_total                 "
+#~ "\"/>\n"
+#~ "            <t t-set=\"current_subtotal\" t-value=\"current_subtotal + "
+#~ "line_subtotal\"/>\n"
+#~ "            <t t-if=\"(not hasattr(line, 'is_delivery') or not "
+#~ "line.is_delivery) and (                     line.display_type in "
+#~ "['line_section', 'line_subsection', 'line_note']                     or "
+#~ "line.product_type == 'combo'                 )\">\n"
+#~ "                <table width=\"100%\" style=\"color: #454748; font-size: "
+#~ "12px; border-collapse: collapse;\">\n"
+#~ "                    <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number or 0\"/>\n"
+#~ "                    <tr t-att-style=\"'background-color: #f2f2f2' if "
+#~ "loop_cycle_number % 2 == 0 else 'background-color: #ffffff'\">\n"
+#~ "                        <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number + 1\"/>\n"
+#~ "                        <td colspan=\"4\">\n"
+#~ "                            <t t-if=\"line.display_type in "
+#~ "('line_section', 'line_subsection') or line.product_type == 'combo'\">\n"
+#~ "                                <span t-att-style=\"'font-weight:bold;' "
+#~ "if line.display_type == 'line_subsection' else 'font-weight:bolder;'\" t-"
+#~ "out=\"line.name or ''\">樹木の手入れについて学ぶコース</span>\n"
+#~ "                                <t t-set=\"current_section\" t-"
+#~ "value=\"line\"/>\n"
+#~ "                                <t t-set=\"current_subtotal\" t-"
+#~ "value=\"0\"/>\n"
+#~ "                            </t>\n"
+#~ "                            <t t-elif=\"line.display_type == "
+#~ "'line_note'\">\n"
+#~ "                                <i t-out=\"line.name or ''\">樹木の手入れ"
+#~ "について学ぶコース</i>\n"
+#~ "                            </t>\n"
+#~ "                        </td>\n"
+#~ "                    </tr>\n"
+#~ "                </table>\n"
+#~ "            </t>\n"
+#~ "            <t t-elif=\"(not hasattr(line, 'is_delivery') or not "
+#~ "line.is_delivery)\">\n"
+#~ "                <table width=\"100%\" style=\"color: #454748; font-size: "
+#~ "12px; border-collapse: collapse;\">\n"
+#~ "                    <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number or 0\"/>\n"
+#~ "                    <tr t-att-style=\"'background-color: #f2f2f2' if "
+#~ "loop_cycle_number % 2 == 0 else 'background-color: #ffffff'\">\n"
+#~ "                        <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number + 1\"/>\n"
+#~ "                        <td style=\"width: 150px;\">\n"
+#~ "                            <img t-attf-src=\"/web/image/product.product/"
+#~ "{{ line.product_id.id }}/image_128\" t-attf-style=\"width: 64px; height: "
+#~ "{{object.website_id and "
+#~ "object.website_id._get_product_image_ratio_height() or '64px'}}; object-"
+#~ "fit: cover; object-position: center;\" alt=\"Product image\"/>\n"
+#~ "                        </td>\n"
+#~ "                        <td align=\"left\" t-out=\"line.product_id.name "
+#~ "or ''\">\t樹木の手入れについて学ぶコース</td>\n"
+#~ "                        <td width=\"15%\" align=\"center\" t-"
+#~ "out=\"line.product_uom_qty or ''\">1</td>\n"
+#~ "                        <td width=\"20%\" align=\"right\"><span "
+#~ "style=\"font-weight:bold; white-space: nowrap;\">\n"
+#~ "                        <t t-"
+#~ "if=\"object.website_id.show_line_subtotals_tax_selection == "
+#~ "'tax_excluded'\">\n"
+#~ "                            <t t-"
+#~ "out=\"format_amount(line.price_reduce_taxexcl, object.currency_id) or "
+#~ "''\">$ 10.00</t>\n"
+#~ "                        </t>\n"
+#~ "                        <t t-else=\"\">\n"
+#~ "                            <t t-"
+#~ "out=\"format_amount(line.price_reduce_taxinc, object.currency_id) or "
+#~ "''\">$ 10.00</t>\n"
+#~ "                        </t>\n"
+#~ "                        </span></td>\n"
+#~ "                    </tr>\n"
+#~ "                </table>\n"
+#~ "            </t>\n"
+#~ "            <t t-if=\"current_section and "
+#~ "(                     line_last                     or "
+#~ "object.order_line[line_index+1].display_type in ('line_section', "
+#~ "'line_subsection')                     or "
+#~ "object.order_line[line_index+1].product_type == "
+#~ "'combo'                     or "
+#~ "(                         line.combo_item_id                         and "
+#~ "not "
+#~ "object.order_line[line_index+1].combo_item_id                     )                 ) "
+#~ "and not line.is_downpayment\">\n"
+#~ "                <t t-set=\"current_section\" t-value=\"None\"/>\n"
+#~ "                <table width=\"100%\" style=\"color: #454748; font-size: "
+#~ "12px; border-collapse: collapse;\">\n"
+#~ "                    <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number or 0\"/>\n"
+#~ "                    <tr t-att-style=\"'background-color: #f2f2f2' if "
+#~ "loop_cycle_number % 2 == 0 else 'background-color: #ffffff'\">\n"
+#~ "                        <t t-set=\"loop_cycle_number\" t-"
+#~ "value=\"loop_cycle_number + 1\"/>\n"
+#~ "                        <td style=\"width: 100%\" align=\"right\">\n"
+#~ "                            <span style=\"font-weight: bold;\">小計:</"
+#~ "span>\n"
+#~ "                            <span t-out=\"format_amount(current_subtotal, "
+#~ "object.currency_id) or ''\">$ 10.00</span>\n"
+#~ "                        </td>\n"
+#~ "                    </tr>\n"
+#~ "                </table>\n"
+#~ "            </t>\n"
+#~ "        </t>\n"
+#~ "    </div>\n"
+#~ "    <div style=\"margin: 0px; padding: 0px;\" t-if=\"hasattr(object, "
+#~ "'carrier_id') and object.carrier_id\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px; "
+#~ "border-spacing: 0px 4px; white-space: nowrap;\" align=\"right\">\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"width: 60%\"/>\n"
+#~ "                <td style=\"width: 30%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\"><span style=\"font-weight:bold;\">配送:</span></td>\n"
+#~ "                <td style=\"width: 10%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\" t-out=\"format_amount(object.amount_delivery, "
+#~ "object.currency_id) or ''\">$ 0.00</td>\n"
+#~ "            </tr>\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"width: 60%\"/>\n"
+#~ "                <td style=\"width: 30%;\" align=\"right\"><span "
+#~ "style=\"font-weight:bold;\">税抜き金額:</span></td>\n"
+#~ "                <td style=\"width: 10%;\" align=\"right\" t-"
+#~ "out=\"format_amount(object.amount_untaxed, object.currency_id) or ''\">$ "
+#~ "10.00</td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "    </div>\n"
+#~ "    <div style=\"margin: 0px; padding: 0px;\" t-else=\"\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px; "
+#~ "border-spacing: 0px 4px; white-space: nowrap;\" align=\"right\">\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"width: 60%\"/>\n"
+#~ "                <td style=\"width: 30%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\"><span style=\"font-weight:bold;\">税抜き金額:</span></"
+#~ "td>\n"
+#~ "                <td style=\"width: 10%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\" t-out=\"format_amount(object.amount_untaxed, "
+#~ "object.currency_id) or ''\">$ 10.00</td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "    </div>\n"
+#~ "    <div style=\"margin: 0px; padding: 0px;\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px; "
+#~ "border-spacing: 0px 4px; white-space: nowrap;\" align=\"right\">\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"width: 60%\"/>\n"
+#~ "                <td style=\"width: 30%;\" align=\"right\"><span "
+#~ "style=\"font-weight:bold;\">税:</span></td>\n"
+#~ "                <td style=\"width: 10%;\" align=\"right\" t-"
+#~ "out=\"format_amount(object.amount_tax, object.currency_id) or ''\">$ "
+#~ "0.00</td>\n"
+#~ "            </tr>\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"width: 60%\"/>\n"
+#~ "                <td style=\"width: 30%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\"><span style=\"font-weight:bold;\">合計:</span></td>\n"
+#~ "                <td style=\"width: 10%; border-top: 1px solid #dee2e6;\" "
+#~ "align=\"right\" t-out=\"format_amount(object.amount_total, "
+#~ "object.currency_id) or ''\">$ 10.00</td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "    </div>\n"
+#~ "    <div t-if=\"object.partner_invoice_id\" style=\"margin: 0px; padding: "
+#~ "0px;\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px;"
+#~ "\">\n"
+#~ "            <tr>\n"
+#~ "                <td style=\"padding-top: 10px;\">\n"
+#~ "                    <span style=\"font-weight:bold;\">請求先:</span>\n"
+#~ "                    <t t-out=\"object.partner_invoice_id.street or "
+#~ "''\">1201 S Figueroa St</t>\n"
+#~ "                    <t t-out=\"object.partner_invoice_id.city or ''\">Los "
+#~ "Angeles</t>\n"
+#~ "                    <t t-out=\"object.partner_invoice_id.state_id.name or "
+#~ "''\">California</t>\n"
+#~ "                    <t t-out=\"object.partner_invoice_id.zip or "
+#~ "''\">90015</t>\n"
+#~ "                    <t t-out=\"object.partner_invoice_id.country_id.name "
+#~ "or ''\">United States</t>\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "            <tr>\n"
+#~ "                <td>\n"
+#~ "                    <span style=\"font-weight:bold;\">支払い方法:</span>\n"
+#~ "                    <t t-if=\"tx_sudo.token_id\">\n"
+#~ "                        <t t-out=\"tx_sudo.token_id.display_name or ''\"/"
+#~ ">\n"
+#~ "                    </t>\n"
+#~ "                    <t t-else=\"\">\n"
+#~ "                        <t t-out=\"tx_sudo.provider_id.sudo().name or "
+#~ "''\"/>\n"
+#~ "                    </t>\n"
+#~ "                    (<t t-out=\"format_amount(tx_sudo.amount, "
+#~ "object.currency_id) or ''\">$ 10.00</t>)\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "    </div>\n"
+#~ "    <div t-if=\"object.partner_shipping_id and not object.only_services\" "
+#~ "style=\"margin: 0px; padding: 0px;\">\n"
+#~ "        <table width=\"100%\" style=\"color: #454748; font-size: 12px;"
+#~ "\">\n"
+#~ "            <tr>\n"
+#~ "                <td>\n"
+#~ "                    <br/>\n"
+#~ "                    <span style=\"font-weight:bold;\">配送先:</span>\n"
+#~ "                    <t t-out=\"object.partner_shipping_id.street or "
+#~ "''\">1201 S Figueroa St</t>\n"
+#~ "                    <t t-out=\"object.partner_shipping_id.city or "
+#~ "''\">Los Angeles</t>\n"
+#~ "                    <t t-out=\"object.partner_shipping_id.state_id.name "
+#~ "or ''\">California</t>\n"
+#~ "                    <t t-out=\"object.partner_shipping_id.zip or "
+#~ "''\">90015</t>\n"
+#~ "                    <t t-out=\"object.partner_shipping_id.country_id.name "
+#~ "or ''\">United States</t>\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "        <table t-if=\"hasattr(object, 'carrier_id') and "
+#~ "object.carrier_id\" width=\"100%\" style=\"color: #454748; font-size: "
+#~ "12px;\">\n"
+#~ "            <tr>\n"
+#~ "                <td>\n"
+#~ "                    <span style=\"font-weight:bold;\">配送方法:</span>\n"
+#~ "                    <t t-out=\"object.carrier_id.name or ''\"/>\n"
+#~ "                    <t t-if=\"object.amount_delivery == 0.0\">\n"
+#~ "                        (無料)\n"
+#~ "                    </t>\n"
+#~ "                    <t t-else=\"\">\n"
+#~ "                        (<t t-out=\"format_amount(object.amount_delivery, "
+#~ "object.currency_id) or ''\">$ 10.00</t>)\n"
+#~ "                    </t>\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "            <tr t-if=\"object.carrier_id.carrier_description\">\n"
+#~ "                <td>\n"
+#~ "                    <strong>配送についての詳細:</strong>\n"
+#~ "                    <t t-out=\"object.carrier_id.carrier_description\"/>\n"
+#~ "                </td>\n"
+#~ "            </tr>\n"
+#~ "        </table>\n"
+#~ "    </div>\n"
+#~ "</t>\n"
+#~ "</div>"
 
 #~ msgid " Data Fetched"
 #~ msgstr " フェッチされたデータ"

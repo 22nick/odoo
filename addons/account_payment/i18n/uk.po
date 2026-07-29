@@ -1,27 +1,29 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* account_payment
+# * account_payment
 #
 # Translators:
 # Martin Trigaux, 2022
 # Alina Lisnenko <alina.lisnenko@erp.co.ua>, 2023
-#
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2022-09-22 05:44+0000\n"
-"Last-Translator: Alina Lisnenko <alina.lisnenko@erp.co.ua>, 2023\n"
-"Language-Team: Ukrainian (https://app.transifex.com/odoo/teams/41243/uk/)\n"
+"POT-Creation-Date: 2026-05-29 17:36+0000\n"
+"PO-Revision-Date: 2026-06-30 10:23+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Language-Team: Ukrainian <https://translate.odoo.com/projects/odoo-19/"
+"account_payment/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
-"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
-"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
-"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != 11 "
+"? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % 100 > "
+"14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || (n % "
+"100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: account_payment
 #. odoo-python
@@ -30,12 +32,14 @@ msgid ""
 "#%(number)s - Installment of <strong>%(amount)s</strong> due on <strong "
 "class=\"text-primary\">%(date)s</strong>"
 msgstr ""
+"#%(number)s - Розтермінування <strong>%(amount)s</strong> через <strong "
+"class=\"text-primary\">%(date)s</strong>"
 
 #. module: account_payment
 #. odoo-javascript
 #: code:addons/account_payment/static/src/interactions/portal_my_invoices_payment_list.js:0
 msgid "%s day(s) overdue"
-msgstr ""
+msgstr "%s дні(в) протерміновано"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_success
@@ -62,6 +66,8 @@ msgid ""
 "<i class=\"fa fa-fw fa-check\"/>\n"
 "                <span class=\"d-none d-md-inline\"> Authorized</span>"
 msgstr ""
+"<i class=\"fa fa-fw fa-check\"/>\n"
+"                <span class=\"d-none d-md-inline\">Авторизовано</span>"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
@@ -69,6 +75,8 @@ msgid ""
 "<i class=\"fa fa-fw fa-check\"/>\n"
 "                <span class=\"d-none d-md-inline\"> Paid</span>"
 msgstr ""
+"<i class=\"fa fa-fw fa-check\"/>\n"
+"                <span class=\"d-none d-md-inline\">Оплачено</span>"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_page_inherit_payment
@@ -83,17 +91,17 @@ msgstr "<i class=\"fa fa-fw fa-check-circle\"/> Очікує на розгляд
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_page_inherit_payment
 msgid "<i class=\"fa fa-fw fa-check-circle\"/> Processing Payment"
-msgstr ""
+msgstr "<i class=\"fa fa-fw fa-check-circle\"/> Обробка платежу"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid "<span class=\"d-none d-md-inline\"> Pending</span>"
-msgstr ""
+msgstr "<span class=\"d-none d-md-inline\">В очікуванні</span>"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
 msgid "<strong>Full Amount</strong><br/>"
-msgstr ""
+msgstr "<strong>Повна сума</strong><br/>"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
@@ -101,6 +109,8 @@ msgid ""
 "<strong>Installment</strong>\n"
 "                                        <br/>"
 msgstr ""
+"<strong>Розтермінування</strong>\n"
+"                                        <br/>"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.payment_refund_wizard_view_form
@@ -120,7 +130,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_payment/wizards/payment_link_wizard.py:0
 msgid "A discount will be applied if the customer pays before %s included."
-msgstr ""
+msgstr "Знижка буде застосована, якщо клієнт сплатить раніше %s включно."
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
@@ -128,6 +138,8 @@ msgid ""
 "A payment has already been made on this invoice, please make sure to not pay "
 "twice."
 msgstr ""
+"Платіж за цим рахунком-фактурою вже було здійснено, переконайтеся, що не "
+"платите двічі."
 
 #. module: account_payment
 #. odoo-python
@@ -145,7 +157,7 @@ msgstr "Для створення нової платіжної операції
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_overdue_invoices_page
 msgid "Amount"
-msgstr ""
+msgstr "Сума"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_payment__amount_available_for_refund
@@ -155,7 +167,7 @@ msgstr "Сума доступна для повернення"
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_link_wizard__invoice_amount_due
 msgid "Amount Due"
-msgstr ""
+msgstr "Сума боргу"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__amount_paid
@@ -179,6 +191,11 @@ msgid "Authorized Transactions"
 msgstr "Авторизовані операції"
 
 #. module: account_payment
+#: model:ir.model,name:account_payment.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr ""
+
+#. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.account_invoice_view_form_inherit_payment
 msgid "Capture Transaction"
 msgstr "Транзакція отримання"
@@ -191,14 +208,9 @@ msgid "Close"
 msgstr "Закрити"
 
 #. module: account_payment
-#: model:ir.model.fields,field_description:account_payment.field_account_payment_register__payment_method_code
-msgid "Code"
-msgstr "Код"
-
-#. module: account_payment
 #: model:ir.model,name:account_payment.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Налаштування"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__create_uid
@@ -218,9 +230,10 @@ msgstr "Валюта"
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_link_wizard__discount_date
 msgid "Discount Date"
-msgstr ""
+msgstr "Дата знижок"
 
 #. module: account_payment
+#: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__display_name
 #: model:ir.model.fields,field_description:account_payment.field_account_journal__display_name
 #: model:ir.model.fields,field_description:account_payment.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_payment.field_account_payment__display_name
@@ -238,7 +251,7 @@ msgstr "Назва для відображення"
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_link_wizard__display_open_installments
 msgid "Display Open Installments"
-msgstr ""
+msgstr "Показати відкриті платежі"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_success
@@ -251,17 +264,17 @@ msgstr ""
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_link_wizard__epd_info
 msgid "Early Payment Discount Information"
-msgstr ""
+msgstr "Інформація про знижку при достроковій оплаті"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
 msgid "Early Payment Discount of"
-msgstr ""
+msgstr "Знижка на попередню оплату"
 
 #. module: account_payment
 #: model:ir.model.fields.selection,name:account_payment.selection__payment_refund_wizard__support_refund__full_only
 msgid "Full Only"
-msgstr ""
+msgstr "Лише повний"
 
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_payment_link_wizard
@@ -276,7 +289,7 @@ msgstr "Створити посилання платежу"
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_link_wizard__has_eligible_epd
 msgid "Has Eligible Epd"
-msgstr ""
+msgstr "Має придатний EPD"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__has_pending_refund
@@ -284,6 +297,7 @@ msgid "Has a pending refund"
 msgstr "Є очікуване повернення"
 
 #. module: account_payment
+#: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__id
 #: model:ir.model.fields,field_description:account_payment.field_account_journal__id
 #: model:ir.model.fields,field_description:account_payment.field_account_move__id
 #: model:ir.model.fields,field_description:account_payment.field_account_payment__id
@@ -305,6 +319,8 @@ msgid ""
 "Impossible to pay all the overdue invoices if they don't share the same "
 "currency."
 msgstr ""
+"Неможливо оплатити всі протерміновані рахунки-фактури, якщо вони не мають "
+"однієї валюти."
 
 #. module: account_payment
 #: model:ir.model.fields,help:account_payment.field_account_payment_method_line__payment_provider_state
@@ -319,7 +335,7 @@ msgstr ""
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.res_config_settings_view_form
 msgid "Invoice Online Payment"
-msgstr ""
+msgstr "Виставити рахунок-фактуру на онлайн-оплату"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.payment_transaction_form
@@ -336,7 +352,7 @@ msgstr "Рахунки"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_home_overdue_invoice
 msgid "Invoices &amp; Bills"
-msgstr ""
+msgstr "Рахунки"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_transaction__invoices_count
@@ -346,7 +362,7 @@ msgstr "Підрахунок рахунків"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_home_account_payment
 msgid "Invoices to pay"
-msgstr ""
+msgstr "Рахунки на оплату"
 
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_account_journal
@@ -376,7 +392,7 @@ msgstr "Максимально дозволене відшкодування"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.payment_link_wizard__form_inherit_account_payment
 msgid "Next Installments"
-msgstr ""
+msgstr "Наступне розтермінування"
 
 #. module: account_payment
 #: model:ir.model.fields,help:account_payment.field_account_payment__payment_token_id
@@ -400,46 +416,46 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_payment/wizards/payment_link_wizard.py:0
 msgid "Online payment option is not enabled in Configuration."
-msgstr ""
+msgstr "Опція онлайн-оплати не ввімкнена в конфігурації."
 
 #. module: account_payment
 #. odoo-python
 #: code:addons/account_payment/controllers/portal.py:0
 msgid "Overdue invoices should share the same company."
-msgstr ""
+msgstr "Протерміновані рахунки-фактури мають використовувати одну компанію."
 
 #. module: account_payment
 #. odoo-python
 #: code:addons/account_payment/controllers/portal.py:0
 msgid "Overdue invoices should share the same currency."
-msgstr ""
+msgstr "У протермінованих рахунках-фактурах має бути одна валюта."
 
 #. module: account_payment
 #. odoo-python
 #: code:addons/account_payment/controllers/portal.py:0
 msgid "Overdue invoices should share the same partner."
-msgstr ""
+msgstr "Протерміновані рахунки-фактури повинні мати одного партнера."
 
 #. module: account_payment
 #: model:ir.model.fields.selection,name:account_payment.selection__payment_refund_wizard__support_refund__partial
 msgid "Partial"
-msgstr ""
+msgstr "Частинами"
 
 #. module: account_payment
 #: model:ir.model,name:account_payment.model_account_payment_register
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
 msgid "Pay"
-msgstr ""
+msgstr "Оплатити"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment_paid
 msgid "Pay Invoice"
-msgstr ""
+msgstr "Оплатити рахунок"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_res_config_settings__pay_invoices_online
 msgid "Pay Invoices Online"
-msgstr ""
+msgstr "Оплачуйте рахунки онлайн"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_docs_entry
@@ -455,7 +471,7 @@ msgstr "Оплатити зараз"
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_home_overdue_invoice
 msgid "Pay overdue"
-msgstr ""
+msgstr "Оплатити протермінування"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_payment_refund_wizard__payment_id
@@ -523,7 +539,7 @@ msgstr "Платежі"
 #. odoo-python
 #: code:addons/account_payment/controllers/payment.py:0
 msgid "Please log in to pay your overdue invoices"
-msgstr ""
+msgstr "Увійдіть, щоб оплатити протерміновані рахунки"
 
 #. module: account_payment
 #. odoo-python
@@ -535,7 +551,7 @@ msgstr "Провайдер"
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_overdue_invoices_page
 msgid "Reference"
-msgstr ""
+msgstr "Референс"
 
 #. module: account_payment
 #. odoo-python
@@ -638,13 +654,13 @@ msgstr "Джерело платежу пов'язаних платежів по�
 #. odoo-python
 #: code:addons/account_payment/models/account_move.py:0
 msgid "There are pending transactions for this invoice."
-msgstr ""
+msgstr "Для цього рахунку-фактури є транзакції, що очікують обробки."
 
 #. module: account_payment
 #. odoo-python
 #: code:addons/account_payment/models/account_move.py:0
 msgid "There is no amount to be paid."
-msgstr ""
+msgstr "Сума до сплати не потрібна."
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_error
@@ -678,31 +694,31 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_payment/models/account_move.py:0
 msgid "This invoice cannot be paid online."
-msgstr ""
+msgstr "Цей рахунок-фактуру неможливо оплатити онлайн."
 
 #. module: account_payment
 #. odoo-python
 #: code:addons/account_payment/models/account_move.py:0
 msgid "This invoice has already been paid."
-msgstr ""
+msgstr "Цей рахунок уже оплачено."
 
 #. module: account_payment
 #. odoo-python
 #: code:addons/account_payment/models/account_move.py:0
 msgid "This invoice isn't posted."
-msgstr ""
+msgstr "Цей рахунок-фактуру не опубліковано."
 
 #. module: account_payment
 #. odoo-python
 #: code:addons/account_payment/models/account_move.py:0
 msgid "This is not an outgoing invoice."
-msgstr ""
+msgstr "Це не вихідний рахунок-фактура."
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__transaction_count
 #: model:ir.model.fields,field_description:account_payment.field_account_move__transaction_count
 msgid "Transaction Count"
-msgstr ""
+msgstr "Підрахунок транзакцій"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_bank_statement_line__transaction_ids
@@ -713,7 +729,7 @@ msgstr "Операції"
 #. module: account_payment
 #: model:ir.model.fields.selection,name:account_payment.selection__payment_refund_wizard__support_refund__none
 msgid "Unsupported"
-msgstr ""
+msgstr "Не підтримується"
 
 #. module: account_payment
 #: model:ir.model.fields,field_description:account_payment.field_account_payment__use_electronic_payment_method
@@ -734,6 +750,9 @@ msgid ""
 "enabled or test state.\n"
 "Linked providers(s): %s"
 msgstr ""
+"Ви не можете видалити спосіб оплати, пов’язаний із постачальником у "
+"включеному або тестовому стані.\n"
+"Пов'язані партнери: %s"
 
 #. module: account_payment
 #. odoo-python
@@ -742,6 +761,8 @@ msgid ""
 "You cannot uninstall this module as payments using this payment method "
 "already exist."
 msgstr ""
+"Ви не можете видалити цей модуль, оскільки платежі за допомогою цього "
+"способу оплати вже існують."
 
 #. module: account_payment
 #. odoo-python
@@ -758,23 +779,26 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/account_payment/static/src/interactions/portal_my_invoices_payment_list.js:0
 msgid "due in %s day(s)"
-msgstr ""
+msgstr "через %s днів"
 
 #. module: account_payment
 #. odoo-javascript
 #: code:addons/account_payment/static/src/interactions/portal_my_invoices_payment_list.js:0
 msgid "due today"
-msgstr ""
+msgstr "термін погашення сьогодні"
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_invoice_payment
 msgid "has been applied."
-msgstr ""
+msgstr "було застосовано."
 
 #. module: account_payment
 #: model_terms:ir.ui.view,arch_db:account_payment.portal_my_invoices_payment
 msgid "overdue"
-msgstr ""
+msgstr "протерміновано"
+
+#~ msgid "Code"
+#~ msgstr "Код"
 
 #~ msgid ""
 #~ "<strong>No suitable payment option could be found.</strong><br/>\n"

@@ -8,14 +8,16 @@
 # Khwunchai Jaengsawang <khwunchai.j@ku.th>, 2022
 # Martin Trigaux, 2022
 # Wichanon Jamwutthipreecha, 2022
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# Nusara Boonma <nuboo@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-09-16 21:19+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-02-13 18:36+0000\n"
+"PO-Revision-Date: 2026-06-30 20:24+0000\n"
+"Last-Translator: Nusara Boonma <nuboo@odoo.com>\n"
 "Language-Team: Thai <https://translate.odoo.com/projects/odoo-19/sale_stock/"
 "th/>\n"
 "Language: th\n"
@@ -23,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.exception_on_picking
@@ -79,8 +81,8 @@ msgid ""
 msgstr ""
 "<span class=\"small badge rounded-pill text-bg-success "
 "orders_label_text_align\">\n"
-"                                        <i class=\"fa fa-fw fa-truck\"/> "
-"จัดส่งแล้ว\n"
+"                                        <i class=\"fa fa-fw fa-truck\"/> จัดส่ง"
+"แล้ว\n"
 "                                    </span>"
 
 #. module: sale_stock
@@ -116,6 +118,11 @@ msgstr ""
 "- วิเคราะห์จากค่าใช้จ่าย: ปริมาณคือผลรวมปริมาณจากค่าใช้จ่ายที่ผ่านรายการ\n"
 "- ระบบบันทึกเวลา: ปริมาณคือผลรวมของชั่วโมงที่บันทึกไว้ในงานที่เชื่อมโยงกับรายการการขายนี้\n"
 "- การเคลื่อนย้ายสต็อค: ปริมาณมาจากการเลือกที่ได้รับการยืนยัน\n"
+
+#. module: sale_stock
+#: model:ir.model,name:sale_stock.model_account_accrued_orders_wizard
+msgid "Accrued Orders Wizard"
+msgstr "โปรแกรมสร้างใบสั่งค้างรับ"
 
 #. module: sale_stock
 #. odoo-javascript
@@ -200,7 +207,7 @@ msgstr "ค่าคลังสินค้าเริ่มต้น"
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.portal_my_orders
 msgid "Delivered"
-msgstr ""
+msgstr "จัดส่งแล้ว"
 
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.view_order_form_inherit_sale_stock
@@ -225,11 +232,12 @@ msgid ""
 "shipping, the shipping policy of the order will be taken into account to "
 "either use the minimum or maximum lead time of the order lines."
 msgstr ""
-"วันที่จัดส่งที่คุณสามารถสัญญากับลูกค้าได้ "
-"โดยคำนวณจากระยะเวลานำสินค้าขั้นต่ำของรายการคำสั่งในกรณีของสินค้าบริการ ในกรณีของการจัดส่ง "
-"นโยบายการจัดส่งของคำสั่งจะถูกนำมาพิจารณาโดยใช้ระยะเวลานำสินค้าขั้นต่ำหรือสูงสุดของรายการคำสั่ง"
+"วันที่จัดส่งที่คุณสามารถสัญญากับลูกค้าได้ โดยคำนวณจากระยะเวลานำสินค้าขั้นต่ำของรายการคำสั่งในกรณีข"
+"องสินค้าบริการ ในกรณีของการจัดส่ง นโยบายการจัดส่งของคำสั่งจะถูกนำมาพิจารณาโดยใช้ระยะเวลานำ"
+"สินค้าขั้นต่ำหรือสูงสุดของรายการคำสั่ง"
 
 #. module: sale_stock
+#: model:ir.model.fields,field_description:sale_stock.field_account_accrued_orders_wizard__display_name
 #: model:ir.model.fields,field_description:sale_stock.field_account_move__display_name
 #: model:ir.model.fields,field_description:sale_stock.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:sale_stock.field_product_template__display_name
@@ -240,7 +248,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:sale_stock.field_sale_order__display_name
 #: model:ir.model.fields,field_description:sale_stock.field_sale_order_line__display_name
 #: model:ir.model.fields,field_description:sale_stock.field_sale_report__display_name
-#: model:ir.model.fields,field_description:sale_stock.field_stock_account_stock_valuation_report__display_name
 #: model:ir.model.fields,field_description:sale_stock.field_stock_forecasted_product_product__display_name
 #: model:ir.model.fields,field_description:sale_stock.field_stock_lot__display_name
 #: model:ir.model.fields,field_description:sale_stock.field_stock_move__display_name
@@ -336,6 +343,7 @@ msgid "Has late picking"
 msgstr "มีการรับล่าช้า"
 
 #. module: sale_stock
+#: model:ir.model.fields,field_description:sale_stock.field_account_accrued_orders_wizard__id
 #: model:ir.model.fields,field_description:sale_stock.field_account_move__id
 #: model:ir.model.fields,field_description:sale_stock.field_account_move_line__id
 #: model:ir.model.fields,field_description:sale_stock.field_product_template__id
@@ -346,7 +354,6 @@ msgstr "มีการรับล่าช้า"
 #: model:ir.model.fields,field_description:sale_stock.field_sale_order__id
 #: model:ir.model.fields,field_description:sale_stock.field_sale_order_line__id
 #: model:ir.model.fields,field_description:sale_stock.field_sale_report__id
-#: model:ir.model.fields,field_description:sale_stock.field_stock_account_stock_valuation_report__id
 #: model:ir.model.fields,field_description:sale_stock.field_stock_forecasted_product_product__id
 #: model:ir.model.fields,field_description:sale_stock.field_stock_lot__id
 #: model:ir.model.fields,field_description:sale_stock.field_stock_move__id
@@ -367,8 +374,8 @@ msgid ""
 "based on the greatest product lead time. Otherwise, it will be based on the "
 "shortest."
 msgstr ""
-"ถ้าคุณจัดส่งสินค้าทั้งหมดในคราวเดียว คำสั่งจัดส่งจะถูกกำหนดเวลาตามระยะเวลานำสินค้าที่มากที่สุด "
-"มิฉะนั้นจะยึดตามระยะเวลาที่สั้นที่สุด"
+"ถ้าคุณจัดส่งสินค้าทั้งหมดในคราวเดียว คำสั่งจัดส่งจะถูกกำหนดเวลาตามระยะเวลานำสินค้าที่มากที่สุด มิฉะ"
+"นั้นจะยึดตามระยะเวลาที่สั้นที่สุด"
 
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.exception_on_so
@@ -400,7 +407,8 @@ msgstr "Incoterm:"
 msgid ""
 "International Commercial Terms are a series of predefined commercial terms "
 "used in international transactions."
-msgstr "Incoterm คือชุดของข้อกำหนดทางการค้าที่กำหนดไว้ล่วงหน้าที่ใช้ในธุรกรรมระหว่างประเทศ"
+msgstr ""
+"Incoterm คือชุดของข้อกำหนดทางการค้าที่กำหนดไว้ล่วงหน้าที่ใช้ในธุรกรรมระหว่างประเทศ"
 
 #. module: sale_stock
 #: model:ir.model,name:sale_stock.model_stock_route
@@ -460,9 +468,8 @@ msgid ""
 "for delivery that many days earlier than the actual promised date, to cope "
 "with unexpected delays in the supply chain."
 msgstr ""
-"สัดส่วนข้อผิดพลาดสำหรับวันที่สัญญากับลูกค้า "
-"สินค้าจะถูกกำหนดเวลาการจัดส่งเร็วกว่าวันที่สัญญาจริงหลายวัน "
-"เพื่อรับมือกับความล่าช้าที่ไม่คาดคิดในซัพพลายเชน"
+"สัดส่วนข้อผิดพลาดสำหรับวันที่สัญญากับลูกค้า สินค้าจะถูกกำหนดเวลาการจัดส่งเร็วกว่าวันที่สัญญาจริงหลายวั"
+"น เพื่อรับมือกับความล่าช้าที่ไม่คาดคิดในซัพพลายเชน"
 
 #. module: sale_stock
 #: model:ir.model.fields,help:sale_stock.field_res_company__security_lead
@@ -473,9 +480,8 @@ msgid ""
 "for procurement and delivery that many days earlier than the actual promised "
 "date, to cope with unexpected delays in the supply chain."
 msgstr ""
-"สัดส่วนข้อผิดพลาดสำหรับวันที่สัญญากับลูกค้า "
-"สินค้าจะได้รับการจัดซื้อและจัดส่งเร็วกว่าวันที่สัญญาจริงหลายวัน "
-"เพื่อรับมือกับความล่าช้าที่ไม่คาดคิดในซัพพลายเชน"
+"สัดส่วนข้อผิดพลาดสำหรับวันที่สัญญากับลูกค้า สินค้าจะได้รับการจัดซื้อและจัดส่งเร็วกว่าวันที่สัญญาจริงหลายวั"
+"น เพื่อรับมือกับความล่าช้าที่ไม่คาดคิดในซัพพลายเชน"
 
 #. module: sale_stock
 #: model:ir.model.fields,field_description:sale_stock.field_sale_order_line__qty_delivered_method
@@ -501,7 +507,7 @@ msgstr "ไม่มีว่างในอนาคต"
 #. module: sale_stock
 #: model_terms:ir.ui.view,arch_db:sale_stock.portal_my_orders
 msgid "Not Available"
-msgstr ""
+msgstr "ไม่พร้อมใช้"
 
 #. module: sale_stock
 #: model:ir.model.fields.selection,name:sale_stock.selection__sale_order__delivery_status__pending
@@ -588,7 +594,7 @@ msgstr ""
 #. module: sale_stock
 #: model:ir.model.fields,field_description:sale_stock.field_sale_order__stock_reference_ids
 msgid "References"
-msgstr ""
+msgstr "อ้างอิง"
 
 #. module: sale_stock
 #. odoo-javascript
@@ -643,7 +649,7 @@ msgstr "จำนวนคำสั่งขาย"
 #. module: sale_stock
 #: model:ir.model.fields,field_description:sale_stock.field_stock_reference__sale_ids
 msgid "Sales"
-msgstr ""
+msgstr "การขาย"
 
 #. module: sale_stock
 #: model:ir.model,name:sale_stock.model_sale_report
@@ -755,11 +761,6 @@ msgid "Stock Rules report"
 msgstr "รายงานกฎสต็อก"
 
 #. module: sale_stock
-#: model:ir.model,name:sale_stock.model_stock_account_stock_valuation_report
-msgid "Stock Valuation"
-msgstr ""
-
-#. module: sale_stock
 #: model:ir.model,name:sale_stock.model_report_stock_report_stock_rule
 msgid "Stock rule report"
 msgstr "รายงานกฎสต็อก"
@@ -781,8 +782,8 @@ msgid ""
 "document."
 msgstr ""
 "ที่อยู่จัดส่งในใบสั่งซื้อได้รับการเปลี่ยนแปลงแล้ว<br/>\n"
-"                        จาก <strong>\"%(old_address)s\"</strong> เป็น "
-"<strong>\"%(new_address)s\"</strong>,\n"
+"                        จาก <strong>\"%(old_address)s\"</strong> เป็น <strong>"
+"\"%(new_address)s\"</strong>,\n"
 "                        คุณควรอัปเดตเอกสารนี้กับพาร์ทเนอร์"
 
 #. module: sale_stock
@@ -792,7 +793,7 @@ msgid ""
 "The ordered quantity cannot be decreased below the amount already delivered. "
 "Instead, create a return in your inventory."
 msgstr ""
-"ปริมาณที่สั่งไม่สามารถลดลงต่ำกว่าจำนวนที่จัดส่งไปแล้วได้ ให้สร้างการคืนสินค้าในสินค้าคงคลังของคุณแทน"
+"ปริมาณที่สั่งไม่สามารถลดลงต่ำกว่าจำนวนที่จัดส่งไปแล้วได้ ให้สร้างการคืนสินค้าในคลังสินค้าของคุณแทน"
 
 #. module: sale_stock
 #. odoo-python
@@ -801,8 +802,8 @@ msgid ""
 "The ordered quantity of a sale order line cannot be decreased below the "
 "amount already delivered. Instead, create a return in your inventory."
 msgstr ""
-"ปริมาณที่สั่งของรายการใบสั่งขายไม่สามารถลดลงต่ำกว่าจำนวนที่จัดส่งแล้วได้ "
-"ให้สร้างการส่งคืนในสินค้าคงคลังของคุณแทน"
+"ปริมาณที่สั่งของรายการใบสั่งขายไม่สามารถลดลงต่ำกว่าจำนวนที่จัดส่งแล้วได้ ให้สร้างการส่งคืนในคลังสิน"
+"ค้าของคุณแทน"
 
 #. module: sale_stock
 #. odoo-javascript
@@ -813,7 +814,7 @@ msgstr "สินค้าชิ้นนี้เติมได้ตามต
 #. module: sale_stock
 #: model:ir.model.fields,field_description:sale_stock.field_sale_order_line__is_storable
 msgid "Track Inventory"
-msgstr "ติดตามสินค้าคงคลัง"
+msgstr "ติดตามคลังสินค้า"
 
 #. module: sale_stock
 #: model:ir.model,name:sale_stock.model_stock_picking
@@ -913,6 +914,9 @@ msgstr "ดำเนินการแทน"
 #: code:addons/sale_stock/static/src/xml/delay_alert.xml:0
 msgid "will be late."
 msgstr "จะล่าช้า"
+
+#~ msgid "Stock Valuation"
+#~ msgstr "การประเมินมูลค่าสต็อก"
 
 #~ msgid "<i class=\"fa fa-fw fa-clock-o\"/> <b>Preparation</b>"
 #~ msgstr "<i class=\"fa fa-fw fa-clock-o\"/> <b>การเตรียมพร้อม</b>"

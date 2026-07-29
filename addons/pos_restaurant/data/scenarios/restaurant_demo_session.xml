@@ -26,11 +26,11 @@
         <record id="pos_closed_order_3_1" model="pos.order" forcecreate="False">
             <field name="session_id" ref="pos_closed_session_3" />
             <field name="company_id" ref="base.main_company" />
-            <field name="state">paid</field>
             <field name="amount_total">14.0</field>
             <field name="amount_tax">0.0</field>
             <field name="amount_paid">14.0</field>
             <field name="amount_return">0.0</field>
+            <field name="ticket_code">cs24t</field>
             <field name="preset_id" eval="ref('pos_takein_preset', raise_if_not_found=False)"/>
         </record>
 
@@ -58,14 +58,19 @@
             <field name="amount">14.0</field>
         </record>
 
+        <function model="pos.order" name="write">
+            <value eval="[ref('pos_closed_order_3_1')]"/>
+            <value eval="{'state': 'paid'}"/>
+        </function>
+
         <record id="pos_closed_order_3_2" model="pos.order" forcecreate="False">
             <field name="session_id" ref="pos_closed_session_3" />
             <field name="company_id" ref="base.main_company" />
-            <field name="state">paid</field>
             <field name="amount_total">7.0</field>
             <field name="amount_tax">0.0</field>
             <field name="amount_paid">7.0</field>
             <field name="amount_return">0.0</field>
+            <field name="ticket_code">bg3yt</field>
             <field name="preset_id" eval="ref('pos_takein_preset', raise_if_not_found=False)"/>
         </record>
 
@@ -83,6 +88,11 @@
             <field name="pos_order_id" ref="pos_closed_order_3_2" />
             <field name="amount">7.0</field>
         </record>
+
+        <function model="pos.order" name="write">
+            <value eval="[ref('pos_closed_order_3_2')]"/>
+            <value eval="{'state': 'paid'}"/>
+        </function>
 
         <function model="pos.session" name="action_pos_session_closing_control"
             eval="[[ref('pos_closed_session_3')]]" />
@@ -102,11 +112,11 @@
         <record id="pos_closed_order_4_1" model="pos.order" forcecreate="False">
             <field name="session_id" ref="pos_closed_session_4" />
             <field name="company_id" ref="base.main_company" />
-            <field name="state">paid</field>
             <field name="amount_total">6.7</field>
             <field name="amount_tax">0.0</field>
             <field name="amount_paid">6.7</field>
             <field name="amount_return">0.0</field>
+            <field name="ticket_code">kq9ty</field>
             <field name="preset_id" eval="ref('pos_takein_preset', raise_if_not_found=False)"/>
         </record>
 
@@ -134,14 +144,19 @@
             <field name="amount">6.7</field>
         </record>
 
+        <function model="pos.order" name="write">
+            <value eval="[ref('pos_closed_order_4_1')]"/>
+            <value eval="{'state': 'paid'}"/>
+        </function>
+
         <record id="pos_closed_order_4_2" model="pos.order" forcecreate="False">
             <field name="session_id" ref="pos_closed_session_4" />
             <field name="company_id" ref="base.main_company" />
-            <field name="state">paid</field>
             <field name="amount_total">28.0</field>
             <field name="amount_tax">0.0</field>
             <field name="amount_paid">28.0</field>
             <field name="amount_return">0.0</field>
+            <field name="ticket_code">ij0ty</field>
             <field name="preset_id" eval="ref('pos_takein_preset', raise_if_not_found=False)"/>
         </record>
 
@@ -160,6 +175,11 @@
             <field name="pos_order_id" ref="pos_closed_order_4_2" />
             <field name="amount">28.0</field>
         </record>
+
+        <function model="pos.order" name="write">
+            <value eval="[ref('pos_closed_order_4_2')]"/>
+            <value eval="{'state': 'paid'}"/>
+        </function>
 
         <function model="pos.session" name="action_pos_session_closing_control"
             eval="[[ref('pos_closed_session_4')]]" />
@@ -187,6 +207,7 @@
             <field name="partner_id" ref="customer_1" />
             <field name="table_id" ref="table_01" />
             <field name="customer_count">8</field>
+            <field name="ticket_code">pp3ss</field>
             <field name="preset_id" eval="ref('pos_takein_preset', raise_if_not_found=False)"/>
         </record>
 
@@ -221,6 +242,7 @@
             <field name="partner_id" ref="customer_1" />
             <field name="table_id" ref="table_02" />
             <field name="customer_count">3</field>
+            <field name="ticket_code">lm5sr</field>
             <field name="preset_id" eval="ref('pos_takein_preset', raise_if_not_found=False)"/>
         </record>
 
@@ -255,6 +277,7 @@
             <field name="partner_id" ref="customer_1" />
             <field name="table_id" ref="table_04" />
             <field name="customer_count">5</field>
+            <field name="ticket_code">qrs2t</field>
             <field name="preset_id" eval="ref('pos_takein_preset', raise_if_not_found=False)"/>
         </record>
 
@@ -289,6 +312,7 @@
             <field name="partner_id" ref="customer_1" />
             <field name="table_id" ref="table_06" />
             <field name="customer_count">1</field>
+            <field name="ticket_code">cv34t</field>
             <field name="preset_id" eval="ref('pos_takein_preset', raise_if_not_found=False)"/>
         </record>
 

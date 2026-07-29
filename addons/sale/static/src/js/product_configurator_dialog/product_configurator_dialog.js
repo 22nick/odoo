@@ -1,4 +1,4 @@
-import { Component, onWillStart, useState, useSubEnv } from "@odoo/owl";
+import { Component, onMounted, onWillStart, onWillUnmount, useState, useSubEnv } from "@odoo/owl";
 import { Dialog } from '@web/core/dialog/dialog';
 import { _t } from "@web/core/l10n/translation";
 import { rpc } from "@web/core/network/rpc";
@@ -114,6 +114,9 @@ export class ProductConfiguratorDialog extends Component {
             // Use the currency id retrieved from the server if none was provided in the props.
             this.currency.id ??= currency_id;
         });
+
+        onMounted(() => this.env.bus.trigger("FORM-CONTROLLER:FORM-IN-DIALOG:ADD"));
+        onWillUnmount(() => this.env.bus.trigger("FORM-CONTROLLER:FORM-IN-DIALOG:REMOVE"));
     }
 
     get totalMessage() {
@@ -264,8 +267,8 @@ export class ProductConfiguratorDialog extends Component {
         if (product.quantity === quantity) {
             return false;
         }
-        const { price } = await this._updateCombination(product, quantity, product.uom.id);
         product.quantity = quantity;
+        const { price } = await this._updateCombination(product, quantity, product.uom.id);
         product.price = parseFloat(price);
 
         return true;
@@ -284,11 +287,22 @@ export class ProductConfiguratorDialog extends Component {
         if (product.uom.id === uomId) {
             return false;
         }
-        const { price } = await this._updateCombination(product, product.quantity, uomId);
-        product.price = parseFloat(price);
-        product.uom = product.available_uoms.find((uom) => uom.id === uomId);
+        const combination = await this._updateCombination(product, product.quantity, uomId);
+        this._handleUnitOfMeasureUpdate(product, combination, uomId);
 
         return true;
+    }
+
+    /**
+     * Apply the update after changing the product uom.
+     *
+     * @param {Object} product - The product for which the uom was changed.
+     * @param {Object} combination - The result of the `_updateCombination`.
+     * @param {Number} uomId - The new uom of the product, as an `uom.uom` id.
+     */
+    _handleUnitOfMeasureUpdate(product, combination, uomId) {
+        product.price = parseFloat(combination.price);
+        product.uom = product.available_uoms.find((uom) => uom.id === uomId);
     }
 
     /**

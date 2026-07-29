@@ -20,14 +20,15 @@
 # Jonas Zinkevicius <jozi@odoo.com>, 2022
 # Denis Knotko <denis_knotko@yahoo.com>, 2022
 # Arunas V. <arunas@devoro.com>, 2023
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 18:40+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-06-12 17:36+0000\n"
+"PO-Revision-Date: 2026-06-29 10:17+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Lithuanian <https://translate.odoo.com/projects/odoo-19/"
 "repair/lt/>\n"
 "Language: lt\n"
@@ -35,9 +36,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < "
-"11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? "
-"1 : n % 1 != 0 ? 2: 3);\n"
-"X-Generator: Weblate 5.12.2\n"
+"11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? 1 "
+": n % 1 != 0 ? 2: 3);\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: repair
 #. odoo-python
@@ -192,7 +193,7 @@ msgstr "Veiklos tipo ikona"
 #. module: repair
 #: model_terms:ir.ui.view,arch_db:repair.repair_order_view_activity
 msgid "Activity view"
-msgstr ""
+msgstr "Veiklos rodinys"
 
 #. module: repair
 #: model:ir.model.fields.selection,name:repair.selection__stock_move__repair_line_type__add
@@ -413,7 +414,7 @@ msgstr "Sukurta"
 #. module: repair
 #: model_terms:ir.ui.view,arch_db:repair.view_repair_order_form
 msgid "Creates a new serial/lot number"
-msgstr ""
+msgstr "Sukurti naują partijos/serijos numerį"
 
 #. module: repair
 #: model:ir.model.fields,field_description:repair.field_repair_order__partner_id
@@ -443,6 +444,7 @@ msgid "Details"
 msgstr "Papildoma informacija"
 
 #. module: repair
+#: model:ir.model.fields,field_description:repair.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:repair.field_product_product__display_name
 #: model:ir.model.fields,field_description:repair.field_product_template__display_name
 #: model:ir.model.fields,field_description:repair.field_repair_order__display_name
@@ -520,6 +522,7 @@ msgid "Has Uncomplete Moves"
 msgstr ""
 
 #. module: repair
+#: model:ir.model.fields,field_description:repair.field_account_move_line__id
 #: model:ir.model.fields,field_description:repair.field_product_product__id
 #: model:ir.model.fields,field_description:repair.field_product_template__id
 #: model:ir.model.fields,field_description:repair.field_repair_order__id
@@ -619,6 +622,11 @@ msgid "John Doe"
 msgstr ""
 
 #. module: repair
+#: model:ir.model,name:repair.model_account_move_line
+msgid "Journal Item"
+msgstr "Žurnalo įrašas"
+
+#. module: repair
 #: model_terms:ir.ui.view,arch_db:repair.report_repairorder
 msgid "L12345"
 msgstr ""
@@ -692,6 +700,8 @@ msgid "My Activity Deadline"
 msgstr "Veiklos paskutinis terminas"
 
 #. module: repair
+#. odoo-python
+#: code:addons/repair/models/repair.py:0
 #: model:ir.model.fields.selection,name:repair.selection__repair_order__state__draft
 #: model_terms:ir.ui.view,arch_db:repair.stock_repair_type_kanban
 #: model_terms:ir.ui.view,arch_db:repair.view_repair_order_form_filter
@@ -717,6 +727,12 @@ msgstr "Kito veiksmo santrauka"
 #: model:ir.model.fields,field_description:repair.field_repair_order__activity_type_id
 msgid "Next Activity Type"
 msgstr "Kito veiksmo tipas"
+
+#. module: repair
+#. odoo-python
+#: code:addons/repair/models/stock_warehouse.py:0
+msgid "No location of type Inventory Loss found"
+msgstr ""
 
 #. module: repair
 #: model_terms:ir.actions.act_window,help:repair.action_repair_order_tree
@@ -987,7 +1003,7 @@ msgstr ""
 #. module: repair
 #: model:ir.model.fields,field_description:repair.field_repair_order__reference_ids
 msgid "References"
-msgstr ""
+msgstr "Rekomendacijos"
 
 #. module: repair
 #: model:ir.model.fields.selection,name:repair.selection__stock_move__repair_line_type__remove
@@ -1650,9 +1666,6 @@ msgstr ""
 #~ msgstr "Sąskaitos faktūros adresas"
 
 #~ msgid "Journal Entry"
-#~ msgstr "Žurnalo įrašas"
-
-#~ msgid "Journal Item"
 #~ msgstr "Žurnalo įrašas"
 
 #~ msgid "No Invoice"

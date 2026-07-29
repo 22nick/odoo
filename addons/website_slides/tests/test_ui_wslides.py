@@ -4,10 +4,12 @@ import base64
 import logging
 
 from dateutil.relativedelta import relativedelta
+from unittest.mock import patch
 
 from odoo import http, tests
 from odoo.addons.base.tests.common import HttpCaseWithUserPortal
 from odoo.addons.gamification.tests.common import HttpCaseGamification
+from odoo.addons.mail.models.mail_message import MailMessage
 from odoo.fields import Command, Datetime
 from odoo.tools import mute_logger
 from odoo.tools.misc import file_open
@@ -143,6 +145,28 @@ class TestUi(TestUICommon):
             location = self.parse_http_location(response.headers.get("Location"))
             self.assertEqual(location.path, "/web/login")
 
+    def test_review_link_redirection(self):
+        message = self.env["mail.message"].create(
+            {
+                "author_id": self.user_admin.partner_id.id,
+                "body": "Test",
+                "model": self.channel._name,
+                "res_id": self.channel.id,
+                "subtype_id": self.ref("mail.mt_comment"),
+            }
+        )
+        cases = [
+            ("admin", rf"^/odoo/slide.channel/.*highlight_message_id={message.id}"),
+            ("portal", rf"^/slides/.*highlight_message_id={message.id}"),
+            (None, rf"^/slides/.*highlight_message_id={message.id}"),
+        ]
+        for login, url_pattern in cases:
+            with self.subTest(user=login):
+                self.authenticate(login, login)
+                res = self.url_open(f"/mail/message/{message.id}")
+                self.assertEqual(res.status_code, 200)
+                self.assertRegex(res.request.path_url, url_pattern)
+
     def test_course_member_employee(self):
         user_demo = self.user_demo
         user_demo.write({
@@ -240,6 +264,45 @@ class TestUi(TestUICommon):
     def test_course_review_modification(self):
         self.user_portal.karma = 20
         self.start_tour("/slides", "course_review_modification", login=self.user_portal.login)
+
+    def test_course_review_modification_by_admin(self):
+        self.channel.message_post(
+            body="Non admin user review",
+            message_type="comment",
+            rating_value="3",
+            subtype_xmlid="mail.mt_comment"
+        )
+        slide = self.channel.slide_ids.filtered(lambda s: s.name == "Gardening: The Know-How")[0]
+        base_vals = {"message_type": "comment", "model": "slide.slide", "res_id": slide.id}
+        self.env["mail.message"].create(
+            [
+                # First message should not be considered comment.
+                {
+                    **base_vals,
+                    "body": "Test note",
+                    "subtype_id": self.env.ref("mail.mt_note").id,
+                },
+                *[
+                    {
+                        **base_vals,
+                        "body": f"Comment {i + 1}",
+                        "subtype_id": self.env.ref("mail.mt_comment").id,
+                    }
+                    for i in range(4)
+                ],
+            ]
+        )
+        original_fetch = MailMessage._message_fetch
+        with patch.object(
+            MailMessage,
+            "_message_fetch",
+            lambda self, domain, **kw: original_fetch(self, domain, **{"limit": 3, **kw}),
+        ):
+            self.start_tour(
+                "/slides",
+                "course_review_modification_by_admin",
+                login=self.user_admin.login,
+            )
 
     def test_fullscreen_slide_text_highlights(self):
         self.env['slide.slide'].create({

@@ -6,14 +6,16 @@
 # Martin Trigaux, 2022
 # Thi Huong Nguyen, 2023
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Thi Huong Nguyen (thng)" <thng@odoo.com>, 2026.
+# Deleted User <noreply+31@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-09-16 02:35+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-06-30 05:43+0000\n"
+"Last-Translator: Deleted User <noreply+31@weblate.org>\n"
 "Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/"
 "sale_expense/vi/>\n"
 "Language: vi\n"
@@ -21,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: sale_expense
 #: model:ir.model.fields,field_description:sale_expense.field_sale_order__expense_count
@@ -38,7 +40,7 @@ msgstr "Có thể xuất lại hóa đơn"
 #: model:ir.model.fields,field_description:sale_expense.field_hr_expense__sale_order_id
 #: model:ir.model.fields,field_description:sale_expense.field_hr_expense_split__sale_order_id
 msgid "Customer to Reinvoice"
-msgstr "Khách hàng cần xuất lại hóa đơn"
+msgstr "Khách hàng cần lập lại hóa đơn"
 
 #. module: sale_expense
 #: model:ir.model.fields,field_description:sale_expense.field_account_move__display_name
@@ -65,7 +67,7 @@ msgstr "Chú thích chính sách chi phí"
 #. module: sale_expense
 #: model:ir.model,name:sale_expense.model_hr_expense_split
 msgid "Expense Split"
-msgstr "Chia sẻ chi phí"
+msgstr "Tách chi phí"
 
 #. module: sale_expense
 #: model:ir.actions.act_window,name:sale_expense.hr_expense_action_from_sale_order
@@ -121,7 +123,7 @@ msgstr ""
 #. module: sale_expense
 #: model_terms:ir.ui.view,arch_db:sale_expense.product_product_view_form_inherit_sale_expense
 msgid "Invoicing"
-msgstr "Xuất hóa đơn"
+msgstr "Lập hóa đơn"
 
 #. module: sale_expense
 #: model:ir.model,name:sale_expense.model_account_move

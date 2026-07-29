@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* lunch
+# * lunch
 #
 # Translators:
 # Egon Raamat <egon@avalah.ee>, 2022
@@ -20,20 +20,23 @@
 # Anna, 2023
 # JanaAvalah, 2023
 # Leaanika Randmets, 2023
-#
+# Kristina Pešehodko <kristina@avalah.ee>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2022-09-22 05:53+0000\n"
-"Last-Translator: Leaanika Randmets, 2023\n"
-"Language-Team: Estonian (https://app.transifex.com/odoo/teams/41243/et/)\n"
+"POT-Creation-Date: 2026-04-10 18:38+0000\n"
+"PO-Revision-Date: 2026-07-02 00:46+0000\n"
+"Last-Translator: Kristina Pešehodko <kristina@avalah.ee>\n"
+"Language-Team: Estonian <https://translate.odoo.com/projects/odoo-19/lunch/"
+"et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: lunch
 #: model_terms:lunch.product,description:lunch.product_temaki
@@ -94,8 +97,8 @@ msgid ""
 "<i class=\"fa fa-money\" role=\"img\" aria-label=\"Amount\" title=\"Amount\"/"
 ">"
 msgstr ""
-"<i class=\"fa fa-money\" role=\"img\" aria-label=\"Amount\" title=\"Amount\"/"
-">"
+"<i class=\"fa fa-money\" role=\"img\" aria-label=\"Amount\" "
+"title=\"Amount\"/>"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_order_view_kanban
@@ -412,8 +415,9 @@ msgstr "Hoiatused"
 #. module: lunch
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
+#, fuzzy
 msgid "Already Paid"
-msgstr ""
+msgstr "Juba makstud"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_cashmove__amount
@@ -550,8 +554,9 @@ msgstr "Tühistatud"
 #. module: lunch
 #. odoo-python
 #: code:addons/lunch/models/lunch_supplier.py:0
+#, fuzzy
 msgid "Cannot send an email to this supplier!"
-msgstr ""
+msgstr "Ei saa sellele tarnijale e-kirja saata!"
 
 #. module: lunch
 #: model:ir.actions.act_window,name:lunch.lunch_cashmove_action_payment
@@ -629,11 +634,11 @@ msgid ""
 "title=\"Cancel button\"></span> red X to announce that the order isn't "
 "available."
 msgstr ""
-"Klikake siia <span class=\"fa fa-phone text-success\" title=\"Order "
-"button\"></span>, et teavitada tellimuse kinnitamisest.<br>\n"
+"Klikake siia <span class=\"fa fa-phone text-success\" title=\"Order button\">"
+"</span>, et teavitada tellimuse kinnitamisest.<br>\n"
 "            Klikake siia <span class=\"fa fa-check text-success\" "
-"title=\"Receive button\"></span>, et teavitada tellimuse kätte saamisest."
-"<br>\n"
+"title=\"Receive button\"></span>, et teavitada tellimuse kätte saamisest.<br>"
+"\n"
 "            Klikake siia <span class=\"fa fa-times-circle text-danger\" "
 "title=\"Cancel button\"></span> punasele X-le, teavitamaks, et tellimus pole "
 "saadaval."
@@ -641,8 +646,9 @@ msgstr ""
 #. module: lunch
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
+#, fuzzy
 msgid "Close"
-msgstr ""
+msgstr "Sulge"
 
 #. module: lunch
 #: model:lunch.product,name:lunch.product_club
@@ -1236,8 +1242,9 @@ msgstr "Lõunatellimused"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.res_config_settings_view_form
+#, fuzzy
 msgid "Lunch Overdraft"
-msgstr ""
+msgstr "Lõunasöögi krediit"
 
 #. module: lunch
 #: model:ir.model,name:lunch.model_lunch_product
@@ -1296,32 +1303,32 @@ msgid "Lunch: Supplier Order"
 msgstr "Lõuna: Tarnija tellimus"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_alert_cron_sa_230
+#: model:ir.actions.server,name:lunch.lunch_alert_cron_sa_231
 msgid "Lunch: alert chat notification (Alert for Office 3)"
 msgstr "Lõuna: märguanne vestluse kohta (Office 3 märguanne)"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_231
+#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_232
 msgid "Lunch: send automatic email to Coin gourmand"
 msgstr "Lõuna: saatke automaatne meil Coin gormand'ile"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_226
+#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_227
 msgid "Lunch: send automatic email to Lunch Supplier"
 msgstr "Lõuna: automaatne e-kirja saatmine lõunasöögi tarnijale"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_232
+#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_233
 msgid "Lunch: send automatic email to Pizza Inn"
 msgstr "Lõuna: saatke automaatne meil Pizza Inn'ile"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_234
+#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_235
 msgid "Lunch: send automatic email to Sushi Shop"
 msgstr "Lõuna: saatke automaatne meil Sushi poele"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_233
+#: model:ir.actions.server,name:lunch.lunch_supplier_cron_sa_234
 msgid "Lunch: send automatic email to The Corner"
 msgstr "Lõuna: saatke automaatne meil The Corner'ile"
 
@@ -1561,8 +1568,9 @@ msgstr "Veateadete arv"
 
 #. module: lunch
 #: model:ir.model.fields,help:lunch.field_lunch_supplier__message_needaction_counter
+#, fuzzy
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Tegevust nõudvate sõnumite arv"
 
 #. module: lunch
 #: model:ir.model.fields,help:lunch.field_lunch_supplier__message_has_error_counter
@@ -1833,8 +1841,9 @@ msgstr "Vastu võetud"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.res_config_settings_view_form
+#, fuzzy
 msgid "Reception notification"
-msgstr ""
+msgstr "Vastuvõtu teavitus"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_alert__recipients
@@ -2149,8 +2158,9 @@ msgstr "Tellida"
 #. module: lunch
 #. odoo-javascript
 #: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
+#, fuzzy
 msgid "To Pay"
-msgstr ""
+msgstr "Kinnitamata palgalehed"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_payment_dialog
@@ -2298,7 +2308,7 @@ msgstr "Kasutaja : Tellige oma söök"
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_product_view_search
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_supplier_view_form
 msgid "Vendor"
-msgstr "Partner"
+msgstr "Tarnija"
 
 #. module: lunch
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_order_view_search
@@ -2317,8 +2327,9 @@ msgstr "Tarnijad"
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_product_category_view_form
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_product_view_form
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_supplier_view_form
+#, fuzzy
 msgid "Visible to all"
-msgstr ""
+msgstr "Nähtav kõigile"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_alert__wed
@@ -2360,8 +2371,9 @@ msgstr "Teie ostukorv ("
 #. module: lunch
 #. odoo-python
 #: code:addons/lunch/models/lunch_alert.py:0
+#, fuzzy
 msgid "Your Lunch Order"
-msgstr ""
+msgstr "Sinu tellimus"
 
 #. module: lunch
 #. odoo-javascript
@@ -2436,6 +2448,12 @@ msgstr " "
 #: model_terms:ir.ui.view,arch_db:lunch.lunch_alert_view_kanban
 msgid "to"
 msgstr "kuni"
+
+#. module: lunch
+#. odoo-javascript
+#: code:addons/lunch/static/src/components/lunch_dashboard.xml:0
+msgid "x"
+msgstr ""
 
 #~ msgid "Edit order"
 #~ msgstr "Muuda tellimust"

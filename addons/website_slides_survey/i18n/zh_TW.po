@@ -6,13 +6,14 @@
 # Wil Odoo, 2025
 # Tony Ng, 2025
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-09-16 08:12+0000\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2026-06-29 23:09+0000\n"
 "Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
 "projects/odoo-19/website_slides_survey/zh_Hant/>\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_slides_survey
 #: model:ir.model.fields,field_description:website_slides_survey.field_slide_channel__members_certified_count
@@ -74,15 +75,15 @@ msgstr ""
 "        親愛的 <t t-out=\"object.partner_id.name or '參加者' or ''\">參加者</"
 "t><br/><br/>\n"
 "        抱歉你未能通過認證，你現時不再是以下課程的成員： <t t-"
-"out=\"object.slide_partner_id.channel_id.name or ''\">園藝基礎</t>。<br/><br/"
-">\n"
+"out=\"object.slide_partner_id.channel_id.name or ''\">園藝基礎</t>。<br/>"
+"<br/>\n"
 "        歡迎你再次報名參加！\n"
 "        </p><div style=\"margin: 16px 0px 16px 0px;\">\n"
-"            <a t-att-"
-"href=\"(object.slide_partner_id.channel_id.website_absolute_url)\" t-attf-"
+"            <a t-att-href=\""
+"(object.slide_partner_id.channel_id.website_absolute_url)\" t-attf-"
 "style=\"background-color: {{user.company_id.email_secondary_color or "
-"'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: "
-"{{user.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px; "
+"'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: {"
+"{user.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px; "
 "font-size:13px;\">\n"
 "                立即報名\n"
 "            </a>\n"
@@ -175,8 +176,7 @@ msgstr "<span class=\"text-muted\">證書</span>"
 #: model_terms:ir.ui.view,arch_db:website_slides_survey.course_main
 msgid ""
 "<span>Start Now</span><i class=\"oi oi-chevron-right ms-2 align-middle\"/>"
-msgstr ""
-"<span>現在開始</span><i class=\"oi oi-chevron-right ms-2 align-middle\"/>"
+msgstr "<span>現在開始</span><i class=\"oi oi-chevron-right ms-2 align-middle\"/>"
 
 #. module: website_slides_survey
 #: model:ir.model.constraint,message:website_slides_survey.constraint_slide_slide_check_survey_id
@@ -214,7 +214,7 @@ msgstr "允許預覽"
 #. module: website_slides_survey
 #: model:survey.question.answer,value:website_slides_survey.furniture_certification_page_1_question_1_choice_3
 msgid "Ash"
-msgstr ""
+msgstr "梣樹"
 
 #. module: website_slides_survey
 #: model_terms:ir.actions.act_window,help:website_slides_survey.survey_survey_action_slides
@@ -238,12 +238,12 @@ msgstr "平均分數（%）"
 #. module: website_slides_survey
 #: model:survey.question.answer,value:website_slides_survey.furniture_certification_page_1_question_2_choice_5
 msgid "Bed"
-msgstr ""
+msgstr "床"
 
 #. module: website_slides_survey
 #: model:survey.question.answer,value:website_slides_survey.furniture_certification_page_1_question_1_choice_4
 msgid "Beech"
-msgstr ""
+msgstr "山毛櫸"
 
 #. module: website_slides_survey
 #. odoo-javascript
@@ -352,7 +352,7 @@ msgstr "已認證"
 #. module: website_slides_survey
 #: model:survey.question.answer,value:website_slides_survey.furniture_certification_page_1_question_2_choice_1
 msgid "Chair"
-msgstr ""
+msgstr "椅子"
 
 #. module: website_slides_survey
 #: model:ir.model,name:website_slides_survey.model_slide_channel_partner
@@ -391,12 +391,12 @@ msgstr "建立認證"
 #. module: website_slides_survey
 #: model:slide.slide,name:website_slides_survey.slide_slide_demo_6_0
 msgid "DIY Furniture Certification"
-msgstr ""
+msgstr "DIY 自製家具證書"
 
 #. module: website_slides_survey
 #: model:survey.question.answer,value:website_slides_survey.furniture_certification_page_1_question_2_choice_3
 msgid "Desk"
-msgstr ""
+msgstr "書桌"
 
 #. module: website_slides_survey
 #: model:ir.model.fields,field_description:website_slides_survey.field_slide_channel__display_name
@@ -417,18 +417,18 @@ msgstr "下載證書"
 #. module: website_slides_survey
 #: model:survey.question.answer,value:website_slides_survey.furniture_certification_page_1_question_1_choice_1
 msgid "Fir"
-msgstr ""
+msgstr "冷杉"
 
 #. module: website_slides_survey
 #: model:survey.question,title:website_slides_survey.furniture_certification_page_1
 msgid "Furniture"
-msgstr ""
+msgstr "家具"
 
 #. module: website_slides_survey
 #: model:slide.slide,name:website_slides_survey.slide_slide_demo_5_4
 #: model:survey.survey,title:website_slides_survey.furniture_certification
 msgid "Furniture Creation Certification"
-msgstr ""
+msgstr "家具創作證書"
 
 #. module: website_slides_survey
 #: model_terms:ir.ui.view,arch_db:website_slides_survey.survey_fill_form_done_inherit_website_slides
@@ -454,7 +454,7 @@ msgstr "識別號"
 #. module: website_slides_survey
 #: model_terms:slide.slide,description:website_slides_survey.slide_slide_demo_6_0
 msgid "It's time to test your knowledge!"
-msgstr ""
+msgstr "是時候測試你的知識了！"
 
 #. module: website_slides_survey
 #: model_terms:ir.ui.view,arch_db:website_slides_survey.res_config_settings_view_form
@@ -486,7 +486,7 @@ msgstr "還沒有取得證書！"
 #: model_terms:slide.slide,description:website_slides_survey.slide_slide_demo_5_4
 msgid ""
 "Now that you have completed the course, it's time to test your knowledge!"
-msgstr ""
+msgstr "現在您已完成本課程，是時候測試您的知識了！"
 
 #. module: website_slides_survey
 #: model:ir.model.fields,field_description:website_slides_survey.field_slide_channel__nbr_certification
@@ -498,7 +498,7 @@ msgstr "證書數量"
 #. module: website_slides_survey
 #: model:survey.question.answer,value:website_slides_survey.furniture_certification_page_1_question_1_choice_2
 msgid "Oak"
-msgstr ""
+msgstr "橡木"
 
 #. module: website_slides_survey
 #. odoo-javascript
@@ -535,7 +535,7 @@ msgstr "選擇一項認證"
 #. module: website_slides_survey
 #: model:survey.question,title:website_slides_survey.furniture_certification_page_1_question_2
 msgid "Select all the furniture shown in the video"
-msgstr ""
+msgstr "選擇影片中顯示的所有家具"
 
 #. module: website_slides_survey
 #. odoo-javascript
@@ -553,7 +553,7 @@ msgstr "發送給未能通過認證參加者"
 #. module: website_slides_survey
 #: model:survey.question.answer,value:website_slides_survey.furniture_certification_page_1_question_2_choice_4
 msgid "Shelf"
-msgstr ""
+msgstr "架子"
 
 #. module: website_slides_survey
 #: model:ir.model,name:website_slides_survey.model_slide_slide_partner
@@ -610,7 +610,7 @@ msgstr "調查：認證不合格"
 #. module: website_slides_survey
 #: model:survey.question.answer,value:website_slides_survey.furniture_certification_page_1_question_2_choice_2
 msgid "Table"
-msgstr ""
+msgstr "餐桌"
 
 #. module: website_slides_survey
 #: model_terms:ir.ui.view,arch_db:website_slides_survey.slide_content_detailed
@@ -628,7 +628,7 @@ msgstr "測試認證"
 #: model_terms:survey.question,description:website_slides_survey.furniture_certification_page_1
 #: model_terms:survey.survey,description:website_slides_survey.furniture_certification
 msgid "Test your furniture knowledge!"
-msgstr ""
+msgstr "測試你的家具知識！"
 
 #. module: website_slides_survey
 #: model:ir.model.fields,help:website_slides_survey.field_slide_slide__is_preview
@@ -670,12 +670,12 @@ msgstr ""
 #. module: website_slides_survey
 #: model:survey.question,title:website_slides_survey.furniture_certification_page_1_question_3
 msgid "What do you think about the content of the course? (not rated)"
-msgstr ""
+msgstr "你對課程內容有何感想？（未評級）"
 
 #. module: website_slides_survey
 #: model:survey.question,title:website_slides_survey.furniture_certification_page_1_question_1
 msgid "What type of wood is the best for furniture?"
-msgstr ""
+msgstr "哪種木材最適合製作家具？"
 
 #. module: website_slides_survey
 #. odoo-python

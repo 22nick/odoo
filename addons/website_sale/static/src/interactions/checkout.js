@@ -179,6 +179,7 @@ export class Checkout extends Interaction {
                 const jsonLocation = JSON.stringify(location);
                 // Assign the selected pickup location to the order.
                 await this.waitFor(this._setPickupLocation(jsonLocation));
+                await this._onPickupLocationConfirmed();
 
                 //  Show and set the order location details.
                 this._updatePickupLocation(deliveryMethodContainer, location, jsonLocation);
@@ -368,7 +369,7 @@ export class Checkout extends Interaction {
 
         // When no dm is set and a price span is hidden, hide the message and show the price span.
         if (amountDelivery.classList.contains('d-none')) {
-            amountDelivery.querySelector('span[name="o_message_no_dm_set"]').classList.add('d-none');
+            amountDelivery.querySelector('span[name="o_message_no_dm_set"]')?.classList.add('d-none');
             amountDelivery.classList.remove('d-none');
         }
 
@@ -555,6 +556,14 @@ export class Checkout extends Interaction {
     async _setPickupLocation(pickupLocationData) {
         await rpc('/website_sale/set_pickup_location', {pickup_location_data: pickupLocationData});
     }
+
+    /**
+     * Hook called after confirming a pickup location from the selector.
+     *
+     * @private
+     * @return {void}
+     */
+    async _onPickupLocationConfirmed() {}
 
     // #=== GETTERS & SETTERS ===#
 

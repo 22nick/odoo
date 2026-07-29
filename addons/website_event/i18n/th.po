@@ -6,14 +6,16 @@
 # Khwunchai Jaengsawang <khwunchai.j@ku.th>, 2022
 # Martin Trigaux, 2022
 # Wichanon Jamwutthipreecha, 2022
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# Nusara Boonma <nuboo@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 22:55+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-01-25 18:35+0000\n"
+"PO-Revision-Date: 2026-07-01 23:01+0000\n"
+"Last-Translator: Nusara Boonma <nuboo@odoo.com>\n"
 "Language-Team: Thai <https://translate.odoo.com/projects/odoo-19/"
 "website_event/th/>\n"
 "Language: th\n"
@@ -21,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_website_visitor__event_registration_count
@@ -46,7 +48,7 @@ msgstr "(เฉพาะ"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid ", at"
-msgstr ""
+msgstr "ที่"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
@@ -61,7 +63,7 @@ msgstr "<b>จบ</b>"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "<b>Sold Out</b>"
-msgstr ""
+msgstr "<b>ขายหมดแล้ว</b>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_complete
@@ -71,19 +73,20 @@ msgstr "<b>เริ่ม</b>"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "<em>Hidden for visitors</em>"
-msgstr ""
+msgstr "<em>ซ่อนไว้สำหรับผู้เยี่ยมชม</em>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "<em>Registrations <b>Closed</b></em>"
-msgstr ""
+msgstr "<em><b>ปิด</b>รับสมัครแล้ว</em>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_quotes
 msgid ""
 "<em>Write here a quote from one of your attendees. It gives confidence in "
 "your events.</em>"
-msgstr "<em>เขียนโควทจากผู้เข้าร่วมงานของคุณที่นี่ มันสร้างความมั่นใจในกิจกรรมของคุณ</em>"
+msgstr ""
+"<em>เขียนโควทจากผู้เข้าร่วมงานของคุณที่นี่ มันสร้างความมั่นใจในกิจกรรมของคุณ</em>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_ticket_registration
@@ -108,7 +111,7 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "<i class=\"fa fa-check me-2\" role=\"img\"/>Registered"
-msgstr ""
+msgstr "<i class=\"fa fa-check me-2\" role=\"img\"/>ลงทะเบียนแล้ว"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
@@ -151,8 +154,8 @@ msgid ""
 "<i class=\"fa fa-github text-github\" aria-label=\"Github\" title=\"Github\"/"
 ">"
 msgstr ""
-"<i class=\"fa fa-github text-github\" aria-label=\"Github\" title=\"Github\"/"
-">"
+"<i class=\"fa fa-github text-github\" aria-label=\"Github\" "
+"title=\"Github\"/>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_pages_kanban_view
@@ -192,7 +195,7 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "<i class=\"fa fa-map-marker\" title=\"Location\"/> Online event"
-msgstr ""
+msgstr "<i class=\"fa fa-map-marker\" title=\"Location\"/> กิจกรรมออนไลน์"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
@@ -200,13 +203,13 @@ msgid ""
 "<i class=\"fa fa-tiktok text-tiktok\" aria-label=\"TikTok\" title=\"TikTok\"/"
 ">"
 msgstr ""
-"<i class=\"fa fa-tiktok text-tiktok\" aria-label=\"TikTok\" title=\"TikTok\"/"
-">"
+"<i class=\"fa fa-tiktok text-tiktok\" aria-label=\"TikTok\" "
+"title=\"TikTok\"/>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
 msgid "<i class=\"fa fa-twitter text-twitter\" aria-label=\"X\" title=\"X\"/>"
-msgstr ""
+msgstr "<i class=\"fa fa-twitter text-twitter\" aria-label=\"X\" title=\"X\"/>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_sidebar_follow_us
@@ -223,21 +226,23 @@ msgid ""
 "<i class=\"oi oi-chevron-left\"/>\n"
 "                <span>All Events</span>"
 msgstr ""
+"<i class=\"oi oi-chevron-left\"/>\n"
+"                <span>กิจกรรมทั้งหมด</span>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "<small class=\"fw-bold\">Ends</small>"
-msgstr ""
+msgstr "<small class=\"fw-bold\">จบ</small>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "<small class=\"fw-bold\">Starts</small>"
-msgstr ""
+msgstr "<small class=\"fw-bold\">เริ่ม</small>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "<small class=\"text-muted\">Add to calendar:</small>"
-msgstr ""
+msgstr "<small class=\"text-muted\">เพิ่มลงในปฏิทิน:</small>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_slot_registration
@@ -250,13 +255,13 @@ msgid ""
 "<span class=\"badge text-bg-secondary text-uppercase "
 "o_wevent_badge\">Speaker</span>"
 msgstr ""
-"<span class=\"badge text-bg-secondary text-uppercase "
-"o_wevent_badge\">ผู้บรรยาย</span>"
+"<span class=\"badge text-bg-secondary text-uppercase o_wevent_badge\">ผู้บรรยา"
+"ย</span>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "<span class=\"fa fa-plus me-1\"/> Create an Event"
-msgstr ""
+msgstr "<span class=\"fa fa-plus me-1\"/> สร้างกิจกรรม"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_dynamic_snippet_events_single_entry_preview_data
@@ -338,6 +343,11 @@ msgid ""
 "Out\n"
 "                                    </span>"
 msgstr ""
+"<span itemprop=\"availability\" content=\"http://schema.org/SoldOut\" "
+"class=\"text-danger\">\n"
+"                                        <i class=\"fa fa-ban me-2\"/>ขายหมดแล้"
+"ว\n"
+"                                    </span>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_dynamic_snippet_events_single_aside_preview_data
@@ -384,13 +394,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event.dynamic_filter_template_event_event_single_card
 #: model_terms:ir.ui.view,arch_db:website_event.s_dynamic_snippet_events_single_card_preview_data
 msgid "<strong>Date</strong>"
-msgstr ""
+msgstr "<strong>วันที่</strong>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.dynamic_filter_template_event_event_single_card
 #: model_terms:ir.ui.view,arch_db:website_event.s_dynamic_snippet_events_single_card_preview_data
 msgid "<strong>Location</strong>"
-msgstr ""
+msgstr "<strong>ตำแหน่ง</strong>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_card_preview_data
@@ -414,6 +424,13 @@ msgid ""
 "                                </span>\n"
 "                            </time>"
 msgstr ""
+"<time class=\"text-white\" datetime=\"2024-08-05 07:00:00\">\n"
+"                                <span>26 กรกฎาคม 2567</span>\n"
+"                                <span class=\"s_events_event_time\">\n"
+"                                    - <span>9:00 น.</span>\n"
+"                                    (ยุโรป/บรัสเซลส์)\n"
+"                                </span>\n"
+"                            </time>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_preview_data
@@ -426,6 +443,13 @@ msgid ""
 "                                </span>\n"
 "                            </time>"
 msgstr ""
+"<time class=\"text-white\" datetime=\"2024-08-10 08:00:00\">\n"
+"                                <span>24 ตุลาคม 2567</span>\n"
+"                                <span class=\"s_events_event_time\">\n"
+"                                    - <span>1:15 น.</span>\n"
+"                                    (ยุโรป/บรัสเซลส์)\n"
+"                                </span>\n"
+"                            </time>"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_preview_data
@@ -438,6 +462,13 @@ msgid ""
 "                                </span>\n"
 "                            </time>"
 msgstr ""
+"<time class=\"text-white\" datetime=\"2024-11-08 20:15:00\">\n"
+"                                <span>23 พฤศจิกายน 2567</span>\n"
+"                                <span class=\"s_events_event_time\">\n"
+"                                    - <span>8:15 น.</span>\n"
+"                                    (ยุโรป/บรัสเซลส์)\n"
+"                                </span>\n"
+"                            </time>"
 
 #. module: website_event
 #: model:event.question.answer,name:website_event.event_question_about_1_answer_2
@@ -463,27 +494,27 @@ msgstr "เกี่ยวกับเรา"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "Add to Google"
-msgstr ""
+msgstr "เพิ่มลงใน Google"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_calendar_links
 msgid "Add to Google Agenda"
-msgstr ""
+msgstr "เพิ่มลงใน Google Agenda"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "Add to Outlook"
-msgstr ""
+msgstr "เพิ่มลงใน Outlook"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "Add to iCal"
-msgstr ""
+msgstr "เพิ่มลงใน iCal"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_calendar_links
 msgid "Add to iCal/Outlook"
-msgstr ""
+msgstr "เพิ่มลงใน iCal/Outlook"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_calendar_links
@@ -493,7 +524,7 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_topbar
 msgid "All"
-msgstr ""
+msgstr "ทั้งหมด"
 
 #. module: website_event
 #. odoo-python
@@ -532,9 +563,9 @@ msgid ""
 "founded TinyERP. This was the first phase of OpenERP which would later "
 "became Odoo, the most installed open-source business software worldwide."
 msgstr ""
-"เมื่ออายุเพียง 13 ปี John DOE ได้เริ่มพัฒนาแอปพลิเคชันทางธุรกิจครั้งแรกสำหรับลูกค้า "
-"หลังจากเชี่ยวชาญด้านวิศวกรรมโยธา เขาได้ก่อตั้ง TinyERP ซึ่งเป็นระยะแรกของ OpenERP "
-"ซึ่งต่อมาได้กลายเป็น Odoo ซึ่งเป็นซอฟต์แวร์ธุรกิจโอเพ่นซอร์สที่มีการติดตั้งมากที่สุดจากทั่วโลก"
+"เมื่ออายุเพียง 13 ปี John DOE ได้เริ่มพัฒนาแอปพลิเคชันทางธุรกิจครั้งแรกสำหรับลูกค้า หลังจากเชี่ยวช"
+"าญด้านวิศวกรรมโยธา เขาได้ก่อตั้ง TinyERP ซึ่งเป็นระยะแรกของ OpenERP ซึ่งต่อมาได้กลายเป็น "
+"Odoo ซึ่งเป็นซอฟต์แวร์ธุรกิจโอเพนซอร์สที่มีการติดตั้งมากที่สุดจากทั่วโลก"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
@@ -559,12 +590,12 @@ msgstr "ผู้เขียน"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.navbar
 msgid "Back to All Events"
-msgstr ""
+msgstr "กลับไปที่กิจกรรมทั้งหมด"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.navbar
 msgid "Back to {{0}}"
-msgstr ""
+msgstr "กลับไปที่ {{0}}"
 
 #. module: website_event
 #: model:event.question.answer,name:website_event.event_question_about_0_answer_1
@@ -600,13 +631,13 @@ msgstr "ยกเลิก"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "Cancelled"
-msgstr ""
+msgstr "ยกเลิก"
 
 #. module: website_event
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/events_list_page_option.xml:0
 msgid "Card design"
-msgstr ""
+msgstr "การออกแบบการ์ด"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.display_timer_alert_widget
@@ -649,12 +680,12 @@ msgstr "การประชุมสำหรับสถาปนิก"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_card_preview_data
 msgid "Conference for Architects"
-msgstr ""
+msgstr "การประชุมสำหรับสถาปนิก"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_configure_tickets_button
 msgid "Configure event tickets"
-msgstr ""
+msgstr "กำหนดค่าตั๋วกิจกรรม"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_attendee_details
@@ -677,7 +708,7 @@ msgstr "ประเทศ"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Cover Position"
-msgstr ""
+msgstr "ตำแหน่งปก"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__cover_properties
@@ -719,7 +750,7 @@ msgstr "วันที่ (เก่าไปใหม่)"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Dates"
-msgstr ""
+msgstr "วันที่"
 
 #. module: website_event
 #: model:ir.model.fields,help:website_event.field_event_event__website_visibility
@@ -729,6 +760,9 @@ msgid ""
 "            Note that the EventEvent is however always available via its "
 "link."
 msgstr ""
+"กำหนดการมองเห็นของกิจกรรมบนเว็บไซต์และในการค้นหา\n"
+"\n"
+"โปรดทราบว่ากิจกรรมจะยังคงเข้าถึงได้เสมอผ่านลิงก์โดยตรง"
 
 #. module: website_event
 #. odoo-javascript
@@ -739,6 +773,7 @@ msgstr "คำอธิบาย"
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__display_name
 #: model:ir.model.fields,field_description:website_event.field_event_registration__display_name
+#: model:ir.model.fields,field_description:website_event.field_event_slot__display_name
 #: model:ir.model.fields,field_description:website_event.field_event_tag__display_name
 #: model:ir.model.fields,field_description:website_event.field_event_tag_category__display_name
 #: model:ir.model.fields,field_description:website_event.field_event_type__display_name
@@ -770,7 +805,7 @@ msgstr "อย่าลืมคลิก<b>บันทึก</b> เมื่�
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_ticket_access
 msgid "Download All Tickets"
-msgstr ""
+msgstr "ดาวน์โหลดตั๋วทั้งหมด"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_ticket_access
@@ -780,7 +815,7 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_event_upcoming_snippet_card_preview_data
 msgid "Enhance your architectural business and improve professional skills."
-msgstr ""
+msgstr "ยกระดับธุรกิจสถาปัตยกรรมของคุณและพัฒนาทักษะทางวิชาชีพ"
 
 #. module: website_event
 #: model:ir.model,name:website_event.model_event_event
@@ -803,12 +838,12 @@ msgstr "วันที่อีเวนต์"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_complete
 msgid "Event Details"
-msgstr ""
+msgstr "รายละเอียดกิจกรรม"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "Event Info"
-msgstr ""
+msgstr "ข้อมูลกิจกรรม"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
@@ -839,12 +874,17 @@ msgstr "การลงทะเบียนอีเวนต์"
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__event_register_url
 msgid "Event Registration Link"
-msgstr ""
+msgstr "ลิงค์ลงทะเบียนกิจกรรม"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_website_visitor__event_registration_ids
 msgid "Event Registrations"
 msgstr "การลงทะเบียนอีเวนต์"
+
+#. module: website_event
+#: model:ir.model,name:website_event.model_event_slot
+msgid "Event Slot"
+msgstr ""
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__subtitle
@@ -855,7 +895,7 @@ msgstr "คำบรรยายอีเวนต์"
 #. module: website_event
 #: model:ir.model,name:website_event.model_event_tag
 msgid "Event Tag"
-msgstr ""
+msgstr "แท็กอีเวนต์"
 
 #. module: website_event
 #: model:ir.model,name:website_event.model_event_tag_category
@@ -919,32 +959,32 @@ msgstr "หมดอายุ"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_location
 msgid "Filter by Country"
-msgstr ""
+msgstr "กรองตามประเทศ"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_time
 msgid "Filter by Date"
-msgstr ""
+msgstr "กรองตามวันที่"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_topbar
 msgid "Filter by category"
-msgstr ""
+msgstr "กรองตามหมวดหมู่"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_location
 msgid "Filter by country"
-msgstr ""
+msgstr "กรองตามประเทศ"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_time
 msgid "Filter by date"
-msgstr ""
+msgstr "กรองตามวันที่"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_topbar
 msgid "Filters"
-msgstr ""
+msgstr "ตัวกรอง"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
@@ -973,7 +1013,7 @@ msgstr "เนื้อหาต่อไปนี้จะปรากฏใน
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__footer_visible
 msgid "Footer Visible"
-msgstr ""
+msgstr "มองเห็นส่วนท้าย"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
@@ -983,13 +1023,13 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "Get directions"
-msgstr ""
+msgstr "รับเส้นทาง"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_calendar_links
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "Google Agenda"
-msgstr ""
+msgstr "Google Agenda"
 
 #. module: website_event
 #. odoo-python
@@ -1013,13 +1053,13 @@ msgstr ""
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__header_visible
 msgid "Header Visible"
-msgstr ""
+msgstr "มองเห็นส่วนหัว"
 
 #. module: website_event
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Hidden (visitor only)"
-msgstr ""
+msgstr "ซ่อนไว้ (ผู้เยี่ยมชมเท่านั้น)"
 
 #. module: website_event
 #. odoo-python
@@ -1032,7 +1072,7 @@ msgstr "การแข่งขันฮอกกี้"
 #: code:addons/website_event/models/event_event.py:0
 #: model:ir.model.fields.selection,name:website_event.selection__website_event_menu__menu_type__introduction
 msgid "Home"
-msgstr ""
+msgstr "หน้าแรก"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.s_dynamic_snippet_events_single_card_preview_data
@@ -1057,6 +1097,7 @@ msgstr "คุณเรียนรู้เกี่ยวกับอีเว
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__id
 #: model:ir.model.fields,field_description:website_event.field_event_registration__id
+#: model:ir.model.fields,field_description:website_event.field_event_slot__id
 #: model:ir.model.fields,field_description:website_event.field_event_tag__id
 #: model:ir.model.fields,field_description:website_event.field_event_tag_category__id
 #: model:ir.model.fields,field_description:website_event.field_event_type__id
@@ -1080,7 +1121,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Inside content"
-msgstr ""
+msgstr "เนื้อหาภายใน"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.template_intro
@@ -1181,7 +1222,7 @@ msgstr "สถานที่"
 #. module: website_event
 #: model:ir.model.fields.selection,name:website_event.selection__event_event__website_visibility__logged_users
 msgid "Logged Users"
-msgstr ""
+msgstr "ผู้ใช้ที่เข้าสู่ระบบ"
 
 #. module: website_event
 #. odoo-javascript
@@ -1189,7 +1230,8 @@ msgstr ""
 msgid ""
 "Looking great! Let's now <b>publish</b> this page so that it becomes "
 "<b>visible</b> on your website!"
-msgstr "ดูดีมากเลย!  <b>เผยแพร่</b>หน้านี้กันเถอะ เพจนี้จะ<b>ปรากฏ</b> บนเว็บไซต์!"
+msgstr ""
+"ดูดีมากเลย!  <b>เผยแพร่</b>หน้านี้กันเถอะ เพจนี้จะ<b>ปรากฏ</b> บนเว็บไซต์!"
 
 #. module: website_event
 #: model:event.question,title:website_event.event_question_meal_type
@@ -1237,7 +1279,7 @@ msgstr "อีเวนต์ใหม่"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_slot_registration
 msgid "Next"
-msgstr ""
+msgstr "ถัดไป"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
@@ -1263,12 +1305,12 @@ msgstr "ยังไม่มีเมนูไอเทมเว็บไซต
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "No event matching your search criteria could be found."
-msgstr ""
+msgstr "ไม่พบเหตุการณ์ที่ตรงกับเกณฑ์การค้นหาของคุณ"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "No events scheduled yet"
-msgstr ""
+msgstr "ยังไม่มีกำหนดกิจกรรม"
 
 #. module: website_event
 #: model_terms:ir.actions.act_window,help:website_event.event_registration_action_from_visitor
@@ -1288,7 +1330,7 @@ msgstr "ไม่เผยแพร่"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_location
 msgid "Online Events"
-msgstr ""
+msgstr "กิจกรรมออนไลน์"
 
 #. module: website_event
 #. odoo-python
@@ -1306,7 +1348,7 @@ msgstr "ผู้จัด"
 #. module: website_event
 #: model:ir.model.fields.selection,name:website_event.selection__website_event_menu__menu_type__other
 msgid "Other"
-msgstr ""
+msgstr "อื่น ๆ"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__other_menu_ids
@@ -1327,7 +1369,7 @@ msgstr "เว็บไซต์ของเรา"
 #: model_terms:ir.ui.view,arch_db:website_event.event_calendar_links
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_dates
 msgid "Outlook"
-msgstr ""
+msgstr "Outlook"
 
 #. module: website_event
 #. odoo-python
@@ -1352,17 +1394,17 @@ msgstr "รูปภาพ"
 #: code:addons/website_event/models/event_event.py:0
 #: model:ir.model.fields.selection,name:website_event.selection__website_event_menu__menu_type__register
 msgid "Practical"
-msgstr ""
+msgstr "ปฏิบัติจริง"
 
 #. module: website_event
 #: model:ir.model.fields.selection,name:website_event.selection__event_event__website_visibility__public
 msgid "Public"
-msgstr ""
+msgstr "สาธารณะ"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_event_view_form
 msgid "Publish"
-msgstr ""
+msgstr "เผยแพร่"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_event_view_search
@@ -1412,7 +1454,7 @@ msgstr "เมนูลงทะเบียน"
 #: model_terms:ir.ui.view,arch_db:website_event.dynamic_filter_template_event_event_single_entry
 #: model_terms:ir.ui.view,arch_db:website_event.s_dynamic_snippet_events_single_entry_preview_data
 msgid "Register Now"
-msgstr ""
+msgstr "สมัครตอนนี้"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.dynamic_filter_template_event_event_single_aside
@@ -1460,7 +1502,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event.modal_ticket_registration
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "Registration failed! These tickets are not available anymore."
-msgstr ""
+msgstr "การลงทะเบียนไม่สำเร็จ! ทิกเก็ตเหล่านี้ไม่สามารถใช้ได้อีกต่อไป"
 
 #. module: website_event
 #: model:ir.actions.act_window,name:website_event.event_registration_action_from_visitor
@@ -1486,7 +1528,7 @@ msgstr "ยังไม่เปิดรับการลงทะเบีย
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "Registrations will open on"
-msgstr ""
+msgstr "การลงทะเบียนจะเปิดในวันที่"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__start_remaining
@@ -1508,13 +1550,13 @@ msgstr "วิจัย"
 #: model:ir.model.fields,help:website_event.field_event_tag__website_id
 #: model:ir.model.fields,help:website_event.field_event_tag_category__website_id
 msgid "Restrict to a specific website."
-msgstr ""
+msgstr "จำกัดเฉพาะเว็บไซต์เฉพาะ"
 
 #. module: website_event
 #. odoo-python
 #: code:addons/website_event/models/event_event.py:0
 msgid "Rooms"
-msgstr ""
+msgstr "ห้อง"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__is_seo_optimized
@@ -1558,9 +1600,11 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.index_topbar
 msgid "Search an event.."
-msgstr ""
+msgstr "ค้นหากิจกรรม.."
 
 #. module: website_event
+#. odoo-javascript
+#: code:addons/website_event/static/src/interactions/website_event_slot_details.js:0
 #: model_terms:ir.ui.view,arch_db:website_event.modal_slot_registration
 msgid "Select a Date:"
 msgstr ""
@@ -1570,6 +1614,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_event.event_registration_view_tree
 msgid "Selected Answers"
 msgstr "คำตอบที่เลือก"
+
+#. module: website_event
+#. odoo-javascript
+#: code:addons/website_event/static/src/interactions/website_event_slot_details.js:0
+msgid "Selected Date:"
+msgstr ""
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__seo_name
@@ -1589,7 +1639,7 @@ msgstr ""
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "Share"
-msgstr ""
+msgstr "แชร์"
 
 #. module: website_event
 #. odoo-javascript
@@ -1607,7 +1657,7 @@ msgstr "แสดงบนเว็บไซต์"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/dynamic_snippet_events_option.xml:0
 msgid "Show time"
-msgstr ""
+msgstr "แสดงเวลา"
 
 #. module: website_event
 #. odoo-javascript
@@ -1659,27 +1709,27 @@ msgstr "เมนูย่อย (เฉพาะ)"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/events_list_page_option.xml:0
 msgid "Template badge"
-msgstr ""
+msgstr "ป้ายเทมเพลต"
 
 #. module: website_event
 #: model:ir.model.fields,help:website_event.field_event_event__website_absolute_url
 #: model:ir.model.fields,help:website_event.field_event_tag__website_absolute_url
 #: model:ir.model.fields,help:website_event.field_event_tag_category__website_absolute_url
 msgid "The full absolute URL to access the document through the website."
-msgstr ""
+msgstr "URL แบบเต็มเพื่อเข้าถึงเอกสารผ่านทางเว็บไซต์"
 
 #. module: website_event
 #: model:ir.model.fields,help:website_event.field_event_event__website_url
 #: model:ir.model.fields,help:website_event.field_event_tag__website_url
 #: model:ir.model.fields,help:website_event.field_event_tag_category__website_url
 msgid "The full relative URL to access the document through the website."
-msgstr ""
+msgstr "URL สัมพัทธ์เต็มในการเข้าถึงเอกสารผ่านทางเว็บไซต์"
 
 #. module: website_event
 #. odoo-python
 #: code:addons/website_event/models/event_event.py:0
 msgid "The website must be from the same company as the event."
-msgstr ""
+msgstr "เว็บไซต์จะต้องมาจากบริษัทเดียวกันกับงาน"
 
 #. module: website_event
 #. odoo-python
@@ -1712,13 +1762,13 @@ msgstr "ทิกเก็ต #"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_ticket_registration
 msgid "Tickets"
-msgstr ""
+msgstr "ทิกเก็ต"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.dynamic_filter_template_event_event_single_offset
 #: model_terms:ir.ui.view,arch_db:website_event.s_dynamic_snippet_events_single_offset_preview_data
 msgid "Time"
-msgstr ""
+msgstr "เวลา"
 
 #. module: website_event
 #. odoo-python
@@ -1730,7 +1780,7 @@ msgstr "วันนี้"
 #. odoo-javascript
 #: code:addons/website_event/static/src/website_builder/event_page_option.xml:0
 msgid "Top"
-msgstr ""
+msgstr "บน"
 
 #. module: website_event
 #. odoo-javascript
@@ -1752,7 +1802,7 @@ msgstr "อีเวนต์ที่จะเกิดขึ้น"
 #. module: website_event
 #: model:website.snippet.filter,name:website_event.website_snippet_filter_event_list_unfinished
 msgid "Upcoming and Ongoing Events"
-msgstr ""
+msgstr "กิจกรรมที่จะเกิดขึ้นและต่อเนื่อง"
 
 #. module: website_event
 #. odoo-javascript
@@ -1778,7 +1828,7 @@ msgstr "มังสวิรัติ"
 #. module: website_event
 #: model:ir.model.fields.selection,name:website_event.selection__event_event__website_visibility__link
 msgid "Via a Link"
-msgstr ""
+msgstr "ผ่านทางลิงค์"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_website_event_menu__view_id
@@ -1793,12 +1843,12 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_event_view_form
 msgid "Visibility"
-msgstr ""
+msgstr "การมองเห็น"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__is_visible_on_website
 msgid "Visible On Website"
-msgstr ""
+msgstr "มองเห็นได้บนเว็บไซต์"
 
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__website_published
@@ -1815,12 +1865,12 @@ msgstr "ผู้เยี่ยมชม"
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "We couldn't find any event matching your search for:"
-msgstr ""
+msgstr "เราไม่พบกิจกรรมที่ตรงกับการค้นหาของคุณ:"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.events_list
 msgid "We couldn't find any event scheduled at this moment."
-msgstr ""
+msgstr "เราไม่พบกิจกรรมที่กำหนดไว้ในขณะนี้"
 
 #. module: website_event
 #: model:ir.model,name:website_event.model_website
@@ -1836,7 +1886,7 @@ msgstr "เว็บไซต์"
 #: model:ir.model.fields,field_description:website_event.field_event_tag__website_absolute_url
 #: model:ir.model.fields,field_description:website_event.field_event_tag_category__website_absolute_url
 msgid "Website Absolute URL"
-msgstr ""
+msgstr "URL สัมบูรณ์ของเว็บไซต์"
 
 #. module: website_event
 #: model:ir.model,name:website_event.model_website_event_menu
@@ -1887,7 +1937,7 @@ msgstr "เว็บไซต์ URL"
 #. module: website_event
 #: model:ir.model.fields,field_description:website_event.field_event_event__website_visibility
 msgid "Website Visibility"
-msgstr ""
+msgstr "การมองเห็นเว็บไซต์"
 
 #. module: website_event
 #: model:ir.model,name:website_event.model_website_visitor
@@ -1944,13 +1994,14 @@ msgstr ""
 msgid ""
 "With the Edit button, you can <b>customize</b> the web page visitors will "
 "see when registering."
-msgstr "ด้วยปุ่มแก้ไขคุณสามารถ <b>ปรับแต่ง</b>ซึ่งผู้เยี่ยมชมเว็บจะเห็นเมื่อลงทะเบียน"
+msgstr ""
+"ด้วยปุ่มแก้ไขคุณสามารถ <b>ปรับแต่ง</b>ซึ่งผู้เยี่ยมชมเว็บจะเห็นเมื่อลงทะเบียน"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.dynamic_filter_template_event_event_single_aside
 #: model_terms:ir.ui.view,arch_db:website_event.dynamic_filter_template_event_event_single_entry
 msgid "at"
-msgstr ""
+msgstr "ที่"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.modal_ticket_registration
@@ -1971,17 +2022,17 @@ msgstr ""
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.registration_template
 msgid "time)"
-msgstr ""
+msgstr "เวลา)"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "w-100"
-msgstr ""
+msgstr "w-100"
 
 #. module: website_event
 #: model_terms:ir.ui.view,arch_db:website_event.event_description_full
 msgid "w-100 py-sm-3 mt-sm-2"
-msgstr ""
+msgstr "w-100 py-sm-3 mt-sm-2"
 
 #~ msgid "(Ref:"
 #~ msgstr "(อ้างอิง:"

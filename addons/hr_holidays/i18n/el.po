@@ -7,15 +7,17 @@
 # Kostas Goutoudis <goutoudis@gmail.com>, 2018
 # Vasilis Dimopoulos <iap3tos@outlook.com>, 2018
 # George Tarasidis <george_tarasidis@yahoo.com>, 2018
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# Panagiotis karampaglis <panosdotk@gmail.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Panagiotis karampaglis <panosdotk@gmail.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# Odoo Translation Bot <c3p@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-10-21 05:27+0000\n"
-"Last-Translator: Panagiotis karampaglis <panosdotk@gmail.com>\n"
+"POT-Creation-Date: 2026-07-17 17:37+0000\n"
+"PO-Revision-Date: 2026-06-30 00:04+0000\n"
+"Last-Translator: Odoo Translation Bot <c3p@odoo.com>\n"
 "Language-Team: Greek <https://translate.odoo.com/projects/odoo-19/"
 "hr_holidays/el/>\n"
 "Language: el\n"
@@ -23,7 +25,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: hr_holidays
 #. odoo-python
@@ -162,6 +164,14 @@ msgstr ""
 #. module: hr_holidays
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
+msgid ""
+"%(name)s does not have a valid allocation for the leave type %(leave_type)s "
+"to cover that request."
+msgstr ""
+
+#. module: hr_holidays
+#. odoo-python
+#: code:addons/hr_holidays/models/hr_leave.py:0
 msgid "%(name)s: %(duration)s"
 msgstr "%(name)s: %(duration)s"
 
@@ -232,14 +242,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/leave_stats/leave_stats.xml:0
 msgid "'s summary in this period"
-msgstr ""
-
-#. module: hr_holidays
-#. odoo-javascript
-#: code:addons/hr_holidays/static/src/components/accrual_level/accrual_levels.xml:0
-msgid ""
-"(s)\n"
-"                                    and a balance cap is set to"
 msgstr ""
 
 #. module: hr_holidays
@@ -667,7 +669,7 @@ msgstr "Τύποι Δραστηριότητας"
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_leave_allocation_filter
 msgid "Activity type"
-msgstr ""
+msgstr "Τύπος Δραστηριότητας"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -697,7 +699,7 @@ msgstr "Διαχειριστής"
 #: code:addons/hr_holidays/static/src/components/accrual_level/accrual_levels.xml:0
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__milestone_date__after
 msgid "After"
-msgstr ""
+msgstr "Μετά"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
@@ -1139,7 +1141,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/avatar_card_resource_popover.xml:0
 msgid "Busy"
-msgstr ""
+msgstr "Απασχολημένος/η"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_allocation_generate_multi_wizard__allocation_mode__company
@@ -1281,7 +1283,9 @@ msgid ""
 "period they already took leaves. Changing this working schedule changes the "
 "duration of these leaves in such a way the employee no longer has the "
 "required allocation for them. Please review these leaves and/or allocations "
-"before changing the contract."
+"before changing the contract.\n"
+"\n"
+"This error has been triggered by:\n"
 msgstr ""
 
 #. module: hr_holidays
@@ -1341,6 +1345,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
 msgid "Color"
 msgstr "Χρώμα"
+
+#. module: hr_holidays
+#: model:ir.model,name:hr_holidays.model_res_company
+msgid "Companies"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__company_id
@@ -1445,7 +1454,7 @@ msgstr ""
 #. module: hr_holidays
 #: model:ir.model,website_form_label:hr_holidays.model_res_partner
 msgid "Create a Customer"
-msgstr ""
+msgstr "Δημιουργία Πελάτη"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
@@ -1582,7 +1591,7 @@ msgstr ""
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__added_value_type__day
 msgid "Day(s)"
-msgstr ""
+msgstr "Ημέρα(ες)"
 
 #. module: hr_holidays
 #. odoo-javascript
@@ -1723,6 +1732,7 @@ msgstr "Απόρριψη"
 #: model:ir.model.fields,field_description:hr_holidays.field_mail_activity_type__display_name
 #: model:ir.model.fields,field_description:hr_holidays.field_mail_message_subtype__display_name
 #: model:ir.model.fields,field_description:hr_holidays.field_report_hr_holidays_report_holidayssummary__display_name
+#: model:ir.model.fields,field_description:hr_holidays.field_res_company__display_name
 #: model:ir.model.fields,field_description:hr_holidays.field_res_partner__display_name
 #: model:ir.model.fields,field_description:hr_holidays.field_res_users__display_name
 #: model:ir.model.fields,field_description:hr_holidays.field_resource_calendar__display_name
@@ -1864,7 +1874,7 @@ msgstr "Εταιρεία Εργαζόμενου"
 #. module: hr_holidays
 #: model:ir.model,name:hr_holidays.model_hr_version
 msgid "Employee Contract"
-msgstr ""
+msgstr "Συμβόλαιο Εργαζομένου"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation_generate_multi_wizard__category_id
@@ -1922,7 +1932,7 @@ msgstr ""
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_generate_multi_wizard_view_form
 msgid "Everyone"
-msgstr ""
+msgstr "Όλοι"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__employee_requests
@@ -2259,6 +2269,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr_holidays.field_mail_activity_type__id
 #: model:ir.model.fields,field_description:hr_holidays.field_mail_message_subtype__id
 #: model:ir.model.fields,field_description:hr_holidays.field_report_hr_holidays_report_holidayssummary__id
+#: model:ir.model.fields,field_description:hr_holidays.field_res_company__id
 #: model:ir.model.fields,field_description:hr_holidays.field_res_partner__id
 #: model:ir.model.fields,field_description:hr_holidays.field_res_users__id
 #: model:ir.model.fields,field_description:hr_holidays.field_resource_calendar__id
@@ -2578,7 +2589,7 @@ msgstr "Επίπεδα"
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__action_with_unused_accruals__lost
 msgid "Lost"
-msgstr ""
+msgstr "Χαμένη"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__message_main_attachment_id
@@ -2692,6 +2703,11 @@ msgid "Meeting"
 msgstr "Συνάντηση"
 
 #. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_report_calendar__member_of_department
+msgid "Member of department"
+msgstr "Μέλος του τμήματος"
+
+#. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__message_has_error
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave_allocation__message_has_error
 msgid "Message Delivery error"
@@ -2767,7 +2783,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_leave_allocation_filter
 msgid "My Activities"
-msgstr ""
+msgstr "Οι Δραστηριότητες μου"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__my_activity_date_deadline
@@ -2873,6 +2889,8 @@ msgid "New Group Allocation"
 msgstr ""
 
 #. module: hr_holidays
+#. odoo-javascript
+#: code:addons/hr_holidays/static/src/views/calendar/calendar_controller.xml:0
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_kanban
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_view_tree
 msgid "New Group Time Off"
@@ -3445,7 +3463,7 @@ msgstr ""
 #. module: hr_holidays
 #: model:ir.model,name:hr_holidays.model_resource_resource
 msgid "Resources"
-msgstr ""
+msgstr "Πόροι"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__activity_user_id
@@ -3480,7 +3498,7 @@ msgstr "Αποθήκευση"
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
 msgid "Save & New"
-msgstr ""
+msgstr "Αποθήκευση  & Δημιουργία Νέου"
 
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
@@ -3595,6 +3613,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_hr_leave_allocation_filter
 msgid "Show all records whose next activity date is past"
 msgstr ""
+"Εμφάνιση όλων των καταγραφών των οποίων η επόμενη δραστηριότητα είναι "
+"προγενέστερη"
 
 #. module: hr_holidays
 #: model:hr.leave.type,name:hr_holidays.l10n_sa_leave_type_sick_leave_100
@@ -3646,6 +3666,16 @@ msgid "Small Unemployment"
 msgstr ""
 
 #. module: hr_holidays
+#. odoo-python
+#: code:addons/hr_holidays/wizard/hr_leave_generate_multi_wizard.py:0
+msgid ""
+"Some employees already have time off requests in hours that overlap with the "
+"selected period, Odoo cannot automatically adjust or split hourly leaves "
+"during batch generation. Conflicting time off:\n"
+"%s"
+msgstr ""
+
+#. module: hr_holidays
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/dashboard/time_off_card.xml:0
 msgid "Some leaves cannot be linked to any allocation. To see those leaves,"
@@ -3675,7 +3705,7 @@ msgstr ""
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_holiday_list
 msgid "Start"
-msgstr ""
+msgstr "Έναρξη"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_leave__date_from
@@ -3724,7 +3754,7 @@ msgstr ""
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.view_holiday_list
 msgid "Stop"
-msgstr ""
+msgstr "Διακοπή"
 
 #. module: hr_holidays
 #: model:hr.leave.type,name:hr_holidays.l10n_be_leave_type_strike
@@ -3766,7 +3796,7 @@ msgstr "Άθροισμα"
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/views/calendar/calendar_filter_panel/calendar_mobile_filter_panel.xml:0
 msgid "Summary"
-msgstr ""
+msgstr "Περίληψη"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_leave_accrual_level__week_day__6
@@ -3836,6 +3866,14 @@ msgstr ""
 #: model:ir.model.fields,help:hr_holidays.field_hr_leave_type__color
 msgid ""
 "The color selected here will be used in every screen with the time off type."
+msgstr ""
+
+#. module: hr_holidays
+#. odoo-python
+#: code:addons/hr_holidays/models/res_company.py:0
+msgid ""
+"The company country cannot be changed while time off leaves or allocations "
+"with the country exist."
 msgstr ""
 
 #. module: hr_holidays
@@ -3951,12 +3989,6 @@ msgstr ""
 msgid ""
 "There is no employee set on the time off. Please make sure you're logged in "
 "the correct company."
-msgstr ""
-
-#. module: hr_holidays
-#. odoo-python
-#: code:addons/hr_holidays/models/hr_leave.py:0
-msgid "There is no valid allocation to cover that request."
 msgstr ""
 
 #. module: hr_holidays
@@ -4597,7 +4629,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hr_holidays.edit_holiday_status_form
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "Visible to all"
-msgstr ""
+msgstr "Ορατό σε όλους"
 
 #. module: hr_holidays
 #: model:ir.model.fields.selection,name:hr_holidays.selection__hr_employee__current_leave_state__confirm
@@ -4678,6 +4710,13 @@ msgstr ""
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_plan_view_form
 msgid "When the time is accrued?"
+msgstr ""
+
+#. module: hr_holidays
+#: model:ir.model.fields,help:hr_holidays.field_hr_leave_report_calendar__member_of_department
+msgid ""
+"Whether the employee is a member of the active user's department or one of "
+"it's child department."
 msgstr ""
 
 #. module: hr_holidays
@@ -4942,14 +4981,6 @@ msgstr ""
 
 #. module: hr_holidays
 #. odoo-python
-#: code:addons/hr_holidays/models/hr_leave_allocation.py:0
-msgid ""
-"You cannot refuse this allocation request since the employee has already "
-"taken leaves for it. Please refuse or delete those leaves first."
-msgstr ""
-
-#. module: hr_holidays
-#. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 msgid ""
 "You do not have any allocation for this time off type.\n"
@@ -5033,6 +5064,12 @@ msgstr ""
 #. module: hr_holidays
 #. odoo-javascript
 #: code:addons/hr_holidays/static/src/components/accrual_level/accrual_levels.xml:0
+msgid "and a balance cap is set to"
+msgstr ""
+
+#. module: hr_holidays
+#. odoo-javascript
+#: code:addons/hr_holidays/static/src/components/accrual_level/accrual_levels.xml:0
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_accrual_level_view_form
 msgid "and the"
 msgstr ""
@@ -5068,6 +5105,12 @@ msgstr ""
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_report_calendar_view_form
 msgid "dates"
+msgstr ""
+
+#. module: hr_holidays
+#. odoo-javascript
+#: code:addons/hr_holidays/static/src/components/accrual_level/accrual_levels.js:0
+msgid "day(s)"
 msgstr ""
 
 #. module: hr_holidays
@@ -5154,6 +5197,12 @@ msgstr ""
 
 #. module: hr_holidays
 #. odoo-javascript
+#: code:addons/hr_holidays/static/src/components/accrual_level/accrual_levels.js:0
+msgid "hour(s)"
+msgstr ""
+
+#. module: hr_holidays
+#. odoo-javascript
 #. odoo-python
 #: code:addons/hr_holidays/models/hr_leave.py:0
 #: code:addons/hr_holidays/models/hr_leave_allocation.py:0
@@ -5173,6 +5222,12 @@ msgstr ""
 #: code:addons/hr_holidays/models/hr_leave_type.py:0
 msgid ""
 "leaves of type 'Worked Time' should be always eligible for accrual rate."
+msgstr ""
+
+#. module: hr_holidays
+#. odoo-javascript
+#: code:addons/hr_holidays/static/src/components/accrual_level/accrual_levels.js:0
+msgid "month(s)"
 msgstr ""
 
 #. module: hr_holidays
@@ -5299,6 +5354,12 @@ msgstr ""
 #. module: hr_holidays
 #: model_terms:ir.ui.view,arch_db:hr_holidays.hr_leave_report_calendar_view_search
 msgid "validate"
+msgstr ""
+
+#. module: hr_holidays
+#. odoo-javascript
+#: code:addons/hr_holidays/static/src/components/accrual_level/accrual_levels.js:0
+msgid "year(s)"
 msgstr ""
 
 #~ msgid "Active Types"

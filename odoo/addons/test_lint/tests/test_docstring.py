@@ -9,7 +9,7 @@ import docutils.parsers.rst.directives.admonitions
 import docutils.parsers.rst.roles
 
 from odoo.modules.registry import Registry
-from odoo.tests.common import BaseCase, get_db_name, tagged
+from odoo.tests.common import BaseCase, get_db_name, tagged, no_retry
 
 logger = logging.getLogger(__name__)
 
@@ -95,7 +95,7 @@ def extract_docstring_params(doctree):
     types = {}
     rtype = inspect._empty
 
-    field_lists = [node for node in doctree if node.tagname == 'field_list']
+    field_lists = [node for node in doctree if node.tagname in ('docinfo', 'field_list')]
     for field_list in field_lists:
         for field in field_list:
             field_name, field_body = field.children
@@ -152,6 +152,7 @@ def extract_docstring_params(doctree):
 
 
 @tagged('-at_install', 'post_install')
+@no_retry
 class TestDocstring(BaseCase):
     @classmethod
     def setUpClass(cls):
@@ -263,4 +264,4 @@ class TestDocstring(BaseCase):
     def _stringify_annotation(self, sign_type):
         if isinstance(sign_type, type):
             sign_type = sign_type.__name__
-        return str(sign_type)
+        return str(sign_type).removeprefix('typing.')

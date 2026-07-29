@@ -6,14 +6,16 @@
 # Wil Odoo, 2025
 # Tony Ng, 2025
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# "Tony Ng (ngto)" <ngto@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-09-16 08:11+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-04-10 18:39+0000\n"
+"PO-Revision-Date: 2026-06-29 11:07+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
 "projects/odoo-19/product/zh_Hant/>\n"
 "Language: zh_TW\n"
@@ -21,7 +23,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: product
 #. odoo-python
@@ -48,16 +50,6 @@ msgid "# Products"
 msgstr "# 產品"
 
 #. module: product
-#: model_terms:ir.ui.view,arch_db:product.report_pricelist_page
-msgid "$14.00"
-msgstr "$14.00"
-
-#. module: product
-#: model_terms:ir.ui.view,arch_db:product.report_pricelist_page
-msgid "$15.00"
-msgstr "$15.00"
-
-#. module: product
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid ""
@@ -76,8 +68,7 @@ msgstr ""
 msgid ""
 "%(item_name)s: end date (%(end_date)s) should be after start date (%"
 "(start_date)s)"
-msgstr ""
-"%(item_name)s：結束日期（%(end_date)s）應在開始日期（%(start_date)s）之後"
+msgstr "%(item_name)s：結束日期（%(end_date)s）應在開始日期（%(start_date)s）之後"
 
 #. module: product
 #. odoo-python
@@ -156,8 +147,8 @@ msgid ""
 "        Note: this cannot be changed once the attribute is used on a product."
 msgstr ""
 "- 立即：屬性及屬性值加入至產品後，立即建立所有可能的款式變體。\n"
-"        - 動態：只在屬性及屬性值加入至銷售訂單時，才建立相應的每個款式變"
-"體。\n"
+"        - 動態：只在屬性及屬性值加入至銷售訂單時，才建立相應的每個款式變體"
+"。\n"
 "        - 從不：永遠不會為該屬性建立款式變體。\n"
 "        請留意：屬性一旦在任何產品上使用，此設定便不可更改。"
 
@@ -172,39 +163,9 @@ msgid "1 year"
 msgstr "1 年"
 
 #. module: product
-#: model_terms:ir.ui.view,arch_db:product.report_packagingbarcode
-msgid "10"
-msgstr "10"
-
-#. module: product
 #: model_terms:ir.ui.view,arch_db:product.report_pricelist_page
 msgid "10 Units"
 msgstr "10 件"
-
-#. module: product
-#: model:product.attribute.value,name:product.pav_height_100
-msgid "100"
-msgstr "100"
-
-#. module: product
-#: model:product.attribute.value,name:product.pav_length_120
-msgid "120"
-msgstr "120"
-
-#. module: product
-#: model_terms:ir.ui.view,arch_db:product.report_packagingbarcode
-msgid "123456789012"
-msgstr "123456789012"
-
-#. module: product
-#: model:product.attribute.value,name:product.pav_length_140
-msgid "140"
-msgstr "140"
-
-#. module: product
-#: model:product.attribute.value,name:product.pav_length_160
-msgid "160"
-msgstr "160"
 
 #. module: product
 #: model:product.template,description_sale:product.product_product_4_product_template
@@ -232,11 +193,6 @@ msgid "3 years"
 msgstr "3 年"
 
 #. module: product
-#: model:product.attribute.value,name:product.pav_shoe_size_39
-msgid "39"
-msgstr "39"
-
-#. module: product
 #: model:product.attribute.value,name:product.pav_size_3xl
 msgid "3XL"
 msgstr "3XL"
@@ -257,31 +213,6 @@ msgid "4 x 7 with price"
 msgstr "4 x 7 含價格"
 
 #. module: product
-#: model:product.attribute.value,name:product.pav_shoe_size_40
-msgid "40"
-msgstr "40"
-
-#. module: product
-#: model:product.attribute.value,name:product.pav_shoe_size_41
-msgid "41"
-msgstr "41"
-
-#. module: product
-#: model:product.attribute.value,name:product.pav_shoe_size_42
-msgid "42"
-msgstr "42"
-
-#. module: product
-#: model:product.attribute.value,name:product.pav_shoe_size_43
-msgid "43"
-msgstr "43"
-
-#. module: product
-#: model:product.attribute.value,name:product.pav_height_45
-msgid "45"
-msgstr "45"
-
-#. module: product
 #: model:product.attribute.value,name:product.pav_size_4xl
 msgid "4XL"
 msgstr "4XL"
@@ -295,11 +226,6 @@ msgstr "5XL"
 #: model:product.attribute.value,name:product.pav_duration_month_6
 msgid "6 months"
 msgstr "6 個月"
-
-#. module: product
-#: model:product.attribute.value,name:product.pav_height_85
-msgid "85"
-msgstr "85"
 
 #. module: product
 #: model_terms:product.template,website_description:product.product_product_4_product_template
@@ -321,16 +247,15 @@ msgid ""
 "<i class=\"fa fa-long-arrow-right mx-2 oe_edit_only\" aria-label=\"Arrow "
 "icon\" title=\"Arrow\"/>"
 msgstr ""
-"<i class=\"fa fa-long-arrow-right mx-2 oe_edit_only\" aria-label=\"箭嘴圖示"
-"\" title=\"箭嘴\"/>"
+"<i class=\"fa fa-long-arrow-right mx-2 oe_edit_only\" aria-label=\"箭嘴圖"
+"示\" title=\"箭嘴\"/>"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_pricelist_view_kanban
 msgid ""
 "<i class=\"fa fa-money\" role=\"img\" aria-label=\"Currency\" "
 "title=\"Currency\"/>"
-msgstr ""
-"<i class=\"fa fa-money\" role=\"img\" aria-label=\"幣別\" title=\"幣別\"/>"
+msgstr "<i class=\"fa fa-money\" role=\"img\" aria-label=\"幣別\" title=\"幣別\"/>"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_category_form_view
@@ -436,6 +361,14 @@ msgstr ""
 "價格是一組銷售價格或規則，用於根據產品、產品類別、日期和訂購數量計算銷售訂單"
 "明细的價格.\n"
 "            這是處理多種定價、季節性折扣等的完美工具."
+
+#. module: product
+#. odoo-python
+#: code:addons/product/models/product_pricelist_item.py:0
+msgid ""
+"A pricelist item with \"Other Pricelist\" as base must have a "
+"base_pricelist_id."
+msgstr "以「其他價目表」為基礎的價目表項目，必須有 base_pricelist_id。"
 
 #. module: product
 #. odoo-python
@@ -627,7 +560,7 @@ msgstr "所有類別"
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_pricelist_view_tree
 msgid "All countries"
-msgstr "所有國家"
+msgstr "所有國家/地區"
 
 #. module: product
 #. odoo-python
@@ -1526,6 +1459,12 @@ msgid "Drawers"
 msgstr "抽屜"
 
 #. module: product
+#. odoo-python
+#: code:addons/product/models/product_product.py:0
+msgid "Duplicate values in attribute values are not allowed: %s"
+msgstr ""
+
+#. module: product
 #: model:product.attribute,name:product.pa_duration
 msgid "Duration"
 msgstr "時長"
@@ -2119,9 +2058,21 @@ msgid "Is public document"
 msgstr "這是公開文件"
 
 #. module: product
+#. odoo-python
+#: code:addons/product/models/product_product.py:0
+msgid ""
+"It is not possible to import different values for the same attribute: %s"
+msgstr ""
+
+#. module: product
 #: model:ir.model.fields.selection,name:product.selection__res_config_settings__product_weight_in_lbs__0
 msgid "Kilograms (kg)"
 msgstr "公斤（kg）"
+
+#. module: product
+#: model:product.attribute.value,name:product.pav_size_l
+msgid "L"
+msgstr "L"
 
 #. module: product
 #: model:product.attribute.value,name:product.pav_brand_loreal
@@ -2208,7 +2159,7 @@ msgstr "逾期活動"
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_supplierinfo__delay
 msgid "Lead Time"
-msgstr ""
+msgstr "前置時間"
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_supplierinfo__delay
@@ -2286,6 +2237,11 @@ msgid ""
 "Looking for a custom bamboo stain to match existing furniture? Contact us "
 "for a quote."
 msgstr "您正在尋找與現有家具相匹配的客製竹染色劑嗎?聯繫我們獲取報價."
+
+#. module: product
+#: model:product.attribute.value,name:product.pav_size_m
+msgid "M"
+msgstr "M"
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_template_attribute_value__exclude_for
@@ -3187,6 +3143,12 @@ msgid "Product Unit of Measure"
 msgstr "產品計量單位"
 
 #. module: product
+#: model:ir.model.fields,field_description:product.field_product_product__import_attribute_values
+#: model:ir.model.fields,field_description:product.field_product_template__import_attribute_values
+msgid "Product Values"
+msgstr ""
+
+#. module: product
 #: model:ir.model,name:product.model_product_product
 #: model:ir.model.fields,field_description:product.field_product_supplierinfo__product_id
 #: model:ir.model.fields.selection,name:product.selection__product_pricelist_item__applied_on__0_product_variant
@@ -3341,7 +3303,7 @@ msgstr "Ray-Ban"
 #. odoo-python
 #: code:addons/product/models/product_pricelist_item.py:0
 msgid "Recursive pricelist rules detected: %s"
-msgstr ""
+msgstr "偵測到遞迴的價目表規則：%s"
 
 #. module: product
 #: model:product.attribute.value,name:product.pav_color_red
@@ -3449,6 +3411,11 @@ msgstr "行"
 #: model:ir.model.fields,field_description:product.field_product_pricelist_item__rule_tip
 msgid "Rule Tip"
 msgstr "規則提示"
+
+#. module: product
+#: model:product.attribute.value,name:product.pav_size_s
+msgid "S"
+msgstr "S"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_product__sale_ok
@@ -3607,8 +3574,7 @@ msgstr "如果這條規則只能用於一個產品模板，則指定一個模板
 msgid ""
 "Specify the fixed amount to add or subtract (if negative) to the amount "
 "calculated with the discount."
-msgstr ""
-"指定一個固定金額，用以加至計算折扣在內的金額（如果為負數，則由該金額減去）。"
+msgstr "指定一個固定金額，用以加至計算折扣在內的金額（如果為負數，則由該金額減去）。"
 
 #. module: product
 #: model:ir.model.fields,help:product.field_product_pricelist_item__price_max_margin
@@ -3678,7 +3644,7 @@ msgstr "供應商價目表"
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_tag_form_view
 msgid "Tag"
-msgstr ""
+msgstr "標籤"
 
 #. module: product
 #: model:ir.model.constraint,message:product.constraint_product_tag_name_uniq
@@ -3764,6 +3730,15 @@ msgstr ""
 #: model:ir.model.fields,help:product.field_product_template_attribute_value__display_type
 msgid "The display type used in the Product Configurator."
 msgstr "產品組態中使用的顯示類型."
+
+#. module: product
+#. odoo-python
+#: code:addons/product/models/product_product.py:0
+msgid ""
+"The exitings product has different attribute value. \"%(imported_values)s\" "
+"is not equivalent to \"%(existing_values)s\" for \"%(external_id)s\", \"%"
+"(id)s\""
+msgstr ""
 
 #. module: product
 #: model_terms:product.template,website_description:product.product_product_4_product_template
@@ -3920,7 +3895,7 @@ msgstr "列印詢價單時，此供應商產品名稱會被使用.保持空白�
 #. module: product
 #: model:ir.model.fields,field_description:product.field_product_document__thumbnail
 msgid "Thumbnail"
-msgstr ""
+msgstr "縮圖"
 
 #. module: product
 #: model:product.attribute.value,name:product.pav_brand_tide
@@ -3959,13 +3934,29 @@ msgstr "記錄的異常活動的類型。"
 #: code:addons/product/controllers/pricelist_report.py:0
 #: model_terms:ir.ui.view,arch_db:product.report_pricelist_page
 msgid "UOM"
-msgstr "計量單位"
+msgstr "量度單位"
 
 #. module: product
 #. odoo-python
 #: code:addons/product/wizard/product_label_layout.py:0
 msgid "Unable to find report template for %s format"
 msgstr "找不到 %s 格式的報告模板"
+
+#. module: product
+#. odoo-python
+#: code:addons/product/models/product_product.py:0
+msgid ""
+"Unable to import products with attribute value without attribute name "
+"(defined as: attribute:value): %s"
+msgstr ""
+
+#. module: product
+#. odoo-python
+#: code:addons/product/models/product_product.py:0
+msgid ""
+"Unable to import products with attribute values but without name of product "
+"set"
+msgstr ""
 
 #. module: product
 #: model:product.attribute.value,name:product.pav_brand_underarmour
@@ -4309,7 +4300,7 @@ msgstr "音量"
 #: model_terms:ir.ui.view,arch_db:product.product_template_form_view
 #: model_terms:ir.ui.view,arch_db:product.res_config_settings_view_form
 msgid "Volume"
-msgstr "音量"
+msgstr "體積"
 
 #. module: product
 #: model:ir.model.fields,field_description:product.field_res_config_settings__product_volume_volume_in_cubic_feet
@@ -4551,8 +4542,7 @@ msgstr ""
 msgid ""
 "You cannot move the attribute %(attribute)s from the product %(product_src)s "
 "to the product %(product_dest)s."
-msgstr ""
-"不可將屬性 %(attribute)s 從產品 %(product_src)s 移動至產品 %(product_dest)s。"
+msgstr "不可將屬性 %(attribute)s 從產品 %(product_src)s 移動至產品 %(product_dest)s。"
 
 #. module: product
 #. odoo-python
@@ -4760,6 +4750,51 @@ msgstr "到"
 #: code:addons/product/static/src/js/pricelist_report/product_pricelist_report.xml:0
 msgid "xlsx"
 msgstr "xlsx"
+
+#~ msgid "$14.00"
+#~ msgstr "$14.00"
+
+#~ msgid "$15.00"
+#~ msgstr "$15.00"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "100"
+#~ msgstr "100"
+
+#~ msgid "120"
+#~ msgstr "120"
+
+#~ msgid "123456789012"
+#~ msgstr "123456789012"
+
+#~ msgid "140"
+#~ msgstr "140"
+
+#~ msgid "160"
+#~ msgstr "160"
+
+#~ msgid "39"
+#~ msgstr "39"
+
+#~ msgid "40"
+#~ msgstr "40"
+
+#~ msgid "41"
+#~ msgstr "41"
+
+#~ msgid "42"
+#~ msgstr "42"
+
+#~ msgid "43"
+#~ msgstr "43"
+
+#~ msgid "45"
+#~ msgstr "45"
+
+#~ msgid "85"
+#~ msgstr "85"
 
 #~ msgid ""
 #~ "You cannot assign the Main Pricelist as Other Pricelist in PriceList Item"

@@ -550,7 +550,8 @@ export function makeActionManager(env, router = _router) {
                     (!lastAction.context?.active_id ||
                         lastAction.context?.active_id === context.active_id) &&
                     (!lastAction.context?.active_ids ||
-                        shallowEqual(lastAction.context?.active_ids, context.active_ids))
+                        shallowEqual(lastAction.context?.active_ids, context.active_ids)) &&
+                    !lastAction.embedded_action_ids?.length
                 ) {
                     actionRequest = lastAction;
                 } else {
@@ -568,12 +569,21 @@ export function makeActionManager(env, router = _router) {
             }
         } else if (state.model) {
             if (state.resId || state.view_type === "form") {
-                actionRequest = {
-                    res_model: state.model,
-                    res_id: state.resId === "new" ? undefined : state.resId,
-                    type: "ir.actions.act_window",
-                    views: [[state.view_id ? state.view_id : false, "form"]],
-                };
+                if (!lastAction.id && lastAction.res_model === state.model) {
+                    actionRequest = lastAction;
+                    options.props = { resId: state.resId === "new" ? undefined : state.resId };
+                    if (state.view_id) {
+                        actionRequest.views = [[state.view_id, "form"]];
+                    }
+                    options.viewType = "form";
+                } else {
+                    actionRequest = {
+                        res_model: state.model,
+                        res_id: state.resId === "new" ? undefined : state.resId,
+                        type: "ir.actions.act_window",
+                        views: [[state.view_id ? state.view_id : false, "form"]],
+                    };
+                }
             } else {
                 // This is a window action on a multi-record view => restores it from
                 // the session storage
@@ -927,7 +937,7 @@ export function makeActionManager(env, router = _router) {
                         if (controller.isMounted) {
                             return;
                         }
-                        pushState(nextStack);
+                        pushState(nextStack, { sync: true });
                     },
                 });
                 if (action.target !== "new") {
@@ -1348,6 +1358,12 @@ export function makeActionManager(env, router = _router) {
         for (const handler of handlers) {
             const result = await handler(action, options, env);
             if (result) {
+                const { onClose } = options;
+                if (action.close_on_report_download) {
+                    return doAction({ type: "ir.actions.act_window_close" }, { onClose });
+                } else if (onClose) {
+                    onClose();
+                }
                 return result;
             }
         }
@@ -1490,7 +1506,7 @@ export function makeActionManager(env, router = _router) {
      * @returns {Promise<void>}
      */
     async function doActionButton(params, { isEmbeddedAction, newWindow } = {}) {
-        if (!params.name) {
+        if (!params.name && !params.special) {
             return;
         }
         // determine the action to execute according to the params
@@ -1685,7 +1701,8 @@ export function makeActionManager(env, router = _router) {
             // This case would mostly happen when loadState detects a change in the URL.
             // Also, I guess we may need it when we have other monoRecord views
             index = controllerStack.findIndex(
-                (ct) => ct.action.jsId === controller.action.jsId && !ct.view.multiRecord
+                (ct) =>
+                    ct.action.jsId === controller.action.jsId && !ct.virtual && !ct.view.multiRecord
             );
             index = index > -1 ? index : controllerStack.length;
         }
@@ -1835,7 +1852,7 @@ export function makeActionManager(env, router = _router) {
         return Object.assign(newState, pick(newState.actionStack.at(-1), ...stateKeys));
     }
 
-    function pushState(cStack = controllerStack) {
+    function pushState(cStack = controllerStack, options) {
         if (!cStack.length) {
             return;
         }
@@ -1844,7 +1861,7 @@ export function makeActionManager(env, router = _router) {
         browser.sessionStorage.setItem("current_state", JSON.stringify(newState));
 
         cStack.at(-1).state = newState;
-        router.pushState(newState, { replace: true });
+        router.pushState(newState, Object.assign({ replace: true }, options));
     }
     return {
         doAction,

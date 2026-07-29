@@ -5,13 +5,14 @@
 # Translators:
 # Martin Trigaux, 2022
 # Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2022
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~15.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-09-14 21:12+0000\n"
+"POT-Creation-Date: 2026-07-17 17:38+0000\n"
+"PO-Revision-Date: 2026-06-29 23:29+0000\n"
 "Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: Spanish <https://translate.odoo.com/projects/odoo-19/sale_mrp/"
 "es/>\n"
@@ -21,7 +22,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=(n == 1) ? 0 : ((n != 0 && n % 1000000 == "
 "0) ? 1 : 2);\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: sale_mrp
 #: model_terms:ir.ui.view,arch_db:sale_mrp.sale_order_portal_content_inherit_sale_mrp
@@ -92,8 +93,10 @@ msgstr "Fecha:"
 #: model:ir.model.fields,field_description:sale_mrp.field_mrp_production__display_name
 #: model:ir.model.fields,field_description:sale_mrp.field_sale_order__display_name
 #: model:ir.model.fields,field_description:sale_mrp.field_sale_order_line__display_name
+#: model:ir.model.fields,field_description:sale_mrp.field_stock_move__display_name
 #: model:ir.model.fields,field_description:sale_mrp.field_stock_move_line__display_name
 #: model:ir.model.fields,field_description:sale_mrp.field_stock_rule__display_name
+#: model:ir.model.fields,field_description:sale_mrp.field_stock_warehouse_orderpoint__display_name
 msgid "Display Name"
 msgstr "Nombre para mostrar"
 
@@ -103,8 +106,10 @@ msgstr "Nombre para mostrar"
 #: model:ir.model.fields,field_description:sale_mrp.field_mrp_production__id
 #: model:ir.model.fields,field_description:sale_mrp.field_sale_order__id
 #: model:ir.model.fields,field_description:sale_mrp.field_sale_order_line__id
+#: model:ir.model.fields,field_description:sale_mrp.field_stock_move__id
 #: model:ir.model.fields,field_description:sale_mrp.field_stock_move_line__id
 #: model:ir.model.fields,field_description:sale_mrp.field_stock_rule__id
+#: model:ir.model.fields,field_description:sale_mrp.field_stock_warehouse_orderpoint__id
 msgid "ID"
 msgstr "ID"
 
@@ -135,6 +140,11 @@ msgid "Manufacturing orders associated with this sales order."
 msgstr "Órdenes de fabricación vinculadas a este pedido de venta."
 
 #. module: sale_mrp
+#: model:ir.model,name:sale_mrp.model_stock_warehouse_orderpoint
+msgid "Minimum Inventory Rule"
+msgstr ""
+
+#. module: sale_mrp
 #: model:ir.model.fields,field_description:sale_mrp.field_mrp_production__sale_line_id
 msgid "Origin sale order line"
 msgstr "Línea del pedido de venta de origen"
@@ -161,15 +171,17 @@ msgid "Sources Sale Orders of %s"
 msgstr "Pedidos de venta de origen de %s"
 
 #. module: sale_mrp
+#: model:ir.model,name:sale_mrp.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de inventario"
+
+#. module: sale_mrp
 #: model:ir.model,name:sale_mrp.model_stock_rule
 msgid "Stock Rule"
-msgstr "Regla de inventario"
+msgstr "Regla de stock"
 
 #~ msgid "<span class=\"o_stat_text\">Manufacturing</span>"
 #~ msgstr "<span class=\"o_stat_text\">Fabricación</span>"
 
 #~ msgid "Production Order"
 #~ msgstr "Orden de producción"
-
-#~ msgid "Stock Move"
-#~ msgstr "Movimiento de inventario"

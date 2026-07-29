@@ -2,15 +2,16 @@
 # This file contains the translation of the following modules:
 # * html_builder
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Kwanghee Park (kwpa)" <kwpa@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Kwanghee Park (kwpa)" <kwpa@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-10-15 09:12+0000\n"
-"Last-Translator: \"Kwanghee Park (kwpa)\" <kwpa@odoo.com>\n"
+"POT-Creation-Date: 2026-07-24 17:39+0000\n"
+"PO-Revision-Date: 2026-06-29 11:17+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/"
 "html_builder/ko/>\n"
 "Language: ko\n"
@@ -18,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: html_builder
 #. odoo-javascript
@@ -56,6 +57,20 @@ msgstr "사진을 가리키면 '제목 태그'가 툴팁으로 표시됩니다."
 
 #. module: html_builder
 #. odoo-javascript
+#: code:addons/html_builder/static/src/plugins/shape/shape_selector.xml:0
+msgid "A"
+msgstr ""
+
+#. module: html_builder
+#. odoo-javascript
+#: code:addons/html_builder/static/src/core/operation_plugin.js:0
+msgid ""
+"A technical issue occurred in the builder, you should save or discard your "
+"changes."
+msgstr ""
+
+#. module: html_builder
+#. odoo-javascript
 #: code:addons/html_builder/static/src/core/building_blocks/builder_list.js:0
 #: code:addons/html_builder/static/src/plugins/image/image_filter_option.xml:0
 msgid "Add"
@@ -63,7 +78,7 @@ msgstr "추가"
 
 #. module: html_builder
 #. odoo-javascript
-#: code:addons/html_builder/static/src/plugins/add_product_option.xml:0
+#: code:addons/html_builder/static/src/plugins/add_product_option.js:0
 msgid "Add Product"
 msgstr "품목 추가"
 
@@ -232,8 +247,10 @@ msgstr "Alt 태그"
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/core/anchor/anchor_plugin.js:0
-msgid "Anchor copied to clipboard%(br)sLink: %(anchorLink)s"
-msgstr "앵커가%(br)s 클립보드에 복사되었습니다. 링크: %(anchorLink)s"
+msgid ""
+"Anchor copied to clipboard%(br)s%(open_span)sLink: %(anchor_link)s%"
+"(close_span)s"
+msgstr ""
 
 #. module: html_builder
 #. odoo-javascript
@@ -522,7 +539,7 @@ msgstr "블록"
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/background_option/background_shapes_definition.js:0
 msgid "Block & Rainy"
-msgstr ""
+msgstr "Block & Rainy"
 
 #. module: html_builder
 #. odoo-javascript
@@ -810,7 +827,7 @@ msgstr "서킷"
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/background_option/background_position_overlay.xml:0
 msgid "Click and drag the background to adjust its position!"
-msgstr ""
+msgstr "배경을 클릭한 후 드래그하여 위치를 조정하세요!"
 
 #. module: html_builder
 #. odoo-javascript
@@ -1148,6 +1165,12 @@ msgstr "어둡게"
 #: code:addons/html_builder/static/src/plugins/border_configurator_option.xml:0
 msgid "Dashed"
 msgstr "현황판에 게시"
+
+#. module: html_builder
+#. odoo-javascript
+#: code:addons/html_builder/static/src/plugins/date_time_field_option.xml:0
+msgid "Date"
+msgstr ""
 
 #. module: html_builder
 #. odoo-javascript
@@ -1533,19 +1556,19 @@ msgstr "하프 갤럭시 S"
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/font/font_plugin.js:0
 msgid "Header 1 Display 2"
-msgstr ""
+msgstr "머리글 1 표시 2"
 
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/font/font_plugin.js:0
 msgid "Header 1 Display 3"
-msgstr ""
+msgstr "머리글 1 표시 3"
 
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/font/font_plugin.js:0
 msgid "Header 1 Display 4"
-msgstr ""
+msgstr "머리글 1 표시 4"
 
 #. module: html_builder
 #. odoo-javascript
@@ -1663,6 +1686,14 @@ msgstr "보이지 않는 요소"
 
 #. module: html_builder
 #. odoo-javascript
+#: code:addons/html_builder/static/src/core/version_error_plugin.js:0
+msgid ""
+"It might have caused problem during the editing. Please drag the new version "
+"from the snippet panel to update it."
+msgstr ""
+
+#. module: html_builder
+#. odoo-javascript
 #: code:addons/html_builder/static/src/core/building_blocks/builder_list.js:0
 msgid "Item"
 msgstr "항목"
@@ -1682,6 +1713,7 @@ msgstr "미로"
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/rating_option.xml:0
+#: code:addons/html_builder/static/src/plugins/size_option.xml:0
 msgid "Large"
 msgstr "크게"
 
@@ -1784,6 +1816,7 @@ msgstr "미디어"
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/rating_option.xml:0
+#: code:addons/html_builder/static/src/plugins/size_option.xml:0
 msgid "Medium"
 msgstr "중간"
 
@@ -1869,13 +1902,13 @@ msgstr "이 앱에 대한 자세한 정보를 확인하세요."
 #. odoo-javascript
 #: code:addons/html_builder/static/src/core/move_plugin.js:0
 msgid "Move left"
-msgstr ""
+msgstr "왼쪽으로 이동"
 
 #. module: html_builder
 #. odoo-javascript
 #: code:addons/html_builder/static/src/core/move_plugin.js:0
 msgid "Move right"
-msgstr ""
+msgstr "오른쪽으로 이동"
 
 #. module: html_builder
 #. odoo-javascript
@@ -2194,6 +2227,12 @@ msgstr "제거"
 
 #. module: html_builder
 #. odoo-javascript
+#: code:addons/html_builder/static/src/plugins/background_option/background_image.xml:0
+msgid "Remove image"
+msgstr "이미지 제거"
+
+#. module: html_builder
+#. odoo-javascript
 #: code:addons/html_builder/static/src/sidebar/option_container.xml:0
 msgid "Remove this block"
 msgstr "해당 블록 제거하기"
@@ -2266,6 +2305,12 @@ msgstr "초기화"
 #: code:addons/html_builder/static/src/plugins/image/image_tool_option.xml:0
 msgid "Reset crop"
 msgstr "자르기 초기화"
+
+#. module: html_builder
+#. odoo-javascript
+#: code:addons/html_builder/static/src/plugins/image/image_shape_option.xml:0
+msgid "Reset shape transformation"
+msgstr ""
 
 #. module: html_builder
 #. odoo-javascript
@@ -2348,6 +2393,12 @@ msgstr "저장 및 복사"
 #: code:addons/html_builder/static/src/snippets/snippet_service.js:0
 msgid "Save and Install"
 msgstr "저장 및 설치"
+
+#. module: html_builder
+#. odoo-javascript
+#: code:addons/html_builder/static/src/core/save_snippet_plugin.js:0
+msgid "Saved as %s. Find it in your snippets."
+msgstr ""
 
 #. module: html_builder
 #. odoo-javascript
@@ -2447,7 +2498,7 @@ msgstr "도형"
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/background_option/background_shape_option.xml:0
 msgid "Show/Hide on Mobile"
-msgstr ""
+msgstr "모바일에서 표시/숨기기"
 
 #. module: html_builder
 #. odoo-javascript
@@ -2466,6 +2517,7 @@ msgstr "표창 (R)"
 #: code:addons/html_builder/static/src/plugins/image/image_size.xml:0
 #: code:addons/html_builder/static/src/plugins/image/image_tool_option.xml:0
 #: code:addons/html_builder/static/src/plugins/rating_option.xml:0
+#: code:addons/html_builder/static/src/plugins/size_option.xml:0
 msgid "Size"
 msgstr "사이즈"
 
@@ -2479,6 +2531,7 @@ msgstr "비스듬하게 놓임"
 #. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/font/font_plugin.js:0
 #: code:addons/html_builder/static/src/plugins/rating_option.xml:0
+#: code:addons/html_builder/static/src/plugins/size_option.xml:0
 msgid "Small"
 msgstr "작게"
 
@@ -2773,6 +2826,12 @@ msgstr "Google 서버에서 이 글꼴을 방문자에게 호스팅 및 제공�
 
 #. module: html_builder
 #. odoo-javascript
+#: code:addons/html_builder/static/src/core/version_error_plugin.js:0
+msgid "This snippet is outdated"
+msgstr ""
+
+#. module: html_builder
+#. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/rating_option.xml:0
 msgid "Thumbs"
 msgstr "Thumbs"
@@ -3046,9 +3105,15 @@ msgstr "물결 모양 14"
 
 #. module: html_builder
 #. odoo-javascript
+#: code:addons/html_builder/static/src/plugins/image/image_filter_option.js:0
+msgid "WebGL is not enabled on your browser."
+msgstr "브라우저에 WebGL이 활성화되지 않았습니다."
+
+#. module: html_builder
+#. odoo-javascript
 #: code:addons/html_builder/static/src/plugins/image/image_format_option.xml:0
 msgid "WebP compression not supported on this browser"
-msgstr ""
+msgstr "이 브라우저에서는 WebP 압축 기능이 지원되지 않습니다"
 
 #. module: html_builder
 #. odoo-javascript
@@ -3087,14 +3152,6 @@ msgstr "추가할 레코드가 없습니다"
 #: code:addons/html_builder/static/src/plugins/image/replace_media_option.xml:0
 msgid "Your URL"
 msgstr "URL"
-
-#. module: html_builder
-#. odoo-javascript
-#: code:addons/html_builder/static/src/core/save_snippet_plugin.js:0
-msgid ""
-"Your custom snippet was successfully saved as %s. Find it in your snippets "
-"collection."
-msgstr ""
 
 #. module: html_builder
 #. odoo-javascript
@@ -3215,6 +3272,9 @@ msgstr "⌙ 활성"
 #: code:addons/html_builder/static/src/plugins/rating_option.xml:0
 msgid "⌙ Inactive"
 msgstr "⌙ 비활성"
+
+#~ msgid "Anchor copied to clipboard%(br)sLink: %(anchorLink)s"
+#~ msgstr "앵커가%(br)s 클립보드에 복사되었습니다. 링크: %(anchorLink)s"
 
 #~ msgid "ACCESS OPTIONS ANYWAY"
 #~ msgstr "어쨌든 액세스 옵션 설정"

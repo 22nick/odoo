@@ -52,6 +52,9 @@ class StripeController(http.Controller):
         except ValidationError:
             _logger.error("Failed to process the return from Stripe.")
         else:
+            if tx_sudo.reference != response_content["description"]:
+                _logger.warning("Received payment data with incorrect reference")
+                raise Forbidden()
             if tx_sudo.operation != 'validation':
                 self._include_payment_intent_in_payment_data(response_content, data)
             else:
@@ -85,6 +88,10 @@ class StripeController(http.Controller):
                 tx_sudo = request.env['payment.transaction'].sudo()._search_by_reference(
                     'stripe', data
                 )
+
+                if not tx_sudo:
+                    return request.make_json_response('')
+
                 self._verify_signature(tx_sudo)
 
                 if event['type'].startswith('payment_intent'):  # Payment operation.
@@ -102,6 +109,9 @@ class StripeController(http.Controller):
                     stripe_object['payment_method'] = payment_method
                     self._include_setup_intent_in_payment_data(stripe_object, data)
                 elif event['type'] == 'charge.refunded':  # Refund operation (refund creation).
+                    if not stripe_object['captured']:  # The charge was authorized and then voided
+                        return request.make_json_response('')  # Don't process void-related events
+
                     refunds = stripe_object['refunds']['data']
 
                     # The refunds linked to this charge are paginated, fetch the remaining refunds.
@@ -189,7 +199,7 @@ class StripeController(http.Controller):
         webhook_secret = stripe_utils.get_webhook_secret(tx_sudo.provider_id)
         if not webhook_secret:
             _logger.warning("ignored webhook event due to undefined webhook secret")
-            return
+            raise Forbidden()
 
         notification_payload = request.httprequest.data.decode('utf-8')
         signature_entries = request.httprequest.headers['Stripe-Signature'].split(',')

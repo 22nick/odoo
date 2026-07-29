@@ -8,12 +8,12 @@
 - Send and receive documents via PEPPOL network in Peppol BIS Billing 3.0 format
     """,
     'category': 'Accounting/Accounting',
-    'version': '1.1',
+    'version': '1.2',
     'countries': [
         # !!! KEEP ALIGNED WITH ACCOUNT/MODELS/COMPANY.PEPPOL_DEFAULT_COUNTRIES
         'at', 'be', 'ch', 'cy', 'cz', 'de', 'dk', 'ee', 'es', 'fi',
-        'fr', 'gr', 'ie', 'is', 'it', 'lt', 'lu', 'lv', 'mt', 'nl',
-        'no', 'pl', 'pt', 'ro', 'se', 'si',
+        'fr', 'ie', 'is', 'lt', 'lu', 'lv', 'mt', 'nl', 'no', 'se',
+        'si',
     ],
     'depends': [
         'account_edi_proxy_client',
@@ -32,6 +32,7 @@
         'security/ir.model.access.csv',
         'views/account_move_views.xml',
         'views/account_portal_templates.xml',
+        'views/peppol_authentication_views.xml',
         'views/res_partner_views.xml',
         'views/res_config_settings_views.xml',
         'wizard/peppol_registration_views.xml',
@@ -46,6 +47,8 @@
     'assets': {
         'web.assets_backend': [
             'account_peppol/static/src/components/**/*',
+            'account_peppol/static/src/web/**/*',
+            'account_peppol/static/src/css/**/*',
         ],
         'web.assets_frontend': [
             'account_peppol/static/src/interactions/*',

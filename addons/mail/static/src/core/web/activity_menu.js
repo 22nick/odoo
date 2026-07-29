@@ -17,12 +17,12 @@ export class ActivityMenu extends Component {
 
     setup() {
         super.setup();
-        this.discussSystray = useDiscussSystray();
         this.store = useService("mail.store");
         this.action = useService("action");
         this.userId = user.userId;
         this.ui = useService("ui");
         this.dropdown = useDropdownState();
+        this.discussSystray = useDiscussSystray(this.dropdown);
         useCommand(_t("Activity"), () => this.store.scheduleActivity(false, false), {
             category: "activity",
             hotkey: "alt+shift+a",
@@ -84,6 +84,15 @@ export class ActivityMenu extends Component {
         }
         const views = this.availableViews(group);
 
+        this.executeActivityAction(group, domain, views, context, newWindow);
+    }
+
+    /**
+     * This logic is extracted into a separate method to allow other modules (e.g., documents)
+     * to override *how* the action is executed (e.g., loading a specific XML ID)
+     * without needing to duplicate the domain and filter preparation logic in `openActivityGroup`.
+     */
+    executeActivityAction(group, domain, views, context, newWindow) {
         this.action.doAction(
             {
                 context,

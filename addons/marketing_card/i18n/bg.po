@@ -1,26 +1,30 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* marketing_card
+# * marketing_card
 #
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# Rosen Vladimirov <vladimirov.rosen@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-07-01 09:06+0000\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: \n"
+"POT-Creation-Date: 2026-01-25 18:35+0000\n"
+"PO-Revision-Date: 2026-07-25 18:49+0000\n"
+"Last-Translator: Rosen Vladimirov <vladimirov.rosen@gmail.com>\n"
+"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/"
+"marketing_card/bg/>\n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: marketing_card
 #. odoo-python
 #: code:addons/marketing_card/models/card_campaign.py:0
 msgid "%(card_campaign_name)s Mailings"
-msgstr ""
+msgstr "%(card_campaign_name)s разпращания"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_kanban
@@ -28,6 +32,8 @@ msgid ""
 "<i class=\"fa fa-fw fa-mouse-pointer\" aria-label=\"Clicks\" role=\"img\" "
 "title=\"Clicks\"/>"
 msgstr ""
+"<i class=\"fa fa-fw fa-mouse-pointer\" aria-label=\"Натискания\" "
+"role=\"img\" title=\"Натискания\"/>"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_kanban
@@ -35,11 +41,13 @@ msgid ""
 "<i class=\"fa fa-fw fa-share\" aria-label=\"Shares\" role=\"img\" "
 "title=\"Shares\"/>"
 msgstr ""
+"<i class=\"fa fa-fw fa-share\" aria-label=\"Споделяния\" role=\"img\" "
+"title=\"Споделяния\"/>"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
 msgid "<small>Where does this link to?</small>"
-msgstr ""
+msgstr "<small>Накъде води тази връзка?</small>"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
@@ -48,6 +56,9 @@ msgid ""
 "                                Cards\n"
 "                            </span>"
 msgstr ""
+"<span class=\"o_stat_text\">\n"
+"                                Карти\n"
+"                            </span>"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
@@ -56,6 +67,9 @@ msgid ""
 "                                Clicks\n"
 "                            </span>"
 msgstr ""
+"<span class=\"o_stat_text\">\n"
+"                                Натискания\n"
+"                            </span>"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
@@ -64,6 +78,9 @@ msgid ""
 "                                Mailings\n"
 "                            </span>"
 msgstr ""
+"<span class=\"o_stat_text\">\n"
+"                                Разпращания\n"
+"                            </span>"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
@@ -72,6 +89,9 @@ msgid ""
 "                                Opened\n"
 "                            </span>"
 msgstr ""
+"<span class=\"o_stat_text\">\n"
+"                                Отворени\n"
+"                            </span>"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
@@ -80,186 +100,206 @@ msgid ""
 "                                Shared\n"
 "                            </span>"
 msgstr ""
+"<span class=\"o_stat_text\">\n"
+"                                Споделени\n"
+"                            </span>"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Необходимо Действие"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__active
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__active
 msgid "Active"
-msgstr ""
+msgstr "Активно"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Дейности"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Декорация за изключение на дейност"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Състояние на Дейност"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_type_icon
 msgid "Activity Type Icon"
+msgstr "Икона за Вид Дейност"
+
+#. module: marketing_card
+#. odoo-python
+#: code:addons/marketing_card/models/card_campaign.py:0
+msgid ""
+"An error occured while rendering a card for %(record_name)s. Try again or "
+"check the server logs for more details."
 msgstr ""
+"Възникна грешка при изобразяването на карта за %(record_name)s. Опитайте "
+"отново или проверете журналите на сървъра за повече подробности."
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_search
 msgid "Archived"
-msgstr ""
+msgstr "Архивирано"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.mailing_mailing_view_form_inherit_marketing_card
 msgid "Are you sure you want to update all cards of the campaign?"
-msgstr ""
+msgstr "Сигурни ли сте, че искате да обновите всички карти на кампанията?"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Брой Прикачени Файлове"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_avatar_highlight
 msgid "Avatar Highlight"
-msgstr ""
+msgstr "Акцент върху аватара"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_background
 msgid "Background"
-msgstr ""
+msgstr "Background"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_blur
 msgid "Blur"
-msgstr ""
+msgstr "Размазване"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__body_html
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__body
 msgid "Body"
-msgstr ""
+msgstr "Текст на имейла"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_button
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_1
 msgid "Button"
-msgstr ""
+msgstr "Бутон"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__campaign_id
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_card_view_search
 msgid "Campaign"
-msgstr ""
+msgstr "Кампании"
 
 #. module: marketing_card
 #: model:ir.ui.menu,name:marketing_card.card_campaign_menu
 msgid "Campaigns"
-msgstr ""
+msgstr "Кампании"
 
 #. module: marketing_card
 #: model:ir.actions.act_window,name:marketing_card.cards_card_action
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__card_ids
 msgid "Card"
-msgstr ""
+msgstr "Карта"
 
 #. module: marketing_card
 #: model:ir.actions.act_window,name:marketing_card.card_campaign_action
 #: model:ir.model.fields,field_description:marketing_card.field_mailing_mailing__card_campaign_id
 msgid "Card Campaign"
-msgstr ""
+msgstr "Кампания с карти"
 
 #. module: marketing_card
 #. odoo-python
 #: code:addons/marketing_card/models/mailing_mailing.py:0
 msgid "Card Campaign Mailing should target model %(model_name)s"
 msgstr ""
+"Разпращането на кампания с карти трябва да е насочено към модел %(model_name)"
+"s"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__card_click_count
 msgid "Card Click Count"
-msgstr ""
+msgstr "Брой натискания на карта"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__card_count
 msgid "Card Count"
-msgstr ""
+msgstr "Брой карти"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Card Layout"
-msgstr ""
+msgstr "Оформление на картата"
 
 #. module: marketing_card
 #. odoo-python
 #: code:addons/marketing_card/models/card_campaign.py:0
 msgid "Card Preview"
-msgstr ""
+msgstr "Преглед на картата"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_mailing_mailing__card_requires_sync_count
 msgid "Card Requires Sync Count"
-msgstr ""
+msgstr "Брой карти за синхронизиране"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__card_share_count
 msgid "Card Share Count"
-msgstr ""
+msgstr "Брой споделяния на карта"
 
 #. module: marketing_card
 #: model:ir.actions.act_window,name:marketing_card.card_template_action
 #: model:ir.ui.menu,name:marketing_card.cards_template_menu
 msgid "Card Template"
-msgstr ""
+msgstr "Шаблон за карта"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.mailing_mailing_view_form_inherit_marketing_card
 msgid "Cards"
-msgstr ""
+msgstr "Карти"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_user_image
 msgid "Center"
-msgstr ""
+msgstr "Център"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_circles
 msgid "Circles"
-msgstr ""
+msgstr "Кръгове"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
 msgid "Click here for your reward!"
-msgstr ""
+msgstr "Кликнете тук за вашата награда!"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign_tag__color
 msgid "Color"
-msgstr ""
+msgstr "Цвят"
+
+#. module: marketing_card
+#: model_terms:ir.ui.view,arch_db:marketing_card.mailing_mailing_view_form_inherit_marketing_card
+msgid "Confirm Cards Update"
+msgstr "Потвърждаване на обновяването на картите"
 
 #. module: marketing_card
 #: model_terms:ir.actions.act_window,help:marketing_card.cards_card_action
 msgid "Create a Card Campaign to send cards to your partners"
-msgstr ""
+msgstr "Създайте кампания с карти, за да изпращате карти на партньорите си"
 
 #. module: marketing_card
 #: model_terms:ir.actions.act_window,help:marketing_card.card_campaign_action
 msgid "Create a Sharing Campaign!"
-msgstr ""
+msgstr "Създайте кампания за споделяне!"
 
 #. module: marketing_card
 #: model_terms:ir.actions.act_window,help:marketing_card.card_template_action
 msgid "Create a design to use in Card Campaigns"
-msgstr ""
+msgstr "Създайте дизайн за използване в кампании с карти"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__create_uid
@@ -267,7 +307,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__create_uid
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Създадено от"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__create_date
@@ -275,27 +315,27 @@ msgstr ""
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__create_date
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Създадено на"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_dark
 msgid "Dark"
-msgstr ""
+msgstr "Тъмен"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__default_background
 msgid "Default Background"
-msgstr ""
+msgstr "Фон по подразбиране"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__post_suggestion
 msgid "Description below the card and default text when sharing on X"
-msgstr ""
+msgstr "Описание под картата и текст по подразбиране при споделяне в X"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__card_template_id
 msgid "Design"
-msgstr ""
+msgstr "Проектирайте"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__display_name
@@ -307,95 +347,95 @@ msgstr ""
 #: model:ir.model.fields,field_description:marketing_card.field_mailing_mailing__display_name
 #: model:ir.model.fields,field_description:marketing_card.field_utm_source__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Име за показване"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_drawings
 msgid "Drawings"
-msgstr ""
+msgstr "Рисунки"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Dynamic Field?"
-msgstr ""
+msgstr "Динамично поле?"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_image1_path
 msgid "Dynamic Image 1"
-msgstr ""
+msgstr "Динамично изображение 1"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_image2_path
 msgid "Dynamic Image 2"
-msgstr ""
+msgstr "Динамично изображение 2"
 
 #. module: marketing_card
 #: model:ir.model.constraint,message:marketing_card.constraint_card_card_campaign_record_unique
 msgid "Each record should be unique for a campaign"
-msgstr ""
+msgstr "Всеки запис трябва да е уникален за кампанията"
 
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr ""
+msgstr "Помощник за създаване на имейли"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Последователи"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Последователи (партньори)"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Икона, примерно fa-tasks"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_geometric
 msgid "Geometric"
-msgstr ""
+msgstr "Геометричен"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Има съобщение"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_header
 msgid "Header"
-msgstr ""
+msgstr "Горен колонтитул"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_header_color
 msgid "Header Color"
-msgstr ""
+msgstr "Цвят на заглавието"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_header_path
 msgid "Header Path"
-msgstr ""
+msgstr "Път на заглавието"
 
 #. module: marketing_card
 #. odoo-python
 #: code:addons/marketing_card/models/card_campaign.py:0
 msgid "Hello everyone"
-msgstr ""
+msgstr "Здравейте на всички"
 
 #. module: marketing_card
 #. odoo-python
 #: code:addons/marketing_card/models/card_campaign.py:0
 msgid "Help us share the news"
-msgstr ""
+msgstr "Помогнете ни да разпространим новината"
 
 #. module: marketing_card
 #. odoo-python
 #: code:addons/marketing_card/models/card_campaign.py:0
 msgid "Here's the link to advertise your participation."
-msgstr ""
+msgstr "Ето връзката за рекламиране на вашето участие."
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__id
@@ -407,78 +447,78 @@ msgstr ""
 #: model:ir.model.fields,field_description:marketing_card.field_mailing_mailing__id
 #: model:ir.model.fields,field_description:marketing_card.field_utm_source__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Икона"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Икона за обозначаване на дейност с изключение."
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Ако е отметнато, новите съобщения ще изискват внимание."
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_has_error
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Ако е отметнато, някои съобщения имат грешка при доставката."
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__image
 msgid "Image"
-msgstr ""
+msgstr "Изображение"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__image_preview
 msgid "Image Preview"
-msgstr ""
+msgstr "Преглед на изображението"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_header_dyn
 msgid "Is Dynamic Header"
-msgstr ""
+msgstr "Е динамично заглавие"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_section_dyn
 msgid "Is Dynamic Section"
-msgstr ""
+msgstr "Е динамична секция"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_sub_header_dyn
 msgid "Is Dynamic Sub-Header"
-msgstr ""
+msgstr "Е динамично подзаглавие"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_sub_section1_dyn
 msgid "Is Dynamic Sub-Section 1"
-msgstr ""
+msgstr "Е динамична подсекция 1"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_sub_section2_dyn
 msgid "Is Dynamic Sub-Section 2"
-msgstr ""
+msgstr "Е динамична подсекция 2"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "е последовател"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Join me at this event!"
-msgstr ""
+msgstr "Присъединете се към мен на това събитие!"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__lang
 msgid "Language"
-msgstr ""
+msgstr "Език"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__write_uid
@@ -486,7 +526,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__write_uid
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Последно актуализирано от"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__write_date
@@ -494,43 +534,43 @@ msgstr ""
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__write_date
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Последно актуализирано на"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_light
 msgid "Light"
-msgstr ""
+msgstr "Светъл"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_lila
 msgid "Lila"
-msgstr ""
+msgstr "Lila"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_lines
 msgid "Lines"
-msgstr ""
+msgstr "Линии"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__link_tracker_id
 msgid "Link Tracker"
-msgstr ""
+msgstr "Link Tracker"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__mailing_ids
 msgid "Mailing"
-msgstr ""
+msgstr "Мейлинг"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__mailing_count
 msgid "Mailing Count"
-msgstr ""
+msgstr "Брой разпращания"
 
 #. module: marketing_card
 #. odoo-python
 #: code:addons/marketing_card/models/card_campaign.py:0
 msgid "Many thanks"
-msgstr ""
+msgstr "Много благодарности"
 
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_card_card
@@ -538,53 +578,53 @@ msgstr ""
 #: model:ir.ui.menu,name:marketing_card.marketing_card_menu_technical
 #: model:res.groups.privilege,name:marketing_card.res_groups_privilege_marketing_card
 msgid "Marketing Card"
-msgstr ""
+msgstr "Маркетингова карта"
 
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_card_campaign
 msgid "Marketing Card Campaign"
-msgstr ""
+msgstr "Кампания с маркетингови карти"
 
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_card_campaign_tag
 msgid "Marketing Card Campaign Tag"
-msgstr ""
+msgstr "Етикет на кампания с маркетингови карти"
 
 #. module: marketing_card
 #: model:res.groups,name:marketing_card.marketing_card_group_manager
 msgid "Marketing Card Manager"
-msgstr ""
+msgstr "Мениджър на маркетингови карти"
 
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_card_template
 msgid "Marketing Card Template"
-msgstr ""
+msgstr "Шаблон за маркетингова карта"
 
 #. module: marketing_card
 #: model:res.groups,name:marketing_card.marketing_card_group_user
 msgid "Marketing Card User"
-msgstr ""
+msgstr "Потребител на маркетингови карти"
 
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_mailing_mailing
 msgid "Mass Mailing"
-msgstr ""
+msgstr "Масов мейлинг"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Грешка при доставката на съобщение"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Съобщения"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__res_model
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__res_model
 msgid "Model Name"
-msgstr ""
+msgstr "Име на модела"
 
 #. module: marketing_card
 #. odoo-python
@@ -592,83 +632,85 @@ msgstr ""
 msgid ""
 "Model of campaign %(campaign)s may not be changed as it already has cards"
 msgstr ""
+"Моделът на кампанията %(campaign)s не може да бъде променян, тъй като вече "
+"има карти"
 
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_ir_model
 msgid "Models"
-msgstr ""
+msgstr "Модели"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Краен срок за моята дейност"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_search
 msgid "My Campaigns"
-msgstr ""
+msgstr "Моите кампании"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__name
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign_tag__name
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__name
 msgid "Name"
-msgstr ""
+msgstr "Име"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_calendar_event_id
 msgid "Next Activity Calendar Event"
-msgstr ""
+msgstr "Следващото събитие от календара на дейностите"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Краен срок на следващо действие"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Обобщение на следваща дейност"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Вид на следващо действие"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "No button"
-msgstr ""
+msgstr "Без бутон"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Брой действия"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__target_url_click_count
 msgid "Number of Clicks"
-msgstr ""
+msgstr "Брой натискания на бутон"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Брой грешки"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Брой съобщения, изискващи действие"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Брой съобщения с грешка при доставка"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
 msgid "Odoo"
-msgstr ""
+msgstr "Odoo"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__lang
@@ -678,57 +720,63 @@ msgid ""
 "usually be a placeholder expression that provides the appropriate language, "
 "e.g. {{ object.partner_id.lang }}."
 msgstr ""
+"Незадължителен език за превод (ISO код), който да се избере при изпращане на "
+"имейл. Ако не е зададен, ще се използва езикът на основния партньор. Това "
+"обикновено трябва да е placeholder израз, който предоставя подходящия език, "
+"напр. {{ object.partner_id.lang }}."
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_organic
 msgid "Organic"
-msgstr ""
+msgstr "Органичен"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__target_url
 msgid "Post Link"
-msgstr ""
+msgstr "Публикувай връзка"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__post_suggestion
 msgid "Post Suggestion"
-msgstr ""
+msgstr "Предложение за публикация"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
 msgid "Powered By"
-msgstr ""
+msgstr "Създадено с"
 
 #. module: marketing_card
 #: model_terms:ir.actions.act_window,help:marketing_card.card_campaign_action
 msgid ""
 "Prepare a design and some content and let your community spread the word!"
 msgstr ""
+"Подгответе дизайн и съдържание и оставете общността ви да разпространи "
+"новината!"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Preview"
-msgstr ""
+msgstr "Преглед"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__preview_record_ref
 msgid "Preview On"
-msgstr ""
+msgstr "Преглед в"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Preview on..."
-msgstr ""
+msgstr "Преглед в..."
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__primary_color
 msgid "Primary Color"
-msgstr ""
+msgstr "Основен цвят"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__primary_text_color
 msgid "Primary Text Color"
-msgstr ""
+msgstr "Основен цвят на текста"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_1
@@ -737,160 +785,160 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_4
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_5
 msgid "Profile Picture"
-msgstr ""
+msgstr "Профилна снимка"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__rating_ids
 msgid "Ratings"
-msgstr ""
+msgstr "Оценявания"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Recipient Message"
-msgstr ""
+msgstr "Съобщение до получателя"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Recipients"
-msgstr ""
+msgstr "Получатели"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_mailing_mailing__mailing_model_id
 msgid "Recipients Model"
-msgstr ""
+msgstr "Модел на получатели"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__res_id
 msgid "Record ID"
-msgstr ""
+msgstr "ИН на запис"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__render_model
 msgid "Rendering Model"
-msgstr ""
+msgstr "Модел на изобразяване"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__request_title
 msgid "Request"
-msgstr ""
+msgstr "Заявка"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__request_description
 msgid "Request Description"
-msgstr ""
+msgstr "Описание на заявката"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__requires_sync
 msgid "Requires Sync"
-msgstr ""
+msgstr "Изисква синхронизиране"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__user_id
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_search
 msgid "Responsible"
-msgstr ""
+msgstr "Отговорно лице"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Отговорник"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__reward_target_url
 msgid "Reward Link"
-msgstr ""
+msgstr "Връзка с награда"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr ""
+msgstr "SMS грешка при доставка"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_safari
 msgid "Safari"
-msgstr ""
+msgstr "Safari"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_card_view_search
 msgid "Search Card"
-msgstr ""
+msgstr "Търсене на карта"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_search
 msgid "Search Share Campaign"
-msgstr ""
+msgstr "Търсене на кампания за споделяне"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__secondary_color
 msgid "Secondary Color"
-msgstr ""
+msgstr "Вторичен цвят"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_template__secondary_text_color
 msgid "Secondary Text Color"
-msgstr ""
+msgstr "Цвят на вторичния текст"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_section
 msgid "Section"
-msgstr ""
+msgstr "Секция"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_section_path
 msgid "Section Path"
-msgstr ""
+msgstr "Път на секцията"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Select a field"
-msgstr ""
+msgstr "Изберете поле"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
 msgid "Select where to share"
-msgstr ""
+msgstr "Изберете къде да споделите"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Send"
-msgstr ""
+msgstr "Изпрати"
 
 #. module: marketing_card
 #. odoo-python
 #: code:addons/marketing_card/models/card_campaign.py:0
 msgid "Send Cards"
-msgstr ""
+msgstr "Изпращане на картите"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Share Campaign"
-msgstr ""
+msgstr "Споделяне на кампанията"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_card_view_list
 msgid "Share Card"
-msgstr ""
+msgstr "Споделяне на картата"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_card__share_status
 msgid "Share Status"
-msgstr ""
+msgstr "Статус на споделяне"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_template_view_form
 msgid "Share Template"
-msgstr ""
+msgstr "Споделяне на шаблона"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
 msgid "Share with your community!"
-msgstr ""
+msgstr "Споделете с вашата общност!"
 
 #. module: marketing_card
 #: model:ir.model.fields.selection,name:marketing_card.selection__card_card__share_status__shared
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_card_view_search
 msgid "Shared"
-msgstr ""
+msgstr "Споделен"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__activity_state
@@ -900,57 +948,61 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Статус според дейностите\n"
+"Пресрочени: Крайната дата е в миналото\n"
+"Днес: Дейности с дата на изпълнение днес \n"
+"Планирани: Бъдещи дейности."
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_sub_header_color
 msgid "Sub Header Color"
-msgstr ""
+msgstr "Цвят на подзаглавието"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_sub_header
 msgid "Sub-Header"
-msgstr ""
+msgstr "Подзаглавие"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_sub_header_path
 msgid "Sub-Header Path"
-msgstr ""
+msgstr "Път на подзаглавието"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_sub_section1
 msgid "Sub-Section 1"
-msgstr ""
+msgstr "Подсекция 1"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_sub_section1_path
 msgid "Sub-Section 1 Path"
-msgstr ""
+msgstr "Път на подсекция 1"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_sub_section2
 msgid "Sub-Section 2"
-msgstr ""
+msgstr "Подсекция 2"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__content_sub_section2_path
 msgid "Sub-Section 2 Path"
-msgstr ""
+msgstr "Път на подсекция 2"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__tag_ids
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_search
 msgid "Tags"
-msgstr ""
+msgstr "Маркери"
 
 #. module: marketing_card
 #: model:ir.model.constraint,message:marketing_card.constraint_card_campaign_tag_name_uniq
 msgid "Tags may not reuse existing names."
-msgstr ""
+msgstr "Етикетите не могат да използват повторно съществуващи имена."
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__reward_message
 msgid "Thank You Message"
-msgstr ""
+msgstr "Съобщение за благодарност"
 
 #. module: marketing_card
 #. odoo-python
@@ -959,57 +1011,61 @@ msgid ""
 "The UTM source '%s' cannot be deleted as it is used to promote marketing "
 "cards campaigns."
 msgstr ""
+"UTM източникът '%s' не може да бъде изтрит, тъй като се използва за "
+"промотиране на кампании с маркетингови карти."
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Вид на изключение на дейност в базата."
 
 #. module: marketing_card
 #: model:ir.model,name:marketing_card.model_utm_source
 msgid "UTM Source"
-msgstr ""
+msgstr "UTM източник"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.mailing_mailing_view_form_inherit_marketing_card
 msgid "Update"
-msgstr ""
+msgstr "Актуализирайте"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.mailing_mailing_view_form_inherit_marketing_card
 msgid "Update Cards"
-msgstr ""
+msgstr "Обновяване на картите"
 
 #. module: marketing_card
 #: model:ir.model.fields.selection,name:marketing_card.selection__card_card__share_status__visited
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_card_view_search
 msgid "Visited"
-msgstr ""
+msgstr "Посетен"
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_waves
 msgid "Waves"
-msgstr ""
+msgstr "Waves"
 
 #. module: marketing_card
 #: model:ir.model.fields,field_description:marketing_card.field_card_campaign__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Съобщения в уебсайт"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "История на комуникацията на уебсайт"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_card__requires_sync
 msgid "Whether the image needs to be updated to match the campaign template."
 msgstr ""
+"Дали изображението трябва да се обнови, за да съответства на шаблона на "
+"кампанията."
 
 #. module: marketing_card
 #: model:card.template,name:marketing_card.card_template_world_map
 msgid "World Map"
-msgstr ""
+msgstr "Карта на света"
 
 #. module: marketing_card
 #. odoo-python
@@ -1017,17 +1073,19 @@ msgstr ""
 msgid ""
 "You should update all the cards for %(mailing)s before scheduling a mailing."
 msgstr ""
+"Трябва да обновите всички карти за %(mailing)s, преди да насрочите "
+"разпращане."
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "Your Home Page"
-msgstr ""
+msgstr "Вашата начална страница"
 
 #. module: marketing_card
 #. odoo-python
 #: code:addons/marketing_card/models/card_campaign.py:0
 msgid "Your help with this promotion would be greatly appreciated!"
-msgstr ""
+msgstr "Вашата помощ с тази промоция ще бъде високо оценена!"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_2
@@ -1035,49 +1093,49 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_4
 #: model_terms:ir.ui.view,arch_db:marketing_card.template_5
 msgid "button text"
-msgstr ""
+msgstr "текст на бутона"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "e.g. \"Thanks for sharing, here is your reward!\""
-msgstr ""
+msgstr "напр. \"Благодарим за споделянето, ето вашата награда!\""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "e.g. \"https://www.mycompany.com/reward\""
-msgstr ""
+msgstr "напр. \"https://www.mycompany.com/reward\""
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "e.g. Aug 24, Brussels Expo"
-msgstr ""
+msgstr "напр. 24 авг., Brussels Expo"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "e.g. By Lionel Messy"
-msgstr ""
+msgstr "напр. От Lionel Messy"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "e.g. CFO Chief Football Officer"
-msgstr ""
+msgstr "напр. CFO Chief Football Officer"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "e.g. Join Odoo Experience 2024"
-msgstr ""
+msgstr "напр. Включете се в Odoo Experience 2024"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "e.g. Odoo Experience Talks"
-msgstr ""
+msgstr "напр. Odoo Experience Talks"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "e.g. Sample Talk"
-msgstr ""
+msgstr "напр. Примерна презентация"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 msgid "e.g. Why people should share on their network?"
-msgstr ""
+msgstr "напр. Защо хората да споделят в своята мрежа?"

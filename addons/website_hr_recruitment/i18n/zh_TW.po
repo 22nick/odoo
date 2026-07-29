@@ -7,13 +7,15 @@
 # Wil Odoo, 2025
 # Tony Ng, 2025
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# "Tony Ng (ngto)" <ngto@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 08:12+0000\n"
+"POT-Creation-Date: 2026-04-10 18:38+0000\n"
+"PO-Revision-Date: 2026-07-01 10:18+0000\n"
 "Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
 "Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
 "projects/odoo-19/website_hr_recruitment/zh_Hant/>\n"
@@ -22,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_hr_recruitment
 #. odoo-python
@@ -57,12 +59,7 @@ msgstr " 如有問題，請聯絡 %(contact_infos)s"
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.index
 msgid "'. Showing results for '"
-msgstr "'.顯示結果 '"
-
-#. module: website_hr_recruitment
-#: model_terms:ir.ui.view,arch_db:website_hr_recruitment.job_right_side_bar
-msgid "+1 (650) 555-0187"
-msgstr "+1 (650) 555-0187"
+msgstr "」。顯示以下結果：「"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.default_website_description
@@ -75,8 +72,8 @@ msgid ""
 "<a href=\"/\" class=\"btn btn-primary o_translate_inline\" "
 "target=\"_blank\"><small><b>READ</b></small></a>"
 msgstr ""
-"<a href=\"/\" class=\"btn btn-primary o_translate_inline\" "
-"target=\"_blank\"><small><b>閱讀</b></small></a>"
+"<a href=\"/\" class=\"btn btn-primary o_translate_inline\" target=\"_blank\">"
+"<small><b>閱讀</b></small></a>"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.detail
@@ -153,7 +150,7 @@ msgid ""
 msgstr ""
 "<span class=\"s_website_form_label_content\">你的名字</span>\n"
 "                                                <span "
-"class=\"s_website_form_mark\"> *</span>"
+"class=\"s_website_form_mark\"> *（必填）</span>"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.apply
@@ -191,33 +188,32 @@ msgstr "<span class=\"text-muted small\">地點</span>"
 msgid ""
 "<span class=\"text-muted small\">Provide either a resume file or a linkedin "
 "profile</span>"
-msgstr ""
-"<span class=\"text-muted small\">提供履歷檔案，或linkedin個人檔案</span>"
+msgstr "<span class=\"text-muted small\">提供履歷檔案，或linkedin個人檔案</span>"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.default_website_description
 msgid "<strong class=\"s_rating_title\">Administrative Work</strong>"
-msgstr ""
+msgstr "<strong class=\"s_rating_title\">行政工作</strong>"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.default_website_description
 msgid "<strong class=\"s_rating_title\">Autonomy</strong>"
-msgstr ""
+msgstr "<strong class=\"s_rating_title\">自主</strong>"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.default_website_description
 msgid "<strong class=\"s_rating_title\">Customer Relationship</strong>"
-msgstr ""
+msgstr "<strong class=\"s_rating_title\">客戶關係</strong>"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.default_website_description
 msgid "<strong class=\"s_rating_title\">Personal Evolution</strong>"
-msgstr ""
+msgstr "<strong class=\"s_rating_title\">個人成長</strong>"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.default_website_description
 msgid "<strong class=\"s_rating_title\">Technical Expertise</strong>"
-msgstr ""
+msgstr "<strong class=\"s_rating_title\">技術知識及能力</strong>"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.default_website_description
@@ -253,7 +249,7 @@ msgstr "所有"
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.view_hr_job_form_website_published_button
 msgid "All websites"
-msgstr ""
+msgstr "所有網站"
 
 #. module: website_hr_recruitment
 #. odoo-python
@@ -314,10 +310,10 @@ msgid ""
 "solving problem skills."
 msgstr ""
 "作為我們公司的員工，您將<b>與每個部門合作建立和部署顛覆性產品。</b>來到一家成"
-"長中的公司工作，該公司提供巨大的好處，並有機會與有成就的領導者一起前進和學"
-"習。我們正在尋找一位經驗豐富且優秀的員工。<br><br>這個職位<b>本質上既富有創意"
-"又嚴謹</b>，你需要跳出框框思考。我們希望候選人積極主動並具有“完成任務”的精"
-"神。要取得成功，您將擁有紮實的解決問題的能力。"
+"長中的公司工作，該公司提供巨大的好處，並有機會與有成就的領導者一起前進和學習"
+"。我們正在尋找一位經驗豐富且優秀的員工。<br><br>這個職位<b>本質上既富有創意又"
+"嚴謹</b>，你需要跳出框框思考。我們希望候選人積極主動並具有“完成任務”的精神。"
+"要取得成功，您將擁有紮實的解決問題的能力。"
 
 #. module: website_hr_recruitment
 #. odoo-javascript
@@ -364,7 +360,7 @@ msgstr "複製"
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.job_filter_by_countries
 msgid "Countries"
-msgstr "國家"
+msgstr "國家/地區"
 
 #. module: website_hr_recruitment
 #. odoo-javascript
@@ -522,13 +518,13 @@ msgid ""
 msgstr ""
 "通常我會在 <strong>3 天內回應求職申請</strong>。\n"
 "                                                <br/><br/>\n"
-"                                                下一步會是在我們的辦公室見"
-"面，或電話通話。\n"
+"                                                下一步會是在我們的辦公室見面"
+"，或電話通話。\n"
 "                                                <br/><br/>\n"
 "                                                若你需要<strong>更快的回應</"
 "strong>，\n"
-"                                                或未有足夠快地從我獲得消"
-"息，\n"
+"                                                或未有足夠快地從我獲得消息"
+"，\n"
 "                                                歡迎聯絡我。"
 
 #. module: website_hr_recruitment
@@ -587,7 +583,7 @@ msgstr "工作說明"
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.hr_job_website_inherit
 msgid "Job Page"
-msgstr ""
+msgstr "職位頁面"
 
 #. module: website_hr_recruitment
 #: model:ir.actions.act_window,name:website_hr_recruitment.action_job_pages_list
@@ -705,7 +701,7 @@ msgstr "可選填的介紹，或是你可能對這份工作的任何疑問⋯"
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.job_filter_by_departments
 msgid "Others"
-msgstr ""
+msgstr "其他"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.index
@@ -720,7 +716,7 @@ msgstr "我們的產品/服務"
 #. module: website_hr_recruitment
 #: model:ir.model,name:website_hr_recruitment.model_website_page
 msgid "Page"
-msgstr ""
+msgstr "頁面"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.default_website_description
@@ -794,7 +790,7 @@ msgstr "遙距工作"
 #. odoo-javascript
 #: code:addons/website_hr_recruitment/static/src/website_builder/website_hr_recruitment_option.xml:0
 msgid "Reset Filter"
-msgstr ""
+msgstr "重設篩選器"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.job_reset_filters
@@ -945,7 +941,7 @@ msgstr "比利時的有效工作簽證"
 #. module: website_hr_recruitment
 #: model:ir.model.fields,field_description:website_hr_recruitment.field_hr_job__website_published
 msgid "Visible on current website"
-msgstr "在當前網站可見"
+msgstr "在目前網站顯示"
 
 #. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.job_right_side_bar
@@ -1035,6 +1031,11 @@ msgid "What's great in the job?"
 msgstr "這份工作的優點?"
 
 #. module: website_hr_recruitment
+#: model_terms:ir.ui.view,arch_db:website_hr_recruitment.job_right_side_bar
+msgid "X"
+msgstr ""
+
+#. module: website_hr_recruitment
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.thankyou_ir_ui_view
 msgid "Your <b>contact</b> information is:"
 msgstr "你的<b>聯絡人</b>資料如下："
@@ -1101,6 +1102,9 @@ msgstr "開放職位空缺"
 #: model_terms:ir.ui.view,arch_db:website_hr_recruitment.index
 msgid "unpublished"
 msgstr "未發佈"
+
+#~ msgid "+1 (650) 555-0187"
+#~ msgstr "+1 (650) 555-0187"
 
 #~ msgid ""
 #~ "<i class=\"fa fa-fw fa-external-link\" role=\"img\"/>\n"

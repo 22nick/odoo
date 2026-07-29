@@ -112,17 +112,21 @@ class AccountMove(models.Model):
     def button_draft(self):
         if self.sudo().pos_order_ids.filtered(lambda o: o.session_id.state != 'closed'):
             self.env.user._bus_send("simple_notification", {
-                'type': 'warning',
-                'title': _("Warning: Invoice Reset Risk"),
-                'message': _("This invoice is linked to a POS Order, resetting it to draft prevents closing the session. You should rather refund the order or create a credit note."),
+                'type': 'danger',
+                'message': _("You can't reset this invoice to draft because the POS session is still open. Please close the ongoing session first, then try again."),
                 'sticky': True,
             })
+            return False
         return super().button_draft()
 
     @api.model
     def _load_pos_data_fields(self, config):
         result = super()._load_pos_data_fields(config)
         return result or ['id', 'name']
+
+    @api.model
+    def _load_pos_data_domain(self, data, config):
+        return False
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'

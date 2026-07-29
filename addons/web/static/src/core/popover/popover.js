@@ -24,9 +24,10 @@ function useEarlyExternalListener(target, eventName, handler, eventParams) {
  *
  * This also handles the case where an iframe is clicked.
  *
+ * @param {Popover} popover
  * @param {(node?: Node) => any} callback
  */
-function useClickAway(callback) {
+function useClickAway(popover, callback) {
     function blurHandler(ev) {
         const target = ev.relatedTarget || document.activeElement;
         if (target?.tagName === "IFRAME") {
@@ -45,6 +46,31 @@ function useClickAway(callback) {
     useEarlyExternalListener(window, "pointerdown", pointerDownHandler, { capture: true });
     useEarlyExternalListener(window, "blur", blurHandler, { capture: true });
     useEarlyExternalListener(window, "popstate", navigationHandler, { capture: true });
+    for (const iframeEl of document.querySelectorAll("iframe")) {
+        try {
+            useEarlyExternalListener(
+                iframeEl.contentWindow,
+                "pointerdown",
+                () => {
+                    const popupEl = popover.popoverRef.el;
+                    let checkEl = iframeEl.parentElement;
+                    while (checkEl) {
+                        if (checkEl === popupEl) {
+                            // Ignore iframes within popup
+                            return;
+                        }
+                        checkEl = checkEl.parentElement;
+                    }
+                    callback(iframeEl);
+                },
+                { capture: true, once: true }
+            );
+        } catch (e) {
+            // In some browsers, if an iframe is loaded from a different
+            // domain accessing it results in a SecurityError.
+            if (e.name !== "SecurityError") throw e;
+        }
+    }
 }
 
 const POPOVERS = new WeakMap();
@@ -96,6 +122,7 @@ export class Popover extends Component {
 
         // Positioning props
         fixedPosition: { optional: true, type: Boolean },
+        extendedFlipping: { optional: true, type: Boolean },
         holdOnHover: { optional: true, type: Boolean },
         onPositioned: { optional: true, type: Function },
         position: {
@@ -130,6 +157,10 @@ export class Popover extends Component {
         this.popoverRef = useRef("ref");
         this.position = usePosition("ref", () => this.props.target, this.positioningOptions);
 
+        if (!this.props.animation) {
+            this.animationDone = true;
+        }
+
         const resizeObserver = new ResizeObserver(() => {
             if (!this.props.fixedPosition && this.animationDone) {
                 this.position.unlock();
@@ -143,7 +174,7 @@ export class Popover extends Component {
         onWillDestroy(() => POPOVERS.delete(this.props.target));
 
         if (this.props.target.isConnected) {
-            useClickAway(this.onClickAway.bind(this));
+            useClickAway(this, this.onClickAway.bind(this));
 
             if (this.props.closeOnEscape) {
                 useHotkey("escape", () => this.props.close());
@@ -162,6 +193,7 @@ export class Popover extends Component {
 
     get positioningOptions() {
         return {
+            extendedFlipping: this.props.extendedFlipping,
             margin: this.props.arrow ? 8 : 0,
             onPositioned: (el, solution) => {
                 this.onPositioned(solution);

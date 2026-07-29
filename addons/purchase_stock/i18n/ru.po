@@ -3,14 +3,16 @@
 # * purchase_stock
 #
 # Translators:
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# "Anastasiia Koroleva (koan)" <koan@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 04:42+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-04-10 18:38+0000\n"
+"PO-Revision-Date: 2026-07-07 17:06+0000\n"
+"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@odoo.com>\n"
 "Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/"
 "purchase_stock/ru/>\n"
 "Language: ru\n"
@@ -20,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.purchase_order_view_form_inherit
@@ -31,19 +33,31 @@ msgstr "% своевременной поставки"
 #. odoo-python
 #: code:addons/purchase_stock/models/purchase_order.py:0
 msgid "%(otd)s %%"
-msgstr ""
+msgstr "%(otd)s %%"
 
 #. module: purchase_stock
 #. odoo-python
 #: code:addons/purchase_stock/models/stock_move.py:0
 msgid "%(value)s for %(quantity)s %(unit)s from %(bills)s"
-msgstr ""
+msgstr "%(value)s за %(quantity)s %(unit)s из %(bills)s"
+
+#. module: purchase_stock
+#. odoo-python
+#: code:addons/purchase_stock/models/stock_move.py:0
+msgid "%(value)s for %(quantity)s %(unit)s from %(quotation)s (not billed)"
+msgstr "%(value)s за %(quantity)s %(unit)s из %(quotation)s (счет не выставлен)"
 
 #. module: purchase_stock
 #. odoo-python
 #: code:addons/purchase_stock/models/stock_rule.py:0
 msgid "+ %d day(s)"
 msgstr "+ %d день(ы)"
+
+#. module: purchase_stock
+#. odoo-python
+#: code:addons/purchase_stock/models/stock_rule.py:0
+msgid "+ %s day(s)"
+msgstr "+ %s дн."
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.res_partner_view_purchase_buttons_inherit
@@ -62,33 +76,28 @@ msgstr "<span class=\"o_stat_value\">%</span>"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.product_view_kanban_catalog_purchase_only
-msgid "<span class=\"text-info fw-bold fs-5\"> Suggest </span>"
-msgstr ""
+msgid "<span class=\"text-info fw-bold fs-5 me-1\">Suggest</span>"
+msgstr "<span class=\"text-info fw-bold fs-5 me-1\">Предложить</span>"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.product_view_kanban_catalog_purchase_only
-msgid "<span class=\"text-info fw-bold fs-5\"> units </span>"
-msgstr ""
+msgid "<span class=\"text-muted small me-1\">Monthly Demand:</span>"
+msgstr "<span class=\"text-muted small me-1\">Ежемесячный спрос:</span>"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.product_view_kanban_catalog_purchase_only
-msgid "<span class=\"text-muted small\"> Forecasted</span>"
-msgstr ""
-
-#. module: purchase_stock
-#: model_terms:ir.ui.view,arch_db:purchase_stock.product_view_kanban_catalog_purchase_only
-msgid "<span class=\"text-muted small\">Monthly Demand: </span>"
-msgstr ""
+msgid "<span class=\"text-muted small ms-1\">Forecasted</span>"
+msgstr "<span class=\"text-muted small ms-1\">Прогноз</span>"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.purchase_order_view_form_inherit
 msgid "<span invisible=\"on_time_rate &gt;= 0\">No data yet</span>"
-msgstr ""
+msgstr "<span invisible=\"on_time_rate &gt;= 0\">Пока нет данных</span>"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.product_view_kanban_catalog_purchase_only
 msgid "<span> / </span>"
-msgstr ""
+msgstr "<span> / </span>"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.res_config_settings_view_form_stock
@@ -110,7 +119,7 @@ msgstr "<strong>Инкотерм:</strong>"
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.report_purchasequotation_document
 msgid "<strong>Requested Ship Date:</strong>"
-msgstr ""
+msgstr "<strong>Запрашиваемая дата отгрузки:</strong>"
 
 #. module: purchase_stock
 #: model:ir.model.fields,help:purchase_stock.field_purchase_order_line__is_storable
@@ -139,7 +148,13 @@ msgstr "Действие"
 #. odoo-javascript
 #: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.xml:0
 msgid "Add All"
-msgstr ""
+msgstr "Добавить все"
+
+#. module: purchase_stock
+#. odoo-javascript
+#: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.js:0
+msgid "After next month last year"
+msgstr "После следующего месяца прошлого года"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.res_config_settings_view_form_purchase
@@ -147,16 +162,18 @@ msgid ""
 "Allow Make to Order, or automate PO, when a product is sold and get direct "
 "links between documents."
 msgstr ""
+"Разрешить производство под заказ (MTO) или автоматизировать создание заказов "
+"на закупку при продаже товара и получать прямые ссылки между документами."
 
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_rfq__all
 msgid "Always"
-msgstr ""
+msgstr "Всегда"
 
 #. module: purchase_stock
 #: model:ir.model.fields,help:purchase_stock.field_stock_warehouse_orderpoint__available_vendor
 msgid "Any vendor on the product's pricelist"
-msgstr ""
+msgstr "Любой поставщик из прайс-листа товаров"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order__effective_date
@@ -166,13 +183,13 @@ msgstr "Прибытие"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_warehouse_orderpoint__available_vendor
 msgid "Available Vendor"
-msgstr ""
+msgstr "Доступный поставщик"
 
 #. module: purchase_stock
 #. odoo-javascript
 #: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.xml:0
 msgid "Based on"
-msgstr ""
+msgstr "Основано на"
 
 #. module: purchase_stock
 #. odoo-python
@@ -222,7 +239,7 @@ msgstr "Соответствующий прием товаров не найде
 #. module: purchase_stock
 #: model:ir.model,website_form_label:purchase_stock.model_res_partner
 msgid "Create a Customer"
-msgstr ""
+msgstr "Создать клиента"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_move__created_purchase_line_ids
@@ -237,7 +254,7 @@ msgstr "Пользовательское описание"
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_rfq__day
 msgid "Daily"
-msgstr ""
+msgstr "Ежедневно"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_picking__days_to_arrive
@@ -269,7 +286,8 @@ msgstr "Дней на покупку"
 #: model:ir.model.fields,help:purchase_stock.field_res_partner__group_rfq
 #: model:ir.model.fields,help:purchase_stock.field_res_users__group_rfq
 msgid ""
-"Define if RFQ should be grouped         together based on expected arrival.\n"
+"Define if RFQ should be grouped         together based on expected arrival, "
+"except for dropship operations.\n"
 "         On Order: Replenishment needs will be grouped together except for "
 "MTO.\n"
 "         Daily: Replenishment needs will be grouped if the expected arrival "
@@ -278,6 +296,15 @@ msgid ""
 "is the same week or week day\n"
 "         Always: Replenishment needs will always be grouped."
 msgstr ""
+"Определяет, должны ли запросы котировок группироваться         вместе на "
+"основе ожидаемой даты поступления, за исключением операций дропшиппинга.\n"
+"         По заказу: потребности в пополнении будут группироваться вместе, за "
+"исключением производства под заказ.\n"
+"         Ежедневно: потребности в пополнении будут сгруппированы, если "
+"ожидаемое поступление приходится на один и тот же день.\n"
+"         Еженедельно: потребности в пополнении будут сгруппированы, если "
+"ожидаемое поступление приходится на ту же неделю или день недели.\n"
+"         Всегда: потребности в пополнении будут группироваться всегда."
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_picking__delay_pass
@@ -292,7 +319,7 @@ msgstr "Доставить в"
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.product_supplierinfo_replenishment_tree_view
 msgid "Delivery Time"
-msgstr ""
+msgstr "Время доставки"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order__default_location_dest_id_usage
@@ -313,7 +340,6 @@ msgstr "Место назначения Тип местоположения"
 #: model:ir.model.fields,field_description:purchase_stock.field_res_company__display_name
 #: model:ir.model.fields,field_description:purchase_stock.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:purchase_stock.field_res_partner__display_name
-#: model:ir.model.fields,field_description:purchase_stock.field_stock_account_stock_valuation_report__display_name
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_forecasted_product_product__display_name
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_lot__display_name
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_move__display_name
@@ -365,7 +391,7 @@ msgstr "Фактические дни до прибытия"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_warehouse_orderpoint__effective_vendor_id
 msgid "Effective Vendor"
-msgstr ""
+msgstr "Фактический поставщик"
 
 #. module: purchase_stock
 #: model:ir.model.fields,help:purchase_stock.field_stock_warehouse_orderpoint__effective_vendor_id
@@ -373,6 +399,8 @@ msgid ""
 "Either the vendor set directly or the one computed to be used by this "
 "replenishment"
 msgstr ""
+"Либо поставщик, указанный напрямую, либо поставщик, рассчитанный системой "
+"для использования в этом пополнении"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.exception_on_po
@@ -387,12 +415,18 @@ msgstr "Исключения:"
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_on__default
 msgid "Expected Date"
-msgstr ""
+msgstr "Ожидаемая дата"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.purchase_order_view_form_inherit
 msgid "Forecast Report"
 msgstr "Прогнозный отчет"
+
+#. module: purchase_stock
+#. odoo-javascript
+#: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.js:0
+msgid "Forecasted"
+msgstr "Прогноз"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__forecasted_issue
@@ -402,13 +436,7 @@ msgstr "Прогнозируемый выпуск"
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_on__5
 msgid "Friday"
-msgstr ""
-
-#. module: purchase_stock
-#. odoo-python
-#: code:addons/purchase_stock/models/stock_move.py:0
-msgid "From %(quotation)s"
-msgstr ""
+msgstr "Пятница"
 
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__purchase_order__receipt_status__full
@@ -431,6 +459,12 @@ msgid ""
 " Set a reference period to estimate sales, and use the percentage to take "
 "into account seasonality and the increase/decrease of business."
 msgstr ""
+"Получайте рекомендации по товарам для закупки у %(vendorName)s на основе "
+"остатков на складе, входящих объемов и ожидаемых объемов продаж.\n"
+"\n"
+" Установите базовый период для оценки продаж и используйте процентное "
+"соотношение, чтобы учесть сезонность, а также рост или спад деловой "
+"активности."
 
 #. module: purchase_stock
 #. odoo-javascript
@@ -442,13 +476,13 @@ msgstr "Вернитесь к заказу на покупку, чтобы сф�
 #. odoo-javascript
 #: code:addons/purchase_stock/static/src/stock_valuation/stock_valuation_report.js:0
 msgid "Goods Received Not Invoiced"
-msgstr ""
+msgstr "Товары получены, счета не выставлены"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_res_partner__group_rfq
 #: model:ir.model.fields,field_description:purchase_stock.field_res_users__group_rfq
 msgid "Group RFQ"
-msgstr ""
+msgstr "Группировать запросы котировок"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_account_move__id
@@ -464,7 +498,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:purchase_stock.field_res_company__id
 #: model:ir.model.fields,field_description:purchase_stock.field_res_config_settings__id
 #: model:ir.model.fields,field_description:purchase_stock.field_res_partner__id
-#: model:ir.model.fields,field_description:purchase_stock.field_stock_account_stock_valuation_report__id
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_forecasted_product_product__id
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_lot__id
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_move__id
@@ -500,7 +533,7 @@ msgstr "Инкотерм Местонахождение"
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_stock_route
 msgid "Inventory Routes"
-msgstr ""
+msgstr "Маршруты Склада"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order__is_shipped
@@ -523,9 +556,39 @@ msgid "Journal Item"
 msgstr "Элемент журнала"
 
 #. module: purchase_stock
+#. odoo-javascript
+#: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.js:0
+msgid "Last 12 months"
+msgstr "Последние 12 месяцев"
+
+#. module: purchase_stock
+#. odoo-javascript
+#: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.js:0
+msgid "Last 3 months"
+msgstr "Последние 3 месяца"
+
+#. module: purchase_stock
+#. odoo-javascript
+#: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.js:0
+msgid "Last 30 days"
+msgstr "Последние 30 дней"
+
+#. module: purchase_stock
+#. odoo-javascript
+#: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.js:0
+msgid "Last 7 days"
+msgstr "Последние 30 дней"
+
+#. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_product_supplierinfo__last_purchase_date
 msgid "Last Purchase"
 msgstr "Последняя покупка"
+
+#. module: purchase_stock
+#. odoo-javascript
+#: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.js:0
+msgid "Last year quarter"
+msgstr "Квартал прошлого года"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__location_final_id
@@ -555,17 +618,29 @@ msgstr "Правило минимального остатка"
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_on__1
 msgid "Monday"
-msgstr ""
+msgstr "Понедельник"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_product_product__monthly_demand
 msgid "Monthly Demand"
-msgstr ""
+msgstr "Месячный спрос"
+
+#. module: purchase_stock
+#. odoo-javascript
+#: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.js:0
+msgid "Next month last year"
+msgstr "Следующий месяц прошлого года"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.exception_on_po
 msgid "Next transfer(s) impacted:"
 msgstr "Затронуты следующие перемещения:"
+
+#. module: purchase_stock
+#. odoo-python
+#: code:addons/purchase_stock/models/stock_rule.py:0
+msgid "No Vendor Found"
+msgstr "Поставщик не найден"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.purchase_help_message_template
@@ -576,7 +651,7 @@ msgstr "Поступлений еще нет! Автоматизируйте и�
 #. odoo-python
 #: code:addons/purchase_stock/models/stock_rule.py:0
 msgid "No supplier has been found to replenish"
-msgstr ""
+msgstr "Не найден поставщик для выполнения пополнения"
 
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__purchase_order__receipt_status__pending
@@ -587,17 +662,17 @@ msgstr "Не получено"
 #. odoo-javascript
 #: code:addons/purchase_stock/static/src/purchase_dashboard/purchase_dashboard.xml:0
 msgid "OTD"
-msgstr ""
+msgstr "OTD"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.res_partner_view_purchase_buttons_inherit
 msgid "On"
-msgstr ""
+msgstr "На"
 
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_rfq__default
 msgid "On Order"
-msgstr ""
+msgstr "Под заказ"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.vendor_delay_report_view_graph
@@ -632,7 +707,7 @@ msgstr "Уровень своевременности"
 #. odoo-python
 #: code:addons/purchase_stock/models/stock_rule.py:0
 msgid "Order Deadline"
-msgstr ""
+msgstr "Крайний срок"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__orderpoint_id
@@ -739,7 +814,7 @@ msgstr "Подсчет заказов на поставку"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_reference__purchase_ids
 msgid "Purchases"
-msgstr ""
+msgstr "Закупки"
 
 #. module: purchase_stock
 #: model:ir.model.fields,help:purchase_stock.field_purchase_order__dest_address_id
@@ -759,7 +834,7 @@ msgstr "Поступления"
 #. odoo-python
 #: code:addons/purchase_stock/models/stock_rule.py:0
 msgid "Receipt Date"
-msgstr ""
+msgstr "Дата приемки"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order__receipt_status
@@ -769,7 +844,7 @@ msgstr "Статус получения"
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.purchase_order_view_form_inherit
 msgid "Receive"
-msgstr ""
+msgstr "Получить"
 
 #. module: purchase_stock
 #. odoo-javascript
@@ -801,18 +876,18 @@ msgstr ""
 #. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_stock_reference
 msgid "Reference between stock documents"
-msgstr ""
+msgstr "Ссылка между складскими документами"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order__reference_ids
 msgid "References"
-msgstr ""
+msgstr "Ссылки"
 
 #. module: purchase_stock
 #. odoo-javascript
 #: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.xml:0
 msgid "Replenish for"
-msgstr ""
+msgstr "Пополнить для"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.res_config_settings_view_form_purchase
@@ -823,7 +898,7 @@ msgstr "Запросите поставщиков для доставки ваш
 #. odoo-javascript
 #: code:addons/purchase_stock/static/src/purchase_stock_forecasted/forecasted_details.xml:0
 msgid "Requests for quotation :"
-msgstr ""
+msgstr "Запросы котировок :"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_purchase_order_line__move_ids
@@ -836,9 +911,15 @@ msgid "Return Picking"
 msgstr "Возвратить комплектование"
 
 #. module: purchase_stock
+#. odoo-javascript
+#: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.js:0
+msgid "Same month last year"
+msgstr "Тот же месяц прошлого года"
+
+#. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_on__6
 msgid "Saturday"
-msgstr ""
+msgstr "Суббота"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.product_supplierinfo_replenishment_tree_view
@@ -859,7 +940,7 @@ msgstr "Показать поставщика"
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_replenishment_info__show_vendor_tab
 msgid "Show Vendor Tab"
-msgstr ""
+msgstr "Показать вкладку поставщика"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_warehouse_orderpoint__show_supplier
@@ -888,11 +969,6 @@ msgid "Stock Rule"
 msgstr "Правило запаса"
 
 #. module: purchase_stock
-#: model:ir.model,name:purchase_stock.model_stock_account_stock_valuation_report
-msgid "Stock Valuation"
-msgstr ""
-
-#. module: purchase_stock
 #: model:ir.model,name:purchase_stock.model_report_stock_report_stock_rule
 msgid "Stock rule report"
 msgstr "Отчет о норме запасов"
@@ -911,40 +987,45 @@ msgstr "Возможность пополнения запасов на скла
 #. odoo-javascript
 #: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.xml:0
 msgid "Suggest"
-msgstr ""
+msgstr "Предложить"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_res_partner__suggest_based_on
 #: model:ir.model.fields,field_description:purchase_stock.field_res_users__suggest_based_on
 msgid "Suggest Based On"
-msgstr ""
+msgstr "Предложить на основании"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_res_partner__suggest_days
 #: model:ir.model.fields,field_description:purchase_stock.field_res_users__suggest_days
 msgid "Suggest Days"
-msgstr ""
+msgstr "Предложить дни"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_product_product__suggest_estimated_price
 msgid "Suggest Estimated Price"
-msgstr ""
+msgstr "Предложить ориентировочную цену"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_res_partner__suggest_percent
 #: model:ir.model.fields,field_description:purchase_stock.field_res_users__suggest_percent
 msgid "Suggest Percent"
-msgstr ""
+msgstr "Предложить процент"
+
+#. module: purchase_stock
+#: model_terms:ir.ui.view,arch_db:purchase_stock.product_view_search_catalog
+msgid "Suggested"
+msgstr "Предложенный"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_product_product__suggested_qty
 msgid "Suggested Qty"
-msgstr ""
+msgstr "Предлагаемое кол-во"
 
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_on__7
 msgid "Sunday"
-msgstr ""
+msgstr "Воскресенье"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_warehouse_orderpoint__supplier_id_placeholder
@@ -976,7 +1057,7 @@ msgstr "Был сформирован следующий заказ на поп�
 #. odoo-python
 #: code:addons/purchase_stock/models/purchase_order.py:0
 msgid "The purchase order %s this receipt is linked to was cancelled."
-msgstr ""
+msgstr "Заказ на закупку %s, с которым связана эта приемка, был отменен."
 
 #. module: purchase_stock
 #. odoo-python
@@ -1022,6 +1103,12 @@ msgid ""
 "manufacturing orders, etc. are triggered based on what way to replenish is "
 "set on the product (Buy or Manufacture route)."
 msgstr ""
+"Это добавляет маршрут «Производство под заказ» для применения к товарам, "
+"чтобы генерировать пополнение по запросу, связанное с вашими заказами на "
+"продажу (например), как только они будут подтверждены, с прямой ссылкой. "
+"Заказы на закупку, производственные заказы и т. д. запускаются в зависимости "
+"от того, какой способ пополнения установлен для товара (маршрут «Купить» или "
+"«Произвести»)."
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.res_config_settings_view_form_purchase
@@ -1043,7 +1130,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/purchase_stock/models/product.py:0
 msgid "This product has the \"Buy\" route checked but is not purchasable."
-msgstr ""
+msgstr "Для этого товара выбран маршрут «Купить», но он недоступен для закупки."
 
 #. module: purchase_stock
 #: model:ir.model.fields,help:purchase_stock.field_purchase_order__picking_type_id
@@ -1069,18 +1156,18 @@ msgstr "Эти даты были соответствующим образом �
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_on__4
 msgid "Thursday"
-msgstr ""
+msgstr "Четверг"
 
 #. module: purchase_stock
 #. odoo-javascript
 #: code:addons/purchase_stock/static/src/product_catalog/search/time_period_selection_fields.js:0
 msgid "Time Perdiod Selection"
-msgstr ""
+msgstr "Выбор периода времени"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.product_view_search_catalog
 msgid "To Order"
-msgstr ""
+msgstr "Порядок"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_vendor_delay_report__qty_total
@@ -1100,7 +1187,12 @@ msgstr "Перевод"
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_on__2
 msgid "Tuesday"
-msgstr ""
+msgstr "Вторник"
+
+#. module: purchase_stock
+#: model_terms:ir.ui.view,arch_db:purchase_stock.product_view_kanban_catalog_purchase_only
+msgid "Units"
+msgstr "Единицы"
 
 #. module: purchase_stock
 #. odoo-javascript
@@ -1137,7 +1229,7 @@ msgstr "Анализ своевременности поставки"
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_replenishment_info__supplierinfo_id
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_warehouse_orderpoint__supplier_id
 msgid "Vendor Pricelist"
-msgstr ""
+msgstr "Прайс-лист поставщика"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_stock_warehouse_orderpoint__vendor_ids
@@ -1155,23 +1247,23 @@ msgstr "Склад"
 #. odoo-python
 #: code:addons/purchase_stock/models/product.py:0
 msgid "Warning!"
-msgstr ""
+msgstr "Внимание!"
 
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_on__3
 msgid "Wednesday"
-msgstr ""
+msgstr "Среда"
 
 #. module: purchase_stock
 #: model:ir.model.fields,field_description:purchase_stock.field_res_partner__group_on
 #: model:ir.model.fields,field_description:purchase_stock.field_res_users__group_on
 msgid "Week Day"
-msgstr ""
+msgstr "День недели"
 
 #. module: purchase_stock
 #: model:ir.model.fields.selection,name:purchase_stock.selection__res_partner__group_rfq__week
 msgid "Weekly"
-msgstr ""
+msgstr "Еженедельно"
 
 #. module: purchase_stock
 #: model:ir.model.fields,help:purchase_stock.field_stock_warehouse__buy_to_resupply
@@ -1200,7 +1292,7 @@ msgstr "Вы должны указать местоположение Произ
 #. odoo-javascript
 #: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.xml:0
 msgid "day(s)"
-msgstr ""
+msgstr "дней"
 
 #. module: purchase_stock
 #: model_terms:ir.ui.view,arch_db:purchase_stock.exception_on_po
@@ -1216,7 +1308,16 @@ msgstr "заказано вместо"
 #. odoo-python
 #: code:addons/purchase_stock/models/stock_rule.py:0
 msgid "this product should be manually replenished."
-msgstr ""
+msgstr "этот товар необходимо пополнять вручную."
+
+#. module: purchase_stock
+#. odoo-javascript
+#: code:addons/purchase_stock/static/src/product_catalog/search/search_panel.xml:0
+msgid "x"
+msgstr "x"
+
+#~ msgid "Stock Valuation"
+#~ msgstr "Оценка запасов"
 
 #~ msgid "Requests for quotation"
 #~ msgstr "Запросы на Коммерческое предложение"

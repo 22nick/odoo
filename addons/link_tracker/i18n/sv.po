@@ -6,19 +6,21 @@
 # Kristoffer Grundström <lovaren@gmail.com>, 2022
 # Victor Ekström, 2022
 # Mikael Åkerberg <mikael.akerberg@mariaakerberg.com>, 2022
-# Jakob Krabbe <jakob.krabbe@vertel.se>, 2022
+# Jakob Krabbe <jakob.krabbe@vertel.se>, 2022, 2025, 2026.
 # Anders Wallenquist <anders.wallenquist@vertel.se>, 2022
 # Martin Trigaux, 2022
 # Chrille Hedberg <hedberg.chrille@gmail.com>, 2022
 # Simon S, 2022
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# symbiotech <symbiotech3@gmail.com>, 2026.
+# Hanna Kharraziha <hakha@odoo.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server saas~14.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-09-16 21:25+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-01-30 18:36+0000\n"
+"PO-Revision-Date: 2026-07-20 08:11+0000\n"
+"Last-Translator: Hanna Kharraziha <hakha@odoo.com>\n"
 "Language-Team: Swedish <https://translate.odoo.com/projects/odoo-19/"
 "link_tracker/sv/>\n"
 "Language: sv\n"
@@ -26,24 +28,24 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_view_tree
 msgid "# Clicks"
-msgstr ""
+msgstr "# klick"
 
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.utm_campaign_view_kanban
 msgid ""
 "<i class=\"fa fa-fw fa-mouse-pointer\" aria-label=\"Clicks\" role=\"img\"/>"
 msgstr ""
-"<i class=\"fa fa-fw fa-mouse-pointer\" aria-label=\"Clicks\" role=\"img\"/>"
+"<i class=\"fa fa-fw fa-mouse-pointer\" aria-label=\"Klick\" role=\"img\"/>"
 
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_view_form
 msgid "<span class=\"o_stat_text\">Visit Page</span>"
-msgstr "<span class=\"o_stat_text\">Besökssida</span>"
+msgstr "<span class=\"o_stat_text\">Gå till sida</span>"
 
 #. module: link_tracker
 #: model:ir.model.fields,field_description:link_tracker.field_link_tracker__absolute_url
@@ -53,7 +55,7 @@ msgstr "Absolut URL"
 #. module: link_tracker
 #: model:ir.model.fields,field_description:link_tracker.field_link_tracker__label
 msgid "Button label"
-msgstr "Knapptext"
+msgstr "Knappens etikett"
 
 #. module: link_tracker
 #: model:ir.model.fields,field_description:link_tracker.field_link_tracker__campaign_id
@@ -64,7 +66,7 @@ msgstr "Kampanj"
 #. module: link_tracker
 #: model:ir.actions.act_window,name:link_tracker.link_tracker_click_action_statistics
 msgid "Click Statistics"
-msgstr "Statistik för klick"
+msgstr "Statistik om klick"
 
 #. module: link_tracker
 #: model:ir.model.fields,field_description:link_tracker.field_link_tracker__link_click_ids
@@ -73,7 +75,7 @@ msgstr "Statistik för klick"
 #: model_terms:ir.ui.view,arch_db:link_tracker.utm_campaign_view_form
 #: model_terms:ir.ui.view,arch_db:link_tracker.utm_campaign_view_kanban
 msgid "Clicks"
-msgstr "Klickar"
+msgstr "Klick"
 
 #. module: link_tracker
 #: model:ir.model.constraint,message:link_tracker.constraint_link_tracker_code_code
@@ -108,7 +110,7 @@ msgstr "Land"
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_view_tree
 msgid "Create Date"
-msgstr ""
+msgstr "Skapad den"
 
 #. module: link_tracker
 #: model_terms:ir.actions.act_window,help:link_tracker.link_tracker_action
@@ -184,17 +186,17 @@ msgstr "Senast uppdaterad den"
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_click_view_search
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_view_form
 msgid "Link"
-msgstr "Link"
+msgstr "Länk"
 
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_click_view_form
 msgid "Link Click"
-msgstr "Länkklick"
+msgstr "Klickningar på länken"
 
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_click_view_graph
 msgid "Link Clicks"
-msgstr "Länkklickningar"
+msgstr "Klickningar på länken"
 
 #. module: link_tracker
 #: model:ir.actions.act_window,name:link_tracker.link_tracker_action
@@ -226,7 +228,7 @@ msgstr "Länkar"
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_click_view_tree
 msgid "Links Clicks"
-msgstr "Länkklickningar"
+msgstr "Länkens klickningar"
 
 #. module: link_tracker
 #: model:ir.model,name:link_tracker.model_mail_render_mixin
@@ -260,9 +262,15 @@ msgid "Page Title"
 msgstr "Sidrubrik"
 
 #. module: link_tracker
+#. odoo-python
+#: code:addons/link_tracker/models/link_tracker.py:0
+msgid "Please enter valid short URL code."
+msgstr "Vänligen ange en giltig kort URL-kod."
+
+#. module: link_tracker
 #: model:ir.model.fields,field_description:link_tracker.field_link_tracker__redirected_url
 msgid "Redirected URL"
-msgstr "URL för omdirigering"
+msgstr "URL vid omdirigering"
 
 #. module: link_tracker
 #: model:ir.model.fields,field_description:link_tracker.field_link_tracker_code__code
@@ -288,7 +296,7 @@ msgstr "Statistik för klick"
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_view_form
 msgid "Target Link"
-msgstr ""
+msgstr "Mållänk"
 
 #. module: link_tracker
 #: model:ir.model.fields,field_description:link_tracker.field_link_tracker__url
@@ -308,8 +316,7 @@ msgstr ""
 #. module: link_tracker
 #: model:ir.model.fields,help:link_tracker.field_link_tracker__medium_id
 msgid "This is the method of delivery, e.g. Postcard, Email, or Banner Ad"
-msgstr ""
-"Detta är leveransmetoden, t.ex. 'Postkort', 'E-post' eller 'Annonsruta'"
+msgstr "Detta är leveransmetoden, t.ex. 'Postkort', 'E-post' eller 'Annonsruta'"
 
 #. module: link_tracker
 #: model:ir.model.fields,help:link_tracker.field_link_tracker__source_id
@@ -333,7 +340,7 @@ msgid ""
 "short URLs."
 msgstr ""
 "Spårare används för att samla statistik om konvertering för länkar och att "
-"generera korta URL:er"
+"generera korta URL:er."
 
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_view_form
@@ -344,7 +351,7 @@ msgstr "UTM"
 #: model:ir.model,name:link_tracker.model_utm_campaign
 #: model:ir.model.fields,field_description:link_tracker.field_link_tracker_click__campaign_id
 msgid "UTM Campaign"
-msgstr "UTM kampanj"
+msgstr "UTM-kampanj"
 
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_view_form
@@ -355,12 +362,12 @@ msgstr "Besök sida"
 #. odoo-python
 #: code:addons/link_tracker/models/link_tracker.py:0
 msgid "Visit Webpage"
-msgstr "Besök webbshop"
+msgstr "Besök hemsida"
 
 #. module: link_tracker
 #: model_terms:ir.ui.view,arch_db:link_tracker.link_tracker_view_form
 msgid "Website Link"
-msgstr "Webbplatslänk"
+msgstr "Hemsideslänk"
 
 #. module: link_tracker
 #. odoo-python

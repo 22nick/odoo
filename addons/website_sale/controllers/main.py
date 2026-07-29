@@ -17,6 +17,7 @@ from odoo.tools import SQL, clean_context, float_round, groupby, lazy, str2bool
 from odoo.tools.json import scriptsafe as json_scriptsafe
 from odoo.tools.translate import LazyTranslate, _
 
+from odoo.addons.payment import utils as payment_utils
 from odoo.addons.payment.controllers import portal as payment_portal
 from odoo.addons.sale.controllers import portal as sale_portal
 from odoo.addons.html_editor.tools import get_video_thumbnail
@@ -324,6 +325,7 @@ class WebsiteSale(payment_portal.PaymentPortal):
         attribute_value_ids = set(itertools.chain.from_iterable(attribute_value_dict.values()))
         if attribute_values:
             request.session['attribute_values'] = attribute_values
+            post['attribute_values'] = attribute_values
         else:
             request.session.pop('attribute_values', None)
 
@@ -374,15 +376,16 @@ class WebsiteSale(payment_portal.PaymentPortal):
             options, post, search, website
         )
 
+        search_term = fuzzy_search_term if fuzzy_search_term else search
+        product_domain = self._get_shop_domain(search_term, category, attribute_value_dict)
+
         filter_by_price_enabled = website.is_view_active('website_sale.filter_products_price')
         if filter_by_price_enabled:
             # TODO Find an alternative way to obtain the domain through the search metadata.
             Product = request.env['product.template'].with_context(bin_size=True)
-            search_term = fuzzy_search_term if fuzzy_search_term else search
-            domain = self._get_shop_domain(search_term, category, attribute_value_dict)
 
             # This is ~4 times more efficient than a search for the cheapest and most expensive products
-            query = Product._search(domain)
+            query = Product._search(product_domain)
             sql = query.select(
                 SQL(
                     "COALESCE(MIN(list_price), 0) * %(conversion_rate)s, COALESCE(MAX(list_price), 0) * %(conversion_rate)s",
@@ -422,11 +425,12 @@ class WebsiteSale(payment_portal.PaymentPortal):
 
         Category = request.env['product.public.category']
         categs_domain = Domain('parent_id', '=', False) & website_domain
-        if not self.env.user._is_internal():
-            categs_domain &= Domain('has_published_products', '=', True)
         if search:
+            # using a sub-query is more efficient than using a query in the shape of "ids in (...)"
+            # when there are 100k product ids to match.
+            product_query = request.env['product.template']._search(product_domain)
             search_categories = Category.search(
-                Domain('product_tmpl_ids', 'in', search_product.ids) & website_domain
+                Domain('product_tmpl_ids', 'in', product_query)
             ).parents_and_self
             categs_domain &= Domain('id', 'in', search_categories.ids)
         else:
@@ -435,14 +439,31 @@ class WebsiteSale(payment_portal.PaymentPortal):
 
         category_entries = Category
         if category:
-            category_entries = not search and category.child_id or category.child_id.filtered(lambda c: c.id in search_categories.ids)
+            available_categories = category.child_id.filtered(
+                lambda c: c.can_access_from_current_website()
+            )
+            category_entries = (
+                (not search
+                and available_categories)
+                or available_categories.filtered(lambda c: c.id in search_categories.ids)
+            )
             if not category_entries:
                 parent = category.parent_id
-                category_entries = not search and parent.child_id or parent.child_id.filtered(lambda c: c.id in search_categories.ids)
+                available_categories = parent.child_id.filtered(
+                    lambda c: c.can_access_from_current_website()
+                )
+                category_entries = (
+                    (not search
+                    and available_categories)
+                    or available_categories.filtered(lambda c: c.id in search_categories.ids)
+                )
+            if not search and not request.env.user._is_internal():
+                # We know the user has access to `categs` and `search_categories` because they come
+                # from a regular `search`, but we have not checked access to `category`'s children,
+                # nor its siblings or itself.
+                category_entries = category_entries.filtered("has_published_products")
         else:
             category_entries = categs
-        if not request.env.user._is_internal():
-            category_entries = category_entries.filtered('has_published_products')
 
         # products for current pager
 
@@ -459,9 +480,10 @@ class WebsiteSale(payment_portal.PaymentPortal):
         ProductAttribute = request.env['product.attribute']
         if products:
             # get all products without limit
+            product_query = request.env['product.template']._search(product_domain)
             attributes_grouped = request.env['product.template.attribute.line']._read_group(
                 domain=[
-                    ('product_tmpl_id', 'in', search_product.ids),
+                    ('product_tmpl_id', 'in', product_query),
                     ('attribute_id.visibility', '=', 'visible'),
                 ],
                 groupby=['attribute_id'],
@@ -791,10 +813,10 @@ class WebsiteSale(payment_portal.PaymentPortal):
     def _prepare_product_values(self, product, category, **kwargs):
         ProductCategory = request.env['product.public.category']
         product_markup_data = [product._to_markup_data(request.website)]
-        category = (
-            (category and ProductCategory.browse(int(category)).exists())
-            or product.public_categ_ids[:1]
-        )
+        original_category = category
+        category = category or product.public_categ_ids.filtered(
+            lambda c: c.can_access_from_current_website()
+        )[:1]
         if category:
             # Add breadcrumb's SEO data.
             product_markup_data.append(self._prepare_breadcrumb_markup_data(
@@ -803,11 +825,11 @@ class WebsiteSale(payment_portal.PaymentPortal):
 
         if (last_attributes_search := request.session.get('attribute_values', [])):
             keep = QueryURL(
-                self._get_shop_path(category),
+                self._get_shop_path(original_category),
                 attribute_values=last_attributes_search
             )
         else:
-            keep = QueryURL(self._get_shop_path(category))
+            keep = QueryURL(self._get_shop_path(original_category))
 
         if attribute_values := kwargs.get('attribute_values', ''):
             attribute_value_ids = {int(i) for i in attribute_values.split(',')}
@@ -819,7 +841,7 @@ class WebsiteSale(payment_portal.PaymentPortal):
                             and ptav.product_attribute_value_id.id in attribute_value_ids
                         )
                     )[:1]
-                ) or ptal.product_template_value_ids[:1]
+                ) or ptal.product_template_value_ids.filtered('ptav_active')[:1]
             )
             combination_info = product._get_combination_info(
                 combination=request.env['product.template.attribute.value'].concat(combination)
@@ -833,6 +855,7 @@ class WebsiteSale(payment_portal.PaymentPortal):
         return {
             'categories': ProductCategory.search([('parent_id', '=', False)]),
             'category': category,
+            'original_category': original_category,
             'combination_info': combination_info,
             'keep': keep,
             'main_object': product,
@@ -1426,10 +1449,9 @@ class WebsiteSale(payment_portal.PaymentPortal):
                 )
             # Process the delivery method.
             if shipping_option:
-                delivery_method_sudo = request.env['delivery.carrier'].sudo().browse(
-                    int(shipping_option['id'])
-                ).exists()
-                order_sudo._set_delivery_method(delivery_method_sudo)
+                dm_id = int(shipping_option['id'])
+                available_dms = order_sudo._get_delivery_methods()
+                order_sudo._set_delivery_method(available_dms.filtered(lambda dm: dm.id == dm_id))
 
         return order_sudo.partner_id.id
 
@@ -1554,6 +1576,23 @@ class WebsiteSale(payment_portal.PaymentPortal):
             'sale_order_id': order.id,  # Allow Stripe to check if tokenization is required.
         }
         return checkout_page_values | payment_form_values
+
+    @route(
+        _express_checkout_delivery_route + '/compute_taxes', type='jsonrpc', auth='public',
+        website=True, sitemap=False,
+    )
+    def express_checkout_shipping_address_compute_taxes(self):
+        order_sudo = request.cart
+        try:
+            order_sudo.with_context(is_express_checkout_flow=True)._recompute_taxes()
+        except ValidationError:
+            return {'external_tax_error': True}
+
+        amount_without_delivery = order_sudo._compute_amount_total_without_delivery()
+
+        return payment_utils.to_minor_currency_units(
+            amount_without_delivery, order_sudo.currency_id
+        )
 
     def _get_shop_payment_errors(self, order):
         """ Check that there is no error that should block the payment.
