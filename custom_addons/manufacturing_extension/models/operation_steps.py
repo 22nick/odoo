@@ -450,9 +450,9 @@ class OperationStepsCutting(models.Model):
     equipment_id = fields.Many2one('maintenance.equipment', string="Equipment")
     equipment_reference_id = fields.Char(related='equipment_id.reference_id', string="Equipment Ref.Id")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    # responsible_id = fields.Many2one('res.users', string="Responsible")
-    resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    # responsible_id = fields.Many2one('hr.employee', string="Responsible")
+    resposible_quality_id = fields.Many2one('hr.employee', string="Responsible for Quality")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
@@ -494,10 +494,10 @@ class OperationStepsHeating(models.Model):
     
     heating_date = fields.Date(string="Heating Date")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    # responsible_id = fields.Many2one('res.users', string="Responsible")
-    resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
-    approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    # responsible_id = fields.Many2one('hr.employee', string="Responsible")
+    resposible_quality_id = fields.Many2one('hr.employee', string="Responsible for Quality")
+    approver_quality_id = fields.Many2one('hr.employee', string="Approver for Quality")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
 
@@ -594,9 +594,9 @@ class OperationStepsGringing(models.Model):
     
     operation_date = fields.Date(string="Operation Date")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    # responsible_id = fields.Many2one('res.users', string="Responsible")
-    resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    # responsible_id = fields.Many2one('hr.employee', string="Responsible")
+    resposible_quality_id = fields.Many2one('hr.employee', string="Responsible for Quality")
     # measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
@@ -632,10 +632,10 @@ class OperationStepsForging(models.Model):
     
     operation_date = fields.Date(string="Operation Date")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    # responsible_id = fields.Many2one('res.users', string="Responsible")
-    resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
-    approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    # responsible_id = fields.Many2one('hr.employee', string="Responsible")
+    resposible_quality_id = fields.Many2one('hr.employee', string="Responsible for Quality")
+    approver_quality_id = fields.Many2one('hr.employee', string="Approver for Quality")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
@@ -671,10 +671,10 @@ class OperationStepsMachining(models.Model):
     start_date_time = fields.Datetime(string="Start Date & Time")
     end_date_time = fields.Datetime(string="End Date & Time")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    # responsible_id = fields.Many2one('res.users', string="Responsible")
-    resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
-    approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    # responsible_id = fields.Many2one('hr.employee', string="Responsible")
+    resposible_quality_id = fields.Many2one('hr.employee', string="Responsible for Quality")
+    approver_quality_id = fields.Many2one('hr.employee', string="Approver for Quality")
     # measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
@@ -712,9 +712,9 @@ class OperationStepsWeighing(models.Model):
     
     # operation_date = fields.Date(string="Operation Date")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    # responsible_id = fields.Many2one('res.users', string="Responsible")
-    # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    # responsible_id = fields.Many2one('hr.employee', string="Responsible")
+    # resposible_quality_id = fields.Many2one('hr.employee', string="Responsible for Quality")
     # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
 
@@ -742,10 +742,10 @@ class OperationStepsSmelting(models.Model):
     
     operation_date_time = fields.Datetime(string="Operation Date & Time")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    # responsible_id = fields.Many2one('res.users', string="Responsible")
-    # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
-    # approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    # responsible_id = fields.Many2one('hr.employee', string="Responsible")
+    # resposible_quality_id = fields.Many2one('hr.employee', string="Responsible for Quality")
+    # approver_quality_id = fields.Many2one('hr.employee', string="Approver for Quality")
     pyrometer_id = fields.Many2one('maintenance.equipment', string="Pyrometer")
     thermocouple_id = fields.Many2one('maintenance.equipment', string="Thermocouple")
     # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
@@ -793,8 +793,8 @@ class OperationStepsLeakageTest(models.Model):
     
     operation_date_time = fields.Datetime(string="Date & Time")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    # responsible_id = fields.Many2one('res.users', string="Responsible")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    # responsible_id = fields.Many2one('hr.employee', string="Responsible")
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     # Vakuum leakage test (before smelting)
     chamber_pressure = fields.Float(string="Chamber Pressure", digits='Process Parameter')
@@ -844,10 +844,10 @@ class OperationStepsCasting(models.Model):
     # OPERATION PARAMETERS
     operation_date_time = fields.Datetime(string="Operation Date & Time")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    # responsible_id = fields.Many2one('res.users', string="Responsible")
-    # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
-    # approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    # responsible_id = fields.Many2one('hr.employee', string="Responsible")
+    # resposible_quality_id = fields.Many2one('hr.employee', string="Responsible for Quality")
+    # approver_quality_id = fields.Many2one('hr.employee', string="Approver for Quality")
     scales_id = fields.Many2one('maintenance.equipment', string="Scales Id.")
     measurement_id = fields.Many2one('maintenance.equipment', string="Measurement Id.")
     # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
@@ -1152,10 +1152,10 @@ class OperationStepsSmeltingQuality(models.Model):
     
     operation_date_time = fields.Datetime(string="Operation Date & Time")
     
-    performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
-    # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
-    # approver_quality_id = fields.Many2one('res.users', string="Approver for Quality")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    responsible_id = fields.Many2one('hr.employee', string="Responsible")
+    # resposible_quality_id = fields.Many2one('hr.employee', string="Responsible for Quality")
+    # approver_quality_id = fields.Many2one('hr.employee', string="Approver for Quality")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     measurement_standard_id = fields.Many2one('standard.info', string="Measurement Standard")
     
@@ -1189,9 +1189,9 @@ class OperationStepsSmeltingQuality(models.Model):
     
 #     # operation_date = fields.Date(string="Operation Date")
     
-#     performer_id = fields.Many2one('res.users', string="Performer")
-#     # responsible_id = fields.Many2one('res.users', string="Responsible")
-#     # resposible_quality_id = fields.Many2one('res.users', string="Responsible for Quality")
+#     performer_id = fields.Many2one('hr.employee', string="Performer")
+#     # responsible_id = fields.Many2one('hr.employee', string="Responsible")
+#     # resposible_quality_id = fields.Many2one('hr.employee', string="Responsible for Quality")
 #     # quality_approval = fields.Selection([('approve','Approve'), ('reject', 'Reject')])
 #     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
 
@@ -1221,7 +1221,7 @@ class OperationStepsRemeltingPreparation(models.Model):
     electrod_dia = fields.Float(string='Electrod Diameter (mm)')
     electrod_length = fields.Float(string='Electrod Length (mm)')
     electrod_surface = fields.Char(string='Electrod Surface')
-    performer_id = fields.Many2one('res.users', string='Preparation Performer')
+    performer_id = fields.Many2one('hr.employee', string='Preparation Performer')
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
     
     stub_weight = fields.Float(string="Stub Weight (kg)")
@@ -1230,8 +1230,8 @@ class OperationStepsRemeltingPreparation(models.Model):
     
     # HARDNESS CONTROL FIELDS
     quality_date_time = fields.Datetime(string="Control Date & Time")
-    quality_performer = fields.Many2one('res.users', string='Quality Performer')
-    quality_responsible = fields.Many2one('res.users', string='Quality Responsible')
+    quality_performer = fields.Many2one('hr.employee', string='Quality Performer')
+    quality_responsible = fields.Many2one('hr.employee', string='Quality Responsible')
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     ksb_form_no_quality = fields.Char(string="KSB Form No. (if exist)")
     
@@ -1278,8 +1278,8 @@ class OperationStepsRemeltingQuality(models.Model):
     
     # MACROSTRUCTURE FIELDS
     operation_date_time = fields.Datetime(string="Operation Date & Time")
-    performer_id = fields.Many2one('res.users', string="Performer")
-    responsible_id = fields.Many2one('res.users', string="Responsible")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
+    responsible_id = fields.Many2one('hr.employee', string="Responsible")
     measurement_device_id = fields.Many2one('maintenance.equipment', string="Measurement Device")
     etching_info = fields.Char(string="Etching Info")
     ksb_form_no = fields.Char(string="KSB Form No. (if exist)")
@@ -1288,7 +1288,7 @@ class OperationStepsRemeltingQuality(models.Model):
     
     # QUALITY FIELDS
     operation_date_time_2 = fields.Datetime(string="Operation Date & Time")
-    performer_id_2 = fields.Many2one('res.users', string="Performer")
+    performer_id_2 = fields.Many2one('hr.employee', string="Performer")
     ksb_form_no_2 = fields.Char(string="KSB Form No. (if exist)")
     size_measurement_device_id = fields.Many2one('maintenance.equipment', string="Size Measurement Device")
     hardness_measurement_device_id = fields.Many2one('maintenance.equipment', string="Hardness Measurement Device")
@@ -1318,7 +1318,7 @@ class OperationStepsRemelting(models.Model):
     operation_date_time = fields.Datetime(string="Operation Date & Time")
     process_type = fields.Selection(related='workorder_id.remelting_operation_params_id.process_type', string="Process Type", readonly=True)
     
-    performer_id = fields.Many2one('res.users', string="Performer")
+    performer_id = fields.Many2one('hr.employee', string="Performer")
     mould_id = fields.Many2one('maintenance.equipment', string="Mould")
     # equipment_properties = fields.Properties(related='mould_id.equipment_properties', string="Mould Properties", readonly=True)
     mould_dia = fields.Float( string="Mould Diameter (mm)", readonly=True)

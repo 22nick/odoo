@@ -7,3 +7,4 @@ from . import operation_params
 from . import material_param
 from . import standard_info
 from . import chart
+from . import report_ext
