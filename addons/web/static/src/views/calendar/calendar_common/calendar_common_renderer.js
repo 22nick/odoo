@@ -184,12 +184,12 @@ export class CalendarCommonRenderer extends Component {
         return `[data-event-id="${event.id}"]`;
     }
     highlightEvent(event, className) {
-        for (const el of this.fc.el.querySelectorAll(this.computeEventSelector(event))) {
+        for (const el of this.fc.api.el.querySelectorAll(this.computeEventSelector(event))) {
             el.classList.add(className);
         }
     }
     unhighlightEvent(event, className) {
-        for (const el of this.fc.el.querySelectorAll(this.computeEventSelector(event))) {
+        for (const el of this.fc.api.el.querySelectorAll(this.computeEventSelector(event))) {
             el.classList.remove(className);
         }
     }
@@ -383,6 +383,7 @@ export class CalendarCommonRenderer extends Component {
         this.unhighlightEvent(info.event, "o_cw_custom_highlight");
     }
     onEventDragStart(info) {
+        this.popover.close();
         this.props.cleanSquareSelection();
         info.el.classList.add(info.view.type);
         this.fc.api.unselect();

@@ -168,6 +168,16 @@ class ResLang(models.Model):
             lang.active = True
         return lang
 
+    def _activate_and_install_lang(self, code):
+        """ Activate languages and update their translations
+        :param code: code of the language to activate
+        :return: the language matching 'code' activated
+        """
+        lang = self.with_context(active_test=False).search([('code', '=', code)])
+        if lang and not lang.active:
+            lang.action_unarchive()
+        return lang
+
     def _create_lang(self, lang, lang_name=None):
         """ Create the given language and make it active. """
         # create the language with locale information
@@ -209,6 +219,14 @@ class ResLang(models.Model):
                 format = format.replace(pattern, replacement)
             return str(format)
 
+        def fix_grouping(grouping):
+            grouping = str(grouping).replace(' ', '')
+
+            if grouping in self._fields['grouping'].get_values(self.env):
+                return grouping
+
+            return '[3,0]'
+
         conv = locale.localeconv()
         lang_info = {
             'code': lang,
@@ -219,7 +237,7 @@ class ResLang(models.Model):
             'time_format' : fix_datetime_format(locale.nl_langinfo(locale.T_FMT)),
             'decimal_point' : fix_xa0(str(conv['decimal_point'])),
             'thousands_sep' : fix_xa0(str(conv['thousands_sep'])),
-            'grouping': str(conv.get('grouping') or '[3,0]'),
+            'grouping': fix_grouping(conv.get('grouping')),
         }
         try:
             return self.create(lang_info)

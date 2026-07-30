@@ -21,6 +21,19 @@ import { CustomizeWebsiteVariableAction } from "../customize_website_plugin";
 import { EditHeadBodyDialog } from "@website/components/edit_head_body_dialog/edit_head_body_dialog";
 import { BaseOptionComponent } from "@html_builder/core/utils";
 
+/**
+ * @typedef { Object } ThemeTabShared
+ * @property { ThemeTabPlugin['buildGray'] } buildGray
+ * @property { ThemeTabPlugin['getGrays'] } getGrays
+ * @property { ThemeTabPlugin['getGrayParams'] } getGrayParams
+ * @property { ThemeTabPlugin['setGrays'] } setGrays
+ * @property { ThemeTabPlugin['setGrayParams'] } setGrayParams
+ */
+
+/**
+ * @typedef {import("@html_builder/core/builder_options_plugin").BuilderOptionContainer[]} theme_options
+ */
+
 export const GRAY_PARAMS = {
     EXTRA_SATURATION: "gray-extra-saturation",
     HUE: "gray-hue",
@@ -43,6 +56,7 @@ export class ThemeTabPlugin extends Plugin {
     grayParams = {};
     grays = reactive({});
 
+    /** @type {import("plugins").WebsiteResources} */
     resources = {
         builder_actions: {
             CustomizeGrayAction,
@@ -267,6 +281,7 @@ export class CustomizeGrayAction extends BuilderAction {
                 colorType: "gray",
             }
         );
+        setBuilderCSSVariables(getHtmlStyle(this.document));
     }
 }
 export class ChangeColorPaletteAction extends CustomizeWebsiteVariableAction {
@@ -298,11 +313,19 @@ export class ChangeColorPaletteAction extends CustomizeWebsiteVariableAction {
         }
         await super.apply(context);
         setBuilderCSSVariables(getHtmlStyle(this.document));
+        await Promise.allSettled(
+            this.getResource("on_website_color_updated_handlers").map((handler) =>
+                handler(["o-color-1", "o-color-2", "o-color-3", "o-color-4", "o-color-5"])
+            )
+        );
     }
 }
 
 export class EditCustomCodeAction extends BuilderAction {
     static id = "editCustomCode";
+    setup() {
+        this.canTimeout = false;
+    }
     apply() {
         this.services.dialog.add(EditHeadBodyDialog);
     }
@@ -311,6 +334,9 @@ export class EditCustomCodeAction extends BuilderAction {
 export class ConfigureApiKeyAction extends BuilderAction {
     static id = "configureApiKey";
     static dependencies = ["googleMapsOption"];
+    setup() {
+        this.canTimeout = false;
+    }
     apply() {
         this.dependencies.googleMapsOption.configureGMapsAPI("", true);
     }

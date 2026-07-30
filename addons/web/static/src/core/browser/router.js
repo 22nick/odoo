@@ -185,7 +185,7 @@ function urlToState(urlObj) {
 
     const [prefix, ...splitPath] = urlObj.pathname.split("/").filter(Boolean);
 
-    if (prefix === "odoo" || isScopedApp()) {
+    if (["odoo", "scoped_app"].includes(prefix)) {
         const actionParts = [...splitPath.entries()].filter(
             ([_, part]) => !isNumeric(part) && part !== "new"
         );
@@ -229,6 +229,11 @@ function urlToState(urlObj) {
         if (activeAction) {
             Object.assign(state, activeAction);
             state.actionStack = actions;
+        }
+        if (prefix === "scoped_app" && !isDisplayStandalone()) {
+            // make sure /scoped_app are redirected to /odoo when using the browser instead of the PWA
+            const url = browser.location.origin + router.stateToUrl(state);
+            urlObj.href = url;
         }
     }
     return state;
@@ -373,13 +378,27 @@ function makeDebouncedPush(mode) {
         Object.assign(pushArgs.state, state);
         browser.clearTimeout(pushTimeout);
         const push = () => {
-            doPush();
-            pushTimeout = null;
-            pushArgs = {
-                replace: false,
-                reload: false,
-                state: {},
-            };
+            try {
+                doPush();
+            } catch (e) {
+                // Firefox error: NS_ERROR_ILLEGAL_VALUE
+                // Firefox has a strict hard limit of 640,000 characters for history serialization.
+                // Chrome and Safari error: DataCloneError
+                // Reported (not officially documented) limits: ~500MB on Chrome/Blink, ~64MB on
+                // Safari/WebKit. See https://bugzilla.mozilla.org/show_bug.cgi?id=1522706
+                if (e.name === "NS_ERROR_ILLEGAL_VALUE" || e.name === "DataCloneError") {
+                    console.error(e);
+                } else {
+                    throw e;
+                }
+            } finally {
+                pushTimeout = null;
+                pushArgs = {
+                    replace: false,
+                    reload: false,
+                    state: {},
+                };
+            }
         };
         if (options.sync) {
             push();

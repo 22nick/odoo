@@ -42,6 +42,7 @@ import {
     useEffect,
     useRef,
     useState,
+    useSubEnv,
 } from "@odoo/owl";
 import { FetchRecordError } from "@web/model/relational_model/errors";
 import { effect } from "@web/core/utils/reactive";
@@ -209,7 +210,7 @@ export class FormController extends Component {
             this.model.config.fields = fields;
         };
         this.model = useState(useModel(this.props.Model, this.modelParams, { beforeFirstLoad }));
-
+        useSubEnv({ model: this.model });
         onMounted(() => {
             effect(
                 (model) => {
@@ -458,7 +459,11 @@ export class FormController extends Component {
     }
 
     displayName() {
-        return this.model.root.data.display_name || (this.model.root.isNew && _t("New")) || "";
+        return (
+            this.model.root.data.display_name?.split("\n")[0] ||
+            (this.model.root.isNew && _t("New")) ||
+            ""
+        );
     }
 
     async onPagerUpdate({ offset, resIds }) {

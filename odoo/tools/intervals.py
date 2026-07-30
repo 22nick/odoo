@@ -86,7 +86,7 @@ class Intervals(typing.Generic[T]):
 
         # using 'self' and 'other' below forces normalization
         bounds1 = _boundaries(self, 'start', 'stop')
-        bounds2 = _boundaries(other, 'switch', 'switch')
+        bounds2 = _boundaries(Intervals(other, keep_distinct=self._keep_distinct), 'switch', 'switch')
 
         start = None                    # set by start/stop
         recs1 = None                    # set by start
@@ -149,10 +149,14 @@ def invert_intervals(intervals: Iterable[tuple[T, T]], first_start: T, last_stop
     items = []
     prev_stop = first_start
     for start, stop in sorted(intervals):
-        if prev_stop and prev_stop < start and start <= last_stop:
+        if start > last_stop:
+            break
+        if prev_stop < start:
             items.append((prev_stop, start))
         prev_stop = max(prev_stop, stop)
-    if last_stop and prev_stop < last_stop:
+        if stop >= last_stop:
+            break
+    if prev_stop < last_stop:
         items.append((prev_stop, last_stop))
     # abuse Intervals to merge contiguous intervals
     return [(start, stop) for start, stop, _ in Intervals([(start, stop, set()) for start, stop in items])]

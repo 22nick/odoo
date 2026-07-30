@@ -36,6 +36,7 @@ BTREE_INDEX_IGNORE_FIELDS = {  # str(field)  (fully-qualified field name)
 }
 
 @common.tagged('post_install', '-at_install')
+@common.no_retry
 class TestIndex(common.TransactionCase):
 
     def test_enforce_index_on_one2many_inverse(self):
@@ -68,7 +69,7 @@ class TestIndex(common.TransactionCase):
             for field in model._fields.values():
                 if field.type == 'one2many' and field.inverse_name:
                     comodel = self.env[field.comodel_name]
-                    inverse_field = comodel._fields.get(field.inverse_name)
+                    inverse_field = comodel._fields.get(field.inverse_name).base_field
                     if inverse_field and not ignore(field, inverse_field):
                         fields_to_index.add(f"{inverse_field} (inverse of {field})")
         if fields_to_index:

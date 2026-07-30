@@ -55,6 +55,7 @@ class TestCloudStorageAttachmentController(HttpCaseWithUserDemo, TestCloudStorag
                                     "ownership_token": attachment._get_ownership_token(),
                                     "raw_access_token": attachment._get_raw_access_token(),
                                     "res_name": False,
+                                    "res_model": attachment.res_model,
                                     "thread": False,
                                     "thumbnail_access_token": attachment._get_thumbnail_token(),
                                     "type": "cloud_storage",
@@ -64,6 +65,11 @@ class TestCloudStorageAttachmentController(HttpCaseWithUserDemo, TestCloudStorag
                             ],
                         },
                     },
-                    "upload_info": {"method": "PUT", "response_status": 200, "url": "[url]"},
+                    "upload_info": {
+                        "headers": {"Content-Type": "text/x-python"},
+                        "method": "PUT",
+                        "response_status": 200,
+                        "url": "[url]",
+                    },
                 },
             )

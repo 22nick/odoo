@@ -26,14 +26,25 @@ export class MailComposerAttachmentSelector extends Component {
         if (this.props.record.resModel === "mail.scheduled.message") {
             resIds = [this.props.record.data.res_id.resId];
         } else {
-            resIds = JSON.parse(this.props.record.data.res_ids);
+            // composer does not store res_ids past a certain limit, assume active_ids is used
+            resIds = this.props.record.data.res_ids
+                ? JSON.parse(this.props.record.data.res_ids)
+                : this.props.record.context.active_ids;
         }
         const thread = await this.mailStore.Thread.insert({
             model: this.props.record.data.model,
             id: resIds[0],
         });
         const file = new File([dataUrlToBlob(data, type)], name, { type });
-        const attachment = await this.attachmentUploadService.upload(thread, thread.composer, file);
+        const isThreadComposer = this.props.record.context.is_thread_composer;
+        let composer = isThreadComposer ? thread.composer : undefined;
+        // Use an isolated composer object instead of thread.composer to
+        // avoid pushing into the main thread's composer.attachments list,
+        // which is observed by the chatter.
+        if (this.props.record.resModel === "mail.scheduled.message") {
+            composer = { attachments: [] };
+        }
+        const attachment = await this.attachmentUploadService.upload(thread, composer, file);
         if (attachment) {
             await this.operations.saveRecord([attachment.id]);
         }

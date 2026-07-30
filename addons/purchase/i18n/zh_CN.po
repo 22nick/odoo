@@ -9,14 +9,16 @@
 # Jeffery CHEN <jeffery9@gmail.com>, 2022
 # Emily Jia <eji@odoo.com>, 2023
 # Martin Trigaux, 2023
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# "Chloe Wang (chwa)" <chwa@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-16 15:29+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-04-10 18:37+0000\n"
+"PO-Revision-Date: 2026-07-01 01:39+0000\n"
+"Last-Translator: \"Chloe Wang (chwa)\" <chwa@odoo.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
 "projects/odoo-19/purchase/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -24,7 +26,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: purchase
 #: model:ir.actions.report,print_report_name:purchase.action_report_purchase_order
@@ -154,8 +156,8 @@ msgstr ""
 "        </t>\n"
 "        预计为\n"
 "        <t t-if=\"object.date_planned\">\n"
-"            <span style=\"font-weight:bold;\" t-"
-"out=\"format_date(object.date_planned) or ''\">05/05/2021</span>。\n"
+"            <span style=\"font-weight:bold;\" t-out=\"format_date"
+"(object.date_planned) or ''\">05/05/2021</span>。\n"
 "        </t>\n"
 "         <t t-else=\"\">\n"
 "            <span style=\"font-weight:bold;\">未定义</span>。\n"
@@ -235,9 +237,8 @@ msgstr ""
 "        <t t-if=\"object.partner_ref\">\n"
 "            参考编号：<t t-out=\"object.partner_ref or ''\">REF_XXX</t>\n"
 "        </t>\n"
-"        金额为 <span style=\"font-weight:bold;\" t-"
-"out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ "
-"10.00</span>，\n"
+"        金额为 <span style=\"font-weight:bold;\" t-out=\"format_amount"
+"(object.amount_total, object.currency_id) or ''\">$ 10.00</span>，\n"
 "        来自 <t t-out=\"object.company_id.name or ''\">YourCompany</t>。/\n"
 "        <br/><br/>\n"
 "        <t t-if=\"object.date_planned\">\n"
@@ -344,8 +345,8 @@ msgid ""
 "Bill\" title=\"Waiting for Bill\"/><span class=\"d-none d-md-inline\"> "
 "Waiting for Bill</span>"
 msgstr ""
-"<i class=\"fa fa-fw fa-file-text\" role=\"img\" aria-label=“等待账单 "
-"title=“等待账单”/><span class=\"d-none d-md-inline\">等待账单</span>"
+"<i class=\"fa fa-fw fa-file-text\" role=\"img\" aria-label=“等待账单 title=“"
+"等待账单”/><span class=\"d-none d-md-inline\">等待账单</span>"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_orders
@@ -799,6 +800,7 @@ msgstr "Aml"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_bill_union__amount
+#: model:ir.model.fields,field_description:purchase.field_purchase_order_line__amount_to_invoice_at_date
 #: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
 msgid "Amount"
 msgstr "金额"
@@ -913,8 +915,7 @@ msgstr "自动提醒收货日期到您的供应商"
 msgid ""
 "Automatically send a confirmation email to the vendor X days before the "
 "expected receipt date, asking him to confirm the exact date."
-msgstr ""
-"在预计的收货日期前X天自动向供应商发送确认电子邮件，要求供应商确认确切日期。"
+msgstr "在预计的收货日期前X天自动向供应商发送确认电子邮件，要求供应商确认确切日期。"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_report__price_average
@@ -943,6 +944,7 @@ msgid "Bill to Purchase Order"
 msgstr "账单到采购订单"
 
 #. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order_line__qty_invoiced_at_date
 #: model_terms:ir.ui.view,arch_db:purchase.purchase_bill_line_match_tree
 #: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
 msgid "Billed"
@@ -1284,8 +1286,7 @@ msgstr "定义您的期限和条件…"
 msgid ""
 "Delivery date expected from vendor. This date respectively defaults to "
 "vendor pricelist lead time then today's date."
-msgstr ""
-"供应商要求的交货日期。此日期分别默认为供应商价格表交货期，然后是今天的日期。"
+msgstr "供应商要求的交货日期。此日期分别默认为供应商价格表交货期，然后是今天的日期。"
 
 #. module: purchase
 #: model:ir.model.fields,help:purchase.field_purchase_order__date_planned
@@ -1839,10 +1840,8 @@ msgid "Message for Purchase Order"
 msgstr "采购订单消息"
 
 #. module: purchase
-#: model:ir.model.fields,field_description:purchase.field_account_move_line__purchase_line_warn_msg
 #: model:ir.model.fields,field_description:purchase.field_product_product__purchase_line_warn_msg
 #: model:ir.model.fields,field_description:purchase.field_product_template__purchase_line_warn_msg
-#: model:ir.model.fields,field_description:purchase.field_purchase_order_line__purchase_line_warn_msg
 msgid "Message for Purchase Order Line"
 msgstr "采购订单明细的消息"
 
@@ -1943,6 +1942,8 @@ msgstr "名称, 税号, 邮箱, 或 参考"
 
 #. module: purchase
 #. odoo-javascript
+#. odoo-python
+#: code:addons/purchase/models/purchase_order.py:0
 #: code:addons/purchase/static/src/views/purchase_dashboard.xml:0
 #: model_terms:ir.ui.view,arch_db:purchase.view_purchase_order_filter
 msgid "New"
@@ -2391,6 +2392,12 @@ msgid "Purchase History for %s"
 msgstr "%s的采购历史"
 
 #. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_account_move_line__purchase_line_warn_msg
+#: model:ir.model.fields,field_description:purchase.field_purchase_order_line__purchase_line_warn_msg
+msgid "Purchase Line Warn Msg"
+msgstr "采购行警告信息"
+
+#. module: purchase
 #: model:ir.model,name:purchase.model_purchase_bill_line_match
 msgid "Purchase Line and Vendor Bill line matching view"
 msgstr "采购行和供应商账单行匹配视图"
@@ -2695,6 +2702,7 @@ msgid "Receipt Reminder Email"
 msgstr "单据提醒邮件"
 
 #. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order_line__qty_received_at_date
 #: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
 msgid "Received"
 msgstr "已收"
@@ -3115,7 +3123,7 @@ msgstr "税项"
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_order_line__technical_price_unit
 msgid "Technical Price Unit"
-msgstr ""
+msgstr "技术价格单位"
 
 #. module: purchase
 #: model:ir.model.fields,help:purchase.field_purchase_order_line__display_type
@@ -3157,6 +3165,11 @@ msgid ""
 msgstr ""
 "ISO国家/地区代码包含两个字符。\n"
 "可以使用该字段进行快速搜索。"
+
+#. module: purchase
+#: model:ir.model.fields,help:purchase.field_purchase_order_line__price_unit_product_uom
+msgid "The Price of one unit of the product's Unit of Measure"
+msgstr ""
 
 #. module: purchase
 #: model_terms:ir.actions.act_window,help:purchase.act_res_partner_2_purchase_order
@@ -3315,6 +3328,11 @@ msgid "Total purchased amount"
 msgstr "采购总额"
 
 #. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order_line__translated_product_name
+msgid "Translated Product Name"
+msgstr ""
+
+#. module: purchase
 #. odoo-javascript
 #: code:addons/purchase/static/src/product_catalog/kanban_renderer.xml:0
 msgid "Try removing the top filter to broaden your search"
@@ -3334,6 +3352,12 @@ msgid ""
 msgstr "无法取消采购订单：%s。您必须首先取消其相关的供应商账单。"
 
 #. module: purchase
+#. odoo-python
+#: code:addons/purchase/models/purchase_order.py:0
+msgid "Unable to cancel purchase order(s): %s. You must first unlock them."
+msgstr ""
+
+#. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_bill_line_match__product_uom_id
 #: model:ir.model.fields,field_description:purchase.field_purchase_order_line__product_uom_id
 msgid "Unit"
@@ -3341,6 +3365,7 @@ msgstr "单元"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_order_line__price_unit
+#: model_terms:ir.ui.view,arch_db:purchase.purchase_history_tree
 #: model_terms:ir.ui.view,arch_db:purchase.purchase_order_portal_content
 msgid "Unit Price"
 msgstr "单价"
@@ -3349,6 +3374,11 @@ msgstr "单价"
 #: model:ir.model.fields,field_description:purchase.field_purchase_order_line__price_unit_discounted
 msgid "Unit Price (Discounted)"
 msgstr "单价（折扣）"
+
+#. module: purchase
+#: model:ir.model.fields,field_description:purchase.field_purchase_order_line__price_unit_product_uom
+msgid "Unit Price Product UoM"
+msgstr ""
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
@@ -3365,6 +3395,12 @@ msgstr "单位和包装"
 #: model_terms:ir.ui.view,arch_db:purchase.purchase_order_form
 msgid "Unlock"
 msgstr "解锁"
+
+#. module: purchase
+#. odoo-python
+#: code:addons/purchase/models/purchase_order.py:0
+msgid "Unsupported operator"
+msgstr ""
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.purchase_order_kpis_tree
@@ -3559,9 +3595,9 @@ msgid ""
 "performance statistics, click on the OTD rate."
 msgstr ""
 "创建采购订单时，请查看供应商的<i>准时交货</i>率：准时发货产品的百分比。如果太"
-"低，请激活<i>自动提醒</i>功能。在到期发货前几天，Odoo 会向供应商发送电子邮"
-"件，要求确认发货日期，并在出现任何延误时通知您。要获取供应商的业绩统计数据，"
-"请点击 \"OTD 率\"。"
+"低，请激活<i>自动提醒</i>功能。在到期发货前几天，Odoo 会向供应商发送电子邮件"
+"，要求确认发货日期，并在出现任何延误时通知您。要获取供应商的业绩统计数据，请"
+"点击 \"OTD 率\"。"
 
 #. module: purchase
 #: model_terms:digest.tip,tip_description:purchase.digest_tip_purchase_1
@@ -3707,8 +3743,7 @@ msgstr "使用"
 #: model:mail.template,subject:purchase.email_template_edi_purchase_done
 #: model:mail.template,subject:purchase.email_template_edi_purchase_reminder
 msgid "{{ object.company_id.name }} Order (Ref {{ object.name or 'n/a' }})"
-msgstr ""
-"{{object.company_id.name }}} 采购订单（参考 {{ object.name or 'n/a' }})"
+msgstr "{{object.company_id.name }}} 采购订单（参考 {{ object.name or 'n/a' }})"
 
 #~ msgid "%(amount)s due %(date)s"
 #~ msgstr "%(amount)s 到期 %(date)s"

@@ -287,7 +287,7 @@ export class GraphModel extends Model {
         if (order !== null && mode !== "pie" && groupBy.length > 0) {
             // group data by their x-axis value, and then sort datapoints
             // based on the sum of values by group in ascending/descending order
-            const groupedDataPoints = {};
+            const groupedDataPoints = Object.create(null);
             for (const dataPt of processedDataPoints) {
                 const key = dataPt.labels[0]; // = x-axis value under the current assumptions
                 if (!groupedDataPoints[key]) {
@@ -445,7 +445,7 @@ export class GraphModel extends Model {
                 cumulatedStart: cumulatedStartValue[groupId] || 0,
             };
             // There is a currency aggregate
-            if (monetaryAggregates) {
+            if (monetaryAggregates && __count) {
                 const currencies = group[monetaryAggregates[0]];
                 dataPoint.currencyId = currencies[0];
                 dataPoint.convertedValue = group[monetaryAggregates[1]];

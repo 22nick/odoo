@@ -632,7 +632,7 @@ export class SampleServer {
      */
     _mockWebReadGroup(params) {
         const aggregates = [...params.aggregates, "__count"];
-        if (params.auto_unfold && params.unfold_read_specification) {
+        if (params.unfold_read_specification) {
             aggregates.push("id:array_agg");
         }
         let groups;
@@ -643,27 +643,52 @@ export class SampleServer {
             groups = this._mockFormattedReadGroup({ ...params, aggregates });
         }
         // Don't care another params - and no subgroup:
-        // order / opening_info / unfold_read_default_limit / groupby_read_specification
+        // order / opening_info / unfold_read_default_limit
+        const openAllGroups = params.auto_unfold && !this.existingGroups;
         let nbOpenedGroup = 0;
-        if (params.auto_unfold && params.unfold_read_specification) {
+        if (params.unfold_read_specification) {
             for (const group of groups) {
-                if (nbOpenedGroup < MAX_NUMBER_OPENED_GROUPS) {
-                    nbOpenedGroup++;
-                    group["__records"] = this._mockWebSearchReadUnity({
-                        model: params.model,
-                        specification: params.unfold_read_specification,
-                        recordIds: group["id:array_agg"],
-                    }).records;
+                if (openAllGroups || "__records" in group) {
+                    // if group has a "__records" key, it means that it is an existing group, and
+                    // that the real webReadGroup returned a "__records" key for that group (which
+                    // is empty, otherwise we wouldn't be here), i.e. that group is opened.
+                    if (nbOpenedGroup < MAX_NUMBER_OPENED_GROUPS) {
+                        nbOpenedGroup++;
+                        group.__records = this._mockWebSearchReadUnity({
+                            model: params.model,
+                            specification: params.unfold_read_specification,
+                            recordIds: group["id:array_agg"],
+                        }).records;
+                    }
                 }
                 delete group["id:array_agg"];
             }
         }
-        if (params.opening_info) {
-            params.opening_info.forEach((info, i) => {
-                if (!info.folded) {
-                    groups[i].__records ||= [];
+        // Handle groupby_read_specification to fetch related field values for group headers
+        if (params.groupby_read_specification && params.groupby.length > 0) {
+            const primaryGroupBy = params.groupby[0].split(":")[0];
+            const readSpec = params.groupby_read_specification[params.groupby[0]];
+            const field = this.data[params.model].fields[primaryGroupBy];
+
+            if (readSpec && field && field.relation) {
+                for (const group of groups) {
+                    const groupbyValue = group[primaryGroupBy];
+
+                    if (Array.isArray(groupbyValue)) {
+                        const id = groupbyValue[0];
+                        const fieldSpecification = readSpec.fields || {};
+                        const result = this._mockWebSearchReadUnity({
+                            model: field.relation,
+                            specification: fieldSpecification,
+                            recordIds: [id],
+                        });
+
+                        group.__values = result.records.length ? result.records[0] : { id: false };
+                    } else {
+                        group.__values = { id: false };
+                    }
                 }
-            });
+            }
         }
 
         return {

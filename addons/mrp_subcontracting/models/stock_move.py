@@ -155,6 +155,7 @@ class StockMove(models.Model):
                 move.picking_id.partner_id.with_company(company).property_stock_subcontractor \
                 or company.subcontracting_location_id
             move.write({
+                'production_group_id': False,
                 'is_subcontract': True,
                 'location_id': subcontracting_location.id
             })
@@ -204,6 +205,10 @@ class StockMove(models.Model):
 
     def _get_available_move_lines(self, assigned_moves_ids, partially_available_moves_ids):
         return super(StockMove, self.filtered(lambda m: not m.is_subcontract))._get_available_move_lines(assigned_moves_ids, partially_available_moves_ids)
+
+    def _should_count_for_quantity_received(self):
+        res = super()._should_count_for_quantity_received()
+        return res or self.is_subcontract
 
     def _check_access_if_subcontractor(self, vals):
         if self.env.user._is_portal() and not self.env.su:
@@ -282,7 +287,7 @@ class StockMove(models.Model):
                     production_to_keep.lot_producing_ids = False
                     orphan_productions = orphan_productions[:-1]
                 if orphan_productions:
-                    orphan_productions.with_context(skip_activity=True).unlink()
+                    orphan_productions.sudo().with_context(skip_activity=True).unlink()
                     productions -= orphan_productions
 
                 mos_to_assign.sudo().action_assign()
@@ -291,3 +296,15 @@ class StockMove(models.Model):
         if self.is_subcontract:
             return super(StockMove, self.with_context(force_lot_m2o=True))._generate_serial_numbers(next_serial, next_serial_count, location_id)
         return super()._generate_serial_numbers(next_serial, next_serial_count, location_id)
+
+    def _get_partner_id(self):
+        if self.raw_material_production_id.subcontractor_id:
+            route = self.env.ref('mrp_subcontracting.route_resupply_subcontractor_mto', raise_if_not_found=False)
+            if route and self.rule_id.route_id == route:
+                return self.raw_material_production_id.subcontractor_id.id
+        return super()._get_partner_id()
+
+    def _get_production_assignation_domain(self):
+        if self.move_dest_ids.raw_material_production_id.subcontractor_id:
+            return []
+        return super()._get_production_assignation_domain()

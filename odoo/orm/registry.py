@@ -8,7 +8,6 @@ from __future__ import annotations
 import functools
 import inspect
 import logging
-import os
 import threading
 import time
 import typing
@@ -27,7 +26,6 @@ from odoo.tools import (
     OrderedSet,
     config,
     gc,
-    lazy_classproperty,
     remove_accents,
     sql,
 )
@@ -58,7 +56,7 @@ _REGISTRY_CACHES = {
     'routing': 1024,  # 2 entries per website
     'routing.rewrites': 8192,  # url_rewrite entries
     'templates.cached_values': 2048, # arbitrary
-    'groups': 8,  # see res.groups
+    'groups': 64,  # see res.groups
 }
 
 # cache invalidation dependencies, as follows:
@@ -93,22 +91,8 @@ class Registry(Mapping[str, type["BaseModel"]]):
     _lock: threading.RLock | DummyRLock = threading.RLock()
     _saved_lock: threading.RLock | DummyRLock | None = None
 
-    @lazy_classproperty
-    def registries(cls) -> LRU[str, Registry]:
-        """ A mapping from database names to registries. """
-        size = config.get('registry_lru_size', None)
-        if not size:
-            # Size the LRU depending of the memory limits
-            if os.name != 'posix':
-                # cannot specify the memory limit soft on windows...
-                size = 42
-            else:
-                # A registry takes 10MB of memory on average, so we reserve
-                # 10Mb (registry) + 5Mb (working memory) per registry
-                avgsz = 15 * 1024 * 1024
-                limit_memory_soft = config['limit_memory_soft'] if config['limit_memory_soft'] > 0 else (2048 * 1024 * 1024)
-                size = (limit_memory_soft // avgsz) or 1
-        return LRU(size)
+    registries = LRU[str, "Registry"](42)  # random default value
+    """ A mapping from database names to registries. """
 
     def __new__(cls, db_name: str):
         """ Return the registry for the given database name."""
@@ -135,6 +119,7 @@ class Registry(Mapping[str, type["BaseModel"]]):
         upgrade_modules: Collection[str] = (),
         reinit_modules: Collection[str] = (),
         new_db_demo: bool | None = None,
+        models_to_check: set[str] | None = None,
     ) -> Registry:
         """Create and return a new registry for the given database name.
 
@@ -172,6 +157,19 @@ class Registry(Mapping[str, type["BaseModel"]]):
         cls.registries[db_name] = registry  # pylint: disable=unsupported-assignment-operation
         try:
             registry.setup_signaling()
+            with registry.cursor() as cr:
+                # This transaction defines a critical section for multi-worker concurrency control.
+                # When the transaction commits, the first worker proceeds to upgrade modules. Other workers
+                # encounter a serialization error and retry, finding no upgrade marker in the database.
+                # This significantly reduces the likelihood of concurrent module upgrades across workers.
+                # NOTE: This block is intentionally outside the try-except below to prevent workers that fail
+                # due to serialization errors from calling `reset_modules_state` while the first worker is
+                # actively upgrading modules.
+                from odoo.modules import db  # noqa: PLC0415
+                if db.is_initialized(cr):
+                    cr.execute("DELETE FROM ir_config_parameter WHERE key='base.partially_updated_database'")
+                    if cr.rowcount:
+                        update_module = True
             # This should be a method on Registry
             from odoo.modules.loading import load_modules, reset_modules_state  # noqa: PLC0415
             exit_stack = ExitStack()
@@ -189,6 +187,7 @@ class Registry(Mapping[str, type["BaseModel"]]):
                     install_modules=install_modules,
                     reinit_modules=reinit_modules,
                     new_db_demo=new_db_demo,
+                    models_to_check=models_to_check,
                 )
             except Exception:
                 reset_modules_state(db_name)
@@ -436,6 +435,9 @@ class Registry(Mapping[str, type["BaseModel"]]):
             # recursively mark fields to re-setup
             todo = []
             for model_cls in self.models.values():
+                if model_cls._custom:
+                    # custom models are going to be reloaded and set up below
+                    model_cls._setup_done__ = False
                 if model_cls._setup_done__:
                     models_field_depends_done.add(model_cls)
                 else:
@@ -459,6 +461,14 @@ class Registry(Mapping[str, type["BaseModel"]]):
                     field.__set_name__(model_cls, name)
                     field._setup_done = False
 
+                    models_field_depends_done.discard(model_cls)
+
+                elif model_cls._setup_done__ and field.related and field.manual:
+                    # manually-added related field (e.g. added via Studio) that has
+                    # no _base_fields__ so it cannot be partially reset; mark the
+                    # whole model for full re-setup so that setup_model_classes()
+                    # recreates the field pointing to the updated target field
+                    model_cls._setup_done__ = False
                     models_field_depends_done.discard(model_cls)
 
                 # partial invalidation of field_depends[_context]
@@ -576,7 +586,10 @@ class Registry(Mapping[str, type["BaseModel"]]):
         self._is_modifying_relations.clear()
 
         # discard fields from field inverses
-        self.field_inverses.discard_keys_and_values(fields)
+        if 'field_inverses' in vars(self):
+            self.field_inverses.discard_keys_and_values(fields)
+
+        self.field_setup_dependents.discard_keys_and_values(fields)
 
     def get_field_trigger_tree(self, field: Field) -> TriggerTree:
         """ Return the trigger tree of a field by computing it from the transitive
@@ -686,6 +699,8 @@ class Registry(Mapping[str, type["BaseModel"]]):
                 # not already marked as "to be applied".
                 with cr.savepoint(flush=False):
                     func(cr)
+            else:
+                self._constraint_queue[key] = func
         except Exception as e:
             if self._is_install:
                 _schema.error(*e.args)
@@ -767,8 +782,7 @@ class Registry(Mapping[str, type["BaseModel"]]):
             SELECT c.relname, a.attname
             FROM pg_attribute a
             JOIN pg_class c ON a.attrelid = c.oid
-            JOIN pg_namespace n ON c.relnamespace = n.oid
-            WHERE n.nspname = 'public'
+            WHERE c.relnamespace = current_schema::regnamespace
             AND a.attnotnull = true
             AND a.attnum > 0
             AND a.attname != 'id';
@@ -802,22 +816,41 @@ class Registry(Mapping[str, type["BaseModel"]]):
         if not expected:
             return
 
-        # retrieve existing indexes with their corresponding table
-        cr.execute("SELECT indexname, tablename FROM pg_indexes WHERE indexname IN %s",
-                   [tuple(row[0] for row in expected)])
-        existing = dict(cr.fetchall())
+        # retrieve existing indexes with their table and access method
+        cr.execute("""
+            SELECT idx.relname, tbl.relname, am.amname
+              FROM pg_index ix
+              JOIN pg_class idx ON idx.oid = ix.indexrelid
+              JOIN pg_class tbl ON tbl.oid = ix.indrelid
+              JOIN pg_am am ON am.oid = idx.relam
+             WHERE idx.relname IN %s
+               AND idx.relnamespace = current_schema::regnamespace
+        """, [tuple(row[0] for row in expected)])
+        existing = {indexname: (tablename, method) for indexname, tablename, method in cr.fetchall()}
 
         for indexname, tablename, field in expected:
             index = field.index
             assert index in ('btree', 'btree_not_null', 'trigram', True, False, None)
-            if index and indexname not in existing:
-                if index == 'trigram' and not self.has_trigram:
-                    # Ignore if trigram index is not supported
-                    continue
-                if field.translate and index != 'trigram':
-                    _schema.warning(f"Index attribute on {field!r} ignored, only trigram index is supported for translated fields")
-                    continue
 
+            if index and field.translate and index != 'trigram':
+                _schema.warning(f"Index attribute on {field!r} ignored, only trigram index is supported for translated fields")
+                continue
+
+            # whether the field should be backed by an index, and the access
+            # method (gin for trigram, btree otherwise) it is expected to use
+            will_index = bool(index) and (
+                (not field.translate and index != 'trigram')
+                or (index == 'trigram' and self.has_trigram)
+            )
+            if indexname in existing:
+                # The index exists, check if it is stale.
+                expected_method = 'gin' if index == 'trigram' else 'btree'
+                stale = existing[indexname][1] != expected_method
+                will_index &= stale  # create only when stale
+            else:
+                stale = False
+
+            if will_index:
                 column_expression = f'"{field.name}"'
                 if index == 'trigram':
                     if field.translate:
@@ -849,11 +882,13 @@ class Registry(Mapping[str, type["BaseModel"]]):
                     where = f'{column_expression} IS NOT NULL' if index == 'btree_not_null' else ''
                 try:
                     with cr.savepoint(flush=False):
+                        if stale:
+                            sql.drop_index(cr, indexname, tablename)
                         sql.create_index(cr, indexname, tablename, [expression], method, where)
                 except psycopg2.OperationalError:
                     _schema.error("Unable to add index %r for %s", indexname, self)
 
-            elif not index and tablename == existing.get(indexname):
+            elif not index and tablename == existing.get(indexname, (None, None))[0]:
                 _schema.info("Keep unexpected index %s on table %s", indexname, tablename)
 
     def add_foreign_key(
@@ -883,6 +918,7 @@ class Registry(Mapping[str, type["BaseModel"]]):
             JOIN pg_attribute AS a1 ON a1.attrelid = c1.oid AND fk.conkey[1] = a1.attnum
             JOIN pg_attribute AS a2 ON a2.attrelid = c2.oid AND fk.confkey[1] = a2.attnum
             WHERE fk.contype = 'f' AND c1.relname IN %s
+            AND c1.relnamespace = current_schema::regnamespace
         """
         cr.execute(query, [tuple({table for table, column in self._foreign_keys})])
         existing = {
@@ -969,10 +1005,9 @@ class Registry(Mapping[str, type["BaseModel"]]):
             query = """
                 SELECT c.relname
                   FROM pg_class c
-                  JOIN pg_namespace n ON (n.oid = c.relnamespace)
                  WHERE c.relname IN %s
                    AND c.relkind = 'r'
-                   AND n.nspname = 'public'
+                   AND c.relnamespace = current_schema::regnamespace
             """
             tables = tuple(m._table for m in self.models.values())
             cr.execute(query, [tables])
@@ -1006,7 +1041,8 @@ class Registry(Mapping[str, type["BaseModel"]]):
             # The `orm_signaling_...` sequences indicates when caches must
             # be invalidated (i.e. cleared).
             signaling_tables = tuple(f'orm_signaling_{cache_name}' for cache_name in ['registry', *_CACHES_BY_KEY])
-            cr.execute("SELECT table_name FROM information_schema.tables WHERE table_name IN %s", [signaling_tables])
+            cr.execute("SELECT table_name FROM information_schema.tables"
+                       " WHERE table_name IN %s AND table_schema = current_schema", [signaling_tables])
 
             existing_sig_tables = tuple(s[0] for s in cr.fetchall())  # could be a set but not efficient with such a little list
             # signaling was previously using sequence but this doesn't work with replication

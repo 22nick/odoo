@@ -2,15 +2,17 @@
 # This file contains the translation of the following modules:
 # * spreadsheet
 #
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-10-13 12:16+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-06-19 17:36+0000\n"
+"PO-Revision-Date: 2026-06-30 04:09+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Arabic <https://translate.odoo.com/projects/odoo-19/"
 "spreadsheet/ar/>\n"
 "Language: ar\n"
@@ -19,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -147,13 +149,13 @@ msgstr "%s (نسخة)"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "%s (exclude manually-hidden rows)"
-msgstr ""
+msgstr "%s (استبعاد الصفوف التي تم إخفاؤها يدويًا)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "%s (include manually-hidden rows)"
-msgstr ""
+msgstr "%s (تضمين الصفوف التي تم إخفاؤها يدويًا)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -257,6 +259,12 @@ msgstr "%s مطابق في كافة الأوراق"
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "'${str}'"
+msgstr "'${str}'"
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "(Blanks)"
 msgstr "(فراغات)"
@@ -283,7 +291,7 @@ msgstr "(السابق)"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "+ \"Others\" group"
-msgstr ""
+msgstr "+ مجموعة \"آخرون\""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -295,13 +303,13 @@ msgstr "+ إضافة قاعدة أخرى"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "+ Add chart"
-msgstr ""
+msgstr "+ إضافة مخطط بياني"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "+ Add data view"
-msgstr ""
+msgstr "+ إضافة عرض للبيانات"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -316,6 +324,8 @@ msgid ""
 "0 = first match, 1 = all matches as an array, 2 = capturing groups from the "
 "first match as an array."
 msgstr ""
+"0 = المطابقة الأولى، 1 = جميع المطابقات على شكل مصفوفة، 2 = التقاط المجموعات "
+"من المطابقة الأولى على شكل مصفوفة."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -349,6 +359,12 @@ msgstr "=PIVOT(${"
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+msgid "A"
+msgstr "A"
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "A boolean indicating whether to use A1 style notation (TRUE) or R1C1 style "
@@ -363,6 +379,7 @@ msgstr ""
 msgid ""
 "A boolean indicating whether to use A1 style notation or R1C1 style notation."
 msgstr ""
+"قيمة منطقية تشير إلى ما إذا كان يجب استخدام ترميز نمط A1 أو ترميز نمط R1C1."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -371,8 +388,8 @@ msgid ""
 "A boolean; if TRUE, empty cells selected in the text arguments won't be "
 "included in the result."
 msgstr ""
-"متغير منطقي؛ إذا كانت القيمة صحيحة، لن تكون الخلايا الفارغة المحددة في "
-"وسيطات النص مشمولة ضمن النتائج."
+"متغير منطقي؛ إذا كانت القيمة صحيحة، لن تكون الخلايا الفارغة المحددة في وسيطات "
+"النص مشمولة ضمن النتائج."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -406,7 +423,7 @@ msgstr "عَلَم كبير يحدد ما إذا كان يجب حساب التق
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "A flag specifying whether to compute the slope or not"
-msgstr ""
+msgstr "عَلَم كبير يحدد ما إذا كان يجب حساب المنحنى أم لا "
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -518,6 +535,12 @@ msgstr "نطاق أو ثابت مجموعة يحتوي على التواريخ �
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "A reference to a cell."
+msgstr "إشارة إلى خلية."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "A segment of a string."
 msgstr "جزء من سلسلة."
 
@@ -562,13 +585,13 @@ msgstr "يمكن إنشاء جدول فقط في مجموعة خيارات مس�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "A text abbreviation for unit of time."
-msgstr ""
+msgstr "اختصار نصي لوحدة الزمن."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "A1 style (default)"
-msgstr ""
+msgstr "نمط A1 (افتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -586,13 +609,13 @@ msgstr "المتوسط"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Absolute row and column (e.g. $A$1)"
-msgstr ""
+msgstr "الصفوف والأعمدة المطلقة (على سبيل المثال $A$1)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Absolute row, relative column (e.g. A$1)"
-msgstr ""
+msgstr "الصف المطلق، العمود النسبي (على سبيل المثال A$1)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -605,6 +628,12 @@ msgstr "القيمة المطلقة"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Absolute value of a number."
 msgstr "القيمة المطلقة لرقم."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/actions/spreadsheet_download_action.js:0
+msgid "Access Error"
+msgstr "خطأ في الوصول"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -644,19 +673,19 @@ msgstr "عوامل التصفية النشطة"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Actual/360"
-msgstr ""
+msgstr "Actual/360"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Actual/365"
-msgstr ""
+msgstr "Actual/365"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Actual/Actual"
-msgstr ""
+msgstr "Actual/Actual"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -668,13 +697,13 @@ msgstr "إضافة"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Add a Title"
-msgstr ""
+msgstr "أضف عنوانًا"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Add a baseline description"
-msgstr ""
+msgstr "أضف وصفًا أساسيًا"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -683,12 +712,14 @@ msgid ""
 "Add a chart to the carousel. You can also add a chart by dragging and "
 "dropping it over the carousel figure."
 msgstr ""
+"أضف مخططًا إلى منصة العرض الدوارة. يمكنك أيضًا إضافة مخطط عن طريق سحبه وإفلاته "
+"فوق منصة العرض الدوارة."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Add a key value description"
-msgstr ""
+msgstr "أضف وصفًا للقيمة الرئيسية"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -772,7 +803,7 @@ msgstr "الأرقام الإضافية أو النطاقات لإضافتها �
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Additional ranges or references for which you want the subtotal."
-msgstr ""
+msgstr "النطاقات أو المراجع الإضافية التي تريد حساب المجموع الفرعي لها."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -929,7 +960,7 @@ msgstr "الكل"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "All matches"
-msgstr ""
+msgstr "جميع النتائج المطابقة"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -944,8 +975,7 @@ msgid ""
 "All the dates should be greater or equal to the first date in cashflow_dates "
 "(%s)."
 msgstr ""
-"يجب أن تكون كافة التواريخ أكبر من أو مساوية لأول تاريخ في cashflow_dates "
-"(%s)."
+"يجب أن تكون كافة التواريخ أكبر من أو مساوية لأول تاريخ في cashflow_dates (%s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1011,8 +1041,8 @@ msgid ""
 "represents some logical value, i.e. TRUE or FALSE, or an expression that can "
 "be coerced to a logical value."
 msgstr ""
-"تعبير أو مرجع لخلية تحتوي على تعبير يمثل بعض القيم المنطقية. مثال: صح أو "
-"خطأ، أو تعبير يمكن إكراهه على أن يصبح قيمة منطقية."
+"تعبير أو مرجع لخلية تحتوي على تعبير يمثل بعض القيم المنطقية. مثال: صح أو خطأ"
+"، أو تعبير يمكن إكراهه على أن يصبح قيمة منطقية."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1041,7 +1071,7 @@ msgstr "مؤشر لنوع طريقة حساب الأيام لاستخدامها.
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "An indicator of whether the reference is row/column absolute."
-msgstr ""
+msgstr "مؤشر يحدد ما إذا كان المرجع مطلقًا بالنسبة للصف أو العمود."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1103,26 +1133,6 @@ msgstr "حدث خطأ غير متوقع أثناء نقل الصورة."
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid ""
-"An unexpected error occurred while pasting content.\n"
-"          Additional information can be found in the browser console."
-msgstr ""
-"حدث خطأ غير متوقع أثناء لصق المحتوى.\n"
-"          يمكنك العثور على المزيد من المعلومات في وحدة تحكم المتصفح."
-
-#. module: spreadsheet
-#. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid ""
-"An unexpected error occurred while pasting content.\n"
-"          This is probably due to a spreadsheet version mismatch."
-msgstr ""
-"حدث خطأ غير متوقع أثناء لصق المحتوى.\n"
-"          ربما يرجع ذلك إلى عدم تطابق إصدار جدول البيانات."
-
-#. module: spreadsheet
-#. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "An unexpected error occurred. Submit a support ticket at odoo.com/help."
 msgstr "حدث خطأ غير متوقع. قم بتقديم تذكرة دعم على odoo.com/help."
 
@@ -1136,7 +1146,7 @@ msgstr "الزاوية من محور X إلى النقطة (x،y)، بالتقد
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Annual"
-msgstr ""
+msgstr "سنوي"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1263,7 +1273,7 @@ msgstr "التطبيق على النطاق"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Approximate match (default)"
-msgstr ""
+msgstr "مطابقة تقريبية (افتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1329,8 +1339,8 @@ msgstr "مجموعة أو نطاق يحتوي على مجموعة البيانا
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "Array result was not expanded because it would overwrite data in %s."
-msgstr "تعذر توسيع نتيجة المجال لأنه سيقوم بالكتابة فوق البيانات في %s."
+msgid "Array result was not expanded because it would overwrite data."
+msgstr "لم يتم توسيع المصفوفة لأن ذلك سيؤدي إلى استبدال البيانات."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1355,7 +1365,7 @@ msgstr "تصاعدي (A ⟶ Z)"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Ascending order (default)"
-msgstr ""
+msgstr "ترتيب تصاعدي (افتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1367,7 +1377,7 @@ msgstr "آسيا"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "At least one delimiter must be provided."
-msgstr ""
+msgstr "يجب توفير فاصل واحد على الأقل."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1503,7 +1513,7 @@ msgstr "الخط الرئيسي"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Baseline Style"
-msgstr ""
+msgstr "النمط الأساسي"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1521,25 +1531,25 @@ msgstr "تهيئة الخط الرئيسي"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Beginning of period"
-msgstr ""
+msgstr "بداية الفترة"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Billion"
-msgstr ""
+msgstr "مليار"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Binary search (sorted ascending order)"
-msgstr ""
+msgstr "البحث الثنائي (بترتيب تصاعدي)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Binary search (sorted descending order)"
-msgstr ""
+msgstr "البحث الثنائي (بترتيب تنازلي)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1743,8 +1753,7 @@ msgid ""
 "(value for the item) / (value for the parent item of the selected Base field)"
 msgstr ""
 "يحسب القيم على النحو التالي:\n"
-"(القيمة الخاصة بالعنصر) / (القيمة الخاصة بالعنصر الأساسي للحقل الأساسي "
-"المحدد)"
+"(القيمة الخاصة بالعنصر) / (القيمة الخاصة بالعنصر الأساسي للحقل الأساسي المحدد)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1824,7 +1833,7 @@ msgstr "لا يمكن إزالة النسخ المكررة لسبب غير مع�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Cannot sort a zone with array formulas."
-msgstr ""
+msgstr "لا يمكن فرز منطقة باستخدام صيغ المصفوفات."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1846,7 +1855,7 @@ msgstr "لا يمكن تقسيم الخيار لسبب غير معروف."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
 msgid "Cannot use custom pivot groups with \"Count Distinct\" measure"
-msgstr ""
+msgstr "لا يمكن استخدام مجموعات محورية مخصصة مع مقياس \"Count Distinct\""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1858,49 +1867,49 @@ msgstr "يستخدم الأحرف الكبيرة في كل كلمة في جمل�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Capture groups of first match"
-msgstr ""
+msgstr "استخراج المجموعات التي تتطابق في أول ظهور"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Carousel"
-msgstr ""
+msgstr "منصّة عرض بعناصر متغيّرة"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Carousel Sections"
-msgstr ""
+msgstr "أقسام الكاروسيل"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Carousel Title"
-msgstr ""
+msgstr "عنوان الكاروسيل"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Carousel copied to clipboard"
-msgstr ""
+msgstr "تم نسخ الكاروسيل إلى الحافظة"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Case-insensitive"
-msgstr ""
+msgstr "لا يراعي التمييز بين الأحرف الكبيرة والصغيرة"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Case-sensitive"
-msgstr ""
+msgstr "يراعي التمييز بين الأحرف الكبيرة والصغيرة"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Case-sensitive (default)"
-msgstr ""
+msgstr "يراعي التمييز بين الأحرف الكبيرة والصغيرة (افتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1962,13 +1971,13 @@ msgstr "يتطلب تغيير تعريف المحور رفع البيانات. �
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Character or string to split columns by."
-msgstr ""
+msgstr "الحرف أو السلسلة التي سيتم تقسيم الأعمدة بناءً عليها."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Character or string to split rows by."
-msgstr ""
+msgstr "الحرف أو السلسلة التي سيتم تقسيم الصفوف بناءً عليها."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1986,7 +1995,7 @@ msgstr "المخطط - %(chart_model)s"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Chart copied to clipboard"
-msgstr ""
+msgstr "تم نسخ المخطط البياني إلى الحافظة"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2005,6 +2014,16 @@ msgstr "نوع المخطط البياني"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Checkbox"
 msgstr "صندوق الاختيار"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid ""
+"Checks whether there is a reference to a cell that contains a formula, and "
+"returns TRUE or FALSE."
+msgstr ""
+"يتحقق مما إذا كانت هناك إشارة إلى خلية تحتوي على صيغة، ويعرض القيمة TRUE أو "
+"FALSE."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2089,7 +2108,7 @@ msgstr "Clip"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Close menu bar"
-msgstr ""
+msgstr "إغلاق شريط القوائم"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2276,9 +2295,19 @@ msgstr "مقارنة قيمتين عدديتين ببعضهما، تكون ال�
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
+msgid ""
+"Compatibility version of ODOO.FILTER.VALUE for v18 spreadsheets. Required "
+"for date filters. Optional for others."
+msgstr ""
+"الإصدار المتوافق من ODOO.FILTER.VALUE مع جداول البيانات في إصدار أودو 18. وهو "
+"مطلوب لتصفية التواريخ، واختياري في الحالات الأخرى."
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Compute from totals"
-msgstr ""
+msgstr "الحساب من المجاميع الإجمالية"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2345,8 +2374,7 @@ msgid ""
 "Computes the rate needed for an investment to reach a specific value within "
 "a specific number of periods."
 msgstr ""
-"يقوم باحتساب النسبة المطلوبة ليصل الاستثمار إلى قيمة محددة ضمن عدد من "
-"الفترات."
+"يقوم باحتساب النسبة المطلوبة ليصل الاستثمار إلى قيمة محددة ضمن عدد من الفترات."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2495,13 +2523,13 @@ msgstr "نسخ كصورة"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Copy carousel"
-msgstr ""
+msgstr "نسخ الكاروسيل"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Copy chart as image"
-msgstr ""
+msgstr "نسخ المخطط البياني كصورة"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2759,7 +2787,7 @@ msgstr "قص"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Cut carousel"
-msgstr ""
+msgstr "قطع الكاروسيل"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3018,7 +3046,7 @@ msgstr "اليوم من الأسبوع من التاريخ المعطى (كرق�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Days"
-msgstr ""
+msgstr "الأيام"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3042,7 +3070,7 @@ msgstr "ديسمبر"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Decimal (default)"
-msgstr ""
+msgstr "نظام العلامة العشرية (الافتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3073,7 +3101,7 @@ msgstr "حذف"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Delete carousel"
-msgstr ""
+msgstr "حذف الكاروسيل"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3097,7 +3125,7 @@ msgstr "حذف الخلايا"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Delete chart"
-msgstr ""
+msgstr "حذف المخطط البياني"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3121,13 +3149,13 @@ msgstr "حذف الأعمدة %s - %s"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Delete data view"
-msgstr ""
+msgstr "حذف طريقة عرض البيانات"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Delete item"
-msgstr ""
+msgstr "حذف العنصر"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3213,7 +3241,7 @@ msgstr "تنازلي (Z ⟶ A)"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Descending order"
-msgstr ""
+msgstr "ترتيب تنازلي"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3267,7 +3295,7 @@ msgstr "لا تطابق الأبعاد تعريف المحور"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/filter_values_list/filter_values_list.xml:0
 msgid "Discard"
-msgstr ""
+msgstr "إهمال"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3283,6 +3311,7 @@ msgstr "معدل خصم سند بناء على السعر."
 
 #. module: spreadsheet
 #: model:ir.model.fields,field_description:spreadsheet.field_ir_http__display_name
+#: model:ir.model.fields,field_description:spreadsheet.field_ir_model__display_name
 #: model:ir.model.fields,field_description:spreadsheet.field_res_currency__display_name
 #: model:ir.model.fields,field_description:spreadsheet.field_res_currency_rate__display_name
 #: model:ir.model.fields,field_description:spreadsheet.field_res_lang__display_name
@@ -3404,8 +3433,8 @@ msgid ""
 "largest item in the field as 1, and each smaller value with a higher rank "
 "value."
 msgstr ""
-"يقوم بعرض رتبة القيم المحددة في حقل معين، مع إدراج أكبر عنصر في الحقل كرقم "
-"1، وكل قيمة أصغر بقيمة رتبة أعلى."
+"يقوم بعرض رتبة القيم المحددة في حقل معين، مع إدراج أكبر عنصر في الحقل كرقم 1"
+"، وكل قيمة أصغر بقيمة رتبة أعلى."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3415,8 +3444,8 @@ msgid ""
 "smallest item in the field as 1, and each larger value with a higher rank "
 "value."
 msgstr ""
-"يقوم بعرض رتبة القيم المحددة في حقل معين، مع إدراج أصغر عنصر في الحقل كرقم "
-"1، وكل قيمة أكبر بقيمة رتبة أعلى."
+"يقوم بعرض رتبة القيم المحددة في حقل معين، مع إدراج أصغر عنصر في الحقل كرقم 1"
+"، وكل قيمة أكبر بقيمة رتبة أعلى."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3446,8 +3475,8 @@ msgid ""
 "Displays values as a percentage of the grand total of all the values or data "
 "points in the report."
 msgstr ""
-"يعرض القيم على هيئة نسبة مئوية من الإجمالي الكلي لكافة القيم أو نقاط "
-"البيانات في التقرير."
+"يعرض القيم على هيئة نسبة مئوية من الإجمالي الكلي لكافة القيم أو نقاط البيانات "
+"في التقرير."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3464,8 +3493,7 @@ msgstr ""
 msgid ""
 "Displays values as the difference from the value of the Base item in the "
 "Base field."
-msgstr ""
-"يقوم بعرض القيم على أنها الفرق من قيمة العنصر الأساسي في الحقل الأساسي."
+msgstr "يقوم بعرض القيم على أنها الفرق من قيمة العنصر الأساسي في الحقل الأساسي."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3473,8 +3501,7 @@ msgstr ""
 msgid ""
 "Displays values as the percentage difference from the value of the Base item "
 "in the Base field."
-msgstr ""
-"يعرض القيم كفرق النسبة المئوية من قيمة العنصر الأساسي في الحقل الأساسي."
+msgstr "يعرض القيم كفرق النسبة المئوية من قيمة العنصر الأساسي في الحقل الأساسي."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3486,13 +3513,13 @@ msgstr "المسافة"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Division by zero"
-msgstr ""
+msgstr "القسمة على صفر"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Do not switch to straight-line depreciation"
-msgstr ""
+msgstr "لا تنتقل إلى نظام الاستهلاك الخطي"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3519,7 +3546,7 @@ msgstr "تنزيل"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Download chart"
-msgstr ""
+msgstr "تنزيل المخطط البياني"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3541,6 +3568,12 @@ msgstr "المدة"
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "E.g. 1234567 -> %(value)s"
+msgstr "على سبيل المثال 1234567 -> %(value)s"
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/filter_values_list/filter_values_list.xml:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Edit"
@@ -3550,13 +3583,13 @@ msgstr "تحرير"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Edit carousel"
-msgstr ""
+msgstr "تحرير الكاروسيل"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Edit chart"
-msgstr ""
+msgstr "تحرير المخطط البياني"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3593,7 +3626,7 @@ msgstr "آخر"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "End of period (default)"
-msgstr ""
+msgstr "نهاية الفترة (افتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3648,13 +3681,13 @@ msgstr "أوروبا"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "European 30/360"
-msgstr ""
+msgstr "الطريقة الأوروبية 30/360"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "European method"
-msgstr ""
+msgstr "الطريقة الأوروبية"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3666,25 +3699,25 @@ msgstr "تسبب تقييم الوظيفة [[FUNCTION_NAME]] بوقوع خطأ �
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Exact match"
-msgstr ""
+msgstr "التطابق التام"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Exact match (default)"
-msgstr ""
+msgstr "التطابق التام (افتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Exact match or next larger item"
-msgstr ""
+msgstr "المطابقة التامة أو العنصر الأكبر التالي"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Exact match or next smaller item"
-msgstr ""
+msgstr "المطابقة التامة أو العنصر الأصغر التالي"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3750,7 +3783,7 @@ msgstr "أسّي"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Extract text from a string based on the supplied regular expression."
-msgstr ""
+msgstr "قم باستخراج النص من سلسلة بناءً على التعبير النمطي المحدد."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3851,13 +3884,13 @@ msgstr "زر الفلتر"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Filter by criterion"
-msgstr ""
+msgstr "التصفية حسب المعيار"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Filter by values"
-msgstr ""
+msgstr "التصفية حسب القيم"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3923,7 +3956,7 @@ msgstr "أول يوم في الأسبوع:"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "First match"
-msgstr ""
+msgstr "أول تطابق"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3941,7 +3974,7 @@ msgstr "الوضع الأول للسلسلة الموجود في النص، بغ
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "First quartile (25th percentile)"
-msgstr ""
+msgstr "الربع الأول (الشريحة المئوية 25)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4063,13 +4096,13 @@ msgstr "الجمعة"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Friday is the only weekend"
-msgstr ""
+msgstr "يوم الجمعة هو يوم العطلة الوحيد"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Friday/Saturday are weekends"
-msgstr ""
+msgstr "الجمعة/السبت هما عطلة نهاية الأسبوع"
 
 #. module: spreadsheet
 #: model_terms:ir.ui.view,arch_db:spreadsheet.public_spreadsheet_layout
@@ -4155,23 +4188,27 @@ msgstr "لم تعثر الوظيفة [[FUNCTION_NAME]] على أي نتائج."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
-"Function [[FUNCTION_NAME]] expects criteria_range and criterion to be in "
-"pairs."
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a boolean."
 msgstr ""
-"تتوقع الدالة  [[FUNCTION_NAME]] من criteria_range والفئة أن يكونوا في أزواج."
+"تتوقع الدالة [[FUNCTION_NAME]] قيمًا رقمية لـ %s ، ولكنها حصلت على قيمة "
+"منطقية."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
-"Function [[FUNCTION_NAME]] expects criteria_range to have the same dimension"
-msgstr "تتوقع الدالة [[FUNCTION_NAME]] أن يكون لـ criteria_range نفس الأبعاد"
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a string."
+msgstr ""
+"تتوقع الدالة [[FUNCTION_NAME]] قيمًا رقمية لـ %s ، ولكنها حصلت على سلسلة."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
-msgstr "تتوقع الدالة [[FUNCTION_NAME]] قيماً رقمية لـ %s، ولكنها حصلت على %s."
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got an empty "
+"value."
+msgstr ""
+"تتوقع الدالة [[FUNCTION_NAME]] قيمًا رقمية لـ %s ، ولكنها حصلت على قيمة فارغة."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4320,8 +4357,8 @@ msgid ""
 "Given a general exponential form of y = b*m^x for a curve fit, calculates b "
 "if TRUE or forces b to be 1 and only calculates the m values if FALSE."
 msgstr ""
-"بالنظر إلى الشكل الأسي العام لـ y = b*m^x لملاءمة المنحنى، يتم حساب b إذا "
-"كانت \"صحيحة\" أو يتم فرض b ليكون 1 ويتم حساب قيم m فقط إذا كانت \"خطأ\"."
+"بالنظر إلى الشكل الأسي العام لـ y = b*m^x لملاءمة المنحنى، يتم حساب b إذا كانت "
+"\"صحيحة\" أو يتم فرض b ليكون 1 ويتم حساب قيم m فقط إذا كانت \"خطأ\"."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4359,19 +4396,19 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Go to %(label)s"
-msgstr ""
+msgstr "انتقل إلى %(label)s"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Go to previous menu"
-msgstr ""
+msgstr "انتقل إلى القائمة السابقة"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Go to url: %(url)s"
-msgstr ""
+msgstr "انتقل إلى الرابط: %(url)s"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4419,7 +4456,7 @@ msgstr "المجموعة"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Group all remaining dimensions"
-msgstr ""
+msgstr "تجميع جميع الأبعاد المتبقية"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4437,7 +4474,7 @@ msgstr "تجميع محتوى الأعمدة %s - %s"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Group pivot dimensions"
-msgstr ""
+msgstr "تجميع أبعاد الجدول المحوري"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4455,7 +4492,7 @@ msgstr "تجميع محتوى الصفوف %s - %s"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Groups"
-msgstr ""
+msgstr "المجموعات"
 
 #. module: spreadsheet
 #: model:ir.model,name:spreadsheet.model_ir_http
@@ -4587,7 +4624,7 @@ msgstr "مكوّن ساعة لوقت محدد."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Hours"
-msgstr ""
+msgstr "ساعات"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4627,6 +4664,7 @@ msgstr "ظل الزاوية القطعي لأي رقم حقيقي."
 
 #. module: spreadsheet
 #: model:ir.model.fields,field_description:spreadsheet.field_ir_http__id
+#: model:ir.model.fields,field_description:spreadsheet.field_ir_model__id
 #: model:ir.model.fields,field_description:spreadsheet.field_res_currency__id
 #: model:ir.model.fields,field_description:spreadsheet.field_res_currency_rate__id
 #: model:ir.model.fields,field_description:spreadsheet.field_res_lang__id
@@ -4656,13 +4694,13 @@ msgstr "تاريخ ISO"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "ISO Date time"
-msgstr ""
+msgstr "تاريخ ووقت ISO"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "ISO week number (Monday as first day of the week)"
-msgstr ""
+msgstr "رقم الأسبوع وفقًا لمعيار ISO (الاثنين هو أول أيام الأسبوع)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4718,25 +4756,25 @@ msgstr "إذا كانت البيانات غير صالحة"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Ignore blanks"
-msgstr ""
+msgstr "تجاهل الفراغات"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Ignore blanks and errors"
-msgstr ""
+msgstr "تجاهل الفراغات والأخطاء"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Ignore empty cells"
-msgstr ""
+msgstr "تجاهل الخلايا الفارغة"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Ignore errors"
-msgstr ""
+msgstr "تجاهل الأخطاء"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4748,7 +4786,7 @@ msgstr "صورة"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Image copied to clipboard"
-msgstr ""
+msgstr "تم نسخ الصورة إلى الحافظة"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4761,12 +4799,10 @@ msgstr "في تقييم [[FUNCTION_NAME]] لم نتمكن من العثور عل
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "In [[FUNCTION_NAME]], the number of columns of the first matrix (%s) must be "
-"equal to the \n"
-"          number of rows of the second matrix (%s)."
+"equal to the           number of rows of the second matrix (%s)."
 msgstr ""
-"في [[FUNCTION_NAME]]، يجب أن يكون عدد الأعمدة في المصفوفة الأولى (%s) مساوياً "
-"لعدد\n"
-"          الصفوف ف يالمصفوفة الثانية (%s)."
+"في [[FUNCTION_NAME]]، يجب أن يكون عدد أعمدة المصفوفة الأولى (%s) مساوياً لعدد "
+"صفوف المصفوفة الثانية (%s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4782,13 +4818,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Inaccessible/missing record ID"
-msgstr ""
+msgstr "معرّف السجل لا يمكن الوصول إليه/غير موجود"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Include empty cells (default)"
-msgstr ""
+msgstr "تضمين الخلايا الفارغة (افتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4833,8 +4869,8 @@ msgid ""
 "range) is sorted, in which case the closest match for search_key will be "
 "returned."
 msgstr ""
-"يشير إلى ما إذا كان الصف الذي سيتم البحث فيه (الصف الأول من النطاق المحدد) "
-"قد تم فرزه أم لا، حيث يتم إظهار أقرب نتيجة لـ search_key."
+"يشير إلى ما إذا كان الصف الذي سيتم البحث فيه (الصف الأول من النطاق المحدد) قد "
+"تم فرزه أم لا، حيث يتم إظهار أقرب نتيجة لـ search_key."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4976,7 +5012,7 @@ msgstr "إدراج جدول"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Integer"
-msgstr ""
+msgstr "عدد صحيح"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5055,8 +5091,8 @@ msgid ""
 "Invalid number of arguments for the %(functionName)s function. Expected %"
 "(maxArgPossible)s maximum, but got %(nbrArgSupplied)s instead."
 msgstr ""
-"عدد غير صحيح من الوسيطات للدالة %(functionName)s. المتوقع هو "
-"%(maxArgPossible)s كحد أقصى، ولكن حصلنا على %(nbrArgSupplied)s عوضاً عن ذلك."
+"عدد غير صحيح من الوسيطات للدالة %(functionName)s. المتوقع هو %"
+"(maxArgPossible)s كحد أقصى، ولكن حصلنا على %(nbrArgSupplied)s عوضاً عن ذلك."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5065,8 +5101,8 @@ msgid ""
 "Invalid number of arguments for the %(functionName)s function. Expected %"
 "(minArgRequired)s minimum, but got %(nbrArgSupplied)s instead."
 msgstr ""
-"عدد غير صحيح من الوسيطات للدالة %(functionName)s. المتوقع هو "
-"%(minArgRequired)s كحد أدنى، ولكن حصلنا على %(nbrArgSupplied)sعوضاً عن ذلك."
+"عدد غير صحيح من الوسيطات للدالة %(functionName)s. المتوقع هو %"
+"(minArgRequired)s كحد أدنى، ولكن حصلنا على %(nbrArgSupplied)sعوضاً عن ذلك."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5085,6 +5121,12 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Invalid reference"
 msgstr "المرجع غير صحيح"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Invalid regular expression"
+msgstr "التعبير النمطي غير صالح"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5260,13 +5302,13 @@ msgstr "يونيو"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Keep all values (default)"
-msgstr ""
+msgstr "الاحتفاظ بجميع القيم (افتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Key Value Style"
-msgstr ""
+msgstr "مظهر القيم الرئيسية"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5561,12 +5603,6 @@ msgstr "المغناطيسية"
 
 #. module: spreadsheet
 #. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "Make numbers human-readable"
-msgstr ""
-
-#. module: spreadsheet
-#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "March"
 msgstr "مارس"
@@ -5587,7 +5623,7 @@ msgstr "مطابقة محتوى الخلية بأكمله"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Match to end"
-msgstr ""
+msgstr "تطابق حتى النهاية"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5648,7 +5684,7 @@ msgstr "القيم القصوى من نطاق شبيه بالجدول."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Maximum value"
-msgstr ""
+msgstr "القيمة القصوى"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5684,7 +5720,7 @@ msgstr "المقاييس"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Median value (50th percentile)"
-msgstr ""
+msgstr "القيمة المتوسطة (الشريحة المئوية 50)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5742,8 +5778,8 @@ msgstr ""
 msgid ""
 "Merging these cells will only preserve the top-leftmost value. Merge anyway?"
 msgstr ""
-"سوف يُبقي دمج هذه الخلايا القيمة العليا إلى اليسار فقط. أترغب بالدمج على أي "
-"حال؟"
+"سوف يُبقي دمج هذه الخلايا القيمة العليا إلى اليسار فقط. أترغب بالدمج على أي حال"
+"؟"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5767,7 +5803,7 @@ msgstr "يجب أن تكون النقطة الوسطى أصغر من القصو�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Million"
-msgstr ""
+msgstr "مليون"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5816,7 +5852,7 @@ msgstr "القيم الدنيا من نطاق شبيه بالجدول."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Minimum value"
-msgstr ""
+msgstr "القيمة الدنيا"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5867,6 +5903,11 @@ msgid "Missing opening parenthesis"
 msgstr "يوجد قوس فتح مفقود"
 
 #. module: spreadsheet
+#: model:ir.model,name:spreadsheet.model_ir_model
+msgid "Models"
+msgstr "النماذج"
+
+#. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Modified Macaulay duration."
@@ -5894,13 +5935,13 @@ msgstr "الاثنين"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Monday is the only weekend"
-msgstr ""
+msgstr "يوم الاثنين هو يوم العطلة الوحيد"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Monday/Tuesday are weekends"
-msgstr ""
+msgstr "الاثنين/الثلاثاء هما عطلة نهاية الأسبوع"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5925,13 +5966,13 @@ msgstr "الشهر من السنة الذي يقع فيه تاريخ معين"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Month to Date"
-msgstr ""
+msgstr "منذ بداية الشهر"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Months"
-msgstr ""
+msgstr "شهور"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6049,6 +6090,12 @@ msgstr "تاريخ الكوبون التالي بعد تاريخ التسوية.
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/hooks.js:0
+msgid "No"
+msgstr "لا"
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "No Color"
 msgstr "بلا لون"
@@ -6069,7 +6116,7 @@ msgstr "لا توجد عمليات حساب"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "No capturing groups found."
-msgstr ""
+msgstr "لم يتم العثور على مجموعات التقاط."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6093,7 +6140,7 @@ msgstr "لا يوجد أي تطابق."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "No matches found."
-msgstr ""
+msgstr "لم يتم العثور على نتائج مطابقة."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6135,7 +6182,7 @@ msgstr "بلا فرز"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "No text to split."
-msgstr ""
+msgstr "لا يوجد نص لتقسيمه."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6254,49 +6301,49 @@ msgstr "الرقم:"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Numbers 0 (Monday) trough 6 (Sunday)"
-msgstr ""
+msgstr "الأرقام من 0 (الاثنين) إلى 6 (الأحد)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Numbers 1 (Friday) trough 7 (Thursday)"
-msgstr ""
+msgstr "الأرقام من 1 (الجمعة) إلى 7 (الخميس)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Numbers 1 (Monday) trough 7 (Sunday)"
-msgstr ""
+msgstr "الأرقام من 1 (الاثنين) إلى 7 (الأحد)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Numbers 1 (Saturday) trough 7 (Friday)"
-msgstr ""
+msgstr "الأرقام من 1 (السبت) إلى 7 (الجمعة)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Numbers 1 (Sunday) trough 7 (Saturday)"
-msgstr ""
+msgstr "الأرقام من 1 (الأحد) إلى 7 (السبت)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Numbers 1 (Thursday) trough 7 (Wednesday)"
-msgstr ""
+msgstr "الأرقام من 1 (الخميس) إلى 7 (الأربعاء)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Numbers 1 (Tuesday) trough 7 (Monday)"
-msgstr ""
+msgstr "الأرقام من 1 (الثلاثاء) إلى 7 (الاثنين)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Numbers 1 (Wednesday) trough 7 (Tuesday)"
-msgstr ""
+msgstr "الأرقام من 1 (الأربعاء) إلى 7 (الثلاثاء)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6318,6 +6365,12 @@ msgstr "تقوم الدالة \"OFFSET\" بالتقييم إلى نطاق خار
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
+msgid "Oceania"
+msgstr "أوقيانوسيا"
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "October"
 msgstr "أكتوبر"
@@ -6327,6 +6380,24 @@ msgstr "أكتوبر"
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 msgid "Odoo Bar Chart"
 msgstr "مخطط أودو الشريطي"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Combo Chart"
+msgstr "مخطط البيانات المركب"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Funnel Chart"
+msgstr "مخطط قمعي"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Geo Chart"
+msgstr "مخطط جغرافي"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6343,14 +6414,44 @@ msgstr "مخطط أودو الدائري"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Pyramid Chart"
+msgstr "مخطط هرمي"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 msgid "Odoo Radar Chart"
 msgstr "مخطط رادار أودو البياني"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Scatter Chart"
+msgstr "مخطط انتشار"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/hooks.js:0
 msgid "Odoo Spreadsheet"
 msgstr "جداول بيانات أودو"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Sunburst Chart"
+msgstr "مخطط شمسي"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Treemap Chart"
+msgstr "مخطط شجري"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Waterfall Chart"
+msgstr "مخطط الشلال"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6364,10 +6465,10 @@ msgid ""
 "found, a non-exact match may be returned."
 msgstr ""
 "إحدى طرق استخدام هذه الوظيفة هي تقديم search_array لصف أو عمود واحد تم فرزه، "
-"للبحث فيه عن search_key مع result_range لحجة ثانية. الطريقة الأخرى هي جمع "
-"تلك الحجج معاً في search_array واحد حيث يكون الصف أو العمود الأول قد تم البحث "
-"فيه وتم الحصول على قيمة من آخر صف أو عمود في المجموعة. في حال لم يتم العثور "
-"على search_key، قد يتم عرض نتيجة غير مطابقة تماماً."
+"للبحث فيه عن search_key مع result_range لحجة ثانية. الطريقة الأخرى هي جمع تلك "
+"الحجج معاً في search_array واحد حيث يكون الصف أو العمود الأول قد تم البحث فيه "
+"وتم الحصول على قيمة من آخر صف أو عمود في المجموعة. في حال لم يتم العثور على "
+"search_key، قد يتم عرض نتيجة غير مطابقة تماماً."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6404,6 +6505,8 @@ msgid ""
 "Oops—this pivot table is quite large (%s cells). Try simplifying it using "
 "the side panel."
 msgstr ""
+"عفوًا — هذا الجدول المحوري كبير جدًا (%s خلية). حاول تبسيطه باستخدام اللوحة "
+"الجانبية."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6439,7 +6542,7 @@ msgstr "الترتيب حسب"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Others"
-msgstr ""
+msgstr "غير ذلك"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6637,7 +6740,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/chart/index.js:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Population Pyramid"
-msgstr ""
+msgstr "الهرم السكاني"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6813,13 +6916,13 @@ msgstr "ربع السنة الذي يقع فيه تاريخ معين"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Quarterly"
-msgstr ""
+msgstr "ربع سنوي"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Quarters"
-msgstr ""
+msgstr "أرباع السنة"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6831,7 +6934,7 @@ msgstr "ترميز R1C1 غير مدعوم."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "R1C1 style"
-msgstr ""
+msgstr "نمط R1C1"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6941,13 +7044,13 @@ msgstr "رفض المدخلات"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Relative row and column (e.g. A1)"
-msgstr ""
+msgstr "الصفوف والأعمدة النسبية (مثل A1)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Relative row, absolute column (e.g. $A1)"
-msgstr ""
+msgstr "الصف النسبي، العمود المطلق (على سبيل المثال $A1)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7082,13 +7185,13 @@ msgstr "إحضار رقم كامل أو قيمة عشرية."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Return every distinct item"
-msgstr ""
+msgstr "عرض كل عنصر فريد"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Return items that appear exactly once"
-msgstr ""
+msgstr "عرض العناصر التي تظهر مرة واحدة فقط"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7098,15 +7201,21 @@ msgstr "إظهار القيمة الحالية لعامل تصفية جدول ا
 
 #. module: spreadsheet
 #. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "Return unique columns"
+#: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
+msgid "Return the label of the current value of a spreadsheet filter."
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Return unique columns"
+msgstr "عرض الأعمدة الفريدة"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Return unique rows"
-msgstr ""
+msgstr "عرض الصفوف الفريدة"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7164,13 +7273,13 @@ msgstr "يُظهر تسلسلًا من الأرقام."
 msgid ""
 "Returns a subtotal for a vertical range of cells using a specified "
 "aggregation function."
-msgstr ""
+msgstr "يُظهِر المجموع الفرعي لنطاق عمودي من الخلايا باستخدام دالة تجميع محددة."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Returns a value by comparing cases to an expression."
-msgstr ""
+msgstr "يعرض قيمة من خلال مقارنة الحالات بتعبير ما."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7184,7 +7293,7 @@ msgstr "يُظهر قيمةً بناءً على عدة تعبيرات منطقي
 msgid ""
 "Returns an absolute reference as plain text of the top left cell in "
 "reference."
-msgstr ""
+msgstr "يعرض مرجعًا مطلقًا كنص عادي للخلية العلوية اليسرى في المرجع."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7196,19 +7305,19 @@ msgstr "يُظهر عكس القيمة المنطقية الموجودة."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Returns text that occurs after a given substring or delimiter."
-msgstr ""
+msgstr "يعرض النص الذي يأتي بعد سلسلة فرعية أو فاصل معين."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Returns text that occurs before a given substring or delimiter."
-msgstr ""
+msgstr "يعرض النص الذي يأتي قبل سلسلة فرعية أو فاصل معين."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Returns the column number of the cell in reference."
-msgstr ""
+msgstr "يعرض رقم العمود الخاص بالخلية المشار إليها."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7238,7 +7347,7 @@ msgstr "يقوم بجلب العناصر الأولى في مجموعة البي
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Returns the format of the top left cell in reference."
-msgstr ""
+msgstr "يعرض تنسيق الخلية الموجودة في أعلى اليسار في المرجع."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7282,7 +7391,7 @@ msgstr "يقوم بجلب ترتيب قيمة محددة في مجموعة بي�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Returns the row number of the top left cell in reference."
-msgstr ""
+msgstr "يعرض رقم الصف الخاص بالخلية الموجودة أعلى يسار المرجع."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7293,12 +7402,15 @@ msgid ""
 "plain text, and \"v\" (for value) if the cell contains any other type of "
 "data."
 msgstr ""
+"يُظهر نوع البيانات الموجودة في الخلية المشار إليها. يتم إظهار القيم التالية: "
+"\"b\" للخلية الفارغة، و\"l\" (للعلامة) إذا كانت الخلية تحتوي على نص عادي، "
+"و\"v\" (للقيمة) إذا كانت الخلية تحتوي على أي نوع آخر من البيانات."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Returns the value contained in the top left cell in reference."
-msgstr ""
+msgstr "يُظهِر القيمة الموجودة في الخلية العلوية اليسرى في المرجع."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7414,13 +7526,13 @@ msgstr "السبت"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Saturday is the only weekend"
-msgstr ""
+msgstr "يوم السبت هو يوم العطلة الوحيد"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Saturday/Sunday are weekends"
-msgstr ""
+msgstr "السبت/الأحد هما عطلة نهاية الأسبوع"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7432,19 +7544,21 @@ msgstr "حفظ"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Scan by column"
-msgstr ""
+msgstr "المسح حسب العمود"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Scan by row (default)"
-msgstr ""
+msgstr "المسح حسب الصف (افتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Scan the array by column. By default, the array is scanned by row."
 msgstr ""
+"قم بمسح المصفوفة عمودًا تلو الآخر. يقوم البرنامج افتراضيًا بمسح المصفوفة صفًا "
+"تلو الآخر."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7478,7 +7592,7 @@ msgstr "البحث في نطاق عن قيمة مطابقة وإحضار الع�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Search first to last (default)"
-msgstr ""
+msgstr "البحث من الأول إلى الأخير (افتراضي)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7490,7 +7604,7 @@ msgstr "البحث في المعادلات"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Search last to first"
-msgstr ""
+msgstr "البحث من الأخير إلى الأول"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7505,6 +7619,8 @@ msgid ""
 "Searches the text for a delimiter match. By default, a case-sensitive match "
 "is done."
 msgstr ""
+"يبحث في النص عن تطابق مع الفاصل. بشكل افتراضي، يتم إجراء البحث مع مراعاة "
+"حالة الأحرف (كبيرة أم صغيرة)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7552,7 +7668,7 @@ msgstr "تحديد الكل"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Semi-annual"
-msgstr ""
+msgstr "نصف سنوي"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7691,7 +7807,7 @@ msgstr "إظهار خطوط الموّصِّل"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Show data markers"
-msgstr ""
+msgstr "إظهار علامات البيانات"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7867,7 +7983,7 @@ msgstr "نطاق محدد"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Specifies how to match search_key with the items in lookup_range. "
-msgstr ""
+msgstr "يحدد كيفية مطابقة search_key مع العناصر الموجودة في lookup_range. "
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7876,6 +7992,8 @@ msgid ""
 "Specifies the search mode to use. By default, a first to last search will be "
 "used."
 msgstr ""
+"يحدد وضع البحث المراد استخدامه. بشكل افتراضي، سيتم استخدام البحث من الأول إلى "
+"الأخير."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7893,13 +8011,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Split dataset by columns"
-msgstr ""
+msgstr "تقسيم مجموعة البيانات حسب الأعمدة"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Split dataset by rows"
-msgstr ""
+msgstr "تقسيم مجموعة البيانات حسب الصفوف"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8652,8 +8770,8 @@ msgid ""
 "Examples: \"0.00\" rounded to 2 decimal places, \"hh:mm:ss\" for "
 "hour:minutes:seconds."
 msgstr ""
-"تنسيق النتيجة يميز بين الأحرف الكبيرة والصغيرة، ومحاط بعلامات اقتباس. أمثلة: "
-"”0.00“ مقرب إلى 2 منزلتين عشريتين، ”hh:mm:ss“ للساعة:الدقائق:الثواني."
+"تنسيق النتيجة يميز بين الأحرف الكبيرة والصغيرة، ومحاط بعلامات اقتباس. أمثلة: ”"
+"0.00“ مقرب إلى 2 منزلتين عشريتين، ”hh:mm:ss“ للساعة:الدقائق:الثواني."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9346,8 +9464,7 @@ msgid ""
 "The first range whose entries will be multiplied with corresponding entries "
 "in the other ranges."
 msgstr ""
-"النطاق الأول الذي ستتم مضاعفة قيوده بمقدار القيود المقابلة في النطاقات "
-"الأخرى."
+"النطاق الأول الذي ستتم مضاعفة قيوده بمقدار القيود المقابلة في النطاقات الأخرى."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9599,8 +9716,8 @@ msgid ""
 "The index from the left of string from which to begin extracting. The first "
 "character in string has the index 1."
 msgstr ""
-"المؤشر يسار السلسلة الذي يجب الاستخلاص منه. الرمز الأول في السلسلة لديه "
-"المؤشر 1."
+"المؤشر يسار السلسلة الذي يجب الاستخلاص منه. الرمز الأول في السلسلة لديه المؤشر "
+"1."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9719,8 +9836,8 @@ msgid ""
 "The last_period (%(last)s) must be smaller or equal to the number_of_periods "
 "(%(nPeriods)s)."
 msgstr ""
-"يجب أن تكون last_period %(last)s أصغر من أو مساوية لـ number_of_periods "
-"%(nPeriods)s."
+"يجب أن تكون last_period %(last)s أصغر من أو مساوية لـ number_of_periods %"
+"(nPeriods)s."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9791,8 +9908,8 @@ msgid ""
 "The maturity or end date of the security, when it can be redeemed at face, "
 "or par value."
 msgstr ""
-"تاريخ الاستحقاق أو تاريخ انتهاء الاستثمار، عندما يمكن تحصيله بقيمته "
-"الظاهرية، أو القيمة الاسمية."
+"تاريخ الاستحقاق أو تاريخ انتهاء الاستثمار، عندما يمكن تحصيله بقيمته الظاهرية، "
+"أو القيمة الاسمية."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10041,6 +10158,8 @@ msgid ""
 "The number of days between start_date and end_date, assuming start_date and "
 "end_date were no more than one year apart"
 msgstr ""
+"عدد الأيام بين start_date و end_date، بافتراض أن start_date و end_date لا يفصل "
+"بينهما أكثر من عام واحد"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10357,8 +10476,7 @@ msgid ""
 "The other range whose entries will be multiplied with corresponding entries "
 "in the other ranges."
 msgstr ""
-"النطاق الآخر الذي ستتم مضاعفة قيوده بمقدار القيود المقابلة في النطاقات "
-"الأخرى."
+"النطاق الآخر الذي ستتم مضاعفة قيوده بمقدار القيود المقابلة في النطاقات الأخرى."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10723,7 +10841,8 @@ msgstr "النطاق للتحقق منه مقابل المعيار1."
 msgid ""
 "The range to consider for the search. Should be a single column or a single "
 "row."
-msgstr "النطاق الذي يجب اعتباره للبحث. يجب أن يكون عموداً واحداً أو صفاً واحداً."
+msgstr ""
+"النطاق الذي يجب اعتباره للبحث. يجب أن يكون عموداً واحداً أو صفاً واحداً."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10732,8 +10851,8 @@ msgid ""
 "The range to consider for the search. The first column in the range is "
 "searched for the key specified in search_key."
 msgstr ""
-"النطاق الذي يجب اعتباره للبحث. يتم البحث في العمود الأول في النطاق عن "
-"المفتاح المحدد في search_key."
+"النطاق الذي يجب اعتباره للبحث. يتم البحث في العمود الأول في النطاق عن المفتاح "
+"المحدد في search_key."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10961,6 +11080,10 @@ msgid ""
 "-1 finds the smallest value greater than or equal to search_key when range "
 "is sorted in descending order."
 msgstr ""
+"طريقة البحث هي رقم 1 أو 0 أو -1 يشير إلى القيمة المطلوب إرجاعها. 1 يبحث عن "
+"أكبر قيمة أقل من أو تساوي search_key عندما يكون النطاق مرتبًا بترتيب تصاعدي. "
+"0 يبحث عن القيمة الدقيقة عندما يكون النطاق غير مرتب. -1 يبحث عن أصغر قيمة "
+"أكبر من أو تساوي search_key عندما يكون النطاق مرتبًا بترتيب تنازلي."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11033,8 +11156,8 @@ msgid ""
 "The settlement date (%(settlement)s) must be greater or equal to the issue "
 "date (%(issue)s)."
 msgstr ""
-"يجب أن يكون تاريخ التسوية (%(settlement)s) أكبر من أو يساوي تاريخ الإصدار "
-"(%(issue)s)."
+"يجب أن يكون تاريخ التسوية (%(settlement)s) أكبر من أو يساوي تاريخ الإصدار (%"
+"(issue)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11052,8 +11175,8 @@ msgid ""
 "The settlement date of the security, the date after issuance when the "
 "security is delivered to the buyer."
 msgstr ""
-"تاريخ تسوية الاستثمار، التاريخ الذي يلي الإصدار عندما يتم توصيل الاستثمار "
-"إلى المشتري."
+"تاريخ تسوية الاستثمار، التاريخ الذي يلي الإصدار عندما يتم توصيل الاستثمار إلى "
+"المشتري."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11448,8 +11571,7 @@ msgstr "يجب أن تكون القيمة (%s) موجبة فقط."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value does not match the custom formula data validation rule"
-msgstr ""
-"لا تتطابق القيمة مع قاعدة التحقق من صحة البيانات الخاصة بالصيغة المخصصة"
+msgstr "لا تتطابق القيمة مع قاعدة التحقق من صحة البيانات الخاصة بالصيغة المخصصة"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12132,8 +12254,7 @@ msgid ""
 "This operation is not possible due to a merge. Please remove the merges "
 "first than try again."
 msgstr ""
-"لا يمكن تنفيذ العملية بسبب الدمج. الرجاء إزالة الدمج أولاً ثم المحاولة من "
-"جديد."
+"لا يمكن تنفيذ العملية بسبب الدمج. الرجاء إزالة الدمج أولاً ثم المحاولة من جديد."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12526,6 +12647,12 @@ msgstr "وظيفة غير معروفة: \"%s\""
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/pivot/pivot_helpers.js:0
+msgid "Unnamed Field"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Unsorted"
 msgstr "لم يتم فرزه"
@@ -12564,6 +12691,12 @@ msgstr "تحديث"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Use col %(column_name)s as headers"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+msgid "Use compact format"
 msgstr ""
 
 #. module: spreadsheet
@@ -12936,14 +13069,14 @@ msgid ""
 "Week value must be a string in the format %(example)s, but received %"
 "(received_value)s instead."
 msgstr ""
-"يجب أن تكون قيمة الأسبوع عبارة عن سلسلة بتنسيق %(example)s، ولكن تم استلام "
-"%(received_value)s عوضاً عن ذلك."
+"يجب أن تكون قيمة الأسبوع عبارة عن سلسلة بتنسيق %(example)s، ولكن تم استلام %"
+"(received_value)s عوضاً عن ذلك."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Weeks"
-msgstr ""
+msgstr "أسابيع"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13031,14 +13164,12 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "Whether or not to remove empty text messages from the split results. The "
-"default behavior is to treat \n"
-"        consecutive delimiters as one (if TRUE). If FALSE, empty cells "
-"values are added between consecutive delimiters."
+"default behavior is to treat         consecutive delimiters as one (if "
+"TRUE). If FALSE, empty cells values are added between consecutive delimiters."
 msgstr ""
-"ما إذا كان يجب إزالة رسالة الرسالة النصية الفارغة من نتائج التقسيم. التصرف "
-"الافتراضي هو التعامل مع \n"
-"        المحددات المتتابعة كواحدة (إذا كانت القيمة صحيحة). إذا كانت القيمة "
-"خاطئة، تتم إضافة قيم الخلايا الفارغة بين المحددات المتتابعة."
+"ما إذا كان سيتم إزالة الرسائل النصية الفارغة من نتائج التقسيم أم لا. السلوك "
+"الافتراضي هو معاملة         الفواصل المتتالية كواحدة (إذا كان TRUE). إذا كان "
+"FALSE، تتم إضافة قيم الخلايا الفارغة بين الفواصل المتتالية."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13121,8 +13252,8 @@ msgid ""
 "Whether to switch to straight-line depreciation when the depreciation is "
 "greater than the declining balance calculation."
 msgstr ""
-"ما إذا كان يجب التبديل إلى إهلاك الخط المستقيم عندما تكون قيمة الإهلاك أكبر "
-"من حساب الرصيد المتناقص أم لا."
+"ما إذا كان يجب التبديل إلى إهلاك الخط المستقيم عندما تكون قيمة الإهلاك أكبر من "
+"حساب الرصيد المتناقص أم لا."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13185,8 +13316,8 @@ msgid ""
 "Wraps the provided row or column of cells by columns after a specified "
 "number of elements to form a new array."
 msgstr ""
-"يقوم بتنظيم صف أو عمود الخلايا المحدد في أعمدة بعد عدد محدد من العناصر "
-"لتكوين مجموعة جديدة."
+"يقوم بتنظيم صف أو عمود الخلايا المحدد في أعمدة بعد عدد محدد من العناصر لتكوين "
+"مجموعة جديدة."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13255,6 +13386,12 @@ msgstr "السنة حتى تاريخه"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Years"
+msgstr "سنوات"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/hooks.js:0
+msgid "Yes"
 msgstr ""
 
 #. module: spreadsheet
@@ -13277,9 +13414,24 @@ msgstr "لا يمكنك إنشاء جداول متداخلة."
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid ""
+"You copied content from a different version of the application. Only text "
+"and image content will be pasted."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/actions/spreadsheet_download_action.js:0
+msgid ""
+"You don't have the rights to export data. Please contact an Administrator."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Zoom"
-msgstr ""
+msgstr "تحجيم"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13503,7 +13655,7 @@ msgstr "سالب"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "not"
-msgstr ""
+msgstr "ليس"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13657,6 +13809,12 @@ msgstr "غدًا"
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/public_readonly_app/public_readonly.xml:0
+msgid "x"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "yesterday"
 msgstr "بالأمس"
@@ -13666,6 +13824,58 @@ msgstr "بالأمس"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "zero"
 msgstr "صفر"
+
+#~ msgid ""
+#~ "An unexpected error occurred while pasting content.\n"
+#~ "          Additional information can be found in the browser console."
+#~ msgstr ""
+#~ "حدث خطأ غير متوقع أثناء لصق المحتوى.\n"
+#~ "          يمكنك العثور على المزيد من المعلومات في وحدة تحكم المتصفح."
+
+#~ msgid ""
+#~ "An unexpected error occurred while pasting content.\n"
+#~ "          This is probably due to a spreadsheet version mismatch."
+#~ msgstr ""
+#~ "حدث خطأ غير متوقع أثناء لصق المحتوى.\n"
+#~ "          ربما يرجع ذلك إلى عدم تطابق إصدار جدول البيانات."
+
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects criteria_range and criterion to be in "
+#~ "pairs."
+#~ msgstr ""
+#~ "تتوقع الدالة  [[FUNCTION_NAME]] من criteria_range والفئة أن يكونوا في "
+#~ "أزواج."
+
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects criteria_range to have the same "
+#~ "dimension"
+#~ msgstr ""
+#~ "تتوقع الدالة [[FUNCTION_NAME]] أن يكون لـ criteria_range نفس الأبعاد"
+
+#~ msgid ""
+#~ "In [[FUNCTION_NAME]], the number of columns of the first matrix (%s) must "
+#~ "be equal to the \n"
+#~ "          number of rows of the second matrix (%s)."
+#~ msgstr ""
+#~ "في [[FUNCTION_NAME]]، يجب أن يكون عدد الأعمدة في المصفوفة الأولى (%s) "
+#~ "مساوياً لعدد\n"
+#~ "          الصفوف ف يالمصفوفة الثانية (%s)."
+
+#~ msgid ""
+#~ "Whether or not to remove empty text messages from the split results. The "
+#~ "default behavior is to treat \n"
+#~ "        consecutive delimiters as one (if TRUE). If FALSE, empty cells "
+#~ "values are added between consecutive delimiters."
+#~ msgstr ""
+#~ "ما إذا كان يجب إزالة رسالة الرسالة النصية الفارغة من نتائج التقسيم. "
+#~ "التصرف الافتراضي هو التعامل مع \n"
+#~ "        المحددات المتتابعة كواحدة (إذا كانت القيمة صحيحة). إذا كانت "
+#~ "القيمة خاطئة، تتم إضافة قيم الخلايا الفارغة بين المحددات المتتابعة."
+
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+#~ msgstr ""
+#~ "تتوقع الدالة [[FUNCTION_NAME]] قيماً رقمية لـ %s، ولكنها حصلت على %s."
 
 #~ msgid ""
 #~ "(0) Exact match. \n"

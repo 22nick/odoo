@@ -11,9 +11,13 @@ export const QUICK_CREATE_CALENDAR_EVENT_FIELDS = {
     stop_date: { type: "date" },
     stop: { type: "datetime" },
     allday: { type: "boolean" },
+    // forwards the duration kept in the hidden, force_save'd field of the quick-create form
+    duration: { type: "float" },
     partner_ids: { type: "many2many" },
+    privacy: { type: "selection" },
+    location: { type: "string" },
     videocall_location: { type: "string" },
-    description: { type: "string" }
+    notes: { type: "string" }
 };
 
 function getDefaultValuesFromRecord(data) {

@@ -98,6 +98,7 @@ class StockLocation(models.Model):
         'check(cyclic_inventory_frequency >= 0)',
         'The inventory frequency (days) for a location must be non-negative',
     )
+    _parent_path_id_idx = models.Index("(parent_path, id)")
 
     @api.depends('name', 'location_id.complete_name', 'usage')
     @api.depends_context('formatted_display_name')
@@ -327,7 +328,9 @@ class StockLocation(models.Model):
                                              reverse=True)
 
         putaway_location = None
-        locations = self.child_internal_location_ids
+        locations = self.env.context.get("locations")
+        if not locations:
+            locations = self.child_internal_location_ids
         if putaway_rules:
             # get current product qty (qty in current quants and future qty on assigned ml) of all child locations
             qty_by_location = defaultdict(lambda: 0)
@@ -418,6 +421,23 @@ class StockLocation(models.Model):
         specified."""
         self.ensure_one()
         if self.storage_category_id:
+            positive_quant = self.quant_ids.filtered(lambda q: q.product_id.uom_id.compare(q.quantity, 0) > 0)
+            # check if only allow new product when empty
+            if self.storage_category_id.allow_new_product == "empty" and positive_quant:
+                return False
+            # check if only allow same product
+            if self.storage_category_id.allow_new_product == "same":
+                # In case it's a package, `product` is not defined, so try to get
+                # the package products from the context
+                product = product or self.env.context.get('products')
+                if (positive_quant and positive_quant.product_id != product) or len(product) > 1:
+                    return False
+                if self.env['stock.move.line'].search_count([
+                    ('product_id', '!=', product.id),
+                    ('state', 'not in', ('done', 'cancel')),
+                    ('location_dest_id', '=', self.id),
+                ], limit=1):
+                    return False
             forecast_weight = self._get_weight(self.env.context.get('exclude_sml_ids', set()))[self]['forecast_weight']
             # check if enough space
             if package and package.package_type_id:
@@ -438,23 +458,6 @@ class StockLocation(models.Model):
                 if product_capacity and location_qty >= product_capacity.quantity:
                     return False
                 if product_capacity and quantity + location_qty > product_capacity.quantity:
-                    return False
-            positive_quant = self.quant_ids.filtered(lambda q: q.product_id.uom_id.compare(q.quantity, 0) > 0)
-            # check if only allow new product when empty
-            if self.storage_category_id.allow_new_product == "empty" and positive_quant:
-                return False
-            # check if only allow same product
-            if self.storage_category_id.allow_new_product == "same":
-                # In case it's a package, `product` is not defined, so try to get
-                # the package products from the context
-                product = product or self.env.context.get('products')
-                if (positive_quant and positive_quant.product_id != product) or len(product) > 1:
-                    return False
-                if self.env['stock.move.line'].search_count([
-                    ('product_id', '!=', product.id),
-                    ('state', 'not in', ('done', 'cancel')),
-                    ('location_dest_id', '=', self.id),
-                ], limit=1):
                     return False
         return True
 

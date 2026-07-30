@@ -558,13 +558,47 @@ class TestMrpProductionBackorder(TestMrpCommon):
         self.assertEqual(mo2.move_raw_ids.filtered(lambda m: m.product_id == p2).product_qty, 4)
         self.assertEqual(mo3.move_raw_ids.filtered(lambda m: m.product_id == p2).product_qty, 2)
 
+        location = self.env['stock.location'].search([], limit=1)
+        mo.production_group_id.production_ids.location_final_id = location
         # Merge them back
         expected_origin = ",".join([mo1.name, mo2.name, mo3.name])
         action = (mo1 + mo2 + mo3).action_merge()
         mo = self.env[action['res_model']].browse(action['res_id'])
+        self.assertEqual(mo.location_final_id, location)
         # Check origin & initial quantity
         self.assertEqual(mo.origin, expected_origin)
         self.assertEqual(mo.product_qty, 10)
+
+    def test_split_merge_production_group(self):
+        """ Ensure that splitting and then merging MO's properly unlinks and deletes the production groups.
+        The group should only be deleted when no MO's are associated to it anymore.
+        """
+        mo_1 = self.generate_mo(qty_final=12)[0]
+        mo_2 = mo_1.copy()
+        mo_2.action_confirm()
+        pg_1 = mo_1.production_group_id
+        pg_2 = mo_2.production_group_id
+        # Split into 4
+        action = mo_1.action_split()
+        wizard = Form.from_action(self.env, action)
+        wizard.max_batch_size = 3
+        action = wizard.save().action_split()
+        # Split into 2
+        action = mo_2.action_split()
+        wizard = Form.from_action(self.env, action)
+        wizard.max_batch_size = 6
+        action = wizard.save().action_split()
+
+        (pg_1.production_ids[0] + pg_2.production_ids[0]).action_merge()
+        self.assertEqual(len(pg_1.production_ids), 3)
+        self.assertEqual(len(pg_2.production_ids), 1)
+
+        (pg_1.production_ids[0] + pg_2.production_ids[0]).action_merge()
+        self.assertEqual(len(pg_1.production_ids), 2)
+        self.assertFalse(pg_2.exists())
+
+        (pg_1.production_ids[0] + pg_1.production_ids[1]).action_merge()
+        self.assertFalse(pg_1.exists())
 
     def test_reservation_method_w_mo(self):
         """ Create a MO for 2 units, Produce 1 and create a backorder.
@@ -916,6 +950,88 @@ class TestMrpProductionBackorder(TestMrpCommon):
         self.assertRecordValues(mo_all_produced, [{'state': 'done', 'qty_produced': product_qty, 'mrp_production_backorder_count': 1, 'priority': '0'}])
         self.assertRecordValues(mo_ask, [{'state': 'done', 'qty_produced': qty_produced, 'mrp_production_backorder_count': 1, 'priority': '0'}])
         self.assertRecordValues(mo_never, [{'state': 'done', 'qty_produced': qty_produced, 'mrp_production_backorder_count': 1, 'priority': '0'}])
+
+    def test_cancel_backorder_3_step_no_propagation(self):
+        '''
+        Ensure the post-prod -> stock picking for the produced quantity doesn't
+        get cancelled with the backorder production.
+        '''
+        warehouse = self.env['stock.warehouse'].search([], limit=1)
+        # 3 steps Manufacture
+        warehouse.write({'manufacture_steps': 'pbm_sam'})
+
+        mo = self.env['mrp.production'].create({
+            'bom_id': self.bom_4.id,
+            'product_qty': 5,
+            'location_src_id': warehouse.pbm_loc_id.id,
+        })
+        mo.action_confirm()
+        mo.picking_ids.button_validate()
+        mo_form = Form(mo)
+        mo_form.qty_producing = 1
+        mo = mo_form.save()
+        action = mo.button_mark_done()
+        Form(self.env['mrp.production.backorder'].with_context(**action['context'])).save().action_backorder()
+        self.assertEqual(len(mo.production_group_id.production_ids), 2)
+
+        # Cancel backorder
+        mo.production_group_id.production_ids[-1].action_cancel()
+        self.assertFalse(mo.picking_ids.filtered(lambda p: p.state == 'cancel' and p.product_id == self.product_6))
+
+    def test_onchange_lot_ids_for_lot_tracked_product_with_reservation(self):
+        """
+        Checks that the consumed quantity is correctly recorded on a manufacturing
+        order configured for 2-step manufacturing (pick before manufacture) when a
+        backorder is created. After partially transferring lot-tracked components to
+        the pre-production location and producing a fraction of the total quantity,
+        the done order should reflect the actual components consumed, not zero.
+        """
+        self.warehouse_1.manufacture_steps = 'pbm'
+        final_product, component = self.product, self.productA
+        self.productA.tracking = 'lot'
+        bom = self.env['mrp.bom'].create({
+            'product_id': final_product.id,
+            'product_tmpl_id': final_product.product_tmpl_id.id,
+            'product_uom_id': self.uom_unit.id,
+            'product_qty': 1.0,
+            'type': 'normal',
+            'consumption': 'flexible',
+            'bom_line_ids': [Command.create({'product_id': component.id, 'product_qty': 2.0})],
+        })
+        lots = self.env['stock.lot'].create([{'name': f'LOT00{i + 1}', 'product_id': component.id} for i in range(2)])
+        mo = self.env['mrp.production'].create({
+            'product_id': final_product.id,
+            'bom_id': bom.id,
+            'product_qty': 5,
+            'warehouse_id': self.warehouse_1.id,
+        })
+        mo.action_confirm()
+
+        # Reserve and partially validate the PBM picking
+        pbm_picking = mo.picking_ids
+        pbm_picking.move_ids.quantity = 6.0
+        pbm_picking.move_ids.move_line_ids.lot_id = lots[0]
+        Form.from_action(self.env, pbm_picking.button_validate()).save().process()
+
+        # Produce 1 unit (consumes 2 components), then create a backorder
+        with Form(mo) as mo_form:
+            mo_form.qty_producing = 1
+        Form.from_action(self.env, mo.button_mark_done()).save().action_backorder()
+        self.assertEqual(mo.move_raw_ids.quantity, 2.0)
+        backorder = mo.production_group_id.production_ids - mo
+        # Produce 3 unit (should consume 6 components but only 4 are already available)
+        with Form(backorder) as backorder_form:
+            backorder_form.qty_producing = 3
+        self.assertEqual(backorder.move_raw_ids.quantity, 4.0)
+        pbm_picking_bo = backorder.picking_ids[-1]
+        pbm_picking_bo.move_ids.quantity = 4.0
+        pbm_picking_bo.move_ids.move_line_ids.lot_id = lots[1]
+        pbm_picking_bo.button_validate()
+        with Form(backorder) as backorder_form:
+            backorder_form.qty_producing = 4
+        self.assertEqual(backorder.move_raw_ids.quantity, 8.0)
+        mo.button_mark_done()
+        self.assertEqual(backorder.move_raw_ids.quantity, 8.0)
 
 
 class TestMrpWorkorderBackorder(TransactionCase):

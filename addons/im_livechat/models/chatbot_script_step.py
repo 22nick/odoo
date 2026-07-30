@@ -34,7 +34,7 @@ class ChatbotScriptStep(models.Model):
         'chatbot.script.answer', 'script_step_id',
         copy=True, string='Answers')
     triggering_answer_ids = fields.Many2many(
-        'chatbot.script.answer', domain="[('script_step_id.sequence', '<', sequence)]",
+        'chatbot.script.answer', domain="[('script_step_id.sequence', '<', sequence), ('script_step_id.chatbot_script_id', '=', chatbot_script_id)]",
         compute='_compute_triggering_answer_ids', readonly=False, store=True,
         copy=False,  # copied manually, see chatbot.script#copy
         string='Only If', help='Show this step only if all of these answers have been selected.')
@@ -216,7 +216,7 @@ class ChatbotScriptStep(models.Model):
     def _find_first_user_free_input(self, discuss_channel):
         """Find the first message from the visitor responding to a free_input step."""
         chatbot_partner = self.chatbot_script_id.operator_partner_id
-        user_answers = discuss_channel.chatbot_message_ids.filtered(
+        user_answers = discuss_channel.sudo().chatbot_message_ids.filtered(
             lambda m: m.mail_message_id.author_id != chatbot_partner
         ).sorted("id")
         for answer in user_answers:

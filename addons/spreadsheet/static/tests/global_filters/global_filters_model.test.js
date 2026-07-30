@@ -310,6 +310,28 @@ test("Can save a value to an existing global filter", async function () {
     expect(listDomain.length).toBe(3);
 });
 
+test("Command rejected when setting the same date filter value", async () => {
+    const { model } = await createSpreadsheetWithPivotAndList();
+    await addGlobalFilter(model, THIS_YEAR_GLOBAL_FILTER, {
+        pivot: DEFAULT_FIELD_MATCHINGS,
+        list: DEFAULT_LIST_FIELD_MATCHINGS,
+    });
+    const gf = model.getters.getGlobalFilters()[0];
+    const year = DateTime.local().year;
+
+    let result = await setGlobalFilterValue(model, {
+        id: gf.id,
+        value: { type: "month", month: 2, year },
+    });
+    expect(result).toBe(DispatchResult.Success);
+
+    result = await setGlobalFilterValue(model, {
+        id: gf.id,
+        value: { type: "month", month: 2, year },
+    });
+    expect(result.reasons).toEqual([CommandResult.NoChanges]);
+});
+
 test("Domain of simple date filter", async function () {
     mockDate("2022-07-14 00:00:00");
     const { model } = await createSpreadsheetWithPivotAndList();
@@ -1677,6 +1699,54 @@ test("Export from/to global filters for excel", async function () {
     expect(getCell(exportedModel, "C2", sheetId).format).toBe("m/d/yyyy");
 });
 
+test("Export boolean global filters with undefined value for excel", async function () {
+    const { model } = await createSpreadsheetWithPivotAndList();
+    await addGlobalFilter(model, { id: "42", label: "test", type: "boolean" });
+    const filterPlugin = model["handlers"].find(
+        (handler) => handler instanceof GlobalFiltersCoreViewPlugin
+    );
+    const exportData = { styles: [], sheets: [] };
+    filterPlugin.exportForExcel(exportData);
+    const filterSheet = exportData.sheets[0];
+    expect(filterSheet.cells["A1"]).toBe("Filter");
+    expect(filterSheet.cells["A2"]).toBe("test");
+    expect(filterSheet.cells["B1"]).toBe("Value");
+    expect(filterSheet.cells["B2"]).toBe("");
+
+    model.exportXLSX(); // should not crash
+});
+
+test("Export relational global filter for excel", async function () {
+    const { model } = await createSpreadsheetWithPivotAndList();
+    await addGlobalFilter(model, {
+        id: "1",
+        label: "test relation in",
+        type: "relation",
+        defaultValue: { operator: "in", ids: [1, 2] },
+    });
+    await addGlobalFilter(model, {
+        id: "2",
+        label: "test relation ilike",
+        type: "relation",
+        defaultValue: { operator: "ilike", strings: ["hello", "world"] },
+    });
+
+    const filterPlugin = model["handlers"].find(
+        (handler) => handler instanceof GlobalFiltersCoreViewPlugin
+    );
+    const exportData = { styles: [], sheets: [], formats: {} };
+    filterPlugin.exportForExcel(exportData);
+    const filterSheet = exportData.sheets[0];
+
+    expect(filterSheet.cells["A2"]).toBe("test relation in");
+    expect(filterSheet.cells["B2"]).toBe("1, 2");
+
+    expect(filterSheet.cells["A3"]).toBe("test relation ilike");
+    expect(filterSheet.cells["B3"]).toBe("hello, world");
+
+    model.exportXLSX(); // should not crash
+});
+
 test("Date filter automatic default value for years filter", async function () {
     const label = "This year";
     const { model } = await createSpreadsheetWithPivot();
@@ -2165,6 +2235,7 @@ test("Can set a value to a relation filter from the SET_MANY_GLOBAL_FILTER_VALUE
     await addGlobalFilter(model, {
         id: "42",
         type: "relation",
+        label: "relational filter",
     });
     model.dispatch("SET_MANY_GLOBAL_FILTER_VALUE", {
         filters: [{ filterId: "42", value: { operator: "in", ids: [31] } }],
@@ -2182,6 +2253,7 @@ test("Can set a value to a date filter from the SET_MANY_GLOBAL_FILTER_VALUE com
     await addGlobalFilter(model, {
         id: "42",
         type: "date",
+        label: "This month",
         defaultValue: "this_month",
     });
     const newValue = { type: "month", year: 2016, month: 5 };
@@ -2193,6 +2265,72 @@ test("Can set a value to a date filter from the SET_MANY_GLOBAL_FILTER_VALUE com
         filters: [{ filterId: "42" }],
     });
     expect(model.getters.getGlobalFilterValue("42")).toBe(undefined);
+});
+
+test("SET_GLOBAL_FILTER_VALUE dispatched multiple times -> multiple RPC calls", async function () {
+    const { model } = await createSpreadsheetWithList({
+        mockRPC: function (_, { model: m, method }) {
+            if (m === "partner" && method === "web_search_read") {
+                expect.step("web_search_read");
+            }
+        },
+    });
+    await addGlobalFilter(
+        model,
+        { id: "f1", type: "date", label: "Filter 1" },
+        { list: { 1: { chain: "date", type: "date" } } }
+    );
+    await addGlobalFilter(
+        model,
+        { id: "f2", type: "relation", label: "Filter 2" },
+        { list: { 1: { chain: "product_id", type: "many2one" } } }
+    );
+    expect.verifySteps(["web_search_read"]);
+
+    model.dispatch("SET_GLOBAL_FILTER_VALUE", {
+        id: "f1",
+        value: { type: "year", year: 2024 },
+    });
+    model.dispatch("SET_GLOBAL_FILTER_VALUE", {
+        id: "f2",
+        value: { operator: "in", ids: [1] },
+    });
+    await waitForDataLoaded(model);
+
+    // 2 separate reloads: one per SET_GLOBAL_FILTER_VALUE dispatch
+    expect.verifySteps(["web_search_read", "web_search_read"]);
+});
+
+test("SET_MANY_GLOBAL_FILTER_VALUE -> batched updates trigger single RPC call", async function () {
+    const { model } = await createSpreadsheetWithList({
+        mockRPC: function (_, { model: m, method }) {
+            if (m === "partner" && method === "web_search_read") {
+                expect.step("web_search_read");
+            }
+        },
+    });
+    await addGlobalFilter(
+        model,
+        { id: "f1", type: "date", label: "Filter 1" },
+        { list: { 1: { chain: "date", type: "date" } } }
+    );
+    await addGlobalFilter(
+        model,
+        { id: "f2", type: "relation", label: "Filter 2" },
+        { list: { 1: { chain: "product_id", type: "many2one" } } }
+    );
+    expect.verifySteps(["web_search_read"]);
+
+    model.dispatch("SET_MANY_GLOBAL_FILTER_VALUE", {
+        filters: [
+            { filterId: "f1", value: { type: "year", year: 2024 } },
+            { filterId: "f2", value: { operator: "in", ids: [1] } },
+        ],
+    });
+    await waitForDataLoaded(model);
+
+    // only 1 reload for both filters changed together
+    expect.verifySteps(["web_search_read"]);
 });
 
 test("getFiltersMatchingPivot return correctly matching filter according to cell formula", async function () {

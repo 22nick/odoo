@@ -1,7 +1,8 @@
+from odoo.addons.mail.tests.common import MailCase
 from odoo.addons.project.tests.test_project_base import TestProjectCommon
 
 
-class TestTaskTemplates(TestProjectCommon):
+class TestTaskTemplates(TestProjectCommon, MailCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -93,4 +94,53 @@ class TestTaskTemplates(TestProjectCommon):
             ),
             task | child,
             "The search should find the non template task and its child",
+        )
+
+    def test_send_creation_email_on_task_creation_from_template(self):
+        self.template_task.project_id.message_subscribe(
+            partner_ids=self.user_projectuser.partner_id.ids,
+            subtype_ids=(self.env.ref('mail.mt_comment') + self.env.ref('project.mt_task_new')).ids
+        )
+        with self.mock_mail_gateway():
+            task_id = self.template_task.with_user(self.user_projectmanager).action_create_from_template()
+        task = self.env["project.task"].browse(task_id)
+        self.assertEqual(task.message_ids[0].subtype_id, self.env.ref('project.mt_task_new'))
+        self.assertEqual(task.message_ids[0].notified_partner_ids, self.user_projectuser.partner_id)
+
+    def test_subtask_count_ignores_template_child_on_normal_parent(self):
+        """Template subtasks should not be counted on a normal parent task."""
+        parent_task = self.env["project.task"].create({
+            "name": "Normal Parent",
+            "project_id": self.project_with_templates.id,
+        })
+        self.env["project.task"].create({
+            "name": "Template Child",
+            "project_id": self.project_with_templates.id,
+            "parent_id": parent_task.id,
+            "is_template": True,
+        })
+
+        self.assertEqual(parent_task.subtask_count, 0, "Template subtasks should not be counted on a normal parent task.")
+
+    def test_open_task_count_on_template_parent(self):
+        """Template parents should not count normal children in project open_task_count."""
+        self.assertEqual(
+            self.project_with_templates.open_task_count,
+            0,
+            "Template parent child tasks should not be counted in project open_task_count.",
+        )
+
+    def test_template_parent_counts_template_subtasks_in_subtask_count(self):
+        """Template parents should still count template subtasks."""
+        self.env["project.task"].create({
+            "name": "Template Child",
+            "project_id": self.project_with_templates.id,
+            "parent_id": self.template_task.id,
+            "is_template": True,
+        })
+
+        self.assertEqual(
+            self.template_task.subtask_count,
+            2,
+            "Template parent tasks should count template subtasks in subtask_count.",
         )

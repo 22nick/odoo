@@ -55,8 +55,10 @@
                 padding: 0;
             }
 
-            div[class*="col-"] + div[class*="col-"] {
-                border-left: 1px solid $dropdown-divider-bg;
+            @include media-breakpoint-up(sm) {
+                > div + div {
+                    border-left: 1px solid $dropdown-divider-bg;
+                }
             }
             > div:last-child {
                 @include o-kanban-dashboard-dropdown-link($link-padding-gap: $o-kanban-dashboard-dropdown-complex-gap);
@@ -208,7 +210,7 @@
         .o_kanban_group,
         .o_column_quick_create:not(.o_quick_create_folded) {
             &:not(.o_column_folded) {
-                flex-grow: 1;
+                flex: 1 1;
                 min-width: var(--KanbanGroup-width);
             }
             max-width: var(--KanbanGroup-max-width);

@@ -2,15 +2,17 @@
 # This file contains the translation of the following modules:
 # * spreadsheet
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Thi Huong Nguyen (thng)" <thng@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Thi Huong Nguyen (thng)" <thng@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# Deleted User <noreply+31@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-10-16 06:07+0000\n"
-"Last-Translator: \"Thi Huong Nguyen (thng)\" <thng@odoo.com>\n"
+"POT-Creation-Date: 2026-06-19 17:36+0000\n"
+"PO-Revision-Date: 2026-06-30 11:37+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/"
 "spreadsheet/vi/>\n"
 "Language: vi\n"
@@ -18,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -146,13 +148,13 @@ msgstr "%s (sao chép)"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "%s (exclude manually-hidden rows)"
-msgstr ""
+msgstr "%s (loại trừ các hàng bị ẩn thủ công)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "%s (include manually-hidden rows)"
-msgstr ""
+msgstr "%s (bao gồm các hàng bị ẩn thủ công)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -211,8 +213,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "%s is not a valid day of week (it should be a number between 1 and 7)"
-msgstr ""
-"%s không phải là ngày hợp lệ trong tuần (đây phải là một số từ 1 đến 7)"
+msgstr "%s không phải là ngày hợp lệ trong tuần (đây phải là một số từ 1 đến 7)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -258,6 +259,12 @@ msgstr "%s kết quả trong tất cả trang tính"
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "'${str}'"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "(Blanks)"
 msgstr "(Trống)"
@@ -284,7 +291,7 @@ msgstr "(trước)"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "+ \"Others\" group"
-msgstr ""
+msgstr "+ Nhóm \"Khác\""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -296,13 +303,13 @@ msgstr "+ Thêm một quy tắc khác"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "+ Add chart"
-msgstr ""
+msgstr "+ Thêm biểu đồ"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "+ Add data view"
-msgstr ""
+msgstr "+ Thêm chế độ xem dữ liệu"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -317,6 +324,8 @@ msgid ""
 "0 = first match, 1 = all matches as an array, 2 = capturing groups from the "
 "first match as an array."
 msgstr ""
+"0 = kết quả khớp đầu tiên, 1 = tất cả kết quả khớp dưới dạng mảng, 2 = các "
+"nhóm nhận được từ kết quả khớp đầu tiên dưới dạng mảng."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -346,6 +355,12 @@ msgstr "2 hàng"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "=PIVOT(${"
+msgstr "=PIVOT(${"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+msgid "A"
 msgstr ""
 
 #. module: spreadsheet
@@ -364,6 +379,7 @@ msgstr ""
 msgid ""
 "A boolean indicating whether to use A1 style notation or R1C1 style notation."
 msgstr ""
+"Một giá trị boolean cho biết liệu nên sử dụng ký hiệu A1 hay ký hiệu R1C1."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -407,7 +423,7 @@ msgstr "Một cờ xác định xem có tính toán giao điểm intercept hay k
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "A flag specifying whether to compute the slope or not"
-msgstr ""
+msgstr "Cờ chỉ định liệu có tính toán độ dốc hay không"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -518,6 +534,12 @@ msgstr "Một hằng số mảng hoặc phạm vi chứa ngày được coi là 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "A reference to a cell."
+msgstr "Tham chiếu đến một ô."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "A segment of a string."
 msgstr "Một đoạn của một chuỗi."
 
@@ -562,13 +584,13 @@ msgstr "Mỗi bảng chỉ có thể được tạo trên một lựa chọn li�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "A text abbreviation for unit of time."
-msgstr ""
+msgstr "Viết tắt của đơn vị thời gian."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "A1 style (default)"
-msgstr ""
+msgstr "Kiểu A1 (mặc định)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -605,6 +627,12 @@ msgstr "Giá trị tuyệt đối"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Absolute value of a number."
 msgstr "Giá trị tuyệt đối của một số."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/actions/spreadsheet_download_action.js:0
+msgid "Access Error"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -668,13 +696,13 @@ msgstr "Thêm"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Add a Title"
-msgstr ""
+msgstr "Thêm tiêu đề"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Add a baseline description"
-msgstr ""
+msgstr "Thêm phần mô tả cơ sở"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -683,12 +711,14 @@ msgid ""
 "Add a chart to the carousel. You can also add a chart by dragging and "
 "dropping it over the carousel figure."
 msgstr ""
+"Thêm biểu đồ vào băng chuyền. Bạn cũng có thể thêm biểu đồ bằng cách kéo và "
+"thả nó lên hình băng chuyền."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Add a key value description"
-msgstr ""
+msgstr "Thêm mô tả cho cặp khóa và giá trị"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -731,6 +761,8 @@ msgstr "Thêm phạm vi"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Additional cases to try if the previous ones don't match expression."
 msgstr ""
+"Các trường hợp bổ sung để thử nếu những trường hợp trước không khớp với biểu "
+"thức."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -883,6 +915,8 @@ msgid ""
 "Additional values to be returned if their corresponding cases match "
 "expression."
 msgstr ""
+"Các giá trị bổ sung sẽ được trả về nếu các trường hợp tương ứng của chúng "
+"khớp với biểu thức."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -902,7 +936,7 @@ msgstr "Trọng số bổ sung."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "Africa"
-msgstr ""
+msgstr "Châu Phi"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -947,14 +981,14 @@ msgid ""
 "All the dates should be greater or equal to the first date in cashflow_dates "
 "(%s)."
 msgstr ""
-"Tất cả các ngày phải lớn hơn hoặc bằng ngày đầu tiên trong "
-"cashflow_dates(%s)."
+"Tất cả các ngày phải lớn hơn hoặc bằng ngày đầu tiên trong cashflow_dates(%s)"
+"."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "All the ranges must have the same dimensions."
-msgstr "Tất cả phạm vi phải có cùng danh mục."
+msgstr "Tất cả phạm vi phải có cùng kích thước."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -962,7 +996,7 @@ msgstr "Tất cả phạm vi phải có cùng danh mục."
 #: code:addons/spreadsheet/static/src/global_filters/components/default_date_value/default_date_value.js:0
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "All time"
-msgstr ""
+msgstr "Mọi lúc"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -994,7 +1028,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "An error occurred while uploading the image. %s"
-msgstr ""
+msgstr "Đã xảy ra lỗi khi tải lên hình ảnh. %s"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1059,8 +1093,7 @@ msgid ""
 "An integer specifying the dimension size of the unit matrix. It must be "
 "positive."
 msgstr ""
-"Một số nguyên xác định kích thước danh mục của ma trận đơn vị. Đây phải là "
-"số dương."
+"Một số nguyên xác định kích thước của ma trận đơn vị. Đây phải là số dương."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1069,6 +1102,8 @@ msgid ""
 "An optional default value to be returned if none of the cases match "
 "expression."
 msgstr ""
+"Một giá trị mặc định tùy chọn sẽ được trả về nếu không có trường hợp nào "
+"khớp với biểu thức."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1115,24 +1150,6 @@ msgstr "Đã xảy ra lỗi không mong muốn trong quá trình truyền hình 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid ""
-"An unexpected error occurred while pasting content.\n"
-"          Additional information can be found in the browser console."
-msgstr ""
-
-#. module: spreadsheet
-#. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid ""
-"An unexpected error occurred while pasting content.\n"
-"          This is probably due to a spreadsheet version mismatch."
-msgstr ""
-"Đã xảy ra lỗi không mong muốn khi dán nội dung.\n"
-"Có thể là do phiên bản bảng tính không khớp."
-
-#. module: spreadsheet
-#. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "An unexpected error occurred. Submit a support ticket at odoo.com/help."
 msgstr "Đã xảy ra lỗi không mong muốn. Hãy gửi phiếu hỗ trợ tại odoo.com/help."
 
@@ -1146,7 +1163,7 @@ msgstr "Góc từ trục X đến một điểm (x,y), tính bằng radian."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Annual"
-msgstr ""
+msgstr "Hàng năm"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1343,8 +1360,8 @@ msgstr "Mảng hoặc phạm vi chứa tập dữ liệu cần xem xét."
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "Array result was not expanded because it would overwrite data in %s."
-msgstr "Kết quả mảng không được mở rộng vì nó sẽ ghi đè dữ liệu trong %s."
+msgid "Array result was not expanded because it would overwrite data."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1375,19 +1392,19 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "Asia"
-msgstr ""
+msgstr "Châu Á"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "At least one delimiter must be provided."
-msgstr ""
+msgstr "Phải cung cấp ít nhất một dấu phân cách."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "At least one measure and/or dimension is not correct."
-msgstr "Có ít nhất một chỉ số và/hoặc danh mục không chính xác."
+msgstr "Có ít nhất một chỉ số và/hoặc chiều dữ liệu không chính xác."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1517,7 +1534,7 @@ msgstr "Đường cơ sở"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Baseline Style"
-msgstr ""
+msgstr "Kiểu đường cơ sở"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1541,19 +1558,19 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Billion"
-msgstr ""
+msgstr "Tỷ"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Binary search (sorted ascending order)"
-msgstr ""
+msgstr "Tìm kiếm nhị phân (kết quả được sắp xếp tăng dần)"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Binary search (sorted descending order)"
-msgstr ""
+msgstr "Tìm kiếm nhị phân (kết quả được sắp xếp giảm dần)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1565,7 +1582,7 @@ msgstr "Đen"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Blues"
-msgstr ""
+msgstr "Xanh lam"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1617,13 +1634,13 @@ msgstr "Dưới"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Bottom left"
-msgstr ""
+msgstr "Dưới cùng bên trái"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Bottom right"
-msgstr ""
+msgstr "Dưới cùng bên phải"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1641,7 +1658,7 @@ msgstr "Chỉ số tính toán %s"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Calculated measure 1"
-msgstr ""
+msgstr "Chỉ số được tính toán 1"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1795,7 +1812,7 @@ msgstr "Không thể dán một hình đặc biệt."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Cannot duplicate a pivot in error."
-msgstr ""
+msgstr "Không thể sao chép pivot lỗi."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1837,7 +1854,7 @@ msgstr "Không thể xóa các bản sao vì lý do không xác định"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Cannot sort a zone with array formulas."
-msgstr ""
+msgstr "Không thể sắp xếp một vùng có công thức mảng."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1877,7 +1894,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Carousel"
-msgstr ""
+msgstr "Băng chuyền"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1925,19 +1942,19 @@ msgstr "Danh mục/Nhãn"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Category"
-msgstr ""
+msgstr "Danh mục"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Category color"
-msgstr ""
+msgstr "Màu danh mục"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Caused by"
-msgstr ""
+msgstr "Gây ra bởi"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1955,7 +1972,7 @@ msgstr "Giữa"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Center radius"
-msgstr ""
+msgstr "Bán kính tâm"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1977,13 +1994,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Character or string to split columns by."
-msgstr ""
+msgstr "Ký tự hoặc chuỗi để tách cột."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Character or string to split rows by."
-msgstr ""
+msgstr "Ký tự hoặc chuỗi để tách hàng."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -1995,13 +2012,13 @@ msgstr "Biểu đồ"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/index.js:0
 msgid "Chart - %(chart_model)s"
-msgstr ""
+msgstr "Biểu đồ - %(chart_model)s"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Chart copied to clipboard"
-msgstr ""
+msgstr "Biểu đồ đã được sao chép vào bộ nhớ tạm"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2023,21 +2040,29 @@ msgstr "Hộp kiểm"
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid ""
+"Checks whether there is a reference to a cell that contains a formula, and "
+"returns TRUE or FALSE."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Chip"
-msgstr ""
+msgstr "Chip"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Circular reference"
-msgstr "Lỗi vòng lặp"
+msgstr "Tham chiếu vòng lặp"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Cividis"
-msgstr ""
+msgstr "Cividis"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2092,7 +2117,7 @@ msgstr "Xoá hàng %s - %s"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Click to select the cell"
-msgstr ""
+msgstr "Nhấp để chọn ô"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2104,7 +2129,7 @@ msgstr "Clip"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Close menu bar"
-msgstr ""
+msgstr "Đóng thanh menu"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2152,7 +2177,7 @@ msgstr "Màu xuống"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Color Scale"
-msgstr ""
+msgstr "Thang màu"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2164,19 +2189,19 @@ msgstr "Màu lên"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Color of maximum values"
-msgstr ""
+msgstr "Màu của giá trị lớn nhất"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Color of middle values"
-msgstr ""
+msgstr "Màu của giá trị trung bình"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Color of minimum values"
-msgstr ""
+msgstr "Màu của giá trị nhỏ nhất"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2288,6 +2313,14 @@ msgstr "Dấy phẩy"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Compare two numeric values, returning 1 if they're equal."
 msgstr "So sánh hai giá trị số, trả về 1 nếu chúng bằng nhau."
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
+msgid ""
+"Compatibility version of ODOO.FILTER.VALUE for v18 spreadsheets. Required "
+"for date filters. Optional for others."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2458,7 +2491,7 @@ msgstr "Chuyển đổi một chuỗi xác định thành chữ hoa."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Converts a string to a numeric value."
-msgstr ""
+msgstr "Chuyển đổi một chuỗi thành giá trị số."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2506,7 +2539,7 @@ msgstr "Sao chép"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Copy as image"
-msgstr ""
+msgstr "Sao chép dưới dạng ảnh"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2574,7 +2607,7 @@ msgstr "Đếm các giá trị phụ thuộc vào nhiều tiêu chí."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Countries without value"
-msgstr ""
+msgstr "Các quốc gia không có giá trị"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2685,19 +2718,19 @@ msgstr "Tiền tệ được làm tròn"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/default_date_value/default_date_value.js:0
 msgid "Current Month"
-msgstr ""
+msgstr "Tháng này"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/default_date_value/default_date_value.js:0
 msgid "Current Quarter"
-msgstr ""
+msgstr "Quý hiện tại"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/default_date_value/default_date_value.js:0
 msgid "Current Year"
-msgstr ""
+msgstr "Năm hiện hành"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2728,7 +2761,7 @@ msgstr "Tùy chỉnh"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/date_filter_dropdown/date_filter_dropdown.js:0
 msgid "Custom Range"
-msgstr ""
+msgstr "Phạm vi tùy chỉnh"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -2794,7 +2827,7 @@ msgstr "Dữ liệu"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Data Series"
-msgstr ""
+msgstr "Chuỗi dữ liệu"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3144,7 +3177,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Delete item"
-msgstr ""
+msgstr "Xóa nội dung"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3266,25 +3299,25 @@ msgstr "Hiệu của hai số."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Dimension %s does not exist"
-msgstr "Danh mục %s không tồn tại"
+msgstr "Chiều dữ liệu %s không tồn tại"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
 msgid "Dimension %s is not a group by"
-msgstr "Danh mục %s không phải là nhóm theo"
+msgstr "Chiều dữ liệu %s không phải là nhóm theo"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Dimensions don't match the pivot definition"
-msgstr "Danh mục không khớp với định nghĩa pivot"
+msgstr "Chiều dữ liệu không khớp với định nghĩa pivot"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/filter_values_list/filter_values_list.xml:0
 msgid "Discard"
-msgstr ""
+msgstr "Huỷ bỏ"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3300,18 +3333,19 @@ msgstr "Tỷ lệ chiết khấu của một chứng khoán dựa trên giá."
 
 #. module: spreadsheet
 #: model:ir.model.fields,field_description:spreadsheet.field_ir_http__display_name
+#: model:ir.model.fields,field_description:spreadsheet.field_ir_model__display_name
 #: model:ir.model.fields,field_description:spreadsheet.field_res_currency__display_name
 #: model:ir.model.fields,field_description:spreadsheet.field_res_currency_rate__display_name
 #: model:ir.model.fields,field_description:spreadsheet.field_res_lang__display_name
 #: model:ir.model.fields,field_description:spreadsheet.field_spreadsheet_mixin__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Tên hiển thị"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Display missing cells only"
-msgstr ""
+msgstr "Chỉ hiển thị các ô bị thiếu"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3510,7 +3544,7 @@ msgstr "Khoảng cách"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Division by zero"
-msgstr ""
+msgstr "Chia cho 0"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3562,6 +3596,12 @@ msgstr "Nhân bản"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Duration"
 msgstr "Thời hạn"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "E.g. 1234567 -> %(value)s"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3666,7 +3706,7 @@ msgstr "Số Euler, e (~2,718) được nâng lên lũy thừa."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "Europe"
-msgstr ""
+msgstr "Châu Âu"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3721,18 +3761,19 @@ msgstr "Số năm chính xác giữa hai ngày."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Excluded due to chart limits. Drag to swap with another range."
 msgstr ""
+"Bị loại trừ do giới hạn của biểu đồ. Kéo để hoán đổi với một phạm vi khác."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Exit Full Screen"
-msgstr ""
+msgstr "Thoát chế độ toàn màn hình"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Exit fullscreen"
-msgstr ""
+msgstr "Thoát chế độ toàn màn hình"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3762,7 +3803,7 @@ msgstr "Mở rộng nhóm hàng"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Expands or pads an array to specified row and column dimensions."
-msgstr "Mở rộng hoặc đệm một mảng theo danh mục hàng và cột xác định."
+msgstr "Mở rộng hoặc đệm một mảng theo kích thước hàng và cột xác định."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3843,14 +3884,14 @@ msgstr "Tô màu"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Fill color"
-msgstr ""
+msgstr "Tô màu"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/index.js:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Filled Radar"
-msgstr ""
+msgstr "Radar đã điền"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3863,7 +3904,7 @@ msgstr "Bộ lọc"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/plugins/global_filters_core_view_plugin.js:0
 msgid "Filter \"%(filter_name)s\" not found"
-msgstr ""
+msgstr "Không tìm thấy bộ lọc \"%(filter_name)s\""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -3875,13 +3916,13 @@ msgstr "Nút bộ lọc"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Filter by criterion"
-msgstr ""
+msgstr "Lọc theo tiêu chí"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Filter by values"
-msgstr ""
+msgstr "Lọc theo giá trị"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4115,7 +4156,7 @@ msgstr "Phiên bản được cố định - Ai cũng có thể xem"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Full Screen"
-msgstr ""
+msgstr "Toàn Màn hình"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4184,22 +4225,23 @@ msgstr "Hàm [[FUNCTION_NAME]] không tìm thấy kết quả nào."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
-"Function [[FUNCTION_NAME]] expects criteria_range and criterion to be in "
-"pairs."
-msgstr "Hàm [[FUNCTION_NAME]] cần criteria_range và tiêu chí đi theo cặp."
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a boolean."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
-"Function [[FUNCTION_NAME]] expects criteria_range to have the same dimension"
-msgstr "Hàm [[FUNCTION_NAME]] cần criteria_range có cùng danh mục."
+"Function [[FUNCTION_NAME]] expects number values for %s, but got a string."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
-msgstr "Hàm [[FUNCTION_NAME]] cần các giá trị số cho %s, nhưng nhận được %s."
+msgid ""
+"Function [[FUNCTION_NAME]] expects number values for %s, but got an empty "
+"value."
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4219,19 +4261,19 @@ msgstr "Giá trị tham số 2 của hàm [[FUNCTION_NAME]] nằm ngoài phạm 
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_funnel_chart.js:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Funnel"
-msgstr ""
+msgstr "Phễu"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Funnel colors"
-msgstr ""
+msgstr "Màu phễu"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Funnel options"
-msgstr ""
+msgstr "Tuỳ chọn phễu"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4273,25 +4315,25 @@ msgstr "Tạo liên kết chia sẻ"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_geo_chart.js:0
 msgid "Geo"
-msgstr ""
+msgstr "Địa lý"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Geo Chart"
-msgstr ""
+msgstr "Biểu đồ địa lý"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/index.js:0
 msgid "Geo chart"
-msgstr ""
+msgstr "Biểu đồ địa lý"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Geo chart options"
-msgstr ""
+msgstr "Tùy chọn biểu đồ địa lý"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4387,19 +4429,19 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Go to %(label)s"
-msgstr ""
+msgstr "Đi đến %(label)s"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Go to previous menu"
-msgstr ""
+msgstr "Đi đến menu trước đó"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Go to url: %(url)s"
-msgstr ""
+msgstr "Đi đến URL: %(url)s"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4423,13 +4465,13 @@ msgstr "Lớn hơn hoặc bằng."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Greens"
-msgstr ""
+msgstr "Xanh lục"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Greys"
-msgstr ""
+msgstr "Xám"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4483,7 +4525,7 @@ msgstr "Nhóm hàng %s - %s"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Groups"
-msgstr ""
+msgstr "Nhóm"
 
 #. module: spreadsheet
 #: model:ir.model,name:spreadsheet.model_ir_http
@@ -4500,20 +4542,19 @@ msgstr "Hàng header"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Headers"
-msgstr ""
+msgstr "Header"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Headers and labels"
-msgstr ""
+msgstr "Header và nhãn"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Height value is %(_height)s. It should be greater than or equal to 1."
-msgstr ""
-"Giá trị chiều cao là %(_height)s. Giá trị này phải lớn hơn hoặc hoặc bằng 1."
+msgstr "Giá trị chiều cao là %(_height)s. Giá trị này phải lớn hơn hoặc bằng 1."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4567,13 +4608,13 @@ msgstr "Ẩn trang tính"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Hierarchical"
-msgstr ""
+msgstr "Phân cấp"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Hierarchy"
-msgstr ""
+msgstr "Phân cấp bậc"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4615,7 +4656,7 @@ msgstr "Thành phần giờ của một thời điểm cụ thể."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Hours"
-msgstr ""
+msgstr "Giờ"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4655,6 +4696,7 @@ msgstr "Tang hyperbol của số thực bất kỳ."
 
 #. module: spreadsheet
 #: model:ir.model.fields,field_description:spreadsheet.field_ir_http__id
+#: model:ir.model.fields,field_description:spreadsheet.field_ir_model__id
 #: model:ir.model.fields,field_description:spreadsheet.field_res_currency__id
 #: model:ir.model.fields,field_description:spreadsheet.field_res_currency_rate__id
 #: model:ir.model.fields,field_description:spreadsheet.field_res_lang__id
@@ -4678,13 +4720,13 @@ msgstr "ID của pivot."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "ISO Date"
-msgstr ""
+msgstr "Ngày ISO"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "ISO Date time"
-msgstr ""
+msgstr "Ngày giờ ISO"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4776,7 +4818,7 @@ msgstr "Hình ảnh"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Image copied to clipboard"
-msgstr ""
+msgstr "Hình ảnh đã được sao chép vào bộ nhớ tạm"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -4789,8 +4831,7 @@ msgstr "Trong đánh giá [[FUNCTION_NAME]], không thể tìm thấy '%s' trong
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "In [[FUNCTION_NAME]], the number of columns of the first matrix (%s) must be "
-"equal to the \n"
-"          number of rows of the second matrix (%s)."
+"equal to the           number of rows of the second matrix (%s)."
 msgstr ""
 
 #. module: spreadsheet
@@ -4800,12 +4841,14 @@ msgid ""
 "In this context, the function [[FUNCTION_NAME]] needs to have a cell or "
 "range in parameter."
 msgstr ""
+"Trong ngữ cảnh này, hàm [[FUNCTION_NAME]] cần có một ô hoặc một phạm vi làm "
+"tham số."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Inaccessible/missing record ID"
-msgstr ""
+msgstr "ID bản ghi không thể truy cập được/không tồn tại"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5001,7 +5044,7 @@ msgstr "Chèn bảng"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Integer"
-msgstr ""
+msgstr "Integer"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5080,6 +5123,8 @@ msgid ""
 "Invalid number of arguments for the %(functionName)s function. Expected %"
 "(maxArgPossible)s maximum, but got %(nbrArgSupplied)s instead."
 msgstr ""
+"Số đối số không hợp lệ cho hàm %(functionName)s. Cần tối đa là %"
+"(maxArgPossible)s, nhưng thay vào đó đã nhận được %(nbrArgSupplied)s."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5088,6 +5133,8 @@ msgid ""
 "Invalid number of arguments for the %(functionName)s function. Expected %"
 "(minArgRequired)s minimum, but got %(nbrArgSupplied)s instead."
 msgstr ""
+"Số đối số không hợp lệ cho hàm %(functionName)s. Cần tối thiểu là %"
+"(minArgRequired)s, nhưng thay vào đó đã nhận được %(nbrArgSupplied)s."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5097,12 +5144,21 @@ msgid ""
 "arguments should be supplied in groups of %(nbrArgRepeating)s, with up to %"
 "(nbrArgOptional)s optional. Got %(nbrValueRemaining)s too many."
 msgstr ""
+"Số lượng đối số không hợp lệ cho hàm %(functionName)s. Các đối số lặp lại "
+"cần được cung cấp theo nhóm %(nbrArgRepeating)s, với tối đa %(nbrArgOptional)"
+"s đối số tùy chọn. Đã vượt quá %(nbrValueRemaining)s đối số."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Invalid reference"
 msgstr "Tham chiếu không hợp lệ"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid "Invalid regular expression"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5181,7 +5237,7 @@ msgstr "Tang nghịch đảo của một giá trị, tính bằng radian."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Irregularity map"
-msgstr ""
+msgstr "Bản đồ bất thường"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5284,7 +5340,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Key Value Style"
-msgstr ""
+msgstr "Kiểu khóa–giá trị"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5296,7 +5352,7 @@ msgstr "Giá trị khoá"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Labels"
-msgstr ""
+msgstr "Nhãn"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5313,7 +5369,7 @@ msgstr "Ngôn ngữ"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Last 12 Months"
-msgstr ""
+msgstr "12 tháng qua"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5337,7 +5393,7 @@ msgstr "90 ngày qua"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Last Month"
-msgstr ""
+msgstr "Tháng trước"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5485,13 +5541,13 @@ msgstr "Liên kết trang tính"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/index.js:0
 msgid "List #%(list_id)s"
-msgstr ""
+msgstr "Danh sách #%(list_id)s"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Load more..."
-msgstr ""
+msgstr "Tải thêm..."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5579,12 +5635,6 @@ msgstr "Từ tính"
 
 #. module: spreadsheet
 #. odoo-javascript
-#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "Make numbers human-readable"
-msgstr ""
-
-#. module: spreadsheet
-#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "March"
 msgstr "Tháng 3"
@@ -5635,7 +5685,7 @@ msgstr "Tối đa"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Max value or formula"
-msgstr ""
+msgstr "Giá trị tối đa hoặc công thức"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5666,7 +5716,7 @@ msgstr "Giá trị tối đa từ một phạm vi dạng bảng."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Maximum value"
-msgstr ""
+msgstr "Giá trị tối đa"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5684,7 +5734,7 @@ msgstr "Tháng 5"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Measure"
-msgstr ""
+msgstr "Chỉ số"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5726,7 +5776,7 @@ msgstr "Không tìm thấy menu %s. Bạn có thể không có quyền truy cậ
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Menu Bar"
-msgstr ""
+msgstr "Thanh menu"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5796,7 +5846,7 @@ msgstr "Tối thiểu"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Min value or formula"
-msgstr ""
+msgstr "Giá trị tối thiểu hoặc công thức"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5833,7 +5883,7 @@ msgstr "Giá trị tối thiểu từ một phạm vi dạng bảng."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Minimum value"
-msgstr ""
+msgstr "Giá trị tối thiểu"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5882,6 +5932,11 @@ msgstr "Thiếu dấu đóng ngoặc đơn"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Missing opening parenthesis"
 msgstr "Thiếu dấu mở ngoặc đơn"
+
+#. module: spreadsheet
+#: model:ir.model,name:spreadsheet.model_ir_model
+msgid "Models"
+msgstr "Mô hình"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -5942,13 +5997,13 @@ msgstr "Tháng trong năm mà một ngày cụ thể rơi vào"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Month to Date"
-msgstr ""
+msgstr "Từ đầu tháng đến nay"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Months"
-msgstr ""
+msgstr "Tháng"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6066,6 +6121,12 @@ msgstr "Ngày tiếp theo của phiếu giảm giá sau ngày thanh toán."
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/hooks.js:0
+msgid "No"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "No Color"
 msgstr "Không có màu"
@@ -6074,7 +6135,7 @@ msgstr "Không có màu"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "No active dimension in the pivot"
-msgstr "Không có danh mục hoạt động trong pivot"
+msgstr "Không có chiều dữ liệu hoạt động trong pivot"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6146,13 +6207,13 @@ msgstr "Không có ô nào được chọn có khoảng trắng được cắt b
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "No sorting"
-msgstr ""
+msgstr "Không sắp xếp"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "No text to split."
-msgstr ""
+msgstr "Không có văn bản để tách."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6173,7 +6234,7 @@ msgstr "Không"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "North America"
-msgstr ""
+msgstr "Bắc Mỹ"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6334,6 +6395,12 @@ msgstr "OFFSET đánh giá ở phạm vi ngoài giới hạn."
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
+msgid "Oceania"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "October"
 msgstr "Tháng 10"
@@ -6343,6 +6410,24 @@ msgstr "Tháng 10"
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 msgid "Odoo Bar Chart"
 msgstr "Odoo Biểu đồ cột"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Combo Chart"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Funnel Chart"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Geo Chart"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6359,7 +6444,19 @@ msgstr "Odoo Biểu đồ tròn"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Pyramid Chart"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 msgid "Odoo Radar Chart"
+msgstr "Odoo Biểu radar"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Scatter Chart"
 msgstr ""
 
 #. module: spreadsheet
@@ -6367,6 +6464,24 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/hooks.js:0
 msgid "Odoo Spreadsheet"
 msgstr "Odoo Bảng tính"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Sunburst Chart"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Treemap Chart"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
+msgid "Odoo Waterfall Chart"
+msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6399,12 +6514,14 @@ msgid ""
 "One or more of the provided criteria values are invalid. Please review and "
 "correct them."
 msgstr ""
+"Một hoặc nhiều giá trị tiêu chí được cung cấp không hợp lệ. Vui lòng kiểm "
+"tra và chỉnh sửa."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "One or more of the provided criteria values are missing."
-msgstr ""
+msgstr "Một hoặc nhiều giá trị tiêu chí được cung cấp còn thiếu."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6424,7 +6541,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Operator"
-msgstr "Người vận hành"
+msgstr "Toán tử"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6442,7 +6559,7 @@ msgstr "Cam"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Oranges"
-msgstr ""
+msgstr "Cam"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6454,7 +6571,7 @@ msgstr "Sắp xếp theo"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Others"
-msgstr ""
+msgstr "Khác"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6556,7 +6673,7 @@ msgstr "Tròn"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Pin this panel to allow to open another side panel beside it."
-msgstr ""
+msgstr "Ghim bảng này để có thể mở thêm một bảng điều khiển bên bên cạnh."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6568,7 +6685,7 @@ msgstr "Pivot #%(formulaId)s"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/index.js:0
 msgid "Pivot #%(pivot_id)s"
-msgstr ""
+msgstr "Pivot #%(pivot_id)s"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6586,7 +6703,7 @@ msgstr "Đã sao chép pivot."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Pivot duplication failed."
-msgstr ""
+msgstr "Sao chép pivot không thành công."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6601,6 +6718,8 @@ msgid ""
 "Pivot updates only work with dynamic pivot tables. Use the formula '%s' or "
 "re-insert the static pivot from the Data menu."
 msgstr ""
+"Cập nhật pivot chỉ hoạt động với các bảng pivot động. Sử dụng công thức '%s' "
+"hoặc chèn lại pivot tĩnh từ menu Dữ liệu."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6764,13 +6883,13 @@ msgstr "Tím"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Purples"
-msgstr ""
+msgstr "Tím"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_pyramid_chart.js:0
 msgid "Pyramid"
-msgstr ""
+msgstr "Kim tự tháp"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6826,13 +6945,13 @@ msgstr "Quý trong năm mà một ngày cụ thể rơi vào"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Quarterly"
-msgstr ""
+msgstr "Hàng quý"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Quarters"
-msgstr ""
+msgstr "Quý"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6852,13 +6971,13 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_radar_chart.js:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Radar"
-msgstr ""
+msgstr "Radar"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Rainbow"
-msgstr ""
+msgstr "Cầu vồng"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6924,7 +7043,7 @@ msgstr "Làm lại"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Reds"
-msgstr ""
+msgstr "Đỏ"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6942,7 +7061,7 @@ msgstr "Tham chiếu đến ô sẽ được kiểm tra xem có trống hay khô
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Region"
-msgstr ""
+msgstr "Khu vực"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7021,7 +7140,7 @@ msgstr "Đổi tên"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Reorder range"
-msgstr ""
+msgstr "Sắp xếp lại phạm vi"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7111,6 +7230,12 @@ msgstr "Trả về giá trị hiện tại của bộ lọc bảng tính."
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
+msgid "Return the label of the current value of a spreadsheet filter."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Return unique columns"
 msgstr ""
@@ -7148,7 +7273,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Returns a n x n unit matrix, where n is the input dimension."
-msgstr "Trả về ma trận đơn vị n x n, trong đó n là danh mục đầu vào."
+msgstr "Trả về ma trận đơn vị n x n, trong đó n là số chiều đầu vào."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7184,7 +7309,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Returns a value by comparing cases to an expression."
-msgstr ""
+msgstr "Trả về một giá trị bằng cách so sánh các trường hợp với một biểu thức."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7272,8 +7397,7 @@ msgstr "Trả về định thức ma trận của ma trận vuông."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "Returns the maximum value in a range of cells, filtered by a set of criteria."
-msgstr ""
-"Trả về giá trị tối đa trong một phạm vi, được lọc theo một bộ tiêu chí."
+msgstr "Trả về giá trị tối đa trong một phạm vi, được lọc theo một bộ tiêu chí."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7310,6 +7434,9 @@ msgid ""
 "plain text, and \"v\" (for value) if the cell contains any other type of "
 "data."
 msgstr ""
+"Trả về loại dữ liệu trong ô được tham chiếu. Các giá trị sau được trả về: "
+"\"b\" cho ô trống, \"l\" (cho nhãn) nếu ô chứa văn bản thuần túy, và \"v\" "
+"(cho giá trị) nếu ô chứa bất kỳ loại dữ liệu nào khác."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7547,7 +7674,7 @@ msgstr "Mã tiền tệ thứ hai."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "See pivot properties"
-msgstr ""
+msgstr "Xem thuộc tính pivot"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7710,7 +7837,7 @@ msgstr "Hiện dòng liên kết"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Show data markers"
-msgstr ""
+msgstr "Hiển thị dấu dữ liệu"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7722,13 +7849,13 @@ msgstr "Hiện trợ giúp công thức"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Show headers"
-msgstr ""
+msgstr "Hiện header"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Show labels"
-msgstr ""
+msgstr "Hiện nhãn"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7770,7 +7897,7 @@ msgstr "Hiện giá trị dưới dạng"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Since %(from)s"
-msgstr ""
+msgstr "Từ %(from)s"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7794,7 +7921,7 @@ msgstr "Giá trị đơn nhất từ một phạm vi dạng bảng."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/pivot_model.js:0
 msgid "Some measures are not available: %s"
-msgstr ""
+msgstr "Không có một số chỉ số: %s"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7834,7 +7961,7 @@ msgstr "Sắp xếp giảm dần (Z ⟶ A)"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Sort pivot"
-msgstr ""
+msgstr "Sắp xếp pivot"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7846,13 +7973,13 @@ msgstr "Sắp xếp phạm vi"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Sorted on column (%(ascOrDesc)s):"
-msgstr ""
+msgstr "Đã sắp xếp trên cột (%(ascOrDesc)s):"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Sorting"
-msgstr ""
+msgstr "Sắp xếp"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7868,7 +7995,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "South America"
-msgstr ""
+msgstr "Nam Phi"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7912,13 +8039,13 @@ msgstr "Phạm vi tràn không trống"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Split dataset by columns"
-msgstr ""
+msgstr "Tách tập dữ liệu theo cột"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Split dataset by rows"
-msgstr ""
+msgstr "Tách tập dữ liệu theo hàng"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -7944,6 +8071,8 @@ msgstr "Tách văn bản sang các cột"
 msgid ""
 "Splits text into rows or columns using specified column and row delimiters."
 msgstr ""
+"Tách văn bản thành các hàng hoặc cột bằng cách sử dụng dấu phân cách cột và "
+"hàng được chỉ định."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8027,7 +8156,7 @@ msgstr "Biểu đồ cột chồng"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Stacked column chart"
-msgstr ""
+msgstr "Biểu đồ cột chồng"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8181,13 +8310,13 @@ msgstr "Tính tổng một phạm vi phụ thuộc vào nhiều tiêu chí."
 #: code:addons/spreadsheet/static/src/chart/odoo_chart/odoo_sunburst_chart.js:0
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Sunburst"
-msgstr ""
+msgstr "Sunburst"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Sunburst options"
-msgstr ""
+msgstr "Tuỳ chọn sunburst"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8254,7 +8383,7 @@ msgstr "Nhiệt độ"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Territories"
-msgstr ""
+msgstr "Lãnh thổ"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8280,19 +8409,19 @@ msgstr "Màu chữ"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Text begins with"
-msgstr ""
+msgstr "Văn bản bắt đầu bằng"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Text begins with \"%s\""
-msgstr ""
+msgstr "Văn bản bắt đầu bằng \"%s\""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Text color"
-msgstr ""
+msgstr "Màu văn bản"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8310,7 +8439,7 @@ msgstr "Văn bản bao gồm \"%s\""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Text does not contain"
-msgstr ""
+msgstr "Văn bản không bao gồm"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8322,13 +8451,13 @@ msgstr "Văn bản không bao gồm \"%s\""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Text ends with"
-msgstr ""
+msgstr "Văn bản kết thúc bằng"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Text ends with \"%s\""
-msgstr ""
+msgstr "Văn bản kết thúc bằng \"%s\""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8460,7 +8589,7 @@ msgstr "Đối số %s không phải là chỉ số hợp lệ. Dưới đây l�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The argument dimension must be positive"
-msgstr "Danh mục của đối số phải là số dương"
+msgstr "Thứ nguyên của đối số phải là số dương"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8486,7 +8615,7 @@ msgstr "Các đối số array_x và array_y phải chứa ít nhất một cặ
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The arguments array_x and array_y must have the same dimensions."
-msgstr ""
+msgstr "Các mảng đối số array_x và array_y phải có cùng kích thước."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8498,7 +8627,7 @@ msgstr "Điều kiện đối số phải là một cột hoặc một hàng."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The arguments conditions must have the same dimensions."
-msgstr "Điều kiện đối số phải có cùng danh mục."
+msgstr "Điều kiện đối số phải có cùng kích thước."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8636,19 +8765,19 @@ msgstr "Cơ số (%s) phải nằm trong khoảng tính từ 2 đến cả 36."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The base (%s) must be strictly positive."
-msgstr ""
+msgstr "Cơ số (%s) phải là số dương tuyệt đối."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The base must be different from 1."
-msgstr ""
+msgstr "Cơ số phải khác 1."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The base of the logarithm."
-msgstr ""
+msgstr "Cơ số của logarit."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8670,6 +8799,9 @@ msgid ""
 "Examples: \"0.00\" rounded to 2 decimal places, \"hh:mm:ss\" for "
 "hour:minutes:seconds."
 msgstr ""
+"Định dạng kết quả có phân biệt chữ hoa/thường, được đặt trong dấu ngoặc kép. "
+"Ví dụ: \"0.00\" làm tròn đến 2 chữ số thập phân, \"hh:mm:ss\" cho "
+"giờ:phút:giây."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8682,7 +8814,7 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "The cashflow_amounts and cashflow_dates ranges must have the same dimensions."
-msgstr "Phạm vi cashflow_amounts và cashflow_dates phải có cùng danh mục."
+msgstr "Phạm vi cashflow_amounts và cashflow_dates phải có cùng kích thước."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -8788,7 +8920,7 @@ msgstr "Công ty để lấy tỷ giá hối đoái."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The corresponding value to be returned if case1 matches expression."
-msgstr ""
+msgstr "Giá trị tương ứng sẽ được trả về nếu case1 khớp với biểu thức."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9018,13 +9150,13 @@ msgstr "day_count_convention (%s) phải nằm trong khoảng tính từ 0 đế
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The delimiter (%s) must be not be empty."
-msgstr ""
+msgstr "Không được để trống dấu phân cách (%s)."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The delimiters cannot be empty values."
-msgstr ""
+msgstr "Các dấu phân cách không được là giá trị trống."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9045,6 +9177,8 @@ msgid ""
 "The desired instance of the delimiter after which we extract the text. A "
 "negative number searches from the end."
 msgstr ""
+"Vị trí mong muốn của dấu phân cách mà sau đó chúng ta sẽ trích xuất văn bản. "
+"Một số âm sẽ tìm từ phía cuối."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9053,6 +9187,8 @@ msgid ""
 "The desired instance of the delimiter before which we extract the text. A "
 "negative number searches from the end."
 msgstr ""
+"Vị trí mong muốn của dấu phân cách mà trước đó chúng ta sẽ trích xuất văn "
+"bản. Một số âm sẽ tìm từ phía cuối."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9094,7 +9230,7 @@ msgstr "Tỷ lệ chiết khấu của chứng khoán tại thời điểm mua."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The discount rate of the security invested in."
-msgstr "Tỷ lệ chiết khấu của chứng khoán tại đã được đầu tư."
+msgstr "Tỷ lệ chiết khấu của chứng khoán đã được đầu tư."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9118,7 +9254,7 @@ msgstr "Lãi suất hiệu dụng mỗi năm."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The effective_rate (%s) must be strictly positive."
-msgstr ""
+msgstr "Giá trị effective_rate (%s) phải lớn hơn 0."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9171,13 +9307,13 @@ msgstr "end_date (%s) phải là số dương hoặc không có."
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "The end_period (%(end)s) must be smaller or equal to the life (%(life)s)."
-msgstr ""
+msgstr "end_period (%(end)s) phải nhỏ hơn hoặc bằng vòng đời (%(life)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The end_period (%s) must be positive or null."
-msgstr ""
+msgstr "Giá trị end_period (%s) phải là số dương hoặc để trống."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9213,7 +9349,7 @@ msgstr "Đối số extract_length (%s) phải là số dương hoặc không c�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The factor (%s) must be positive when the value (%s) is positive."
-msgstr "Thừa số (%s) phải là số dương khi giá trị (%s) là số dương."
+msgstr "Hệ số (%s) phải là số dương khi giá trị (%s) là số dương."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9253,7 +9389,7 @@ msgstr "Trường phải là số hoặc chuỗi"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/list/list_functions.js:0
 msgid "The field name should not be empty."
-msgstr ""
+msgstr "Tên trường không được để trống."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9263,6 +9399,9 @@ msgid ""
 "It will not be added to your OS clipboard.\n"
 "You can download it directly instead."
 msgstr ""
+"Tệp bạn đang cố sao chép có kích thước quá lớn (>%sMB).\n"
+"Tệp này sẽ không được thêm vào bộ nhớ tạm của OS.\n"
+"Thay vào đó, bạn có thể trực tiếp tải tệp về."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9282,7 +9421,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The first case to be checked against expression."
-msgstr ""
+msgstr "Trường hợp đầu tiên được kiểm tra so với biểu thức."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9451,7 +9590,7 @@ msgstr "Giá trị đầu tiên."
 msgid ""
 "The first_period (%(first)s) must be smaller or equal to the last_period (%"
 "(last)s)."
-msgstr ""
+msgstr "first_period (%(first)s) phải nhỏ hơn hoặc bằng last_period (%(last)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9475,7 +9614,7 @@ msgstr "Đơn vị định dạng. Sử dụng 'k', 'm' hoặc 'b' để bắt b
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The formula must be valid"
-msgstr ""
+msgstr "Công thức phải hợp lệ"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9594,7 +9733,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The high (%s) must be greater than or equal to the low (%s)."
-msgstr "Giá trị cao (%s) phải lớn hơn hoặc hoặc bằng giá trị thấp (%s)."
+msgstr "Giá trị cao (%s) phải lớn hơn hoặc bằng giá trị thấp (%s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9736,6 +9875,8 @@ msgid ""
 "The last_period (%(last)s) must be smaller or equal to the number_of_periods "
 "(%(nPeriods)s)."
 msgstr ""
+"last_period (%(last)s) phải nhỏ hơn hoặc bằng number_of_periods (%(nPeriods)"
+"s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9765,7 +9906,7 @@ msgstr "Logarit của một số, cơ số e (số euler)."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The logarithm of a number, for a given base."
-msgstr ""
+msgstr "Logarit của một số với một cơ số nhất định."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9792,6 +9933,8 @@ msgid ""
 "The maturity (%(maturity)s) must be strictly greater than the settlement (%"
 "(settlement)s)."
 msgstr ""
+"Thời gian đáo hạn (%(maturity)s) phải lớn hơn thời gian thanh toán (%"
+"(settlement)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9822,8 +9965,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The maximum (%s) must be greater than or equal to the minimum (%s)."
-msgstr ""
-"Giá trị tối đa (%s) phải lớn hơn hoặc hoặc bằng giá trị tối thiểu (%s)."
+msgstr "Giá trị tối đa (%s) phải lớn hơn hoặc bằng giá trị tối thiểu (%s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -9954,7 +10096,7 @@ msgstr "Lãi suất danh nghĩa mỗi năm."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The nominal_rate (%s) must be strictly positive."
-msgstr ""
+msgstr "Giá trị nominal_rate (%s) phải lớn hơn 0."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10058,6 +10200,8 @@ msgid ""
 "The number of days between start_date and end_date, assuming start_date and "
 "end_date were no more than one year apart"
 msgstr ""
+"Số ngày giữa start_date và end_date, giả sử start_date và end_date không "
+"cách nhau quá một năm"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10339,13 +10483,13 @@ msgstr "number_of_characters (%s) phải là số dương hoặc không có."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The number_of_periods (%s) must be different from zero."
-msgstr ""
+msgstr "Giá trị number_of_periods (%s) phải khác 0."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The number_of_periods (%s) must be strictly positive."
-msgstr ""
+msgstr "Giá trị number_of_periods (%s) phải lớn hơn 0."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10357,7 +10501,7 @@ msgstr "Số lần xuất hiện (%s) phải là số dương hoặc không có.
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The one-dimensional array to be searched."
-msgstr "Mảng một danh mục cần tìm."
+msgstr "Mảng một chiều cần được tìm kiếm."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10429,13 +10573,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The period (%(period)s) must be less than or equal life (%(life)s)."
-msgstr ""
+msgstr "Kỳ (%(period)s) phải nhỏ hơn hoặc bằng số kỳ khấu hao (%(life)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The period (%(period)s) must be less than or equal to %(lifeLimit)s."
-msgstr ""
+msgstr "Giá trị kỳ (%(period)s) phải nhỏ hơn hoặc bằng %(lifeLimit)s."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10465,7 +10609,7 @@ msgstr "Giai đoạn phải nằm trong khoảng từ 1 đến number_of_periods
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The periods_by_year (%s) must be strictly positive."
-msgstr ""
+msgstr "Giá trị periods_by_year (%s) phải lớn hơn 0."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10495,7 +10639,7 @@ msgstr "Không thể tạo pivot vì thiếu tập dữ liệu."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The position (%s) must be greater than or equal to 1."
-msgstr "Vị trí (%s) phải lớn hơn hoặc hoặc bằng 1."
+msgstr "Vị trí (%s) phải lớn hơn hoặc bằng 1."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10552,6 +10696,8 @@ msgid ""
 "The purchase_date (%(purchaseDate)s) must be before the first_period_end (%"
 "(firstPeriodEnd)s)."
 msgstr ""
+"Giá trị purchase_date (%(purchaseDate)s) phải trước first_period_end (%"
+"(firstPeriodEnd)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10571,7 +10717,7 @@ msgstr "Phạm vi chứa tập dữ liệu cần xem xét."
 msgid ""
 "The range containing the return value. Should have the same dimensions as "
 "lookup_range."
-msgstr "Phạm vi chứa giá trị trả về. Phải có cùng danh mục với lookup_range."
+msgstr "Phạm vi chứa giá trị trả về. Phải có cùng kích thước với lookup_range."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10603,7 +10749,7 @@ msgstr "Phạm vi không hợp lệ"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The range is invalid."
-msgstr ""
+msgstr "Phạm vi không hợp lệ."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10936,7 +11082,7 @@ msgstr "Quy tắc không hợp lệ vì lý do không xác định"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The rule is invalid for an unknown reason."
-msgstr ""
+msgstr "Quy tắc không hợp lệ vì lý do không xác định."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10944,6 +11090,7 @@ msgstr ""
 msgid ""
 "The salvage (%(salvage)s) must be smaller or equal than the cost (%(cost)s)."
 msgstr ""
+"Giá trị còn lại (%(salvage)s) phải nhỏ hơn hoặc bằng chi phí (%(cost)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10964,6 +11111,7 @@ msgid ""
 "The search and match mode combination is not supported for XLOOKUP "
 "evaluation."
 msgstr ""
+"Tự kết hợp chế độ tìm kiếm và so khớp không được hỗ trợ cho đánh giá XLOOKUP."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -10975,6 +11123,11 @@ msgid ""
 "-1 finds the smallest value greater than or equal to search_key when range "
 "is sorted in descending order."
 msgstr ""
+"Phương pháp tìm kiếm là một số 1, 0 hoặc -1 chỉ định giá trị cần trả về. 1 "
+"tìm giá trị lớn nhất nhỏ hơn hoặc bằng search_key khi dãy được sắp xếp theo "
+"thứ tự tăng dần. 0 tìm giá trị chính xác khi dãy không được sắp xếp. -1 tìm "
+"giá trị nhỏ nhất lớn hơn hoặc bằng search_key khi dãy được sắp xếp theo thứ "
+"tự giảm dần."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11037,6 +11190,8 @@ msgid ""
 "The settlement date (%(settlement)s) must at most one year after the "
 "maturity date (%(maturity)s)."
 msgstr ""
+"Ngày thanh toán (%(settlement)s) muộn nhất là một năm sau ngày đáo hạn (%"
+"(maturity)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11045,6 +11200,8 @@ msgid ""
 "The settlement date (%(settlement)s) must be greater or equal to the issue "
 "date (%(issue)s)."
 msgstr ""
+"Ngày thanh toán (%(settlement)s) phải lớn hơn hoặc bằng ngày phát hành (%"
+"(issue)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11053,6 +11210,8 @@ msgid ""
 "The settlement date (%(settlement)s) must be strictly greater than the issue "
 "date (%(issue)s)."
 msgstr ""
+"Ngày thanh toán (%(settlement)s) bắt buộc phải lớn hơn ngày phát hành (%"
+"(issue)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11134,13 +11293,13 @@ msgstr "start_date (%s) phải là số dương hoặc không có."
 msgid ""
 "The start_period (%(start)s) must be smaller or equal to the end_period (%"
 "(end)s)."
-msgstr ""
+msgstr "start_period (%(start)s) phải nhỏ hơn hoặc bằng end_period (%(end)s)."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The start_period (%s) must be positive or null."
-msgstr ""
+msgstr "Giá trị start_period (%s) phải là số dương hoặc để trống."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11158,7 +11317,7 @@ msgstr "Đơn vị bắt đầu, đơn vị hiện được gán cho giá trị"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The starting_at (%s) must be greater than or equal to 1."
-msgstr "starting_at (%s) phải lớn hơn hoặc hoặc bằng 1."
+msgstr "starting_at (%s) phải lớn hơn hoặc bằng 1."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11290,7 +11449,7 @@ msgstr "Văn bản để tìm kiếm lần xuất hiện đầu tiên của sear
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The text to split."
-msgstr ""
+msgstr "Văn bản cần tách."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11439,7 +11598,7 @@ msgstr "Giá trị (%s) phải nằm trong khoảng tính từ -1 đến cả 1.
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value (%s) must be greater than or equal to 1."
-msgstr "Giá trị (%s) phải lớn hơn hoặc hoặc bằng 1."
+msgstr "Giá trị (%s) phải lớn hơn hoặc bằng 1."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11533,7 +11692,7 @@ msgstr "Giá trị để tính logarit, cơ số e."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value for which to calculate the logarithm."
-msgstr ""
+msgstr "Giá trị để tính logarit."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11605,7 +11764,7 @@ msgstr "Giá trị phải là một số"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value must be a text that begins with \"%s\""
-msgstr ""
+msgstr "Giá trị phải là một văn bản bắt đầu bằng \"%s\""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11623,7 +11782,7 @@ msgstr "Giá trị phải là văn bản không chứa \"%s\""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value must be a text that ends with \"%s\""
-msgstr ""
+msgstr "Giá trị phải là một văn bản kết thúc bằng \"%s\""
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11665,7 +11824,7 @@ msgstr "Giá trị phải nằm giữa %s và %s"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value must be empty"
-msgstr ""
+msgstr "Giá trị phải để trống"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -11936,13 +12095,13 @@ msgstr "Giá trị để kiểm tra liệu có nhỏ hơn hoặc bằng value2."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value to test as being less than value2."
-msgstr "Giá trị để kiểm tra liệu có nhỏ hơn value2."
+msgstr "Giá trị cần kiểm tra liệu có nhỏ hơn value2."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The value to use for padding empty cells."
-msgstr ""
+msgstr "Giá trị dùng để chèn vào các ô trống."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12004,7 +12163,7 @@ msgstr "Cuối tuần phải khác '1111111'."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "The window is too small to display multiple side panels."
-msgstr ""
+msgstr "Cửa sổ quá nhỏ để hiển thị nhiều bảng điều khiển bên."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12101,6 +12260,8 @@ msgid ""
 "This formula has over 1000 parts. It can't be processed properly, consider "
 "splitting it into multiple cells"
 msgstr ""
+"Công thức này có hơn 1000 phần. Hệ thống không thể xử lý chính xác, nên hãy "
+"cân nhắc chia công thức này thành nhiều ô"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12138,7 +12299,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "This pivot has no cell missing on this sheet"
-msgstr ""
+msgstr "Pivot này không có ô nào bị thiếu trên trang tính này"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12161,6 +12322,9 @@ msgid ""
 "            may indicate potential errors in formula structures, references "
 "or arguments."
 msgstr ""
+"Công cụ này phân tích công thức để tìm mẫu và đánh dấu các điểm không nhất "
+"quán. Bất thường \n"
+"có thể cho thấy lỗi tiềm ẩn trong cấu trúc công thức, tham chiếu hoặc đối số."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12170,6 +12334,9 @@ msgid ""
 "inconsistencies. Irregularities may indicate potential errors in formula "
 "structures, references, or arguments. (Click to turn off)"
 msgstr ""
+"Công cụ này phân tích công thức trong bảng tính để tìm mẫu và đánh dấu các "
+"điểm không nhất quán. Bất thường có thể cho thấy lỗi tiềm ẩn trong cấu trúc "
+"công thức, tham chiếu hoặc đối số. (Nhấp để tắt)"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12181,7 +12348,7 @@ msgstr "Việc này sẽ ghi đè dữ liệu trong các cột tiếp theo. Bạ
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Those settings affect all users."
-msgstr ""
+msgstr "Các cài đặt đó ảnh hưởng đến tất cả người dùng."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12228,7 +12395,7 @@ msgstr "Thời gian"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Today"
-msgstr ""
+msgstr "Hôm nay"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12241,13 +12408,13 @@ msgstr "Trên"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Top left"
-msgstr ""
+msgstr "Trên cùng bên trái"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Top right"
-msgstr ""
+msgstr "Trên cùng bên phải"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12266,7 +12433,7 @@ msgstr "Tổng hàng"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Trailing moving average"
-msgstr ""
+msgstr "Trung bình động theo chu kỳ trước"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12296,13 +12463,13 @@ msgstr "Coi nhãn là văn bản"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Tree Map"
-msgstr ""
+msgstr "Sơ đồ cây"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Tree map colors"
-msgstr ""
+msgstr "Màu sơ đồ cây"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12369,7 +12536,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Turn off"
-msgstr ""
+msgstr "Tắt"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12502,7 +12669,7 @@ msgstr "Các hàng duy nhất trong phạm vi nguồn đã cho."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "United States"
-msgstr ""
+msgstr "Hoa Kỳ"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12518,6 +12685,12 @@ msgstr "Hàm không xác định: \"%s\""
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/pivot/pivot_helpers.js:0
+msgid "Unnamed Field"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Unsorted"
 msgstr "Chưa sắp xếp"
@@ -12526,7 +12699,7 @@ msgstr "Chưa sắp xếp"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Until %(to)s"
-msgstr ""
+msgstr "Đến %(to)s"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12556,6 +12729,12 @@ msgstr "Cập nhật"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Use col %(column_name)s as headers"
+msgstr "Dùng cột %(column_name)s làm header"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
+msgid "Use compact format"
 msgstr ""
 
 #. module: spreadsheet
@@ -12568,13 +12747,13 @@ msgstr "Dùng giá trị đầu tiên làm tổng phụ"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Use row %(row_position)s as headers"
-msgstr ""
+msgstr "Dùng hàng %(row_position)s làm header"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Use value-based gradient"
-msgstr ""
+msgstr "Sử dụng dải màu dựa trên giá trị"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12587,14 +12766,13 @@ msgstr "Giá trị"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Value %s"
-msgstr ""
+msgstr "Giá trị %s"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Value at a given percentile of a dataset exclusive of 0 and 1."
-msgstr ""
-"Giá trị tại một phân vị nhất định của tập dữ liệu không bao gồm 0 và 1."
+msgstr "Giá trị tại một phân vị nhất định của tập dữ liệu không bao gồm 0 và 1."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12812,7 +12990,7 @@ msgstr "Căn dọc"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Vertical alignment"
-msgstr ""
+msgstr "Căn chỉnh dọc"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12843,7 +13021,7 @@ msgstr "Chế độ xem"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Viridis"
-msgstr ""
+msgstr "Viridis"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -12930,12 +13108,14 @@ msgid ""
 "Week value must be a string in the format %(example)s, but received %"
 "(received_value)s instead."
 msgstr ""
+"Giá trị tuần phải là một chuỗi theo định dạng %(example)s, nhưng đã nhận "
+"được %(received_value)s."
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Weeks"
-msgstr ""
+msgstr "Tuần"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13023,14 +13203,9 @@ msgstr ""
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid ""
 "Whether or not to remove empty text messages from the split results. The "
-"default behavior is to treat \n"
-"        consecutive delimiters as one (if TRUE). If FALSE, empty cells "
-"values are added between consecutive delimiters."
+"default behavior is to treat         consecutive delimiters as one (if "
+"TRUE). If FALSE, empty cells values are added between consecutive delimiters."
 msgstr ""
-"Liệu có cần loại bỏ tin nhắn văn bản trống khỏi kết quả phân tách hay không. "
-"Hành vi mặc định là coi\n"
-"       các dấu phân cách liên tiếp là một (nếu TRUE). Nếu FALSE, các giá trị "
-"ô trống sẽ được thêm vào giữa các dấu phân cách liên tiếp."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13075,7 +13250,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Whether to ignore empty cells."
-msgstr ""
+msgstr "Có bỏ qua các ô trống hay không."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13087,7 +13262,7 @@ msgstr "Liệu có bao gồm tiêu đề cột hay không."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Whether to include the measure titles row or not."
-msgstr ""
+msgstr "Có bao gồm hàng tiêu đề chỉ số hay không."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13139,8 +13314,7 @@ msgstr "Giá trị tứ phân nào, không bao gồm 0 và 4, cần trả về."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "Width value is %(_width)s. It should be greater than or equal to 1."
-msgstr ""
-"Giá trị chiều rộng là %(_width)s. Giá trị này phải lớn hơn hoặc hoặc bằng 1."
+msgstr "Giá trị chiều rộng là %(_width)s. Giá trị này phải lớn hơn hoặc bằng 1."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13152,13 +13326,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Window"
-msgstr ""
+msgstr "Window"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/helpers/geo_json_service.js:0
 msgid "World"
-msgstr ""
+msgstr "Thế giới"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13251,13 +13425,19 @@ msgstr "Từ đầu năm đến nay"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_feature_plugin.js:0
 msgid "Years"
+msgstr "Năm"
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/hooks.js:0
+msgid "Yes"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "Yesterday"
-msgstr ""
+msgstr "Hôm qua"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13273,9 +13453,24 @@ msgstr "Bạn không thể tạo bảng chồng chéo."
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
+msgid ""
+"You copied content from a different version of the application. Only text "
+"and image content will be pasted."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
+#: code:addons/spreadsheet/static/src/actions/spreadsheet_download_action.js:0
+msgid ""
+"You don't have the rights to export data. Please contact an Administrator."
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13325,7 +13520,7 @@ msgstr "[[FUNCTION_NAME]] có số đối số không khớp %s với %s."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "[[FUNCTION_NAME]] has mismatched dimensions for argument %s (%s vs %s)."
-msgstr "[[FUNCTION_NAME]] có danh mục không khớp cho đối số %s (%s vs %s)."
+msgstr "[[FUNCTION_NAME]] có kích thước không khớp cho đối số %s (%s vs %s)."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13343,7 +13538,7 @@ msgstr "[[FUNCTION_NAME]] không có dữ liệu đầu vào hợp lệ."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "ascending"
-msgstr ""
+msgstr "tăng dần"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13379,7 +13574,7 @@ msgstr "mã"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 msgid "confirm edition"
-msgstr ""
+msgstr "xác nhận phiên bản"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13391,7 +13586,7 @@ msgstr "mặc định:"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "descending"
-msgstr ""
+msgstr "giảm dần"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13475,7 +13670,7 @@ msgstr "match_mode phải là một giá trị nằm trong [-1, 0, 1, 2]."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "match_mode should be a value of 0 or 1."
-msgstr ""
+msgstr "match_mode phải có giá trị là 0 hoặc 1."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13499,7 +13694,7 @@ msgstr "âm"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "not"
-msgstr ""
+msgstr "không"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13535,7 +13730,7 @@ msgstr "một năm trước"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/helpers.js:0
 msgid "or"
-msgstr ""
+msgstr "hay"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13595,7 +13790,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "return_range should have the same dimensions as lookup_range."
-msgstr "return_range phải có cùng danh mục với lookup_range."
+msgstr "return_range phải có cùng kích thước với lookup_range."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13607,7 +13802,7 @@ msgstr "search_mode phải là một giá trị nằm trong [-1, 1, -2, 2]."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "sort_column${"
-msgstr ""
+msgstr "sort_column${"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13631,13 +13826,13 @@ msgstr "giá trị số trong start_unit để chuyển đổi thành end_unit"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "the string to be converted"
-msgstr ""
+msgstr "chuỗi cần chuyển đổi"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/global_filters/components/date_filter_dropdown/date_filter_dropdown.xml:0
 msgid "to"
-msgstr ""
+msgstr "đến"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13653,6 +13848,12 @@ msgstr "ngày mai"
 
 #. module: spreadsheet
 #. odoo-javascript
+#: code:addons/spreadsheet/static/src/public_readonly_app/public_readonly.xml:0
+msgid "x"
+msgstr ""
+
+#. module: spreadsheet
+#. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "yesterday"
 msgstr "hôm qua"
@@ -13662,6 +13863,54 @@ msgstr "hôm qua"
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 msgid "zero"
 msgstr "0"
+
+#~ msgid ""
+#~ "An unexpected error occurred while pasting content.\n"
+#~ "          Additional information can be found in the browser console."
+#~ msgstr ""
+#~ "Đã xảy ra lỗi không mong muốn khi dán nội dung.\n"
+#~ "Bạn có thể xem thông tin chi tiết trong bảng điều khiển của trình duyệt."
+
+#~ msgid ""
+#~ "An unexpected error occurred while pasting content.\n"
+#~ "          This is probably due to a spreadsheet version mismatch."
+#~ msgstr ""
+#~ "Đã xảy ra lỗi không mong muốn khi dán nội dung.\n"
+#~ "Có thể là do phiên bản bảng tính không khớp."
+
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects criteria_range and criterion to be in "
+#~ "pairs."
+#~ msgstr "Hàm [[FUNCTION_NAME]] cần criteria_range và tiêu chí đi theo cặp."
+
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects criteria_range to have the same "
+#~ "dimension"
+#~ msgstr "Hàm [[FUNCTION_NAME]] cần criteria_range có cùng kích thước"
+
+#~ msgid ""
+#~ "In [[FUNCTION_NAME]], the number of columns of the first matrix (%s) must "
+#~ "be equal to the \n"
+#~ "          number of rows of the second matrix (%s)."
+#~ msgstr ""
+#~ "Trong [[FUNCTION_NAME]], số cột của ma trận đầu tiên (%s) phải bằng\n"
+#~ "số hàng của ma trận thứ hai (%s)."
+
+#~ msgid ""
+#~ "Whether or not to remove empty text messages from the split results. The "
+#~ "default behavior is to treat \n"
+#~ "        consecutive delimiters as one (if TRUE). If FALSE, empty cells "
+#~ "values are added between consecutive delimiters."
+#~ msgstr ""
+#~ "Liệu có cần loại bỏ tin nhắn văn bản trống khỏi kết quả phân tách hay "
+#~ "không. Hành vi mặc định là coi\n"
+#~ "       các dấu phân cách liên tiếp là một (nếu TRUE). Nếu FALSE, các giá "
+#~ "trị ô trống sẽ được thêm vào giữa các dấu phân cách liên tiếp."
+
+#~ msgid ""
+#~ "Function [[FUNCTION_NAME]] expects number values for %s, but got a %s."
+#~ msgstr ""
+#~ "Hàm [[FUNCTION_NAME]] cần các giá trị số cho %s, nhưng nhận được %s."
 
 #~ msgid ""
 #~ "(0) Exact match. \n"

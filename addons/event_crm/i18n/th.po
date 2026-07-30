@@ -2,14 +2,15 @@
 # This file contains the translation of the following modules:
 # * event_crm
 #
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:38+0000\n"
-"PO-Revision-Date: 2025-09-16 21:37+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-07-01 04:57+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Thai <https://translate.odoo.com/projects/odoo-19/event_crm/"
 "th/>\n"
 "Language: th\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_event__lead_count
@@ -54,7 +55,7 @@ msgstr "เปิดใช้งาน"
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_question_view_form
 msgid "Add a rule"
-msgstr ""
+msgstr "เพิ่มกฎ"
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_form
@@ -64,7 +65,7 @@ msgstr ""
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_form
 msgid "All Events"
-msgstr ""
+msgstr "กิจกรรมทั้งหมด"
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_form
@@ -106,7 +107,8 @@ msgstr "กำหนดลูกค้าเป้าหมายที่สร
 #. odoo-python
 #: code:addons/event_crm/models/event_event.py:0
 msgid "Aww! No Leads created, check your Lead Generation Rules and try again."
-msgstr "อุ๊ย! ไม่มีการสร้างลูกค้าเป้าหมาย ตรวจสอบกฎการสร้างลูกค้าเป้าหมายของคุณแล้วลองอีกครั้ง"
+msgstr ""
+"อุ๊ย! ไม่มีการสร้างลูกค้าเป้าหมาย ตรวจสอบกฎการสร้างลูกค้าเป้าหมายของคุณแล้วลองอีกครั้ง"
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__company_id
@@ -131,7 +133,7 @@ msgstr "สร้างกฎการสร้างลูกค้าเป้
 #. module: event_crm
 #: model:ir.model,website_form_label:event_crm.model_crm_lead
 msgid "Create an Opportunity"
-msgstr ""
+msgstr "สร้างโอกาส"
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__lead_ids
@@ -204,7 +206,7 @@ msgstr "กฎลูกค้าเป้าหมายอีเวนต์"
 #. module: event_crm
 #: model:ir.model,name:event_crm.model_event_question_answer
 msgid "Event Question Answer"
-msgstr ""
+msgstr "คำถามคำตอบอีเวนต์"
 
 #. module: event_crm
 #: model:ir.model,name:event_crm.model_event_registration
@@ -264,7 +266,8 @@ msgstr ""
 msgid ""
 "Filter the attendees to include those of this specific event. If not set, no "
 "event restriction will be applied."
-msgstr "กรองผู้เข้าร่วมเพื่อรวมผู้เข้าร่วมอีเวนต์เฉพาะนี้ หากไม่ได้ตั้งค่า จะไม่มีการจำกัดอีเวนต์"
+msgstr ""
+"กรองผู้เข้าร่วมเพื่อรวมผู้เข้าร่วมอีเวนต์เฉพาะนี้ หากไม่ได้ตั้งค่า จะไม่มีการจำกัดอีเวนต์"
 
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_form
@@ -391,7 +394,8 @@ msgstr "ไม่พบการลงทะเบียน"
 #. odoo-python
 #: code:addons/event_crm/models/event_event.py:0
 msgid "Only Event Managers are allowed to re-generate all leads."
-msgstr "มีเพียงผู้จัดการงานเท่านั้นที่ได้รับอนุญาตให้สร้างรายชื่อลูกค้าเป้าหมายจะเป็นลูกค้าใหม่ทั้งหมด"
+msgstr ""
+"มีเพียงผู้จัดการงานเท่านั้นที่ได้รับอนุญาตให้สร้างรายชื่อลูกค้าเป้าหมายจะเป็นลูกค้าใหม่ทั้งหมด"
 
 #. module: event_crm
 #: model:ir.model.fields.selection,name:event_crm.selection__event_lead_rule__lead_type__opportunity
@@ -530,7 +534,7 @@ msgstr "อัปเดตการลงทะเบียน"
 #. module: event_crm
 #: model_terms:ir.ui.view,arch_db:event_crm.event_lead_rule_view_form
 msgid "Visible to all"
-msgstr ""
+msgstr "มองเห็นได้ทุกคน"
 
 #. module: event_crm
 #: model:ir.model.fields,field_description:event_crm.field_event_lead_rule__lead_creation_trigger

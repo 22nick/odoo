@@ -26,20 +26,39 @@ class IrDefault(models.Model):
     condition = fields.Char('Condition', help="If set, applies the default upon condition.")
     json_value = fields.Char('Default Value (JSON format)', required=True)
 
-    @api.constrains('json_value')
+    @api.constrains('json_value', 'field_id')
     def _check_json_format(self):
         for record in self:
+            model_name = record.sudo().field_id.model_id.model
+            model = self.env[model_name]
+            field = model._fields[record.field_id.name]
             try:
-                json.loads(record.json_value)
+                value = json.loads(record.json_value)
+                field.convert_to_cache(value, model)
             except json.JSONDecodeError:
                 raise ValidationError(self.env._('Invalid JSON format in Default Value field.'))
+            except Exception:  # noqa: BLE001
+                raise ValidationError(self.env._("Invalid value in Default Value field. Expected type '%(field_type)s' for '%(model_name)s.%(field_name)s'.",
+                                        field_type=record.field_id.ttype, model_name=model_name, field_name=record.field_id.name))
+
+    def _check_accessible_field_id(self):
+        # using current environment as function is called after checking
+        # permissions on the record
+        if self.env.su:
+            return
+        for record in self:
+            if field := record.field_id:
+                model = self.env[field.model]
+                model._check_field_access(model._fields[field.name], 'write')
 
     @api.model_create_multi
     def create(self, vals_list):
         # invalidate all company dependent fields since their fallback value in cache may be changed
         self.env.invalidate_all()
         self.env.registry.clear_cache()
-        return super(IrDefault, self).create(vals_list)
+        new_defaults = super().create(vals_list)
+        new_defaults._check_accessible_field_id()
+        return new_defaults
 
     def write(self, vals):
         if self:
@@ -48,6 +67,7 @@ class IrDefault(models.Model):
             self.env.registry.clear_cache()
         new_default = super().write(vals)
         self.check_access('write')
+        self._check_accessible_field_id()
         return new_default
 
     def unlink(self):
@@ -102,7 +122,7 @@ class IrDefault(models.Model):
             ('user_id', '=', user_id),
             ('company_id', '=', company_id),
             ('condition', '=', condition),
-        ])
+        ], limit=1)
         if default:
             # Avoid clearing the cache if nothing changes
             if default.json_value != json_value:

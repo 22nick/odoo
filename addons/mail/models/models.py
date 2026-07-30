@@ -10,6 +10,9 @@ from odoo import api, exceptions, models, tools, _
 from odoo.addons.mail.tools.alias_error import AliasError
 from odoo.tools import parse_contact_from_email
 from odoo.tools.mail import email_normalize, email_split_and_format
+from odoo.tools.sql import column_exists
+
+from odoo.addons.base.models.ir_model import MODULE_UNINSTALL_FLAG
 
 import logging
 
@@ -44,7 +47,13 @@ class Base(models.AbstractModel):
         # Override unlink to delete records activities through (res_model, res_id)
         record_ids = self.ids if (not self._abstract and not self._transient) else []
         result = super().unlink()
-        if record_ids:
+        if record_ids and (
+            # during uninstallation of module mail, the search below will crash
+            not self.env.context.get(MODULE_UNINSTALL_FLAG) or (
+                column_exists(self.env.cr, 'mail_activity', 'res_model')
+                and column_exists(self.env.cr, 'mail_activity', 'res_id')
+            )
+        ):
             self.env['mail.activity'].with_context(active_test=False).sudo().search(
                 [('res_model', '=', self._name), ('res_id', 'in', record_ids)]
             ).unlink()
@@ -77,12 +86,9 @@ class Base(models.AbstractModel):
         """ Globally reverse result of '_mail_get_operation_for_mail_message_operation'
         aka return documents for a given access to check on them. """
         document_operations = self._mail_get_operation_for_mail_message_operation(message_operation)
-        operation_documents = defaultdict(lambda: self.env[self._name])
-        for record, record_operation in document_operations.items():
-            operation_documents[record_operation] += record
-        # force prefetch in a post-loop as recordset concatenation may lose it
-        for operation, records in operation_documents.items():
-            records = records.with_prefetch(self.ids)
+        documents = self.browse(record.id for record in document_operations).with_prefetch(self._prefetch_ids)
+        operation_documents = documents.grouped(document_operations.__getitem__)
+        operation_documents.pop(None, None)  # discard documents without a permission
         return operation_documents
 
     # ------------------------------------------------------------
@@ -387,14 +393,17 @@ class Base(models.AbstractModel):
         prioritize_email = getattr(self, '_mail_defaults_to_email', False)
         found = self._message_add_default_recipients()
 
-        # ban emails: never propose odoobot nor aliases
+        # ban emails: never propose aliases
         all_emails = []
         for defaults in found.values():
             all_emails += defaults['email_to_lst']
             if with_cc:
                 all_emails += defaults['email_cc_lst']
             all_emails += defaults['partners'].mapped('email_normalized')
-        ban_emails = [self.env.ref('base.partner_root').email_normalized]
+        ban_emails = []
+        # ban emails: don't propose odoobot unless another active partner has the same email
+        if not self.env['res.partner'].search_count([('email_normalized', '=', self.env.ref('base.partner_root').email_normalized)]):
+            ban_emails.append(self.env.ref('base.partner_root').email_normalized)
         ban_emails += self.env['mail.alias.domain'].sudo()._find_aliases(
             [email_key(e) for e in all_emails if e and e.strip()]
         )
@@ -459,6 +468,8 @@ class Base(models.AbstractModel):
         if user_field and user_field.type == 'many2one' and user_field.comodel_name == 'res.users':
             # SUPERUSER because of a read on res.users that would crash otherwise
             for record_su in self.sudo():
+                if record_su.user_id.partner_id == self.env.user.partner_id:
+                    continue
                 suggested[record_su.id]['partners'] += record_su.user_id.partner_id
 
         # add customers
@@ -575,16 +586,22 @@ class Base(models.AbstractModel):
                     not p.is_public
                 )
             ))
+            existing_mails = {
+                email_key(e)
+                for rec in (followers | partners)
+                for e in ([rec.email_normalized] if rec.email_normalized else []) + email_split_and_format(rec.email or '')
+            }
             email_to_lst = list(tools.misc.unique(
                 e for email_input in suggested[record.id]['email_to_lst'] for e in email_split_and_format(email_input)
                 if (
                     e and e.strip() and
                     email_key(e) not in ban_emails and
-                    email_key(e) not in ((followers | partners).mapped('email_normalized') + (followers | partners).mapped('email'))
+                    email_key(e) not in existing_mails
                 )
             ))
 
             recipients = [{
+                **({'display_name': partner.display_name} if not partner.name else {}),
                 'email': partner.email_normalized,
                 'name': partner.name,
                 'partner_id': partner.id,

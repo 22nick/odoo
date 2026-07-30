@@ -157,6 +157,7 @@ test("Channel member count update after user joined", async () => {
     pyEnv["res.partner"].create({ name: "Harry", user_ids: [userId] });
     await start();
     await openDiscuss(channelId);
+    await contains(".o-discuss-ChannelMemberList"); // wait for auto-open of this panel
     await contains(".o-discuss-ChannelMemberList h6", { text: "Offline - 1" });
     await click("[title='Invite People']");
     await click(".o-discuss-ChannelInvitation-selectable", { text: "Harry" });
@@ -229,4 +230,29 @@ test("Members are partitioned by online/offline", async () => {
         text: "Dobby",
         after: ["h6", { text: "Offline - 1" }],
     });
+});
+
+test("Do not open chat / avatar card of archived users", async () => {
+    const pyEnv = await startServer();
+    const [partnerId_1, partnerId_2] = pyEnv["res.partner"].create([
+        { name: "Active User" },
+        { name: "Archived User" },
+    ]);
+    pyEnv["res.users"].create([
+        { partner_id: partnerId_1, active: true },
+        { partner_id: partnerId_2, active: false },
+    ]);
+    const channelId = pyEnv["discuss.channel"].create({
+        name: "TestChannel",
+        channel_member_ids: [
+            Command.create({ partner_id: partnerId_1 }),
+            Command.create({ partner_id: partnerId_2 }),
+        ],
+        channel_type: "channel",
+    });
+    await start();
+    await openDiscuss(channelId);
+    // This is a shortcut to determine whether the member can open chat or avatar card.
+    await contains(".o-discuss-ChannelMember.cursor-pointer", { text: "Active User" });
+    await contains(".o-discuss-ChannelMember:not(.cursor-pointer)", { text: "Archived User" });
 });

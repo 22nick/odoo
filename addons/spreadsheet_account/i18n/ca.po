@@ -2,14 +2,15 @@
 # This file contains the translation of the following modules:
 # * spreadsheet_account
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-09-16 02:37+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-01-25 18:37+0000\n"
+"PO-Revision-Date: 2026-06-30 04:52+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: Catalan <https://translate.odoo.com/projects/odoo-19/"
 "spreadsheet_account/ca/>\n"
 "Language: ca\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -32,8 +33,8 @@ msgid ""
 "'%s' is not a valid period. Supported formats are \"21/12/2022\", "
 "\"Q1/2022\", \"12/2022\", and \"2022\"."
 msgstr ""
-"'%s' no és un període vàlid. Els formats admesos són \"21/12/2022\", "
-"\"Q1/2022\", \"12/2022\" i \"2022\"."
+"'%s' no és un període vàlid. Els formats admesos són \"21/12/2022\", \"Q1/"
+"2022\", \"12/2022\" i \"2022\"."
 
 #. module: spreadsheet_account
 #: model:ir.model,name:spreadsheet_account.model_account_account
@@ -44,7 +45,7 @@ msgstr "Compte"
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Bank and Cash"
-msgstr ""
+msgstr "Banc i caixa"
 
 #. module: spreadsheet_account
 #. odoo-python
@@ -61,61 +62,61 @@ msgstr "Empreses"
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Cost of Revenue"
-msgstr ""
+msgstr "Cost directe de les vendes"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Credit Card"
-msgstr ""
+msgstr "Targeta de crèdit"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Current Assets"
-msgstr ""
+msgstr "Actius circulants"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Current Liabilities"
-msgstr ""
+msgstr "Passius circulants"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Current Year Earnings"
-msgstr ""
+msgstr "Guanys de l'exercici actual"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Depreciation"
-msgstr ""
+msgstr "Amortització"
 
 #. module: spreadsheet_account
 #: model:ir.model.fields,field_description:spreadsheet_account.field_account_account__display_name
 #: model:ir.model.fields,field_description:spreadsheet_account.field_res_company__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom mostrat"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Equity"
-msgstr ""
+msgstr "Patrimoni"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Expenses"
-msgstr ""
+msgstr "Despeses"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Fixed Assets"
-msgstr ""
+msgstr "Actius fixos"
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -139,31 +140,31 @@ msgstr "Obteniu el dèbit total dels comptes i períodes especificats."
 #: model:ir.model.fields,field_description:spreadsheet_account.field_account_account__id
 #: model:ir.model.fields,field_description:spreadsheet_account.field_res_company__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Income"
-msgstr ""
+msgstr "Ingrés"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Non-current Assets"
-msgstr ""
+msgstr "Actius no corrents"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Non-current Liabilities"
-msgstr ""
+msgstr "Passius no corrents"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Off-Balance Sheet"
-msgstr ""
+msgstr "Full de sortida"
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -175,25 +176,25 @@ msgstr "Desplaçament aplicat als anys"
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Other Income"
-msgstr ""
+msgstr "Altre ingrés"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Payable"
-msgstr ""
+msgstr "A pagar"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Prepayments"
-msgstr ""
+msgstr "Prepagaments"
 
 #. module: spreadsheet_account
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/account_group_auto_complete.js:0
 msgid "Receivable"
-msgstr ""
+msgstr "A cobrar"
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -205,8 +206,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/spreadsheet_account/static/src/accounting_functions.js:0
 msgid "Return the partner balance for the specified account(s) and period"
-msgstr ""
-"Torna el saldo del contacte al compte o comptes i períodes especificats"
+msgstr "Torna el saldo del contacte al compte o comptes i períodes especificats"
 
 #. module: spreadsheet_account
 #. odoo-javascript
@@ -287,8 +287,8 @@ msgid ""
 "The date range. Supported formats are \"21/12/2022\", \"Q1/2022\", "
 "\"12/2022\", and \"2022\"."
 msgstr ""
-"L'interval de dates. Els formats compatibles són \"21/12/2022\", "
-"\"Q1/2022\", \"12/2022\" i \"2022\"."
+"L'interval de dates. Els formats compatibles són \"21/12/2022\", \"Q1/"
+"2022\", \"12/2022\" i \"2022\"."
 
 #. module: spreadsheet_account
 #. odoo-javascript

@@ -65,6 +65,7 @@
             'point_of_sale/static/src/utils.js',
             'point_of_sale/static/src/proxy_trap.js',
             'point_of_sale/static/src/lazy_getter.js',
+            'point_of_sale/static/src/app/utils/init_lna.js',
             'web/static/lib/bootstrap/js/dist/util/index.js',
             'web/static/lib/bootstrap/js/dist/dom/data.js',
             'web/static/lib/bootstrap/js/dist/dom/event-handler.js',
@@ -78,10 +79,13 @@
             'html_editor/static/src/scss/base_style.scss',
             'html_editor/static/src/scss/html_editor.common.scss',
             "point_of_sale/static/src/app/components/numpad/*",
+            "point_of_sale/static/src/app/components/loader/*",
+            "point_of_sale/static/src/app/components/loader/critical_pos_error/*",
             "point_of_sale/static/src/app/components/product_card/*",
             "point_of_sale/static/src/app/components/order_display/*",
             "point_of_sale/static/src/app/components/orderline/*",
             "point_of_sale/static/src/app/components/centered_icon/*",
+            "point_of_sale/static/src/app/components/validation_animation/*",
             "point_of_sale/static/src/app/components/epos_templates.xml",
             "point_of_sale/static/src/css/pos_receipts.css",
             "point_of_sale/static/src/app/screens/receipt_screen/receipt/**/*",
@@ -110,6 +114,7 @@
             "point_of_sale/static/src/app/utils/devices_identifier_sequence.js",
             "point_of_sale/static/src/app/hooks/hooks.js",
             "point_of_sale/static/src/app/utils/debug-formatter.js",
+            "pos_restaurant/static/src/app/screens/receipt_screen/order_receipt/order_receipt.xml",
         ],
         # Assets tests
         "pos_self_order.assets_tests": [
@@ -118,6 +123,7 @@
             "point_of_sale/static/tests/generic_helpers/numpad_util.js",
             "point_of_sale/static/tests/generic_helpers/dialog_util.js",
             "point_of_sale/static/tests/generic_helpers/utils.js",
+            "point_of_sale/static/tests/pos/tours/utils/chrome_util.js",
         ],
         'web.assets_tests': [
             'pos_self_order/static/tests/pos/**/*',

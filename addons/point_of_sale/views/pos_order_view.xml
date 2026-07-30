@@ -97,7 +97,7 @@
                                 <field name="margin_percent" invisible="not is_total_cost_computed" optional="hide" widget="percentage"/>
                                 <field name="discount" width="50px" string="Disc.%"/>
                                 <field name="tax_ids_after_fiscal_position" widget="many2many_tax_tags" string="Taxes"/>
-                                <field name="tax_ids" widget="many2many_tax_tags" column_invisible="True"/>
+                                <field name="tax_ids" widget="many2many_tax_tags" column_invisible="True" force_save="1"/>
                                 <field name="price_subtotal" widget="monetary" force_save="1"/>
                                 <field name="price_subtotal_incl" widget="monetary" force_save="1"/>
                                 <field name="currency_id" column_invisible="True"/>
@@ -112,7 +112,7 @@
                                     <field name="price_subtotal" invisible="1" widget="monetary" force_save="1"/>
                                     <field name="price_subtotal_incl" invisible="1" widget="monetary" force_save="1"/>
                                     <field name="tax_ids_after_fiscal_position" widget="many2many_tax_tags" string="Taxes"/>
-                                    <field name="tax_ids" widget="many2many_tax_tags" invisible="1"/>
+                                    <field name="tax_ids" widget="many2many_tax_tags" invisible="1" force_save="1"/>
                                     <field name="pack_lot_ids" widget="many2many_tags" groups="stock.group_production_lot"/>
                                     <field name="notice"/>
                                     <field name="currency_id" invisible="1"/>
@@ -273,7 +273,7 @@
         <field name="name">Orders</field>
         <field name="res_model">pos.order</field>
         <field name="view_mode">graph,list,form,kanban,pivot</field>
-        <field name="domain">[('state', 'not in', ['draft', 'cancel']), ('account_move', '!=', False)]</field>
+        <field name="domain">[('state', 'not in', ['draft', 'cancel']), ('account_move', '=', False)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 No data yet!
@@ -302,7 +302,7 @@
                 <field name="user_id" widget="many2one_avatar_user" readonly="account_move or state == 'done'"/>
                 <field name="amount_total" sum="Amount total" widget="monetary" decoration-bf="1"/>
                 <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-success="state not in ('draft','cancel')"/>
-                <field name="invoice_status" widget="badge" decoration-success="invoice_status == 'invoiced'" decoration-info="invoice_status == 'to_invoice'"/>
+                <field name="invoice_status" widget="badge" decoration-success="invoice_status == 'invoiced'" invisible="invoice_status == 'to_invoice'"/>
                 <field name="is_edited" readonly="1" optional="hide"/>
             </list>
         </field>

@@ -7,6 +7,7 @@ import {
     isEmptyBlock,
     isVisibleTextNode,
     isZWS,
+    isContentEditableAncestor,
 } from "@html_editor/utils/dom_info";
 import {
     ancestors,
@@ -30,11 +31,18 @@ import {
     getBaseContainerSelector,
     SUPPORTED_BASE_CONTAINER_NAMES,
 } from "@html_editor/utils/base_container";
-import { withSequence } from "@html_editor/utils/resource";
+import { READ, withSequence } from "@html_editor/utils/resource";
 import { reactive } from "@odoo/owl";
 import { FontSizeSelector } from "./font_size_selector";
 import { isHtmlContentSupported } from "@html_editor/core/selection_plugin";
 import { weakMemoize } from "@html_editor/utils/functions";
+
+/** @typedef {import("plugins").TranslatedString} TranslatedString */
+
+/**
+ * @typedef {((insertedNode: Node) => insertedNode)[]} before_insert_within_pre_processors
+ * @typedef {{ name: TranslatedString; tagName: string; extraClass?: string; }[]} font_items
+ */
 
 export const fontSizeItems = [
     { variableName: "display-1-font-size", className: "display-1-fs" },
@@ -57,7 +65,7 @@ const rightLeafOnlyNotBlockPath = createDOMPathGenerator(DIRECTIONS.RIGHT, {
     stopFunction: isBlock,
 });
 
-const headingTags = ["H1", "H2", "H3", "H4", "H5", "H6"];
+export const headingTags = ["H1", "H2", "H3", "H4", "H5", "H6"];
 const handledElemSelector = [...headingTags, "PRE", "BLOCKQUOTE"].join(", ");
 
 export class FontPlugin extends Plugin {
@@ -71,6 +79,7 @@ export class FontPlugin extends Plugin {
         "format",
         "lineBreak",
     ];
+    /** @type {import("plugins").EditorResources} */
     resources = {
         font_items: [
             withSequence(10, {
@@ -215,14 +224,17 @@ export class FontPlugin extends Plugin {
             {
                 categoryId: "format",
                 commandId: "setTagHeading1",
+                keywords: [_t("title")],
             },
             {
                 categoryId: "format",
                 commandId: "setTagHeading2",
+                keywords: [_t("title")],
             },
             {
                 categoryId: "format",
                 commandId: "setTagHeading3",
+                keywords: [_t("title")],
             },
             {
                 categoryId: "format",
@@ -286,8 +298,8 @@ export class FontPlugin extends Plugin {
 
         /** Handlers */
         selectionchange_handlers: [
-            this.updateFontSelectorParams.bind(this),
-            this.updateFontSizeSelectorParams.bind(this),
+            withSequence(READ, this.updateFontSelectorParams.bind(this)),
+            withSequence(READ, this.updateFontSizeSelectorParams.bind(this)),
         ],
         post_undo_handlers: [
             this.updateFontSelectorParams.bind(this),
@@ -307,6 +319,18 @@ export class FontPlugin extends Plugin {
         ],
         delete_backward_overrides: withSequence(20, this.handleDeleteBackward.bind(this)),
         delete_backward_word_overrides: this.handleDeleteBackward.bind(this),
+
+        /** Predicates */
+        are_shorthands_available_predicates: (node) => {
+            if (closestElement(node, "pre")) {
+                return false;
+            }
+        },
+        is_powerbox_available_predicates: (node) => {
+            if (closestElement(node, "pre")) {
+                return false;
+            }
+        },
 
         /** Processors */
         clipboard_content_processors: this.processContentForClipboard.bind(this),
@@ -330,7 +354,10 @@ export class FontPlugin extends Plugin {
     }
 
     normalize(root) {
-        for (const el of selectElements(root, "strong, b, span[style*='font-weight: bolder']")) {
+        for (const el of selectElements(
+            root,
+            "strong, b, span[style*='font-weight: bolder'], small"
+        )) {
             if (isRedundantElement(el)) {
                 unwrapContents(el);
             }
@@ -529,8 +556,8 @@ export class FontPlugin extends Plugin {
                 if (dir) {
                     baseContainer.setAttribute("dir", dir);
                 }
-                baseContainer.replaceChildren(...newElement.childNodes);
                 newElement.replaceWith(baseContainer);
+                baseContainer.replaceChildren(this.document.createElement("br"));
                 this.dependencies.selection.setCursorStart(baseContainer);
             }
             return true;
@@ -538,18 +565,19 @@ export class FontPlugin extends Plugin {
     }
 
     /**
-     * Transform an empty heading, blockquote or pre at the beginning of the
-     * editable into a baseContainer.
+     * Transform an empty heading or pre at the beginning of the
+     * editable into a base container. An empty blockquote is transformed
+     * into a base container, regardless of its position in the editable.
      */
     handleDeleteBackward({ startContainer, startOffset, endContainer, endOffset }) {
         // Detect if cursor is at the start of the editable (collapsed range).
         const rangeIsCollapsed = startContainer === endContainer && startOffset === endOffset;
-        if (!rangeIsCollapsed) {
+        const closestHandledElement = closestElement(endContainer, handledElemSelector);
+        if (!rangeIsCollapsed && closestHandledElement?.tagName !== "BLOCKQUOTE") {
             return;
         }
         // Check if cursor is inside an empty heading, blockquote or pre.
-        const closestHandledElement = closestElement(endContainer, handledElemSelector);
-        if (!closestHandledElement || closestHandledElement.textContent.length) {
+        if (!closestHandledElement || !isEmptyBlock(closestHandledElement)) {
             return;
         }
         // Check if unremovable.
@@ -584,6 +612,9 @@ export class FontPlugin extends Plugin {
             ];
             // Wrap rangeContent with clones of their ancestors to keep the styles.
             for (const ancestor of ancestorsList) {
+                if (isContentEditableAncestor(ancestor)) {
+                    break;
+                }
                 // Keep the formatting by keeping inline ancestors and paragraph
                 // related ones like headings etc.
                 if (!isBlock(ancestor) || isParagraphRelatedElement(ancestor)) {

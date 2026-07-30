@@ -20,6 +20,7 @@ export class SplitBillScreen extends Component {
         this.ui = useService("ui");
         this.qtyTracker = useState({});
         this.priceTracker = useState({});
+        this.isTransferred = false;
         useRouterParamsChecker();
 
         onWillDestroy(() => {
@@ -86,8 +87,15 @@ export class SplitBillScreen extends Component {
         return `${latestOrderName.slice(0, -1)}${nextChar}`;
     }
 
+    get totOrderQty() {
+        return this.currentOrder.lines.reduce(
+            (sum, line) => sum + (line.isGlobalDiscountApplicable() ? line.qty : 0),
+            0
+        );
+    }
+
     async paySplittedOrder() {
-        const totalQty = this.currentOrder.lines.reduce((sum, line) => sum + line.qty, 0);
+        const totalQty = this.totOrderQty;
         const selectedQty = this.getNumberOfProducts();
 
         if (selectedQty > 0 && selectedQty < totalQty) {
@@ -101,19 +109,27 @@ export class SplitBillScreen extends Component {
     async transferSplittedOrder(event) {
         // Prevents triggering the 'startTransferOrder' event listener
         event.stopPropagation();
-        if (this.getNumberOfProducts() > 0) {
+        const totalQty = this.totOrderQty;
+        const selectedQty = this.getNumberOfProducts();
+        if (selectedQty > 0 && selectedQty !== totalQty) {
+            this.isTransferred = true;
             await this.createSplittedOrder();
         }
         this.pos.startTransferOrder();
     }
-
-    async createSplittedOrder() {
-        const curOrderUuid = this.currentOrder.uuid;
-        const originalOrder = this.pos.models["pos.order"].find((o) => o.uuid === curOrderUuid);
-        const originalOrderName = this._getOrderName(originalOrder);
-        const newOrderName = this._getSplitOrderName(originalOrderName);
-
-        const newOrder = this.pos.createNewOrder();
+    async handleDiscountLines(originalOrder, newOrder) {
+        const discountPercentage = originalOrder.globalDiscountPc;
+        if (!this.isTransferred && discountPercentage) {
+            await this.pos.applyDiscount(discountPercentage, newOrder);
+        }
+    }
+    async _createNewSplitOrder(originalOrder, newOrderName, curOrderUuid) {
+        const newOrder = this.pos.createNewOrder({
+            preset_id: originalOrder.preset_id,
+            preset_time: originalOrder.preset_time,
+            fiscal_position_id: originalOrder.fiscal_position_id,
+        });
+        newOrder.setPricelist(originalOrder.pricelist_id);
         newOrder.floating_order_name = newOrderName;
         newOrder.uiState.splittedOrderUuid = curOrderUuid;
         originalOrder.uiState.splittedOrderUuid = newOrder.uuid;
@@ -187,13 +203,35 @@ export class SplitBillScreen extends Component {
         for (const line of lineToDel) {
             line.delete();
         }
+        await this.handleDiscountLines(originalOrder, newOrder);
+        return newOrder;
+    }
+    async createSplittedOrder() {
+        const curOrderUuid = this.currentOrder.uuid;
+        const originalOrder = this.pos.models["pos.order"].find((o) => o.uuid === curOrderUuid);
 
-        await this.pos.syncAllOrders({ orders: [originalOrder, newOrder] });
-        originalOrder.customer_count -= 1;
-        originalOrder.setScreenData({ name: "ProductScreen" });
-        this.pos.selectedOrderUuid = null;
-        this.pos.setOrder(newOrder);
-        this.back();
+        // Guard to prevent multiple simultaneous split of the same order
+        if (originalOrder.uiState.isSplitInProgress) {
+            return;
+        }
+        originalOrder.uiState.isSplitInProgress = true;
+        try {
+            const originalOrderName = this._getOrderName(originalOrder);
+            const newOrderName = this._getSplitOrderName(originalOrderName);
+            const newOrder = await this._createNewSplitOrder(
+                originalOrder,
+                newOrderName,
+                curOrderUuid
+            );
+            await this.pos.syncAllOrders({ orders: [originalOrder, newOrder] });
+            originalOrder.customer_count -= 1;
+            originalOrder.setScreenData({ name: "ProductScreen" });
+            this.pos.selectedOrderUuid = null;
+            this.pos.setOrder(newOrder);
+            this.back();
+        } finally {
+            originalOrder.uiState.isSplitInProgress = false;
+        }
     }
 
     setLineQtyStr(line) {

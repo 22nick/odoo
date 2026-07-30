@@ -138,3 +138,32 @@ class ProductVariantsCommon(ProductCommon):
                 ])],
             })]
         })
+
+        cls.product_sofa_red = cls.product_template_sofa.product_variant_ids.filtered(
+            lambda pp:
+                pp.product_template_attribute_value_ids.product_attribute_value_id
+                ==
+                cls.color_attribute_red
+        )
+        cls.product_sofa_blue = cls.product_template_sofa.product_variant_ids.filtered(
+            lambda pp:
+                pp.product_template_attribute_value_ids.product_attribute_value_id
+                ==
+                cls.color_attribute_blue
+        )
+        cls.product_sofa_green = cls.product_template_sofa.product_variant_ids.filtered(
+            lambda pp:
+                pp.product_template_attribute_value_ids.product_attribute_value_id
+                ==
+                cls.color_attribute_green
+        )
+        cls.custom_attribute = cls.env['product.attribute'].create({
+            'name': 'Custom',
+            'display_type': 'radio',
+            'create_variant': 'no_variant',
+        })
+        cls.custom_attribute_value = cls.env['product.attribute.value'].create({
+            'name': 'Custom',
+            'attribute_id': cls.custom_attribute.id,
+            'is_custom': True,
+        })

@@ -17,11 +17,14 @@ class PosOrder(models.Model):
 
     def get_amount_unpaid(self):
         self.ensure_one()
+        if self.config_id.cash_rounding and self.config_id.only_round_cash_method:
+            # Online payments are never rounded: pay the exact residual.
+            return self.currency_id.round(self.amount_total - self.amount_paid)
         return self.currency_id.round(self._get_rounded_amount(self.amount_total) - self.amount_paid)
 
     def _clean_payment_lines(self):
         self.ensure_one()
-        order_payments = self.env['pos.payment'].search(['&', ('pos_order_id', '=', self.id), ('online_account_payment_id', '=', False)])
+        order_payments = self.env['pos.payment'].search(['&', ('pos_order_id', '=', self.id), ('online_account_payment_id', '=', False), ('payment_method_id.is_online_payment', '=', True)])
         order_payments.unlink()
 
     def get_and_set_online_payments_data(self, next_online_payment_amount=False):

@@ -6,15 +6,16 @@
 # Martin Trigaux, 2022
 # Niyas Raphy, 2023
 # Malaz Abuidris <msea@odoo.com>, 2023
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-10-13 12:16+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-07-10 17:38+0000\n"
+"PO-Revision-Date: 2026-07-01 19:09+0000\n"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
 "Language-Team: Arabic <https://translate.odoo.com/projects/odoo-19/"
 "website_sale_stock/ar/>\n"
 "Language: ar\n"
@@ -23,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_sale_stock
 #. odoo-python
@@ -31,11 +32,12 @@ msgstr ""
 msgid ""
 "%(product_name)s has not been added to your cart since it is not available."
 msgstr ""
+"لم تتم إضافة %(product_name)s إلى سلة التسوق الخاصة بك لأن المنتج غير متوفر."
 
 #. module: website_sale_stock
 #: model_terms:ir.ui.view,arch_db:website_sale_stock.res_config_settings_view_form
 msgid "<span invisible=\"not default_show_availability\">units</span>"
-msgstr ""
+msgstr "<span invisible=\"not default_show_availability\">الوحدات</span>"
 
 #. module: website_sale_stock
 #. odoo-javascript
@@ -101,6 +103,11 @@ msgid ""
 "- New: Applied based on the New period you will define.\n"
 "- Out Of Stock: Applied when the product is out of stock."
 msgstr ""
+"يحدد الطريقة التي يتم بها تعيين هذا الشريط للمنتجات:\n"
+"- يدويًا: تعيين الشريط للمنتجات يدويًا.\n"
+"- تخفيضات: يتم تطبيقه عندما تكون المنتجات ضمن فترة التخفيضات.\n"
+"- جديد: يتم تطبيقه بناءً على فترة ”جديد“ التي ستحددها.\n"
+"- غير متوفر: يتم تطبيقه عندما يكون المنتج غير متوفر."
 
 #. module: website_sale_stock
 #: model:ir.model.fields,field_description:website_sale_stock.field_product_combo__display_name
@@ -144,7 +151,7 @@ msgstr "بريد إلكتروني خاطئ"
 
 #. module: website_sale_stock
 #. odoo-javascript
-#: code:addons/website_sale_stock/static/src/xml/website_sale_stock_product_availability.xml:0
+#: code:addons/website_sale_stock/static/src/interactions/website_sale.js:0
 msgid "Invalid email"
 msgstr "بريد إلكتروني خاطئ"
 
@@ -181,6 +188,12 @@ msgstr "نفدت الكمية"
 #: model:ir.model.fields,field_description:website_sale_stock.field_product_template__out_of_stock_message
 msgid "Out-of-Stock Message"
 msgstr "رسالة نفاد الكمية"
+
+#. module: website_sale_stock
+#. odoo-python
+#: code:addons/website_sale_stock/controllers/main.py:0
+msgid "Please sign in to proceed."
+msgstr ""
 
 #. module: website_sale_stock
 #. odoo-python
@@ -280,6 +293,12 @@ msgid "The product '%(product_name)s' is now available"
 msgstr "المنتج '%(product_name)s' متاح الآن"
 
 #. module: website_sale_stock
+#. odoo-python
+#: code:addons/website_sale_stock/controllers/main.py:0
+msgid "This product is not eligible for stock notifications."
+msgstr ""
+
+#. module: website_sale_stock
 #: model:ir.model,name:website_sale_stock.model_stock_picking
 msgid "Transfer"
 msgstr "تحويل"
@@ -322,8 +341,8 @@ msgid ""
 "You ask for %(desired_qty)s %(product_name)s but only %(new_qty)s is "
 "available"
 msgstr ""
-"قمت بتحديد %(desired_qty)s %(product_name)s ولكن الكمية المتوفرة هي "
-"%(new_qty)s فقط"
+"قمت بتحديد %(desired_qty)s %(product_name)s ولكن الكمية المتوفرة هي %"
+"(new_qty)s فقط"
 
 #. module: website_sale_stock
 #. odoo-python

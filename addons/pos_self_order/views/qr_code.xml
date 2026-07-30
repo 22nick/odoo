@@ -8,8 +8,6 @@
             <field name="report_name">pos_self_order.qr_codes_page</field>
             <field name="report_file">pos_self_order.qr_codes_page</field>
             <field name="print_report_name">"QR codes"</field>
-            <field name="binding_model_id" ref="model_pos_config"/>
-            <field name="binding_type">report</field>
         </record>
         <record id="paperformat_qrcodes" model="report.paperformat">
             <field name="name">QR Codes Page</field>
@@ -70,6 +68,12 @@
                                                         <path d="M60 110C87.6142 110 110 87.6142 110 60C110 32.3858 87.6142 10 60 10C32.3858 10 10 32.3858 10 60C10 87.6142 32.3858 110 60 110Z" fill="#9C5789"/>
                                                         <path d="M59.5166 89.6961C75.8029 89.6961 89.0055 76.4935 89.0055 60.2072C89.0055 43.9209 75.8029 30.7182 59.5166 30.7182C43.2303 30.7182 30.0276 43.9209 30.0276 60.2072C30.0276 76.4935 43.2303 89.6961 59.5166 89.6961Z" fill="white"/>
                                                     </g>
+                                                    <t t-if="table.get('name')">
+                                                        <text x="60" y="72" text-anchor="middle" font-size="22"
+                                                                font-family="Arial" font-weight="bold" fill="#9C5789">
+                                                            <t t-esc="table['name']"/>
+                                                        </text>
+                                                    </t>
                                                 </g>
                                             </svg>
                                         </div>

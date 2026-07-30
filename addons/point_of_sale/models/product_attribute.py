@@ -31,7 +31,7 @@ class ProductTemplateAttributeLine(models.Model):
 
     @api.model
     def _load_pos_data_fields(self, config):
-        return ['display_name', 'attribute_id', 'product_template_value_ids']
+        return ['display_name', 'attribute_id', 'product_template_value_ids', 'active']
 
     @api.model
     def _load_pos_data_domain(self, data, config):
@@ -65,8 +65,9 @@ class ProductTemplateAttributeExclusion(models.Model):
     @api.model
     def _load_pos_data_domain(self, data, config):
         loaded_product_tmpl_ids = list({p['id'] for p in data['product.template']})
-        return [('product_tmpl_id', 'in', loaded_product_tmpl_ids)]
+        loaded_ptav_ids = list({ptav['id'] for ptav in data['product.template.attribute.value']})
+        return [('product_tmpl_id', 'in', loaded_product_tmpl_ids), ('product_template_attribute_value_id', 'in', loaded_ptav_ids)]
 
     @api.model
     def _load_pos_data_fields(self, config):
-        return ['value_ids']
+        return ['value_ids', 'product_template_attribute_value_id']

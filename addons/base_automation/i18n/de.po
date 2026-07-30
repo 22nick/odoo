@@ -6,14 +6,14 @@
 # Martin Trigaux, 2022
 # Larissa Manderfeld, 2023
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-10-31 12:43+0000\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-06-30 20:26+0000\n"
 "Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
 "Language-Team: German <https://translate.odoo.com/projects/odoo-19/"
 "base_automation/de/>\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: base_automation
 #. odoo-javascript
@@ -91,8 +91,8 @@ msgid ""
 "<code>time</code>, <code>datetime</code>, <code>dateutil</code>, "
 "<code>timezone</code>: useful Python libraries"
 msgstr ""
-"<code>time</code>, <code>datetime</code>, <code>dateutil</code>, "
-"<code>timezone:</code> nützliche Python-Bibliotheken"
+"<code>time</code>, <code>datetime</code>, <code>dateutil</code>, <code>"
+"timezone:</code> nützliche Python-Bibliotheken"
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_kanban
@@ -118,8 +118,8 @@ msgid ""
 msgstr ""
 "<i class=\"fa fa-warning\"/>Automatisierungsregeln, die durch Änderungen der "
 "Benutzeroberfläche ausgelöst werden, werden <em>jedes Mal</em> ausgeführt, "
-"wenn sich die überwachten Felder ändern, <em>ob Sie speichern oder nicht</"
-"em>."
+"wenn sich die überwachten Felder ändern, <em>ob Sie speichern oder nicht</em>"
+"."
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_server_action_form
@@ -134,7 +134,7 @@ msgstr "<span class=\"text-muted\"> Verfügbare Variablen: </span>"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__message_needaction
 msgid "Action Needed"
-msgstr "Aktion notwendig"
+msgstr "Aktion erforderlich"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__action_server_ids
@@ -159,7 +159,7 @@ msgstr "Aktivitäten"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr "Aktivitätsausnahme-Dekoration"
+msgstr "Kennzeichnung von Aktivitätsausnahmen"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__activity_state
@@ -292,8 +292,8 @@ msgstr "Verzögerungsmodus"
 msgid ""
 "Delay must be positive. Set 'Delay mode' to 'Before' to negate the delay."
 msgstr ""
-"Die Verzögerung muss positiv sein. Stellen Sie den „Verzögerungsmodus“ auf "
-"„Vorher“, um die Verzögerung aufzuheben."
+"Die Verzögerung muss positiv sein. Stellen Sie den „Verzögerungsmodus“ auf „"
+"Vorher“, um die Verzögerung aufzuheben."
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__trg_date_range_type
@@ -581,12 +581,12 @@ msgstr "Notizen"
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__message_needaction_counter
 msgid "Number of Actions"
-msgstr "Anzahl der Aktionen"
+msgstr "Anzahl Aktionen"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__message_has_error_counter
 msgid "Number of errors"
-msgstr "Anzahl der Fehler"
+msgstr "Anzahl Fehler"
 
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__message_needaction_counter
@@ -596,7 +596,7 @@ msgstr "Anzahl der Nachrichten, die eine Aktion erfordern"
 #. module: base_automation
 #: model:ir.model.fields,help:base_automation.field_base_automation__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr "Anzahl der Nachrichten mit Zustellungsfehler."
+msgstr "Anzahl Nachrichten mit Zustellungsfehler"
 
 #. module: base_automation
 #: model:ir.model.fields,field_description:base_automation.field_base_automation__on_change_field_ids
@@ -641,7 +641,7 @@ msgstr "Bei ausgehender Nachricht"
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_unarchive
 msgid "On unarchived"
-msgstr "Bei Dearchivierung"
+msgstr "Bei Aufhbehung der Archivierung"
 
 #. module: base_automation
 #: model:ir.model.fields.selection,name:base_automation.selection__base_automation__trigger__on_write

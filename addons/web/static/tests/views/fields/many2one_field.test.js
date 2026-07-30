@@ -3150,6 +3150,7 @@ test("leaving an empty many2one by pressing tab (after backspace or delete)", as
     await press("backspace");
     await press("tab");
     await animationFrame();
+    await runAllTimers();
     expect(".o_field_many2one input").toHaveValue("");
 
     // reset a value
@@ -3351,7 +3352,7 @@ test("search more in many2one: no text in input", async () => {
     // when the user clicks on 'Search more...' in a many2one dropdown, and there is no text
     // in the input (i.e. no value to search on), we bypass the web_name_search that is meant to
     // return a list of preselected ids to filter on in the list view (opened in a dialog)
-    expect.assertions(2);
+    expect.assertions(4);
 
     for (let i = 0; i < 8; i++) {
         Partner._records.push({ id: 100 + i, name: `test_${i}` });
@@ -3376,14 +3377,19 @@ test("search more in many2one: no text in input", async () => {
         arch: '<form><field name="trululu" /></form>',
     });
 
+    expect.verifySteps([
+        "get_views", // main form view
+        "onchange",
+    ]);
+
     await contains(`.o_field_widget[name="trululu"] input`).clear();
+    await runAllTimers();
+    expect.verifySteps(["web_name_search"]);
 
     await contains(`.o_field_widget[name="trululu"] input`).click();
     await contains(`.o_field_widget[name="trululu"] .o_m2o_dropdown_option_search_more`).click();
 
     expect.verifySteps([
-        "get_views", // main form view
-        "onchange",
         "web_name_search", // to display results in the dropdown
         "get_views", // list view in dialog
         "has_group",
@@ -4037,7 +4043,8 @@ test("many2one search with formatted name", async () => {
         {
             id: 1,
             display_name: "Paul Eric",
-            __formatted_display_name: "Test: **Paul** --Eric-- `good guy`\n\tMore text",
+            __formatted_display_name:
+                "Research & Development Test: **Paul** --Eric-- `good guy`\n\tMore text",
         },
     ]);
     await mountView({
@@ -4053,7 +4060,7 @@ test("many2one search with formatted name", async () => {
     expect(
         ".o_field_many2one[name='trululu'] .dropdown-menu a.dropdown-item:eq(0)"
     ).toHaveInnerHTML(
-        `Test: <b>Paul</b> <span class="text-muted">Eric</span> <span class="o_tag position-relative d-inline-flex align-items-center mw-100 o_badge badge rounded-pill lh-1 o_tag_color_0">good guy</span><br/><span style="margin-left: 2em"></span>More text`
+        `Research & Development Test: <b>Paul</b> <span class="text-muted">Eric</span> <span class="o_tag position-relative d-inline-flex align-items-center mw-100 o_badge badge rounded-pill lh-1 o_tag_color_0">good guy</span><br/><span style="margin-left: 2em"></span>More text`
     );
     await contains(
         ".o_field_many2one[name='trululu'] .dropdown-menu a.dropdown-item:eq(0)"
@@ -4108,6 +4115,37 @@ test("search typeahead", async () => {
         "Create and edit...",
         "Search more...",
     ]);
+});
+
+test.tags("desktop");
+test("skip name search optimization", async () => {
+    class Parent extends Component {
+        static template = xml`<Many2XAutocomplete
+            value="test"
+            resModel="'partner'"
+            activeActions="{}"
+            fieldString.translate="Field"
+            getDomain.bind="getDomain"
+            update.bind="update"
+            preventMemoization="true"
+        />`;
+        static components = { Many2XAutocomplete };
+        static props = ["*"];
+        getDomain() {
+            return [];
+        }
+        update() {}
+    }
+    await mountWithCleanup(Parent);
+    onRpc("web_name_search", () => expect.step("web_name_search"));
+    await contains(".o_input_dropdown input").edit("wxy", { confirm: false });
+    await runAllTimers();
+    expect.verifySteps(["web_name_search"]);
+    expect(`.o-autocomplete.dropdown li:not(.o_m2o_dropdown_option) a`).toHaveCount(0);
+    await contains(".o_input_dropdown input").edit("wxyz", { confirm: false });
+    expect(`.o-autocomplete.dropdown li:not(.o_m2o_dropdown_option) a`).toHaveCount(0);
+    await runAllTimers();
+    expect.verifySteps(["web_name_search"]);
 });
 
 test("highlight search in many2one", async () => {

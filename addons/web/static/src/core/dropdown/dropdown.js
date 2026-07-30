@@ -21,7 +21,7 @@ import { effect } from "@web/core/utils/reactive";
 import { utils } from "@web/core/ui/ui_service";
 import { hasTouch } from "@web/core/browser/feature_detection";
 
-function getFirstElementOfNode(node) {
+export function getFirstElementOfNode(node) {
     if (!node) {
         return null;
     }
@@ -361,11 +361,14 @@ export class Dropdown extends Component {
             this.target.classList.add("show");
         }
 
-        this.observer = new MutationObserver(() => this.navigation.update());
-        this.observer.observe(this.menuRef.el, {
-            childList: true,
-            subtree: true,
-        });
+        const menuEl = this.menuRef.el;
+        if (menuEl) {
+            this.observer = new MutationObserver(() => this.navigation.update());
+            this.observer.observe(menuEl, {
+                childList: true,
+                subtree: true,
+            });
+        }
     }
 
     onClosed() {

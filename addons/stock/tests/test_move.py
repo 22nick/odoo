@@ -2,6 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from dateutil.relativedelta import relativedelta
+from freezegun import freeze_time
 
 from odoo import Command, fields
 from odoo.exceptions import UserError
@@ -2007,6 +2008,46 @@ class TestStockMove(TestStockCommon):
         move_partial.product_uom_qty = 3.0
         move_partial._action_assign()
         self.assertEqual(move_partial.state, 'assigned')
+
+    def test_availability_10(self):
+        """ test the reservation is taken into account when updating the quantity on a move."""
+        # make some stock
+        lot1, lot2, lot3 = self.env['stock.lot'].create([{
+            'name': 'lot%s' % str(i),
+            'product_id': self.product_lot.id,
+        } for i in range(1, 4)])
+        pack = self.env['stock.package'].create({'name': 'pack'})
+        self.env['stock.quant']._update_available_quantity(self.product_lot, self.shelf_1, 3, lot_id=lot1)
+        self.env['stock.quant']._update_available_quantity(self.product_lot, self.shelf_2, 3, lot_id=lot2)
+        self.env['stock.quant']._update_available_quantity(self.product_lot, self.shelf_1, 1, lot_id=lot3)
+        self.env['stock.quant']._update_available_quantity(self.product_lot, self.shelf_2, 3, lot_id=lot2, package_id=pack)
+
+        move = self.env['stock.move'].create({
+            'location_id': self.stock_location.id,
+            'location_dest_id': self.customer_location.id,
+            'product_id': self.product_lot.id,
+            'product_uom': self.product_lot.uom_id.id,
+            'product_uom_qty': 1.0,
+        })
+
+        move._action_confirm()
+        move._action_assign()
+        self.assertRecordValues(move.move_line_ids, [
+            {'quantity': 1.0, 'location_id': self.shelf_1.id, 'lot_id': lot1.id, 'package_id': False},
+        ])
+
+        move.quantity = 8.0
+        self.assertRecordValues(move.move_line_ids, [
+            {'quantity': 3.0, 'location_id': self.shelf_1.id, 'lot_id': lot1.id, 'package_id': False},
+            {'quantity': 3.0, 'location_id': self.shelf_2.id, 'lot_id': lot2.id, 'package_id': False},
+            {'quantity': 1.0, 'location_id': self.shelf_1.id, 'lot_id': lot3.id, 'package_id': False},
+            {'quantity': 1.0, 'location_id': self.shelf_2.id, 'lot_id': lot2.id, 'package_id': pack.id},
+        ])
+
+        move.quantity = 3.0
+        self.assertRecordValues(move.move_line_ids, [
+            {'quantity': 3.0, 'location_id': self.shelf_1.id, 'lot_id': lot1.id, 'package_id': False},
+        ])
 
     def test_past_quantity(self):
         """Test the quantity is correct when looking in the past."""
@@ -5606,9 +5647,9 @@ class TestStockMove(TestStockCommon):
         sml1 = delivery.move_line_ids.filtered(lambda ml: ml.product_id == self.productA)
         sml2 = delivery.move_line_ids.filtered(lambda ml: ml.product_id == product2)
         sml3 = delivery.move_line_ids.filtered(lambda ml: ml.product_id == product4)
-        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{sml1.product_uom_id.id}']
-        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sml2.product_uom_id.id}']
-        aggregate_val_3 = aggregate_values[f'{product4.id}_{product4.name}__{sml3.product_uom_id.id}']
+        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{sml1.product_uom_id.id}_{sml1.move_id.packaging_uom_id.id}']
+        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sml2.product_uom_id.id}_{sml2.move_id.packaging_uom_id.id}']
+        aggregate_val_3 = aggregate_values[f'{product4.id}_{product4.name}__{sml3.product_uom_id.id}_{sml3.move_id.packaging_uom_id.id}']
         self.assertEqual(aggregate_val_1['qty_ordered'], 10)
         self.assertEqual(aggregate_val_1['quantity'], 6)
         self.assertEqual(aggregate_val_2['qty_ordered'], 10)
@@ -5633,9 +5674,9 @@ class TestStockMove(TestStockCommon):
         sml1 = delivery.move_line_ids.filtered(lambda ml: ml.product_id == self.productA)
         sml2 = delivery.move_line_ids.filtered(lambda ml: ml.product_id == product2)
         sml3 = delivery.move_line_ids.filtered(lambda ml: ml.product_id == product4)
-        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{sml1.product_uom_id.id}']
-        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sml2.product_uom_id.id}']
-        aggregate_val_3 = aggregate_values[f'{product4.id}_{product4.name}__{sml3.product_uom_id.id}']
+        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{sml1.product_uom_id.id}_{sml1.move_id.packaging_uom_id.id}']
+        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sml2.product_uom_id.id}_{sml2.move_id.packaging_uom_id.id}']
+        aggregate_val_3 = aggregate_values[f'{product4.id}_{product4.name}__{sml3.product_uom_id.id}_{sml3.move_id.packaging_uom_id.id}']
         self.assertEqual(aggregate_val_1['qty_ordered'], 10)
         self.assertEqual(aggregate_val_1['quantity'], 6)
         self.assertEqual(aggregate_val_2['qty_ordered'], 10)
@@ -5649,10 +5690,10 @@ class TestStockMove(TestStockCommon):
         sml2 = first_backorder.move_line_ids.filtered(lambda ml: ml.product_id == product2)
         sml3 = first_backorder.move_line_ids.filtered(lambda ml: ml.product_id == product3)
         sml4 = first_backorder.move_line_ids.filtered(lambda ml: ml.product_id == product4)
-        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{sml1.product_uom_id.id}']
-        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sml2.product_uom_id.id}']
-        aggregate_val_3 = aggregate_values[f'{product3.id}_{product3.name}_Description3_{sml3.product_uom_id.id}']
-        aggregate_val_4 = aggregate_values[f'{product4.id}_{product4.name}__{sml4.product_uom_id.id}']
+        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{sml1.product_uom_id.id}_{sml1.move_id.packaging_uom_id.id}']
+        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sml2.product_uom_id.id}_{sml2.move_id.packaging_uom_id.id}']
+        aggregate_val_3 = aggregate_values[f'{product3.id}_{product3.name}_Description3_{sml3.product_uom_id.id}_{sml3.move_id.packaging_uom_id.id}']
+        aggregate_val_4 = aggregate_values[f'{product4.id}_{product4.name}__{sml4.product_uom_id.id}_{sml4.move_id.packaging_uom_id.id}']
         self.assertEqual(aggregate_val_1['qty_ordered'], 4)
         self.assertEqual(aggregate_val_1['quantity'], 4)
         self.assertEqual(aggregate_val_2['qty_ordered'], 8)
@@ -5680,9 +5721,9 @@ class TestStockMove(TestStockCommon):
         sml1 = delivery.move_line_ids.filtered(lambda ml: ml.product_id == self.productA)
         sml2 = delivery.move_line_ids.filtered(lambda ml: ml.product_id == product2)
         sml3 = delivery.move_line_ids.filtered(lambda ml: ml.product_id == product4)
-        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{sml1.product_uom_id.id}']
-        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sml2.product_uom_id.id}']
-        aggregate_val_3 = aggregate_values[f'{product4.id}_{product4.name}__{sml3.product_uom_id.id}']
+        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{sml1.product_uom_id.id}_{sml1.move_id.packaging_uom_id.id}']
+        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sml2.product_uom_id.id}_{sml2.move_id.packaging_uom_id.id}']
+        aggregate_val_3 = aggregate_values[f'{product4.id}_{product4.name}__{sml3.product_uom_id.id}_{sml3.move_id.packaging_uom_id.id}']
         self.assertEqual(aggregate_val_1['qty_ordered'], 10)
         self.assertEqual(aggregate_val_1['quantity'], 6)
         self.assertEqual(aggregate_val_2['qty_ordered'], 10)
@@ -5696,10 +5737,10 @@ class TestStockMove(TestStockCommon):
         sml2 = first_backorder.move_line_ids.filtered(lambda ml: ml.product_id == product2)
         sml3 = first_backorder.move_line_ids.filtered(lambda ml: ml.product_id == product3)
         sml4 = first_backorder.move_line_ids.filtered(lambda ml: ml.product_id == product4)
-        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{sml1.product_uom_id.id}']
-        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sml2.product_uom_id.id}']
-        aggregate_val_3 = aggregate_values[f'{product3.id}_{product3.name}_Description3_{sml3.product_uom_id.id}']
-        aggregate_val_4 = aggregate_values[f'{product4.id}_{product4.name}__{sml4.product_uom_id.id}']
+        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{sml1.product_uom_id.id}_{sml1.move_id.packaging_uom_id.id}']
+        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sml2.product_uom_id.id}_{sml2.move_id.packaging_uom_id.id}']
+        aggregate_val_3 = aggregate_values[f'{product3.id}_{product3.name}_Description3_{sml3.product_uom_id.id}_{sml3.move_id.packaging_uom_id.id}']
+        aggregate_val_4 = aggregate_values[f'{product4.id}_{product4.name}__{sml4.product_uom_id.id}_{sml4.move_id.packaging_uom_id.id}']
         self.assertEqual(aggregate_val_1['qty_ordered'], 4)
         self.assertEqual(aggregate_val_1['quantity'], 4)
         self.assertEqual(aggregate_val_2['qty_ordered'], 8)
@@ -5713,8 +5754,8 @@ class TestStockMove(TestStockCommon):
         self.assertEqual(len(aggregate_values), 2)
         sml1 = second_backorder.move_line_ids.filtered(lambda ml: ml.product_id == product3)
         sm2 = second_backorder.move_ids.filtered(lambda ml: ml.product_id == product2)
-        aggregate_val_1 = aggregate_values[f'{product3.id}_{product3.name}_Description3_{sml1.product_uom_id.id}']
-        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sm2.product_uom.id}']
+        aggregate_val_1 = aggregate_values[f'{product3.id}_{product3.name}_Description3_{sml1.product_uom_id.id}_{sml1.move_id.packaging_uom_id.id}']
+        aggregate_val_2 = aggregate_values[f'{product2.id}_{product2.name}_Description2_{sm2.product_uom.id}_{sml2.move_id.packaging_uom_id.id}']
         self.assertEqual(aggregate_val_1['qty_ordered'], 3)
         self.assertEqual(aggregate_val_1['quantity'], 3)
         self.assertEqual(aggregate_val_2['qty_ordered'], 2)
@@ -5768,7 +5809,7 @@ class TestStockMove(TestStockCommon):
             'location_dest_id': move2.location_dest_id.id,
         })
         aggregate_values = picking.move_line_ids._get_aggregated_product_quantities()
-        aggregated_val = aggregate_values[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}']
+        aggregated_val = aggregate_values[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}_{self.productA.uom_id.id}']
         self.assertEqual(aggregated_val['qty_ordered'], 15)
         picking.move_ids.picked = True
         picking.button_validate()
@@ -5817,11 +5858,11 @@ class TestStockMove(TestStockCommon):
         self.assertEqual(self.env['stock.quant']._get_available_quantity(self.productA, self.customer_location), 15)
 
         aggregate_values1 = picking.move_line_ids[0]._get_aggregated_product_quantities(strict=True)
-        aggregated_val = aggregate_values1[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}_{picking.move_line_ids[0].result_package_id.id}']
+        aggregated_val = aggregate_values1[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}_{self.productA.uom_id.id}_{picking.move_line_ids[0].result_package_id.id}']
         self.assertEqual(aggregated_val['qty_ordered'], 5)
 
         aggregate_values2 = picking.move_line_ids[1]._get_aggregated_product_quantities(strict=True)
-        aggregated_val = aggregate_values2[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}_{picking.move_line_ids[1].result_package_id.id}']
+        aggregated_val = aggregate_values2[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}_{self.productA.uom_id.id}_{picking.move_line_ids[1].result_package_id.id}']
         self.assertEqual(aggregated_val['qty_ordered'], 10)
 
     def test_move_line_aggregated_product_quantities_incomplete_package(self):
@@ -5859,17 +5900,17 @@ class TestStockMove(TestStockCommon):
         picking.backorder_ids.action_cancel()
 
         aggregate_values = picking.move_line_ids._get_aggregated_product_quantities()
-        aggregated_val = aggregate_values[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}_{package.id}']
+        aggregated_val = aggregate_values[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}_{self.productA.uom_id.id}_{package.id}']
         self.assertEqual(aggregated_val['qty_ordered'], 15)
         self.assertEqual(aggregated_val['quantity'], 5)
 
         aggregate_values = picking.move_line_ids._get_aggregated_product_quantities(strict=True)
-        aggregated_val = aggregate_values[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}_{package.id}']
+        aggregated_val = aggregate_values[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}_{self.productA.uom_id.id}_{package.id}']
         self.assertEqual(aggregated_val['qty_ordered'], 5)
         self.assertEqual(aggregated_val['quantity'], 5)
 
         aggregate_values = picking.move_line_ids._get_aggregated_product_quantities(except_package=True)
-        aggregated_val = aggregate_values[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}']
+        aggregated_val = aggregate_values[f'{self.productA.id}_{self.productA.name}__{self.productA.uom_id.id}_{self.productA.uom_id.id}']
         self.assertEqual(aggregated_val['qty_ordered'], 10)
         self.assertEqual(aggregated_val['quantity'], False)
 
@@ -5925,11 +5966,14 @@ class TestStockMove(TestStockCommon):
         self.assertEqual(list(warning.keys())[0], 'warning', 'Warning message was not returned')
         self.assertEqual(move_line.location_id, self.pack_location, 'Location was not auto-corrected')
 
-        move.lot_ids = lot1
+        move_line.write({
+            'lot_name': False,
+            'lot_id': False,
+        })
         warning = False
-        warning = move._onchange_lot_ids()
+        warning = move.onchange({'lot_ids': [Command.link(lot1.id)]}, ['lot_ids'], {'lot_ids': {'context': {}}})
         self.assertTrue(warning, 'Reuse of existing serial number (record) not detected')
-        self.assertEqual(list(warning.keys())[0], 'warning', 'Warning message was not returned')
+        self.assertIn('Unavailable Serial numbers. Please correct the serial numbers encoded', warning.get('warning', {}).get('message'))
 
     def test_forecast_availability(self):
         """ Make an outgoing picking in dozens for a product stored in units.
@@ -6116,11 +6160,31 @@ class TestStockMove(TestStockCommon):
         destination location and then the done quantity. In such cases, since
         the user has defined himself the destination location, we should not try
         to apply any putaway rule that would override his choice.
+
+        Additionally, ensure that when a delivery is waiting for availability
+        from a parent location, validating a receipt whose destination is a
+        child location of that parent triggers the reservation of the delivery.
         """
         self.env.user.write({'group_ids': [(4, self.env.ref('stock.group_stock_multi_locations').id)]})
 
         child_location = self.stock_location.child_ids[0]
         self.picking_type_in.show_operations = True
+
+        # Create a delivery from the parent location to the customer location.
+        delivery = self.env['stock.picking'].create({
+            'location_id': self.stock_location.id,
+            'location_dest_id': self.customer_location.id,
+            'picking_type_id': self.picking_type_out.id,
+            'move_ids': [Command.create({
+                'location_id': self.stock_location.id,
+                'location_dest_id': self.customer_location.id,
+                'product_id': self.productA.id,
+                'product_uom': self.productA.uom_id.id,
+                'product_uom_qty': 2.0,
+            })],
+        })
+        delivery.action_confirm()
+        self.assertEqual(delivery.state, 'confirmed', 'The delivery should be waiting for availability since there is no stock on hand.')
 
         receipt = self.env['stock.picking'].create({
             'location_id': self.customer_location.id,
@@ -6144,6 +6208,10 @@ class TestStockMove(TestStockCommon):
         self.assertRecordValues(receipt.move_ids.move_line_ids[-1], [
             {'location_dest_id': child_location.id, 'product_id': self.productA.id, 'quantity': 2},
         ])
+        receipt.button_validate()
+        self.assertEqual(receipt.state, 'done')
+        self.assertEqual(delivery.state, 'assigned',
+                        'The delivery should be assigned since the receipt destination is a child location of the delivery source location.')
 
     def test_scheduled_date_after_backorder(self):
         today = fields.Datetime.today()
@@ -6227,6 +6295,32 @@ class TestStockMove(TestStockCommon):
         ml.write({'product_uom_id': self.uom_unit.id})
         self.assertEqual(quant.reserved_quantity, 2)
         self.assertEqual(ml.quantity * self.uom_unit.factor, 2)
+
+    def test_decrease_move_quantity_with_move_line_in_different_uom(self):
+        """Check decreasing a move keeps move lines in sync when their UoM differs from the move's."""
+        self.env['stock.quant']._update_available_quantity(self.productA, self.stock_location, 24)
+        quant = self.env['stock.quant']._gather(self.productA, self.stock_location)
+        move = self.env['stock.move'].create({
+            'product_id': self.productA.id,
+            'product_uom_qty': 2,
+            'product_uom': self.uom_dozen.id,
+            'location_id': self.stock_location.id,
+            'location_dest_id': self.customer_location.id,
+        })
+        move._action_confirm()
+        move._action_assign()
+        self.assertEqual(quant.reserved_quantity, 24)
+
+        ml = move.move_line_ids
+        ml.write({'quantity': 24, 'product_uom_id': self.uom_unit.id})
+        self.assertEqual(ml.quantity, 24)
+
+        move.quantity = 1
+
+        self.assertEqual(len(move.move_line_ids), 1)
+        self.assertEqual(move.move_line_ids.product_uom_id, self.uom_unit)
+        self.assertEqual(move.move_line_ids.quantity, 12)
+        self.assertEqual(quant.reserved_quantity, 12)
 
     def test_move_line_qty_with_quant_in_different_uom(self):
         """
@@ -6348,6 +6442,7 @@ class TestStockMove(TestStockCommon):
         line2.quant_id = quant
         self.assertEqual(move.move_line_ids[1].quantity, 1.0)
 
+    @freeze_time("2025-10-10")
     def test_free_reservation(self):
         """ Checks that the free_reservation uses the latest move line when the picking or date are equal.
         """
@@ -6524,3 +6619,406 @@ class TestStockMove(TestStockCommon):
             {'quantity': 149.97, 'quantity_product_uom': 5.29},
             {'quantity': 0.03, 'quantity_product_uom': 0},
         ])
+
+    def test_tracked_move_quantity_lot_ids_combined_write(self):
+        """ Writing both `quantity` and `lot_ids` on a tracked move in the
+        same call must keep `move.quantity` in sync with the resulting
+        `move.move_line_ids`. Otherwise the picking can be validated to
+        'done' with a positive `quantity` but no move line and no serial
+        number recorded (phantom delivery, broken traceability).
+        """
+        picking_type_out = self.env.ref('stock.picking_type_out')
+        picking_type_out.use_existing_lots = True
+        picking_type_out.use_create_lots = False
+        lots = self.env['stock.lot'].create([
+            {'name': 'SN-PHANTOM-%d' % i, 'product_id': self.product_serial.id}
+            for i in range(1, 7)
+        ])
+        for lot in lots:
+            self.env['stock.quant']._update_available_quantity(
+                self.product_serial, self.stock_location, 1.0, lot_id=lot,
+            )
+        picking = self.env['stock.picking'].create({
+            'picking_type_id': picking_type_out.id,
+            'location_id': self.stock_location.id,
+            'location_dest_id': self.customer_location.id,
+            'move_ids': [Command.create({
+                'product_id': self.product_serial.id,
+                'product_uom_qty': 6.0,
+                'product_uom': self.product_serial.uom_id.id,
+                'location_id': self.stock_location.id,
+                'location_dest_id': self.customer_location.id,
+            })],
+        })
+        picking.action_confirm()
+        picking.action_assign()
+        move = picking.move_ids
+        self.assertEqual(move.state, 'assigned')
+        self.assertEqual(len(move.move_line_ids), 6)
+        self.assertEqual(move.quantity, 6.0)
+        # The exact write the form sends when the user typed "1" in the
+        # Quantity column AND cleared every lot in the Serial Numbers
+        # widget on the same form save
+        move.write({
+            'quantity': 1.0,
+            'lot_ids': [Command.set([])],
+        })
+        self.assertFalse(move.move_line_ids)
+        self.assertEqual(move.quantity, 0.0)
+
+    def test_move_state_after_split(self):
+        """Test that move states are correctly recomputed after splitting a picking."""
+        picking = self.env['stock.picking'].create({
+            'picking_type_id': self.env.ref('stock.picking_type_out').id,
+            'location_id': self.stock_location.id,
+            'location_dest_id': self.supplier_location.id,
+            'move_ids': [Command.create({
+                'product_id': self.product.id,
+                'product_uom_qty': 10,
+                'location_id': self.stock_location.id,
+                'location_dest_id': self.supplier_location.id,
+            })]
+        })
+        self.product.is_storable = True
+        self.assertEqual(picking.move_ids.forecast_availability, -10)
+        self.env['stock.quant']._update_available_quantity(self.product, self.stock_location, 10)
+        self.env.invalidate_all()
+        self.assertEqual(picking.move_ids.forecast_availability, 10)
+        picking.action_confirm()
+        self.assertEqual(picking.move_ids.state, 'assigned')
+        picking.move_ids.quantity = 4
+        self.assertEqual(picking.move_ids.state, 'partially_available')
+        picking.action_split_transfer()
+        self.assertEqual(len(picking.move_ids), 1)
+        self.assertEqual(picking.move_ids.product_uom_qty, 4)
+        self.assertEqual(picking.move_ids.state, 'assigned')
+        backorder = picking.backorder_ids
+        self.assertEqual(backorder.move_ids.product_uom_qty, 6)
+        self.assertEqual(backorder.move_ids.quantity, 6)
+        self.assertEqual(backorder.move_ids.state, 'assigned')
+
+    def test_edit_serial_number_from_move(self):
+        """
+        This test verifies that when a move is assigned an initial serial number,
+        and the user manually replaces it with another available one before
+        validation, the system correctly updates the serial number on both the
+        stock move and the move line. It also ensures that the updated serial
+        number is preserved after validating the picking.
+        """
+        lot1 = self.env['stock.lot'].create({
+            'product_id': self.product_serial.id,
+        })
+        lot2 = self.env['stock.lot'].create({
+            'product_id': self.product_serial.id,
+        })
+        self.env['stock.quant']._update_available_quantity(self.product_serial, self.stock_location, 1, lot_id=lot1)
+        self.env['stock.quant']._update_available_quantity(self.product_serial, self.stock_location, 1, lot_id=lot2)
+        picking = self.env['stock.picking'].create({
+            'location_id': self.stock_location.id,
+            'location_dest_id': self.customer_location.id,
+            'picking_type_id': self.picking_type_out.id,
+            'move_ids': [Command.create({
+                'location_id': self.stock_location.id,
+                'location_dest_id': self.customer_location.id,
+                'product_id': self.product_serial.id,
+                'product_uom_qty': 1,
+            })],
+        })
+        picking.action_confirm()
+        self.assertEqual(picking.move_ids.state, 'assigned')
+        self.assertEqual(picking.move_ids.lot_ids, lot1)
+        picking.move_ids.lot_ids = lot2
+        self.assertEqual(picking.move_ids.lot_ids, lot2)
+        self.assertEqual(picking.move_line_ids.lot_id, lot2)
+        picking.button_validate()
+        self.assertEqual(picking.move_ids.lot_ids, lot2)
+
+    def test_delivery_slip_aggregated_lines_with_canceled_move_and_packaging(self):
+        """
+        Ensure that the delivery slip report correctly aggregates product quantities
+        when a picking contains both a completed move and a canceled move that uses
+        packaging units.
+        - two products are ordered in packaging (e.g., 1 pack of 6)
+        - the picking is split, causing one move to be fulfilled and the other canceled
+        - the canceled move still contributes packaging information (ordered quantity)
+        The report must not crash and must return consistent aggregated values.
+        """
+        pack_of_6 = self.env.ref('uom.product_uom_pack_6')
+        # upodate the quantity of product A
+        self.env['stock.quant']._update_available_quantity(self.productA, self.stock_location, 6)
+        picking = self.env['stock.picking'].create({
+            'location_id': self.stock_location.id,
+            'location_dest_id': self.customer_location.id,
+            'picking_type_id': self.picking_type_out.id,
+            'move_ids': [
+                Command.create({
+                    'product_id': self.productA.id,
+                    'product_uom_qty': 1,
+                    'product_uom': pack_of_6.id,
+                    'location_id': self.stock_location.id,
+                    'location_dest_id': self.customer_location.id,
+                }),
+                Command.create({
+                    'product_id': self.productB.id,
+                    'product_uom_qty': 1,
+                    'product_uom': pack_of_6.id,
+                    'location_id': self.stock_location.id,
+                    'location_dest_id': self.customer_location.id,
+                }),
+            ],
+        })
+        picking.action_confirm()
+        self.assertEqual(picking.move_ids.mapped('quantity'), [1.0, 0])
+        picking.action_split_transfer()
+        backorder = picking.backorder_ids
+        backorder.action_cancel()
+        picking.button_validate()
+        self.assertEqual(backorder.state, 'cancel')
+        self.assertEqual(picking.state, 'done')
+        aggregate_values = picking.move_line_ids._get_aggregated_product_quantities()
+        self.assertEqual(len(aggregate_values), 2)
+        aggregate_val_1 = aggregate_values[f'{self.productA.id}_{self.productA.name}__{pack_of_6.id}_{pack_of_6.id}']
+        aggregate_val_2 = aggregate_values[f'{self.productB.id}_{self.productB.name}__{pack_of_6.id}_{pack_of_6.id}']
+        self.assertEqual(aggregate_val_1['qty_ordered'], 1.0)
+        self.assertEqual(aggregate_val_1['quantity'], 1.0)
+        self.assertEqual(aggregate_val_1['packaging_qty_ordered'], 1.0)
+        self.assertEqual(aggregate_val_2['qty_ordered'], 1.0)
+        self.assertEqual(aggregate_val_2['quantity'], 0)
+        self.assertEqual(aggregate_val_2['packaging_qty_ordered'], 0.0)
+
+    def test_newly_added_move_line_is_picked_if_move_is_picked(self):
+        """
+        After a new move line is added in the "Details" popup of a move,
+        it should be automatically marked as picked if the stock move was
+        earlier marked as picked.
+        """
+        lot_1, lot_2 = self.env['stock.lot'].create([{
+            'name': 'lot_1', 'product_id': self.product_lot.id,
+        }, {
+            'name': 'lot_2', 'product_id': self.product_lot.id,
+        }])
+        for lot_id in [lot_1, lot_2]:
+            self.env['stock.quant']._update_available_quantity(
+                self.product_lot, self.stock_location, 3, lot_id=lot_id
+            )
+        # Create a delivery with one move of 3 products
+        with Form(self.env['stock.picking']) as delivery_form:
+            delivery_form.picking_type_id = self.picking_type_out
+            with delivery_form.move_ids.new() as move:
+                move.product_id = self.product_lot
+                move.product_uom_qty = 3
+            delivery = delivery_form.save()
+        delivery.action_confirm()
+        # Verify that the stock move line uses lot_1
+        self.assertEqual(delivery.move_ids.move_line_ids.lot_id, lot_1)
+        # Mark the move as picked, which will also mark the move line as picked
+        delivery.move_ids.picked = True
+        self.assertTrue(delivery.move_ids.move_line_ids.picked)
+        # Split the move lines: 2 from lot_1, 1 from lot_2
+        action = delivery.move_ids.action_show_details()
+        with Form(delivery.move_ids.with_context(action['context']), view=action['view_id']) as form:
+            with form.move_line_ids.edit(0) as existing_move_line:
+                existing_move_line.quantity = 2
+            with form.move_line_ids.new() as new_move_line:
+                new_move_line.lot_id = lot_2
+                new_move_line.quantity = 1
+
+        # The move should still be picked
+        self.assertTrue(delivery.move_ids.picked)
+        # All the move lines are also picked
+        for move_line in delivery.move_ids.move_line_ids:
+            self.assertTrue(move_line.picked)
+
+    def test_delivery_slip_quantity_aggregation_with_pack_uom(self):
+        """
+        Test aggregated delivery slip quantities with respect to mixed uoms and packages.
+        """
+        pack_of_6 = self.env.ref('uom.product_uom_pack_6')
+        package1, package2 = self.env['stock.package'].create([{'name': 'Pack 1'}, {'name': 'Pack 2'}])
+        receipt = self.env['stock.picking'].create({
+            'location_id': self.supplier_location.id,
+            'location_dest_id': self.stock_location.id,
+            'picking_type_id': self.env.ref('stock.picking_type_in').id,
+            'move_ids': [Command.create({
+                'product_id': self.product.id,
+                'product_uom_qty': 10,
+                'product_uom': pack_of_6.id,
+            })],
+        })
+        self.assertEqual(receipt.move_ids.packaging_uom_id, pack_of_6)
+        receipt.action_confirm()
+        receipt.write({
+            'move_line_ids': [
+                Command.update(receipt.move_ids.move_line_ids[0].id, {
+                    'product_id': self.product.id,
+                    'quantity': 30,
+                    'product_uom_id': self.uom_unit.id,
+                    'result_package_id': package1.id,
+                }),
+                Command.create({
+                    'product_id': self.product.id,
+                    'quantity': 30,
+                    'product_uom_id': self.uom_unit.id,
+                    'result_package_id': package2.id,
+                })],
+        })
+        for aggregate_val in receipt.move_line_ids._get_aggregated_product_quantities().values():
+            self.assertDictEqual({
+                'qty_ordered': aggregate_val['qty_ordered'],
+                'quantity': aggregate_val['quantity'],
+                'packaging_quantity': aggregate_val['packaging_quantity'],
+                'packaging_qty_ordered': aggregate_val['packaging_qty_ordered'],
+            }, {
+                'qty_ordered': 5.0,
+                'quantity': 5.0,
+                'packaging_quantity': 5.0,
+                'packaging_qty_ordered': 5.0,
+            })
+
+    def test_aggregated_quantities_partial_and_over_delivery(self):
+        """
+        Test that aggregated product quantities preserve the original demand
+        and quantity done during a partial or over delivery.
+        """
+        delivery = self.env['stock.picking'].create({
+            'picking_type_id': self.env.ref('stock.picking_type_out').id,
+            'location_id': self.stock_location.id,
+            'location_dest_id': self.customer_location.id,
+            'move_ids': [(0, 0, {
+                'product_id': self.product.id,
+                'product_uom': self.uom_unit.id,
+                'product_uom_qty': 10.0,
+            })],
+        })
+        delivery.action_confirm()
+        delivery.action_assign()
+        # -------------------------
+        # Partial delivery (6 / 10)
+        # -------------------------
+        delivery.move_line_ids.quantity = 6
+        delivery.move_ids.picked = True
+        wizard_vals = delivery.button_validate()
+        wizard = Form(
+            self.env[wizard_vals['res_model']]
+            .with_context(wizard_vals['context'])
+        )
+        wizard.save().process_cancel_backorder()
+        aggregated = list(delivery.move_line_ids._get_aggregated_product_quantities().values())
+        self.assertEqual(aggregated[0]['qty_ordered'], 10)
+        self.assertEqual(aggregated[0]['quantity'], 6)
+        # -------------------------
+        # Over-delivery (12 / 10)
+        # -------------------------
+        delivery.move_line_ids.quantity = 12
+        aggregated = list(delivery.move_line_ids._get_aggregated_product_quantities().values())
+        self.assertEqual(aggregated[0]['qty_ordered'], 10)
+        self.assertEqual(aggregated[0]['quantity'], 12)
+        # -------------------------
+        # Over-delivery (10 / 0)
+        # -------------------------
+        delivery.move_ids.product_uom_qty = 0
+        delivery.move_line_ids.quantity = 10
+        aggregated = list(delivery.move_line_ids._get_aggregated_product_quantities().values())
+        self.assertEqual(aggregated[0]['qty_ordered'], 0)
+        self.assertEqual(aggregated[0]['quantity'], 10)
+
+    def test_modifying_lots_id_in_outgoing_picking(self):
+        """ Ensure that after setting the quantity of the move to zero, manually add serial
+        number will not add unexpected serial number to the lots_id field and cause a mismatch
+        of quantity and the number of the serial number. This test also ensures that if we change
+        the quantity back to another number, the lot_ids will be autopopulated as usual with no issue.
+        """
+        lot_1 = self.env['stock.lot'].create({
+            'name': 'SN-001',
+            'product_id': self.product_serial.id,
+            'location_id': self.stock_location.id,
+        })
+        lot_2 = self.env['stock.lot'].create({
+            'name': 'SN-002',
+            'product_id': self.product_serial.id,
+            'location_id': self.stock_location.id,
+        })
+        lot_3 = self.env['stock.lot'].create({
+            'name': 'SN-003',
+            'product_id': self.product_serial.id,
+            'location_id': self.stock_location.id,
+        })
+        self.env['stock.quant']._update_available_quantity(self.product_serial, self.stock_location, 1.0, lot_id=lot_1)
+        self.env['stock.quant']._update_available_quantity(self.product_serial, self.stock_location, 1.0, lot_id=lot_2)
+        self.env['stock.quant']._update_available_quantity(self.product_serial, self.stock_location, 1.0, lot_id=lot_3)
+
+        form = Form(self.env['stock.picking'].with_context(restricted_picking_type_code="outgoing"))
+        form.location_id = self.stock_location
+        with form.move_ids.new() as move:
+            move.product_id = self.product_serial
+            move.product_uom_qty = 3.0
+        picking = form.save()
+        picking.action_confirm()
+        form = Form(picking)
+        with form.move_ids.edit(0) as move:
+            move.quantity = 0
+        picking = form.save()
+        self.assertEqual(len(picking.move_ids[0].lot_ids), 0)
+
+        form = Form(picking)
+        with form.move_ids.edit(0) as move:
+            move.quantity = 2
+            move.lot_ids = lot_2 | lot_3
+        picking = form.save()
+        self.assertNotIn(lot_1, picking.move_ids[0].lot_ids)
+        self.assertEqual(len(picking.move_ids[0].lot_ids), 2)
+        self.assertIn(lot_2, picking.move_ids[0].lot_ids)
+        self.assertIn(lot_3, picking.move_ids[0].lot_ids)
+
+        form = Form(picking)
+        with form.move_ids.edit(0) as move:
+            move.quantity = 3
+        picking = form.save()
+        self.assertEqual(len(picking.move_ids[0].lot_ids), 3)
+        self.assertIn(lot_1, picking.move_ids[0].lot_ids)
+        self.assertIn(lot_2, picking.move_ids[0].lot_ids)
+        self.assertIn(lot_3, picking.move_ids[0].lot_ids)
+
+    def test_picking_deadline_excludes_cancelled_move(self):
+        """ Picking deadline must recompute on move cancellation and must not include cancelled moves. """
+        today = fields.Datetime.now()
+        picking = self.env['stock.picking'].create({
+            'picking_type_id': self.env.ref('stock.picking_type_in').id,
+            'location_id': self.supplier_location.id,
+            'location_dest_id': self.stock_location.id,
+            'move_ids': [
+                Command.create({
+                    'product_id': self.product_consu.id,
+                    'product_uom_qty': 1,
+                    'date_deadline': today,
+                }),
+                Command.create({
+                    'product_id': self.product_consu.id,
+                    'product_uom_qty': 1,
+                    'date_deadline': today + relativedelta(days=2),
+                }),
+            ],
+        })
+        move1, move2 = picking.move_ids
+        self.assertEqual(picking.date_deadline, move1.date_deadline, 'Picking deadline should be the earliest move deadline')
+        move1._action_cancel()
+        self.assertEqual(picking.date_deadline, move2.date_deadline, 'Picking deadline should update to the remaining move after cancellation')
+
+    def test_open_reference_opens_picking_for_inventory_loss(self):
+        """Inventory loss moves without scrap_id should open the picking, not scrap."""
+        self.picking_type_out.default_location_dest_id = self.env['stock.location'].create({
+            'name': 'Office supplies consumption',
+            'usage': 'inventory',
+        })
+        view = self.env['stock.picking'].create({
+            'picking_type_id': self.picking_type_out.id,
+            'partner_id': self.partner_1.id,
+            'move_ids': [
+                Command.create({
+                    'product_id': self.productA.id,
+                    'product_uom_qty': 1.0,
+                }),
+            ],
+        }).move_ids.action_open_reference()
+        self.assertTrue(view['res_id'])
+        self.assertEqual(view['res_model'], 'stock.picking')

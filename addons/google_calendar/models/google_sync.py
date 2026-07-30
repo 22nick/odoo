@@ -78,8 +78,12 @@ class GoogleCalendarSync(models.AbstractModel):
 
     @api.model_create_multi
     def create(self, vals_list):
-        if self.env.user.google_synchronization_stopped:
-            for vals in vals_list:
+        user_ids = {v['user_id'] for v in vals_list if v.get('user_id')}
+        users_with_sync = self.env['res.users'].browse(user_ids).filtered(lambda u: not u.sudo().google_synchronization_stopped)
+        users_with_sync_set = set(users_with_sync.ids)
+
+        for vals in vals_list:
+            if vals.get('user_id', False) and vals['user_id'] not in users_with_sync_set:
                 vals.update({'need_sync': False})
         records = super().create(vals_list)
         self._handle_allday_recurrences_edge_case(records, vals_list)
@@ -344,7 +348,9 @@ class GoogleCalendarSync(models.AbstractModel):
     @api.model
     def _get_sync_partner(self, emails):
         normalized_emails = [email_normalize(contact) for contact in emails if email_normalize(contact)]
-        partners = self.env['mail.thread']._partner_find_from_emails_single(normalized_emails)
+        partners = self.env['mail.thread'].with_context(
+            mail_create_log_from_calendar_sync=True,
+        )._partner_find_from_emails_single(normalized_emails)
         # partners needs to be sorted according to the emails order provided by google
         k = {value: idx for idx, value in enumerate(emails)}
         return partners.sorted(key=lambda p: k.get(p.email_normalized, -1))

@@ -60,10 +60,10 @@ class ResPartner(models.Model):
 
     def l10n_tr_check_nilvera_customer(self):
         results = defaultdict(lambda: self.env['res.partner'])
-        for record in self:
-            if not record.vat:
-                return
-
+        # we want to skip records whose status is already set, unless we want to
+        # purposefully retry them
+        retry_existing = self.env.context.get('retry_existing', False)
+        for record in self.filtered(lambda p: p.vat and (retry_existing or p.l10n_tr_nilvera_customer_status == 'not_checked')):
             if record._check_nilvera_customer():
                 if len(record.l10n_tr_nilvera_customer_alias_ids) > 1:
                     results['multi_alias'] |= record
@@ -93,7 +93,7 @@ class ResPartner(models.Model):
         if not self.vat:
             return
 
-        with _get_nilvera_client(self.env.company) as client:
+        with _get_nilvera_client(self.env.company.sudo()) as client:
             response = client.request("GET", "/general/GlobalCompany/Check/TaxNumber/" + urllib.parse.quote(self.vat), handle_response=False)
             if response.status_code == 200:
                 query_result = response.json()
@@ -123,6 +123,9 @@ class ResPartner(models.Model):
                     remaining_aliases = newly_persisted_aliases | to_keep
                     if not self.l10n_tr_nilvera_customer_alias_id and remaining_aliases:
                         self.l10n_tr_nilvera_customer_alias_id = remaining_aliases[0]
+                # commit the result of each request because in the case of a bulk verify the
+                # server can timeout and all progress will be undone
+                self.env.cr.commit()
                 return True
             else:
                 return False

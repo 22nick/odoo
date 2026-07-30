@@ -71,13 +71,9 @@ class AccountMove(models.Model):
                         'name': line.name[:64],
                         'move_id': move.id,
                         'partner_id': line.partner_id.id or move.commercial_partner_id.id,
-                        'currency_id': line.currency_id.id,
                         'product_id': line.product_id.id,
                         'product_uom_id': line.product_uom_id.id,
                         'quantity': relevant_qty,
-                        'price_unit': price_unit_val_dif,
-                        'price_subtotal': relevant_qty * price_unit_val_dif,
-                        'amount_currency': relevant_qty * price_unit_val_dif,
                         'balance': line.currency_id._convert(
                             relevant_qty * price_unit_val_dif,
                             line.company_currency_id,
@@ -86,6 +82,7 @@ class AccountMove(models.Model):
                         'account_id': debit_pdiff_account.id,
                         'analytic_distribution': line.analytic_distribution,
                         'display_type': 'cogs',
+                        'tax_ids': [],
                     }
                     lines_vals_list.append(vals)
 
@@ -94,13 +91,9 @@ class AccountMove(models.Model):
                         'name': line.name[:64],
                         'move_id': move.id,
                         'partner_id': line.partner_id.id or move.commercial_partner_id.id,
-                        'currency_id': line.currency_id.id,
                         'product_id': line.product_id.id,
                         'product_uom_id': line.product_uom_id.id,
                         'quantity': relevant_qty,
-                        'price_unit': -price_unit_val_dif,
-                        'price_subtotal': relevant_qty * -price_unit_val_dif,
-                        'amount_currency': relevant_qty * -price_unit_val_dif,
                         'balance': line.currency_id._convert(
                             relevant_qty * -price_unit_val_dif,
                             line.company_currency_id,
@@ -109,6 +102,7 @@ class AccountMove(models.Model):
                         'account_id': line.account_id.id,
                         'analytic_distribution': line.analytic_distribution,
                         'display_type': 'cogs',
+                        'tax_ids': [],
                     }
                     lines_vals_list.append(vals)
         return lines_vals_list

@@ -519,6 +519,14 @@ class TestStockLot(TestStockCommon):
         When assigning a lot to a SML, if the lot has an expiration date,
         the latter should be applied on the SML
         """
+        self.apple_product.use_expiration_date = False
+        # Create a lot without expiration date to be sure that the date applied on the SML is the one of the lot and not a default one
+        lot_without_expiration = self.env['stock.lot'].create({
+            'name': 'Lot 2',
+            'product_id': self.apple_product.id,
+        })
+        self.assertFalse(lot_without_expiration.expiration_date)
+        self.apple_product.use_expiration_date = True
         exp_date = fields.Datetime.today() + relativedelta(days=15)
         sml_exp_date = fields.Datetime.today() + relativedelta(days=10)
 
@@ -548,6 +556,8 @@ class TestStockLot(TestStockCommon):
 
         sml.lot_id = lot
         self.assertEqual(sml.expiration_date, exp_date)
+        sml.lot_id = lot_without_expiration
+        self.assertFalse(sml.expiration_date)
 
     def test_apply_same_date_on_expiry_fields(self):
         expiration_time = 10
@@ -705,13 +715,13 @@ class TestStockLot(TestStockCommon):
 
         self.StockQuantObj.with_context(inventory_mode=True).create({
             'product_id': self.apple_product.id,
-            'location_id': self.env.ref('stock.stock_location_stock').id,
+            'location_id': self.stock_location.id,
             'quantity': 100,
             'lot_id': lot.id,
         })
         picking = self.PickingObj.create({
             'partner_id': self.partner_1.id,
-            'picking_type_id': self.env.ref('stock.picking_type_out').id,
+            'picking_type_id': self.picking_type_out.id,
             'move_ids': [Command.create({
                 'product_id': self.apple_product.id,
                 'product_uom_qty': 2,
@@ -726,3 +736,120 @@ class TestStockLot(TestStockCommon):
         wizard = self.env['expiry.picking.confirmation'].with_context(context).create({})
         self.assertFalse(wizard.picking_ids.move_line_ids.removal_date)
         wizard.process_no_expired()
+
+    def test_lot_dates_form_update(self):
+        """
+        Ensure that we can edit the removal_date and expiration_date fields at the same time
+        Without triggering the compute method for the expiration when saving modifications.
+        """
+        delta = timedelta(seconds=10)
+        today = datetime.today()
+        receipt = self.env['stock.picking'].create({
+            'location_id': self.supplier_location.id,
+            'location_dest_id': self.stock_location.id,
+            'picking_type_id': self.picking_type_in.id,
+            'scheduled_date': today,
+            'move_ids': [
+                Command.create({
+                    'product_id': self.apple_product.id,
+                    'location_id': self.supplier_location.id,
+                    'location_dest_id': self.stock_location.id,
+                    'product_uom_qty': 1,
+                }),
+            ],
+        })
+        receipt.action_confirm()
+        self.assertAlmostEqual(receipt.move_line_ids.expiration_date, today + timedelta(days=10), delta=delta)
+        self.assertAlmostEqual(receipt.move_line_ids.removal_date, today + timedelta(days=8), delta=delta)
+
+        with Form(receipt.move_ids, view="stock.view_stock_move_operations") as move_form:
+            with move_form.move_line_ids.edit(0) as line_form:
+                line_form.lot_name = 'lot 1'
+                line_form.expiration_date = today + timedelta(days=15)
+                line_form.removal_date = today + timedelta(days=10)
+
+        self.assertAlmostEqual(receipt.move_line_ids.expiration_date, today + timedelta(days=15), delta=delta)
+        self.assertAlmostEqual(receipt.move_line_ids.removal_date, today + timedelta(days=10), delta=delta)
+
+    def test_no_expiration_wizard_when_tracking_removed(self):
+        product = self.ProductObj.create({
+            'name': 'Expirable Product',
+            'is_storable': True,
+            'tracking': 'lot',
+            'use_expiration_date': True,
+            'expiration_time': 0,
+            'removal_time': 2,
+        })
+
+        product.write({'tracking': 'none'})
+
+        self.assertFalse(product.use_expiration_date)
+
+        picking = self.PickingObj.create({
+            'location_id': self.supplier_location.id,
+            'location_dest_id': self.stock_location.id,
+            'picking_type_id': self.picking_type_in.id,
+            'move_ids': [Command.create({
+                'product_id': product.id,
+                'product_uom_qty': 1,
+                'product_uom': product.uom_id.id,
+                'location_id': self.supplier_location.id,
+                'location_dest_id': self.stock_location.id,
+            })],
+        })
+        picking.action_confirm()
+        res = picking.button_validate()
+        self.assertEqual(res, True)
+
+    def test_reordering_rule_for_expiring_product(self):
+        """Test that products with future expiration dates are excluded from
+        forecasted quantities in reordering rules."""
+        receipt = self.env['stock.picking'].create({
+            'location_id': self.supplier_location.id,
+            'location_dest_id': self.stock_location.id,
+            'partner_id': self.partner_1.id,
+            'picking_type_id': self.picking_type_in.id,
+            'move_ids': [Command.create({
+                'product_id': self.apple_product.id,
+                'product_uom_qty': 10.0,
+            })],
+        })
+        receipt.action_confirm()
+        receipt.move_ids.lot_ids = self.LotObj.create({
+            'name': 'Lot1',
+            'product_id': self.apple_product.id,
+        })
+        receipt.button_validate()
+        reordering_rule = self.env['stock.warehouse.orderpoint'].create({
+            'product_id': self.apple_product.id,
+            'product_max_qty': 10,
+            'product_min_qty': 5,
+        })
+        self.assertEqual(self.env.company.horizon_days, 365)
+        self.assertRecordValues(reordering_rule, [{'qty_forecast': 10, 'qty_to_order': 0}])
+
+    def test_expiry_wizard_displays_lot_name_when_lot_not_created(self):
+        receipt = self.env['stock.picking'].create({
+            'location_id': self.supplier_location.id,
+            'location_dest_id': self.stock_location.id,
+            'picking_type_id': self.picking_type_in.id,
+            'move_ids': [Command.create({
+                'product_id': self.apple_product.id,
+                'product_uom_qty': 1,
+            })],
+        })
+        receipt.action_confirm()
+
+        receipt.move_line_ids.write({
+            'lot_name': 'new-expired-lot',
+            'removal_date': datetime.today() - timedelta(days=1),
+            'quantity': 1,
+        })
+        receipt.move_ids.picked = True
+
+        res = receipt.button_validate()
+
+        self.assertEqual(res['res_model'], 'expiry.picking.confirmation')
+
+        wizard = self.env['expiry.picking.confirmation'].with_context(res['context']).create({})
+        self.assertIn('new-expired-lot', wizard.description)

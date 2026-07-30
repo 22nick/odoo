@@ -1,13 +1,14 @@
 import { FloatField, floatField } from "@web/views/fields/float/float_field";
 import { registry } from "@web/core/registry";
 import { getActiveHotkey } from "@web/core/hotkeys/hotkey_service";
-import { useEffect, useRef } from "@odoo/owl";
+import { useEffect, useRef, useState } from "@odoo/owl";
 
 export class CountedQuantityWidgetField extends FloatField {
     setup() {
         // Need to adapt useInputField to overide onInput and onChange
         super.setup();
 
+        this.hasInput = useState({ value: false });
         const inputRef = useRef("numpadDecimal");
 
         useEffect(
@@ -31,21 +32,21 @@ export class CountedQuantityWidgetField extends FloatField {
     }
 
     onInput(ev) {
-        return this.props.record.update({ inventory_quantity_set: true });
+        this.hasInput.value = true;
     }
 
     updateValue(ev){
         try {
-           const val = this.parse(ev.target.value);
-            this.props.record.update({ [this.props.name]: val });
+            const val = this.parse(ev.target.value);
+            this.props.record.update({ [this.props.name]: val, inventory_quantity_set: true });
         } catch {} // ignore since it will be handled later
     }
 
     onBlur(ev) {
-         if (!this.props.record.data.inventory_quantity_set) {
-           return;
+        if (this.hasInput.value) {
+            this.updateValue(ev);
+            this.hasInput.value = false;
         }
-        this.updateValue(ev);
     }
 
     onKeydown(ev) {

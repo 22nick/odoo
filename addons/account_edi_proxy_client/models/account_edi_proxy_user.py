@@ -108,20 +108,29 @@ class Account_Edi_Proxy_ClientUser(models.Model):
             raise AccountEdiProxyError("block_demo_mode", "Can't access the proxy in demo mode")
 
         try:
-            response = requests.post(
+            res = requests.post(
                 url,
                 json=payload,
                 timeout=DEFAULT_TIMEOUT,
                 headers={'content-type': 'application/json'},
-                auth=OdooEdiProxyAuth(user=self, auth_type=auth_type)).json()
-        except (ValueError, requests.exceptions.ConnectionError, requests.exceptions.MissingSchema, requests.exceptions.Timeout, requests.exceptions.HTTPError):
+                auth=OdooEdiProxyAuth(user=self, auth_type=auth_type))
+            res.raise_for_status()
+            response = res.json()
+        except (ValueError, requests.exceptions.ConnectionError, requests.exceptions.MissingSchema, requests.exceptions.Timeout, requests.exceptions.HTTPError) as e:
+            _logger.warning('Connection error <%(url)s>: %(error)s', {'url': url, 'error': e})
             raise AccountEdiProxyError('connection_error',
                 _('The url that this service requested returned an error. The url it tried to contact was %s', url))
 
         if 'error' in response:
-            message = _('The url that this service requested returned an error. The url it tried to contact was %(url)s. %(error_message)s', url=url, error_message=response['error']['message'])
             if response['error']['code'] == 404:
                 message = _('The url that this service tried to contact does not exist. The url was “%s”', url)
+            else:
+                error_message = response['error'].get('data', {}).get('message') or response['error']['message']
+                message = _(
+                    "The url that this service requested returned an error. The url it tried to contact was %(url)s. %(error_message)s",
+                    url=url,
+                    error_message=error_message,
+                )
             raise AccountEdiProxyError('connection_error', message)
 
         proxy_error = response['result'].pop('proxy_error', False)

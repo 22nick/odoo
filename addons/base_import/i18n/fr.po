@@ -6,14 +6,15 @@
 # Martin Trigaux, 2022
 # Jolien De Paepe, 2023
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Manon Rondou (ronm)" <ronm@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-09-14 21:11+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-01-25 18:36+0000\n"
+"PO-Revision-Date: 2026-06-30 08:21+0000\n"
+"Last-Translator: \"Manon Rondou (ronm)\" <ronm@odoo.com>\n"
 "Language-Team: French <https://translate.odoo.com/projects/odoo-19/"
 "base_import/fr/>\n"
 "Language: fr\n"
@@ -22,7 +23,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=3; plural=(n == 0 || n == 1) ? 0 : ((n != 0 && n % "
 "1000000 == 0) ? 1 : 2);\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: base_import
 #. odoo-javascript
@@ -543,8 +544,8 @@ msgid ""
 "format: %(cell_format)s, as (%(format_type)s) formats are not supported."
 msgstr ""
 "Format de cellule non valide à la ligne %(row)s, colonne %(col)s: %"
-"(cell_value)s, avec format : %(cell_format)s, car les formats (%"
-"(format_type)s) ne sont pas pris en charge."
+"(cell_value)s, avec format : %(cell_format)s, car les formats (%(format_type)"
+"s) ne sont pas pris en charge."
 
 #. module: base_import
 #. odoo-python
@@ -823,6 +824,26 @@ msgid "The file will be imported by batches"
 msgstr "Le fichier sera importé par lots"
 
 #. module: base_import
+#. odoo-python
+#: code:addons/base_import/models/base_import.py:0
+msgid ""
+"There was an issue decoding the file using encoding “%s”.\n"
+"This encoding was automatically detected."
+msgstr ""
+"Un problème est survenu lors du décodage du fichier avec l’encodage '%s'.\n"
+"Cet encodage a été détecté automatiquement."
+
+#. module: base_import
+#. odoo-python
+#: code:addons/base_import/models/base_import.py:0
+msgid ""
+"There was an issue decoding the file using encoding “%s”.\n"
+"This encoding was manually selected."
+msgstr ""
+"Un problème est survenu lors du décodage du fichier avec l’encodage '%s'.\n"
+"Cet encodage a été sélectionné manuellement."
+
+#. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_model.js:0
 msgid "This column will be concatenated in field"
@@ -858,8 +879,8 @@ msgstr "Activer l'historique des modifications pendant l'importation"
 msgid ""
 "Unable to load \"{extension}\" file: requires Python module \"{modname}\""
 msgstr ""
-"Impossible de charger le fichier \"{extension}\" : le module Python "
-"\"{modname}\" est requis"
+"Impossible de charger le fichier \"{extension}\" : le module Python \""
+"{modname}\" est requis"
 
 #. module: base_import
 #. odoo-python
@@ -970,7 +991,7 @@ msgstr "Vous devez paramétrer au moins un champ à importer"
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_column_error/import_data_column_error.xml:0
 msgid "at multiple rows"
-msgstr "à plusieurs lignes"
+msgstr "sur plusieurs lignes"
 
 #. module: base_import
 #. odoo-javascript

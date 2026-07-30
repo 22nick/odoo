@@ -2,10 +2,16 @@ import { omit } from "@web/core/utils/objects";
 import { Plugin } from "@html_editor/plugin";
 import { withSequence } from "@html_editor/utils/resource";
 
+/**
+ * @typedef { Object } DisableSnippetsShared
+ * @property { DisableSnippetsPlugin['disableUndroppableSnippets'] } disableUndroppableSnippets
+ */
+
 export class DisableSnippetsPlugin extends Plugin {
     static id = "disableSnippets";
     static dependencies = ["setup_editor_plugin", "dropzone", "dropzone_selector"];
     static shared = ["disableUndroppableSnippets"];
+    /** @type {import("plugins").BuilderResources} */
     resources = {
         on_removed_handlers: this.disableUndroppableSnippets.bind(this),
         post_undo_handlers: this.disableUndroppableSnippets.bind(this),
@@ -129,15 +135,16 @@ export class DisableSnippetsPlugin extends Plugin {
                 exclude = false,
                 dropIn,
                 dropNear,
+                excludeAncestor,
                 excludeNearParent,
             } = dropzoneSelector;
 
-            const dropAreaEls = [];
+            let dropAreaEls = [];
             if (dropNear) {
                 dropAreaEls.push(
                     ...this.dependencies.dropzone.getSelectorSiblings(editableAreaEls, rootEl, {
                         selector: dropNear,
-                        excludeNearParent,
+                        excludeParent: excludeNearParent,
                     })
                 );
             }
@@ -147,6 +154,9 @@ export class DisableSnippetsPlugin extends Plugin {
                         selector: dropIn,
                     })
                 );
+            }
+            if (excludeAncestor) {
+                dropAreaEls = dropAreaEls.filter((el) => !el.closest(excludeAncestor));
             }
             if (dropAreaEls.length) {
                 dropAreasBySelector.push({ selector, exclude, dropAreaEls });

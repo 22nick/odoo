@@ -450,6 +450,7 @@ class TestPurchaseRequisition(TestPurchaseRequisitionCommon):
             }),
             ]
         })
+        product.supplier_taxes_id.price_include_override = 'tax_included'
         po_form = Form(self.env['purchase.order'])
         po_form.partner_id = vendor_a
         with po_form.order_line.new() as line:
@@ -815,3 +816,65 @@ class TestPurchaseRequisition(TestPurchaseRequisitionCommon):
 
         # Check that payment terms is correctly set on the alternative RFQ.
         self.assertEqual(alt_po.payment_term_id, alt_po.partner_id.property_supplier_payment_term_id)
+
+    def test_purchase_order_taxes_from_purchase_agreement_in_child_company(self):
+        """
+        Ensure that the taxes of the parent company are applied to the PO generated from purchase agreement in the child company.
+        """
+        child_company = self.env['res.company'].create({
+            'name': 'My Branch',
+            'parent_id': self.env.company.id,
+        })
+        # Ensure all the tax on the product are from the parent company
+        self.product_09.supplier_taxes_id = self.env['account.tax'].create({
+            'name': 'Test Tax 10%',
+            'amount_type': 'percent',
+            'amount': 10.0,
+            'type_tax_use': 'purchase',
+            'company_id': self.env.company.id,
+        })
+
+        purchase_requisition = self.env['purchase.requisition'].with_company(child_company.id).create({
+            'vendor_id': self.res_partner_1.id,
+            'line_ids': [
+                Command.create({
+                    'product_id': self.product_09.id,
+                    'product_qty': 5.0,
+                    'price_unit': 20,
+                }),
+            ],
+        })
+        purchase_requisition.action_confirm()
+
+        po_form = Form(self.env['purchase.order'].with_company(child_company.id))
+        po_form.requisition_id = purchase_requisition
+        po = po_form.save()
+        self.assertEqual(po.partner_id, purchase_requisition.vendor_id, 'The partner should have been set from the purchase requisition')
+        self.assertEqual(po.order_line.price_unit, purchase_requisition.line_ids.price_unit, 'The unit price should have been set from the purchase requisition')
+        self.assertEqual(po.order_line.tax_ids, purchase_requisition.line_ids.product_id.supplier_taxes_id, 'The blanket order taxes should have been set')
+
+    def test_cancel_requisition_only_cancels_draft_po(self):
+        """ Only POs in draft are cancelled when the requisition is cancelled. """
+        def _make_po():
+            return self.env['purchase.order'].create({
+                'requisition_id': self.bo_requisition.id,
+                'partner_id': self.res_partner_1.id,
+                'order_line': [
+                    Command.create({
+                        'product_id': self.bo_requisition.product_id.id,
+                    },
+                )],
+            })
+
+        # PO 1: draft → should be cancelled
+        po_draft = _make_po()
+
+        # PO 2: confirmed → should NOT be cancelled
+        po_confirmed = _make_po()
+        po_confirmed.button_confirm()
+
+        # Cancel the requisition
+        self.bo_requisition.action_cancel()
+        self.assertEqual(self.bo_requisition.state, 'cancel')
+        self.assertEqual(po_draft.state, 'cancel')
+        self.assertEqual(po_confirmed.state, 'purchase')

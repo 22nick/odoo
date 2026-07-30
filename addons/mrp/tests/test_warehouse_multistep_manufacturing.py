@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo.tests import Form, tagged
+from odoo.tests import Form, tagged, Command
 from odoo.addons.mrp.tests.common import TestMrpCommon
-from odoo import Command
 
 
 @tagged('post_install', '-at_install')
@@ -24,6 +23,8 @@ class TestMultistepManufacturingWarehouse(TestMrpCommon):
         warehouse_form.name = 'Test Warehouse'
         warehouse_form.code = 'TWH'
         cls.warehouse = warehouse_form.save()
+        # Enable MTO
+        cls.warehouse.mto_pull_id.route_id.active = True
 
         cls.uom_unit = cls.env.ref('uom.product_uom_unit')
 
@@ -32,10 +33,11 @@ class TestMultistepManufacturingWarehouse(TestMrpCommon):
         product_form.name = 'Stick'
         product_form.uom_id = cls.uom_unit
         product_form.is_storable = True
-        product_form.route_ids.clear()
-        product_form.route_ids.add(cls.warehouse.manufacture_pull_id.route_id)
-        product_form.route_ids.add(cls.warehouse.mto_pull_id.route_id)
         cls.finished_product = product_form.save()
+        # Assign the MTO route directly to avoid requiring route_ids to be
+        # visible in the form (which would need product_selectable routes to
+        # be present, an assumption that doesn't hold on DBs without demo data)
+        cls.finished_product.route_ids = cls.warehouse.mto_pull_id.route_id
 
         # Create raw product for manufactured product
         product_form = Form(cls.env['product.product'])
@@ -370,7 +372,6 @@ class TestMultistepManufacturingWarehouse(TestMrpCommon):
 
         finished_product = self.env['product.product'].create({
             'name': 'Super Product',
-            'route_ids': [Command.link(self.route_manufacture.id)],
             'is_storable': True,
         })
         secondary_product = self.env['product.product'].create({
@@ -433,10 +434,6 @@ class TestMultistepManufacturingWarehouse(TestMrpCommon):
     def test_manufacturing_3_steps_trigger_reordering_rules(self):
         with Form(self.warehouse) as warehouse:
             warehouse.manufacture_steps = 'pbm_sam'
-
-        with Form(self.raw_product) as p:
-            p.route_ids.clear()
-            p.route_ids.add(self.warehouse.manufacture_pull_id.route_id)
 
         # Create an additional BoM for component
         product_form = Form(self.env['product.product'])
@@ -620,6 +617,72 @@ class TestMultistepManufacturingWarehouse(TestMrpCommon):
         self.assertEqual(mo.product_qty, 1.0)
         self.assertEqual(mo.bom_id, bom_2)
 
+    def test_mto_3steps_lot_reservation_after_sam_sublocation(self):
+        """In a MTO + 3-step manufacturing flow, when the 'Store Finished
+        Products' (SAM) transfer is validated to a sublocation of WH/Stock
+        (e.g. WH/Stock/Shelf 1) instead of WH/Stock directly, the downstream
+        delivery order must reserve the lot that was just produced (Lot 002)
+        and not fall back to pre-existing stock (Lot 001).
+        """
+        # Configure warehouse for 3-step manufacturing and MTO
+        self.warehouse_1.manufacture_steps = 'pbm_sam'
+        self.warehouse_1.mto_pull_id.route_id.active = True
+        # change the tracking to 'lot' and update available qty for the finished product with Lot1
+        self.finished_product.write({
+            'tracking': 'lot',
+            'route_ids': self.warehouse_1.mto_pull_id.route_id,
+        })
+
+        lot_1 = self.env['stock.lot'].create({'name': 'Lot 001', 'product_id': self.finished_product.id})
+        self.env['stock.quant']._update_available_quantity(
+            self.finished_product, self.stock_location, 1.0, lot_id=lot_1
+        )
+        self.env['stock.quant']._update_available_quantity(self.raw_product, self.stock_location, 2.0)
+        # Create a MTO picking that will trigger the manufacturing order
+        picking_customer = self.env['stock.picking'].create({
+            'location_id': self.stock_location.id,
+            'location_dest_id': self.customer_location.id,
+            'picking_type_id': self.warehouse_1.out_type_id.id,
+            'move_ids': [Command.create({
+                'product_id': self.finished_product.id,
+                'product_uom_qty': 1,
+                'product_uom': self.uom_unit.id,
+                'location_id': self.stock_location.id,
+                'location_dest_id': self.customer_location.id,
+                'procure_method': 'make_to_order',
+            })],
+        })
+        picking_customer.action_confirm()
+
+        production = self.env['mrp.production'].search([('product_id', '=', self.finished_product.id)])
+        self.assertEqual(len(production), 1)
+
+        pbm_picking = production.picking_ids
+        pbm_picking.action_assign()
+        pbm_picking._action_done()
+
+        production.action_assign()
+        production.action_generate_serial()
+        production.button_mark_done()
+
+        sam_picking = self.env['stock.picking'].search([
+            ('picking_type_id', '=', self.warehouse_1.sam_type_id.id),
+            ('state', 'not in', ['done', 'cancel']),
+        ])
+        self.assertEqual(len(sam_picking), 1)
+
+        # Simulate user changing the destination to a sublocation of WH/Stock
+        sam_picking.location_dest_id = self.shelf_1
+        sam_picking.move_ids.picked = True
+        self.assertEqual(picking_customer.state, 'waiting')
+        sam_picking._action_done()
+        self.assertEqual(sam_picking.state, 'done')
+        picking_customer.action_assign()
+        self.assertEqual(picking_customer.state, 'assigned')
+        reserved_lots = picking_customer.move_line_ids.lot_id
+        self.assertIn(production.lot_producing_ids, reserved_lots, "Delivery should reserve Lot 003 (manufactured for this MTO order)")
+        self.assertNotIn(lot_1, reserved_lots, "Delivery should not reserve Lot 001 (pre-existing stock)")
+
     # def test_manufacturing_bom_with_repetitions(self):
     #     """
     #         Checks that manufacturing orders created to manufacture the components of a BOM
@@ -760,7 +823,6 @@ class TestMultistepManufacturingWarehouse(TestMrpCommon):
         self.env.user.group_ids += self.env.ref('mrp.group_mrp_byproducts')
         demo = self.env['product.product'].create({
             'name': 'DEMO',
-            'route_ids': [Command.link(self.route_manufacture.id)],
             'is_storable': True,
         })
         comp1 = self.env['product.product'].create({
@@ -891,3 +953,12 @@ class TestMultistepManufacturingWarehouse(TestMrpCommon):
         mo.action_confirm()
         self.assertEqual(mo.state, 'confirmed')
         self.assertEqual(lovely_product.with_context(location_id=self.warehouse_1.lot_stock_id.id).virtual_available, 3.0)
+
+    def test_manufacture_to_resupply_unchecks_and_unlinks_warehouse(self):
+        """Unchecking Manufacture to Resupply should keep manufacture_to_resupply disabled."""
+        manufacture_route = self.warehouse.manufacture_pull_id.route_id
+        self.warehouse.manufacture_to_resupply = False
+        # Invalidate recordset to avoid cached `manufacture_to_resupply`
+        self.warehouse.invalidate_recordset(["manufacture_to_resupply"])
+        self.assertFalse(self.warehouse.manufacture_to_resupply)
+        self.assertNotIn(self.warehouse, manufacture_route.warehouse_ids)

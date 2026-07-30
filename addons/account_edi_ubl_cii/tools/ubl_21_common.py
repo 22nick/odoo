@@ -89,6 +89,7 @@ Address = {
     'cbc:PostalZone': {},
     'cbc:CountrySubentity': {},
     'cbc:CountrySubentityCode': {},
+    'cbc:District': {},
     'cac:AddressLine': {
         'cbc:Line': {},
     },
@@ -140,6 +141,10 @@ Party = {
         'cbc:RegistrationName': {},
         'cbc:CompanyID': {},
         'cac:RegistrationAddress': Address,
+        'cac:CorporateRegistrationScheme': {
+            'cbc:ID': {},
+            'cbc:Name': {},
+        },
     },
     'cac:Contact': Contact,
     'cac:Person': {
@@ -154,6 +159,7 @@ SupplierParty = {
     'cbc:AdditionalAccountID': {},
     'cac:Party': Party,
     'cac:AccountingContact': Contact,
+    'cac:SellerContact': Contact,
 }
 
 CustomerParty = {
@@ -234,6 +240,7 @@ TaxCategory = {
 }
 
 AllowanceCharge = {
+    'cbc:ID': {},
     'cbc:ChargeIndicator': {},
     'cbc:AllowanceChargeReasonCode': {},
     'cbc:AllowanceChargeReason': {},

@@ -48,6 +48,9 @@ export class NoteButton extends Component {
                 note: payload,
             });
             selectedOrderline.qty = saved_quantity;
+            for (const line of selectedOrderline.combo_line_ids) {
+                line.setQuantity(line.uiState.oldQty);
+            }
         } else {
             this.setOrderlineNote(payload);
         }
@@ -124,7 +127,7 @@ export class InternalNoteButton extends NoteButton {
         const selectedOrderline = this.pos.getOrder().getSelectedOrderline();
         const selectedNote = JSON.parse(this.currentNote || "[]");
         const payload = await this.openTextInput(selectedNote.map((n) => n.text).join("\n"));
-        const coloredNotes = payload ? this.reframeNotes(payload) : "[]";
+        const coloredNotes = payload ? this.reframeNotes(payload) : "";
         if (selectedOrderline) {
             this.setChanges(selectedOrderline, coloredNotes);
         } else {

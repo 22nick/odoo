@@ -80,7 +80,7 @@ def apply_patch(initial_content, patch):
         # We need to remove PATCH_OPERATION_CONTENT char from lines_index_range.
         lines_index_range = lines_index_range.split(PATCH_OPERATION_CONTENT)[0]
         indexes = lines_index_range.split(",")
-        start_index = int(indexes[0])
+        start_index = int(indexes[0]) if len(indexes) else 0
         end_index = int(indexes[1]) if len(indexes) > 1 else start_index
 
         # We need to insert lines from last to the first
@@ -134,7 +134,7 @@ def generate_comparison(new_content, old_content):
         lines_index_range = metadata_split[1] if len(metadata_split) > 1 else ""
         lines_index_range = lines_index_range.split(PATCH_OPERATION_CONTENT)[0]
         indexes = lines_index_range.split(",")
-        start_index = int(indexes[0])
+        start_index = int(indexes[0]) if len(indexes) else 0
         end_index = int(indexes[1]) if len(indexes) > 1 else start_index
 
         # If the operation is a replace, we need to flag the changes that
@@ -201,6 +201,7 @@ def generate_comparison(new_content, old_content):
                     comparison.insert(start_index, addition_flagged_line)
                 elif (
                     line.split(">")[0] != comparison[start_index].split(">")[0]
+                    or line.startswith("/")
                 ):
                     comparison.insert(start_index, line)
 

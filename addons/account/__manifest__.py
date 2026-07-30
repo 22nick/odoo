@@ -87,6 +87,7 @@ You could use this simplified accounting in case you work with an (external) acc
         'views/account_lock_exception_views.xml',
         'views/report_templates.xml',
         'wizard/account_merge_wizard_views.xml',
+        'data/ir_config_parameter_data.xml',
     ],
     'demo': [
         'demo/account_demo.xml',
@@ -109,10 +110,11 @@ You could use this simplified accounting in case you work with an (external) acc
             'account/static/src/scss/account_reconcile_model.scss',
             'account/static/src/scss/account_multi_ledger.scss',
             'account/static/src/scss/account_move_send_wizard.scss',
+            'account/static/src/scss/account_type_selection.scss',
             'account/static/src/components/**/*',
             'account/static/src/services/*.js',
             'account/static/src/views/**/*',
-            'account/static/src/js/tours/account.js',
+            'account/static/src/js/tours/*',
             'account/static/src/js/search/search_bar/search_bar.js',
             'account/static/src/helpers/*.js',
         ],
@@ -127,7 +129,6 @@ You could use this simplified accounting in case you work with an (external) acc
             'account/static/src/helpers/*.js',
         ],
         'web.assets_tests': [
-            'account/static/src/js/tours/tour_utils.js',
             'account/static/tests/tours/**/*',
         ],
         'web.report_assets_common': [
@@ -139,4 +140,7 @@ You could use this simplified accounting in case you work with an (external) acc
     },
     'author': 'Odoo S.A.',
     'license': 'LGPL-3',
+    'kpi_providers': [
+        'models.kpi_provider:get_kpi_summary',
+    ],
 }

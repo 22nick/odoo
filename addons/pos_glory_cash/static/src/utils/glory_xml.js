@@ -7,8 +7,11 @@ import { GLORY_RESULT } from "./constants";
 export async function parseGloryXml(xmlBlob) {
     const text = await xmlBlob.text();
     // Remove control characters from Glory response string
-    const xmlString = text.replace(/[\cD\0]/g, "");
-    return parseXML(xmlString);
+    const xmlString = text.replace(/[\cD\0]/g, "").trim();
+    // Wrap the XML in a root element to prevent parse errors on multiple elements
+    const wrappedXml = `<wrapper>${xmlString}</wrapper>`;
+    const wrappedResult = parseXML(wrappedXml);
+    return wrappedResult.children;
 }
 
 /**
@@ -44,7 +47,7 @@ export function serializeGloryXml(gloryElement) {
  */
 export const makeGloryHeader = (sequenceNumber, sessionId) => {
     const sequenceNumberString = sequenceNumber.toString(10).padStart(11, "0");
-    return [
+    const header = [
         {
             name: "Id",
             children: ["OdooPos"],
@@ -53,11 +56,14 @@ export const makeGloryHeader = (sequenceNumber, sessionId) => {
             name: "SeqNo",
             children: [sequenceNumberString],
         },
-        {
+    ];
+    if (sessionId) {
+        header.push({
             name: "SessionID",
             children: [sessionId],
-        },
-    ];
+        });
+    }
+    return header;
 };
 
 /**
@@ -68,9 +74,10 @@ export const makeGloryHeader = (sequenceNumber, sessionId) => {
  * @returns {string}
  */
 export function parseGloryResult(xmlResponse) {
-    const resultString = GLORY_RESULT[xmlResponse.getAttribute("result")];
+    const resultCode = xmlResponse.getAttribute("result");
+    const resultString = GLORY_RESULT[resultCode];
     if (!resultString) {
-        throw new Error("Not a valid Glory XML response");
+        return `UNKNOWN_STATUS_${resultCode}`;
     }
 
     return resultString;

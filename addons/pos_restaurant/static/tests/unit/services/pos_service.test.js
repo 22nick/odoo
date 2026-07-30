@@ -230,17 +230,18 @@ describe("restaurant pos_store.js", () => {
             let id = 1;
             let lineId = 1;
             const createOrderForTable = async () => {
+                const orderId = `${id++}_string`;
                 const lines = [
                     {
                         id: `${lineId++}_string`,
-                        order_id: 31,
+                        order_id: orderId,
                         product_id: 5,
                         qty: 1,
                         write_date: date,
                     },
                     {
                         id: `${lineId++}_string`,
-                        order_id: 31,
+                        order_id: orderId,
                         product_id: 6,
                         qty: 1,
                         write_date: date,
@@ -248,7 +249,7 @@ describe("restaurant pos_store.js", () => {
                 ];
                 const order = [
                     {
-                        id: `${id++}_string`,
+                        id: orderId,
                         lines: lines.map((line) => line.id),
                         write_date: date,
                         table_id: table.id,
@@ -276,18 +277,37 @@ describe("restaurant pos_store.js", () => {
         });
     });
 
-    test("categoryCount", async () => {
-        const store = await setupPosEnv();
-        const order = await getFilledOrder(store);
-        order.lines[0].note = '[{"text":"Test Note","colorIndex":0}]';
-        order.lines[1].note = '[{"text":"Test 1","colorIndex":0},{"text":"Test 2","colorIndex":0}]';
-        order.general_customer_note = '[{"text":"General Note","colorIndex":0}]';
-        const changes = store.categoryCount;
-        expect(changes).toEqual([
-            { count: 3, name: "Category 1" },
-            { count: 2, name: "Category 2" },
-            { count: 1, name: "Message" },
-        ]);
+    describe("categoryCount", () => {
+        test("Normal flow", async () => {
+            const store = await setupPosEnv();
+            const order = await getFilledOrder(store);
+            order.lines[0].note = '[{"text":"Test Note","colorIndex":0}]';
+            order.lines[1].note =
+                '[{"text":"Test 1","colorIndex":0},{"text":"Test 2","colorIndex":0}]';
+            order.general_customer_note = '[{"text":"General Note","colorIndex":0}]';
+            const changes = store.categoryCount;
+            expect(changes).toEqual([
+                { count: 3, name: "Category 1" },
+                { count: 2, name: "Category 2" },
+                { count: 1, name: "Message" },
+            ]);
+        });
+
+        test("Unselected order", async () => {
+            const store = await setupPosEnv();
+            const order = await getFilledOrder(store);
+            order.general_customer_note = '[{"text":"General Note","colorIndex":0}]';
+            store.selectedOrderUuid = null;
+            // without a selected order, `categoryCount` throws
+            expect(() => store.categoryCount).toThrow();
+            // explicitly specify the order to compute the changes for
+            const changes = store.getCategoryCount(order);
+            expect(changes).toEqual([
+                { count: 3, name: "Category 1" },
+                { count: 2, name: "Category 2" },
+                { count: 1, name: "Message" },
+            ]);
+        });
     });
 
     test("getDefaultSearchDetails", async () => {
@@ -343,7 +363,7 @@ describe("restaurant pos_store.js", () => {
         store.alert = {
             dismiss: () => {},
         };
-        const result = store.prepareOrderTransfer(order, tableDst);
+        const result = await store.prepareOrderTransfer(order, tableDst);
         expect(result).toBe(false);
         expect(order.table_id).toBe(tableDst);
         expect(store.getOrder()).toBe(order);
@@ -351,18 +371,29 @@ describe("restaurant pos_store.js", () => {
 
     test("transferOrder", async () => {
         const store = await setupPosEnv();
+        const date = DateTime.now();
         const tableSrc = store.models["restaurant.table"].get(1);
         const tableDst = store.models["restaurant.table"].get(2);
-        const sourceOrder = store.addNewOrder({ table_id: tableSrc });
+        const sourceOrder = store.addNewOrder({
+            table_id: tableSrc,
+            write_date: date,
+            create_date: date,
+        });
         const product1 = store.models["product.template"].get(5);
         await store.addLineToOrder(
             {
                 product_tmpl_id: product1,
                 qty: 2,
+                write_date: date,
+                create_date: date,
             },
             sourceOrder
         );
-        const order = store.addNewOrder({ table_id: tableDst });
+        const order = store.addNewOrder({
+            table_id: tableDst,
+            write_date: date,
+            create_date: date,
+        });
         await store.transferOrder(sourceOrder.uuid, tableDst);
         expect(sourceOrder.lines.length).toBe(0);
         expect(order.lines.length).toBe(1);
@@ -386,6 +417,46 @@ describe("restaurant pos_store.js", () => {
         const line2 = await store.addLineToOrder({ product_tmpl_id: product2, qty: 2 }, order2);
         line2.course_id = course2;
         course2.line_ids = [line2];
+        order1.last_order_preparation_change.lines[line1.preparationKey] = {
+            uuid: line1.uuid,
+            product_id: product1.id,
+            name: "Starter 1",
+            quantity: 1,
+        };
+        order2.last_order_preparation_change.lines[line2.preparationKey] = {
+            uuid: line2.uuid,
+            product_id: product2.id,
+            name: "Starter 2",
+            quantity: 2,
+        };
+        const table1InternalNote = '[{"text":"Table 1 kitchen note","colorIndex":0}]';
+        const table2InternalNote = '[{"text":"Table 2 kitchen note","colorIndex":0}]';
+        order1.uiState.lastPrints.push(
+            {
+                new: [{ product_id: 99, name: "Drink 1", quantity: 1 }],
+                cancelled: [],
+                noteUpdate: [],
+            },
+            {
+                new: [],
+                cancelled: [{ product_id: product1.id, name: "Starter 1", quantity: 1 }],
+                noteUpdate: [],
+                internal_note: table1InternalNote,
+            }
+        );
+        order2.uiState.lastPrints.push(
+            {
+                new: [{ product_id: 100, name: "Drink 2", quantity: 1 }],
+                cancelled: [],
+                noteUpdate: [],
+            },
+            {
+                new: [{ product_id: product2.id, name: "Starter 2", quantity: 2 }],
+                cancelled: [],
+                noteUpdate: [],
+                internal_note: table2InternalNote,
+            }
+        );
         await store.mergeOrders(order1, order2);
         expect(order2.lines.length).toBe(2);
         expect(order1.lines.length).toBe(0);
@@ -393,6 +464,46 @@ describe("restaurant pos_store.js", () => {
         expect(order2.table_id.id).toBe(table2.id);
         expect(order2.course_ids.length).toBe(1);
         expect(line2.course_id.id).toBe(course2.id);
+        const lastPrint = order2.uiState.lastPrints.at(-1);
+        expect(lastPrint).not.toBe(undefined);
+        expect(lastPrint.new.length).toBe(1);
+        expect(lastPrint.new[0].product_id).toBe(product2.id);
+        expect(lastPrint.cancelled.length).toBe(1);
+        expect(lastPrint.cancelled[0].product_id).toBe(product1.id);
+        expect(lastPrint.internal_note).toBe(table2InternalNote);
+    });
+
+    test("mergeOrders sums guest counts", async () => {
+        const store = await setupPosEnv();
+        const models = store.models;
+        const table1 = models["restaurant.table"].get(2);
+        const table2 = models["restaurant.table"].get(3);
+        const order1 = store.addNewOrder({ table_id: table1 });
+        order1.setCustomerCount(3);
+        const order2 = store.addNewOrder({ table_id: table2 });
+        order2.setCustomerCount(5);
+        await store.mergeOrders(order1, order2);
+        expect(order2.getCustomerCount()).toBe(8);
+    });
+
+    test("mergeOrders keeps kitchen sent quantities when merging identical products", async () => {
+        const store = await setupPosEnv();
+        const table6 = store.models["restaurant.table"].get(2);
+        const table7 = store.models["restaurant.table"].get(3);
+        const product = store.models["product.template"].get(5);
+        const destOrder = store.addNewOrder({ table_id: table6 });
+        await store.addLineToOrder({ product_tmpl_id: product, qty: 2 }, destOrder);
+        destOrder.updateLastOrderChange();
+        const sourceOrder = store.addNewOrder({ table_id: table7 });
+        await store.addLineToOrder({ product_tmpl_id: product, qty: 3 }, sourceOrder);
+        sourceOrder.updateLastOrderChange();
+        await store.mergeOrders(sourceOrder, destOrder);
+        expect(destOrder.lines.length).toBe(1);
+        expect(destOrder.lines[0].qty).toBe(5);
+        expect(
+            destOrder.last_order_preparation_change.lines[destOrder.lines[0].uuid].quantity
+        ).toBe(5);
+        expect(store.getOrderChanges(destOrder).nbrOfChanges).toBe(0);
     });
 
     test("getCustomerCount", async () => {

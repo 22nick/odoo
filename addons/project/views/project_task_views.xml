@@ -214,6 +214,7 @@
                 'default_project_id': active_id,
                 'show_project_update': True,
                 'search_default_open_tasks': 1,
+                'display_milestone_deadline': True,
             }</field>
             <field name="search_view_id" ref="view_task_search_form"/>
             <field name="help" type="html">
@@ -374,7 +375,7 @@
                         <button name="action_recurring_tasks" type="object" invisible="not active or not recurrence_id or not allow_recurring_tasks" class="oe_stat_button" icon="fa-repeat" groups="project.group_project_recurring_tasks">
                             <field name="recurring_count" widget="statinfo" string="Recurring Tasks"/>
                         </button>
-                        <button name="%(project_task_action_sub_task)d" type="action" class="oe_stat_button" icon="fa-check"
+                        <button name="action_open_subtasks" type="object" class="oe_stat_button" icon="fa-check"
                             invisible="not id or subtask_count == 0"
                             context="{
                                 'default_project_id': project_id,
@@ -427,7 +428,8 @@
                                 invisible="not project_id or not allow_milestones"/>
                             <field name="user_ids"
                                 class="o_task_user_field"
-                                options="{'no_open': True}"
+                                options="{'no_open': True, 'no_quick_create': True}"
+                                required="not project_id"
                                 widget="many2many_avatar_user"/>
                             <field name="role_ids" invisible="not has_project_template or is_template" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Assign at project creation"/>
                         </group>
@@ -526,6 +528,7 @@
                                         'kanban_view_ref': 'project.project_sub_task_view_kanban_mobile',
                                         'closed_X2M_count': closed_depend_on_count,
                                         'default_is_template': is_template,
+                                        'render_task_templates': False,
                                    }"
                                    widget="notebook_task_one2many">
                                 <list editable="bottom" decoration-muted="state in ['1_done','1_canceled']" open_form_view="True">
@@ -764,7 +767,7 @@
                     <field name="stage_id_color" column_invisible="1"/>
                     <field name="is_rotting" column_invisible="True"/>
                     <field name="rotting_days" column_invisible="True"/>
-                    <field name="stage_id" column_invisible="context.get('set_visible', False)" optional="show" widget="badge_rotting" options="{'color_field': 'stage_id_color'}"/>
+                    <field name="stage_id" column_invisible="context.get('set_visible', False)" optional="show" widget="badge_rotting" options="{'no_open': True}"/>
                 </list>
             </field>
         </record>
@@ -1038,6 +1041,7 @@
         <record id="action_view_my_task" model="ir.actions.act_window">
             <field name="name">My Tasks</field>
             <field name="res_model">project.task</field>
+            <field name="path">my-tasks</field>
             <field name="view_mode">kanban,list,form,calendar,activity,pivot,graph</field>
             <field name="context">{
                 'search_default_open_tasks': 1,
@@ -1045,7 +1049,7 @@
                 'default_user_ids': [(4, uid)],
             }</field>
             <field name="search_view_id" ref="view_task_search_form"/>
-            <field name="domain">[('user_ids', 'in', uid), ('has_template_ancestor', '=', False)]</field>
+            <field name="domain">[('user_ids', 'in', uid), ('has_template_ancestor', '=', False), ('has_project_template', '=', False)]</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     No tasks found. Let's create one!
@@ -1095,7 +1099,7 @@
             <field name="res_model">project.task</field>
             <field name="path">all-tasks</field>
             <field name="view_mode">list,kanban,form,calendar,activity,pivot,graph</field>
-            <field name="domain">[('has_template_ancestor', '=', False)]</field>
+            <field name="domain">[('has_template_ancestor', '=', False), ('has_project_template', '=', False)]</field>
             <field name="context">{'search_default_open_tasks': 1, 'default_user_ids': [(4, uid)]}</field>
             <field name="search_view_id" ref="view_task_search_form"/>
             <field name="help" type="html">
@@ -1196,7 +1200,7 @@
             <field name="res_model">project.task</field>
             <field name="view_mode">list,kanban,form,calendar,pivot,graph,activity</field>
             <field name="search_view_id" ref="view_task_search_form"/>
-            <field name="domain">[('has_template_ancestor', '=', False)]</field>
+            <field name="domain">[('has_template_ancestor', '=', False), ('has_project_template', '=', False)]</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     No tasks found. Let's create one!
@@ -1236,7 +1240,7 @@
             <field name="name">Overpassed Tasks</field>
             <field name="res_model">project.task</field>
             <field name="view_mode">list,form,calendar,graph,kanban</field>
-            <field name="domain">[('is_closed', '=', False), ('date_deadline', '&lt;', 'today'), ('project_id', '!=', False), ('has_template_ancestor', '=', False)]</field>
+            <field name="domain">[('is_closed', '=', False), ('date_deadline', '&lt;', 'today'), ('project_id', '!=', False), ('has_template_ancestor', '=', False), ('has_project_template', '=', False)]</field>
             <field name="filter" eval="True"/>
             <field name="search_view_id" ref="view_task_search_form"/>
         </record>

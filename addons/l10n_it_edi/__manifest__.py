@@ -1,6 +1,6 @@
 {
     'name': 'Italy - E-invoicing',
-    'version': '0.4',
+    'version': '0.5',
     'depends': [
         'l10n_it',
         'account_edi_proxy_client',
@@ -41,4 +41,5 @@ E-invoice implementation
     'author': 'Odoo S.A.',
     'license': 'LGPL-3',
     'post_init_hook': '_l10n_it_edi_post_init',
+    'uninstall_hook': 'uninstall_hook',
 }

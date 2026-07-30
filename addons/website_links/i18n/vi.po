@@ -5,15 +5,17 @@
 # Translators:
 # Martin Trigaux, 2022
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
 # "Thi Huong Nguyen (thng)" <thng@odoo.com>, 2025.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# Deleted User <noreply+31@weblate.org>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-10-16 06:07+0000\n"
-"Last-Translator: \"Thi Huong Nguyen (thng)\" <thng@odoo.com>\n"
+"POT-Creation-Date: 2026-06-05 19:30+0000\n"
+"PO-Revision-Date: 2026-06-30 01:41+0000\n"
+"Last-Translator: Deleted User <noreply+31@weblate.org>\n"
 "Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/"
 "website_links/vi/>\n"
 "Language: vi\n"
@@ -21,20 +23,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_links
 #. odoo-javascript
 #: code:addons/website_links/static/src/interactions/website_links_charts.js:0
 msgid "# of clicks"
 msgstr "Số lần bấm chuột"
-
-#. module: website_links
-#: model_terms:ir.ui.view,arch_db:website_links.graphs
-msgid ""
-"<a class=\"copy-to-clipboard btn btn-sm btn-primary o_translate_inline\" t-"
-"att-data-clipboard-text=\"short_url\"><i class=\"fa fa-copy me-2\"/>Copy</a>"
-msgstr ""
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -46,7 +41,7 @@ msgstr ""
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "<i class=\"fa fa-copy me-2\"/>Copy"
-msgstr ""
+msgstr "<i class=\"fa fa-copy me-2\"/>Sao chép"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
@@ -68,7 +63,7 @@ msgid ""
 "nowrap text-truncate\" id=\"short_url\"><span id=\"short-url-host\" "
 "class=\"text-truncate\"/><span id=\"o_website_links_code\"/></span>\n"
 "                                        <span "
-"class=\"o_website_links_edit_tools text-nowrap\" style=\"display:none;\">\n"
+"class=\"o_website_links_edit_tools text-nowrap d-none\">\n"
 "                                            <a role=\"button\" "
 "class=\"o_website_links_ok_edit btn btn-sm btn-primary o_translate_inline\" "
 "href=\"#\">ok</a> or\n"
@@ -81,7 +76,7 @@ msgstr ""
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "<span class=\"text-muted me-1\">Sort By:</span>"
-msgstr ""
+msgstr "<span class=\"text-muted me-1\">Lọc theo:</span>"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
@@ -96,7 +91,7 @@ msgstr "<strong>Trung bình</strong>"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "<strong>Name</strong>"
-msgstr ""
+msgstr "<strong>Tên</strong>"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
@@ -126,7 +121,7 @@ msgstr "Tất cả thời gian"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Campaign"
-msgstr ""
+msgstr "Chiến dịch"
 
 #. module: website_links
 #. odoo-javascript
@@ -137,23 +132,23 @@ msgstr "Sao chép"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Create a Link tracker"
-msgstr ""
+msgstr "Tạo một trình theo dõi liên kết"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Create another Tracker"
-msgstr ""
+msgstr "Tạo một trình theo dõi khác"
 
 #. module: website_links
 #. odoo-javascript
 #: code:addons/website_links/static/src/xml/website_links_tags_wrapper.xml:0
 msgid "Create option \""
-msgstr ""
+msgstr "Tạo tuỳ chọn \""
 
 #. module: website_links
 #: model:ir.model.fields,field_description:website_links.field_link_tracker__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Tên hiển thị"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -164,7 +159,7 @@ msgstr "Sửa mã"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Generate Link Tracker"
-msgstr ""
+msgstr "Tạo trình theo dõi liên kết"
 
 #. module: website_links
 #: model:ir.model.fields,field_description:website_links.field_link_tracker__id
@@ -174,7 +169,7 @@ msgstr "ID"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Last Clicks"
-msgstr ""
+msgstr "Lượt nhấp cuối cùng"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
@@ -191,7 +186,7 @@ msgstr "Tuần trước"
 #: code:addons/website_links/static/src/interactions/website_links.js:0
 #: code:addons/website_links/static/src/interactions/website_links_code_editor.js:0
 msgid "Link Copied!"
-msgstr ""
+msgstr "Liên kết đã được sao chép!"
 
 #. module: website_links
 #: model:ir.model,name:website_links.model_link_tracker
@@ -203,12 +198,12 @@ msgstr "Trình theo dõi Liên kết"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Medium"
-msgstr ""
+msgstr "Phương tiện"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Name"
-msgstr ""
+msgstr "Tên"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -218,12 +213,20 @@ msgstr "Mới nhất"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Number of Clicks"
+msgstr "Số lượt nhấp"
+
+#. module: website_links
+#. odoo-javascript
+#: code:addons/website_links/static/src/interactions/website_links_code_editor.js:0
+msgid ""
+"Only letters (A–Z, a–z), numbers (0–9), underscores (_) and hyphens (-) are "
+"allowed. No spaces."
 msgstr ""
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Read More"
-msgstr ""
+msgstr "Đọc thêm"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -231,13 +234,13 @@ msgid ""
 "Share this page with a <strong>short link</strong> that includes "
 "<strong>analytics trackers</strong>."
 msgstr ""
-"Chia sẽ trang này với một <strong>liên kết rút gọn</strong> bao gồm "
-"<strong>trình theo dõi phân tích</strong>."
+"Chia sẽ trang này với một <strong>liên kết rút gọn</strong> bao gồm <strong>"
+"trình theo dõi phân tích</strong>."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Source"
-msgstr ""
+msgstr "Nguồn"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
@@ -248,7 +251,7 @@ msgstr "Thống kê"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Target Link"
-msgstr ""
+msgstr "Liên kết đích"
 
 #. module: website_links
 #. odoo-javascript
@@ -281,7 +284,7 @@ msgstr ""
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Tracked Link"
-msgstr ""
+msgstr "Liên kết được theo dõi"
 
 #. module: website_links
 #. odoo-javascript
@@ -293,7 +296,7 @@ msgstr "Không xác định"
 #. odoo-javascript
 #: code:addons/website_links/static/src/xml/recent_link.xml:0
 msgid "Visit Link"
-msgstr ""
+msgstr "Truy cập liên kết"
 
 #. module: website_links
 #. odoo-python
@@ -317,12 +320,12 @@ msgstr "bấm chuột"
 #. odoo-javascript
 #: code:addons/website_links/static/src/interactions/website_links_charts.js:0
 msgid "countries"
-msgstr ""
+msgstr "quốc gia"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "e.g. \"Black Friday Mailing Campaign\""
-msgstr ""
+msgstr "VD: \"Chiến dịch gửi thư Black Friday\""
 
 #. module: website_links
 #. odoo-javascript
@@ -346,6 +349,35 @@ msgstr "VD: LinkedIn, Facebook, Lead,..."
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "e.g. https://www.odoo.com/contactus"
 msgstr "Ví dụ: https://www.odoo.com/contactus"
+
+#~ msgid ""
+#~ "<span class=\"o_website_links_short_url d-flex align-items-center text-"
+#~ "nowrap text-truncate\" id=\"short_url\"><span id=\"short-url-host\" "
+#~ "class=\"text-truncate\"/><span id=\"o_website_links_code\"/></span>\n"
+#~ "                                        <span "
+#~ "class=\"o_website_links_edit_tools text-nowrap\" style=\"display:none;"
+#~ "\">\n"
+#~ "                                            <a role=\"button\" "
+#~ "class=\"o_website_links_ok_edit btn btn-sm btn-primary "
+#~ "o_translate_inline\" href=\"#\">ok</a> or\n"
+#~ "                                            <a "
+#~ "class=\"o_website_links_cancel_edit o_translate_inline\" "
+#~ "href=\"#\">cancel</a>\n"
+#~ "                                        </span>"
+#~ msgstr ""
+#~ "<span class=\"o_website_links_short_url d-flex align-items-center text-"
+#~ "nowrap text-truncate\" id=\"short_url\"><span id=\"short-url-host\" "
+#~ "class=\"text-truncate\"/><span id=\"o_website_links_code\"/></span>\n"
+#~ "                                        <span "
+#~ "class=\"o_website_links_edit_tools text-nowrap\" style=\"display:none;"
+#~ "\">\n"
+#~ "                                            <a role=\"button\" "
+#~ "class=\"o_website_links_ok_edit btn btn-sm btn-primary "
+#~ "o_translate_inline\" href=\"#\">ok</a> hoặc\n"
+#~ "                                            <a "
+#~ "class=\"o_website_links_cancel_edit o_translate_inline\" href=\"#\">huỷ</"
+#~ "a>\n"
+#~ "                                        </span>"
 
 #~ msgid " clicks"
 #~ msgstr "bấm chuột"

@@ -23,6 +23,7 @@ from urllib.parse import urlparse, urlencode, parse_qsl
 
 from odoo import tools, fields
 from odoo.addons.base.models.ir_mail_server import IrMail_Server
+from odoo.addons.base.models.ir_mail_server import MailDeliveryException
 from odoo.addons.base.tests.common import MockSmtplibCase
 from odoo.addons.bus.models.bus import BusBus, json_dump
 from odoo.addons.bus.tests.common import BusCase
@@ -102,14 +103,17 @@ class MockEmail(common.BaseCase, MockSmtplibCase):
         self._init_mail_mock()
 
         def _ir_mail_server_build_email(model, email_from, email_to, subject, body, **kwargs):
-            self._mails.append({
+            data = {
                 'email_from': email_from,
                 'email_to': email_to,
                 'subject': subject,
                 'body': body,
                 **kwargs,
-            })
-            return build_email_origin(model, email_from, email_to, subject, body, **kwargs)
+            }
+            res = build_email_origin(model, email_from, email_to, subject, body, **kwargs)
+            data['EmailMessage'] = res
+            self._mails.append(data)
+            return res
 
         def _mail_mail_create(model, *args, **kwargs):
             res = mail_create_origin(model, *args, **kwargs)
@@ -134,6 +138,21 @@ class MockEmail(common.BaseCase, MockSmtplibCase):
             self.mail_mail_private_send_mocked = mail_mail_private_send_mocked
             self.push_to_end_point_mocked = patched_push
             yield
+
+    @contextmanager
+    def mock_send_email_delivery_exception(self, fail_emails, error="OutboundSpamException"):
+        """ Small tooling to simulate a crash at sending (smtp management level)
+        for some specific emails. """
+        send_current = self.send_email_mocked.side_effect
+        self.addCleanup(setattr, self.send_email_mocked, 'side_effect', send_current)
+
+        def _send_email(model, message, **kwargs):
+            if message['To'] in fail_emails:
+                raise MailDeliveryException(error)
+            return send_current(model, message, **kwargs)
+
+        self.send_email_mocked.side_effect = _send_email
+        yield
 
     def _init_mail_mock(self):
         self._mails = []
@@ -339,6 +358,16 @@ class MockEmail(common.BaseCase, MockSmtplibCase):
                 debug_log=debug_log,
             )
         return capture_messages
+
+    def gateway_mail_reply_wmail(self, template, record, mail_mail, debug_log=False):
+        """ Simulate a reply through the mail gateway. Usage: giving an existing
+        mail_mail sent to record, use its message-ID to simulate a reply. """
+        return self._gateway_mail_reply(
+            template, mail=mail_mail,
+            target_field=record._rec_name,
+            target_model=record._name,
+            debug_log=debug_log,
+        )
 
     def gateway_mail_reply_wrecord(self, template, record, use_in_reply_to=True, debug_log=False):
         """ Simulate a reply through the mail gateway. Usage: giving a record,
@@ -835,28 +864,32 @@ class MockEmail(common.BaseCase, MockSmtplibCase):
         else:
             raise AssertionError('mail.mail exists for message %s / recipients %s / emails %s but should not exist' % (mail_message, recipients.ids, email_to or '/'))
         finally:
-            self.assertNotSentEmail(recipients)
+            self.assertNotSentEmail(recipients=list(recipients) + email_split_and_format_normalize(email_to or ''), message_id=mail_message and mail_message.message_id)
 
-    def assertNotSentEmail(self, recipients=None):
+    def assertNotSentEmail(self, recipients=None, message_id=None):
         """Check no email was generated during gateway mock.
 
         :param recipients:
             List of partner for which we will check that no email have been sent
             Or list of email address
-            If None, we will check that no email at all have been sent
+            If empty, we will check that no email at all have been sent
+        :param message_id:
+            message-id associated with the email. Allows to identify emails originating
+            from the a specific message in odoo.
         """
-        if recipients is None:
-            mails = self._mails
-        else:
+        mails = self._mails
+        if message_id:
+            mails = [mail for mail in self._mails if mail['message_id'] == message_id]
+        if recipients:
             all_emails = [
-                email_to.email if isinstance(email_to, self.env['res.partner'].__class__)
+                email_to.email_formatted if isinstance(email_to, self.env['res.partner'].__class__)
                 else email_to
                 for email_to in recipients
             ]
 
             mails = [
                 mail
-                for mail in self._mails
+                for mail in mails
                 if any(email in all_emails for email in mail['email_to'])
             ]
 
@@ -1508,13 +1541,18 @@ class MailCase(common.TransactionCase, MockEmail, BusCase):
                     mbody in message.body and message.message_type == mtype and
                     msubtype == message.subtype_id
                 ))
+                debug_info = '\n'.join(
+                    f'Msg: message_type {message.message_type}, subtype {message.subtype_id.name}, content {message.body}'
+                    for message in messages
+                )
             else:
                 message = self.env['mail.message'].sudo().search([
                     ('body', 'ilike', mbody),
                     ('message_type', '=', mtype),
                     ('subtype_id', '=', msubtype.id)
                 ], limit=1, order='id DESC')
-            self.assertTrue(message, 'Mail: not found message (content: %s, message_type: %s, subtype: %s)' % (mbody, mtype, msubtype and msubtype.name))
+                debug_info = ''
+            self.assertTrue(message, 'Mail: not found message (content: %s, message_type: %s, subtype: %s\n%s)' % (mbody, mtype, msubtype and msubtype.name, debug_info))
 
             # check message values
             if message_values:
@@ -1663,7 +1701,7 @@ class MailCase(common.TransactionCase, MockEmail, BusCase):
                         )
 
             if not any(p for recipients in email_groups.values() for p in recipients):
-                self.assertNoMail(partners, email_to=email_addrs, mail_message=message, author=message.author_id)
+                self.assertNoMail(self.env['res.partner'], email_to=email_addrs, mail_message=message, author=message.author_id)
 
         return done_msgs, done_notifs
 

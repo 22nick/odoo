@@ -8,15 +8,17 @@
 # Mustafa J. Kadhem <safi2266@gmail.com>, 2022
 # Martin Trigaux, 2022
 # Malaz Abuidris <msea@odoo.com>, 2022
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
+# "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:37+0000\n"
-"PO-Revision-Date: 2025-10-13 12:16+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-06-19 17:35+0000\n"
+"PO-Revision-Date: 2026-06-29 10:03+0000\n"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
 "Language-Team: Arabic <https://translate.odoo.com/projects/odoo-19/"
 "website_slides/ar/>\n"
 "Language: ar\n"
@@ -25,7 +27,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__members_engaged_count
@@ -192,17 +194,8 @@ msgid ""
 "<a href=\"/contactus\" class=\"btn btn-primary rounded-circle "
 "o_translate_inline\">Contact us</a>"
 msgstr ""
-"<a href=\"/contactus\" class="
-"\"btn btn-primary rounded-circle o_translate_inline\">تواصل</a>"
-
-#. module: website_slides
-#: model_terms:ir.ui.view,arch_db:website_slides.profile_access_denied
-msgid ""
-"<a t-attf-href=\"/slides/course-#{request.params.get('channel_id')}\" "
-"class=\"o_translate_inline\">Return to the course.</a>"
-msgstr ""
-"<a t-attf-href=\"/slides/course-#{request.params.get('channel_id')}\" class="
-"\"o_translate_inline\">العودة إلى الدورة.</a>"
+"<a href=\"/contactus\" class=\"btn btn-primary rounded-circle "
+"o_translate_inline\">تواصل</a>"
 
 #. module: website_slides
 #. odoo-python
@@ -253,8 +246,8 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        مرحباً<br/><br/>\n"
-"        لقد تم تسجيلك في دورة جديدة: <t t-out="
-"\"object.channel_id.name or ''\">مبادئ العناية بالحدائق</t>.\n"
+"        لقد تم تسجيلك في دورة جديدة: <t t-out=\"object.channel_id.name or "
+"''\">مبادئ العناية بالحدائق</t>.\n"
 "    </p>\n"
 "</div>\n"
 "            "
@@ -274,8 +267,8 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "        مرحباً<br/><br/>\n"
-"        لقد تمت دعوتك لإلقاء نظرة على دورة: <t t-out="
-"\"object.channel_id.name or ''\">مبادئ العناية بالحدائق</t>.\n"
+"        لقد تمت دعوتك لإلقاء نظرة على دورة: <t t-out=\"object.channel_id.name "
+"or ''\">مبادئ العناية بالحدائق</t>.\n"
 "    </p>\n"
 "</div>\n"
 "            "
@@ -315,6 +308,37 @@ msgid ""
 "                </div>\n"
 "            "
 msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <div style=\"margin: 0px; padding: 0px; font-size: "
+"13px;\">\n"
+"                        <p style=\"margin: 0px;\">مرحباً <t t-"
+"out=\"object.partner_id.name or ''\">براندن فريمان</t>،</p><br/>\n"
+"                        <p><b>تهانينا!</b></p>\n"
+"                        <p>لقد أكملت دورة <b t-out=\"object.channel_id.name "
+"or ''\">أساسيات العناية بالحدائق</b></p>\n"
+"                        <p>ألقِ نظرة على الدورات الأخرى المتاحة.</p><br/>\n"
+"\n"
+"                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
+"center;\">\n"
+"                            <a href=\"/slides\" t-attf-style=\"background-"
+"color: {{object.channel_id.user_id.company_id.email_secondary_color or "
+"'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: {"
+"{object.channel_id.user_id.company_id.email_primary_color or '#FFFFFF'}}; "
+"border-radius: 5px;\">\n"
+"                                تصفح الدورات\n"
+"                            </a>\n"
+"                        </div>\n"
+"                        استمتع بالمحتوى الحصري!\n"
+"                        <t t-if=\"object.channel_id.user_id.signature\" data-"
+"o-mail-quote-container=\"1\">\n"
+"                            <br/>\n"
+"                            <div data-o-mail-quote=\"1\">--<br data-o-mail-"
+"quote=\"1\"/><t t-out=\"object.channel_id.user_id.signature or ''\" data-o-"
+"mail-quote=\"1\">ميتشل آدمن</t></div>\n"
+"                        </t>\n"
+"                    </div>\n"
+"                </div>\n"
+"            "
 
 #. module: website_slides
 #: model:mail.template,body_html:website_slides.mail_template_channel_shared
@@ -360,23 +384,23 @@ msgstr ""
 "                        مرحباً<br/><br/>\n"
 "                        قام <t t-out=\"user.name or ''\">ميتشل آدمن</t> "
 "بمشاركة <strong t-out=\"object.name or ''\">المستند</strong> معك!\n"
-"                        </p><div style="
-"\"margin: 16px 8px 16px 8px; text-align: center;\">\n"
+"                        </p><div style=\"margin: 16px 8px 16px 8px; text-"
+"align: center;\">\n"
 "                            <a t-att-href=\"object.website_absolute_url\">\n"
-"                                <img t-att-alt=\"object.name\" t-attf-src=\""
-"{{ ctx.get('base_url') }}/web/image/slide.channel/{{ object.id }}/image_256\""
-" style=\"height:auto; width:150px; margin: 16px;\"/>\n"
+"                                <img t-att-alt=\"object.name\" t-attf-src=\"{"
+"{ ctx.get('base_url') }}/web/image/slide.channel/{{ object.id }}/image_256\" "
+"style=\"height:auto; width:150px; margin: 16px;\"/>\n"
 "                            </a>\n"
 "                        </div>\n"
-"                        <div style="
-"\"padding: 16px 8px 16px 8px; text-align: center;\">\n"
-"                            <a t-att-href=\"object.website_absolute_url\" t"
-"-attf-style=\"background-color: {{user.company_id.email_secondary_color or "
+"                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
+"center;\">\n"
+"                            <a t-att-href=\"object.website_absolute_url\" t-"
+"attf-style=\"background-color: {{user.company_id.email_secondary_color or "
 "'#875A7B'}}; padding: 8px 16px 8px 16px;                                 "
 "text-decoration: none; color: {{user.company_id.email_primary_color or "
 "'#FFFFFF'}}; border-radius: 5px;\">\n"
-"                                عرض <strong t-out=\"object.name or ''\""
-">المستند</strong></a>\n"
+"                                عرض <strong t-out=\"object.name or ''\">"
+"المستند</strong></a>\n"
 "                        </div>\n"
 "                        <t t-if=\"user.signature\" data-o-mail-quote-"
 "container=\"1\">\n"
@@ -433,25 +457,25 @@ msgstr ""
 "\n"
 "                        مرحباً<br/><br/>\n"
 "                         قام <t t-out=\"user.name or ''\">ميتشل آدمن</t> "
-"بمشاركة <t t-out=\"object.slide_category or ''\">مستند</t> <strong t-out="
-"\"object.name or ''\">\"الأشجار\"</strong> معك!\n"
-"                        </p><div style="
-"\"margin: 16px 8px 16px 8px; text-align: center;\">\n"
+"بمشاركة <t t-out=\"object.slide_category or ''\">مستند</t> <strong t-"
+"out=\"object.name or ''\">\"الأشجار\"</strong> معك!\n"
+"                        </p><div style=\"margin: 16px 8px 16px 8px; text-"
+"align: center;\">\n"
 "                            <a t-att-href=\"(object.website_share_url + "
 "'?fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\">\n"
-"                                <img t-att-alt=\"object.name\" t-attf-src=\""
-"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/image_1024\" "
+"                                <img t-att-alt=\"object.name\" t-attf-src=\"{"
+"{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/image_1024\" "
 "style=\"height:auto; width:150px; margin: 16px;\"/>\n"
 "                            </a>\n"
 "                        </div>\n"
-"                        <div style="
-"\"padding: 16px 8px 16px 8px; text-align: center;\">\n"
+"                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
+"center;\">\n"
 "                            <a t-att-href=\"(object.website_share_url + "
-"'?fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\" t"
-"-attf-style=\"background-color: {{user.company_id.email_secondary_color or "
-"'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: {{"
-"user.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px;"
-"\">عرض مستند <strong t-out=\"object.name or ''\">\"الأشجار\"</strong></a>\n"
+"'?fullscreen=1') if ctx.get('fullscreen') else object.website_share_url\" t-"
+"attf-style=\"background-color: {{user.company_id.email_secondary_color or "
+"'#875A7B'}}; padding: 8px 16px 8px 16px; text-decoration: none; color: {"
+"{user.company_id.email_primary_color or '#FFFFFF'}}; border-radius: 5px;\">"
+"عرض مستند <strong t-out=\"object.name or ''\">\"الأشجار\"</strong></a>\n"
 "                        </div>\n"
 "                        <t t-if=\"user.signature\" data-o-mail-quote-"
 "container=\"1\">\n"
@@ -511,29 +535,29 @@ msgstr ""
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">"
 "\n"
 "                        مرحباً<br/><br/>\n"
-"                        لقد تم إضافة محتوى جديد في دورة <strong t-out="
-"\"object.channel_id.name or ''\">الأشجار، الخشب، والحدائق</strong> التي "
+"                        لقد تم إضافة محتوى جديد في دورة <strong t-"
+"out=\"object.channel_id.name or ''\">الأشجار، الخشب، والحدائق</strong> التي "
 "تتبعها:<br/><br/>\n"
-"                        </p><center><strong t-out=\"object.name or ''\""
-">الأشجار</strong></center>\n"
+"                        </p><center><strong t-out=\"object.name or ''\">"
+"الأشجار</strong></center>\n"
 "                        <t t-if=\"object.image_1024\">\n"
-"                            <div style="
-"\"padding: 16px 8px 16px 8px; text-align: center;\">\n"
+"                            <div style=\"padding: 16px 8px 16px 8px; text-"
+"align: center;\">\n"
 "                                <a t-att-href=\"object.website_share_url\">\n"
-"                                <img t-att-alt=\"object.name\" t-attf-src=\""
-"{{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/image_1024\" "
+"                                <img t-att-alt=\"object.name\" t-attf-src=\"{"
+"{ ctx.get('base_url') }}/web/image/slide.slide/{{ object.id }}/image_1024\" "
 "style=\"height:auto; width:150px; margin: 16px;\"/>\n"
 "                            </a>\n"
 "                        </div>\n"
 "                        </t>\n"
-"                        <div style="
-"\"padding: 16px 8px 16px 8px; text-align: center;\">\n"
-"                            <a t-att-href=\"object.website_share_url\" t"
-"-attf-style=\"background-color: {{"
-"object.user_id.company_id.email_secondary_color or '#875A7B'}}; padding: 8px "
-"16px 8px 16px; text-decoration: none; color: {{"
-"object.user_id.company_id.email_primary_color or '#FFFFFF'}}; border-radius: "
-"5px;\">عرض المحتوى</a>\n"
+"                        <div style=\"padding: 16px 8px 16px 8px; text-align: "
+"center;\">\n"
+"                            <a t-att-href=\"object.website_share_url\" t-"
+"attf-style=\"background-color: {"
+"{object.user_id.company_id.email_secondary_color or '#875A7B'}}; padding: "
+"8px 16px 8px 16px; text-decoration: none; color: {"
+"{object.user_id.company_id.email_primary_color or '#FFFFFF'}}; border-"
+"radius: 5px;\">عرض المحتوى</a>\n"
 "                        </div>\n"
 "                        استمتع بهذا المحتوى الحصري!\n"
 "                        <t t-if=\"user.signature\" data-o-mail-quote-"
@@ -563,8 +587,8 @@ msgid ""
 "<i class=\"fa fa-bars\"/><span class=\"d-none d-md-inline-block "
 "ms-1\">Lessons</span>"
 msgstr ""
-"<i class=\"fa fa-bars\"/><span class=\"d-none d-md-inline-block "
-"ms-1\">الدروس</span>"
+"<i class=\"fa fa-bars\"/><span class=\"d-none d-md-inline-block ms-1\">"
+"الدروس</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.lesson_card
@@ -614,8 +638,8 @@ msgstr "<i class=\"fa fa-cloud-upload me-1\"/>إضافة محتوى"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
-msgid "<i class=\"fa fa-comments\"/> Comments ("
-msgstr "<i class=\"fa fa-comments\"/> التعليقات ("
+msgid "<i class=\"fa fa-comments\"/> Comments"
+msgstr ""
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_content_detailed
@@ -740,8 +764,8 @@ msgid ""
 "<i class=\"fa fa-home\"/><span class=\"d-none d-md-inline-block ms-1\">Back "
 "to course</span>"
 msgstr ""
-"<i class=\"fa fa-home\"/><span class=\"d-none d-md-inline-block "
-"ms-1\">العودة إلى الدورة</span>"
+"<i class=\"fa fa-home\"/><span class=\"d-none d-md-inline-block ms-1\">"
+"العودة إلى الدورة</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
@@ -758,8 +782,8 @@ msgid ""
 "<i class=\"fa fa-plus me-1\"/> <span class=\"d-none d-md-inline-block\">Add "
 "Content</span>"
 msgstr ""
-"<i class=\"fa fa-plus me-1\"/> <span class=\"d-none d-md-inline-"
-"block\">إضافة محتوى</span>"
+"<i class=\"fa fa-plus me-1\"/> <span class=\"d-none d-md-inline-block\">"
+"إضافة محتوى</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list
@@ -819,8 +843,8 @@ msgid ""
 "span>"
 msgstr ""
 "<i class=\"fa fa-share-alt\"/>\n"
-"                        <span class=\"d-none d-md-inline-block "
-"ms-2\">مشاركة</span>"
+"                        <span class=\"d-none d-md-inline-block ms-2\">"
+"مشاركة</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_sidebar
@@ -833,8 +857,8 @@ msgid ""
 "<i class=\"fa fa-sign-out\"/><span class=\"d-none d-md-inline-block "
 "ms-1\">Exit Fullscreen</span>"
 msgstr ""
-"<i class=\"fa fa-sign-out\"/><span class=\"d-none d-md-inline-block "
-"ms-1\">الخروج من وضع ملء الشاشة</span>"
+"<i class=\"fa fa-sign-out\"/><span class=\"d-none d-md-inline-block ms-1\">"
+"الخروج من وضع ملء الشاشة</span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_search_tags
@@ -881,8 +905,8 @@ msgid ""
 "<small><span class=\"badge text-bg-success fw-normal\"><i class=\"fa fa-"
 "check\"/> Completed</span></small>"
 msgstr ""
-"<small><span class=\"badge text-bg-success fw-normal\"><i class="
-"\"fa fa-check\"/> تم الانتهاء</span></small>"
+"<small><span class=\"badge text-bg-success fw-normal\"><i class=\"fa fa-"
+"check\"/> تم الانتهاء</span></small>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_sample
@@ -900,8 +924,8 @@ msgstr ""
 msgid ""
 "<span class=\"badge text-bg-info badge-arrow-right fw-normal m-1\">New</span>"
 msgstr ""
-"<span class=\"badge text-bg-info badge-arrow-right fw-normal m-1\""
-">جديد</span>"
+"<span class=\"badge text-bg-info badge-arrow-right fw-normal m-1\">جديد</"
+"span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_slide
@@ -918,8 +942,8 @@ msgid ""
 "<span class=\"badge text-bg-success fw-normal m-1\"><span>Preview</span></"
 "span>"
 msgstr ""
-"<span class=\"badge text-bg-success fw-normal m-1\""
-"><span>معاينة</span></span>"
+"<span class=\"badge text-bg-success fw-normal m-1\"><span>معاينة</span></"
+"span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_sample
@@ -1047,8 +1071,8 @@ msgstr ""
 msgid ""
 "<span class=\"text-muted text-truncate mw-100\" title=\"Total\">Total</span>"
 msgstr ""
-"<span class=\"text-muted text-truncate mw-100\" title=\"الإجمالي \""
-">الإجمالي</span>"
+"<span class=\"text-muted text-truncate mw-100\" title=\"الإجمالي \">الإجمالي</"
+"span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_list_sample
@@ -1082,12 +1106,12 @@ msgstr ""
 "                                        <span id=\"previous\" class=\"mx-1 "
 "mx-sm-2\" title=\"الشريحة السابقة \" aria-label=\"Previous slide\" "
 "role=\"button\"><i class=\"fa fa-arrow-circle-left\"/></span>\n"
-"                                        <span id=\"next\" class=\"mx-1 mx-"
-"sm-2\" title=\"الشريحة التالية \" aria-label=\"Next slide\" "
-"role=\"button\"><i class=\"fa fa-arrow-circle-right\"/></span>\n"
-"                                        <span id=\"last\" class=\"mx-1 mx-"
-"sm-2\" title=\"الشريحة الأخيرة \" aria-label=\"Last slide\" "
-"role=\"button\"><i class=\"fa fa-step-forward\"/></span>"
+"                                        <span id=\"next\" class=\"mx-1 mx-sm-"
+"2\" title=\"الشريحة التالية \" aria-label=\"Next slide\" role=\"button\"><i "
+"class=\"fa fa-arrow-circle-right\"/></span>\n"
+"                                        <span id=\"last\" class=\"mx-1 mx-sm-"
+"2\" title=\"الشريحة الأخيرة \" aria-label=\"Last slide\" role=\"button\"><i "
+"class=\"fa fa-step-forward\"/></span>"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.embed_slide
@@ -1121,8 +1145,8 @@ msgstr ""
 "                                            <i class=\"fa fa-search-minus\"/>"
 "\n"
 "                                        </span>\n"
-"                                        <span id=\"zoomin\" class="
-"\"d-inline\" title=\"تكبير \" aria-label=\"Zoom in\" role=\"button\">\n"
+"                                        <span id=\"zoomin\" class=\"d-"
+"inline\" title=\"تكبير \" aria-label=\"Zoom in\" role=\"button\">\n"
 "                                            <i class=\"fa fa-search-plus\"/>"
 "\n"
 "                                        </span>"
@@ -1244,8 +1268,7 @@ msgstr "فاكهة"
 msgid ""
 "A good course has a structure. Pick a name for your first <b>Section</b>."
 msgstr ""
-"يجب أن تحتوي الدورة الجيدة على هيكل. اختر اسماً لـ <b>الجزء</b> الأول من "
-"دورتك."
+"يجب أن تحتوي الدورة الجيدة على هيكل. اختر اسماً لـ <b>الجزء</b> الأول من دورتك."
 
 #. module: website_slides
 #: model:slide.slide,name:website_slides.slide_slide_demo_1_4
@@ -1562,8 +1585,8 @@ msgid ""
 "answer: \n"
 "%s\n"
 msgstr ""
-"يجب أن يكون لكافة الأسئلة إجابة واحدة صحيحة على الأقل وإجابة واحدة غير صحيحة:"
-" \n"
+"يجب أن يكون لكافة الأسئلة إجابة واحدة صحيحة على الأقل وإجابة واحدة غير صحيحة: "
+"\n"
 "%s\n"
 
 #. module: website_slides
@@ -1593,8 +1616,7 @@ msgstr "كل ما تحتاج لمعرفته عن صناعة الأثاث."
 msgid ""
 "Allow Attendees to like and comment your content and to submit reviews on "
 "your course."
-msgstr ""
-"السماح للحاضرين بالإعجاب والتعليق على محتواك وإرسال التقييمات في دورتك."
+msgstr "السماح للحاضرين بالإعجاب والتعليق على محتواك وإرسال التقييمات في دورتك."
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide__slide_resource_downloadable
@@ -2059,7 +2081,7 @@ msgstr "اختر نوع الخشب الذي تفضله!"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_home
 msgid "Clear Filters"
-msgstr ""
+msgstr "مسح عوامل التصفية"
 
 #. module: website_slides
 #. odoo-javascript
@@ -2161,9 +2183,9 @@ msgid ""
 "answering questions. In this course, you'll study those topics with "
 "activities about mathematics, science and logic."
 msgstr ""
-"من المهام المعتادة لعالِم الحاسوب هي سؤال الأسئلة المناسبة والإجابة على "
-"الأسئلة. سوف تتعلم في هذه الدورة عن تلك المواضيع عن طريق الأنشطة المتعلقة "
-"بالرياضيات والعلوم والمنطق."
+"من المهام المعتادة لعالِم الحاسوب هي سؤال الأسئلة المناسبة والإجابة على الأسئلة. "
+"سوف تتعلم في هذه الدورة عن تلك المواضيع عن طريق الأنشطة المتعلقة بالرياضيات "
+"والعلوم والمنطق."
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.slide_channel_view_form_add
@@ -2171,8 +2193,7 @@ msgid ""
 "Common tasks for a computer scientist is asking the right questions and "
 "answering questions..."
 msgstr ""
-"من المهام المعتادة لعالِم الحاسوب هي طرح الأسئلة المناسبة والإجابة على "
-"الأسئلة..."
+"من المهام المعتادة لعالِم الحاسوب هي طرح الأسئلة المناسبة والإجابة على الأسئلة..."
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
@@ -2298,8 +2319,8 @@ msgid ""
 "Congratulations, your course has been created, but there isn't any content "
 "yet. First, let's add a <b>Section</b> to give your course a structure."
 msgstr ""
-"تهانينا، لقد تم إنشاء دورتك، ولكن لا يوجد أي محتوى بعد. أولاً، فلنقم بإضافة "
-"<b>جزء</b> لإضفاء هيكل لدورتك."
+"تهانينا، لقد تم إنشاء دورتك، ولكن لا يوجد أي محتوى بعد. أولاً، فلنقم بإضافة <b>"
+"جزء</b> لإضفاء هيكل لدورتك."
 
 #. module: website_slides
 #: model:ir.model,name:website_slides.model_res_partner
@@ -2453,8 +2474,8 @@ msgid ""
 "Could not find your video. Please check if your link is correct and if the "
 "video can be accessed."
 msgstr ""
-"لم نتمكن من العثور على مقطع الفيديو الخاص بك. يرجى التحقق من سلامة الرابط "
-"ومن أن مقطع الفيديو يمكن الوصول إليه."
+"لم نتمكن من العثور على مقطع الفيديو الخاص بك. يرجى التحقق من سلامة الرابط ومن "
+"أن مقطع الفيديو يمكن الوصول إليه."
 
 #. module: website_slides
 #: model:ir.model,name:website_slides.model_slide_channel
@@ -2762,6 +2783,15 @@ msgid "Defines the content that will be promoted on the course home page"
 msgstr "يقوم بتحديد المحتوى الذي سيتم الترويج له في الصفحة الرئيسية للدورة"
 
 #. module: website_slides
+#: model:ir.model.fields,help:website_slides.field_slide_channel__channel_type
+#: model:ir.model.fields,help:website_slides.field_slide_channel_partner__channel_type
+#: model:ir.model.fields,help:website_slides.field_slide_slide__channel_type
+msgid ""
+"Defines the course type (e.g., \"Training\" for interactive learning, or "
+"\"Documentation\" for resources and guides)."
+msgstr ""
+
+#. module: website_slides
 #: model:ir.model.fields,help:website_slides.field_slide_channel__publish_template_id
 msgid ""
 "Defines the email your Attendees will receive each time you upload new "
@@ -2853,9 +2883,11 @@ msgid "Display"
 msgstr "عرض"
 
 #. module: website_slides
+#: model:ir.model.fields,field_description:website_slides.field_base_partner_merge_automatic_wizard__display_name
 #: model:ir.model.fields,field_description:website_slides.field_gamification_challenge__display_name
 #: model:ir.model.fields,field_description:website_slides.field_gamification_karma_tracking__display_name
 #: model:ir.model.fields,field_description:website_slides.field_mail_activity__display_name
+#: model:ir.model.fields,field_description:website_slides.field_mail_message__display_name
 #: model:ir.model.fields,field_description:website_slides.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:website_slides.field_res_groups__display_name
 #: model:ir.model.fields,field_description:website_slides.field_res_partner__display_name
@@ -3245,7 +3277,7 @@ msgstr "التصفية والترتيب"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_home
 msgid "Filters"
-msgstr ""
+msgstr "عوامل التصفية"
 
 #. module: website_slides
 #. odoo-javascript
@@ -3281,8 +3313,8 @@ msgid ""
 "First, create your lesson, then edit it with the website builder. You'll be "
 "able to drop building blocks on your page and edit them."
 msgstr ""
-"أنشئ درسك أولاً ثم قم بتحريره باستخدام أداة بناء المواقع الإلكترونية. سوف "
-"يكون بمقدورك سحب وإفلات الكتل البرمجية الإنشائية في صفحتك وتحريرها."
+"أنشئ درسك أولاً ثم قم بتحريره باستخدام أداة بناء المواقع الإلكترونية. سوف يكون "
+"بمقدورك سحب وإفلات الكتل البرمجية الإنشائية في صفحتك وتحريرها."
 
 #. module: website_slides
 #. odoo-javascript
@@ -3540,8 +3572,7 @@ msgstr "كيفية زراعة وحصد أفضل فراولة على الإطلا
 #: model:slide.slide,name:website_slides.slide_slide_demo_1_6
 msgid ""
 "How to Grow and Harvest The Best Strawberries | Gardening Tips and Tricks"
-msgstr ""
-"كيفية زراحة وحصد أفضل فراولة على الإطلاق | نصائح مفيدة للعناية بالحدائق"
+msgstr "كيفية زراحة وحصد أفضل فراولة على الإطلاق | نصائح مفيدة للعناية بالحدائق"
 
 #. module: website_slides
 #. odoo-javascript
@@ -3577,9 +3608,11 @@ msgid "HowTo"
 msgstr "كيفية عمل"
 
 #. module: website_slides
+#: model:ir.model.fields,field_description:website_slides.field_base_partner_merge_automatic_wizard__id
 #: model:ir.model.fields,field_description:website_slides.field_gamification_challenge__id
 #: model:ir.model.fields,field_description:website_slides.field_gamification_karma_tracking__id
 #: model:ir.model.fields,field_description:website_slides.field_mail_activity__id
+#: model:ir.model.fields,field_description:website_slides.field_mail_message__id
 #: model:ir.model.fields,field_description:website_slides.field_res_config_settings__id
 #: model:ir.model.fields,field_description:website_slides.field_res_groups__id
 #: model:ir.model.fields,field_description:website_slides.field_res_partner__id
@@ -3711,8 +3744,8 @@ msgid ""
 "Impossible to send emails. Select a \"Share Template\" for courses %"
 "(course_names)s first"
 msgstr ""
-"لا يمكن إرسال رسائل البريد الإلكتروني. قم أولاً بتحديد \"قالب المشاركة\" "
-"للدورات %(course_names)s"
+"لا يمكن إرسال رسائل البريد الإلكتروني. قم أولاً بتحديد \"قالب المشاركة\" للدورات "
+"%(course_names)s"
 
 #. module: website_slides
 #: model:slide.answer,comment:website_slides.slide_slide_demo_1_4_question_0_1
@@ -4141,7 +4174,7 @@ msgstr "الدروس"
 #. module: website_slides
 #: model:slide.channel.tag.group,name:website_slides.slide_channel_tag_group_level
 msgid "Level"
-msgstr ""
+msgstr "المستوى"
 
 #. module: website_slides
 #. odoo-javascript
@@ -4282,6 +4315,16 @@ msgid "Menu Entry"
 msgstr "قيد القائمة"
 
 #. module: website_slides
+#: model:ir.model,name:website_slides.model_base_partner_merge_automatic_wizard
+msgid "Merge Partner Wizard"
+msgstr ""
+
+#. module: website_slides
+#: model:ir.model,name:website_slides.model_mail_message
+msgid "Message"
+msgstr ""
+
+#. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__message_has_error
 #: model:ir.model.fields,field_description:website_slides.field_slide_slide__message_has_error
 msgid "Message Delivery error"
@@ -4314,8 +4357,8 @@ msgid ""
 "Mighty forest just don't appear in a few weeks. Learn how time made our "
 "forests mighty and mysterious."
 msgstr ""
-"لا تظهر الغابات الرائعة خلال أسابيع قليلة. تعلّم كيف تمكنا من جعل غاباتنا "
-"رائعة وساحرة مع الوقت."
+"لا تظهر الغابات الرائعة خلال أسابيع قليلة. تعلّم كيف تمكنا من جعل غاباتنا رائعة "
+"وساحرة مع الوقت."
 
 #. module: website_slides
 #. odoo-javascript
@@ -4422,8 +4465,7 @@ msgstr "دورة جديدة"
 #: model:mail.template,subject:website_slides.slide_template_published
 msgid ""
 "New {{ object.slide_category }} published on {{ object.channel_id.name }}"
-msgstr ""
-"تم نشر {{ object.slide_category }} جديد في {{ object.channel_id.name }}"
+msgstr "تم نشر {{ object.slide_category }} جديد في {{ object.channel_id.name }}"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_slides_cards
@@ -4707,6 +4749,10 @@ msgid ""
 "usually be a placeholder expression that provides the appropriate language, "
 "e.g. {{ object.partner_id.lang }}."
 msgstr ""
+"Optional translation language (ISO code) to select when sending out an "
+"email. If not set, the main partner's language will be used. This should "
+"usually be a placeholder expression that provides the appropriate language, "
+"e.g. {{ object.partner_id.lang }}."
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
@@ -4716,7 +4762,7 @@ msgstr "الخيارات"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_home
 msgid "Overview"
-msgstr ""
+msgstr "نظرة عامة"
 
 #. module: website_slides
 #: model:ir.model.fields.selection,name:website_slides.selection__slide_slide__slide_type__pdf
@@ -4761,6 +4807,7 @@ msgstr "محور"
 #: code:addons/website_slides/static/src/xml/slide_course_join.xml:0
 #: code:addons/website_slides/static/src/xml/slide_quiz.xml:0
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_social_email
 msgid "Please"
 msgstr "رجاءً"
 
@@ -4777,15 +4824,6 @@ msgstr ""
 #: code:addons/website_slides/static/src/interactions/slide_like.js:0
 msgid "Please %(a_login_open)slogin%(a_login_close)s to vote for this lesson"
 msgstr ""
-
-#. module: website_slides
-#: model_terms:ir.ui.view,arch_db:website_slides.slide_social_email
-msgid ""
-"Please <a t-attf-href=\"/odoo?redirect=#{request.httprequest.url}\" "
-"class=\"fw-bold o_translate_inline\"> login </a> to share this"
-msgstr ""
-"يُرجى <a t-attf-href=\"/odoo?redirect=#{request.httprequest.url}\" class=\"fw-"
-"bold o_translate_inline\">تسجيل الدخول</a> للمشاركة"
 
 #. module: website_slides
 #. odoo-python
@@ -5206,6 +5244,11 @@ msgid "Retry"
 msgstr "إعادة المحاولة"
 
 #. module: website_slides
+#: model_terms:ir.ui.view,arch_db:website_slides.profile_access_denied
+msgid "Return to the course."
+msgstr "العودة إلى الدورة "
+
+#. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_channel_form
 msgid "Review Course"
 msgstr "مراجعة الدورة"
@@ -5262,7 +5305,7 @@ msgstr "المكافآت"
 #. module: website_slides
 #: model:slide.channel.tag.group,name:website_slides.slide_channel_tag_group_role
 msgid "Role"
-msgstr ""
+msgstr "الدور"
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_slide_channel__is_seo_optimized
@@ -5385,7 +5428,7 @@ msgstr "التحديد يدوياً"
 
 #. module: website_slides
 #. odoo-javascript
-#: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.js:0
+#: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
 msgid "Select or create a category"
 msgstr "قم بتحديد أو إنشاء فئة"
 
@@ -5403,7 +5446,7 @@ msgstr "قم باختيار أو إنشاء مجموعة علامات تصنيف
 
 #. module: website_slides
 #. odoo-javascript
-#: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_select_tags.xml:0
+#: code:addons/website_slides/static/src/js/public/components/slide_upload_dialog/slide_upload_category.xml:0
 msgid "Select or create tags"
 msgstr "قم بتحديد أو إنشاء علامات التصنيف"
 
@@ -5417,8 +5460,7 @@ msgstr "اختر الإجابة الصحيحة أدناه:"
 #: model_terms:ir.ui.view,arch_db:website_slides.res_config_settings_view_form
 msgid "Sell access to your courses on your website and track revenues."
 msgstr ""
-"قم ببيع صلاحيات الوصول إلى دوراتك على موقعك الإلكتروني وتمكن من تتبع "
-"إيراداتك."
+"قم ببيع صلاحيات الوصول إلى دوراتك على موقعك الإلكتروني وتمكن من تتبع إيراداتك."
 
 #. module: website_slides
 #: model:ir.model.fields,field_description:website_slides.field_res_config_settings__module_website_sale_slides
@@ -5742,7 +5784,7 @@ msgstr "البدء في الصفحة"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_card
 msgid "Start now"
-msgstr ""
+msgstr "ابدأ الآن"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.course_join
@@ -6820,8 +6862,8 @@ msgid ""
 "You cannot mark a slide quiz as completed if you are not among its members "
 "or it is unpublished."
 msgstr ""
-"لا يمكنك تحديد الاختبار القصير لشريحة كمكتمل إذا لم تكن أحد الأعضاء أو إذا "
-"كان غير منشور."
+"لا يمكنك تحديد الاختبار القصير لشريحة كمكتمل إذا لم تكن أحد الأعضاء أو إذا كان "
+"غير منشور."
 
 #. module: website_slides
 #. odoo-python
@@ -6830,8 +6872,16 @@ msgid ""
 "You cannot mark a slide quiz as not completed if you are not among its "
 "members or it is unpublished."
 msgstr ""
-"لا يمكنك تحديد الاختبار القصير لشريحة كغير مكتمل إذا لم تكن أحد الأعضاء أو "
-"إذا كان غير منشور."
+"لا يمكنك تحديد الاختبار القصير لشريحة كغير مكتمل إذا لم تكن أحد الأعضاء أو إذا "
+"كان غير منشور."
+
+#. module: website_slides
+#. odoo-python
+#: code:addons/website_slides/models/base_partner_merge.py:0
+msgid ""
+"You cannot merge these contacts because multiple contacts are enrolled in "
+"the same courses: %s"
+msgstr ""
 
 #. module: website_slides
 #. odoo-python
@@ -7181,7 +7231,7 @@ msgstr "friend1@email.com, friend2@email.com"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.courses_my
 msgid "hours"
-msgstr ""
+msgstr "ساعات"
 
 #. module: website_slides
 #. odoo-javascript
@@ -7198,6 +7248,7 @@ msgstr "انضمام"
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/email_sharing_input.xml:0
 #: code:addons/website_slides/static/src/xml/slide_course_join.xml:0
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_social_email
 msgid "login"
 msgstr "تسجيل الدخول"
 
@@ -7282,6 +7333,7 @@ msgstr "لطلب صلاحية الوصول"
 #. module: website_slides
 #. odoo-javascript
 #: code:addons/website_slides/static/src/js/public/components/slide_share_dialog/email_sharing_input.xml:0
+#: model_terms:ir.ui.view,arch_db:website_slides.slide_social_email
 msgid "to share this"
 msgstr "لمشاركة هذا"
 
@@ -7316,6 +7368,23 @@ msgstr "قام {{ user.name }} بمشاركة {{ object.slide_category }} معك
 #: model_terms:ir.ui.view,arch_db:website_slides.course_nav
 msgid "└<span class=\"ms-1\">Uncategorized</span>"
 msgstr "└<span class=\"ms-1\">غير مصنف</span>"
+
+#~ msgid ""
+#~ "<a t-attf-href=\"/slides/course-#{request.params.get('channel_id')}\" "
+#~ "class=\"o_translate_inline\">Return to the course.</a>"
+#~ msgstr ""
+#~ "<a t-attf-href=\"/slides/course-#{request.params.get('channel_id')}\" "
+#~ "class=\"o_translate_inline\">العودة إلى الدورة.</a>"
+
+#~ msgid ""
+#~ "Please <a t-attf-href=\"/odoo?redirect=#{request.httprequest.url}\" "
+#~ "class=\"fw-bold o_translate_inline\"> login </a> to share this"
+#~ msgstr ""
+#~ "يُرجى <a t-attf-href=\"/odoo?redirect=#{request.httprequest.url}\" "
+#~ "class=\"fw-bold o_translate_inline\">تسجيل الدخول</a> للمشاركة"
+
+#~ msgid "<i class=\"fa fa-comments\"/> Comments ("
+#~ msgstr "<i class=\"fa fa-comments\"/> التعليقات ("
 
 #~ msgid ". This way, they will be secured."
 #~ msgstr ". وبهذه الطريقة، سيكونون في أمان. "
@@ -7610,9 +7679,6 @@ msgstr "└<span class=\"ms-1\">غير مصنف</span>"
 
 #~ msgid "Restrict publishing to this website."
 #~ msgstr "قصر إمكانية النشر على هذا الموقع الإلكتروني. "
-
-#~ msgid "Return to the course."
-#~ msgstr "العودة إلى الدورة "
 
 #~ msgid "Save & Publish"
 #~ msgstr "حفظ ونشر "

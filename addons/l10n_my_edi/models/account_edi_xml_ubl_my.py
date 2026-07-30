@@ -1,8 +1,9 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 import re
-from datetime import datetime
 
+from datetime import datetime
 from pytz import UTC
+from lxml import etree
 
 from odoo import api, models
 from odoo.tools import html2plaintext
@@ -61,6 +62,7 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
         """
         self._add_myinvois_document_config_vals(vals)
         self._add_myinvois_document_base_lines_vals(vals)
+        self._setup_base_lines(vals)
         self._add_document_currency_vals(vals)
         self._add_myinvois_document_tax_grouping_function_vals(vals)
         self._add_myinvois_document_monetary_total_vals(vals)
@@ -126,6 +128,7 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
             'customer': customer,
             'partner_shipping': partner_shipping,
 
+            'company': myinvois_document.company_id,
             'currency_id': myinvois_document.currency_id,
             'company_currency_id': myinvois_document.company_id.currency_id,
 
@@ -332,6 +335,17 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
         }
 
     def _add_myinvois_document_header_nodes(self, document_node, vals):
+        original_document_id = None
+        if vals['document_type_code'] in {'02', '03', '04', '12', '13', '14'} and vals['original_document']:
+            if vals['original_document'].myinvois_file_id:
+                decoded_vals = self._l10n_my_edi_decode_myinvois_attachment(vals['original_document'].myinvois_file_id)
+                original_document_id = decoded_vals.get('original_document_id')
+            original_invoice = vals['original_document'].invoice_ids[:1]
+            if not original_document_id and vals['document_type_code'] in {'12', '13', '14'} and original_invoice.ref:
+                original_document_id = original_invoice.ref
+            if not original_document_id:
+                original_document_id = vals['original_document'].name
+
         document_node.update({
             'cbc:UBLVersionID': None,
             'cbc:ID': {'_text': vals['document_name']},
@@ -355,7 +369,7 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
             # managed outside Odoo/...)
             'cac:BillingReference': {
                 'cac:InvoiceDocumentReference': {
-                    'cbc:ID': {'_text': (vals['original_document'] and vals['original_document'].name) or 'NA'},
+                    'cbc:ID': {'_text': original_document_id or 'NA'},
                     'cbc:UUID': {'_text': (vals['original_document'] and vals['original_document'].myinvois_external_uuid) or 'NA'},
                 }
             } if vals['document_type_code'] in {'02', '03', '04', '12', '13', '14'} else None,
@@ -422,6 +436,11 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
 
         amount_paid = vals[f'total_paid_amount{currency_suffix}']
         if amount_paid:
+            myinvois_document = vals["myinvois_document"]
+            if myinvois_document._is_consolidated_invoice():
+                amount_paid = 0
+            # For credit, debit, refund notes, and their self-billed variants, the PrepaidPayment amount must be set to 0.
+            amount_paid = 0 if vals['document_type_code'] in ('02', '03', '04', '12', '13', '14') else amount_paid
             document_node['cac:PrepaidPayment'] = {
                 'cbc:PaidAmount': {
                     '_text': self.format_float(amount_paid, vals['currency_dp']),
@@ -429,6 +448,8 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
                 },
             }
         monetary_total_tag = self._get_tags_for_document_type(vals)['monetary_total']
+        # For credit, debit, refund notes, and their self-billed variants, the PayableAmount reflects the full
+        # refund/adjustment amount without being reduced by the prepayment, as per MyInvois specifications.
         payable_amount = self.format_float(vals[f'tax_inclusive_amount{currency_suffix}'] - amount_paid, vals['currency_dp'])
         document_node[monetary_total_tag]['cbc:PayableAmount']['_text'] = payable_amount
 
@@ -577,11 +598,26 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
                 if tax_category['cbc:ID']['_text'] == 'E' and not tax_category['cbc:TaxExemptionReason']['_text']:
                     self._l10n_my_edi_make_validation_error(constraints, 'tax_exemption_required', line_vals['cbc:ID']['_text'], line_item['cbc:Name']['_text'])
 
-            myinvois_document = vals["myinvois_document"]
-            if myinvois_document._is_consolidated_invoice() or myinvois_document._is_consolidated_invoice_refund():
-                customer_vat = vals['document_node']['cac:AccountingCustomerParty']['cac:Party']['cac:PartyIdentification'][0]['cbc:ID']['_text']
-                if customer_vat != 'EI00000000010':
-                    self._l10n_my_edi_make_validation_error(constraints, 'missing_general_public', vals['customer'].id, vals['customer'].name)
+        # Code '004' (Consolidated e-Invoice) requires the General Public TIN + identification number, and
+        # vice-versa: that TIN + identification number requires every line to use code '004'.
+        invoice_type_code = vals['document_node']['cbc:InvoiceTypeCode']['_text']
+        if invoice_type_code in ("11", "12", "13", "14"):  # For self billed, we validate the supplier
+            party_identification_nodes = vals['document_node']['cac:AccountingSupplierParty']['cac:Party']['cac:PartyIdentification']
+        else:
+            party_identification_nodes = vals['document_node']['cac:AccountingCustomerParty']['cac:Party']['cac:PartyIdentification']
+        vat = party_identification_nodes[0]['cbc:ID']['_text']
+        identification_number = party_identification_nodes[1]['cbc:ID']['_text'] if len(party_identification_nodes) > 1 else None
+        is_general_public = vat == 'EI00000000010' and identification_number == 'NA'
+
+        line_classification_codes = [
+            line_vals['cac:Item'].get('cac:CommodityClassification', {}).get('cbc:ItemClassificationCode', {}).get('_text')
+            for line_vals in vals['document_node']['cac:InvoiceLine']
+        ]
+
+        if any(code == '004' for code in line_classification_codes) and not is_general_public:
+            self._l10n_my_edi_make_validation_error(constraints, 'missing_general_public', vals['customer'].id, vals['customer'].name)
+        if is_general_public and any(code != '004' for code in line_classification_codes):
+            self._l10n_my_edi_make_validation_error(constraints, 'general_public_requires_004', vals['customer'].id, vals['customer'].name)
 
         return constraints
 
@@ -647,11 +683,42 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
                 "You must set a Tax Exemption Reason on each tax exempt taxes in order to use them in a Myinvois Document.",
             ),
             'missing_general_public': self.env._(
-                "You must have a commercial partner named 'General Public' with a VAT number set to 'EI00000000010' in order to proceed.",
+                "Classification code '004' can only be used for consolidated e-invoice issued to general public "
+                "(TIN of 'EI00000000010', BRN/NRIC of 'NA')"
+            ),
+            'general_public_requires_004': self.env._(
+                "TIN 'EI00000000010' (General Public / Consolidated e-Invoice) with BRN/NRIC of 'NA' requires "
+                "classification code '004' on every invoice line."
             ),
         }
 
         constraints[f'myinvois_{record_identifier}_{code}'] = message_mapping[code]
+
+    @api.model
+    def _l10n_my_edi_decode_myinvois_attachment(self, attachment):
+        """ Extract data from MyInvois xml. """
+        def get_node(node, xpath):
+            nodes = node.xpath(xpath)
+            return nodes[0] if nodes else None
+
+        def get_value(node):
+            if node is None:
+                return None
+            return node.text
+
+        vals = {}
+        try:
+            root = etree.fromstring(attachment.raw)
+            invoice_id_node = get_node(root, "//*[local-name()='Invoice']/*[local-name()='ID']")
+        except etree.XMLSyntaxError:
+            # Not an xml
+            return {}
+        except AttributeError:
+            # Not a MyInvois xml
+            return {}
+
+        vals['original_document_id'] = get_value(invoice_id_node)
+        return vals
 
     # ----------------
     # EXPORT: Business methods

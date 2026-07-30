@@ -359,13 +359,11 @@ describe("row", () => {
                     </table>
                 `),
                 stepFunction: removeRow(),
-                // @todo @phoenix: consider changing the behavior and placing the cursor
-                // inside the td (normalize deep)
                 contentAfter: unformat(`
                     <table>
                         <tbody>
                             <tr>
-                                <td>[]ef</td> <td>gh</td>
+                                <td>ef[]</td><td>gh</td>
                             </tr>
                         </tbody>
                     </table>
@@ -395,7 +393,7 @@ describe("row", () => {
                     <table>
                         <tbody>
                             <tr>
-                                <td>[]ab</td> <td>cd</td>
+                                <td>ab[]</td><td>cd</td>
                             </tr>
                         </tbody>
                     </table>
@@ -448,7 +446,7 @@ describe("column", () => {
                     "</tr></tbody></table>",
                 stepFunction: addColumn("before"),
                 contentAfter:
-                    '<table style="width: 150px;"><tbody><tr style="height: 20px;">' +
+                    '<table><tbody style="width: 150px;"><tr style="height: 20px;">' +
                     '<td style="width: 32px;"><p><br></p></td>' +
                     '<td style="width: 32px;">ab[]</td>' +
                     '<td style="width: 40px;">cd</td>' +
@@ -478,7 +476,7 @@ describe("column", () => {
                     "</tr></tbody></table>",
                 stepFunction: addColumn("before"),
                 contentAfter:
-                    '<table style="width: 150px;"><tbody><tr style="height: 20px;">' +
+                    '<table><tbody style="width: 150px;"><tr style="height: 20px;">' +
                     '<th style="width: 32px;"><p><br></p></th>' +
                     '<th style="width: 32px;">ab[]</th>' +
                     '<th style="width: 40px;">cd</th>' +
@@ -513,7 +511,7 @@ describe("column", () => {
                     "</tr></tbody></table>",
                 stepFunction: addColumn("before"),
                 contentAfter:
-                    '<table style="width: 200px;"><tbody><tr style="height: 20px;">' +
+                    '<table><tbody style="width: 200px;"><tr style="height: 20px;">' +
                     '<td style="width: 38px;">ab</td>' +
                     '<td style="width: 49px;"><p><br></p></td>' +
                     '<td style="width: 49px;">cd</td>' +
@@ -551,7 +549,7 @@ describe("column", () => {
                     "</tr></tbody></table>",
                 stepFunction: addColumn("after"),
                 contentAfter:
-                    '<table style="width: 150px;"><tbody><tr style="height: 20px;">' +
+                    '<table><tbody style="width: 150px;"><tr style="height: 20px;">' +
                     '<td style="width: 29px;">ab</td>' +
                     '<td style="width: 36px;">cd</td>' +
                     '<td style="width: 41px;">ef[]</td>' +
@@ -584,7 +582,7 @@ describe("column", () => {
                     "</tr></tbody></table>",
                 stepFunction: addColumn("after"),
                 contentAfter:
-                    '<table style="width: 150px;"><tbody><tr style="height: 20px;">' +
+                    '<table><tbody style="width: 150px;"><tr style="height: 20px;">' +
                     '<th style="width: 30px;">ab</th>' +
                     '<th style="width: 38px;">cd[]</th>' +
                     '<th style="width: 38px;"><p><br></p></th>' +
@@ -619,7 +617,7 @@ describe("column", () => {
                     "</tr></tbody></table>",
                 stepFunction: addColumn("after"),
                 contentAfter:
-                    '<table style="width: 200px;"><tbody><tr style="height: 20px;">' +
+                    '<table><tbody style="width: 200px;"><tr style="height: 20px;">' +
                     '<td style="width: 38px;">ab</td>' +
                     '<td style="width: 49px;">cd</td>' +
                     '<td style="width: 49px;"><p><br></p></td>' +
@@ -660,7 +658,7 @@ describe("column", () => {
                     <table>
                         <tbody>
                             <tr>
-                                <td>[]cd</td>
+                                <td>cd[]</td>
                             </tr>
                             <tr>
                                 <td>gh</td>
@@ -693,7 +691,7 @@ describe("column", () => {
                     <table>
                         <tbody>
                             <tr>
-                                <td>[]ab</td>
+                                <td>ab[]</td>
                             </tr>
                             <tr>
                                 <td>ef</td>

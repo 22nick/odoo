@@ -7,14 +7,15 @@
 # Odoo Thaidev <odoothaidev@gmail.com>, 2022
 # Martin Trigaux, 2022
 # Wichanon Jamwutthipreecha, 2022
-# "Tiffany Chang (tic)" <tic@odoo.com>, 2025.
+# "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
+# Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-09-16 22:54+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
+"POT-Creation-Date: 2026-06-05 19:30+0000\n"
+"PO-Revision-Date: 2026-07-01 23:30+0000\n"
+"Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
 "Language-Team: Thai <https://translate.odoo.com/projects/odoo-19/"
 "website_links/th/>\n"
 "Language: th\n"
@@ -22,20 +23,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_links
 #. odoo-javascript
 #: code:addons/website_links/static/src/interactions/website_links_charts.js:0
 msgid "# of clicks"
 msgstr "# ของคลิก"
-
-#. module: website_links
-#: model_terms:ir.ui.view,arch_db:website_links.graphs
-msgid ""
-"<a class=\"copy-to-clipboard btn btn-sm btn-primary o_translate_inline\" t-"
-"att-data-clipboard-text=\"short_url\"><i class=\"fa fa-copy me-2\"/>Copy</a>"
-msgstr ""
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -46,8 +40,9 @@ msgstr ""
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
+#, fuzzy
 msgid "<i class=\"fa fa-copy me-2\"/>Copy"
-msgstr ""
+msgstr "<i class=\"fa fa-copy me-2\"/>คัดลอก"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
@@ -69,7 +64,7 @@ msgid ""
 "nowrap text-truncate\" id=\"short_url\"><span id=\"short-url-host\" "
 "class=\"text-truncate\"/><span id=\"o_website_links_code\"/></span>\n"
 "                                        <span "
-"class=\"o_website_links_edit_tools text-nowrap\" style=\"display:none;\">\n"
+"class=\"o_website_links_edit_tools text-nowrap d-none\">\n"
 "                                            <a role=\"button\" "
 "class=\"o_website_links_ok_edit btn btn-sm btn-primary o_translate_inline\" "
 "href=\"#\">ok</a> or\n"
@@ -97,7 +92,7 @@ msgstr "<strong>วิธีที่เข้ามา</strong>"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
 msgid "<strong>Name</strong>"
-msgstr ""
+msgstr "<strong>ชื่อ</strong>"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
@@ -127,7 +122,7 @@ msgstr "เวลาทั้งหมด"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Campaign"
-msgstr ""
+msgstr "แคมเปญ"
 
 #. module: website_links
 #. odoo-javascript
@@ -149,12 +144,12 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/website_links/static/src/xml/website_links_tags_wrapper.xml:0
 msgid "Create option \""
-msgstr ""
+msgstr "สร้างตัวเลือก \""
 
 #. module: website_links
 #: model:ir.model.fields,field_description:website_links.field_link_tracker__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "แสดงชื่อ"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -170,7 +165,7 @@ msgstr ""
 #. module: website_links
 #: model:ir.model.fields,field_description:website_links.field_link_tracker__id
 msgid "ID"
-msgstr ""
+msgstr "ไอดี"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -192,7 +187,7 @@ msgstr "สัปดาห์ที่แล้ว"
 #: code:addons/website_links/static/src/interactions/website_links.js:0
 #: code:addons/website_links/static/src/interactions/website_links_code_editor.js:0
 msgid "Link Copied!"
-msgstr ""
+msgstr "คัดลอกลิงก์แล้ว!"
 
 #. module: website_links
 #: model:ir.model,name:website_links.model_link_tracker
@@ -204,12 +199,12 @@ msgstr "ตัวติดตามลิงก์"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Medium"
-msgstr ""
+msgstr "วิธีที่เข้ามา"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Name"
-msgstr ""
+msgstr "ชื่อ"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -219,12 +214,20 @@ msgstr "ใหม่ล่าสุด"
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Number of Clicks"
+msgstr "จำนวนคลิก"
+
+#. module: website_links
+#. odoo-javascript
+#: code:addons/website_links/static/src/interactions/website_links_code_editor.js:0
+msgid ""
+"Only letters (A–Z, a–z), numbers (0–9), underscores (_) and hyphens (-) are "
+"allowed. No spaces."
 msgstr ""
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Read More"
-msgstr ""
+msgstr "อ่านเพิ่มเติม"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -237,7 +240,7 @@ msgstr ""
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "Source"
-msgstr ""
+msgstr "แหล่งที่มา"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.graphs
@@ -274,8 +277,8 @@ msgid ""
 "Those trackers can be used in Google Analytics to track clicks and visitors, "
 "or in Odoo reports to track opportunities and related revenues."
 msgstr ""
-"เครื่องมือติดตามเหล่านั้นสามารถใช้ใน Google Analytics เพื่อติดตามการคลิกและผู้เยี่ยมชม "
-"หรือใช้ในรายงาน Odoo เพื่อติดตามโอกาสและรายได้ที่เกี่ยวข้อง"
+"เครื่องมือติดตามเหล่านั้นสามารถใช้ใน Google Analytics เพื่อติดตามการคลิกและผู้เยี่ยมชม หรือใช้ใ"
+"นรายงาน Odoo เพื่อติดตามโอกาสและรายได้ที่เกี่ยวข้อง"
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -321,7 +324,7 @@ msgstr ""
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "e.g. \"Black Friday Mailing Campaign\""
-msgstr ""
+msgstr "เช่น \"แคมเปญส่งจดหมาย Black Friday\""
 
 #. module: website_links
 #. odoo-javascript
@@ -345,6 +348,35 @@ msgstr "เช่น LinkedIn, Facebook, ลูกค้าเป้าหมา
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid "e.g. https://www.odoo.com/contactus"
 msgstr "เช่น  https://www.odoo.com/contactus"
+
+#~ msgid ""
+#~ "<span class=\"o_website_links_short_url d-flex align-items-center text-"
+#~ "nowrap text-truncate\" id=\"short_url\"><span id=\"short-url-host\" "
+#~ "class=\"text-truncate\"/><span id=\"o_website_links_code\"/></span>\n"
+#~ "                                        <span "
+#~ "class=\"o_website_links_edit_tools text-nowrap\" style=\"display:none;"
+#~ "\">\n"
+#~ "                                            <a role=\"button\" "
+#~ "class=\"o_website_links_ok_edit btn btn-sm btn-primary "
+#~ "o_translate_inline\" href=\"#\">ok</a> or\n"
+#~ "                                            <a "
+#~ "class=\"o_website_links_cancel_edit o_translate_inline\" "
+#~ "href=\"#\">cancel</a>\n"
+#~ "                                        </span>"
+#~ msgstr ""
+#~ "<span class=\"o_website_links_short_url d-flex align-items-center text-"
+#~ "nowrap text-truncate\" id=\"short_url\"><span id=\"short-url-host\" "
+#~ "class=\"text-truncate\"/><span id=\"o_website_links_code\"/></span>\n"
+#~ "                                        <span "
+#~ "class=\"o_website_links_edit_tools text-nowrap\" style=\"display:none;"
+#~ "\">\n"
+#~ "                                            <a role=\"button\" "
+#~ "class=\"o_website_links_ok_edit btn btn-sm btn-primary "
+#~ "o_translate_inline\" href=\"#\">ตกลง</a> or\n"
+#~ "                                            <a "
+#~ "class=\"o_website_links_cancel_edit o_translate_inline\" "
+#~ "href=\"#\">ยกเลิก</a>\n"
+#~ "                                        </span>"
 
 #~ msgid " clicks"
 #~ msgstr "คลิก"

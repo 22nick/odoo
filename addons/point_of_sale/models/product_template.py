@@ -114,6 +114,11 @@ class ProductTemplate(models.Model):
         product_tmpl_attr_value = product_tmpls.attribute_line_ids.product_template_value_ids
         product_tmpl_attr_value_read = product_tmpl_attr_value._load_pos_data_read(product_tmpl_attr_value, config)
 
+        # product.attribute loading — include archived attributes so that archived attribute lines
+        # (kept for referential integrity when used in a sale order) resolve correctly on the frontend
+        product_attr = product_tmpl_attr_line.attribute_id
+        product_attr_read = product_attr._load_pos_data_read(product_attr, config)
+
         # product.template.attribute.exclusion loading
         product_tmpl_excl = self.env['product.template.attribute.exclusion']
         product_tmpl_exclusion = product_tmpl_attr_value.exclude_for + product_tmpl_excl.search([
@@ -150,6 +155,7 @@ class ProductTemplate(models.Model):
         return {
             **pricelists,
             'account.tax': tax_read,
+            'product.attribute': product_attr_read,
             'product.product': product_read,
             'product.template': product_tmpl_read,
             'product.uom': packaging_read,
@@ -166,7 +172,7 @@ class ProductTemplate(models.Model):
             'id', 'display_name', 'standard_price', 'categ_id', 'pos_categ_ids', 'taxes_id', 'barcode', 'name', 'list_price', 'is_favorite',
             'default_code', 'to_weight', 'uom_id', 'description_sale', 'description', 'tracking', 'type', 'service_tracking', 'is_storable',
             'write_date', 'color', 'pos_sequence', 'available_in_pos', 'attribute_line_ids', 'active', 'image_128', 'combo_ids', 'product_variant_ids', 'public_description',
-            'pos_optional_product_ids', 'sequence', 'product_tag_ids'
+            'pos_optional_product_ids', 'sequence', 'product_tag_ids', 'currency_id', 'cost_currency_id',
         ]
 
     @api.model
@@ -221,6 +227,10 @@ class ProductTemplate(models.Model):
         if products.filtered(lambda p: p.pos_optional_product_ids):
             products |= products.mapped("pos_optional_product_ids")
 
+        # Ensure products from loaded orders are loaded
+        if data.get('pos.order.line'):
+            products += self.env['product.product'].browse([l['product_id'] for l in data['pos.order.line']]).product_tmpl_id
+
         return self._load_pos_data_read(products, config)
 
     @api.model
@@ -230,7 +240,7 @@ class ProductTemplate(models.Model):
         return read_records
 
     def _load_product_with_domain(self, domain, load_archived=False, offset=0, limit=0):
-        context = {**self.env.context, 'display_default_code': False, 'active_test': not load_archived}
+        context = {**self.env.context, 'display_default_code': False, 'active_test': not load_archived, 'bin_size': True}
         domain = self._server_date_to_domain(domain)
         return self.with_context(context).search(
             domain,
@@ -262,14 +272,12 @@ class ProductTemplate(models.Model):
             for tax in taxes:
                 taxes_by_company[tax.company_id.id].add(tax.id)
 
-        different_currency = config_id.currency_id != self.env.company.currency_id
-
         self._add_archived_combinations(products)
-        for product in products:
-            if different_currency:
-                product['list_price'] = self.env.company.currency_id._convert(product['list_price'], config_id.currency_id, self.env.company, fields.Date.today())
-                product['standard_price'] = self.env.company.currency_id._convert(product['standard_price'], config_id.currency_id, self.env.company, fields.Date.today())
 
+        self._convert_pos_data_currency(products, config_id, 'list_price', 'currency_id')
+        self._convert_pos_data_currency(products, config_id, 'standard_price', 'cost_currency_id')
+
+        for product in products:
             product['image_128'] = bool(product['image_128'])
 
             if len(taxes_by_company) > 1 and len(product['taxes_id']) > 1:
@@ -298,17 +306,26 @@ class ProductTemplate(models.Model):
                     "Deleting a product available in a session would be like attempting to snatch a hamburger from a customer’s hand mid-bite; chaos will ensue as ketchup and mayo go flying everywhere!",
                 ))
 
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_special_product(self):
+        self._check_is_special_product()
+
     def _ensure_unused_in_pos(self):
-        open_pos_sessions = self.env['pos.session'].search([('state', '!=', 'closed')])
-        used_products = open_pos_sessions.order_ids.filtered(lambda o: o.state == "draft").lines.product_id.product_tmpl_id
-        if used_products & self:
+        if any(self.mapped('available_in_pos')) and self.env['pos.session'].sudo().search_count([('state', '!=', 'closed')]):
             raise UserError(_(
                 "Hold up! Archiving products while POS sessions are active is like pulling a plate mid-meal.\n"
                 "Make sure to close all sessions first to avoid any issues.",
             ))
 
+    def _check_is_special_product(self):
+        special_products = self.env['pos.config'].sudo()._get_special_products().product_tmpl_id
+        for product in self:
+            if product in special_products:
+                raise UserError(_("You cannot archive a product that is set as a special product in a Point of Sale configuration. Please change the configuration first."))
+
     def action_archive(self):
         self._ensure_unused_in_pos()
+        self._check_is_special_product()
         return super().action_archive()
 
     @api.onchange('sale_ok')
@@ -333,7 +350,7 @@ class ProductTemplate(models.Model):
         self.ensure_one()
         config = self.env['pos.config'].browse(pos_config_id)
         product_variant = self.env['product.product'].browse(product_variant_id) if product_variant_id else False
-        template_or_variant = product_variant or self.product_variant_id
+        template_or_variants = product_variant or self.product_variant_ids
 
         # Tax related
         tax_to_use = self.env['account.tax']
@@ -342,6 +359,10 @@ class ProductTemplate(models.Model):
             tax_to_use = self.taxes_id.filtered(lambda tax: tax.company_id.id == company.id)
             if not tax_to_use:
                 company = company.sudo().parent_id
+        fiscal_position_id = self.env.context.get('fiscal_position_id')
+        if fiscal_position_id:
+            fiscal_position = self.env['account.fiscal.position'].browse(fiscal_position_id)
+            tax_to_use = fiscal_position.map_tax(tax_to_use)
         taxes = tax_to_use.compute_all(price, config.currency_id, quantity, self)
         grouped_taxes = {}
         for tax in taxes['taxes']:
@@ -364,17 +385,17 @@ class ProductTemplate(models.Model):
             pricelists = config.available_pricelist_ids
         else:
             pricelists = config.pricelist_id
-        price_per_pricelist_id = pricelists._price_get(template_or_variant, quantity) if pricelists else False
+        price_per_pricelist_id = pricelists._price_get(product_variant or self, quantity) if pricelists else False
         pricelist_list = [{'name': pl.name, 'price': price_per_pricelist_id[pl.id]} for pl in pricelists]
 
         # Warehouses
         warehouse_list = [
             {'id': w.id,
             'name': w.name,
-            'available_quantity': template_or_variant.with_context({'warehouse_id': w.id}).qty_available,
-            'free_qty': template_or_variant.with_context({'warehouse_id': w.id}).free_qty,
-            'forecasted_quantity': template_or_variant.with_context({'warehouse_id': w.id}).virtual_available,
-            'uom': template_or_variant.uom_name}
+            'available_quantity': sum(template_or_variants.with_context({'warehouse_id': w.id}).mapped('qty_available')),
+            'free_qty': sum(template_or_variants.with_context({'warehouse_id': w.id}).mapped('free_qty')),
+            'forecasted_quantity': sum(template_or_variants.with_context({'warehouse_id': w.id}).mapped('virtual_available')),
+            'uom': template_or_variants.uom_id.name}
             for w in self.env['stock.warehouse'].search([('company_id', '=', config.company_id.id)])]
 
         if config.picking_type_id.warehouse_id:

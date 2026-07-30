@@ -4,12 +4,12 @@ from contextlib import nullcontext, ExitStack
 from datetime import datetime
 import json
 import logging
-import sys
-import time
-import threading
 import re
-import tracemalloc
+import sys
+import threading
+import time
 
+import psutil
 from psycopg2 import OperationalError
 
 from odoo import tools
@@ -119,20 +119,27 @@ class Collector:
 
     def add(self, entry=None, frame=None):
         """ Add an entry (dict) to this collector. """
-        self._entries.append({
+        sample = {
             'stack': self._get_stack_trace(frame),
             'exec_context': getattr(self.profiler.init_thread, 'exec_context', ()),
             'start': real_time(),
             **(entry or {}),
-        })
+        }
+        self._entries.append(sample)
+        return sample
 
     def progress(self, entry=None, frame=None):
         """ Checks if the limits were met and add to the entries"""
-        if self.profiler.entry_count_limit \
-            and self.profiler.entry_count() >= self.profiler.entry_count_limit:
+        exceeded_entry_count = bool(self.profiler.entry_count_limit) \
+                                and self.profiler.counter >= self.profiler.entry_count_limit
+        exceeded_time_limit = bool(self.profiler.time_limit) \
+                              and self.profiler.time_limit < real_time() - self.profiler.start_time
+        if exceeded_entry_count \
+            or exceeded_time_limit:
             self.profiler.end()
 
-        self.add(entry=entry,frame=frame)
+        self.profiler.counter += 1
+        return self.add(entry=entry, frame=frame)
 
     def _get_stack_trace(self, frame=None):
         """ Return the stack trace to be included in a given entry. """
@@ -149,8 +156,10 @@ class Collector:
         """ Return the entries of the collector after postprocessing. """
         if not self._processed:
             self.post_process()
+            self.processed_entries = self._entries
+            self._entries = None  # avoid modification after processing
             self._processed = True
-        return self._entries
+        return self.processed_entries
 
     def summary(self):
         return f"{'='*10} {self.name} {'='*10} \n Entries: {len(self._entries)}"
@@ -172,12 +181,18 @@ class SQLCollector(Collector):
         self.profiler.init_thread.query_hooks.remove(self.hook)
 
     def hook(self, cr, query, params, query_start, query_time):
-        self.progress({
+        entry = {
             'query': str(query),
             'full_query': str(cr._format(query, params)),
             'start': query_start,
             'time': query_time,
-        })
+        }
+        sample = self.progress(entry)
+
+        def update_sample(delay):
+            sample['time'] = delay
+
+        return update_sample
 
     def summary(self):
         total_time = sum(entry['time'] for entry in self._entries) or 1
@@ -203,6 +218,7 @@ class _BasePeriodicCollector(Collector):
         self.frame_interval = interval or self._default_interval
         self.__thread = threading.Thread(target=self.run)
         self.last_frame = None
+        self._stop_event = threading.Event()
 
     def start(self):
         interval = self.profiler.params.get(f'{self.name}_interval')
@@ -219,19 +235,25 @@ class _BasePeriodicCollector(Collector):
         self.last_time = real_time()
         while self.active:  # maybe add a check on parent_thread state?
             self.progress()
-            time.sleep(self.frame_interval)
-
-        self._entries.append({'stack': [], 'start': real_time()})  # add final end frame
+            self._stop_event.wait(self.frame_interval)
 
     def stop(self):
         self.active = False
-        self.__thread.join()
+        self._stop_event.set()
+        self._entries.append({'stack': [], 'start': real_time()})  # add final end frame
+        if self.__thread.is_alive() and self.__thread is not threading.current_thread():
+            self.__thread.join()
         self.profiler.init_thread.profile_hooks.remove(self.progress)
 
 
 class PeriodicCollector(_BasePeriodicCollector):
 
     name = 'traces_async'
+
+    def start(self):
+        self._memory_profile = self.profiler.memory_profile
+        self._process = self.profiler.process
+        super().start()
 
     def add(self, entry=None, frame=None):
         """ Add an entry (dict) to this collector. """
@@ -253,43 +275,9 @@ class PeriodicCollector(_BasePeriodicCollector):
             # maybe modify the last entry to add a last seen?
             return
         self.last_frame = frame
+        if self._memory_profile:
+            entry = {'memory': self._process.memory_info().rss, **(entry or {})}
         super().add(entry=entry, frame=frame)
-
-
-_lock = threading.Lock()
-
-
-class MemoryCollector(_BasePeriodicCollector):
-
-    name = 'memory'
-    _store = 'others'
-    _min_interval = 0.01  # minimum interval allowed
-    _default_interval = 1
-
-    def start(self):
-        _lock.acquire()
-        tracemalloc.start()
-        super().start()
-
-    def add(self, entry=None, frame=None):
-        """ Add an entry (dict) to this collector. """
-        self._entries.append({
-            'start': real_time(),
-            'memory': tracemalloc.take_snapshot(),
-        })
-
-    def stop(self):
-        _lock.release()
-        tracemalloc.stop()
-        super().stop()
-
-    def post_process(self):
-        for i, entry in enumerate(self._entries):
-            if entry.get("memory", False):
-                entry_statistics = entry["memory"].statistics('traceback')
-                modified_entry_statistics = [{'traceback': list(statistic.traceback._frames),
-                                            'size': statistic.size} for statistic in entry_statistics]
-                self._entries[i] = {"memory_tracebacks": modified_entry_statistics, "start": entry['start']}
 
 
 class SyncCollector(Collector):
@@ -549,9 +537,13 @@ class Profiler:
         self.profile_id = None
         self.log = log
         self.sub_profilers = []
-        self.entry_count_limit = int(self.params.get("entry_count_limit",0)) # the limit could be set using a smarter way
+        self.entry_count_limit = int(self.params.get("entry_count_limit", 0))
+        self.time_limit = int(self.params.get("time_limit", 0))
         self.done = False
         self.exit_stack = ExitStack()
+        self.process = psutil.Process()
+        self.memory_profile = self.params.get("memory_profile", False)
+        self.counter = 0
 
         if db is ...:
             # determine database from current thread

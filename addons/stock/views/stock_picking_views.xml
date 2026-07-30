@@ -146,15 +146,15 @@
                             invisible="not has_scrap_move"/>
                         <button name="action_see_packages" string="Packages" type="object"
                             class="oe_stat_button" icon="fa-cubes"
-                            invisible="state == 'done'" groups="stock.group_tracking_lot">
-                            <div class="o_form_field o_stat_info">
+                            invisible="state == 'done' or not packages_count" groups="stock.group_tracking_lot">
+                            <div class="o_stat_info">
                                 <span class="o_stat_text">Packages</span>
                             </div>
                         </button>
-                        <button name="action_see_package_histories" type="object"
+                        <button name="action_see_package_histories" string="Packages" type="object"
                             class="oe_stat_button" icon="fa-cubes"
-                            invisible="state != 'done'" groups="stock.group_tracking_lot">
-                            <div class="o_form_field o_stat_info">
+                            invisible="state != 'done' or not packages_count" groups="stock.group_tracking_lot">
+                            <div class="o_stat_info">
                                 <span class="o_stat_text">Packages</span>
                             </div>
                         </button>
@@ -229,7 +229,7 @@
                             <field name="location_id" groups="!stock.group_stock_multi_locations" invisible="1" readonly="state == 'done'"/>
                             <field name="location_dest_id" groups="!stock.group_stock_multi_locations" invisible="1" readonly="state == 'done'"/>
                             <field name="location_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations" invisible="picking_type_code == 'incoming'" readonly="state == 'done'"/>
-                            <field name="location_dest_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations" invisible="picking_type_code == 'outgoing'" readonly="state == 'done'"/>
+                            <field name="location_dest_id" options="{'no_create': True}" groups="stock.group_stock_multi_locations" invisible="picking_type_code == 'outgoing'" readonly="state == 'done'" domain="[('usage','!=','view')]"/>
                             <field name="backorder_id" invisible="not backorder_id"/>
                             <field name="use_create_lots" invisible="1"/> <!-- used by embedded stock.move list view below -->
                         </group>

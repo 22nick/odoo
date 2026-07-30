@@ -32,6 +32,7 @@ export class HtmlMailField extends HtmlField {
     getConfig() {
         const config = super.getConfig();
         config.dropImageAsAttachment = false;
+        config.defaultLinkAttributes = { target: "_blank", rel: "noreferrer noopener" };
         config.Plugins = config.Plugins.filter((plugin) => plugin !== ColumnPlugin);
         return config;
     }
@@ -43,7 +44,6 @@ export const htmlMailField = {
     additionalClasses: ["o_field_html"],
     extractProps({ attrs, options }, dynamicInfo) {
         const props = htmlField.extractProps({ attrs, options }, dynamicInfo);
-        props.editorConfig.allowChecklist = false;
         props.embeddedComponents = false;
         return props;
     },

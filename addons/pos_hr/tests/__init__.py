@@ -3,3 +3,5 @@
 
 from . import test_frontend
 from . import test_point_of_sale_flow
+from . import test_res_config_settings
+from . import test_synchronisation

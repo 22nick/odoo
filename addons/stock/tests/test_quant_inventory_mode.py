@@ -323,3 +323,46 @@ class TestEditableQuant(TransactionCase):
         self.assertEqual(len(move_lines), 2, "Two inventory adjustment move lines should have been created")
         move_lines.action_revert_inventory()
         self.assertEqual(self.product.qty_available, 0, "After revert multi inventory adjustment qty is not zero")
+
+    def test_set_inventory_quant_to_zero(self):
+        """Try to set inventory quantity to zero and check that the quant is deleted after unlinking zero quants"""
+        default_wh = self.env['stock.warehouse'].search([('company_id', '=', self.env.company.id)], limit=1)
+        default_stock_location = default_wh.lot_stock_id
+        quant = self.Quant.create({
+            'product_id': self.product.id,
+            'location_id': default_stock_location.id,
+            'inventory_quantity': 100,
+        })
+        quant.action_apply_inventory()
+        self.assertEqual(quant.quantity, 100)
+        self.assertEqual(quant.user_id.id, False)
+        quant.with_context(inventory_report_mode=True).action_set_inventory_quantity_zero()
+        self.assertEqual(quant.inventory_quantity, 0)
+        self.assertEqual(quant.user_id.id, False)
+        self.assertEqual(quant.quantity, 0)
+        self.assertEqual(quant.reserved_quantity, 0)
+        # flush ORM state before raw SQL in _unlink_zero_quants
+        quant.flush_recordset()
+        quant._unlink_zero_quants()
+        self.assertFalse(quant.exists(), "After unlinking zero quants, the quant should be deleted")
+
+    def test_revert_inventory_package_quant(self):
+        """
+        Test Reverting an inventory move line restores the package quant
+        quantity with no negative quants.
+        """
+        package = self.env['stock.package'].create({})
+        quant = self.Quant.create({
+            'product_id': self.product.id,
+            'location_id': self.stock.id,
+            'inventory_quantity': 1,
+            'package_id': package.id,
+        })
+        quant.action_apply_inventory()
+        quant.inventory_quantity = 0
+        quant.action_apply_inventory()
+        domain = quant.action_view_stock_moves()['domain'] + [('is_inventory', '=', True)]
+        self.env['stock.move.line'].search(domain, limit=1).action_revert_inventory()
+        self.assertRecordValues(package.quant_ids, [{"quantity": 1}])
+        self.env['stock.move.line'].search(domain, limit=1, order='id asc').action_revert_inventory()
+        self.assertFalse(package.quant_ids, 'Reverting creation adjustment should remove the product from the package.')

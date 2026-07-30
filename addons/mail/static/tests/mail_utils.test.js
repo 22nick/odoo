@@ -35,6 +35,7 @@ test("add_link utility function", () => {
         "https://github.com/odoo/enterprise/compare/chỗgiặt...chỗgiặt-voip-fix_demo_data-tsm?expand=1": true,
         "https://github.com/odoo/enterprise/compare/@...}-voip-fix_demo_data-tsm?expand=1": true,
         "https://x.com": true,
+        "http://localhost:8069/mail/message/25": true,
     };
 
     for (const [content, willLinkify] of Object.entries(testInputs)) {
@@ -85,7 +86,26 @@ test("addLink: utility function and special entities", () => {
         // Already encoded url should not be encoded twice
         [
             markup`https://odoo.com/%5B%5D`,
-            `<a target="_blank" rel="noreferrer noopener" href="https://odoo.com/%5B%5D">https://odoo.com/[]</a>`,
+            `<a target="_blank" rel="noreferrer noopener" href="https://odoo.com/%5B%5D">https://odoo.com/%5B%5D</a>`,
+        ],
+        [
+            markup`https://www.odoo.com/appointment/10552?filter_appointment_type_ids=%5B6706%2C%2B6705%2C%2B5292%2C%2B10552%5D`,
+            `<a target="_blank" rel="noreferrer noopener" href="https://www.odoo.com/appointment/10552?filter_appointment_type_ids=%5B6706%2C%2B6705%2C%2B5292%2C%2B10552%5D">https://www.odoo.com/appointment/10552?filter_appointment_type_ids=%5B6706%2C%2B6705%2C%2B5292%2C%2B10552%5D</a>`,
+        ],
+        [
+            markup`www.odoo.com`,
+            `<a target="_blank" rel="noreferrer noopener" href="http://www.odoo.com/">www.odoo.com</a>`,
+        ],
+        [
+            markup`https://odoo.com/?q=ỗ`,
+            `<a target="_blank" rel="noreferrer noopener" href="https://odoo.com/?q=%E1%BB%97">https://odoo.com/?q=ỗ</a>`,
+        ],
+        [markup`http://999.999.999.999`, "http://999.999.999.999"],
+        [markup`www.example.com:999999`, "www.example.com:999999"],
+        [markup`www.example.com:abc`, "www.example.com:abc"],
+        [
+            markup`http://999.999.999.999 www.odoo.com`,
+            `http://999.999.999.999 <a target="_blank" rel="noreferrer noopener" href="http://www.odoo.com/">www.odoo.com</a>`,
         ],
     ];
 

@@ -5,8 +5,11 @@ from datetime import date, timedelta
 from odoo.addons.base.tests.common import HttpCase
 from odoo.tests.common import tagged
 from odoo.tests.common import users
+from odoo.exceptions import ValidationError
+
 
 from odoo.addons.hr_holidays.tests.common import TestHrHolidaysCommon
+
 
 @tagged('post_install', '-at_install', 'holiday_calendar')
 class TestHolidaysCalendar(HttpCase, TestHrHolidaysCommon):
@@ -39,3 +42,100 @@ class TestHolidaysCalendar(HttpCase, TestHrHolidaysCommon):
         self.assertEqual(last_leave.date_from.weekday(), 3, "It should be Thursday")
         self.assertEqual(last_leave.date_from.hour, expected_leave_start, "Wrong start of the day")
         self.assertEqual(last_leave.date_to.hour, expected_leave_end, "Wrong end of the day")
+
+    def test_timezone_calendar_event_single_day(self):
+        """
+        Test that single-day time off requests have a single day display in calendar
+        """
+
+        leave_type, leave_type_half = self.env['hr.leave.type'].create([
+            {
+                'name': 'Test Leave Type',
+                'requires_allocation': False,
+                'leave_validation_type': 'no_validation',
+                'create_calendar_meeting': True,
+            },
+            {
+                'name': 'Test Leave Type Half Day',
+                'requires_allocation': False,
+                'leave_validation_type': 'no_validation',
+                'create_calendar_meeting': True,
+                'request_unit': 'half_day',
+            },
+        ])
+
+        # case 1: full day in Los/Angeles tz
+
+        test_date = date(2025, 4, 22)
+        self.employee_emp.user_id.tz = 'America/Los_Angeles'
+        self.employee_emp.resource_calendar_id.tz = 'America/Los_Angeles'
+        leave = self.env['hr.leave'].create({
+            'name': 'Single Day Leave',
+            'employee_id': self.employee_emp.id,
+            'holiday_status_id': leave_type.id,
+            'request_date_from': test_date,
+            'request_date_to': test_date,
+        })
+
+        leave.action_approve()
+
+        self.assertEqual(leave.meeting_id.allday, True)
+        self.assertEqual(leave.meeting_id.start_date, test_date,
+                        f"Meeting start date should be {test_date}")
+        self.assertEqual(leave.meeting_id.stop_date, test_date,
+                        f"Meeting end date should be {test_date}")
+
+        # case 2: half day in Los/Angeles tz
+
+        test_date_half = date(2025, 4, 23)
+
+        leave_half = self.env['hr.leave'].create({
+            'name': 'Half Day Leave LA',
+            'employee_id': self.employee_emp.id,
+            'holiday_status_id': leave_type_half.id,
+            'request_date_from': test_date_half,
+            'request_date_to': test_date_half,
+            'request_date_from_period': 'pm',
+            'request_date_to_period': 'pm',
+        })
+
+        leave_half.action_approve()
+
+        self.assertEqual(leave_half.meeting_id.allday, False)
+        self.assertEqual(leave_half.meeting_id.start, leave_half.date_from)
+        self.assertEqual(leave_half.meeting_id.stop, leave_half.date_to)
+
+    def test_overlapping_refused_time_off_approval(self):
+        """
+        Test that a refused time off request shows a warning message
+        when another approved request exists for the same period.
+        """
+        leave_type = self.env['hr.leave.type'].create({
+            'name': 'Test Leave Type',
+            'requires_allocation': False,
+            'request_unit': 'day',
+            'leave_validation_type': 'no_validation',
+            'allow_request_on_top': False,
+        })
+        test_date = date(2025, 4, 22)
+
+        # Now create leave requests
+        leave_request_a = self.env['hr.leave'].create({
+            'name': 'First Time Off Request',
+            'employee_id': self.employee_emp.id,
+            'holiday_status_id': leave_type.id,
+            'request_date_from': test_date,
+            'request_date_to': test_date,
+        })
+        leave_request_a.action_approve()
+        leave_request_a.action_refuse()
+        leave_request_b = self.env['hr.leave'].create({
+            'name': 'Second Time Off Request',
+            'employee_id': self.employee_emp.id,
+            'holiday_status_id': leave_type.id,
+            'request_date_from': test_date,
+            'request_date_to': test_date,
+        })
+        leave_request_b.action_approve()
+        with self.assertRaises(ValidationError):
+            leave_request_a.action_approve()

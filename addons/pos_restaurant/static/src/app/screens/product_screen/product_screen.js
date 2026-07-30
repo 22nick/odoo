@@ -14,6 +14,7 @@ patch(ProductScreen.prototype, {
         this.state.tableBuffer = "";
         this.state.isValidBuffer = true;
         this.doSubmitOrder = useTrackedAsync(() => this.pos.submitOrder());
+        this.doReprintOrder = useTrackedAsync(() => this.pos.reprintOrder());
         useBus(this.numberBuffer, "buffer-update", ({ detail: value }) => {
             this.checkIsValid(value);
         });
@@ -75,5 +76,9 @@ patch(ProductScreen.prototype, {
         this.state.tableBuffer = buffer;
         const res = this.pos.findTable(buffer);
         this.state.isValidBuffer = Boolean(res);
+    },
+    async clickNew() {
+        await this.pos.syncAllOrders({ orders: [this.pos.getOrder()] });
+        this.pos.showDefault();
     },
 });

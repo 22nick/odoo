@@ -2,15 +2,15 @@
 # This file contains the translation of the following modules:
 # * sms
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
-# "Fernanda Alvarez (mfar)" <mfar@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# "Fernanda Alvarez (mfar)" <mfar@odoo.com>, 2025, 2026.
 # "Patricia Gutiérrez (pagc)" <pagc@odoo.com>, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-10-30 17:21+0000\n"
+"POT-Creation-Date: 2026-06-12 17:37+0000\n"
+"PO-Revision-Date: 2026-06-30 15:42+0000\n"
 "Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
 "Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
 "odoo-19/sms/es_419/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_composer__recipient_invalid_count
@@ -50,11 +50,6 @@ msgstr "%s (copia)"
 #: code:addons/sms/wizard/sms_composer.py:0
 msgid "%s invalid recipients"
 msgstr "%s destinatarios no válidos"
-
-#. module: sms
-#: model_terms:ir.ui.view,arch_db:sms.sms_account_phone_view_form
-msgid "+1 555-555-555"
-msgstr "+1 555-555-555"
 
 #. module: sms
 #: model_terms:ir.ui.view,arch_db:sms.iap_account_view_form
@@ -156,8 +151,8 @@ msgstr ""
 "                                <span invisible=\"sms_method != 'note'\">\n"
 "                                    El SMS no se enviará, solo se registrará "
 "como una\n"
-"                                    nota interna en el historial de mensajes."
-"\n"
+"                                    nota interna en el historial de "
+"mensajes.\n"
 "                                </span>\n"
 "                                <span invisible=\"sms_method != 'comment'\">"
 "\n"
@@ -311,7 +306,7 @@ msgstr "Elija un ejemplo"
 #: code:addons/sms/wizard/sms_account_code.py:0
 #: model_terms:ir.ui.view,arch_db:sms.sms_account_sender_view_form
 msgid "Choose your sender name"
-msgstr "Elija su nombre de remitente"
+msgstr "Elige tu nombre de remitente"
 
 #. module: sms
 #: model:ir.model,name:sms.model_res_company
@@ -627,10 +622,10 @@ msgid ""
 "i.e. a plus sign (+), then country code, city code, and local phone number. "
 "For example: +1 555-555-555"
 msgstr ""
-"El número de teléfono no es válido. Asegúrese de usar el formato "
-"internacional, es decir, un signo más (+), luego el código del país, el "
-"código de la ciudad y el número de teléfono local. Por ejemplo: +1 "
-"555-555-555"
+"El número de teléfono no es válido. Asegúrate de usar el formato "
+"internacional, es decir, el signo de más (+), seguido del código del país, "
+"el código de la ciudad y el número de teléfono local. Por ejemplo: +1 555-"
+"555-555"
 
 #. module: sms
 #. odoo-python
@@ -1264,7 +1259,7 @@ msgstr "Error del servidor"
 #. module: sms
 #: model_terms:ir.ui.view,arch_db:sms.sms_account_sender_view_form
 msgid "Set sender name"
-msgstr "Establecer nombre del remitente"
+msgstr "Definir nombre de remitente"
 
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_template__sidebar_action_id
@@ -1415,8 +1410,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/sms/tools/sms_api.py:0
 msgid "This phone number/account has been banned from our service."
-msgstr ""
-"Este número de teléfono o cuenta tiene prohibido usar nuestro servicio."
+msgstr "Este número de teléfono o cuenta tiene prohibido usar nuestro servicio."
 
 #. module: sms
 #: model_terms:ir.ui.view,arch_db:sms.sms_composer_view_form
@@ -1618,6 +1612,19 @@ msgstr "Su cuenta de SMS se registró con éxito."
 #. module: sms
 #. odoo-python
 #: code:addons/sms/tools/sms_api.py:0
+msgid "Your country is not supported due to sender registration legislation"
+msgstr ""
+"Tu país no es compatible debido a la legislación de registro del remitente"
+
+#. module: sms
+#. odoo-python
+#: code:addons/sms/tools/sms_api.py:0
+msgid "Your database is not activated"
+msgstr "Tu base de datos no está activada"
+
+#. module: sms
+#. odoo-python
+#: code:addons/sms/tools/sms_api.py:0
 #: code:addons/sms/wizard/sms_account_sender.py:0
 msgid ""
 "Your sender name must be between 3 and 11 characters long and only contain "
@@ -1684,6 +1691,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:sms.sms_template_preview_form
 msgid "record:"
 msgstr "registro:"
+
+#~ msgid "+1 555-555-555"
+#~ msgstr "+1 555-555-555"
 
 #~ msgid ""
 #~ "<span invisible=\"sms_method != 'sms'\">\n"

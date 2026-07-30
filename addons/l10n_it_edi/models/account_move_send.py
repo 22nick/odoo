@@ -28,7 +28,7 @@ class AccountMoveSend(models.AbstractModel):
     def _get_alerts(self, moves, moves_data):
         # EXTENDS 'account'
         alerts = super()._get_alerts(moves, moves_data)
-        if it_moves := moves.filtered(lambda m: 'it_edi_send' in moves_data[m]['extra_edis'] or moves_data[m]['invoice_edi_format'] == 'it_edi_xml'):
+        if it_moves := moves.filtered(lambda m: 'it_edi_send' in moves_data[m]['extra_edis']):
             if it_alerts := it_moves._l10n_it_edi_export_data_check():
                 alerts.update(**it_alerts)
 
@@ -102,7 +102,7 @@ class AccountMoveSend(models.AbstractModel):
         # Prepare attachment data
         for move, move_data in moves_data.items():
             if attachment := move.l10n_it_edi_attachment_file:
-                attachments_vals[move] = {'name': move.l10n_it_edi_attachment_name, 'raw': attachment}
+                attachments_vals[move] = {'name': move.l10n_it_edi_attachment_name, 'raw': base64.b64decode(attachment)}
                 moves |= move
             elif edi_values := move_data.get('l10n_it_edi_values'):
                 attachments_vals[move] = edi_values
@@ -119,10 +119,10 @@ class AccountMoveSend(models.AbstractModel):
                 attachment_name = attachment['name']
             attachment_data = results.get(attachment_name, {})
             if attachment_data.get('signed') and (signed_data := attachment_data.get('signed_data')):
-                attachment['raw'] = signed_data.encode()
+                move.l10n_it_edi_attachment_file = base64.b64encode(signed_data.encode())
                 # Show that those moves couldn't be sent
             if 'error_message' in attachment_data:
-                moves_data[move]['error'] = attachment_data['error_message']
+                moves_data[move]['error'] = {'error_title': attachment_data['error_message']}
 
     def _link_invoice_documents(self, invoices_data):
         # EXTENDS 'account'

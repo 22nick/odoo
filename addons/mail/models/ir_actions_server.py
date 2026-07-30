@@ -375,8 +375,8 @@ class IrActionsServer(models.Model):
             user = False
             if self.activity_user_type == 'specific':
                 user = self.activity_user_id
-            elif self.activity_user_type == 'generic' and self.activity_user_field_name in record:
-                user = record[self.activity_user_field_name]
+            elif self.activity_user_type == 'generic' and self.activity_user_field_name:
+                user = record.mapped(self.activity_user_field_name)
             if user:
                 # if x2m field, assign to the first user found
                 # (same behavior as Field.traverse_related)
@@ -391,7 +391,4 @@ class IrActionsServer(models.Model):
         key set to False in the context. This way all notification emails linked
         to the currently executed action will be set in the queue instead of
         sent directly. This will avoid possible break in transactions. """
-        eval_context = super()._get_eval_context(action=action)
-        env = eval_context['env']
-        eval_context['env'] = env(context={**env.context, 'mail_notify_force_send': False})
-        return eval_context
+        return super(IrActionsServer, self.with_context(mail_notify_force_send=False))._get_eval_context(action=action)

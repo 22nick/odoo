@@ -1,5 +1,10 @@
 import { Component, onWillStart, onWillUpdateProps, useState } from "@odoo/owl";
 import { getSnippetName, isElementInViewport } from "@html_builder/utils/utils";
+import { scrollTo } from "@html_builder/utils/scrolling";
+
+/**
+ * @typedef {((snippetEl: HTMLElement) => void)[]} on_reveal_target_handlers
+ */
 
 export class InvisibleElementsPanel extends Component {
     static template = "html_builder.InvisibleElementsPanel";
@@ -94,7 +99,7 @@ export class InvisibleElementsPanel extends Component {
             this.shared.builderOptions.updateContainers(snippetEl);
             // Scroll to the target if not visible.
             if (!isElementInViewport(snippetEl) && !snippetEl.matches(".s_popup")) {
-                snippetEl.scrollIntoView({ behavior: "smooth", block: "center" });
+                scrollTo(snippetEl);
             }
         }
         this.shared.disableSnippets.disableUndroppableSnippets();

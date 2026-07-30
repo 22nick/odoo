@@ -966,6 +966,34 @@ class TestFields(TransactionCaseWithUserDemo, TransactionExpressionCase):
         self.env.invalidate_all()
         self.assertEqual(record.created_id.value, 3)
 
+    def test_18_flush_precommit(self):
+        """ check that cr.flush() runs precommits as many times as needed. """
+        cr = self.env.cr
+        record = self.env['test_orm.compute.created'].create({'name': 'foo'})
+        # The hook triggers a compute of the value (stored-computed) field
+        # which triggers the hook again, limited to 4 calls.
+        # Choosing a number < 10 (which is the max number of iterations).
+        count = 4
+
+        def hook():
+            nonlocal count
+            if count <= 0:
+                return
+            count -= 1
+            record.name = 'x'
+
+        def compute_value(self):
+            self.value = 10 + count
+            self.env.cr.precommit.add(hook)
+
+        self.patch(self.registry[record._name], '_compute_value', compute_value)
+
+        # run the pre-commit hook
+        hook()
+        cr.flush()
+        self.assertEqual(count, 0, "Precommit not ran enough times")
+        self.assertEqual(record.value, 10, "Flush not triggered correctly")
+
     def test_20_float(self):
         """ test rounding of float fields """
         record = self.env['test_orm.mixed'].create({})
@@ -3202,6 +3230,29 @@ class TestFields(TransactionCaseWithUserDemo, TransactionExpressionCase):
                 self.assertIn(new_name, self.env['res.partner']._fields)
                 self.assertIn(new_name, self.env['res.users']._fields)
 
+    def test_100_rename_custom_field_inherited(self):
+        manual_origin = self.env["ir.model.fields"].create({
+            "name": "x_manual_hazel",
+            "model_id": self.env["ir.model"]._get("test_orm.related").id,
+            "ttype": "char",
+        })
+        self.assertEqual(manual_origin.state, "manual")
+        manual_inherited = self.env["ir.model.fields"]._get("test_orm.related_inherits", "x_manual_hazel")
+        self.assertTrue(manual_inherited.exists())
+        self.assertEqual(manual_inherited.state, "base")
+
+        with self.assertRaisesRegex(UserError, r'cannot be removed'):
+            manual_inherited.unlink()
+
+        manual_origin.name = 'x_manual_hazel_2'
+        manual_inherited = self.env["ir.model.fields"]._get("test_orm.related_inherits", 'x_manual_hazel')
+        self.assertFalse(manual_inherited)
+        manual_inherited = self.env["ir.model.fields"]._get("test_orm.related_inherits", 'x_manual_hazel_2')
+        self.assertTrue(manual_inherited.exists())
+
+        manual_origin.unlink()
+        self.assertFalse(manual_inherited.exists())
+
     def test_cache_key_invalidation(self):
         company0 = self.env.ref('base.main_company')
         company1 = self.env['res.company'].create({'name': 'A'})
@@ -3257,6 +3308,10 @@ class TestFields(TransactionCaseWithUserDemo, TransactionExpressionCase):
         self.assertEqual(record.comment0, record_value)
         record.invalidate_recordset()
         self.assertEqual(record.comment0, record_value)
+
+    def test_related_column_type(self):
+        related_float_field = self.env['test_orm.related']._fields['foo_float_id']
+        self.assertEqual(related_float_field.column_type[1], 'numeric')
 
 
 class TestX2many(TransactionExpressionCase):
@@ -4304,6 +4359,69 @@ class TestSelectionUpdates(TransactionCase):
             record.related_selection = 'bar'
 
 
+@tagged('selection_manual_related_update')
+class TestSelectionManualRelatedUpdate(TransactionCase):
+    """
+    Regression test: adding a value to a manual selection field must update
+    the registry for models that have a manual related field pointing to it.
+    """
+
+    MODEL_BASE = 'test_orm.model_selection_base'
+    MODEL_RELATED = 'test_orm.model_selection_related'
+
+    def test_manual_related_selection_reflects_new_value(self):
+        self.env.flush_all()
+        base_model_id = self.env['ir.model']._get_id(self.MODEL_BASE)
+        related_model_id = self.env['ir.model']._get_id(self.MODEL_RELATED)
+
+        # Create a manual selection field with two initial options
+        x_sel = self.env['ir.model.fields'].create({
+            'name': 'x_sel',
+            'field_description': 'Manual Selection',
+            'model_id': base_model_id,
+            'ttype': 'selection',
+            'selection_ids': [
+                Command.create({'value': 'a', 'name': 'A', 'sequence': 0}),
+                Command.create({'value': 'b', 'name': 'B', 'sequence': 1}),
+            ],
+        })
+
+        # Create a manual related field on MODEL_RELATED pointing to the new field
+        self.env['ir.model.fields'].create({
+            'name': 'x_related_sel',
+            'field_description': 'Related Manual Selection',
+            'model_id': related_model_id,
+            'ttype': 'selection',
+            'related': 'selection_id.x_sel',
+        })
+
+        # Sanity check: the related field initially knows only 'a' and 'b'
+        related_field = self.env[self.MODEL_RELATED]._fields['x_related_sel']
+        initial_values = [v for v, _ in related_field._description_selection(self.env)]
+        self.assertIn('a', initial_values)
+        self.assertIn('b', initial_values)
+        self.assertNotIn('c', initial_values)
+
+        # Add a third option to the manual selection field
+        self.env['ir.model.fields.selection'].create({
+            'field_id': x_sel.id,
+            'value': 'c',
+            'name': 'C',
+            'sequence': 2,
+        })
+
+        # The manual related field must reflect the new option
+        related_field = self.env[self.MODEL_RELATED]._fields['x_related_sel']
+        updated_values = [v for v, _ in related_field._description_selection(self.env)]
+        self.assertIn('c', updated_values,
+            "Manual related selection field must reflect new values added to its target field")
+
+        # Also verify that reading a record with the new value via the related field works
+        base_record = self.env[self.MODEL_BASE].create({'x_sel': 'c'})
+        related_record = self.env[self.MODEL_RELATED].create({'selection_id': base_record.id})
+        self.assertEqual(related_record.x_related_sel, 'c')
+
+
 @tagged('selection_ondelete_base')
 class TestSelectionOndelete(TransactionCase):
 
@@ -4311,6 +4429,7 @@ class TestSelectionOndelete(TransactionCase):
     MODEL_REQUIRED = 'test_orm.model_selection_required'
     MODEL_NONSTORED = 'test_orm.model_selection_non_stored'
     MODEL_WRITE_OVERRIDE = 'test_orm.model_selection_required_for_write_override'
+    MODEL_COMPANY_DEPENDENT = 'test_orm.model_selection_company_dependent'
 
     def setUp(self):
         super().setUp()
@@ -4458,6 +4577,39 @@ class TestSelectionOndelete(TransactionCase):
 
         self._unlink_option(self.MODEL_WRITE_OVERRIDE, 'divinity')
         self.assertEqual(rec.my_selection, 'foo')
+
+    def test_ondelete_company_dependent_null_implicit_with_multicompany(self):
+        Model = self.env[self.MODEL_COMPANY_DEPENDENT]
+        company_2 = self.env['res.company'].create({'name': 'Test Company'})
+
+        # create records with the extended selection option
+        records = r1, r2, r3 = Model.create([
+            {'my_selection': 'manual'},
+            {'my_selection': 'auto'},
+            {'my_selection': 'semi_auto'},
+        ])
+
+        # set different values for company_2
+        r1.with_company(company_2).write({'my_selection': 'semi_auto'})
+        r2.with_company(company_2).write({'my_selection': 'semi_auto'})
+        r3.with_company(company_2).write({'my_selection': 'manual'})
+
+        # sanity checks before unlink
+        self.assertEqual(records.mapped("my_selection"), ["manual", "auto", "semi_auto"])
+        self.assertEqual(
+            records.with_company(company_2).mapped("my_selection"),
+            ["semi_auto", "semi_auto", "manual"],
+        )
+
+        # simulates a module uninstall
+        self._unlink_option(self.MODEL_COMPANY_DEPENDENT, 'semi_auto')
+
+        # test that values are removed from all the companies
+        self.assertEqual(records.mapped("my_selection"), ["manual", "auto", False])
+        self.assertEqual(
+            records.with_company(company_2).mapped("my_selection"),
+            [False, False, "manual"],
+        )
 
 
 @tagged('selection_ondelete_advanced')

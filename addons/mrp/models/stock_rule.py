@@ -103,18 +103,21 @@ class StockRule(models.Model):
                     new_productions_values_by_company[procurement.company_id.id]['procurements'].append(procurement)
                     procurement_qty -= batch_size
             else:
+                procurement_product_uom_qty = procurement.product_uom._compute_quantity(procurement.product_qty, procurement.product_id.uom_id)
                 self.env['change.production.qty'].sudo().with_context(skip_activity=True).create({
                     'mo_id': mo.id,
-                    'product_qty': mo.product_id.uom_id._compute_quantity((mo.product_uom_qty + procurement.product_qty), mo.product_uom_id)
+                    'product_qty': mo.product_id.uom_id._compute_quantity((mo.product_uom_qty + procurement_product_uom_qty), mo.product_uom_id),
                 }).change_prod_qty()
+                if procurement.values.get('move_dest_ids'):
+                    mo.move_finished_ids.filtered(
+                        lambda m: m.product_id == procurement.product_id and m.state not in ('done', 'cancel')
+                    ).move_dest_ids = [Command.link(m.id) for m in procurement.values['move_dest_ids']]
 
         for company_id in new_productions_values_by_company:
             productions_vals_list = new_productions_values_by_company[company_id]['values']
             # create the MO as SUPERUSER because the current user may not have the rights to do it (mto product launched by a sale for example)
             productions = self.env['mrp.production'].with_user(SUPERUSER_ID).sudo().with_company(company_id).create(productions_vals_list)
-            for mo in productions:
-                if self._should_auto_confirm_procurement_mo(mo):
-                    mo.action_confirm()
+            productions.filtered(self._should_auto_confirm_procurement_mo).action_confirm()
             productions._post_run_manufacture(new_productions_values_by_company[company_id]['procurements'])
         return True
 
@@ -153,6 +156,8 @@ class StockRule(models.Model):
             ('user_id', '=', False),
             ('reference_ids', '=', procurement.values.get('reference_ids', self.env['stock.reference']).ids),
         )
+        if production_group_id := procurement.values.get('production_group_id'):
+            domain += (('production_group_id.parent_ids', '=', production_group_id),)
         if procurement.values.get('orderpoint_id'):
             procurement_date = datetime.combine(
                 fields.Date.to_date(procurement.values['date_planned']) - relativedelta(days=int(bom.produce_delay)),

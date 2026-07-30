@@ -1167,6 +1167,35 @@ class TestWebReadGroup(common.TransactionCase):
             },
         )
 
+    def test_order_field_aggregator_fallback(self):
+        """Ordering by a field not in aggregates should use the field's default aggregator.
+        Ordering with a non-default aggregator in aggregates should use that aggregator."""
+        Model = self.env["test_read_group.aggregate"]
+        Model.create([
+            {"key": 1, "value": 1},
+            {"key": 1, "value": 1},
+            {"key": 1, "value": 1},
+            {"key": 2, "value": 2},
+        ])
+
+        groups = Model.web_read_group(
+            domain=[],
+            groupby=["key"],
+            aggregates=["__count"],
+            order="value",
+        )["groups"]
+
+        self.assertEqual([g["key"] for g in groups], [2, 1])
+
+        groups = Model.web_read_group(
+            domain=[],
+            groupby=["key"],
+            aggregates=["value:max"],
+            order="value",
+        )["groups"]
+
+        self.assertEqual([g["key"] for g in groups], [1, 2])
+
     def test_read_extra_info_groupby_value(self):
         Model = self.env["test_read_group.aggregate"]
         partner_1, partner_2 = self.env["res.partner"].create(
@@ -1245,3 +1274,34 @@ class TestWebReadGroup(common.TransactionCase):
             )
 
             self.assertEqual(spy_web_read.call_count, 1)
+
+    def test_web_read_group_custom_active_field(self):
+        """ Test web_read_group on a model with a custom active field (x_active) """
+        Model = self.env['test_read_group.aggregate']
+
+        # Add x_active field to the model
+        self.env['ir.model.fields'].create({
+            'model_id': self.env['ir.model']._get(Model._name).id,
+            'name': 'x_active',
+            'ttype': 'boolean',
+        })
+
+        # Invalidate cache to ensure _active_name is updated
+        self.env.registry.clear_cache()
+        Model = self.env[Model._name]
+
+        self.assertEqual(Model._active_name, 'x_active')
+
+        Model.create([
+            {'key': 1, 'value': 10, 'x_active': True},
+            {'key': 1, 'value': 20, 'x_active': False},
+        ])
+
+        result = Model.web_read_group(
+            domain=[('x_active', 'in', [True, False])],
+            groupby=['key'],
+            aggregates=['value:sum']
+        )
+
+        self.assertEqual(result['groups'][0]['value:sum'], 30)
+        self.assertEqual(result['groups'][0]['__count'], 2)

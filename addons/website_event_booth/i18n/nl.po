@@ -2,14 +2,15 @@
 # This file contains the translation of the following modules:
 # * website_event_booth
 #
-# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025.
+# "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
+# Bren Driesen <brdri@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-08 18:39+0000\n"
-"PO-Revision-Date: 2025-09-14 08:07+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
+"POT-Creation-Date: 2026-02-27 18:38+0000\n"
+"PO-Revision-Date: 2026-06-29 10:46+0000\n"
+"Last-Translator: Bren Driesen <brdri@odoo.com>\n"
 "Language-Team: Dutch <https://translate.odoo.com/projects/odoo-19/"
 "website_event_booth/nl/>\n"
 "Language: nl\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
@@ -224,9 +225,8 @@ msgstr "ID"
 #. module: website_event_booth
 #. odoo-javascript
 #: code:addons/website_event_booth/static/src/interactions/booth_registration.js:0
-msgid "It looks like your email is linked to an existing account."
-msgstr ""
-"Het lijkt erop dat je e-mailadres is gekoppeld aan een bestaand account."
+msgid "It looks like your email is already in our system."
+msgstr "Het lijkt erop dat je e-mailadres al in ons systeem staat."
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
@@ -250,14 +250,14 @@ msgstr "Telefoon"
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration_details
-msgid "Please Sign In."
-msgstr "Graag inloggen."
+msgid "Please Sign In or Create an Account."
+msgstr "Log in of maak een account aan."
 
 #. module: website_event_booth
 #. odoo-javascript
 #: code:addons/website_event_booth/static/src/interactions/booth_registration.js:0
 msgid "Please fill out the form correctly."
-msgstr "Graag het formulier correct in te vullen."
+msgstr "Vul het formulier correct in."
 
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
@@ -278,8 +278,7 @@ msgstr "De standcategorie bestaat niet."
 #. module: website_event_booth
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_layout
 msgid "This event is not open to exhibitors registration at this time."
-msgstr ""
-"Standhouders kunnen zich momenteel niet registreren voor dit evenement."
+msgstr "Standhouders kunnen zich momenteel niet registreren voor dit evenement."
 
 #. module: website_event_booth
 #: model:ir.model,name:website_event_booth.model_website_event_menu
@@ -290,3 +289,10 @@ msgstr "Website event menu"
 #: model_terms:ir.ui.view,arch_db:website_event_booth.event_booth_registration
 msgid "if you have any question."
 msgstr "als je vragen heeft."
+
+#~ msgid "It looks like your email is linked to an existing account."
+#~ msgstr ""
+#~ "Het lijkt erop dat je e-mailadres is gekoppeld aan een bestaand account."
+
+#~ msgid "Please Sign In."
+#~ msgstr "Graag inloggen."

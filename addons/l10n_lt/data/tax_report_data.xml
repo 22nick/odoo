@@ -28,7 +28,7 @@
                             <record id="tax_report_line_11_tag" model="account.report.expression">
                                 <field name="label">balance</field>
                                 <field name="engine">tax_tags</field>
-                                <field name="formula">11_base</field>
+                                <field name="formula">-11_base</field>
                             </record>
                         </field>
                     </record>
@@ -64,7 +64,7 @@
                             <record id="tax_report_line_14_tag" model="account.report.expression">
                                 <field name="label">balance</field>
                                 <field name="engine">tax_tags</field>
-                                <field name="formula">14_base</field>
+                                <field name="formula">-14_base</field>
                             </record>
                         </field>
                     </record>
@@ -76,7 +76,7 @@
                             <record id="tax_report_line_15_tag" model="account.report.expression">
                                 <field name="label">balance</field>
                                 <field name="engine">tax_tags</field>
-                                <field name="formula">15_base</field>
+                                <field name="formula">-15_base</field>
                             </record>
                         </field>
                     </record>
@@ -88,7 +88,7 @@
                             <record id="tax_report_line_16_tag" model="account.report.expression">
                                 <field name="label">balance</field>
                                 <field name="engine">tax_tags</field>
-                                <field name="formula">16_base</field>
+                                <field name="formula">-16_base</field>
                             </record>
                         </field>
                     </record>
@@ -134,7 +134,7 @@
                             <record id="tax_report_line_19_tag" model="account.report.expression">
                                 <field name="label">balance</field>
                                 <field name="engine">tax_tags</field>
-                                <field name="formula">19_base</field>
+                                <field name="formula">-19_base</field>
                             </record>
                         </field>
                     </record>
@@ -254,7 +254,7 @@
                             <record id="tax_report_line_27_tag" model="account.report.expression">
                                 <field name="label">balance</field>
                                 <field name="engine">tax_tags</field>
-                                <field name="formula">27_tax</field>
+                                <field name="formula">-27_tax</field>
                             </record>
                         </field>
                     </record>
@@ -305,7 +305,7 @@
                             <record id="tax_report_line_30_tag" model="account.report.expression">
                                 <field name="label">balance</field>
                                 <field name="engine">tax_tags</field>
-                                <field name="formula">30_tax</field>
+                                <field name="formula">-30_tax</field>
                             </record>
                         </field>
                     </record>
@@ -329,7 +329,7 @@
                             <record id="tax_report_line_32_tag" model="account.report.expression">
                                 <field name="label">balance</field>
                                 <field name="engine">tax_tags</field>
-                                <field name="formula">32_tax</field>
+                                <field name="formula">-32_tax</field>
                             </record>
                         </field>
                     </record>
@@ -353,7 +353,7 @@
                             <record id="tax_report_line_34_tag" model="account.report.expression">
                                 <field name="label">balance</field>
                                 <field name="engine">tax_tags</field>
-                                <field name="formula">34_tax</field>
+                                <field name="formula">-34_tax</field>
                             </record>
                         </field>
                     </record>
